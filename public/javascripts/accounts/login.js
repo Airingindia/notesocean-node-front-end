@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     //    input label toggle
     $("input").each(function () {
@@ -25,35 +24,22 @@ $(document).ready(function () {
         });
     });;
 
-    // form validations 
     $("form").submit(function (event) {
         event.preventDefault();
-        let firstName = $("form input[name='fistName']").val();
-        let lastName = $("form input[name='lastName']").val();
-        let email = $("form input[name='email']").val();
-        let mobile = $("form input[name='mobile']").val();
-        let choosePassword = $("form input[name='password']").val();
-
+        let email = $("form input[type='email'").val();
+        let password = $("form input[type='password']").val();
         $.ajax({
             type: "POST",
             url: sessionStorage.getItem("api"),
             data: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: mobile,
-                password: choosePassword
+
             },
             success: function (data) {
                 console.log(data);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
+            error: function (error) {
+                console.log(error);
             }
         })
-    });
-
-    $(".google-auth-btn").click(function () {
-        window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
-    });
-});
+    })
+})

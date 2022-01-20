@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index.routes');
 const accountRoutes = require('./routes/account.routes');
 const loginHandlerRoutes = require("./routes/loginHandler.routes");
 const apiEnvRoutes = require('./routes/api.env.routes');
+const dashboardRoutes = require('./routes/dashboard.routes');
 const app = express();
 
 app.use(logger('dev'));
@@ -19,6 +20,7 @@ app.use('/', indexRouter);
 app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
 app.use("/api/env", apiEnvRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
