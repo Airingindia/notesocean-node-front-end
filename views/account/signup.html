@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <!-- cdn -->
+
+    <link rel="stylesheet" href="https://static.notesocean.com/vendor/bootstrap5/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/stylesheets/account/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- cdn  -->
+</head>
+
+<body>
+
+    <div class="container-fluid p-5">
+        <div class="row">
+            <div class="col-7">
+                <img src="/images/accounts/signup_bg.svg" loading="lazy" alt="signup background">
+            </div>
+            <div class="col-5">
+                <h1>Sign up</h1>
+                <div class="py-4">
+                    <form class="input-icons">
+                        <div class="form-group">
+                            <i class="fa fa-user left"></i>
+                            <label for="First Name" class="animate__animated animate__fadeInUp d-none"> First Name
+                            </label>
+                            <input type="text" name="fistName" class="form-control" placeholder="First Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-user"></i>
+                            <label for="Last Name" class="animate__animated animate__fadeInUp d-none">Last Name</label>
+                            <input type="text" name="lastName" class="form-control" placeholder="Last Name"
+                                id="lastName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-envelope"></i>
+                            <label for="Email" class="animate__animated animate__fadeInUp d-none">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email Address" id="email"
+                                autocomplete="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-phone"></i>
+                            <label for="Mobile Number" class="animate__animated animate__fadeInUp d-none">Mobile
+                                Number</label>
+                            <input type="number" name="phone" class="form-control" placeholder="Mobile Number"
+                                id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-lock"></i>
+                            <label for="Choose Password" class="animate__animated animate__fadeInUp d-none">Choose
+                                Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Choose Password"
+                                id="password" autocomplete="new-password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Signup</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast hide border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-success text-light">
+                    <strong class="me-auto">Bootstrap</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://static.notesocean.com/vendor/jquery/jquery-3.6.0.min.js"></script>
+    <script src="https://static.notesocean.com/vendor/bootstrap5/js/bootstrap.js"></script>
+    <script src="/javascripts/accounts/signup.js"></script>
+</body>
+
+</html>
