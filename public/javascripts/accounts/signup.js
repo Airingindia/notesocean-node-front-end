@@ -33,22 +33,43 @@ $(document).ready(function () {
         let email = $("form input[name='email']").val();
         let mobile = $("form input[name='mobile']").val();
         let choosePassword = $("form input[name='password']").val();
-
+        const usersData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: mobile,
+            password: choosePassword
+        }
         $.ajax({
             type: "POST",
-            url: sessionStorage.getItem("api"),
-            data: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: mobile,
-                password: choosePassword
-            },
+            url: sessionStorage.getItem("api") + "/users",
+            processData: false,
+            contentType: "application/json",
+            data: JSON.stringify(usersData),
             success: function (data) {
-                console.log(data);
+                localStorage.setItem("userInfo", JSON.stringify(data));
+                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-success text-light">
+                    <strong class="me-auto">Success!</strong>
+                </div>
+                <div class="toast-body">
+                    Your account has been created successfully!
+                </div>
+            </div>`);
+                window.location = "/account/login";
+                setTimeout(function () { $(".notice-box").html("") }, 5000);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
+            error: function (err) {
+                const errortext = err.responseJSON.description;
+                $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-danger text-light">
+                    <strong class="me-auto">Error!</strong>
+                </div>
+                <div class="toast-body">
+                    ${errortext}
+                </div>
+            </div>`);
+                setTimeout(function () { $(".notice-box").html("") }, 5000);
             }
         })
     });
