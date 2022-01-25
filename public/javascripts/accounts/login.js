@@ -33,24 +33,31 @@ $(document).ready(function () {
             "password": password
         }
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: sessionStorage.getItem("api") + "/authenticate/email-sign-in",
             processData: false,
             contentType: "application/json",
             data: JSON.stringify(userData),
+            beforeSend: function () {
+                $(".login-btn").prop("disabled", true);
+                $(".login-btn").html("please wait ...");
+            },
             success: function (data) {
-                console.log(data);
+                $(".login-btn").html("Login");
+                $(".login-btn").prop("disabled", false);
+                const authToken = data.token;
+                localStorage.setItem("token", authToken);
                 $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
-                    <strong class="me-auto">Success!</strong>
+                    <strong class="me-auto"> Success!</strong>
                 </div>
                 <div class="toast-body">
                     Login successful
                 </div>
             </div>`);
+                window.location = "/dashboard";
             },
-            error: function (error) {
-                console.log(error);
+            error: function (err) {
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">
@@ -62,5 +69,9 @@ $(document).ready(function () {
             </div>`);
             }
         })
-    })
+    });
+
+
+    // log out
+
 })

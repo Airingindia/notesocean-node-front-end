@@ -7,13 +7,9 @@ const pagecrypt = require('../services/pagecrypt.services');
 router.get('/:type', async function (req, res, next) {
     const type = req.params.type;
     if (type == "signup") {
-        res.type("text/html");
-        const file = await pagecrypt("../views/account/signup.html");
-        res.send(file);
+        res.render("account/signup");
     } else if (type == "login") {
-        res.type("text/html");
-        const file = await pagecrypt("../views/account/login.html");
-        res.send(file);
+        res.render("account/login");
     }
 });
 

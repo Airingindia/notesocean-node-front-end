@@ -8,6 +8,44 @@ header i.fa-bell{
     margin: 10px;
     color:black;
 }
-aside button{
-    
+
+.btn-primary{
+    background-color:#FB0100;
+    color:#fff;
+    border: none;
 }
+aside .card-content{
+    padding:20px;
+}
+aside button{
+    background:#fff;
+    border:none;
+    border-radius:none;
+    width:100%;
+    padding:10px 20px;
+    margin: 10px 0;
+    font-size: 20px;
+    border-radius:5px;
+    text-align: center;
+}
+aside i{
+    margin: 10px 10px;
+}
+
+aside button.active{
+    background:red;
+    color:#fff;
+}
+
+aside button:focus{
+    border: none;
+}
+aside button:active{
+    border: none;
+}
+aside button:hover{
+    border: none;
+}
+
+
+

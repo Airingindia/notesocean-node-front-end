@@ -10,6 +10,9 @@ const apiEnvRoutes = require('./routes/api.env.routes');
 const dashboardRoutes = require('./routes/dashboard.routes');
 const app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

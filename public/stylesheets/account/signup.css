@@ -50,6 +50,14 @@ input[type="color"]:focus,
     border: none;
 }
 
+.btn-primary:hover{
+    background-color:#FB0100;
+    color:#fff;
+    border: none;
+}
+
+
+
 @media (min-width: 992px){
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 1.5rem;

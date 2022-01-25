@@ -6,9 +6,7 @@ const pagecrypt = require('../services/pagecrypt.services');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.type("text/html");
-  const file = pagecrypt("../views/index.html");
-  res.send(file);
+  res.render("index");
 });
 
 module.exports = router;

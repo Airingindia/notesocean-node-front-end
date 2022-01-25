@@ -5,23 +5,20 @@ const path = require('path');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.status(200);
-    res.json({
-        message:"get request method not allowed!"
-    });
+    res.render("index");
 });
 
 router.post('/', function (req, res, next) {
     res.status(200);
     res.json({
-        message:"okay"
+        message: "okay"
     })
 });
 
-router.put("/",function (req, res, next) {
+router.put("/", function (req, res, next) {
     res.status(200);
     res.json({
-        message:"put method not allowed!"
+        message: "put method not allowed!"
     })
 })
 
