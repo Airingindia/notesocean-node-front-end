@@ -8,6 +8,8 @@ const accountRoutes = require('./routes/account.routes');
 const loginHandlerRoutes = require("./routes/loginHandler.routes");
 const apiEnvRoutes = require('./routes/api.env.routes');
 const dashboardRoutes = require('./routes/dashboard.routes');
+const aboutRoutes = require('./routes/about.routes');
+const contactRoutes = require("./routes/contact.routes");
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +26,11 @@ app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
 app.use("/api/env", apiEnvRoutes);
 app.use("/dashboard", dashboardRoutes);
+app.use("/about", aboutRoutes);
+app.use("/about-us", aboutRoutes);
 
+app.use("/contact", contactRoutes);
+app.use("/contact-us", contactRoutes);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
