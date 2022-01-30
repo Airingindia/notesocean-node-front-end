@@ -53,13 +53,40 @@ $(document).ready(function () {
                     <strong class="me-auto">Success!</strong>
                 </div>
                 <div class="toast-body">
-                    Your account has been created successfully!
+                    Your account has been created successfully!, we are logging you in your dashboard
                 </div>
             </div>`);
-                window.location = "/account/login";
-                setTimeout(function () { $(".notice-box").html("") }, 5000);
+
+                setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: sessionStorage.getItem("api") + "/authenticate/email-sign-in",
+                        processData: false,
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            email: email,
+                            password: choosePassword
+                        }),
+                        success: function (data) {
+                            const authToken = data.token;
+                            localStorage.setItem("token", authToken);
+                            window.location = "/dashboard";
+                        }, error: function (jqXHR, textStatus) {
+                            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header bg-danger text-light">
+                                <strong class="me-auto">Error!</strong>
+                            </div>
+                            <div class="toast-body">
+                                Login failed!, Forwading to login to page
+                            </div>
+                        </div>`);
+                            window.location = "/account/login";
+                        }
+                    })
+                }, 2000);
             },
             error: function (err) {
+                console.log(err);
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">

@@ -11,6 +11,8 @@ router.get('/:page', async function (req, res, next) {
     var alias = req.params.page;
     if (alias == "my-notes") {
         res.render("dashboard/my-notes");
+    } else if (alias == "profile") {
+        res.render("dashboard/profile");
     }
 });
 

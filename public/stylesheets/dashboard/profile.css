@@ -1,0 +1,8 @@
+.profile-user-pic img{
+    border-radius:50% ;
+    width:80px;
+}
+.popover-header{
+    background-color:yellow;
+    color: #323232;
+}

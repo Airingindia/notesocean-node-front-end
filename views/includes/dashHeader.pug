@@ -3,7 +3,7 @@ header
     .container
       h5
         a.navbar-brand(href='/dashboard')
-          img(width='30' src='/images/logo.png' alt='notesocean-logo')
+          img(src='/images/dash-logo.svg' alt='notesocean-logo')
       button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
@@ -12,9 +12,5 @@ header
             a.nav-link
               i.fa.fa-bell
           li.nav-item
-            a.nav-link
+            a.nav-link(href="/dashboard/profile")
               img(src='/images/dummy-user.jpeg' alt='user-pic')
-          li.nav-item
-            a.nav-link
-              button.btn.btn-sm.btn-primary.m-1.logout-btn
-                i.fa.fa-power-off  Log Out

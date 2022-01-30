@@ -10,6 +10,8 @@ $(document).ready(function () {
       },
       success: function (data) {
         if (data == true) {
+          const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
+          sessionStorage.setItem("userid", userinfo);
         } else {
           alert("Invalid token");
           window.location = "/account/login";

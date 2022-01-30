@@ -22,11 +22,11 @@ aside button{
     border:none;
     border-radius:none;
     width:100%;
-    padding:10px 20px;
+    padding:8px 20px;
     margin: 10px 0;
-    font-size: 20px;
+    font-size: 15px;
     border-radius:5px;
-    text-align: center;
+    text-align: left;
 }
 aside i{
     margin: 10px 10px;
@@ -46,6 +46,3 @@ aside button:active{
 aside button:hover{
     border: none;
 }
-
-
-

@@ -58,6 +58,8 @@ $(document).ready(function () {
                 window.location = "/dashboard";
             },
             error: function (err) {
+                $(".login-btn").html("Login");
+                $(".login-btn").prop("disabled", false);
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">

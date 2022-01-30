@@ -1,0 +1,87 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Profile
+        include ../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/profile.css')
+    body
+    include ../includes/dashHeader
+    .row
+        include ../includes/dashAside
+        .col-9.shadow.p-3
+            h3 My profile
+            .container.mt-5
+                .row
+                    .col-12.d-flex.justify-content-between
+                        h6.text-danger Personal Information
+                        button(type="button").btn.btn-sm.btn-primary
+                            i.fa.fa-edit.mx-1
+                            span edit
+                    .col-12.mt-4.user-info
+                        .row
+                            .col-2.text-center
+                                div.profile-user-pic
+                                    img(src="/images/dummy-user.jpeg")
+                            .col-2 
+                                h6 First Name
+                                p.first-name sachin 
+                            .col-2
+                                h6 Last Name
+                                p.last-name kumar 
+                            .col-3
+                                h6 Email
+                                i.fa.fa-info-circle.text-warning.mx-1.emailUnverified.d-none( data-bs-toggle='popover' title='Email Not Verified!' data-bs-content='Your email is not verified, click to <a class="btn btn-sm btn-primary my-1" href="/dashboard/email-verification"> verify </a>' data-bs-placement="top")
+                                i.fa.fa-check-circle.text-success.mx-1.emailverified.d-none
+                                span.email sachinkumarshera@gmail.com
+                            .col-3
+                                h6 Mobile Number
+                                p.mobile 63768623
+                .row.mt-5
+                    .col-12.d-flex.justify-content-between
+                        h6.text-danger Address Information
+                        button(type="button").btn.btn-sm.btn-primary
+                            i.fa.fa-edit.mx-1
+                            span edit
+                    .col-12.mt-4.user-address
+                        .row
+                            .col-4 
+                                h6 Street Address 
+                                p.address mulllan , mm engineering college
+                            .col-2
+                                h6 City
+                                p.city Ambala 
+                            .col-2
+                                h6 State
+                                p.state Haryana
+                            .col-3
+                                h6 Country
+                                p.country India
+                .row.mt-5
+                    .col-12.d-flex.justify-content-between
+                        h6.text-danger Payment Information
+                        button(type="button").btn.btn-sm.btn-primary
+                            i.fa.fa-edit.mx-1
+                            span edit
+                    .col-12.mt-4
+                        .row
+                            .col-4 
+                                h6 Payment Mode 
+                                p UPI
+                            .col-2
+                                h6 Payment Address
+                                p 8210071758@upi 
+                button.btn.btn-sm.btn-primary.logout-btn
+                    i.fa.fa-power-off.mx-1
+                    span Log Out
+
+               
+
+
+    script(src='/javascripts/common.js')
+    script(src='/javascripts/dashboard/dashboard.js')
+    script(src='/javascripts/dashboard/profile.js')
+    
