@@ -14,6 +14,12 @@ router.get('/:page', async function (req, res, next) {
     } else if (alias == "profile") {
         res.render("dashboard/profile");
     }
+    else if (alias == "create-notes") {
+        res.render("dashboard/create-notes");
+    }
+    else if (alias == "upload-note") {
+        res.render("dashboard/upload-note");
+    }
 });
 
 module.exports = router;

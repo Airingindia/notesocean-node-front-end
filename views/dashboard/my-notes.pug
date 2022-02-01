@@ -17,22 +17,10 @@ html(lang="en")
                 .col-6
                     h2 My Notes
                 .col-6.p-1
-                    button.btn-primary.add-new.add-new-notes-btn
-                        i.fa.fa-plus.m-1
-                        span New
-           .row
-                p list all of user notes
-
-    .modal(tabindex='-1').bg-white
-        .modal-dialog.modal-fullscreen
-            .modal-content
-                .modal-header
-                    h5.modal-title Add New
-                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-                .modal-body
-                    p Add new notes content here
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close                      
+                    a(href="/dashboard/upload-note")
+                        button.btn-primary.add-new
+                            i.fa.fa-plus.m-1
+                            span New                    
 
 
     script(src='/javascripts/common.js')

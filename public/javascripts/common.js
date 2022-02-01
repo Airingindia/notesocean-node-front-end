@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    // var deviceId = amplitude.getInstance().options.deviceId;
+    // console.log("deviceId: " + deviceId);
     $.ajax({
         type: "GET",
         url: "/api/env",

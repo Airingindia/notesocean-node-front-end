@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Upload note
+        include ../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/upload-note.css')
+    body
+    include ../includes/dashHeader
+    .row
+        include ../includes/dashAside
+        .col-10.p-2.content.shadow
+           .container
+                h2 Upload Notes
+                h6.mt-2.text-danger *Before you upload please read the following instructions*
+                p You are uploading private notes , this notes will be private and will not be published to the public
+                p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
+                p  If you want to published to the public and earn money or rewards  
+                    a(href="/dashboard/publish-note").btn.btn-sm.btn-dark.mx-1 click here 
+           .container
+                form(class="dropzone",id="file-upload")               
+
+
+    script(src='/javascripts/common.js')
+    script(src='/javascripts/dashboard/dashboard.js')
+    script(src='/vendors/dropzone/dropzone.min.js')
+    script(src='/javascripts/dashboard/upload-note.js')

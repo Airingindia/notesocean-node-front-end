@@ -1,0 +1,40 @@
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  include ../includes/bootstrap
+  link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+  title Create Notes
+include ../includes/dashHeader  
+.row   
+  include ../includes/dashAside
+  .col-10
+     h3.text-danger Create Note
+     p You can create and upload a note , with a flexible text editor 
+     .container.mt-3.shadow-lg.py-3
+       .form-group.my-3
+            label Title
+            input(type='text',class="form-control" ,placeholder="ex- Data stractures and alogorithms in c language")
+       .document-editor
+            label  Content
+            .toolbar-container
+                .content-container
+                    #editor(style='height: 40vh;border: 1px solid #ccc')
+       .form-group.my-3
+           button.btn-primary.btn.mx-2 Save
+           button.btn.btn-dark.mx-2 upload
+
+script(src='/vendors/ckeditor/ckeditor.js')
+script.
+  DecoupledEditor
+  .create(document.querySelector('#editor'), {
+  // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' , 'exportPdf', '|',]
+  })
+  .then(editor => {
+  const toolbarContainer = document.querySelector('.toolbar-container');
+  toolbarContainer.prepend(editor.ui.view.toolbar.element);
+  window.editor = editor;
+  })
+  .catch(err => {
+  console.error(err.stack);
+  });
