@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Upload Public Notes
+        include ../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/upload-public-notes.css')
+    body
+    include ../includes/dashHeader
+    .row
+        include ../includes/dashAside
+        .col-10.p-2.content.shadow
+           .container
+                h3 Upload Public Notes
+                br
+           .container
+               form
+               .row
+                    .col-md-8
+                        .form-group.my-3
+                            label Note title
+                            i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top",data-bs-trigger="focus",tabindex="0")
+                            input(type="text",placeholder="Eg:- Class 12th chemistry chapter 2",data-json=`{"very-long": "piece of ","data": true}`).form-control
+                        .form-group.my-3
+                            label Description
+                            i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top",data-bs-trigger="focus",tabindex="0")
+                            textarea.form-control(placeholder="Eg:- Every solid does not dissolve in a given liquid. While sodium chloride and sugar dissolve readily in wate",rows="5")
+                        .form-group.my-3
+                            div.d-flex.align-item-end.justify-content-between.my-2
+                                label Tags
+                                    i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='ffhfghhgfhg' data-bs-placement="top", data-bs-trigger="focus",tabindex="0")
+                                i.fa.fa-times.close(title="Clear all tags").cleartags
+                            section.section-preview
+                                .chips.chips-placeholder(tabindex='0')
+                                    .chip.btn(contenteditable="true") class 12th
+                                        i.fa.fa-times-circle.mx-1
+                                    .chip.btn(contenteditable="true") chemistry
+                                        i.fa.fa-times-circle.mx-1
+                                    
+                                    input.input.active(placeholder='Enter a tag').tag-input
+
+                    .col-md-4
+                        .form-group.my-3
+                            div(class="dropzone",id="file-upload") 
+                        .form-group.my-5
+                            button.btn.btn-primary.mx-auto Upload 
+                        
+                
+
+    script(src='/javascripts/common.js')
+    script(src='/javascripts/dashboard/dashboard.js')
+    script(src='/vendors/dropzone/dropzone.min.js')
+    script(src='/javascripts/dashboard/upload-public-notes.js')

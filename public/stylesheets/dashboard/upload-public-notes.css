@@ -1,0 +1,69 @@
+.dropzone {
+    height: 30vh !important;
+    border-radius: 5px !important;
+    border: 1px solid #ccc;
+}
+
+input,
+textarea,
+.chip {
+    /* border: 0 !important; */
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.chips {
+    height: auto;
+    padding: 10px 5px;
+    border: 0;
+    border: 1px solid #ced4da;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.chip {
+    display: inline-block;
+    height: auto !important;
+    padding: 2px 5px;
+    margin: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 32px;
+    color: black;
+    cursor: text;
+    /* background-color: #ccc;
+        bor */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+}
+
+.chips input {
+    display: inline-block;
+    width: auto !important;
+    height: 35px;
+    padding: 0 !important;
+    margin: 0px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 32px;
+    color: black;
+    background: 0;
+    border: 0;
+    outline: 0;
+}
+
+.chips i {
+    cursor: pointer;
+}
+
+.cleartags {
+    cursor: pointer;
+    display: none;
+}
+
+/* test  */

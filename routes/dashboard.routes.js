@@ -17,8 +17,12 @@ router.get('/:page', async function (req, res, next) {
     else if (alias == "create-notes") {
         res.render("dashboard/create-notes");
     }
-    else if (alias == "upload-note") {
-        res.render("dashboard/upload-note");
+    else if (alias == "upload-private-notes") {
+        res.render("dashboard/upload-private-notes");
+    } else if (alias == "public-notes") {
+        res.render("dashboard/public-notes");
+    } else if (alias == "upload-public-notes") {
+        res.render("dashboard/upload-public-notes");
     }
 });
 

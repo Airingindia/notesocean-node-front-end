@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
         const envdata = {
             env: env,
             home: "https://notesocean.com",
-            api: "http://localhost:8081"
+            api: "https://api.notesocean.com"
         };
         res.json(envdata);
     }

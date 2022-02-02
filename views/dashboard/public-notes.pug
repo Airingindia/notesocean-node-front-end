@@ -4,7 +4,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title My notes
+        title Public notes
         include ../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
@@ -15,12 +15,11 @@ html(lang="en")
         .col-9.p-2.content
            .row
                 .col-6
-                    h2 My Notes
-                    small These notes are not publically accessible and you will be get any rewards
-                    br
-                    small This is your  private cloud you can store multiple types of file
+                    h3 Public Notes
+                    small These notes are publically accessible and you will get rewards
+                    
                 .col-6.p-1
-                    a(href="/dashboard/upload-private-notes")
+                    a(href="/dashboard/upload-public-notes")
                         button.btn-primary.add-new
                             i.fa.fa-plus.m-1
                             span New                    
