@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Collections
+        include ../../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
+    body
+    include ../../includes/dashHeader
+    .row
+        include ../../includes/dashAside
+        .col-9.p-2.content
+           .row
+                .col-6
+                    h2 Collections
+                    small Collections is like a youtube playlist
+                .col-6.p-1
+                    a(href="/dashboard/collections/new")
+                        button.btn-primary.add-new
+                            i.fa.fa-plus.m-1
+                            span New                    
+
+
+    script(src='/javascripts/common.js')
+    script(src='/javascripts/dashboard/dashboard.js')

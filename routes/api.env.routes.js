@@ -2,7 +2,6 @@ require("dotenv").config();
 var express = require('express');
 var router = express.Router();
 const path = require('path');
-const pagecrypt = require('../services/pagecrypt.services');
 const env = process.env.ENV;
 
 /* GET home page. */

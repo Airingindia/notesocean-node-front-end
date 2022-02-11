@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const pagecrypt = require('../services/pagecrypt.services');
 
 router.get('/', async function (req, res, next) {
     res.render("dashboard/dashboard");
@@ -23,7 +22,28 @@ router.get('/:page', async function (req, res, next) {
         res.render("dashboard/public-notes");
     } else if (alias == "upload-public-notes") {
         res.render("dashboard/upload-public-notes");
+    } else if (alias == "collections") {
+        res.render("dashboard/collections/my-collections");
+    } else if (alias == "create-new-collections") {
+        res.render("dashboard/collections/create-new-collections");
+    }
+    else if (alias == "colection-details") {
+        res.render("dashboard/collections/colection-details");
+        console.log(req);
     }
 });
+
+router.get("/:page/:parameter", (req, res, next) => {
+    var alias = req.params.page;
+    var parameter = req.params.parameter;
+    if (alias == "colection-details") {
+        res.render("dashboard/collections/colection-details");
+    } else if (alias == "collections" && parameter == "new") {
+        res.render("dashboard/collections/create-new-collections");
+    }
+    else if (alias == "collections" && !isNaN(parameter)) {
+        res.render("dashboard/collections/colection-details");
+    }
+})
 
 module.exports = router;
