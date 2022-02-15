@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Public notes
+        include ../../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
+        link(rel="stylesheet", href="/stylesheets/loader.css")
+    body
+    include ../../includes/dashHeader
+    .row
+        include ../../includes/dashAside
+        .col-10.p-2.content
+           .row
+                .col-6
+                    h3 Public Notes
+                    small These notes are publically accessible and you will get rewards
+                .col-6.px-4
+                    a(href="/dashboard/upload-public-notes")
+                        button.btn-primary.add-new
+                            i.fa.fa-plus.m-1
+                            span New
+           .public-notes-container.container.mt-3.px-5.d-none
+                
+           .row.no-public-notes.d-none
+                            .card.border-0
+                                .card-content
+                                    center
+                                        img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                        .card-body
+                                            h2 No Public notes uploaded Yet
+                                            a(href="/dashboard/upload-public-notes")
+                                                button.btn.btn-primary 
+                                                    i.fa.fa-cloud-upload.mx-1
+                                                    span Upload New Notes
+           .row.loading-public-notes
+                            center 
+                                .lds-roller
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                p Your public notes are loading... please wait...
+
+            
+
+
+
+
+
+    script(src='/javascripts/common.js')
+    script(src='/javascripts/dashboard/dashboard.js')
+    script(src='/javascripts/dashboard/public-notes/public-notes.js')

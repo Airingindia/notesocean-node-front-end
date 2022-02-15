@@ -1,0 +1,34 @@
+.add-new {
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 15px;
+    float: right;
+    margin: 0px 30px;
+}
+
+.no-collections {
+    display: none;
+}
+
+.collection-items {
+    cursor: pointer;
+}
+
+.collection-removed {
+    display: none;
+}
+
+.notes-details-container i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.notes-details-container .private-notes-container .d-flex,
+.public-notes-container .d-flex {
+    border: 1px solid #ccc;
+}
+
+.collection-items:hover {
+    transition: all 0.2s linear;
+    transform: scale(1.10, 1.10);
+}

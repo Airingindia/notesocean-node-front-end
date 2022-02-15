@@ -1,48 +1,57 @@
-img[alt='user-pic']{
-    border-radius:50%;
-    width:40px;
+img[alt='user-pic'] {
+    border-radius: 50%;
+    width: 40px;
 }
 
-header i.fa-bell{
-    font-size:20px;
+header i.fa-bell {
+    font-size: 20px;
     margin: 10px;
-    color:black;
+    color: black;
 }
 
-.btn-primary{
-    background-color:#FB0100;
-    color:#fff;
+.btn-primary {
+    background-color: #FB0100;
+    color: #fff;
     border: none;
 }
-aside .card-content{
-    padding:20px;
+
+.text-danger {
+    color: #FB0100 !important
 }
-aside button{
-    background:#fff;
-    border:none;
-    border-radius:none;
-    width:100%;
-    padding:8px 20px;
+
+aside .card-content {
+    padding: 20px;
+}
+
+aside button {
+    background: #fff;
+    border: none;
+    border-radius: none;
+    width: 100%;
+    padding: 8px 20px;
     margin: 10px 0;
     font-size: 15px;
-    border-radius:5px;
+    border-radius: 5px;
     text-align: left;
 }
-aside i{
+
+aside i {
     margin: 10px 10px;
 }
 
-aside button.active{
-    background:red;
-    color:#fff;
+aside button.active {
+    background: red;
+    color: #fff;
 }
 
-aside button:focus{
+aside button:focus {
     border: none;
 }
-aside button:active{
+
+aside button:active {
     border: none;
 }
-aside button:hover{
+
+aside button:hover {
     border: none;
 }

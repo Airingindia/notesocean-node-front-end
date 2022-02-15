@@ -19,7 +19,7 @@ router.get('/:page', async function (req, res, next) {
     else if (alias == "upload-private-notes") {
         res.render("dashboard/upload-private-notes");
     } else if (alias == "public-notes") {
-        res.render("dashboard/public-notes");
+        res.render("dashboard/public-notes/my-public-notes");
     } else if (alias == "upload-public-notes") {
         res.render("dashboard/upload-public-notes");
     } else if (alias == "collections") {
@@ -43,6 +43,9 @@ router.get("/:page/:parameter", (req, res, next) => {
     }
     else if (alias == "collections" && !isNaN(parameter)) {
         res.render("dashboard/collections/colection-details");
+    }
+    else if (alias == "public-notes" && !isNaN(parameter)) {
+        res.render("dashboard/public-notes/public-notes-details");
     }
 })
 

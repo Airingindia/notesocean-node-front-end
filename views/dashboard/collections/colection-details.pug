@@ -7,22 +7,86 @@ html(lang="en")
         title Collections
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
     body
     include ../../includes/dashHeader
     .row
         include ../../includes/dashAside
-        .col-9.p-2.content
-           .row
-                .col-6
-                    h2 Collections
-                    small Collections is like a youtube playlist
-                .col-6.p-1
-                    a(href="/dashboard/collections/new")
-                        button.btn-primary.add-new
-                            i.fa.fa-plus.m-1
-                            span New                    
+        .col-10.shadow
+           .row.d-none.notes-details-row
+                h2.m-2 Collections Details
+                .col-4
+                    center
+                        img.collection-image(src="/images/dummy/collection.png")
+                .col-8.py-3
+                    .cont.d-flex.justify-content-between
+                        .left 
+                            h2.collection-title 
+                            p.collection-descriptions Collections is like a youtube playlist
+                        .right
+                            button.btn.btn-dark.mx-2.delete-collection 
+                                i.fa.fa-trash.mx-1
+                                span Delete Collection
+                    p 
+                        i.fa.fa-globe.mx-1
+                        span.all_notes_count
+                    p
+                        i.fa.fa-lock.mx-1
+                        span.total_private_notes 
+                    p 
+                        i.fa.fa-users.mx-1
+                        span.total_public_notes
+           .row.container.notes-details-container.d-none.notes-details-row
+                .col-md-6
+                    .private-notes-header.d-flex.justify-content-between
+                        h6 Private Notes 
+                        button.btn.btn-sm.btn-primary Add
+                    .private-notes-container
+                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+                .col-md-6
+                    .public-notes-header.d-flex.justify-content-between
+                        h6 Public Notes
+                        button.btn.btn-sm.btn-primary Add
+                    .public-notes-container
+                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
+                            p Notes Title  Lorem ipsum dolor sit amet.
+                            i.fa.fa-trash.m-2
+           .row.collection-removed
+                .card.border-0
+                    .card-content
+                        center
+                            img.card-img-top.w-50(src="/images/dashboard/collection_details_not_found.svg")  
+                            .card-body
+                                h6 The collection you are looking for it may removed or insufficient permissions to access
+        #confirm-dialog.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+            .modal-dialog(role='document').bg-light
+                .modal-content
+                    .modal-header
+                        h5#exampleModalLabel.modal-title Warning!
+                        button.close(type='button' data-dismiss='confirm-dialog' aria-label='Close')
+                            span(aria-hidden='true') cose
+                    .modal-body
+                        span your collection will be removed and won't be able to recover
+                    .modal-footer
+                        button.btn.btn-secondary(type='button' data-dismiss='confirm-dialog') Cancel
+                        button.btn.btn-primary(type='button').confirm-delete Confirm Delete           
 
 
     script(src='/javascripts/common.js')
     script(src='/javascripts/dashboard/dashboard.js')
+    script(src='/javascripts/dashboard/collections/collections-details.js')
+    script(src='/vendors/sweetalert/sweetalert.min.js')

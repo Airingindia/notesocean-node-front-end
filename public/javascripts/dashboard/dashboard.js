@@ -12,6 +12,9 @@ $(document).ready(function () {
         if (data == true) {
           const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
           sessionStorage.setItem("userid", userinfo);
+          // console.log(userinfo);
+          amplitude.getInstance().setUserId(userinfo);
+
         } else {
           alert("Invalid token");
           window.location = "/account/login";
@@ -65,6 +68,7 @@ $(document).ready(function () {
   // button active function
   let path = window.location.pathname;
   $("aside button[route='" + path + "']").addClass("active");
+
 
   // add new notes notes button function
 

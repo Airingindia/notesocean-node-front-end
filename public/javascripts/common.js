@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    // var deviceId = amplitude.getInstance().options.deviceId;
-    // console.log("deviceId: " + deviceId);
+    amplitude.getInstance().logEvent("change page ", {
+        path: window.location.href
+    });
     if (sessionStorage.getItem("home") == null || sessionStorage.getItem("env") == null || sessionStorage.getItem("api") == null) {
         $.ajax({
             type: "GET",
