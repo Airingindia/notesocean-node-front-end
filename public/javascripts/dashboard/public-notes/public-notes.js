@@ -9,7 +9,6 @@ $(document).ready(function () {
             Authorization: localStorage.getItem("token")
         },
         success: function (data) {
-            console.log(data);
             if (data.requestedProducts.length !== 0) {
                 $(".public-notes-container").html("");
                 $(".loading-public-notes").addClass("d-none");
@@ -20,13 +19,12 @@ $(document).ready(function () {
                     let name = data.requestedProducts[i].name;
                     let timestamp = data.requestedProducts[i].timestamp;
                     // let description = data.requestedProducts[i].description;
-                    let createImageThumbnails = data.requestedProducts[i].createImageThumbnails;
+                    let thumbnails = data.requestedProducts[i].thumbnails;
                     timestamp = timeDifference(timestamp);
-                    console.log(name);
                     $(".public-notes-container").append(`
                     <div class="row shadow rounded my-3 p-2 public-notes-item" data-route="${id}">
     <div class="col-md-1">
-        <center><img class="w-100" src="/images/dummy/notes.jpg" /></center>
+        <center><img class="w-100" src="${thumbnails.split(",")[0]}" /></center>
     </div>
     <div class="col-md-7 d-flex align-items-center">
         <div>
@@ -77,15 +75,15 @@ $(document).ready(function () {
         }
 
         else if (elapsed < msPerMonth) {
-            return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
+            return Math.round(elapsed / msPerDay) + ' days ago';
         }
 
         else if (elapsed < msPerYear) {
-            return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
+            return Math.round(elapsed / msPerMonth) + ' months ago';
         }
 
         else {
-            return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
+            return Math.round(elapsed / msPerYear) + ' years ago';
         }
     };
 

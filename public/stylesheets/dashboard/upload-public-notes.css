@@ -67,3 +67,33 @@ textarea,
 }
 
 /* test  */
+
+.progress-bar-primary {
+    background-color: #FF0000;
+}
+
+.btn:focus,
+.btn:active {
+    background-color: #FF0000;
+}
+
+.progress {
+    display: none;
+}
+
+.swal-button {
+    background-color: #FF0000 !important;
+    outline: 0;
+    border: none;
+}
+
+.swal-button:focus,
+.swal-button:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+.swal-modal {
+    box-shadow: none;
+}

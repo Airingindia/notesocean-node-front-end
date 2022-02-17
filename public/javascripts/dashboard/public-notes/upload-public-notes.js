@@ -11,28 +11,71 @@ $(function () {
         maxFiles: 1,
         uploadMultiple: false,
         acceptedFiles: ".pdf",
-        url: sessionStorage.getItem("api") + "/upload-public-notes",
+        url: sessionStorage.getItem("api") + "/products",
         method: "post",
         headers: {
             Authorization: localStorage.getItem("token"),
         },
         success: function (data) {
+            $('.upload-notes-btn').html("Upload");
+            $('.upload-notes-btn').prop('disabled', false);
             let status = data.status;
-            console.log(status);
+            $(".progress").css({ display: "none" });
             if (status == "success") {
-                swal("success", "your files are uploaded successfully", "success");
+                swal("success", "your note are uploaded successfully", "success");
             } else {
-                swal("error", "somthing sent wrong , please try again", "success");
+                swal("error", "somthing sent wrong , please try again", "error");
             }
             myDropzone.removeAllFiles();
         }
     });
     myDropzone.on("sending", function (file, xhr, formData) {
-        formData.append("test", "test");// append file description
+        let title = $(".note-title").val();
+        // formData.append("name",);// append file description
+        let tags = [];
+        $(".chip").each(function () {
+            tags.push($(this).html().split("<i class=\"fa fa-times-circle mx-1\"></i>")[0]);
+        });
+        var json = {
+            name: title,
+            tags: tags.toString()
+        };
+        formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
     });
 
     myDropzone.on("complete", function (file) {
-        // myDropzone.removeFile(file);  should remove after implement api
+        myDropzone.removeFile(file);
+        $("form").trigger("reset");
+        $(".chips .chip").each(function () {
+            $(this).remove();
+        });
+        $(".progress").css({ display: "none" });
+        $(".note-title").val("");
+    });
+
+    myDropzone.on("totaluploadprogress", function (progress) {
+        $(".progress").css({ display: "block" });
+        document.querySelector(".progress-bar").style.width = progress + "%";
+        $(".progress-bar").html(progress + "%");
+    });
+
+    $('.upload-notes-btn').click(function () {
+        // check all field is not null
+        let title = $(".note-title").val();
+        // formData.append("name",);// append file description
+        let tags = [];
+        $(".chip").each(function () {
+            tags.push($(this).html().split("<i class=\"fa fa-times-circle mx-1\"></i>")[0]);
+        });
+        let description = $(".note-descriptions").val();
+
+        if (title.length > 10 && tags.length > 3 && description.length > 10) {
+            myDropzone.processQueue();
+            $(this).html(`<i class="fa fa-spinner fa-spin"> </i> Uploading ...`);
+            $(this).prop("disabled", true);
+        } else {
+            swal("warning", "All field are required ", "warning");
+        }
     });
 });
 

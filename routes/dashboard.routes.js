@@ -47,6 +47,9 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "public-notes" && !isNaN(parameter)) {
         res.render("dashboard/public-notes/public-notes-details");
     }
+    else if (alias == "public-notes" && parameter == "new") {
+        res.render("dashboard/public-notes/upload-public-notes");
+    }
 })
 
 module.exports = router;

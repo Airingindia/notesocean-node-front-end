@@ -26,7 +26,7 @@ $(document).ready(function () {
                 $(".public-notes-likes-count").html(likes);
                 $(".public-notes-dislikes-count").html(dislikes);
                 $(".public-notes-views-count").html(formatViews(views));
-
+                $(".notes-img").attr("src", thumbnails.split(",")[0]);
             } else {
                 $(".loading-public-notes").addClass("d-none");
                 $(".notes-removed").removeClass("d-none");
