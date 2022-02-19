@@ -5,14 +5,14 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Upload  private notes
-        include ../includes/bootstrap
+        include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/upload-note.css')
     body
-    include ../includes/dashHeader
+    include ../../includes/dashHeader
     .row
-        include ../includes/dashAside
+        include ../../includes/dashAside
         .col-10.p-2.content.shadow
            .container
                 h3 Upload Private Notes
@@ -21,14 +21,15 @@ html(lang="en")
                 small  You can't earn money or rewards from these notes because it will be private and only you will be able to access
                 br
                 small If you want to published to the public and earn money or rewards  
-                    a(href="/dashboard/upload-public-notes").btn.btn-sm.btn-dark.mx-1 click here 
+                    a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
                 br
                 br
            .container
                 form(class="dropzone",id="file-upload")               
 
-
+section
+  .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index: 11')
     script(src='/javascripts/common.js')
     script(src='/javascripts/dashboard/dashboard.js')
     script(src='/vendors/dropzone/dropzone.min.js')
-    script(src='/javascripts/dashboard/upload-private-notes.js')
+    script(src='/javascripts/dashboard//private-notes/upload-private-notes.js')

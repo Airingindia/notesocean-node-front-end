@@ -81,11 +81,11 @@ textarea,
     display: none;
 }
 
-.swal-button {
+/* .swal-button {
     background-color: #FF0000 !important;
     outline: 0;
     border: none;
-}
+} */
 
 .swal-button:focus,
 .swal-button:active {
@@ -96,4 +96,19 @@ textarea,
 
 .swal-modal {
     box-shadow: none;
+}
+
+.is-invalid {
+    border: 1px solid red;
+}
+
+.is-valid {
+    border: 1px solid green;
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled {
+    color: #323232;
+    background-color: #cccc;
+    border-color: #cccc;
 }

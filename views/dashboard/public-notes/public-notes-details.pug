@@ -16,9 +16,9 @@ html(lang="en")
         .col-10.content
             .row.shadow.public-notes-details-container.d-none
                 h2.m-2 Public Notes Details
-                .col-md-3.p-2
+                .col-md-2.p-2
                     center
-                        img(src="/images/dummy/collection2.png").w-75.border.rounded.notes-img
+                        img(src="/images/dummy/collection2.png").w-75.rounded.notes-img.shadow
                 .col-md-6.p-3
                     h4.public-notes-title Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, sapiente? 
                     p.public-notes-description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi quis ea aliquam ipsam dolores natus est provident ab sunt blanditiis.
@@ -36,15 +36,16 @@ html(lang="en")
                             i.fa.fa-comment.text-danger.mx-1
                             span.public-notes-comment-count 30
                 .col-3
-                    button.btn.btn-sm.btn-dark.mx-1
+                    button.btn.btn-sm.btn-dark.mx-1.public-notes-edit-btn
                         i.fa.fa-edit.mx-1
                         span Edit
-                    button.btn.btn-primary.btn-sm.mx-1
+                    button.btn.btn-primary.btn-sm.mx-1.delete-puublic-note
                         i.fa.fa-trash.mx-1
                         span Delete
                 .col-12
                     h5.text-center Daily  Performance
-                    #daily-views(style="height:60vh")
+                    #daily-views(style="height:60vh").w-100
+                    
             .row.notes-removed.d-none
                 .card.border-0
                     .card-content
@@ -64,8 +65,39 @@ html(lang="en")
                                     div
                                     div
                                 p Your public notes details are loading... please wait...
+            .modal#edit-public-notes-modal(tabindex='-1').fade
+                    .modal-dialog.modal-dialog-centered.modal-md
+                            .modal-content.bg-white
+                                .modal-header
+                                    h5 
+                                        span Edit 
+                                        span.public-notes-modal-title.text-danger classdssd
+                                   
+                                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                .modal-body
+                                    p.text-warning *You can update only title and description*
+                                    form.form.form-responsive
+                                        .form-group
+                                            label Title 
+                                            input.note-title(type="text").form-control
+                                            .invalid-feedback
+                                                p.invalid-title-error invalid title
+                                            .valid-feedback
+                                                p looks good
+                                        .form-group 
+                                            label Descriptions
+                                            textarea.form-control.note-descriptions(style="height:15vh")
+                                            .invalid-feedback
+                                                p.invalid-descriptions-error invalid Description
+                                            .valid-feedback
+                                                p looks good
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+                                    button.btn.btn-primary(type='button') Save changes
+
 
     script(src='/javascripts/common.js')
     script(src='/javascripts/dashboard/dashboard.js')
     script(src="https://www.gstatic.com/charts/loader.js")
+    script(src='/vendors/sweetalert/sweetalert.min.js')
     script(src='/javascripts/dashboard/public-notes/public-notes-details.js')

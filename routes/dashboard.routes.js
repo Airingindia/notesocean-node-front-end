@@ -8,13 +8,10 @@ router.get('/', async function (req, res, next) {
 
 router.get('/:page', async function (req, res, next) {
     var alias = req.params.page;
-    if (alias == "my-notes") {
-        res.render("dashboard/my-notes");
+    if (alias == "private-notes") {
+        res.render("dashboard/private-notes/private-notes");
     } else if (alias == "profile") {
         res.render("dashboard/profile");
-    }
-    else if (alias == "create-notes") {
-        res.render("dashboard/create-notes");
     }
     else if (alias == "upload-private-notes") {
         res.render("dashboard/upload-private-notes");
@@ -49,6 +46,12 @@ router.get("/:page/:parameter", (req, res, next) => {
     }
     else if (alias == "public-notes" && parameter == "new") {
         res.render("dashboard/public-notes/upload-public-notes");
+    }
+    else if (alias == "private-notes" && parameter == "new") {
+        res.render("dashboard/private-notes/upload-private-notes");
+    }
+    else if (alias == "private-notes" && parameter == "create") {
+        res.render("dashboard/private-notes/create-private-notes");
     }
 })
 

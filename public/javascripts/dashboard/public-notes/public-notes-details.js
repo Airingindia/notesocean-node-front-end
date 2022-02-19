@@ -11,6 +11,7 @@ $(document).ready(function () {
         },
         success: function (data) {
             if (data.length !== 0) {
+
                 $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-details-container").removeClass("d-none");
                 console.log(data);
@@ -27,6 +28,10 @@ $(document).ready(function () {
                 $(".public-notes-dislikes-count").html(dislikes);
                 $(".public-notes-views-count").html(formatViews(views));
                 $(".notes-img").attr("src", thumbnails.split(",")[0]);
+                dailyViews();
+                deleteNote();
+                updateNote();
+                validate();
             } else {
                 $(".loading-public-notes").addClass("d-none");
                 $(".notes-removed").removeClass("d-none");
@@ -74,8 +79,123 @@ $(document).ready(function () {
             chart.draw(data, options);
         }
     };
-    dailyViews();
 
+    function deleteNote() {
+        $(".delete-puublic-note").click(function () {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Note! ",
+                icon: "warning",
+                buttons: ["Cancel", "Delete"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: sessionStorage.getItem("api") + "/products/" + public_notes_id,
+                            contentType: "application/json",
+                            processData: false,
+                            headers: {
+                                Authorization: localStorage.getItem("token")
+                            },
+                            beforeSend: function () {
+                                $(".delete-puublic-note").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> Please wait ...`);
+                                $(".delete-puublic-note").prop("disabled", true);
+                            },
+                            success: function (data) {
+                                $(".delete-puublic-note").html(`Delete`);
+                                $(".delete-puublic-note").prop("disabled", false);
+                                swal("Success ! Your note deleted succefully!", {
+                                    icon: "success",
+                                    button: "continue"
+                                }).then((function () {
+                                    window.location = "/dashboard/public-notes";
+                                }));
+                            },
+                            error: function (err) {
+                                swal("Error!", "Your note has beeen successfully deleted", "error");
+                            }
+                        })
+                    }
+                });
+        });
+    };
+
+    function updateNote() {
+        $(".public-notes-edit-btn").click(function () {
+            $("#edit-public-notes-modal").modal('show');
+        });
+    }
+
+    function validate() {
+        $(".note-title").on("input", function () {
+            if ($(this).val().length > 20) {
+                $(".note-title").addClass("is-valid");
+                $(".note-title").removeClass("is-invalid");
+            }
+            else if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty'");
+                $(".notes-title").addClass("animate__heartBeat");
+            }
+            else {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title should be at least 20 characters");
+            }
+        });
+        $(".note-title").on("change", function () {
+            if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty'");
+            }
+        });
+
+        $(".note-title").on("blur", function () {
+            if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty'");
+            }
+        });
+
+        // description validations
+
+        $(".note-descriptions").on("input", function () {
+            if ($(this).val().length > 30) {
+                $(".note-descriptions").addClass("is-valid");
+                $(".note-descriptions").removeClass("is-invalid");
+            }
+            else if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+            else {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 30 characters");
+            }
+        });
+        $(".note-descriptions").on("change", function () {
+            if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+        });
+
+        $(".note-descriptions").on("blur", function () {
+            if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+        });
+    };
     const formatViews = n => {
         if (n < 1e3) return n;
         if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "K";

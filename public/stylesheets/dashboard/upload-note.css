@@ -2,6 +2,11 @@
     border: 3px dotted red !important;
     height: 40vh !important;
 }
-.content{
-    height:95vh !important;
+
+.content {
+    height: 95vh !important;
+}
+
+.close-notice {
+    cursor: pointer;
 }

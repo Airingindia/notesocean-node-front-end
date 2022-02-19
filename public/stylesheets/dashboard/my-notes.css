@@ -11,3 +11,39 @@
     cursor: pointer;
     transition: all .2s linear;
 }
+
+.notes-img {
+    transition: all .2s linear;
+}
+
+.modal .modal-content,
+.modal .modal-body,
+.modal .modal-footer,
+.modal .modal-header {
+    border: none;
+}
+
+.modal input:focus,
+.modal input:active,
+.modal textarea:focus,
+.modal textarea:active {
+    border: 1px solid #ccc;
+    outline: none;
+    box-shadow: none;
+}
+
+.swal-button--danger {
+    background: #FF0202 !important;
+}
+
+.swal-button {
+    border-radius: 5px;
+}
+
+.swal-button:focus,
+.swal-button:active,
+.swal-button:hover {
+    box-shadow: none;
+    outline: none;
+    border: none;
+}

@@ -1,26 +1,33 @@
-@import "../animate.css"; /* Using a string */
-.form-group{
+@import "../animate.css";
+
+/* Using a string */
+.form-group {
     margin: 40px 0;
 }
-.form-group input{
-    border:none;
+
+.form-group input {
+    border: none;
     outline: none;
     box-shadow: none;
     border-bottom: 1px solid #323232;
     border-radius: 0;
     padding: 0 30px;
 }
-.form-group label{
+
+.form-group label {
     margin: 0 30px;
 }
-.form-group i{
+
+.form-group i {
     position: absolute;
     font-size: 20px;
 }
-.form-group #right{
+
+.form-group #right {
     left: 84%;
 }
-form{
+
+form {
     width: 70%;
 }
 
@@ -40,22 +47,19 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
-    border-color:black;
+    border-color: black;
     box-shadow: none;
     outline: 0 none;
 }
-.btn-primary{
-    background-color:#FB0100;
-    color:#fff;
+
+.btn-primary {
+    background-color: #FB0100;
+    color: #fff;
     border: none;
 }
 
-.btn-primary:hover{
-    background-color:#FB0100;
-    color:#fff;
+.btn-primary:hover {
+    background-color: #FB0100;
+    color: #fff;
     border: none;
 }
-
-
-
-

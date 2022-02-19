@@ -4,14 +4,14 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title My notes
-        include ../includes/bootstrap
+        title Private Notes
+        include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
     body
-    include ../includes/dashHeader
+    include ../../includes/dashHeader
     .row
-        include ../includes/dashAside
+        include ../../includes/dashAside
         .col-9.p-2.content
            .row
                 .col-6
@@ -20,7 +20,7 @@ html(lang="en")
                     br
                     small This is your  private cloud you can store multiple types of file
                 .col-6.p-1
-                    a(href="/dashboard/upload-private-notes")
+                    a(href="/dashboard/private-notes/new")
                         button.btn-primary.add-new
                             i.fa.fa-plus.m-1
                             span New                    
