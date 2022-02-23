@@ -43,8 +43,10 @@ $(function () {
             myDropzone.removeAllFiles();
         }
     });
+
     myDropzone.on("sending", function (file, xhr, formData) {
         let title = $(".note-title").val();
+        let description = $(".note-descriptions").val();
         $(".upload-notes-btn").html(`<i class="fa fa-spinner fa-spin"> </i> Uploading ...`);
         $(".upload-notes-btn").prop("disabled", true);
         // formData.append("name",);// append file description
@@ -54,7 +56,8 @@ $(function () {
         });
         var json = {
             name: title,
-            tags: tags.toString()
+            tags: tags.toString(),
+            description: description
         };
         formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
         console.log(xhr);

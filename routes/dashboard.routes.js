@@ -53,6 +53,9 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "private-notes" && parameter == "create") {
         res.render("dashboard/private-notes/create-private-notes");
     }
+    else if (alias == "private-notes" && !isNaN(parameter)) {
+        res.render("dashboard/private-notes/private-notes-details");
+    }
 })
 
 module.exports = router;

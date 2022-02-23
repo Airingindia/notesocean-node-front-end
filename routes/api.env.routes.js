@@ -3,25 +3,17 @@ var express = require('express');
 var router = express.Router();
 const path = require('path');
 const env = process.env.ENV;
+const api_url = process.env.API_URL;
+const homepage = process.env.HOMEPAGE;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    if (env == "development") {
-        const envdata = {
-            env: env,
-            home: "http://localhost:3000",
-            api: "http://localhost:8081"
-        };
-        res.json(envdata);
-    } else {
-        const envdata = {
-            env: env,
-            home: "https://notesocean.com",
-            api: "https://api.notesocean.com"
-        };
-        res.json(envdata);
-    }
-
+    const envdata = {
+        env: env,
+        home: homepage,
+        api: api_url
+    };
+    res.json(envdata);
 });
 
 module.exports = router;

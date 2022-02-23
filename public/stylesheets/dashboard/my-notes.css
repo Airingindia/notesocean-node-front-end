@@ -47,3 +47,9 @@
     outline: none;
     border: none;
 }
+
+.notes-container-row .card:hover {
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+    transition: all .2s linear;
+}

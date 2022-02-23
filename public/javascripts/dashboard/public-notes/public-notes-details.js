@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log(window.location.pathname.split("/")[3]);
     const public_notes_id = window.location.pathname.split("/")[3];
     $.ajax({
         type: "GET",

@@ -9,17 +9,18 @@ $(document).ready(function () {
             Authorization: localStorage.getItem("token")
         },
         success: function (data) {
-            if (data.requestedProducts.length !== 0) {
+            console.log(data);
+            if (data.requested.length !== 0) {
                 $(".public-notes-container").html("");
                 $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-container").removeClass("d-none");
                 $(".no-public-notes").addClass("d-none");
-                for (let i = 0; i < data.requestedProducts.length; i++) {
-                    let id = data.requestedProducts[i].id;
-                    let name = data.requestedProducts[i].name;
-                    let timestamp = data.requestedProducts[i].timestamp;
-                    // let description = data.requestedProducts[i].description;
-                    let thumbnails = data.requestedProducts[i].thumbnails;
+                for (let i = 0; i < data.requested.length; i++) {
+                    let id = data.requested[i].id;
+                    let name = data.requested[i].name;
+                    let timestamp = data.requested[i].timestamp;
+                    // let description = data.requested[i].description;
+                    let thumbnails = data.requested[i].thumbnails;
                     timestamp = timeDifference(timestamp);
                     $(".public-notes-container").append(`
                     <div class="row shadow rounded my-3 p-2 public-notes-item" data-route="${id}">
