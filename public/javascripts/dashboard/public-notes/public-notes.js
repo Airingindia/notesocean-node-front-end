@@ -10,6 +10,7 @@ $(document).ready(function () {
         },
         success: function (data) {
             console.log(data);
+            // return;
             if (data.requested.length !== 0) {
                 $(".public-notes-container").html("");
                 $(".loading-public-notes").addClass("d-none");
@@ -22,6 +23,7 @@ $(document).ready(function () {
                     // let description = data.requested[i].description;
                     let thumbnails = data.requested[i].thumbnails;
                     timestamp = timeDifference(timestamp);
+                    let size = bytesToSize(data.requested[i].size);
                     $(".public-notes-container").append(`
                     <div class="row shadow rounded my-3 p-2 public-notes-item" data-route="${id}">
     <div class="col-md-1">
@@ -38,6 +40,7 @@ $(document).ready(function () {
     </div>
 </div>
                     `);
+
                 }
                 publicNotesRoute();
             } else {
@@ -95,5 +98,11 @@ $(document).ready(function () {
                 window.location = "/dashboard/public-notes/" + id;
             })
         })
+    }
+    function bytesToSize(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return '0 Byte';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
 });

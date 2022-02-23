@@ -9,6 +9,8 @@ html(lang="en")
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
         link(rel="stylesheet", href="/stylesheets/loader.css")
+        link(rel='stylesheet' href='/stylesheets/dashboard/upload-public-notes.css')
+        link(rel='stylesheet' href='/stylesheets/animate.css')
     body
     include ../../includes/dashHeader
     .row
@@ -66,16 +68,16 @@ html(lang="en")
                                     div
                                 p Your public notes details are loading... please wait...
             .modal#edit-public-notes-modal(tabindex='-1').fade
-                    .modal-dialog.modal-dialog-centered.modal-md
+                    .modal-dialog.modal-xl
                             .modal-content.bg-white
                                 .modal-header
                                     h5 
                                         span Edit 
-                                        span.public-notes-modal-title.text-danger classdssd
+                                        span.public-notes-modal-title.text-danger 
                                    
                                     button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
                                 .modal-body
-                                    p.text-warning *You can update only title and description*
+                                    p.text-warning *You can update only title,  description and tags*
                                     form.form.form-responsive
                                         .form-group
                                             label Title 
@@ -91,9 +93,22 @@ html(lang="en")
                                                 p.invalid-descriptions-error invalid Description
                                             .valid-feedback
                                                 p looks good
+                                        .form-group.my-3
+                                            div.d-flex.align-item-end.justify-content-between.my-2
+                                                label Tags
+                                                    i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='ffhfghhgfhg' data-bs-placement="top", data-bs-trigger="focus",tabindex="0")
+                                                i.fa.fa-times.close(title="Clear all tags").cleartags
+                                            section.section-preview
+                                                .chips.chips-placeholder(tabindex='0')
+                                                    
+                                                    
+                                                    input.input.active(placeholder='Enter a tag').tag-input
+                                                .invalid-feedback
+                                                        p.invalid-title-error invalid title
+                                                .valid-feedback
+                                                        p looks good
                                 .modal-footer
-                                    button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
-                                    button.btn.btn-primary(type='button') Save changes
+                                    button.btn.btn-primary(type='button').public-notes-update-btn Update
 
 
     script(src='/javascripts/common.js')
