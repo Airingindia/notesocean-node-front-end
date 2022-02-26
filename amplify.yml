@@ -4,5 +4,3 @@ frontend:
       commands:
         - npm install
         - node ./bin/www
-  artifacts:
-    baseDirectory: /
