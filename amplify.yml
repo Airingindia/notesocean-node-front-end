@@ -5,4 +5,4 @@ frontend:
         - npm install
         - node ./bin/www
   artifacts:
-    baseDirectory: public
+    baseDirectory: /
