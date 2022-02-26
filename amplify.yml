@@ -1,14 +1,8 @@
-version: 1
 frontend:
   phases:
-    # IMPORTANT - Please verify your build commands
     build:
-      commands: "node ./bin/www"
+      commands:
+        - npm install
+        - node ./bin/www
   artifacts:
-    # IMPORTANT - Please verify your build output directory
-    baseDirectory: /
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
+    baseDirectory: public
