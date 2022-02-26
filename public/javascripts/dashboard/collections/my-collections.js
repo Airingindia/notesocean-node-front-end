@@ -19,16 +19,16 @@ $(document).ready(function () {
                     let notes = data.requested[i].notes;
                     let products = data.requested[i].products;
                     let id = data.requested[i].id;
-                    if (notes !== null) {
-                        notes = notes.length;
-                    } else {
-                        notes = 0;
-                    }
-                    if (products !== null) {
-                        products = products.length;
-                    } else {
-                        products = 0;
-                    }
+                    // if (notes !== null) {
+                    //     notes = notes.length;
+                    // } else {
+                    //     notes = 0;
+                    // }
+                    // if (products !== null) {
+                    //     products = products.length;
+                    // } else {
+                    //     products = 0;
+                    // }
 
                     $(".my-colleaction-row").append(`<div class="col-md-3 my-2">
                     <div class="card border-0 shadow collection-items" collection-route="${id}">

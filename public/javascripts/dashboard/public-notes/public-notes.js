@@ -27,7 +27,7 @@ $(document).ready(function () {
                     $(".public-notes-container").append(`
                     <div class="row shadow rounded my-3 p-2 public-notes-item" data-route="${id}">
     <div class="col-md-1">
-        <center><img class="w-100" src="${thumbnails.split(",")[0]}" /></center>
+        <center><img class="w-100 lozad "  data-src="${thumbnails.split(",")[0]}" src="${thumbnails.split(",")[0]}" /></center>
     </div>
     <div class="col-md-7 d-flex align-items-center">
         <div>
