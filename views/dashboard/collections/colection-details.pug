@@ -4,89 +4,114 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Collections
+        title Create new collections
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
+        link(rel="stylesheet", href="/stylesheets/loader.css")
     body
     include ../../includes/dashHeader
     .row
         include ../../includes/dashAside
-        .col-10.shadow
-           .row.d-none.notes-details-row
-                h2.m-2 Collections Details
-                .col-4
-                    center
-                        img.collection-image(src="/images/dummy/collection.png")
-                .col-8.py-3
-                    .cont.d-flex.justify-content-between
-                        .left 
-                            h2.collection-title 
-                            p.collection-descriptions Collections is like a youtube playlist
-                        .right
-                            button.btn.btn-dark.mx-2.delete-collection 
-                                i.fa.fa-trash.mx-1
-                                span Delete Collection
-                    p 
-                        i.fa.fa-globe.mx-1
-                        span.all_notes_count
-                    p
-                        i.fa.fa-lock.mx-1
-                        span.total_private_notes 
-                    p 
-                        i.fa.fa-users.mx-1
-                        span.total_public_notes
-           .row.container.notes-details-container.d-none.notes-details-row
-                .col-md-6
-                    .private-notes-header.d-flex.justify-content-between
-                        h6 Private Notes 
-                        button.btn.btn-sm.btn-primary Add
-                    .private-notes-container
-                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-                        .private-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-                .col-md-6
-                    .public-notes-header.d-flex.justify-content-between
-                        h6 Public Notes
-                        button.btn.btn-sm.btn-primary Add
-                    .public-notes-container
-                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-                        .public-notes-item.d-flex.justify-content-between.rounded.p-2.my-2
-                            p Notes Title  Lorem ipsum dolor sit amet.
-                            i.fa.fa-trash.m-2
-           .row.collection-removed
-                .card.border-0
-                    .card-content
-                        center
-                            img.card-img-top.w-50(src="/images/dashboard/collection_details_not_found.svg")  
-                            .card-body
-                                h6 The collection you are looking for it may removed or insufficient permissions to access
-        #confirm-dialog.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-            .modal-dialog(role='document').bg-light
-                .modal-content
-                    .modal-header
-                        h5#exampleModalLabel.modal-title Warning!
-                        button.close(type='button' data-dismiss='confirm-dialog' aria-label='Close')
-                            span(aria-hidden='true') cose
-                    .modal-body
-                        span your collection will be removed and won't be able to recover
-                    .modal-footer
-                        button.btn.btn-secondary(type='button' data-dismiss='confirm-dialog') Cancel
-                        button.btn.btn-primary(type='button').confirm-delete Confirm Delete           
-
-
+        .col-10.p-2.content.shadow
+           .container
+                h3 Create new collections
+                .container.pt-4
+                   
+                    form.form
+                        .row
+                            .col-md-6
+                                .form-group.my-2
+                                    label Collection Name
+                                    input(type="text").form-control(placeholder="Class 10th all math mcq pdf").collection-name
+                                    .invalid-feedback
+                                        p.invalid-title-error Collection name should be atleast 10 characters
+                                    .valid-feedback
+                                        p looks good
+                                .form-group.my-2
+                                    label Collection Descriptions
+                                    textarea.form-control(rows="5",cols="10")
+                                    .invalid-feedback
+                                        p.invalid-title-error Collection descriptions should be atleast 20 characters
+                                    .valid-feedback
+                                        p looks good
+                            .col-md-6
+                                .form-group.w-50.my-2
+                                    label.card-text Select collection Banner
+                                        img.card-img-top.select-banner-img(src="/images/dummy/collection_thumbnail.png", alt="").w-100.border
+                    .notes-container
+                        label Select Public Notes
+                        .row.collection-notes-row
+                            //- .col-md-2.my-3
+                            //-     .card.border-0.shadow.rounded.w-100
+                            //-         img.card-img-top(src="/images/dummy/collection2.png")
+                            //-         i.fa.fa-times-circle.delete-note-from-collection
+                            //-         .card-body
+                            //-             h6.card-title Personal
+                            //- .col-md-2.my-3
+                            //-     .card.border-0.shadow.rounded.w-100
+                            //-         img.card-img-top(src="/images/dummy/collection2.png")
+                            //-         i.fa.fa-times-circle.delete-note-from-collection
+                            //-         .card-body
+                            //-             h6.card-title Personal
+                            //- .col-md-2.my-3
+                            //-     .card.border-0.shadow.rounded.w-100
+                            //-         img.card-img-top(src="/images/dummy/collection2.png")
+                            //-         i.fa.fa-times-circle.delete-note-from-collection
+                            //-         .card-body
+                            //-             h6.card-title Personal
+                            .col-md-2.my-3
+                                .card.rounded.add-notes-box
+                                    img.card-img-top(src="/images/dummy/white.png")
+                                    i.fa.fa-plus-circle
+                    
+                        button.btn.btn-primary.submit-btn
+                            span Update collection
+                            i.fa.fa-plus.mx-1 
+                .modal(tabindex='-1')#select-public-notes-modal.fade
+                    .modal-dialog.modal-fullscreen
+                        .modal-content
+                            .modal-header
+                                .div 
+                                    h5.modal-title Select Public Notes                                   
+                                .div 
+                                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                            .modal-body
+                                form
+                                        .row.public-notes-row-modal
+                                            //- .col-md-2
+                                            //-     .form-check.form-check-inline
+                                            //-     .card.border-0.shadow.rounded
+                                            //-         .card-header.bg-white.border-0
+                                            //-             input#inlineCheckbox1.form-check-input(type='checkbox', value='option1')
+                                            //-         img(src="/images/dummy/collection.png").card-img-top
+                                            //-         .card-body.border-0
+                                            //-             p.card-text Lorem ipsum dolor sit amet.
+                                            //- .col-md-2
+                                            //-     .form-check.form-check-inline
+                                            //-     .card.border-0.shadow.rounded
+                                            //-         .card-header.border-0.bg-white
+                                            //-             input#inlineCheckbox1.form-check-input(type='checkbox', value='option1')
+                                            //-         img(src="/images/dummy/collection.png").card-img-top
+                                            //-         .card-body.border-0
+                                            //-            p.card-text Lorem ipsum dolor sit amet.
+                                        
+                                .row.loading-public-notes
+                                    center 
+                                        .lds-roller
+                                            div
+                                            div
+                                            div
+                                            div
+                                            div
+                                            div
+                                            div
+                                            div
+                                        p Your public notes are loading... please wait...    
+                            .modal-footer
+                                button.btn.btn-primary.collection-add-btn Select
     script(src='/javascripts/common.js')
     script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/javascripts/dashboard/collections/collections-details.js')
     script(src='/vendors/sweetalert/sweetalert.min.js')
+    //- script(src="/javascripts/dashboard/collections/create-new-collection.js")
+    script(src="/javascripts/dashboard/collections/collections-details.js")
