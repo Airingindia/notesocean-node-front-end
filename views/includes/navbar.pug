@@ -1,18 +1,24 @@
 link(rel='stylesheet' href='/stylesheets/style.css')
-nav.navbar.navbar-expand-lg.navbar-light.bg-white.mt-3
-    .container
-      a.navbar-brand(href='/') Notesocean
-      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+nav
+  .container-fluid.d-flex.justify-content-between.pt-2
+    .logo-box
+      a(href="/")
+        img(src="/images/logo.png",width="40").mobile-logo
+        img(src="/images/dash-logo.svg",width="80%").desktop-logo.m-1
+    ul.d-flex.justify-content-between.d-none
+          li.nav-item.shadow-sm.rounded
+            a.nav-link(href='/')
+              img(src="/images/icons/home-icon.svg")
           li.nav-item
-            a.nav-link(href='/') Home
-          li.nav-item
-            a.nav-link(href='#') Notes
-          li.nav-item
-            a.nav-link(href='#') Faculities
-          li.nav-item
-            a.nav-link(href='#') Courses
-          li.nav-item
-            a.nav-link(href='/account/login') Login
+            a.nav-link(href='#')
+              img(src="/images/icons/collection-icon.svg")
+    .search-box.w-50
+      .input-group.m-1
+        input(type="search",placeholder="Ex- class 10th math notes").form-control
+        button(type="button").btn.btn-outline-secondary
+          i.fa.fa-search
+    .user-box.d-flex.justify-content-between
+      div.upload-box.mx-3
+          i.fa.fa-cloud-upload(title="upload new notes")
+      div.user-icon-box
+        img(src="/images/dummy-user.jpeg")

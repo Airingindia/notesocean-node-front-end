@@ -10,7 +10,30 @@ html(lang="en")
         link(rel="manifest", href="/manifest.webmanifest")
         
     body
-    header
-        include includes/navbar
-        h1 welcome to notesocean.com 
-        a(href="/login") Login
+        header
+            include includes/navbar
+        section.main-section
+            .container-fluid
+                .row.public-now-row
+                    .col-md-3
+                        .card.h-100.shadow.border-0
+                            img(src="/images/dummy/collection.png", alt="").card-img-top
+                            .card-footer.border-0
+                                .row
+                                    .col-2.d-flex.justify-content-center.align-items-center
+                                        img(src="/images/dummy-user.jpeg", alt="user image").user-image
+                                    .col-10
+                                        p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                        p.card-text
+                                            a(href="/").user-name-text Sachin Kumar
+                                        p.card-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small 100 
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small 10 pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small 1 minute ago
+        script(src="/javascripts/subpages/index.js")
