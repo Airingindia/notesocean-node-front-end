@@ -4,36 +4,82 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Find the Perfact Notes
         include includes/bootstrap
-        include includes/amplitude
+        //- include includes/amplitude
         link(rel="manifest", href="/manifest.webmanifest")
+        link(rel="stylesheet", href="/vendors/infinite-scroll-pagination/css/scrollpagination.css")
         
     body
         header
             include includes/navbar
+        
         section.main-section
             .container-fluid
                 .row.public-now-row
-                    .col-md-3
-                        .card.h-100.shadow.border-0
-                            img(src="/images/dummy/collection.png", alt="").card-img-top
-                            .card-footer.border-0
-                                .row
-                                    .col-2.d-flex.justify-content-center.align-items-center
-                                        img(src="/images/dummy-user.jpeg", alt="user image").user-image
-                                    .col-10
-                                        p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                                        p.card-text
-                                            a(href="/").user-name-text Sachin Kumar
-                                        p.card-text
-                                            span
-                                                i.fa.fa-globe.mx-1
-                                                small 100 
-                                            span.mx-1
-                                                i.fa.fa-file.mx-1 
-                                                small 10 pages
-                                            span.mx-1
-                                                i.fa.fa-clock-o.mx-1
-                                                small 1 minute ago
+                    
+                    - for (var i = 0; i < data.length; ++i) {
+                        - let name  = data[i].name;
+                        - let thumbnails = data[i].thumbnails.split(",")[0];
+                        - let views = data[i].views+" views";
+                        - let id = data[i].id;
+                        - let timestamp = data[i].timestamp;
+                        - let pages = data[i].pages +" Pages";
+                        - let actual_time = getTime.get(timestamp);
+                        - let seoUrl = url.make(name);
+                        
+                        .col-md-3.my-2
+                            a(href="/"+id+"/"+seoUrl+".html")
+                                .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id=id)
+                                    .card-header.border-0.bg-white
+                                        p.card-title #{name}
+                                    //- img(src=thumbnails, alt="",height="200px").card-img-top.notes-thumbnails
+                                    .card-body.border-0(style=`background-image:url(${(thumbnails)});background-size:cover`).notes-thumbnails
+                                    .card-footer.border-0.bg-white
+                                        .row
+                                            .col-12.dflex.justify-content-center
+                                                img(src="/images/dummy-user.jpeg", alt="user image").user-image
+                                                span.card-text
+                                                    a(href="/").mx-2.user-name-text Sachin Kumar
+                                            .col-12
+                                                //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                                p.card-text.notes-details-text
+                                                    span
+                                                        i.fa.fa-globe.mx-1
+                                                        small=views
+                                                    span.mx-1
+                                                        i.fa.fa-file.mx-1 
+                                                        small=pages
+                                                    span.mx-1
+                                                        i.fa.fa-clock-o.mx-1
+                                                        small=actual_time
+                    - }    
+                        //- .col-md-3
+                        //-     .card.h-100.shadow.border-0
+                        //-         .card-header.border-0.bg-white
+                        //-             h6.card-title Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                        //-         img(src="/images/dummy/collection.png", alt="").card-img-top
+                        //-         .card-footer.border-0
+                        //-             .row
+                        //-                 .col-2.dflex.justify-content-center.align-items-center
+                        //-                     img(src="/images/dummy-user.jpeg", alt="user image").user-image
+                        //-                 .col-10
+                        //-                     //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                        //-                     p.card-text
+                        //-                         a(href="/").user-name-text Sachin Kumar
+                        //-                     p.card-text
+                        //-                         span
+                        //-                             i.fa.fa-globe.mx-1
+                        //-                             small 100 
+                        //-                         span.mx-1
+                        //-                             i.fa.fa-file.mx-1 
+                        //-                             small 10 pages
+                        //-                         span.mx-1
+                        //-                             i.fa.fa-clock-o.mx-1
+                        //-                             small 1 minute ago
+        script(src="/javascripts/common.js")
+        script(type="module",src="/javascripts/modules/url.module.js")
         script(src="/javascripts/subpages/index.js")
+        script(src="/vendors/wow/wow.min.js")
+        script.
+            new WOW().init();

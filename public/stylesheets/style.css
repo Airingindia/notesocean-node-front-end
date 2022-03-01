@@ -16,18 +16,33 @@
 @media (max-width: 768px) {
     .mobile-logo {
         display: block;
+        width: 60%;
     }
 
     .desktop-logo {
         display: none;
     }
+
+    .upload-box {
+        display: none;
+    }
+
+    .search-box {
+        width: 80% !important;
+    }
 }
+
+/* .upload-box {
+    display: block;
+} */
 
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 999;
+    background-color: #fff;
 }
 
 .main-section {
@@ -103,10 +118,24 @@ input[type="color"]:focus,
 
 .public-now-row .user-image {
     border-radius: 50%;
-    width: 50px;
+    width: 30px;
 }
 
 a {
     text-decoration: none;
     color: black;
+}
+
+.notes-details-text {
+    /* margin-left: 30px; */
+}
+
+.notes-thumbnails {
+    height: 200px !important;
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

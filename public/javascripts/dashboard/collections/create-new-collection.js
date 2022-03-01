@@ -23,7 +23,9 @@ $(document).ready(function () {
                     <div class="col-md-2 container my-3 ">
                         <div class="form-check form-check-inline"></div>
                             <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].id}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0]}">
-                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0]}" data-src="${data.requested[i].thumbnails.split(",")[0]}" height="190px" />
+                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div>
+                                <img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0]}" data-src="${data.requested[i].thumbnails.split(",")[0]}" height="190px" />
+                                
                                 <div class="card-body border-0"> </div>
                                 <div class="card-footer border-0 bg-white">
                                     <p class="card-text"> ${data.requested[i].name} </p>

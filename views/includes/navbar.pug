@@ -5,18 +5,12 @@ nav
       a(href="/")
         img(src="/images/logo.png",width="40").mobile-logo
         img(src="/images/dash-logo.svg",width="80%").desktop-logo.m-1
-    ul.d-flex.justify-content-between.d-none
-          li.nav-item.shadow-sm.rounded
-            a.nav-link(href='/')
-              img(src="/images/icons/home-icon.svg")
-          li.nav-item
-            a.nav-link(href='#')
-              img(src="/images/icons/collection-icon.svg")
     .search-box.w-50
-      .input-group.m-1
-        input(type="search",placeholder="Ex- class 10th math notes").form-control
-        button(type="button").btn.btn-outline-secondary
-          i.fa.fa-search
+      form
+        .input-group
+          input(type="search",placeholder="Ex- class 10th math notes",name="query").form-control
+          button(type="submit").btn.btn-outline-secondary
+            i.fa.fa-search
     .user-box.d-flex.justify-content-between
       div.upload-box.mx-3
           i.fa.fa-cloud-upload(title="upload new notes")
