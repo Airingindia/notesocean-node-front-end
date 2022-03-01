@@ -139,3 +139,8 @@ a {
     bottom: 0;
     width: 100%;
 }
+
+.footer a {
+    text-decoration: none;
+    color: white !important;
+}

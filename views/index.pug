@@ -19,12 +19,12 @@ html(lang="en")
                 .row.public-now-row
                     
                     - for (var i = 0; i < data.length; ++i) {
-                        - let name  = data[i].name;
-                        - let thumbnails = data[i].thumbnails.split(",")[0];
-                        - let views = data[i].views+" views";
-                        - let id = data[i].id;
-                        - let timestamp = data[i].timestamp;
-                        - let pages = data[i].pages +" Pages";
+                        - let name  = data[i].product.name;
+                        - let thumbnails = data[i].product.thumbnails.split(",")[0];
+                        - let views = data[i].product.views+" views";
+                        - let id = data[i].product.id;
+                        - let timestamp = data[i].product.timestamp;
+                        - let pages = data[i].product.pages +" Pages";
                         - let actual_time = getTime.get(timestamp);
                         - let seoUrl = url.make(name);
                         
@@ -77,8 +77,8 @@ html(lang="en")
                         //-                         span.mx-1
                         //-                             i.fa.fa-clock-o.mx-1
                         //-                             small 1 minute ago
+        include includes/footer
         script(src="/javascripts/common.js")
-        script(type="module",src="/javascripts/modules/url.module.js")
         script(src="/javascripts/subpages/index.js")
         script(src="/vendors/wow/wow.min.js")
         script.

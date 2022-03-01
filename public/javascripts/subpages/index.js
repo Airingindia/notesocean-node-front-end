@@ -25,15 +25,15 @@ $(document).ready(function () {
                 beforeSend: function () { },
                 success: function (data) {
                     // console.log(data);
-                    if (data.requestedProducts.length !== 0) {
+                    if (data.requested.length !== 0) {
                         access++;
-                        for (let i = 0; i < data.requestedProducts.length; i++) {
-                            let name = data.requestedProducts[i].name;
-                            let thumbnails = data.requestedProducts[i].thumbnails.split(",")[0];
-                            let views = data.requestedProducts[i].views + " views";
-                            let id = data.requestedProducts[i].id;
-                            let timestamp = data.requestedProducts[i].timestamp;
-                            let pages = data.requestedProducts[i].pages + " Pages";
+                        for (let i = 0; i < data.requested.length; i++) {
+                            let name = data.requested[i].product.name;
+                            let thumbnails = data.requested[i].product.thumbnails.split(",")[0];
+                            let views = data.requested[i].product.views + " views";
+                            let id = data.requested[i].product.id;
+                            let timestamp = data.requested[i].product.timestamp;
+                            let pages = data.requested[i].product.pages + " Pages";
                             let actual_time = getTime(timestamp);
                             let seoUrl = makeUrl(name);
                             $(".public-now-row").append(`
