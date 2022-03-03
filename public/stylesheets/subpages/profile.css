@@ -1,0 +1,33 @@
+.profile-image {
+    border-radius: 50% !important;
+}
+
+section {
+    margin-top: 70px;
+}
+
+.content-box {
+    border-top: 1px solid #ccc;
+}
+
+.nav-pills .nav-link {
+    border-radius: 3px !important;
+    padding: 4px 30px !important;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+.nav-link .active {
+    color: #fff !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: red !important;
+}

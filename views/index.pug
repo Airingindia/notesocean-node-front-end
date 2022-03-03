@@ -8,7 +8,6 @@ html(lang="en")
         include includes/bootstrap
         //- include includes/amplitude
         link(rel="manifest", href="/manifest.webmanifest")
-        link(rel="stylesheet", href="/vendors/infinite-scroll-pagination/css/scrollpagination.css")
         
     body
         header
@@ -20,6 +19,7 @@ html(lang="en")
                     
                     - for (var i = 0; i < data.length; ++i) {
                         - let name  = data[i].product.name;
+                        - if (name.length > 80)  name = name.substring(0,80)+"..";
                         - let thumbnails = data[i].product.thumbnails.split(",")[0];
                         - let views = data[i].product.views+" views";
                         - let id = data[i].product.id;
@@ -27,9 +27,16 @@ html(lang="en")
                         - let pages = data[i].product.pages +" Pages";
                         - let actual_time = getTime.get(timestamp);
                         - let seoUrl = url.make(name);
-                        
+                        //- user details
+                        - let full_name = data[i].user.firstName+" "+data[i].user.lastName;
+                        - let user_id = data[i].user.id;
+                        - let profilePic = data[i].user.profileImage;
+                        -var  pic;
+                        - if(profilePic!==null) pic = profilePic.split(",")[0];
+                        -else pic = "/images/user.jfif";  
+                                                  
                         .col-md-3.my-2
-                            a(href="/"+id+"/"+seoUrl+".html")
+                            a(href="/notes/"+id)
                                 .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id=id)
                                     .card-header.border-0.bg-white
                                         p.card-title #{name}
@@ -38,9 +45,10 @@ html(lang="en")
                                     .card-footer.border-0.bg-white
                                         .row
                                             .col-12.dflex.justify-content-center
-                                                img(src="/images/dummy-user.jpeg", alt="user image").user-image
+                                                a(href="/profile/"+user_id)
+                                                    img(src=pic,alt="user image").user-image
                                                 span.card-text
-                                                    a(href="/").mx-2.user-name-text Sachin Kumar
+                                                    a(href="/profile/"+user_id).mx-2.user-name-text=full_name
                                             .col-12
                                                 //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
                                                 p.card-text.notes-details-text

@@ -5,7 +5,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index.routes');
 const accountRoutes = require('./routes/account.routes');
 const loginHandlerRoutes = require("./routes/loginHandler.routes");
-const apiEnvRoutes = require('./routes/api.env.routes');
+const apiRoutes = require('./routes/api.routes');
 const dashboardRoutes = require('./routes/dashboard.routes');
 const aboutRoutes = require('./routes/about.routes');
 const contactRoutes = require("./routes/contact.routes");
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
-app.use("/api/env", apiEnvRoutes);
+app.use("/api", apiRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
@@ -33,11 +33,12 @@ app.use("/contact-us", contactRoutes);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   // next(createError(404));
+  res.render("notfound");
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log(err.message);
+  // console.log(err.message);
   // res.sendFile(path.join(__dirname, './views/index.html'));
 });
 

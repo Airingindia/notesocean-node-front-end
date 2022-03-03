@@ -19,10 +19,44 @@ router.get('/', async function (req, res, next) {
   // res.renderAsynchronous("index");
 });
 
-router.get("/:id/:products.html", (req, res, next) => {
+router.get("/notes/:id", (req, res, next) => {
   res.render("view-products");
   console.log("id", req.params.id);
-  console.log("product", req.params.products);
-})
+});
+
+router.get("/profile/:user_id", (req, res, next) => {
+  let user_id = req.params.user_id;
+  if (!isNaN(user_id)) {
+    res.render("profile");
+  } else {
+    res.render("notfound");
+  }
+});
+
+router.get("/privacy-policies", (req, res, next) => {
+  res.render("information-pages/privacy");
+});
+
+router.get("/terms-and-condition", (req, res, next) => {
+  res.render("information-pages/terms");
+});
+
+router.get("/about-us", (req, res, next) => {
+  res.render("information-pages/about");
+});
+
+router.get("/contact-us", (req, res, next) => {
+  res.render("information-pages/contact");
+});
+
+router.get("/contact-us/success", (req, res, next) => {
+  res.render("information-pages/contact-success");
+});
+
+router.get("/contact-us/error", (req, res, next) => {
+  res.render("information-pages/contact-error");
+});
+
+
 
 module.exports = router;

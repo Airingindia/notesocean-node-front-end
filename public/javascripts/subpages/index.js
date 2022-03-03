@@ -29,6 +29,9 @@ $(document).ready(function () {
                         access++;
                         for (let i = 0; i < data.requested.length; i++) {
                             let name = data.requested[i].product.name;
+                            if (name.length > 80) {
+                                name = name.substring(0, 100);
+                            }
                             let thumbnails = data.requested[i].product.thumbnails.split(",")[0];
                             let views = data.requested[i].product.views + " views";
                             let id = data.requested[i].product.id;
@@ -36,9 +39,19 @@ $(document).ready(function () {
                             let pages = data.requested[i].product.pages + " Pages";
                             let actual_time = getTime(timestamp);
                             let seoUrl = makeUrl(name);
+                            // user details 
+                            let Full_name = data.requested[i].user.firstName + " " + data.requested[i].user.lastName
+                            let user_id = data.requested[i].user.id;
+                            let profilePic = data.requested[i].user.profileImage;
+                            var pic;
+                            if (profilePic !== null) {
+                                pic = profilePic.split(",")[0];
+                            } else {
+                                pic = "/images/user.jfif";
+                            }
                             $(".public-now-row").append(`
                         <div class="col-md-3 my-2">
-                            <a href="/${id}/${name}.html"> 
+                            <a href="/notes/${id}"> 
                                     <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item" data-id="${id}">
                                         <div class="card-header border-0 bg-white">
                                             <p class="card-title"> ${name} </p>
@@ -46,7 +59,13 @@ $(document).ready(function () {
                                     <div class="card-body border-0 notes-thumbnails" style="background-image:url(${thumbnails});background-size:cover"></div>
                                     <div class="card-footer border-0 bg-white">
                                         <div class="row">
-                                            <div class="col-12 dflex justify-content-center"><img class="user-image" src="/images/dummy-user.jpeg" alt="user image" /><span class="card-text"><a class="mx-2 user-name-text" href="/">Sachin Kumar</a></span></div>
+                                            <div class="col-12 dflex justify-content-center">
+                                            <a href="/profile/${user_id}"> 
+                                            <img class="user-image" src="${pic}" alt="user image" alt="${Full_name}"/>
+                                            </a>
+                                            <span class="card-text">
+                                            <a class="mx-2 user-name-text" href="/profile/${user_id}"> ${Full_name}  </a>
+                                            </span></div>
                                             <div class="col-12">
                                                 <p class="card-text notes-details-text">
                                                     <span>

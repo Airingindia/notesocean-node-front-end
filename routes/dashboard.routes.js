@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', async function (req, res, next) {
-    res.render("dashboard/dashboard");
+    res.render("dashboard/my-dashboard");
     // console.log(req.pages);
 });
 
@@ -56,6 +56,6 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "private-notes" && !isNaN(parameter)) {
         res.render("dashboard/private-notes/private-notes-details");
     }
-})
+});
 
 module.exports = router;

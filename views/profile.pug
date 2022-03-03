@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        include includes/bootstrap
+        link(rel="stylesheet", href="/stylesheets/subpages/profile.css")
+    body 
+        header 
+            include includes/navbar
+        section
+            .container-fluid
+                div.d-flex.justify-content-center.align-items-center
+                    img(src="/images/dummy-user.jpeg", alt="user name",width="150px").profile-image.shadow
+                div
+                    center
+                        h6 Sachin kumar
+                        small Notes 100
+                        br
+                        small Collections 10
+            .container-fluid.content-box.mt-3.p-1
+                ul#pills-tab.nav.nav-pills.mb-3(role='tablist').d-flex.justify-content-center
+                    li.nav-item(role='presentation')
+                        button#pills-notes-tab.nav-link.active(data-bs-toggle='pill', data-bs-target='#pills-notes', type='button', role='tab', aria-controls='pills-notes', aria-selected='true') Notes
+                    li.nav-item(role='presentation')
+                        button#pills-collection-tab.nav-link(data-bs-toggle='pill', data-bs-target='#pills-collection', type='button', role='tab', aria-controls='pills-collection', aria-selected='false') Collections
+                #pills-tabContent.tab-content
+                        #pills-notes.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-notes-tab') 
+                            h1 Notes 
+                        #pills-collection.tab-pane.fade(role='tabpanel', aria-labelledby='pills-collection-tab') 
+                            h1 collection

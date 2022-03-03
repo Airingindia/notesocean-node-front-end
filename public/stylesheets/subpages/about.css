@@ -1,0 +1,138 @@
+.banner_main {
+    height: 50vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url('assest/img/about.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-notesocean {
+    color: #FF0606;
+}
+
+.main-container {
+    margin-top: 80px;
+}
+
+.banner_child h1 {
+    color: black;
+}
+
+.about h3 {
+    /* font-size: 1.2rem; */
+    color: #FF0606;
+    font-weight: bold;
+}
+
+.about h2 {
+    /* font-size: 4rem; */
+    font-weight: 900;
+}
+
+.about_h2 {
+    color: #E0E0E0;
+}
+
+.about hr {
+    width: 150px;
+    height: 10px;
+}
+
+.about_section h2 {
+    /* font-size: 2rem; */
+}
+
+.about_section {
+    /* font-size: 1.5rem; */
+}
+
+.about_section ul {
+    list-style-type: none;
+}
+
+.fa-hand-o-right {
+    color: #FF0606;
+}
+
+.service_section h3 {
+    /* font-size: 1.2rem; */
+    color: #FF0606;
+    font-weight: bold;
+}
+
+.service_section h2 {
+    /* font-size: 4rem; */
+    font-weight: 900;
+}
+
+.service_section hr {
+    width: 150px;
+    height: 10px;
+}
+
+.card img {
+    height: 300px;
+}
+
+.earn {
+    padding-bottom: 25px;
+}
+
+
+
+
+.team {
+    /* border-radius: 10px; */
+    /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */
+    padding: 10px;
+}
+
+.fa-facebook {
+    color: red;
+}
+
+.social_ul {
+    display: table;
+    margin: 15px auto 0 auto;
+    list-style-type: none;
+}
+
+.social_ul li {
+    padding-left: 20px;
+    padding-top: 10px;
+    float: left;
+}
+
+.social_ul li a {
+    color: #CCC;
+    /* border: 1px solid #CCC; */
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.social_ul li i {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .illustrations-img {
+        display: none;
+    }
+}
+
+.social_icons {
+    font-family: Arial, sans-serif;
+    /* font-size: 12px; */
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+.social_icons_image {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
