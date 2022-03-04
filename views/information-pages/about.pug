@@ -153,4 +153,40 @@ head
                             p 
                                 i.fa.fa-location-arrow.mx-1
                                 span Dhaka ,Bangladesh
+        .technoligies-partner
+            h4.text-center.my-4 Our Technolgy partner
+            #carouselExampleControls.carousel.slide(data-bs-ride='carousel').container
+                .carousel-indicators
+                    button.active(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='0', aria-current='true', aria-label='Slide 1')
+                    button(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='1', aria-label='Slide 2')
+                    button(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='2', aria-label='Slide 3')
+
+                .carousel-inner
+                    .carousel-item.active
+                        .row
+                            .col
+                                a(href="https://aws.amazon.com/activate/")
+                                    img.d-block.w-100(src='/images/partner/aws.png', alt='aws active')
+                            .col
+                                a(href="https://sendgrid.com/blog/startup-resources-2/")
+                                    img.d-block.w-100(src='/images/partner/sendgrid.png', alt='send grid')
+                            .col
+                                a(href="https://www.amplitude.com/startups")
+                                    img.d-block.w-100(src='/images/partner/amplitude.png', alt='...')
+                            .col
+                                a(href="https://www.twilio.com/solutions/startups")
+                                    img.d-block.w-75(src='/images/partner/twilio.png', alt='...')
+                            .col
+                                a(href="https://business.paytm.com/paytm-startups")
+                                    img.d-block.w-75(src='/images/partner/paytm.png', alt='...')
+                            .col.pt-3
+                                a(href="https://www.airwallex.com/us")
+                                    img.d-block.w-100(src='/images/partner/airwallex.png', alt='...')
+                    
+                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
+                    span.carousel-control-prev-icon(aria-hidden='true')
+                    span.visually-hidden Previous
+                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
+                    span.carousel-control-next-icon(aria-hidden='true')
+                    span.visually-hidden Next
     include ../includes/footer

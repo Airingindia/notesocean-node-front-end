@@ -6,7 +6,7 @@ $(document).ready(function () {
         const email = $("input[name='email']").val();
         const phone = $("input[name='phone']").val();
         const subject = $("input[name='subject']").val();
-        const message = $("input[name='message']").val();
+        const message = $("textarea[name='message']").val();
         $.ajax({
             type: "POST",
             url: "/api/contact-email",

@@ -59,7 +59,34 @@ input[type="color"]:focus,
 }
 
 .btn-primary:hover {
-    background-color: #FB0100;
-    color: #fff;
+    background-color: #FB0100 !important;
+    color: #fff !important;
     border: none;
+}
+
+
+@media(max-width:950px) {
+    .desktop-img {
+        display: none;
+    }
+
+    form {
+        width: 90% !important;
+        margin: 5% auto;
+    }
+
+    .main-section {
+        margin-top: 105px !important;
+    }
+
+}
+
+@media (max-width:812px) {
+    .desktop-img {
+        display: none;
+    }
+}
+
+.main-section {
+    margin-top: 100px
 }

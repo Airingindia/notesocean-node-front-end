@@ -47,6 +47,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(usersData),
             success: function (data) {
+                console.log(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
@@ -86,7 +87,6 @@ $(document).ready(function () {
                 }, 2000);
             },
             error: function (err) {
-                console.log(err);
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">
