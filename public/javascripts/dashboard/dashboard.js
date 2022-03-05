@@ -60,6 +60,9 @@ $(document).ready(function () {
 
   $("aside button").each(function () {
     $(this).click(function () {
+      if ($(window).width() < 769) {
+        $(this).html(`<i class="fa fa-spinner fa-spin text-danger"> </i>`);
+      }
       let url = $(this).attr("route");
       window.location = url;
     });

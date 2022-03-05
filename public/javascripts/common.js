@@ -13,4 +13,21 @@ $(document).ready(function () {
             }
         });
     }
+
+    if (localStorage.getItem("token") !== null && sessionStorage.getItem("userid") !== null) {
+        $.ajax({
+            type: "GET",
+            url: sessionStorage.getItem("api") + "/users/" + sessionStorage.getItem("userid"),
+            headers: {
+                Authrization: localStorage.getItem("token")
+            },
+            beforeSend: function () { },
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    } else {
+        // alert("okay");
+    }
+
 });

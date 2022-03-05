@@ -12,7 +12,11 @@ $(document).ready(function () {
             $(".loading-private-notes").addClass("d-none");
             if (data.length !== 0) {
                 for (let i = 0; i < data.length; i++) {
-                    let name = data[i].name;
+                    var name;
+                    if ($(window).width() < 769) {
+                        name = data[i].name.substring(0, 12) + "..";
+                    }
+                    name = data[i].name;
                     let fileType = data[i].fileType;
                     let id = data[i].id;
                     let size = data[i].size;
@@ -24,7 +28,7 @@ $(document).ready(function () {
                     let type = data[i].fileType;
 
                     $(".notes-container-row").append(`
-                    <div class="col-sm-6 col-lg-2 my-2">
+                    <div class="col-6 col-lg-2 my-2">
                         <div class="card  border-0 rounded shadow w-100 h-100 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}">
                                 
                                 <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
@@ -40,9 +44,7 @@ $(document).ready(function () {
                                     <i class="fa fa-database mx-1">
                                     </i>
                                     <span> ${actual_size} </span>
-                                    </span>
-                                    
-                                    <i class="fa fa-ellipsis-v private-notes-content-btn"> </i>                            
+                                    </span>                                    
                                     </p>
                                 </div>
                           

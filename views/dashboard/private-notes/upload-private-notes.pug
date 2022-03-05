@@ -10,22 +10,20 @@ html(lang="en")
         link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/upload-note.css')
     body
-    include ../../includes/dashHeader
-    .row
-        include ../../includes/dashAside
-        .col-10.p-2.content.shadow
-           .container
-                h3 Upload Private Notes
-                h6.mt-2.text-danger *Before you upload please read the following instructions*
-                //- p You are uploading private notes , this notes will be private and will not be published to the public
-                small  You can't earn money or rewards from these notes because it will be private and only you will be able to access
-                br
-                small If you want to published to the public and earn money or rewards  
-                    a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
-                br
-                br
-           .container
-                form(class="dropzone",id="file-upload")               
+        include ../../includes/dashHeader
+        section.row
+                include ../../includes/dashAside
+                .col-10.second-side
+                    .container.content-box
+                            h3 Upload Private Notes
+                            p.mt-2.text-danger *Before you upload please read the following instructions*
+                            //- p You are uploading private notes , this notes will be private and will not be published to the public
+                            p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
+                            
+                            p If you want to published to the public and earn money or rewards  
+                                a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
+                    .container.uploader-box
+                            form(class="dropzone",id="file-upload")               
 
 section
   .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index: 11')

@@ -3,7 +3,7 @@
     font-size: 16px;
     padding: 5px 15px;
     float: right;
-    margin: 0px 30px;
+    margin: 0px 0px;
 }
 
 .public-notes-container .row:hover {
@@ -48,8 +48,73 @@
     border: none;
 }
 
+
 .notes-container-row .card:hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
     transition: all .2s linear;
+}
+
+@media (max-width:769px) {
+    .upload-header {
+        padding: 10px 20px !important;
+    }
+
+    .upload-header .header-text {
+        display: none;
+    }
+
+    .notes-container-row {
+        padding: 0px !important;
+        width: 100%;
+    }
+
+    .notes-container-row .card {
+        box-shadow: none !important;
+        border: 0.3px solid #ccc !important;
+    }
+
+    .row>* {
+        padding-right: 0% !important;
+    }
+
+    .card-title {
+        font-size: 15px;
+    }
+
+    .header-title {
+        font-size: 20px;
+    }
+
+    #file-open-modal {
+        z-index: 9999 !important;
+    }
+
+    .loading-private-notes {
+        position: absolute;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%);
+    }
+
+    .loading-notice {
+        display: none;
+    }
+
+    .heading-title {
+        font-size: 20px;
+    }
+
+    .heading-text {
+        display: none;
+    }
+
+    .public-notes-container img {
+        height: 200px !important;
+        width: 100% !important;
+    }
+
+    .content {
+        box-shadow: none !important;
+    }
 }

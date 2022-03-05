@@ -1,16 +1,8 @@
 header
   nav.navbar.navbar-expand-lg.navbar-light.bg-white.mt-3
-    .container-fluid
-      h5
-        a.navbar-brand(href='/dashboard')
-          img(src='/images/dash-logo.svg' alt='notesocean-logo')
-      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.ms-auto.mb-2.mb-lg-0
-          li.nav-item
-            a.nav-link
-              i.fa.fa-bell
-          li.nav-item
-            a.nav-link(href="/dashboard/profile")
-              img(src='/images/dummy-user.jpeg' alt='user-pic')
+    .container-fluid.d-flex.justify-content-between
+      a.navbar-brand(href='/dashboard')
+        img(src='/images/dash-logo.svg' alt='notesocean-logo').logo
+      a.nav-link(href="/dashboard/profile")
+        img(src='/images/dummy-user.jpeg' alt='user-pic').user
+            

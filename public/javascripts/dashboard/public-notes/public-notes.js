@@ -9,7 +9,7 @@ $(document).ready(function () {
             Authorization: localStorage.getItem("token")
         },
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             // return;
             if (data.requested.length !== 0) {
                 $(".public-notes-container").html("");
@@ -32,7 +32,7 @@ $(document).ready(function () {
     <div class="col-md-7 d-flex align-items-center">
         <div>
             <h6> ${name}</h6>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime porro adipisci sint voluptas voluptatum, minus harum eius exercitationem quam fugiat.</p>
+            <p class="d-none">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime porro adipisci sint voluptas voluptatum, minus harum eius exercitationem quam fugiat.</p>
         </div>
     </div>
     <div class="col-md-2 d-flex align-items-center">
