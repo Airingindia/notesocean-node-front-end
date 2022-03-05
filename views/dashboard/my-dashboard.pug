@@ -7,6 +7,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   include ../includes/bootstrap
   link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+  link(rel="stylesheet", href="/stylesheets/loader.css")
   title Dashboard
   body
     include ../includes/dashHeader  
@@ -23,40 +24,71 @@ head
                     h5
                       i.fa.fa-book.mx-2.text-danger
                       span.text-danger Total notes
-                      p.text-bold.my-2 55
+                      p.text-bold.my-2 00
               .col-lg-3.col-6
                 .card.shadow.border-0
                   .card-content.text-center.p-3
                     h5
                       i.fa.fa-globe.mx-2.text-danger
                       span.text-danger Total Views
-                      p.text-bold.my-2 55
+                      p.text-bold.my-2 00
               .col-lg-3.col-6
                 .card.shadow.border-0
                   .card-content.text-center.p-3
                     h5
                       i.fa.fa-thumbs-up.mx-2.text-danger
                       span.text-danger Total Likes
-                      p.text-bold.my-2 55
+                      p.text-bold.my-2 00
               .col-lg-3.col-6
                 .card.shadow.border-0
                   .card-content.text-center.p-3
                     h5
                       i.fa.fa-rupee.mx-2.text-danger
                       span.text-danger Total Earnings
-                      p.text-bold.my-2 1000
+                      p.text-bold.my-2 00
 
             .row
               .col-md-6
                 h5.text-center.mt-3 Top Notes
                 div#barchart_values.shadow
+                  center(style="width:100%;height:200px;margin-top:40%")
+                      .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
               .col-md-6
                 h5.text-center.mt-3 Daily views progress 
                 div#dailyViews.shadow
+                  center(style="width:100%;height:200px;margin-top:40%")
+                      .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
               .col-md-6
                 h5.text-center.mt-5 Profile Strength
                 p.text-center This chart show your profile strength based on your notes activities
                 #profile-strength.shadow
+                  center(style="width:100%;height:200px;margin-top:40%")
+                      .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                  
 
           
                   

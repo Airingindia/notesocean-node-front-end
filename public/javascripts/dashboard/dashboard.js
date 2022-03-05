@@ -16,19 +16,30 @@ $(document).ready(function () {
           amplitude.getInstance().setUserId(userinfo);
 
         } else {
-          alert("Invalid token");
-          window.location = "/account/login";
+          localStorage.removeItem("token");
+          localStorage.removeItem("userinfo");
+          localStorage.removeItem("userdata");
+          window.location = "/session-expire";
         }
       },
       error: function (err) {
-        window.location = "/account/login";
+        localStorage.removeItem("token");
+        localStorage.removeItem("userinfo");
+        localStorage.removeItem("userdata");
+        window.location = "/session-expire";
       },
     });
   } else {
-    window.location = "/account/login";
+    localStorage.removeItem("token");
+    localStorage.removeItem("userinfo");
+    localStorage.removeItem("userdata");
+    window.location = "/session-expire";
   }
 
   $(".logout-btn").click(function () {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userinfo");
+    localStorage.removeItem("userdata");
     $.ajax({
       type: "GET",
       url: sessionStorage.getItem("api") + "/authenticate/logout",

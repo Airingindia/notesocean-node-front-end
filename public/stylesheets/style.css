@@ -77,8 +77,9 @@ header {
 }
 
 .user-icon-box img {
-    border-radius: 50%;
+    border-radius: 50% !important;
     width: 35px;
+    height: 35px;
     margin: 5px;
 }
 
@@ -108,8 +109,8 @@ input[type="color"]:focus,
 .btn:active {
     box-shadow: none !important;
     outline: 0 none !important;
-    background-color: inherit !important;
-    color: inherit !important;
+    background-color: FB0100 !important;
+    color: white !important;
 }
 
 .public-now-row .card-img-top {
@@ -119,6 +120,7 @@ input[type="color"]:focus,
 .public-now-row .user-image {
     border-radius: 50%;
     width: 30px;
+    height: 30px;
 }
 
 a {

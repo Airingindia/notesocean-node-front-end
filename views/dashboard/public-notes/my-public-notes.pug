@@ -11,14 +11,14 @@ html(lang="en")
         link(rel="stylesheet", href="/stylesheets/loader.css")
     body
         include ../../includes/dashHeader
-        section.row.second-side
+        section.row
                 include ../../includes/dashAside
-                .col-md-10.pt-3.pb-5
+                .col-md-10.pb-5.second-side
                     .div.d-flex.justify-content-between
                             .div
                                 h3.heading-title Public Notes
                                 small.heading-text These notes are publically accessible and you will get rewards
-                            .div.px-2
+                            .div.p-3
                                 a(href="/dashboard/public-notes/new")
                                     button.btn-primary.add-new
                                         i.fa.fa-plus.m-1
@@ -26,29 +26,29 @@ html(lang="en")
                     .public-notes-container.container.mt-3.d-none.py-4
                     
                         
-                .row.no-public-notes.d-none
-                                    .card.border-0
-                                        .card-content
-                                            center
-                                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                                .card-body
-                                                    h2 No Public notes uploaded Yet
-                                                    a(href="/dashboard/public-notes/new")
-                                                        button.btn.btn-primary 
-                                                            i.fa.fa-cloud-upload.mx-1
-                                                            span Upload New Notes
-                .row.loading-public-notes
-                                    center 
-                                        .lds-roller
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                        p.loading-notice Your public notes are loading... please wait...
+                    .row.no-public-notes.d-none
+                                        .card.border-0
+                                            .card-content
+                                                center
+                                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                                    .card-body
+                                                        h2 No Public notes uploaded Yet
+                                                        a(href="/dashboard/public-notes/new")
+                                                            button.btn.btn-primary 
+                                                                i.fa.fa-cloud-upload.mx-1
+                                                                span Upload New Notes
+                    .row.loading-public-notes
+                                        center 
+                                            .lds-roller
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                            p.loading-notice Your public notes are loading... please wait...
 
             
 

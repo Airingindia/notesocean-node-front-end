@@ -13,21 +13,35 @@ $(document).ready(function () {
             }
         });
     }
-
-    if (localStorage.getItem("token") !== null && sessionStorage.getItem("userid") !== null) {
-        $.ajax({
-            type: "GET",
-            url: sessionStorage.getItem("api") + "/users/" + sessionStorage.getItem("userid"),
-            headers: {
-                Authrization: localStorage.getItem("token")
-            },
-            beforeSend: function () { },
-            success: function (data) {
-                console.log(data);
-            }
-        })
+    if (localStorage.getItem("userdata") == null) {
+        if (localStorage.getItem("token") !== null) {
+            const userId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
+            $.ajax({
+                type: "GET",
+                url: sessionStorage.getItem("api") + "/users/" + userId,
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                beforeSend: function () { },
+                success: function (data) {
+                    localStorage.setItem("userdata", JSON.stringify(data));
+                    showProfilePic();
+                }
+            });
+        } else {
+            $(".user-icon-box a").html(`<button class="btn btn-sm btn-primary m-2"> Login</button>`);
+        }
     } else {
-        // alert("okay");
+        showProfilePic();
     }
+
+    function showProfilePic() {
+        const userData = JSON.parse(localStorage.getItem("userdata"));
+        const profile_pic = userData.profileImage;
+        if (profile_pic !== null) {
+            $(".user-icon-box img").attr("src", profile_pic);
+        }
+    };
+
 
 });

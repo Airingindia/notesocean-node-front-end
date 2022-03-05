@@ -57,6 +57,10 @@ router.get("/contact-us/error", (req, res, next) => {
   res.render("information-pages/contact-error");
 });
 
+router.get("/session-expire", (req, res, next) => {
+  res.render("session-expire");
+});
+
 
 
 module.exports = router;

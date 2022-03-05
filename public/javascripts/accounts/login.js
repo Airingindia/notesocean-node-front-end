@@ -73,6 +73,16 @@ $(document).ready(function () {
         })
     });
 
+    if (localStorage.getItem("token") !== null) {
+        // auto login
+        window.location = "/dashboard";
+        // console.log("okay");
+    }
+
+    $(".google-auth-btn").click(function () {
+        window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
+    });
+
 
     // log out
 

@@ -25,9 +25,9 @@ $(document).ready(function () {
 
             var options = {
                 title: "",
-                width: 600,
+                width: "100%",
                 height: 400,
-                bar: { groupWidth: "60%" },
+                bar: { groupWidth: "50%" },
                 legend: { position: "none" },
             };
             var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
@@ -65,7 +65,7 @@ $(document).ready(function () {
             chart.draw(data, options);
         }
     }
-    dailyupload();
+    // dailyupload();
 
     function dailyEarning() {
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -95,7 +95,7 @@ $(document).ready(function () {
             chart.draw(data, options);
         }
     }
-    dailyEarning();
+    // dailyEarning();
 
     function dailyViews() {
         google.charts.load("current", { packages: ['corechart'] });
@@ -121,9 +121,9 @@ $(document).ready(function () {
 
             var options = {
                 title: "",
-                width: 600,
+                width: "100%",
                 height: 400,
-                bar: { groupWidth: "50%" },
+                bar: { groupWidth: "15%" },
                 legend: { position: "none" },
             };
             var chart = new google.visualization.ColumnChart(document.getElementById("dailyViews"));
@@ -146,7 +146,9 @@ $(document).ready(function () {
             ]);
 
             var options = {
-                title: ''
+                title: '',
+                width: "100%",
+                height: 300,
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('profile-strength'));
@@ -157,6 +159,9 @@ $(document).ready(function () {
 
     profileStrength();
 
-
-
+    $(window).resize(function () {
+        profileStrength();
+        dailyViews();
+        top5notes();
+    });
 })
