@@ -80,8 +80,14 @@ $(document).ready(function () {
   });
 
   // button active function
-  let path = window.location.pathname;
-  $("aside button[route='" + path + "']").addClass("active");
+
+  function Dashroute() {
+    const path = window.location.pathname;
+    $("aside button[route='" + path + "']").addClass("active");
+  }
+
+  Dashroute();
+
 
 
   // add new notes notes button function
@@ -102,12 +108,12 @@ $(document).ready(function () {
 
     this.hammer.on('swipeleft', () => {
       // left 
-      prevRoute();
+      nextRoute();
+
     })
     this.hammer.on('swiperight', () => {
       // right
-
-      nextRoute();
+      prevRoute();
     })
   };
 
@@ -117,6 +123,13 @@ $(document).ready(function () {
         const next = $(this).parent().next();
         console.log(next);
         $(next).find("button").click();
+      } else {
+        let path = window.location.pathname.split("/");
+        if (path.length == 4) {
+          const location = "/" + path[1] + "/" + path[2];
+          window.location = location;
+        }
+        console.log(path);
       }
     });
   }
@@ -126,6 +139,14 @@ $(document).ready(function () {
       if ($(this).hasClass("active")) {
         const prev = $(this).parent().prev();
         $(prev).find("button").click();
+      } else {
+        let path = window.location.pathname.split("/");
+        if (path.length == 4) {
+          const location = "/" + path[1] + "/" + path[2];
+          console.log(location);
+          window.location = location;
+        }
+        console.log(path);
       }
     });
   }

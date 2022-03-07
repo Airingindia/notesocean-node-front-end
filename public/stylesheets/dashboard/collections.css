@@ -48,3 +48,20 @@
     font-size: 50px;
     z-index: 100;
 }
+
+@media (max-width:768px) {
+
+    .colletion-heating-text,
+    .loading-colletion-text {
+        display: none;
+    }
+
+    form .form-group {
+        width: 100% !important;
+    }
+
+    .select-banner-img {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}

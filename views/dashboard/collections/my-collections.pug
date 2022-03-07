@@ -13,13 +13,13 @@ html(lang="en")
         include ../../includes/dashHeader
         .row
             include ../../includes/dashAside
-            .col-10.p-2.content
+            .col-10.p-2.content.second-side
                 .row
-                        .col-6
+                        .col-6.px-3.p-2
                             h2 Collections
-                            small Collections is like a youtube playlist
+                            small.colletion-heating-text Collections is like a your favroite music playlist
                             
-                        .col-6.p-1
+                        .col-6.p-2
                             a(href="/dashboard/collections/new")
                                 button.btn-primary.add-new
                                     i.fa.fa-plus.m-1
@@ -39,8 +39,8 @@ html(lang="en")
                                                 i.fa.fa-users.mx-1
                                                 span Public Notes  : 100        
                         .row.no-collections
-                            .card.border-0
-                                .card-content
+                            .card.border-0.p-0
+                                .card-content.p-0
                                     center
                                         img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
                                         .card-body
@@ -58,7 +58,7 @@ html(lang="en")
                                     div
                                     div
                                     div
-                                p Your Collections are loading... please wait...
+                                p.loading-colletion-text Your Collections are loading... please wait...
 
 
         script(src='/javascripts/common.js')
