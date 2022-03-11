@@ -31,3 +31,66 @@ section {
 .nav-pills .show>.nav-link {
     background-color: red !important;
 }
+
+
+/* user notes css */
+
+.notes-thumbnails {
+    height: 250px !important;
+}
+
+.public-notes-item:hover {
+
+    transition: all 0.2s linear;
+    transform: scale(1.10, 1.10);
+}
+
+.public-now-row .user-image {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.user-collection-cont .cont {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.user-collection-cont img {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 350px !important;
+    height: 350px !important;
+    z-index: -10;
+}
+
+
+.user-collection-cont .img-warpper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    z-index: 100 !important;
+}
+
+.collection-text-box {
+    display: none;
+}
+
+.user-collection-cont .cont:hover .collection-text-box {
+    transition: all 1s linear;
+    display: block;
+}
+
+@media(max-width:769px) {
+    .collection-text-box {
+        display: block;
+    }
+}

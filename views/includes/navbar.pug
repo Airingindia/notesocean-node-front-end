@@ -3,7 +3,7 @@ nav
   .container-fluid.d-flex.justify-content-between.pt-2
     .logo-box
       a(href="/")
-        img(src="/images/logo.png",width="40").mobile-logo
+        //- img(src="/images/logo.png",width="40").mobile-logo
         img(src="/images/dash-logo.svg",width="80%").desktop-logo.m-1
     .search-box.w-50
       form(action="/search")
@@ -15,6 +15,9 @@ nav
       div.upload-box.mx-3
         a(href="/dashboard/public-notes/new")
           i.fa.fa-cloud-upload(title="upload new notes")
+      div.mobile-search-box.m-2
+        a(href="/mobile-search")
+          i.fa.fa-search(title="Search notes")
       div.user-icon-box
-        a(href="/account/login")
+        a(href="/dashboard")
           img(src="/images/dummy-user.jpeg")

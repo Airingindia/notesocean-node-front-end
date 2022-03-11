@@ -49,7 +49,7 @@ $(document).ready(function () {
                 localStorage.setItem("token", authToken);
                 $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
-                    <strong class="me-auto"> Success!</strong>
+                    <strong class="me-auto"> <i  class="fa fa-check-circle text-white mx-1"> </i>  Success!</strong>
                 </div>
                 <div class="toast-body">
                     Login successful
@@ -63,7 +63,7 @@ $(document).ready(function () {
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">
-                    <strong class="me-auto">Error!</strong>
+                    <strong class="me-auto">  <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
                 </div>
                 <div class="toast-body">
                     ${errortext}

@@ -29,7 +29,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $(".user-icon-box a").html(`<button class="btn btn-sm btn-primary m-2"> Login</button>`);
+            $(".user-icon-box a").html(`<button class="btn btn-sm btn-primary navbar-login-btn"> Login</button>`);
         }
     } else {
         showProfilePic();

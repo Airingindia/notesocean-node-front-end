@@ -52,22 +52,21 @@ input[type="color"]:focus,
     outline: 0 none;
 }
 
-/* .btn-primary {
+section .btn-primary {
     background-color: #FB0100;
-    color: #fff;
+    color: #fff !important;
     border: none;
 }
 
-.btn-primary:hover {
+section .btn-primary:hover {
     background-color: #FB0100 !important;
     color: #fff !important;
     border: none;
 }
 
-.btn {
+section .btn {
     background-color: #FB0100 !important;
-} */
-
+}
 
 @media(max-width:950px) {
     .desktop-img {

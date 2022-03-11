@@ -2,32 +2,165 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title #{profile.firstName} #{profile.lastName} | Notes Ocean
+        meta(name="description",content=`${(profile.firstName)} ${(profile.lastName)} is a notes ocean user`)
+        meta(name="keyword",content=` ${(profile.firstName)} ${(profile.lastName)} ,${(profile.firstName)} ${(profile.lastName)} Notes, ${(profile.firstName)} ${(profile.lastName)} notesocean, ${(profile.firstName)} ${(profile.lastName)} profile , ${(profile.firstName)} ${(profile.lastName)} notes ocean page , ${(profile.firstName)} ${(profile.lastName)} sir page , ${(profile.firstName)} ${(profile.lastName)} notes ocean pdf`)
         include includes/bootstrap
-        link(rel="stylesheet", href="/stylesheets/subpages/profile.css")
+        style
+            include ../public/stylesheets/subpages/profile.css
+
+        link(rel="canonical",href=`https://notesocean.com/profile/${(profile.id)}`)
+
+        meta(property='og:title', content=`${(profile.firstName)} ${(profile.lastName)}`)
+        meta(property='og:site_name' content='Notes Ocean')
+        meta(property='og:url' content=`https://notesocean.com/profile/${(profile.id)}`)
+        meta(property='og:description' content=`${(profile.firstName)} ${(profile.lastName)} is a notes ocean user`)
+        meta(property='og:type' content='profile')
+        meta(property='og:image' content=`${(profile.profileImage)}`)
+
+
+        meta(name='twitter:card' content='summary')
+        meta(name='twitter:site' content='@real_notesocean')
+        meta(name='twitter:title' content=`${(profile.firstName)} ${(profile.lastName)}`)
+        meta(name='twitter:description' content=`${(profile.firstName)} ${(profile.lastName)} is a notes ocean user`)
+        meta(name='twitter:image' content=`${(profile.profileImage)}`)
+
+        script(type='application/ld+json').
+            {
+                "@context": "https://schema.org/",
+                "@type": "Person",
+                "name": "#{profile.firstName} #{profile.lastName}",
+                "url": "https://notesocean.com/profile/#{profile.id}",
+                "image": "#{profile.profileImage}",
+                "jobTitle": "user",
+                "worksFor": {
+                "@type": "Organization",
+                "name": "Notes ocean"
+                }
+            }
+
     body 
         header 
             include includes/navbar
         section
-            .container-fluid
+            .container.my-5
                 div.d-flex.justify-content-center.align-items-center
-                    img(src="/images/dummy-user.jpeg", alt="user name",width="150px").profile-image.shadow
-                div
+                    img(src=profile.profileImage, alt=`${(profile.firstName)} ${(profile.lastName)}`,width="200px" height="200px").profile-image
+                div.my-3
                     center
-                        h6 Sachin kumar
-                        small Notes 100
+                        h2 #{profile.firstName} #{profile.lastName}
+                        small 
+                            i.fa.fa-book.mx-1
+                            span Notes 100
                         br
-                        small Collections 10
-            .container-fluid.content-box.mt-3.p-1
-                ul#pills-tab.nav.nav-pills.mb-3(role='tablist').d-flex.justify-content-center
+                        small
+                            i.fa.fa-database.mx-1 
+                            span Collections 10
+            .container-fluid.content-box.mt-3
+                ul#pills-tab.nav.nav-pills.mb-3(role='tablist').d-flex.justify-content-center.mt-2
                     li.nav-item(role='presentation')
-                        button#pills-notes-tab.nav-link.active(data-bs-toggle='pill', data-bs-target='#pills-notes', type='button', role='tab', aria-controls='pills-notes', aria-selected='true') Notes
+                        button#pills-notes-tab.nav-link.active(data-bs-toggle='pill' data-bs-target='#pills-notes' type='button' role='tab' aria-controls='pills-notes' aria-selected='true') Notes
                     li.nav-item(role='presentation')
-                        button#pills-collection-tab.nav-link(data-bs-toggle='pill', data-bs-target='#pills-collection', type='button', role='tab', aria-controls='pills-collection', aria-selected='false') Collections
+                        button#pills-collection-tab.nav-link(data-bs-toggle='pill' data-bs-target='#pills-collection' type='button' role='tab' aria-controls='pills-collection' aria-selected='false') Collections
                 #pills-tabContent.tab-content
-                        #pills-notes.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-notes-tab') 
-                            h1 Notes 
-                        #pills-collection.tab-pane.fade(role='tabpanel', aria-labelledby='pills-collection-tab') 
-                            h1 collection
+                    #pills-notes.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-notes-tab') 
+                        //-  show users notes 
+                        .row.public-now-row
+                            .col-md-3.my-2
+                                a(href="/notes/")
+                                    .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
+                                        .card-header.border-0.bg-white
+                                            p.card-title Lorem ipsum dolor sit amet.
+                                        .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                                        .card-footer.border-0.bg-white
+                                            .row
+                                                .col-12
+                                                    //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                                    p.card-text.notes-details-text
+                                                        span
+                                                            i.fa.fa-globe.mx-1
+                                                            small 100 views
+                                                        span.mx-1
+                                                            i.fa.fa-file.mx-1 
+                                                            small 10 pages
+                                                        span.mx-1
+                                                            i.fa.fa-clock-o.mx-1
+                                                            small 10 minute ago
+
+                            .col-md-3.my-2
+                                a(href="/notes/")
+                                    .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
+                                        .card-header.border-0.bg-white
+                                            p.card-title Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
+                                        .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                                        .card-footer.border-0.bg-white
+                                            .row
+                                                .col-12
+                                                    p.card-text.notes-details-text
+                                                        span
+                                                            i.fa.fa-globe.mx-1
+                                                            small 100 views
+                                                        span.mx-1
+                                                            i.fa.fa-file.mx-1 
+                                                            small 10 pages
+                                                        span.mx-1
+                                                            i.fa.fa-clock-o.mx-1
+                                                            small 10 minute ago               
+                    #pills-collection.tab-pane.fade(role='tabpanel' aria-labelledby='pills-collection-tab') 
+                        .container-fluid
+                            .row.user-collection-cont
+                                .col-md-3.my-2
+                                    a(href="#")
+                                        .cont.d-flex.justify-content-center.align-items-center
+                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646423316510_158_0.png")
+                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
+                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.2)")
+                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
+                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+                                .col-md-3.my-2
+                                    a(href="#")
+                                        .cont
+                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
+                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
+                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
+                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
+                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+                                .col-md-3.my-2
+                                    a(href="#")
+                                        .cont.d-flex.justify-content-center.align-items-center
+                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646423316510_158_0.png")
+                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
+                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
+                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
+                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+                                .col-md-3.my-2
+                                    a(href="#")
+                                        .cont
+                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
+                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
+                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
+                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
+                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+                                .col-md-3.my-2
+                                    a(href="#")
+                                        .cont
+                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
+                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
+                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
+                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
+                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+
+
+
+
+        include includes/footer
+        script
+            include ../public/javascripts/common.js
+        script
+            include ../public/javascripts/subpages/profile.js
+        script(src="/vendors/wow/wow.min.js")
+        script.
+            new WOW().init();       

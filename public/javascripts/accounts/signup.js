@@ -46,12 +46,15 @@ $(document).ready(function () {
             processData: false,
             contentType: "application/json",
             data: JSON.stringify(usersData),
+            beforeSend: function () {
+                $(".signup-btn").prop("disabled", true);
+                $(".signup-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i>  <span> please wait ... </span>`);
+            },
             success: function (data) {
-                console.log(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
-                    <strong class="me-auto">Success!</strong>
+                    <strong class="me-auto">  <i  class="fa fa-check-circle text-white mx-1"> </i> Success!</strong>
                 </div>
                 <div class="toast-body">
                     Your account has been created successfully!, we are logging you in your dashboard
@@ -75,7 +78,7 @@ $(document).ready(function () {
                         }, error: function (jqXHR, textStatus) {
                             $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header bg-danger text-light">
-                                <strong class="me-auto">Error!</strong>
+                                <strong class="me-auto">  <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
                             </div>
                             <div class="toast-body">
                                 Login failed!, Forwading to login to page
@@ -90,7 +93,7 @@ $(document).ready(function () {
                 const errortext = err.responseJSON.description;
                 $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-light">
-                    <strong class="me-auto">Error!</strong>
+                    <strong class="me-auto"> <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
                 </div>
                 <div class="toast-body">
                     ${errortext}

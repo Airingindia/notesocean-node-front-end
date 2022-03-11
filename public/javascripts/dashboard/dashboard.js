@@ -121,7 +121,6 @@ $(document).ready(function () {
     $("aside button").each(function () {
       if ($(this).hasClass("active")) {
         const next = $(this).parent().next();
-        console.log(next);
         $(next).find("button").click();
       } else {
         let path = window.location.pathname.split("/");
@@ -129,7 +128,6 @@ $(document).ready(function () {
           const location = "/" + path[1] + "/" + path[2];
           window.location = location;
         }
-        console.log(path);
       }
     });
   }
@@ -143,10 +141,8 @@ $(document).ready(function () {
         let path = window.location.pathname.split("/");
         if (path.length == 4) {
           const location = "/" + path[1] + "/" + path[2];
-          console.log(location);
           window.location = location;
         }
-        console.log(path);
       }
     });
   }

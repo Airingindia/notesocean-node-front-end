@@ -1,93 +1,97 @@
 doctype html
 html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Find the Perfact Notes
-        include includes/bootstrap
-        //- include includes/amplitude
-        link(rel="manifest", href="/manifest.webmanifest")
-        
-    body
-        header
-            include includes/navbar
-        
-        section.main-section
-            .container-fluid
-                .row.public-now-row
-                    
-                    - for (var i = 0; i < data.length; ++i) {
-                        - let name  = data[i].product.name;
-                        - if (name.length > 80)  name = name.substring(0,80)+"..";
-                        - let thumbnails = data[i].product.thumbnails.split(",")[0];
-                        - let views = data[i].product.views+" views";
-                        - let id = data[i].product.id;
-                        - let timestamp = data[i].product.timestamp;
-                        - let pages = data[i].product.pages +" Pages";
-                        - let actual_time = getTime.get(timestamp);
-                        - let seoUrl = url.make(name);
-                        //- user details
-                        - let full_name = data[i].user.firstName+" "+data[i].user.lastName;
-                        - let user_id = data[i].user.id;
-                        - let profilePic = data[i].user.profileImage;
-                        -var  pic;
-                        - if(profilePic!==null) pic = profilePic.split(",")[0];
-                        -else pic = "/images/user.jfif";  
-                                                  
-                        .col-md-3.my-2
-                            a(href="/notes/"+id)
-                                .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id=id)
-                                    .card-header.border-0.bg-white
-                                        p.card-title #{name}
-                                    //- img(src=thumbnails, alt="",height="200px").card-img-top.notes-thumbnails
-                                    .card-body.border-0(style=`background-image:url(${(thumbnails)});background-size:cover`).notes-thumbnails
-                                    .card-footer.border-0.bg-white
-                                        .row
-                                            .col-12.dflex.justify-content-center
-                                                a(href="/profile/"+user_id)
-                                                    img(src=pic,alt="user image").user-image
-                                                span.card-text
-                                                    a(href="/profile/"+user_id).mx-2.user-name-text=full_name
-                                            .col-12
-                                                //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                                                p.card-text.notes-details-text
-                                                    span
-                                                        i.fa.fa-globe.mx-1
-                                                        small=views
-                                                    span.mx-1
-                                                        i.fa.fa-file.mx-1 
-                                                        small=pages
-                                                    span.mx-1
-                                                        i.fa.fa-clock-o.mx-1
-                                                        small=actual_time
-                    - }    
-                        //- .col-md-3
-                        //-     .card.h-100.shadow.border-0
-                        //-         .card-header.border-0.bg-white
-                        //-             h6.card-title Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
-                        //-         img(src="/images/dummy/collection.png", alt="").card-img-top
-                        //-         .card-footer.border-0
-                        //-             .row
-                        //-                 .col-2.dflex.justify-content-center.align-items-center
-                        //-                     img(src="/images/dummy-user.jpeg", alt="user image").user-image
-                        //-                 .col-10
-                        //-                     //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                        //-                     p.card-text
-                        //-                         a(href="/").user-name-text Sachin Kumar
-                        //-                     p.card-text
-                        //-                         span
-                        //-                             i.fa.fa-globe.mx-1
-                        //-                             small 100 
-                        //-                         span.mx-1
-                        //-                             i.fa.fa-file.mx-1 
-                        //-                             small 10 pages
-                        //-                         span.mx-1
-                        //-                             i.fa.fa-clock-o.mx-1
-                        //-                             small 1 minute ago
-        include includes/footer
-        script(src="/javascripts/common.js")
-        script(src="/javascripts/subpages/index.js")
-        script(src="/vendors/wow/wow.min.js")
-        script.
-            new WOW().init();
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Find the Perfact Notes
+    include includes/bootstrap
+    //- include includes/amplitude 
+    style
+      include ../public/stylesheets/subpages/index.css
+    link(rel="manifest" href="/manifest.webmanifest")
+
+  body
+    header
+      include includes/navbar
+
+    section.main-section
+      .container-fluid
+        .row.public-now-row
+
+          - for (var i = 0; i < data.length; ++i) {
+            - let name  = data[i].product.name;
+            - if (name.length > 80)  name = name.substring(0,80)+"..";
+            - let thumbnails = data[i].product.thumbnails.split(",")[0];
+            - let views = data[i].product.views+" views";
+            - let id = data[i].product.id;
+            - let timestamp = data[i].product.timestamp;
+            - let pages = data[i].product.pages +" Pages";
+            - let actual_time = getTime.get(timestamp);
+            - let seoUrl = url.make(name);
+            //- user details
+            - let full_name = data[i].user.firstName+" "+data[i].user.lastName;
+            - let user_id = data[i].user.id;
+            - let profilePic = data[i].user.profileImage;
+            -var  pic;
+            - if(profilePic!==null) pic = profilePic.split(",")[0];
+            -else pic = "/images/user.jfif";  
+
+            .col-md-3.my-2
+              a(href="/notes/"+id)
+                .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id=id)
+                  .card-header.border-0.bg-white
+                    p.card-title #{name}
+                  //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
+                  .card-body.border-0(style=`background-image:url(${(thumbnails)});background-size:cover`).notes-thumbnails
+                  .card-footer.border-0.bg-white
+                    .row
+                      .col-12.dflex.justify-content-center
+                        a(href="/profile/"+user_id)
+                          img(src=pic,alt="user image").user-image
+                        span.card-text
+                          a(href="/profile/"+user_id).mx-2.user-name-text=full_name
+                      .col-12
+                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                        p.card-text.notes-details-text
+                          span
+                            i.fa.fa-globe.mx-1
+                            small=views
+                          span.mx-1
+                            i.fa.fa-file.mx-1 
+                            small=pages
+                          span.mx-1
+                            i.fa.fa-clock-o.mx-1
+                            small=actual_time
+          - }    
+            //- .col-md-3
+            //-     .card.h-100.shadow.border-0
+            //-         .card-header.border-0.bg-white
+            //-             h6.card-title Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+            //-         img(src="/images/dummy/collection.png" alt="").card-img-top
+            //-         .card-footer.border-0
+            //-             .row
+            //-                 .col-2.dflex.justify-content-center.align-items-center
+            //-                     img(src="/images/dummy-user.jpeg" alt="user image").user-image
+            //-                 .col-10
+            //-                     //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+            //-                     p.card-text
+            //-                         a(href="/").user-name-text Sachin Kumar
+            //-                     p.card-text
+            //-                         span
+            //-                             i.fa.fa-globe.mx-1
+            //-                             small 100 
+            //-                         span.mx-1
+            //-                             i.fa.fa-file.mx-1 
+            //-                             small 10 pages
+            //-                         span.mx-1
+            //-                             i.fa.fa-clock-o.mx-1
+            //-                             small 1 minute ago
+    include includes/footer
+    script
+      include ../public/javascripts/common.js
+    script
+      include ../public/javascripts/subpages/index.js
+    script(src="/vendors/wow/wow.min.js")
+    script.
+      new WOW().init();
