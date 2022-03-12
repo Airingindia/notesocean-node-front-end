@@ -1,1 +1,100 @@
-h1 welcome
+doctype html
+html(lang="en")
+    head
+        //- main meta's
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description",content=`${(data.description)}`)
+        meta(name="keyword",content=`${(data.tags)}`)
+        title #{data.name} | Notes ocean
+        link(rel="canonical",href=`https://notesocean.com/notes/${(data.id)}`)
+
+        //-  og 
+        meta(property='og:title' content=`${(data.name)}`)
+        meta(property='og:site_name' content='Notes ocean')
+        meta(property='og:url' content=`https://notesocean.com/notes/${(data.id)}`)
+        meta(property='og:description' content=`${(data.description)}`)
+        meta(property='og:type' content='product.item')
+        meta(property='og:image' content=`${(data.thumbnails.split(",")[0])}`)
+
+        //- twitter card
+        meta(name='twitter:card' content='summary')
+        meta(name='twitter:site' content='@real_notesocean')
+        meta(name='twitter:title' content=`${(data.name)}`)
+        meta(name='twitter:description' content=`${(data.description)}`)
+        meta(name='twitter:image' content=`${(data.thumbnails.split(",")[0])}`)
+        //- schema.org
+        script(type='application/ld+json').
+            {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name":  #{data.name},
+                "image": #{data.thumbnails.split(",")[0]},
+                "description": #{data.description},
+                "brand": {
+                "@type": "Brand",
+                "name": "Notes Ocean"
+                },
+                "offers": {
+                "@type": "Offer",
+                "url": "",
+                "priceCurrency": "INR",
+                "price": "0"
+                }
+            }
+        include includes/bootstrap
+        style
+            include ../public/stylesheets/subpages/product.css
+    body 
+        header 
+            include includes/navbar
+        section
+            .main-content-box
+                .card.bg-white.border-0.p-0.shadow
+                    .card-header.bg-white.border-0.shadow.border-0
+                        h1.card-title.text-center=data.name
+                        p.text-center=data.description
+                    .card-body.bg-white.border-0.p-0(style="width:100%;height:60vh")
+                        //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
+                        #pdfShow(data-url=data.file)
+                .card.shadow
+                    .row
+                        .col-12
+                            p.card-text.notes-details-text.d-flex.justify-content-center.text-muted
+                                span
+                                    i.fa.fa-globe.mx-1
+                                    small #{data.views} views
+                                span.mx-1
+                                    i.fa.fa-file.mx-1 
+                                    small #{data.pages} pages
+                                span.mx-1
+                                    i.fa.fa-clock-o.mx-1
+                                    small #{timeService.get(data.timestamp)}
+                        .col-12.mt-3
+                            .icon-group.d-flex.justify-content-center
+                                .icon-item.mx-3.text-center
+                                    i.fa.fa-thumbs-up
+                                    br
+                                    span #{data.likes}
+                                .icon-item.mx-3.text-center
+                                    i.fa.fa-thumbs-down
+                                    br
+                                    span #{data.dislikes}
+                                .icon-item.mx-3.text-center
+                                    i.fa.fa-comment
+                                    br
+                                    span 100
+                                .icon-item.mx-3.text-center
+                                    i.fa.fa-share
+
+
+    script(src="https://documentcloud.adobe.com/view-sdk/main.js")
+    script(type='text/javascript').
+        document.addEventListener("adobe_dc_view_sdk.ready", function(){
+        var adobeDCView = new AdobeDC.View({clientId: "791e6a57b798444482ba43e80a4091a0", divId: "pdfShow"});
+        adobeDCView.previewFile({
+        content:{location: {url:document.querySelector(" #pdfShow").getAttribute("data-url")}},
+        metaData:{fileName: "basic-civil-mechanical-engineering-book-free-pdf"}
+        }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
+        });

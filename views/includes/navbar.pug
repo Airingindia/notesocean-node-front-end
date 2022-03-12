@@ -1,14 +1,16 @@
-link(rel='stylesheet' href='/stylesheets/style.css')
+style
+  include ../../public//stylesheets/style.css
+//- link(rel='stylesheet' href='/stylesheets/style.css')
 nav
   .container-fluid.d-flex.justify-content-between.pt-2
     .logo-box
       a(href="/")
-        //- img(src="/images/logo.png",width="40").mobile-logo
-        img(src="/images/dash-logo.svg",width="80%").desktop-logo.m-1
+        //- img(src="/images/logo.png" width="40").mobile-logo
+        img(src="/images/new-logo-180.png" width="80%").desktop-logo.m-1
     .search-box.w-50
       form(action="/search")
         .input-group
-          input(type="search",placeholder="Ex- class 10th math notes",name="query").form-control
+          input(type="search" placeholder="Ex- class 10th math notes" name="query").form-control
           button(type="submit").btn.btn-outline-secondary
             i.fa.fa-search
     .user-box.d-flex.justify-content-between

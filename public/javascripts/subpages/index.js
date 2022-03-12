@@ -1,8 +1,22 @@
 $(document).ready(function () {
+    const ads = [
+        {
+            name: " Basic Electrical Engineering | First Edition | By Pearson",
+            timestamp: 1647108474,
+            image: "https://m.media-amazon.com/images/P/B08153W5PZ.01._SCLZZZZZZZ_SX500_.jpg",
+            link: "https://amzn.to/3Jk4g7O"
+        },
+        {
+            name: "Mechanics of Materials (SI Edition) Paperback – 5 April 2018",
+            timestamp: 1647108474,
+            image: "https://m.media-amazon.com/images/I/510Kc+VbQdL._SL160_.jpg",
+            link: "https://amzn.to/3CGsSVV"
+        },
+
+    ];
     var access = 1;
     var last_access = 0;
     function scrollFunction() {
-        // var scroll_height = Number($(".footer").height()) + Number($(window).height()) + 150;
         $(window).scroll(function () {
             // console.log($(".public-notes-item").last().attr("data-id"));
             let visibility = $(".public-notes-item").last().css("visibility");
@@ -10,6 +24,7 @@ $(document).ready(function () {
                 loadFeed(access);
             }
         });
+
     }
     scrollFunction();
 
@@ -22,7 +37,39 @@ $(document).ready(function () {
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },
-                beforeSend: function () { },
+                beforeSend: function () {
+                    //  ads place
+                    let ad1 = ads[last_access - 1];
+                    let ad2 = ads[last_access];
+                    //  ad1 append
+                    $(".public-now-row").append(`
+                        <div class="col-md-3 my-2">
+                            <a href="${ad1.link}"> 
+                                    <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
+                                        <div class="card-header border-0 bg-white">
+                                            <p class="card-title"> <span style="color:white;font-weight:bold">  Ad: </span>  ${ad1.name}</p>
+                                        </div>
+                                        <img class="card-img-top" src="${ad1.image}" style="height:250px;width:100%"> </img>
+
+                                    </div>
+                            </a>
+                        </div>
+                    `);
+                    // ad2 place
+                    $(".public-now-row").append(`
+                    <div class="col-md-3 my-2">
+                            <a href="${ad2.link}"> 
+                                    <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
+                                        <div class="card-header border-0 bg-white">
+                                            <p class="card-title"> <span style="color:white;font-weight:bold">  Ad: </span>  ${ad2.name}</p>
+                                        </div>
+                                        <img class="card-img-top" src="${ad2.image}" style="height:250px;width:100%"> </img>
+
+                                    </div>
+                            </a>
+                        </div>
+                `);
+                },
                 success: function (data) {
                     // console.log(data);
                     if (data.requested.length !== 0) {

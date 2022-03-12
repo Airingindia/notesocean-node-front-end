@@ -149,3 +149,8 @@ a {
     text-decoration: none;
     color: white !important;
 }
+
+header input,
+header button {
+    border: 1px solid black !important;
+}

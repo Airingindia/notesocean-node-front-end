@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
-const homeControllers = require('../controllers/home.controllers');
+const homeControllers = require('../controllers/home.controller');
 const profileControllers = require("../controllers/profile.controller");
 const urlMaker = require("../services/url.services");
 const timeService = require('../services/time.services');
 const req = require('express/lib/request');
+const productControllers = require("../controllers/product.controller");
 /* GET home page. */
 // app.locals.getActualTime = timeService.get
 router.get('/', async function (req, res, next) {
@@ -22,8 +23,16 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get("/notes/:id", async (req, res, next) => {
-  res.render("view-products");
-  console.log("id", req.params.id);
+  const product = await productControllers.getInfo(req.params.id);
+  if (!product.error) {
+    res.render("view-products", {
+      data: product.product, timeService: timeService
+    });
+    // console.log(product);
+  } else {
+    res.status(404);
+    res.render("notfound");
+  }
 });
 
 router.get("/profile/:user_id", async (req, res, next) => {
