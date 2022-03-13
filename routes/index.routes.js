@@ -7,8 +7,8 @@ const urlMaker = require("../services/url.services");
 const timeService = require('../services/time.services');
 const req = require('express/lib/request');
 const productControllers = require("../controllers/product.controller");
-/* GET home page. */
-// app.locals.getActualTime = timeService.get
+
+// homepage route
 router.get('/', async function (req, res, next) {
   await homeControllers.getFeed().then((data) => {
     res.render("index",
@@ -19,8 +19,9 @@ router.get('/', async function (req, res, next) {
       }
     );
   });
-  // res.renderAsynchronous("index");
 });
+
+// notes page route
 
 router.get("/notes/:id", async (req, res, next) => {
   const product = await productControllers.getInfo(req.params.id);
@@ -34,6 +35,8 @@ router.get("/notes/:id", async (req, res, next) => {
     res.render("notfound");
   }
 });
+
+// profile page routes
 
 router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
@@ -51,6 +54,28 @@ router.get("/profile/:user_id", async (req, res, next) => {
     res.render("notfound");
   }
 });
+
+// collection page route
+
+router.get("/collection/:collecton_id", async (req, res, next) => {
+  let collecton_id = req.params.collecton_id;
+  if (!isNaN(collecton_id)) {
+    res.render("collection");
+  } else {
+    res.status(404);
+    res.render("notfound");
+  }
+});
+
+// other pages routes
+// search page route
+
+router.get("/search", (req, res, next) => {
+  const query = req.query.query;
+  console.log(query);
+  res.render("search");
+});
+
 
 router.get("/privacy-policies", (req, res, next) => {
   res.render("information-pages/privacy");

@@ -1,6 +1,18 @@
 $(document).ready(function () {
     const ads = [
         {
+            name: "Class 10 Sanskrit Shemushi + Class 10 Sanskrit Workbook Abhyaswan Bhav - NCERT Book for Class 10",
+            timestamp: 1647108474,
+            image: "https://admedia.notesocean.com/amazon/sanskrit.png",
+            link: "https://amzn.to/3JaL7W7"
+        },
+        {
+            name: "CBSE All In One Social Science Class 10 for 2022 Exam (Updated edition for Term 1 and 2) Paperback – 20 April 2021",
+            timestamp: 1647108474,
+            image: "https://admedia.notesocean.com/amazon+1.png",
+            link: "https://amzn.to/3tR04Gg"
+        },
+        {
             name: " Basic Electrical Engineering | First Edition | By Pearson",
             timestamp: 1647108474,
             image: "https://m.media-amazon.com/images/P/B08153W5PZ.01._SCLZZZZZZZ_SX500_.jpg",
@@ -12,7 +24,6 @@ $(document).ready(function () {
             image: "https://m.media-amazon.com/images/I/510Kc+VbQdL._SL160_.jpg",
             link: "https://amzn.to/3CGsSVV"
         },
-
     ];
     var access = 1;
     var last_access = 0;
@@ -47,28 +58,16 @@ $(document).ready(function () {
                             <a href="${ad1.link}"> 
                                     <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
                                         <div class="card-header border-0 bg-white">
-                                            <p class="card-title"> <span style="color:white;font-weight:bold">  Ad: </span>  ${ad1.name}</p>
+                                            <p class="card-title">  ${ad1.name} </p>
                                         </div>
-                                        <img class="card-img-top" src="${ad1.image}" style="height:250px;width:100%"> </img>
+                                        <div class="card-body border-0 notes-thumbnails" style="background-image:url(${ad1.image});background-size:cover">
+                                        </div>
 
                                     </div>
                             </a>
                         </div>
                     `);
                     // ad2 place
-                    $(".public-now-row").append(`
-                    <div class="col-md-3 my-2">
-                            <a href="${ad2.link}"> 
-                                    <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
-                                        <div class="card-header border-0 bg-white">
-                                            <p class="card-title"> <span style="color:white;font-weight:bold">  Ad: </span>  ${ad2.name}</p>
-                                        </div>
-                                        <img class="card-img-top" src="${ad2.image}" style="height:250px;width:100%"> </img>
-
-                                    </div>
-                            </a>
-                        </div>
-                `);
                 },
                 success: function (data) {
                     // console.log(data);

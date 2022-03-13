@@ -1,0 +1,165 @@
+doctype html
+html(lang="en")
+    head
+        //- main meta's
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description",content=`<collection description>`)
+        meta(name="keyword",content=`<collection tags>`)
+        title collection name | Notes ocean
+        link(rel="canonical",href=`https://notesocean.com/collection/<collectionid>`)
+
+        //-  og 
+        meta(property='og:title' content=`Collection`)
+        meta(property='og:site_name' content='Notes ocean')
+        meta(property='og:url' content=`https://notesocean.com/collection/<collectionid>`)
+        meta(property='og:description' content=`<collection description>`)
+        meta(property='og:type' content='product.item')
+        meta(property='og:image' content=`<collection image>`)
+
+        //- twitter card
+        meta(name='twitter:card' content='summary')
+        meta(name='twitter:site' content='@real_notesocean')
+        meta(name='twitter:title' content=`<collection name> `)
+        meta(name='twitter:description' content=`<collection description> `)
+        meta(name='twitter:image' content=`<collection image>`)
+        //- schema.org
+        include includes/bootstrap
+        style
+            include ../public/stylesheets/subpages/collection.css
+        //- schema notes breadcumb
+        script(type='application/ld+json').
+            {
+                "@context": "https://schema.org/",
+                "@type": "BreadcrumbList",
+                "itemListElement": 
+                [
+                    {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "first note page",
+                    "item": "https://notesocean.com"
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "second page name",
+                    "item": "https://notesocean.com"
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "third page name",
+                    "item": "https://notesocean.com"
+                    }
+                ]
+            }
+
+
+    body 
+        header 
+            include includes/navbar
+        section
+            .collection-info-container.container
+                .d-flex.align-items-center.bg-white.rounded
+                    .flex-shrink-0.collection-img-cont
+                        img(src='/images/dummy/collection.png' alt='...')
+                    .flex-grow-1.ms-1.collection-details-cont
+                        h1 This is some content from a media component. You can replace this with any content and adjust it as needed.
+                        p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus eum dolores cupiditate dolore nemo ullam. Accusantium odit maiores quia officiis sapiente eum quo illum cupiditate?
+                        p 
+                            i.fa.fa-book.mx-1
+                            span 100 Notes
+                        .user-profile.mt-5
+                            a(href="/")
+                                .d-flex.align-items-center.collection-user-info
+                                    .flex-shrink-0
+                                        img(src='/images/dummy-user.jpeg' alt='...').collection-user-image
+                                    .flex-grow-1.ms-1
+                                        h2 sachin kumar
+            div.px-3
+                h3 Collection Name notes
+            .row.public-now-row.mx-1
+                .col-md-3.my-2
+                    a(href="/notes/")
+                        .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
+                            .card-header.border-0.bg-white
+                                p.card-title Lorem ipsum dolor sit amet.
+                            .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                            .card-footer.border-0.bg-white
+                                .row
+                                    .col-12
+                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                        p.card-text.notes-details-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small 100 views
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small 10 pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small 10 minute ago
+                .col-md-3.my-2
+                    a(href="/notes/")
+                        .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
+                            .card-header.border-0.bg-white
+                                p.card-title Lorem ipsum dolor sit amet.
+                            .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                            .card-footer.border-0.bg-white
+                                .row
+                                    .col-12
+                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                        p.card-text.notes-details-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small 100 views
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small 10 pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small 10 minute ago
+                .col-md-3.my-2
+                    a(href="/notes/")
+                        .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
+                            .card-header.border-0.bg-white
+                                p.card-title Lorem ipsum dolor sit amet.
+                            .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                            .card-footer.border-0.bg-white
+                                .row
+                                    .col-12
+                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                        p.card-text.notes-details-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small 100 views
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small 10 pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small 10 minute ago
+                .col-md-3.my-2
+                    a(href="/notes/")
+                        .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
+                            .card-header.border-0.bg-white
+                                p.card-title Lorem ipsum dolor sit amet.
+                            .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                            .card-footer.border-0.bg-white
+                                .row
+                                    .col-12
+                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                                        p.card-text.notes-details-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small 100 views
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small 10 pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small 10 minute ago
+
+

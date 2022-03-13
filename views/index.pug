@@ -11,11 +11,59 @@ html(lang="en")
       include ../public/stylesheets/subpages/index.css
     link(rel="manifest" href="/manifest.webmanifest")
 
+    //- schema .org
+    script(type="application/ld+json").
+      {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Notes Ocean",
+        "url": "https://notesocean.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://notesocean.com/search?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    script(type='application/ld+json').
+      {
+      "@context": "https://schema.org",
+      "@type": "Corporation",
+      "name": "Notes ocean",
+      "alternateName": "Notes Ocean LLP",
+      "url": "https://notesocean.com",
+      "logo": "https://notesocean.com/logo.png",
+      "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "8045685522",
+      "contactType": "customer service",
+      "contactOption": "HearingImpairedSupported",
+      "areaServed": "IN",
+      "availableLanguage": ["en","Hindi"]
+      },{
+      "@type": "ContactPoint",
+      "telephone": "8045685522",
+      "contactType": "technical support",
+      "contactOption": "HearingImpairedSupported",
+      "areaServed": "IN",
+      "availableLanguage": ["en","Hindi"]
+      }],
+      "sameAs": [
+      "https://www.facebook.com/notesoceanofficial",
+      "https://twitter.com/real_notesocean",
+      "https://www.instagram.com/notesoceanofficial/",
+      "https://www.linkedin.com/company/notesocean"
+      ]
+      }
+
+
   body
     header
       include includes/navbar
 
     section.main-section
+      .container-fluid
+        a(href="/")
+          img(src="" alt="") 
       .container-fluid
         .row.public-now-row
 
