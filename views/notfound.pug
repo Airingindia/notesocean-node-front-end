@@ -2,12 +2,12 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Not Found
-        link(rel="manifest", href="/manifest.webmanifest")
+        link(rel="manifest" href="/manifest.webmanifest")
         include includes/bootstrap
-        link(rel="stylesheet", href="/stylesheets/subpages/notfound.css")
+        link(rel="stylesheet" href="/stylesheets/subpages/notfound.css")
         //- include includes/amplitude
     body 
         header
@@ -17,11 +17,13 @@ html(lang="en")
                 .notfound-404
                 h1.d-flex.justify-content-center
                     span.m-3 4
-                    img(src="/images/icons/sad.png",width="100px")
+                    img(src="/images/icons/sad.png" width="100px")
                     span.m-3 4
                 h2 Oops! Page Not Be Found
                 p
                 | The page you are looking for might have been removed had its name changed or is temporarily unavailable.
                 form(action='/search')
-                    input#input_box.form-control(type='text', name='query', placeholder='Ex- Class 12th math solutions')
+                    input#input_box.form-control(type='text' name='query' placeholder='Ex- Class 12th math solutions')
         include includes/footer
+        script
+            include ../public/javascripts/common.js

@@ -1,192 +1,194 @@
 doctype html
 head
-  meta(charset='utf-8')
-  title About us - Notesocean
-  // meta
-  meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-  meta(name='description', content='Notes Ocean is the best destination for students to find perfect notes for every subject and courses. We provide students with perfect study materials for their education, unlimited data storage, platform to earn money.')
-  meta(name='keyword', content='basic computer notes for students,ms word notes pdf,note to pdf,lecture notes in,,mechanical engineering,engineering mechanics notes,lecture notes in electrical engineering,total quality management notes,basic electrical engineering notes,handwritten notes to text,highway engineering notes,made easy handwritten notes,irrigation engineering notes,business management notes,lacture notes,handwritten notes,pdf notes,engineering notes,management notes,notesocean, notes ocean,notes ocean bba notes')
-  include ../includes/bootstrap
-  link(rel="stylesheet", href="/stylesheets/subpages/about.css")
-  body 
-    header 
-        include ../includes/navbar
-    
-    section.main-container
-        .container.text-center
-            h6.text-notesocean A little bit more about
-            h1 Notes Ocean
-            p Notes Ocean is notes sharing platform , where teachers and students connects all over the world 
-        .container.mt-5.mb-5
-            .row
-                .col-md-5
-                    img(src='/images/illustrations/vision.png', height='400', width='100%').illustrations-img
-                .col-md-7.about_section
-                    h2 Our Mission
-                    p Our mission is to support students mentally and financially. Since education is the light of life, we want everyone to learn and earn and build their career
-                    ul
-                        li
-                        i.fa.fa-hand-o-right(aria-hidden='true')
-                        |  To organize the world&apos;s information and make in universally accessible and useful.
-                        li
-                        i.fa.fa-hand-o-right(aria-hidden='true')
-                        |  To make education easier.
-                        li
-                        i.fa.fa-hand-o-right(aria-hidden='true')
-                        |  To support studens financially to get their education.
-                        li
-                        i.fa.fa-hand-o-right(aria-hidden='true')
-                        |  To provide students finacially to get higher education to provide unlimited data storage to save their documents.
-        .text-center
-            h6 WHAT WE SERVE
-            h3 Services We Provide
-        .container
-            .row.text-center
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-3.rounded
-                            img.card-img-top(src='/images/illustrations/notes.svg', alt='SUBJECT WISE NOTES')
-                            .card-body
-                                h5.card-title SUBJECT WISE NOTES
-                                p.card-text Subject and course wise perfect Notes, Questions, Casse Studies, Syllabus, etc.
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-3.rounded
-                            img.card-img-top(src='/images/illustrations/read.svg', alt='Card image cap')
-                            .card-body
-                                h5.card-title READ &amp; DOWNLOAD
-                                p.card-text Online visible and downloading option to view the notes offline
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-3.rounded
-                            img.card-img-top(src='/images/illustrations/storage.svg', alt='Card image cap')
-                            .card-body
-                                h5.card-title UNLIMITED STORAGE
-                                p.card-text Unlimited data storage and backup facilities to store their documentss.
-                .row
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-3.rounded
-                            img.card-img-top(src='/images/illustrations/wallet.svg', alt='EARN MONEY')
-                            .card-body
-                                h5.card-title EARN MONEY
-                                p.card-text.earn Sharing notes with Notesacean and earn money.
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-1.rounded
-                            img.card-img-top(src='/images/illustrations/done.svg', alt='NOTES ON DEMAND')
-                            .card-body
-                                h5.card-title NOTES ON DEMAND
-                                p.card-text As us what you want ,Your demand notes will be available to you within 24 hours of your question asked.
-                .col-md-4.mb-5
-                    .service_item
-                        .card.border-0.shadow.p-3.rounded
-                            img.card-img-top(src='/images/illustrations/document.svg', alt='DOCUMENT')
-                            .card-body
-                                h5.card-title DOCUMENT
-                                p.card-text.earn Notesocean provides notes on every subject.
-        .vision
-            .container
-                .row
-                    .col-md-6.about_section.mt-100
-                        h2 Our Vision
-                        p
-                        | There&apos;s always more information out there. Our vision is to empower students around the world to grouw with knowledge and build their career with our suppport.
-                    .col-md-6
-                        img(src='/images/illustrations/vision2.png', height='350', width='100%').illustrations-img
-        .team_section.mt-5
-            .container
-                .text-center.mt-2.mb-5
-                    h3 MEET OUR TEAM
-                    p.mt-2
-                        | We are all very different. We were born in different cities, nations and different times, we love different music, food, movies. But we have something that unites us all. It is our Goal. We are its heart. We are not just a team, we are a family.
-                .row.mb-3                    
-                    .col-md-4.mt-4
-                        .team.text-center.shadow.rounded
-                            img.rounded-circle(src='/images/icons/male.jpg', alt='Team_1', height='230', width='220')
-                            h5.m-2  Sachin Kumar 
-                            p  
-                                i.fa.fa-briefcase.mx-1
-                                span Development 
-                            p 
-                                i.fa.fa-location-arrow.mx-1
-                                span Bihar ,India
-                    .col-md-4.mt-4
-                        .team.text-center.shadow.rounded
-                            img.rounded-circle(src='/images/people/akash.jpg', alt='Aakash Sharma', height='230', width='220')
-                            h5.m-2  Aakash Sharma
-                            p  
-                                i.fa.fa-briefcase.mx-1
-                                span Development 
-                            p 
-                                i.fa.fa-location-arrow.mx-1
-                                span Haryana ,India
-                        
-                    .col-md-4.mt-4
-                        .team.text-center.shadow.rounded
-                            img.rounded-circle(src='/images/people/sajib.jpg', alt='Sajib Biswas', height='230')
-                            h5.m-2  Sajib Biswas
-                            p  
-                                i.fa.fa-briefcase.mx-1
-                                span Development 
-                            p 
-                                i.fa.fa-location-arrow.mx-1
-                                span Dhaka ,Bangladesh
-                    .col-md-4.mt-4
-                        .team.text-center.shadow.rounded
-                            img.rounded-circle(src='/images/icons/female.png', alt='Aakash Sharma', height='230', width='220')
-                            h5.m-2  Bindiya Kushwaha 
-                            p  
-                                i.fa.fa-briefcase.mx-1
-                                span Management 
-                            p 
-                                i.fa.fa-location-arrow.mx-1
-                                span Birgunj ,Nepal
-                        
-                    .col-md-4.mt-4
-                        .team.text-center.shadow.rounded
-                            img.rounded-circle(src='/images/people/majeetakushwaha.jpeg', alt='Majeeta Kushwaha', height='230', width='220')
-                            h5.m-2  Majeeta Kushwaha
-                            p  
-                                i.fa.fa-briefcase.mx-1
-                                span Management 
-                            p 
-                                i.fa.fa-location-arrow.mx-1
-                                span Dhaka ,Bangladesh
-        .technoligies-partner
-            h4.text-center.my-4 Our Technolgy partner
-            #carouselExampleControls.carousel.slide(data-bs-ride='carousel').container
-                .carousel-indicators
-                    button.active(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='0', aria-current='true', aria-label='Slide 1')
-                    button(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='1', aria-label='Slide 2')
-                    button(type='button', data-bs-target='#carouselExampleDark', data-bs-slide-to='2', aria-label='Slide 3')
+    meta(charset='utf-8')
+    title About us - Notesocean
+    // meta
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(name='description' content='Notes Ocean is the best destination for students to find perfect notes for every subject and courses. We provide students with perfect study materials for their education, unlimited data storage, platform to earn money.')
+    meta(name='keyword' content='basic computer notes for students,ms word notes pdf,note to pdf,lecture notes in,,mechanical engineering,engineering mechanics notes,lecture notes in electrical engineering,total quality management notes,basic electrical engineering notes,handwritten notes to text,highway engineering notes,made easy handwritten notes,irrigation engineering notes,business management notes,lacture notes,handwritten notes,pdf notes,engineering notes,management notes,notesocean, notes ocean,notes ocean bba notes')
+    include ../includes/bootstrap
+    link(rel="stylesheet" href="/stylesheets/subpages/about.css")
+    body 
+        header 
+            include ../includes/navbar
 
-                .carousel-inner
-                    .carousel-item.active
-                        .row
-                            .col
-                                a(href="https://aws.amazon.com/activate/")
-                                    img.d-block.w-100(src='/images/partner/aws.png', alt='aws active')
-                            .col
-                                a(href="https://sendgrid.com/blog/startup-resources-2/")
-                                    img.d-block.w-100(src='/images/partner/sendgrid.png', alt='send grid')
-                            .col
-                                a(href="https://www.amplitude.com/startups")
-                                    img.d-block.w-100(src='/images/partner/amplitude.png', alt='...')
-                            .col
-                                a(href="https://www.twilio.com/solutions/startups")
-                                    img.d-block.w-75(src='/images/partner/twilio.png', alt='...')
-                            .col
-                                a(href="https://business.paytm.com/paytm-startups")
-                                    img.d-block.w-75(src='/images/partner/paytm.png', alt='...')
-                            .col.pt-3
-                                a(href="https://www.airwallex.com/us")
-                                    img.d-block.w-100(src='/images/partner/airwallex.png', alt='...')
-                    
-                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
-                    span.carousel-control-prev-icon(aria-hidden='true')
-                    span.visually-hidden Previous
-                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
-                    span.carousel-control-next-icon(aria-hidden='true')
-                    span.visually-hidden Next
-    include ../includes/footer
+        section.main-container
+            .container.text-center
+                h6.text-notesocean A little bit more about
+                h1 Notes Ocean
+                p Notes Ocean is notes sharing platform , where teachers and students connects all over the world 
+            .container.mt-5.mb-5
+                .row
+                    .col-md-5
+                        img(src='/images/illustrations/vision.png' height='400' width='100%').illustrations-img
+                    .col-md-7.about_section
+                        h2 Our Mission
+                        p Our mission is to support students mentally and financially. Since education is the light of life, we want everyone to learn and earn and build their career
+                        ul
+                            li
+                            i.fa.fa-hand-o-right(aria-hidden='true')
+                            |  To organize the world&apos;s information and make in universally accessible and useful.
+                            li
+                            i.fa.fa-hand-o-right(aria-hidden='true')
+                            |  To make education easier.
+                            li
+                            i.fa.fa-hand-o-right(aria-hidden='true')
+                            |  To support studens financially to get their education.
+                            li
+                            i.fa.fa-hand-o-right(aria-hidden='true')
+                            |  To provide students finacially to get higher education to provide unlimited data storage to save their documents.
+            .text-center
+                h6 WHAT WE SERVE
+                h3 Services We Provide
+            .container
+                .row.text-center
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-3.rounded
+                                img.card-img-top(src='/images/illustrations/notes.svg' alt='SUBJECT WISE NOTES')
+                                .card-body
+                                    h5.card-title SUBJECT WISE NOTES
+                                    p.card-text Subject and course wise perfect Notes, Questions, Casse Studies, Syllabus, etc.
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-3.rounded
+                                img.card-img-top(src='/images/illustrations/read.svg' alt='Card image cap')
+                                .card-body
+                                    h5.card-title READ &amp; DOWNLOAD
+                                    p.card-text Online visible and downloading option to view the notes offline
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-3.rounded
+                                img.card-img-top(src='/images/illustrations/storage.svg' alt='Card image cap')
+                                .card-body
+                                    h5.card-title UNLIMITED STORAGE
+                                    p.card-text Unlimited data storage and backup facilities to store their documentss.
+                    .row
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-3.rounded
+                                img.card-img-top(src='/images/illustrations/wallet.svg' alt='EARN MONEY')
+                                .card-body
+                                    h5.card-title EARN MONEY
+                                    p.card-text.earn Sharing notes with Notesacean and earn money.
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-1.rounded
+                                img.card-img-top(src='/images/illustrations/done.svg' alt='NOTES ON DEMAND')
+                                .card-body
+                                    h5.card-title NOTES ON DEMAND
+                                    p.card-text As us what you want ,Your demand notes will be available to you within 24 hours of your question asked.
+                    .col-md-4.mb-5
+                        .service_item
+                            .card.border-0.shadow.p-3.rounded
+                                img.card-img-top(src='/images/illustrations/document.svg' alt='DOCUMENT')
+                                .card-body
+                                    h5.card-title DOCUMENT
+                                    p.card-text.earn Notesocean provides notes on every subject.
+            .vision
+                .container
+                    .row
+                        .col-md-6.about_section.mt-100
+                            h2 Our Vision
+                            p
+                            | There&apos;s always more information out there. Our vision is to empower students around the world to grouw with knowledge and build their career with our suppport.
+                        .col-md-6
+                            img(src='/images/illustrations/vision2.png' height='350' width='100%').illustrations-img
+            .team_section.mt-5
+                .container
+                    .text-center.mt-2.mb-5
+                        h3 MEET OUR TEAM
+                        p.mt-2
+                            | We are all very different. We were born in different cities, nations and different times, we love different music, food, movies. But we have something that unites us all. It is our Goal. We are its heart. We are not just a team, we are a family.
+                    .row.mb-3                    
+                        .col-md-4.mt-4
+                            .team.text-center.shadow.rounded
+                                img.rounded-circle(src='/images/icons/male.jpg' alt='Team_1' height='230' width='220')
+                                h5.m-2  Sachin Kumar 
+                                p  
+                                    i.fa.fa-briefcase.mx-1
+                                    span Development 
+                                p 
+                                    i.fa.fa-location-arrow.mx-1
+                                    span Bihar ,India
+                        .col-md-4.mt-4
+                            .team.text-center.shadow.rounded
+                                img.rounded-circle(src='/images/people/akash.jpg' alt='Aakash Sharma' height='230' width='220')
+                                h5.m-2  Aakash Sharma
+                                p  
+                                    i.fa.fa-briefcase.mx-1
+                                    span Development 
+                                p 
+                                    i.fa.fa-location-arrow.mx-1
+                                    span Haryana ,India
+
+                        .col-md-4.mt-4
+                            .team.text-center.shadow.rounded
+                                img.rounded-circle(src='/images/people/sajib.jpg' alt='Sajib Biswas' height='230')
+                                h5.m-2  Sajib Biswas
+                                p  
+                                    i.fa.fa-briefcase.mx-1
+                                    span Development 
+                                p 
+                                    i.fa.fa-location-arrow.mx-1
+                                    span Dhaka ,Bangladesh
+                        .col-md-4.mt-4
+                            .team.text-center.shadow.rounded
+                                img.rounded-circle(src='/images/icons/female.png' alt='Aakash Sharma' height='230' width='220')
+                                h5.m-2  Bindiya Kushwaha 
+                                p  
+                                    i.fa.fa-briefcase.mx-1
+                                    span Management 
+                                p 
+                                    i.fa.fa-location-arrow.mx-1
+                                    span Birgunj ,Nepal
+
+                        .col-md-4.mt-4
+                            .team.text-center.shadow.rounded
+                                img.rounded-circle(src='/images/people/majeetakushwaha.jpeg' alt='Majeeta Kushwaha' height='230' width='220')
+                                h5.m-2  Majeeta Kushwaha
+                                p  
+                                    i.fa.fa-briefcase.mx-1
+                                    span Management 
+                                p 
+                                    i.fa.fa-location-arrow.mx-1
+                                    span Dhaka ,Bangladesh
+            .technoligies-partner
+                h4.text-center.my-4 Our Technolgy partner
+                #carouselExampleControls.carousel.slide(data-bs-ride='carousel').container
+                    .carousel-indicators
+                        button.active(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
+                        button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='1' aria-label='Slide 2')
+                        button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='2' aria-label='Slide 3')
+
+                    .carousel-inner
+                        .carousel-item.active
+                            .row
+                                .col
+                                    a(href="https://aws.amazon.com/activate/")
+                                        img.d-block.w-100(src='/images/partner/aws.png' alt='aws active')
+                                .col
+                                    a(href="https://sendgrid.com/blog/startup-resources-2/")
+                                        img.d-block.w-100(src='/images/partner/sendgrid.png' alt='send grid')
+                                .col
+                                    a(href="https://www.amplitude.com/startups")
+                                        img.d-block.w-100(src='/images/partner/amplitude.png' alt='...')
+                                .col
+                                    a(href="https://www.twilio.com/solutions/startups")
+                                        img.d-block.w-75(src='/images/partner/twilio.png' alt='...')
+                                .col
+                                    a(href="https://business.paytm.com/paytm-startups")
+                                        img.d-block.w-75(src='/images/partner/paytm.png' alt='...')
+                                .col.pt-3
+                                    a(href="https://www.airwallex.com/us")
+                                        img.d-block.w-100(src='/images/partner/airwallex.png' alt='...')
+
+                    button.carousel-control-prev(type='button' data-bs-target='#carouselExampleControls' data-bs-slide='prev')
+                        span.carousel-control-prev-icon(aria-hidden='true')
+                        span.visually-hidden Previous
+                    button.carousel-control-next(type='button' data-bs-target='#carouselExampleControls' data-bs-slide='next')
+                        span.carousel-control-next-icon(aria-hidden='true')
+                        span.visually-hidden Next
+        include ../includes/footer
+        script
+            include ../public/javascripts/common.js

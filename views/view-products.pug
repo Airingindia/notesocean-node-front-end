@@ -46,24 +46,24 @@ html(lang="en")
         include includes/bootstrap
         style
             include ../public/stylesheets/subpages/product.css
+        link(rel="stylesheet" href="/vendors/sheron/shareon.min.css")
 
     body 
         header 
             include includes/navbar
         section
-            .main-content-box
-
+            .main-content-box.w-75
                 .card.bg-white.border-0.p-0.shadow
                     .card-header.bg-white.border-0.shadow.border-0
-                        h1.card-title.text-center=data.name
-                        p.text-center=data.description
+                        h1.card-title=data.name
+                        p.card-text=data.description
                     .card-body.bg-white.border-0.p-0(style="width:100%;height:60vh")
                         //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
                         #pdfShow(data-url=data.file)
                 .card.shadow
-                    .row
-                        .col-12
-                            p.card-text.notes-details-text.d-flex.justify-content-center.text-muted
+                    .row.px-2
+                        .col-md-4.py-2
+                            p.card-text.notes-details-text.text-muted
                                 span
                                     i.fa.fa-globe.mx-1
                                     small #{data.views} views
@@ -73,26 +73,55 @@ html(lang="en")
                                 span.mx-1
                                     i.fa.fa-clock-o.mx-1
                                     small #{timeService.get(data.timestamp)}
-                        .col-12.mt-3
-                            .icon-group.d-flex.justify-content-center
+                        .col-md-8.py-2
+                            .icon-group.d-flex.justify-content-end
                                 .icon-item.mx-3.text-center
-                                    i.fa.fa-thumbs-up
-                                    br
+                                    i.fa.fa-thumbs-up.mx-1 
+                                    span.mx-1 Like
                                     span #{data.likes}
                                 .icon-item.mx-3.text-center
-                                    i.fa.fa-thumbs-down
-                                    br
+                                    i.fa.fa-thumbs-down.mx-1 
+                                    span.mx-1 Dislike
                                     span #{data.dislikes}
                                 .icon-item.mx-3.text-center
-                                    i.fa.fa-comment
-                                    br
+                                    i.fa.fa-comment.mx-1 
+                                    span.mx-1 Comments
                                     span 100
                                 .icon-item.mx-3.text-center
-                                    i.fa.fa-share
-                .container-fluid
-                    h5 Recomended Books
-                    #amzn-assoc-ad-7128acb2-aeea-4819-b05d-f0315c3a20e1.w-100
-                    script(src="https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=7128acb2-aeea-4819-b05d-f0315c3a20e1")
+                                    i.fa.fa-flag.mx-1
+                                    span Report
+                                .icon-item.mx-3.text-center.share-btn
+                                    i.fa.fa-share.mx-1
+                                    span Share
+                        .col-12.my-3
+                            a(href=`/profile/${(user.id)}`)
+                                .d-flex
+                                    .flex-shrink-3
+                                        img(src=user.profileImage alt=user.firstName).user-image
+                                    .flex-grow-0.ms-2
+                                        h6 #{user.firstName} #{user.lastName} 
+        .share-modal.modal(tabindex='10')
+            .modal-dialog.modal-dialog-centered.modal-lg
+                .modal-content.border-0
+                    .modal-header.bg-white.border-0
+                        h5.text-center Share 
+                        button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                    .modal-body.bg-white.border-0
+                        .shareon.d-flex.justify-content-center
+                            a.facebook 
+                            a.linkedin
+                            a.mastodon
+                            a.messenger
+                            a.odnoklassniki
+                            a.pinterest 
+                            a.pocket
+                            button.reddit
+                            button.telegram
+                            button.twitter
+                            button.viber
+                            button.vkontakte
+                            button.whatsapp
+
     script(src="https://documentcloud.adobe.com/view-sdk/main.js")
     script(type='text/javascript').
         document.addEventListener("adobe_dc_view_sdk.ready", function(){
@@ -102,3 +131,7 @@ html(lang="en")
         metaData:{fileName: "basic-civil-mechanical-engineering-book-free-pdf"}
         }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
         });
+    include includes/footer
+    script(src="/vendors/sheron/shareon.iife.js")
+    script
+        include ../public/javascripts/subpages/products.js

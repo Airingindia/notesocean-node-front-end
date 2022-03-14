@@ -7,6 +7,7 @@ const urlMaker = require("../services/url.services");
 const timeService = require('../services/time.services');
 const req = require('express/lib/request');
 const productControllers = require("../controllers/product.controller");
+const collectionController = require('../controllers/collection.controller');
 
 // homepage route
 router.get('/', async function (req, res, next) {
@@ -25,10 +26,22 @@ router.get('/', async function (req, res, next) {
 
 router.get("/notes/:id", async (req, res, next) => {
   const product = await productControllers.getInfo(req.params.id);
-  if (!product.error) {
-    res.render("view-products", {
-      data: product.product, timeService: timeService
-    });
+  if (product.product !== null) {
+    const userData = await profileControllers.getInfo(product.product.userId);
+    if (userData.id) {
+      res.render("view-products", {
+        data: product.product, timeService: timeService, user: userData
+      });
+    } else {
+      res.render("view-products", {
+        data: product.product, timeService: timeService, user: {
+          fistName: "Notes",
+          lastName: "Ocean",
+          profileImage: "/images/logo.png",
+          id: ""
+        }
+      });
+    }
     // console.log(product);
   } else {
     res.status(404);
@@ -51,6 +64,7 @@ router.get("/profile/:user_id", async (req, res, next) => {
       });
     }
   } else {
+    res.status(404);
     res.render("notfound");
   }
 });
@@ -60,7 +74,18 @@ router.get("/profile/:user_id", async (req, res, next) => {
 router.get("/collection/:collecton_id", async (req, res, next) => {
   let collecton_id = req.params.collecton_id;
   if (!isNaN(collecton_id)) {
-    res.render("collection");
+    const collection = await collectionController.getCollection(collecton_id);
+    if (collection.id) {
+      const userInfo = await profileControllers.getInfo(collection.userId);
+      res.render("collection", {
+        collection: collection,
+        timeService: timeService,
+        user: userInfo
+      });
+    } else {
+      res.status(404);
+      res.render("notfound");
+    }
   } else {
     res.status(404);
     res.render("notfound");
