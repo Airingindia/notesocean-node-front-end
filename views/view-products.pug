@@ -5,33 +5,33 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        meta(name="description",content=`${(data.description)}`)
-        meta(name="keyword",content=`${(data.tags)}`)
-        title #{data.name} | Notes ocean
-        link(rel="canonical",href=`https://notesocean.com/notes/${(data.id)}`)
+        meta(name="description",content=`${(data.product.description)}`)
+        meta(name="keyword",content=`${(data.product.tags)}`)
+        title #{data.product.name} | Notes ocean
+        link(rel="canonical",href=`https://notesocean.com/notes/${(data.product.id)}`)
 
         //-  og 
-        meta(property='og:title' content=`${(data.name)}`)
+        meta(property='og:title' content=`${(data.product.name)}`)
         meta(property='og:site_name' content='Notes ocean')
-        meta(property='og:url' content=`https://notesocean.com/notes/${(data.id)}`)
-        meta(property='og:description' content=`${(data.description)}`)
+        meta(property='og:url' content=`https://notesocean.com/notes/${(data.product.id)}`)
+        meta(property='og:description' content=`${(data.product.description)}`)
         meta(property='og:type' content='product.item')
-        meta(property='og:image' content=`${(data.thumbnails.split(",")[0])}`)
+        meta(property='og:image' content=`${(data.product.thumbnails.split(",")[0])}`)
 
         //- twitter card
         meta(name='twitter:card' content='summary')
         meta(name='twitter:site' content='@real_notesocean')
-        meta(name='twitter:title' content=`${(data.name)}`)
-        meta(name='twitter:description' content=`${(data.description)}`)
-        meta(name='twitter:image' content=`${(data.thumbnails.split(",")[0])}`)
+        meta(name='twitter:title' content=`${(data.product.name)}`)
+        meta(name='twitter:description' content=`${(data.product.description)}`)
+        meta(name='twitter:image' content=`${(data.product.thumbnails.split(",")[0])}`)
         //- schema.org
         script(type='application/ld+json').
             {
                 "@context": "https://schema.org/",
                 "@type": "Product",
-                "name":  #{data.name},
-                "image": #{data.thumbnails.split(",")[0]},
-                "description": #{data.description},
+                "name":  #{data.product.name},
+                "image": #{data.product.thumbnails.split(",")[0]},
+                "description": #{data.product.description},
                 "brand": {
                 "@type": "Brand",
                 "name": "Notes Ocean"
@@ -47,59 +47,161 @@ html(lang="en")
         style
             include ../public/stylesheets/subpages/product.css
         link(rel="stylesheet" href="/vendors/sheron/shareon.min.css")
+        style 
+            include ../public/stylesheets/loader.css
 
-    body 
+    body(data-api=api)
         header 
             include includes/navbar
         section
-            .main-content-box.w-75
-                .card.bg-white.border-0.p-0.shadow
-                    .card-header.bg-white.border-0.shadow.border-0
-                        h1.card-title=data.name
-                        p.card-text=data.description
-                    .card-body.bg-white.border-0.p-0(style="width:100%;height:60vh")
-                        //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
-                        #pdfShow(data-url=data.file)
-                .card.shadow
-                    .row.px-2
-                        .col-md-4.py-2
-                            p.card-text.notes-details-text.text-muted
-                                span
-                                    i.fa.fa-globe.mx-1
-                                    small #{data.views} views
-                                span.mx-1
-                                    i.fa.fa-file.mx-1 
-                                    small #{data.pages} pages
-                                span.mx-1
-                                    i.fa.fa-clock-o.mx-1
-                                    small #{timeService.get(data.timestamp)}
-                        .col-md-8.py-2
-                            .icon-group.d-flex.justify-content-end
-                                .icon-item.mx-3.text-center
-                                    i.fa.fa-thumbs-up.mx-1 
-                                    span.mx-1 Like
-                                    span #{data.likes}
-                                .icon-item.mx-3.text-center
-                                    i.fa.fa-thumbs-down.mx-1 
-                                    span.mx-1 Dislike
-                                    span #{data.dislikes}
-                                .icon-item.mx-3.text-center
-                                    i.fa.fa-comment.mx-1 
-                                    span.mx-1 Comments
-                                    span 100
-                                .icon-item.mx-3.text-center
-                                    i.fa.fa-flag.mx-1
-                                    span Report
-                                .icon-item.mx-3.text-center.share-btn
-                                    i.fa.fa-share.mx-1
-                                    span Share
-                        .col-12.my-3
-                            a(href=`/profile/${(user.id)}`)
-                                .d-flex
-                                    .flex-shrink-3
-                                        img(src=user.profileImage alt=user.firstName).user-image
-                                    .flex-grow-0.ms-2
-                                        h6 #{user.firstName} #{user.lastName} 
+            .row
+                .col-md-9.main-content-box
+                    .card.bg-white.border-0.p-0.shadow
+                        .card-header.bg-white.border-0.shadow.border-0
+                            h1.card-title=data.product.name
+                            p.card-text=data.product.description
+                        .card-body.bg-white.border-0.p-0.pdf-cont
+                            //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
+                            #pdfShow(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf")
+                    .card.shadow
+                        .row.px-2
+                            .col-md-4.py-2
+                                p.card-text.notes-details-text.text-muted
+                                    span
+                                        i.fa.fa-globe.mx-1
+                                        small #{data.product.views} views
+                                    span.mx-1
+                                        i.fa.fa-file.mx-1 
+                                        small #{data.product.pages} pages
+                                    span.mx-1
+                                        i.fa.fa-clock-o.mx-1
+                                        small #{timeService.get(data.product.timestamp)}
+                            .col-md-8.py-2
+                                .icon-group.d-flex.justify-content-end
+                                    - if(data.react !== null && data.react.react == 1){
+                                    .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.react.timestamp))}` aria-label="like")
+                                        i.fa.fa-thumbs-up.mx-1
+                                        span.mx-1.icon-text Like
+                                        span.react-count #{data.product.likes}
+                                    - }
+                                    - else{
+                                    .icon-item.mx-3.text-center.react-btn(data-action="1")
+                                        i.fa.fa-thumbs-up.mx-1
+                                        span.mx-1.icon-text Like
+                                        span.react-count #{data.product.likes}
+                                    - }
+
+                                    - if (data.react!== null && data.react.react == 2){
+                                    .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",title=`You  disliked this note ${(timeService.get(data.react.timestamp))}` aria-label="dislike")
+                                        i.fa.fa-thumbs-down
+                                        span.mx-1.icon-text Dislike
+                                        span.react-count #{data.product.dislikes}
+                                    - }
+                                    -else{
+                                    .icon-item.mx-3.text-center.mx-1.react-btn(data-action="2")
+                                        i.fa.fa-thumbs-down
+                                        span.mx-1.icon-text Dislike
+                                        span.react-count #{data.product.dislikes}
+                                    -}
+
+                                    .icon-item.mx-3.text-center( aria-label="comments").comment-btn
+                                        i.fa.fa-comment.mx-1 
+                                        span.mx-1.icon-text Comments
+                                        span.comment-length
+                                    .icon-item.mx-3.text-center.report-btn
+                                        i.fa.fa-flag.mx-1
+                                        span.icon-text Report
+                                    .icon-item.mx-3.text-center.share-btn
+                                        i.fa.fa-share.mx-1
+                                        span.icon-text Share
+                            .col-12.mt-3
+                                a(href=`/profile/${(user.id)}`)
+                                    .d-flex
+                                        .flex-shrink-3
+                                            img(src=user.profileImage alt=user.firstName).user-image
+                                        .flex-grow-0.ms-2
+                                            h6 #{user.firstName} #{user.lastName}
+                            .col-12.mt-3
+                                #commentbox.collapse
+                                    .card.card-body.p-0.border-0.commnet-form.d-none
+                                        .input-group
+                                            button.btn.btn-sm(type='button').p-0.px-1
+                                                img(src="/images/dummy-user.jpeg" alt="" style="width:35px;height:35px;border-radius:50%").commentator-user-img
+                                            input(type="text" placeholder="Type somthing .....").form-control.commentbox-input
+                                            button.btn.btn-sm.btn-primary.comment-add-btn(type='button') Comment
+                                        .container.px-5
+                                            label.comment-error-notice
+                                    .card.card-body.p-0.border-0.text-center.d-none.user-not-login
+                                        h6 You can't comment yet , login to your account and continue comment
+                                        div
+                                            a(href="/account/login").btn.btn-sm.btn-primary Login 
+                                    .card.my-3.border-0.px-2.commentbox-container
+
+                                        .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
+                                            .flex-shrink-0
+                                                a(href="/")
+                                                    img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
+                                            .flex-grow-1.ms-3
+                                                h6 Sachin kumar
+                                                span This is some content from a media component. You can replace this with any content and adjust it as needed
+                                                br
+                                                small.text-muted 
+                                                    i.fa.fa-clock-o.mx-1
+                                                    span 1 hour ago 
+                                        .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
+                                            .flex-shrink-0
+                                                a(href="/")
+                                                    img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
+                                            .flex-grow-1.ms-3
+                                                h6 Rahul kumar
+                                                span This is some content from a media component. You can replace this with any content and adjust it as needed
+                                                br
+                                                small.text-muted 
+                                                    i.fa.fa-clock-o.mx-1
+                                                    span 1 hour ago
+                .relates-notes-container.col-md-3.bg-white.px-0
+                    h4.mx-3 Related Notes
+                    .container-fluid.realted-notes-container
+                        a(href="/").related-notes-item
+                            .card.border-0.shadow.rounded
+                                .card-content
+                                    img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")(style="height:150px")
+                                    .card-body
+                                        p Lorem ipsum dolor sit amet consectetur.
+                                        a(href="/")
+                                            .user-box.d-flex
+                                                .flex-shrink-3
+                                                    img(src="/images/dummy-user.jpeg" alt="user" style="width:30px;height:30px;border-radius:50%")
+                                                .flex-grow-0.ms-2
+                                                    p sachin kumar
+                        a(href="/").related-notes-item
+                            .card.border-0.shadow.rounded
+                                .card-content
+                                    img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")(style="height:150px")
+                                    .card-body
+                                        p Lorem ipsum dolor sit amet consectetur.
+                                        a(href="/")
+                                            .user-box.d-flex
+                                                .flex-shrink-3
+                                                    img(src="/images/dummy-user.jpeg" alt="user" style="width:30px;height:30px;border-radius:50%")
+                                                .flex-grow-0.ms-2
+                                                    p sachin kumar
+                        a(href="/").related-notes-item
+                            .card.border-0.shadow.rounded
+                                .card-content
+                                    img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")(style="height:150px")
+                                    .card-body
+                                        p Lorem ipsum dolor sit amet consectetur.
+                                        a(href="/")
+                                            .user-box.d-flex
+                                                .flex-shrink-3
+                                                    img(src="/images/dummy-user.jpeg" alt="user" style="width:30px;height:30px;border-radius:50%")
+                                                .flex-grow-0.ms-2
+                                                    p sachin kumar
+
+
+
+
         .share-modal.modal(tabindex='10')
             .modal-dialog.modal-dialog-centered.modal-lg
                 .modal-content.border-0
@@ -121,7 +223,34 @@ html(lang="en")
                             button.viber
                             button.vkontakte
                             button.whatsapp
+        .report-modal.modal(tabindex="1")
+            .modal-dialog.modal-dialog-centered.modal-lg
+                .modal-content.border-0
+                    .modal-header.bg-white.border-0
+                        h5.text-center Report this note 
+                        button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                    .modal-body.bg-white.border-0
+                        h6 Choose Report type 
+                        .container.py-0
+                            form
+                                .form-check
+                                    input#inlineRadio1.form-check-input(type='radio' name='report' value='Spam or misleading')
+                                    label.form-check-label(for='inlineRadio1') Spam or misleading 
+                                .form-check
+                                    input#inlineRadio2.form-check-input(type='radio' name='report' value='Sexual/ Violent / Hateful or abusive ')
+                                    label.form-check-label(for='inlineRadio2')  Sexual/ Violent / Hateful or abusive 
+                                .form-check
+                                    input#inlineRadio2.form-check-input(type='radio' name='report' value='Copyrighted/Trademark or other legal issue')
+                                    label.form-check-label(for='inlineRadio2')  Copyrighted/Trademark or other legal issue
+                                label.my-3 Provide full description 
+                                textarea.form-control(rows="5" cols="10")  
+                                button.btn.btn-primary.my-3 Report
 
+
+
+
+    section
+        .notice-box
     script(src="https://documentcloud.adobe.com/view-sdk/main.js")
     script(type='text/javascript').
         document.addEventListener("adobe_dc_view_sdk.ready", function(){
@@ -132,6 +261,11 @@ html(lang="en")
         }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
         });
     include includes/footer
+    script
+        include ../public/javascripts/common.js
     script(src="/vendors/sheron/shareon.iife.js")
+    script(src="/vendors/wow/wow.min.js")
     script
         include ../public/javascripts/subpages/products.js
+    script.
+        new WOW().init();

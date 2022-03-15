@@ -47,6 +47,7 @@ $(document).ready(function () {
                 $(".login-btn").prop("disabled", false);
                 const authToken = data.token;
                 localStorage.setItem("token", authToken);
+                setCookie("token", authToken, 100);
                 $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
                     <strong class="me-auto"> <i  class="fa fa-check-circle text-white mx-1"> </i>  Success!</strong>
@@ -83,6 +84,12 @@ $(document).ready(function () {
         window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
     });
 
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
     // log out
 

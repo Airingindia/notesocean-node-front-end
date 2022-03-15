@@ -15,7 +15,16 @@ const getRequest = async (api_path) => {
     return response;
 }
 
+const getRequestWithToken = async (api_path, token) => {
+    const response = await ajax(api_endpoint)
+        .get(api_path)
+        .set("Authorization", token)
+        .send();
+    return response;
+}
+
 module.exports = {
     post: postRequest,
-    get: getRequest
+    get: getRequest,
+    getWithAuth: getRequestWithToken
 }

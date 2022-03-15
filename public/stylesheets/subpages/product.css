@@ -36,3 +36,55 @@ div#amzn-native-ad-0 {
     height: 30px;
     border-radius: 50%;
 }
+
+.react-btn.active {
+    color: crimson;
+}
+
+.notice-box {
+    position: absolute;
+    top: 80px;
+    right: 5%;
+    z-index: 9996546 !important;
+    background-color: white;
+}
+
+.commentbox-input {
+    border-left: none !important;
+    border-top: none !important;
+}
+
+/* .comment-add-btn:hover,
+.comment-add-btn:active,
+.comment-add-btn:focus {
+    background: #FF0000 !important;
+    color: white !important;
+} */
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background: #FF0000 !important;
+    color: white !important;
+}
+
+
+.pdf-cont {
+    width: 100%;
+    height: 70vh;
+}
+
+@media (max-width:768px) {
+    .icon-group {
+        justify-content: start !important;
+    }
+
+    .icon-item .icon-text {
+        display: none !important;
+    }
+
+    .pdf-cont {
+        width: 100%;
+        height: 40vh;
+    }
+}

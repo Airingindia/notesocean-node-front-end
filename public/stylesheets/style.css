@@ -113,6 +113,7 @@ input[type="color"]:focus,
     border-color: black;
     box-shadow: none;
     outline: 0 none;
+    background: inherit;
 }
 
 .btn:hover,

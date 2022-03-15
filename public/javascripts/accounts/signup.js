@@ -33,6 +33,7 @@ $(document).ready(function () {
         let email = $("form input[name='email']").val();
         let mobile = $("form input[name='mobile']").val();
         let choosePassword = $("form input[name='password']").val();
+        var form = new FormData();
         const usersData = {
             firstName: firstName,
             lastName: lastName,
@@ -40,12 +41,13 @@ $(document).ready(function () {
             phone: mobile,
             password: choosePassword
         }
+        form.append("users", new Blob([JSON.stringify(usersData)], { type: "application/json" }));
         $.ajax({
             type: "POST",
             url: sessionStorage.getItem("api") + "/users",
             processData: false,
-            contentType: "application/json",
-            data: JSON.stringify(usersData),
+            contentType: false,
+            data: form,
             beforeSend: function () {
                 $(".signup-btn").prop("disabled", true);
                 $(".signup-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i>  <span> please wait ... </span>`);
@@ -74,6 +76,7 @@ $(document).ready(function () {
                         success: function (data) {
                             const authToken = data.token;
                             localStorage.setItem("token", authToken);
+                            setCookie("token", authToken, 100);
                             window.location = "/dashboard";
                         }, error: function (jqXHR, textStatus) {
                             $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -107,4 +110,12 @@ $(document).ready(function () {
     $(".google-auth-btn").click(function () {
         window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
     });
+
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 });

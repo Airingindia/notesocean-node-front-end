@@ -19,6 +19,7 @@ $(document).ready(function () {
           localStorage.removeItem("token");
           localStorage.removeItem("userinfo");
           localStorage.removeItem("userdata");
+          setCookie("token", "", 0);
           window.location = "/session-expire";
         }
       },
@@ -26,6 +27,7 @@ $(document).ready(function () {
         localStorage.removeItem("token");
         localStorage.removeItem("userinfo");
         localStorage.removeItem("userdata");
+        setCookie("token", "", 0);
         window.location = "/session-expire";
       },
     });
@@ -33,6 +35,7 @@ $(document).ready(function () {
     localStorage.removeItem("token");
     localStorage.removeItem("userinfo");
     localStorage.removeItem("userdata");
+    setCookie("token", "", 0);
     window.location = "/session-expire";
   }
 
@@ -40,6 +43,7 @@ $(document).ready(function () {
     localStorage.removeItem("token");
     localStorage.removeItem("userinfo");
     localStorage.removeItem("userdata");
+    setCookie("token", "", 0);
     $.ajax({
       type: "GET",
       url: sessionStorage.getItem("api") + "/authenticate/logout",
@@ -148,5 +152,12 @@ $(document).ready(function () {
   }
 
   // 
+  // cookie expire
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 });

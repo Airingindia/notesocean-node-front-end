@@ -5,9 +5,9 @@ const homeControllers = require('../controllers/home.controller');
 const profileControllers = require("../controllers/profile.controller");
 const urlMaker = require("../services/url.services");
 const timeService = require('../services/time.services');
-const req = require('express/lib/request');
 const productControllers = require("../controllers/product.controller");
 const collectionController = require('../controllers/collection.controller');
+const api_url = process.env.API_URL;
 
 // homepage route
 router.get('/', async function (req, res, next) {
@@ -25,12 +25,16 @@ router.get('/', async function (req, res, next) {
 // notes page route
 
 router.get("/notes/:id", async (req, res, next) => {
-  const product = await productControllers.getInfo(req.params.id);
-  if (product.product !== null) {
+  var token = "";
+  if (req.cookies.token) {
+    token = req.cookies.token;
+  }
+  const product = await productControllers.getInfo(req.params.id, token);
+  if (!product.status) {
     const userData = await profileControllers.getInfo(product.product.userId);
     if (userData.id) {
       res.render("view-products", {
-        data: product.product, timeService: timeService, user: userData
+        data: product, timeService: timeService, user: userData, api: api_url
       });
     } else {
       res.render("view-products", {
@@ -42,7 +46,6 @@ router.get("/notes/:id", async (req, res, next) => {
         }
       });
     }
-    // console.log(product);
   } else {
     res.status(404);
     res.render("notfound");
