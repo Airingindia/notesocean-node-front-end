@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    const api_url = $("body").attr("data-api");
     // sherron init
     Shareon.init();
     // amplitude
@@ -38,7 +39,7 @@ $(document).ready(function () {
                         addReactionAction(action);
                     }
                 } else {
-                    alert("user not logged in");
+                    $(".user-not-login-modal").modal("show");
                 }
             })
         })
@@ -108,13 +109,12 @@ $(document).ready(function () {
         $("#commentbox").toggle("show");
     });
     // load comments
-    const api_url = $("body").attr("data-api");
+
     $.ajax({
         type: "GET",
         url: api_url + "/products/" + window.location.pathname.split("/")[2] + "/comments/" + 0,
         beforeSend: function () { },
         success: function (data) {
-            console.log(data);
             $(".comment-length").html(data.length);
             $(".commentbox-container").html("");
             if (data.length !== 0) {
@@ -286,5 +286,18 @@ $(document).ready(function () {
     $(".report-btn").click(function () {
         $(".report-modal").modal("show");
     });
+
+    // load realted notes
+    // const tags = $("meta[name='keyword']").attr("content").replace(",", " ");
+    // alert(tags);
+    // $.ajax({
+    //     type: "GET",
+    //     url: api_url + "/products/search/" + tags,
+    //     beforeSend: function () { },
+    //     success: function (data) {
+    //         console.log(data);
+    //     }
+    // })
+    //  api not implementation due to api not working properly
 });
 
