@@ -160,4 +160,15 @@ $(document).ready(function () {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
+  // set user profilepic
+  if (localStorage.getItem('userdata') !== null) {
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    const profilepic = userdata.profileImage;
+    if (profilepic !== null) {
+      $(".navbar-user-pic").attr("src", profilepic);
+    } else {
+      $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
+    }
+  }
+
 });

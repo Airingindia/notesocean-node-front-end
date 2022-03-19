@@ -2,13 +2,13 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Private Notes
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
-        link(rel="stylesheet", href="/stylesheets/loader.css")
+        link(rel="stylesheet" href="/stylesheets/loader.css")
     body
         include ../../includes/dashHeader
         section.row
@@ -20,62 +20,65 @@ html(lang="en")
                         small.header-text These notes are not publically accessible and you will be get any rewards
                         br  
                         small.header-text This is your  private cloud you can store multiple types of file
-                    .col-6
+                    .col-6.px-3
                         a(href="/dashboard/private-notes/new")
                             button.btn-primary.add-new
                                 i.fa.fa-cloud-upload.m-1
                                 span Upload
                 .row.container-fulid.notes-container-row.mt-3
+                .row.no-private-notes.d-none
+                    .card.border-0
+                        .card-content
+                            center
+                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                .card-body
+                                    h2 No private notes uploaded Yet
+                                    a(href="/dashboard/private-notes/new")
+                                        button.btn.btn-primary 
+                                            i.fa.fa-cloud-upload.mx-1
+                                            span Upload New Notes
+                .loading-private-notes
+                    center 
+                        .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                        p.loading-notice Your private notes are loading... please wait...
         section
             .modal#file-open-modal(tabindex='-1').fade.p-0
-                    .modal-dialog.modal-fullscreen.p-0
-                        .modal-content.p-0
-                            .modal-header.p-0.bg-dark.border-0
-                                button(data-bs-dismiss='modal').btn.text-light
-                                    i.fa.fa-angle-left.mx-1
-                                    span Go Back
-                                h6.text-light.private-notes-moda-title Note title
-                                .btn-group
-                                    button.btn.btn-group-item.btn-sm.text-light.private-notes-delete-btn
-                                        i.fa.fa-trash.mx-1
-                                        span Delete
-                                    button.btn.btn-group-item.btn-sm.text-light.private-notes-download
-                                        i.fa.fa-cloud-download.mx-1
-                                        span Download
-                                    //- button.btn.btn-group-item.btn-sm.text-light.private-notes-rename-btn
-                                        i.fa.fa-edit.mx-1
-                                        span Rename
+                .modal-dialog.modal-fullscreen.p-0
+                    .modal-content.p-0
+                        .modal-header.p-0.bg-dark.border-0
+                            button(data-bs-dismiss='modal').btn.text-light
+                                i.fa.fa-angle-left.mx-1
+                                span Go Back
+                            h6.text-light.private-notes-moda-title Note title
+                            .btn-group
+                                button.btn.btn-group-item.btn-sm.text-light.private-notes-delete-btn
+                                    i.fa.fa-trash.mx-1
+                                    span Delete
+                                button.btn.btn-group-item.btn-sm.text-light.private-notes-download
+                                    i.fa.fa-cloud-download.mx-1
+                                    span Download
+                                //- button.btn.btn-group-item.btn-sm.text-light.private-notes-rename-btn
+                                    i.fa.fa-edit.mx-1
+                                    span Rename
 
-                            .modal-body.p-0.border-0
-                                .card.h-100.w-100.p-0.border-0
-                                    .card-body.p-0.viewer
-                    
-        .row.no-private-notes.d-none
-                                    .card.border-0
-                                        .card-content
-                                            center
-                                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                                .card-body
-                                                    h2 No private notes uploaded Yet
-                                                    a(href="/dashboard/private-notes/new")
-                                                        button.btn.btn-primary 
-                                                            i.fa.fa-cloud-upload.mx-1
-                                                            span Upload New Notes
-        .loading-private-notes
-            center 
-                .lds-roller
-                    div
-                    div
-                    div
-                    div
-                    div
-                    div
-                    div
-                    div
-                p.loading-notice Your private notes are loading... please wait...
+                        .modal-body.p-0.border-0
+                            .card.h-100.w-100.p-0.border-0
+                                .card-body.p-0.viewer
 
-    script(src='/javascripts/common.js')
+
     script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
     script(src="/vendors/sweetalert/sweetalert.min.js")
-    script(src="/javascripts/dashboard/private-notes/private-notes.js")
+    script 
+        include ../../../public/javascripts/common.js
+    script 
+        include ../../../public/javascripts/dashboard/dashboard.js
+    script
+        include ../../../public/javascripts/dashboard/private-notes/private-notes.js

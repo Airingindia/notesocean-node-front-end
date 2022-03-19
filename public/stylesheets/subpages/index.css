@@ -14,24 +14,24 @@
 
 .public-now-row .user-image {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 
 .public-now-row {
     padding: 0% 0%;
 }
 
-.card-footer,
+/* .card-footer,
 .card-header {
     background: #FF5F6D;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFC371, #FF5F6D);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-}
+    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);
+
+    background: linear-gradient(to right, #FFC371, #FF5F6D);
+
+
+} */
 
 
 
@@ -43,4 +43,22 @@ body {
     background: linear-gradient(to right, #CFDEF3, #E0EAFC);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+
+.desktop-top-bannner {
+    display: block;
+}
+
+.mobile-top-bannner {
+    display: none;
+}
+
+@media (max-width:768px) {
+    .desktop-top-bannner {
+        display: none;
+    }
+
+    .mobile-top-bannner {
+        display: block;
+    }
 }

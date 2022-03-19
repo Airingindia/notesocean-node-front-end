@@ -2,8 +2,8 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Profile
         include ../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
@@ -11,78 +11,93 @@ html(lang="en")
     body
         include ../includes/dashHeader
         section.row
-                include ../includes/dashAside
-                .col-9.shadow.second-side.pb-5
-                    h3 My profile
-                    .container.mt-5.pb-5
-                        .row
-                            .col-12.d-flex.justify-content-between
-                                h6.text-danger Personal Information
-                                button(type="button").btn.btn-sm.btn-dark
-                                    i.fa.fa-edit.mx-1
-                                    span edit
-                            .col-12.mt-4.user-info
-                                .row
-                                    .col-md-2.text-center
-                                        div.profile-user-pic.text-center
-                                            img(src="/images/dummy-user.jpeg")
-                                    .col-lg-2.col-6.text-center
-                                        h6 First Name
-                                        p.first-name sachin 
-                                    .col-lg-2.col-6.text-center
-                                        h6 Last Name
-                                        p.last-name kumar 
-                                    .col-md-3.text-center.my-2
-                                        h6 Email
-                                        i.fa.fa-info-circle.text-warning.mx-1.emailUnverified.d-none( data-bs-toggle='popover' title='Email Not Verified!' data-bs-content='Your email is not verified, click to <a class="btn btn-sm btn-primary my-1" href="/dashboard/email-verification"> verify </a>' data-bs-placement="top")
-                                        i.fa.fa-check-circle.text-success.mx-1.emailverified.d-none
-                                        span.email sachinkumarshera@gmail.com
-                                    .col-lg-3.col-12.text-center.my-2
-                                        h6 Mobile Number
-                                        p.mobile 63768623
-                        .row.mt-5
-                            .col-12.d-flex.justify-content-between
-                                h6.text-danger Address Information
-                                button(type="button").btn.btn-sm.btn-dark
-                                    i.fa.fa-edit.mx-1
-                                    span edit
-                            .col-12.mt-4.user-address
-                                .row
-                                    .col-lg-4.col-6.text-center
-                                        h6 Street Address 
-                                        p.address mulllan , mm engineering college
-                                    .col-lg-2.col-6.text-center
-                                        h6 City
-                                        p.city Ambala 
-                                    .col-lg-2.col-6.text-center
-                                        h6 State
-                                        p.state Haryana
-                                    .col-lg-3.col-6.text-center
-                                        h6 Country
-                                        p.country India
-                        .row.mt-5
-                            .col-12.d-flex.justify-content-between
-                                h6.text-danger Payment Information
-                                button(type="button").btn.btn-sm.btn-dark
-                                    i.fa.fa-edit.mx-1
-                                    span edit
-                            .col-12.mt-4
-                                .row
-                                    .col-md-4.text-center
-                                        h6 Payment Mode 
-                                        p UPI
-                                    .col-md-2.text-center
-                                        h6 Payment Address
-                                        p 8210071758@upi 
-                        button.btn.btn-sm.btn-primary.logout-btn.mb-5
+            include ../includes/dashAside
+            .col-9.shadow.second-side.pb-5
+                h3 My profile
+                .container.mt-5
+                    .row
+                        .col-12.d-flex.justify-content-between
+                            h6.text-danger Personal Information
+                        .col-12.mt-4.user-info
+                            .row
+                                .col-md-12
+                                    div.profile-user-pic.d-flex.justify-content-center
+                                        img(src="/images/dummy-user.jpeg")
+                                    div.d-flex.justify-content-center.py-2
+                                        p.pic-chnage-btn change
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label First Name 
+                                        input(type="text").form-control.first-name
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label Last Name 
+                                        input(type="text").form-control.last-name
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label Email Address
+                                        input(type="text").form-control.email
+                                        .valid-feedback
+                                            span Email Verified
+                                        .invalid-feedback
+                                            span.mx-2 Email is not Verified
+                                            a(href="/") click here to verify
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label Mobile Number
+                                        input(type="text").form-control.mobile
+                                        .valid-feedback
+                                            span Mobile Number Verified
+                                        .invalid-feedback
+                                            span.mx-2 Mobile number is not Verified
+                                            a(href="/") click here to verify
+                    .row.mt-5
+                        .col-12.d-flex.justify-content-between
+                            h6.text-danger Address Information
+
+                        .col-12.mt-4.user-address
+                            .row
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label Address
+                                        input(type="text").form-control.address
+                                .col-md-6.mt-3
+                                    .form-group 
+                                        label Country
+                                        input(type="text").form-control.country
+                    .row.mt-5
+                        .col-12.d-flex.justify-content-between
+                            h6.text-danger Payment Information
+                        .col-12.mt-3
+                            .row
+                                .col-md-3.mt-3
+                                    .form-group 
+                                        label Payment Mode
+                                        input(type="text",disabled,value="Bank Transfer").form-control
+                                .col-md-3.mt-3
+                                    .form-group 
+                                        label Bank Name
+                                        input(type="text").form-control
+                                .col-md-4.mt-3
+                                    .form-group 
+                                        label Account Number
+                                        input(type="text").form-control
+                                .col-md-2.mt-2
+                                    .form-group 
+                                        label IFSC Code
+                                        input(type="text").form-control
+                    .btn-box.d-flex.justify-content-between
+                        button.btn.btn-sm.btn-primary.my-5.profile-update-btn
+                            span Update
+                        button.btn.btn-sm.logout-btn.my-5
                             i.fa.fa-power-off.mx-1
                             span Log Out
 
-               
 
-
-    script(src='/javascripts/common.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/javascripts/dashboard/profile.js')
-    
+    script(src="/vendors/hammer/hammer.min.js")
+    script 
+        include ../../public/javascripts/common.js
+    script 
+        include ../../public/javascripts/dashboard/dashboard.js
+    script 
+        include ../../public/javascripts/dashboard/profile.js

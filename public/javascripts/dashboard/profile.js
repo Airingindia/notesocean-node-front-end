@@ -40,18 +40,42 @@ $(document).ready(function () {
 
     function showUserInfo(userInfo) {
         console.log(userInfo);
-        $(".user-info .first-name").html(userInfo.firstName);
-        $(".user-info .last-name").html(userInfo.lastName);
-        $(".user-info .email").html(userInfo.email);
-        $(".user-info .mobile").html(userInfo.phone);
-        $(".user-address .address").html(userInfo.address);
-        $(".user-address .country").html(userInfo.country);
+        $(".first-name").val(userInfo.firstName);
+        $(".last-name").val(userInfo.lastName);
+        $(".email").val(userInfo.email);
+        $(".mobile").val(userInfo.phone);
+        $(".address").val(userInfo.address);
+        $(".country").val(userInfo.country);
         if (userInfo.emailVerified) {
-            $(".emailverified").removeClass("d-none");
+            $(".email").removeClass("is-invalid");
+            $(".email").addClass("is-valid");
         } else {
-            $(".emailUnverified").removeClass("d-none");
+            $(".email").addClass("is-invalid");
+            $(".email").removeClass("is-valid");
         }
     }
+
+    //    change  profile picture
+    $(".pic-chnage-btn").click(function () {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".png,.jpg,.jpeg";
+        $(input).click();
+        $(input).on("change", function () {
+            var file = this.files[0];
+            var objUrl = URL.createObjectURL(file);
+            // update  pic with ajax
+            $.ajax({
+                type: "PUT",
+                url: sessionStorage.getItem("api"),
+                data: file,
+                beforeSend: function () { },
+                success: function (data) {
+                    // show succes messge to user
+                }
+            })
+        })
+    });
 
 });
 

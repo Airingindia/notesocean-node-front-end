@@ -1,8 +1,21 @@
-.profile-user-pic img{
-    border-radius:50% ;
-    width:80px;
+.profile-user-pic img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+
 }
-.popover-header{
-    background-color:yellow;
+
+.popover-header {
+    background-color: yellow;
     color: #323232;
+}
+
+.edit-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.pic-chnage-btn {
+    cursor: pointer;
 }

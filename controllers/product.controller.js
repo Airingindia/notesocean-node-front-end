@@ -14,8 +14,6 @@ const getProductInfoWithToken = async (productid, token) => {
     } else {
         return getProductInfo(productid, "");
     }
-
-
 }
 module.exports = {
     getInfo: getProductInfo,

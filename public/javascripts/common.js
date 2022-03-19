@@ -40,8 +40,17 @@ $(document).ready(function () {
         const profile_pic = userData.profileImage;
         if (profile_pic !== null) {
             $(".user-icon-box img").attr("src", profile_pic);
+        } else {
+            $(".user-icon-box img").attr("src", "/images/dummy/user_dummy.jpg");
         }
     };
+
+    $(".mobile-search-box").click(function () {
+        $(".logo-box").slideToggle("hide");
+        $(".search-box").slideToggle("show");
+        $(".search-btn-close").slideToggle("show");
+        $(".search-btn").slideToggle("hide");
+    })
 
 
 

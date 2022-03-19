@@ -62,11 +62,11 @@ html(lang="en")
 
     section.main-section
       .container-fluid
-        a(href="/")
-          img(src="" alt="") 
-      .container-fluid
+        a(href="https://www.amazon.in/dp/B077S5CVBQ/?ref=assoc_tag_sept19?actioncode=AINOTH066082819002X&tag=notesocean-21")
+          .today-homepage-banner
+            img(src="https://admedia.notesocean.com/amazon/Amazon_Audible_1068x260.jpg" style="width:100%;height:200px").desktop-top-bannner
+            img(src="https://admedia.notesocean.com/amazon/Amazon_Audible_300x250.jpg" style="width:100%;height:200px").mobile-top-bannner
         .row.public-now-row
-
           - for (var i = 0; i < data.length; ++i) {
             - let name  = data[i].product.name;
             - if (name.length > 80)  name = name.substring(0,80)+"..";

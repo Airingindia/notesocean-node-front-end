@@ -1,13 +1,13 @@
 $(document).ready(function () {
     const ads = [
         {
-            name: "Class 10 Sanskrit Shemushi + Class 10 Sanskrit Workbook Abhyaswan Bhav - NCERT Book for Class 10",
+            name: "Class 10 Sanskrit Shemushi + Class 10 Sanskrit Workbook Abhyaswan Bhav",
             timestamp: 1647108474,
             image: "https://admedia.notesocean.com/amazon/sanskrit.png",
             link: "https://amzn.to/3JaL7W7"
         },
         {
-            name: "CBSE All In One Social Science Class 10 for 2022 Exam (Updated edition for Term 1 and 2) Paperback – 20 April 2021",
+            name: "CBSE All In One Social Science Class 10 for 2022 Exam (Updated edition for Term 1 ",
             timestamp: 1647108474,
             image: "https://admedia.notesocean.com/amazon+1.png",
             link: "https://amzn.to/3tR04Gg"
@@ -57,9 +57,9 @@ $(document).ready(function () {
                         <div class="col-md-3 my-2">
                             <a href="${ad1.link}"> 
                                     <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
-                                        <div class="card-header border-0 bg-white">
-                                            <p class="card-title">  ${ad1.name} </p>
-                                        </div>
+                                    <div class="card-header border-0 bg-white">
+                                    <p class="card-title"> <span class="text-danger" style="font-weight:bold">Ad </span>  ${ad1.name.substring(0, 80)} </p>
+                                    </div>
                                         <div class="card-body border-0 notes-thumbnails" style="background-image:url(${ad1.image});background-size:cover">
                                         </div>
 
@@ -76,7 +76,7 @@ $(document).ready(function () {
                         for (let i = 0; i < data.requested.length; i++) {
                             let name = data.requested[i].product.name;
                             if (name.length > 80) {
-                                name = name.substring(0, 100);
+                                name = name.substring(0, 80);
                             }
                             let thumbnails = data.requested[i].product.thumbnails.split(",")[0];
                             let views = data.requested[i].product.views + " views";
