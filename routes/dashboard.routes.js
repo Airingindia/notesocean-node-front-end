@@ -11,8 +11,9 @@ router.get('/:page', async function (req, res, next) {
     if (alias == "private-notes") {
         res.render("dashboard/private-notes/private-notes");
     } else if (alias == "profile") {
-        res.render("dashboard/profile");
+        res.render("dashboard/profile/profile");
     }
+
     else if (alias == "upload-private-notes") {
         res.render("dashboard/upload-private-notes");
     } else if (alias == "public-notes") {
@@ -26,7 +27,7 @@ router.get('/:page', async function (req, res, next) {
     }
     else if (alias == "colection-details") {
         res.render("dashboard/collections/colection-details");
-        console.log(req);
+
     }
 });
 
@@ -56,6 +57,17 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "private-notes" && !isNaN(parameter)) {
         res.render("dashboard/private-notes/private-notes-details");
     }
+
+    else if (alias == "profile" && parameter == "verify-email") {
+        // check user email is verified or not
+        // if verified show verified page
+        // else show verification page
+        res.render("dashboard/profile/email-verified");
+        // res.render("dashboard/profile/verify-email");
+        // console.log(req.cookies.token);
+    }
+
+
 });
 
 module.exports = router;

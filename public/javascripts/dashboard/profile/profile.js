@@ -3,43 +3,11 @@ $(document).ready(function () {
     //check if user has stored profile information 
     const userid = sessionStorage.getItem('userid');
     const token = localStorage.getItem('token');
-    if (localStorage.getItem('userInfo') !== null) {
-        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (localStorage.getItem('userdata') !== null) {
+        const userInfo = JSON.parse(localStorage.getItem('userdata'));
         showUserInfo(userInfo);
-    } else {
-        if (userid !== null) {
-            $.ajax({
-                type: "GET",
-                url: sessionStorage.getItem("api") + "/users/" + userid,
-                headers: {
-                    Authorization: token
-                },
-                success: function (data) {
-                    const userInfo = JSON.stringify({
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        email: data.email,
-                        address: data.address,
-                        country: data.country,
-                        phone: data.phone,
-                        profileImage: data.profileImage,
-                        emailVerified: data.emailVerified
-                    });
-                    console.log(data);
-                    localStorage.setItem('userInfo', userInfo);
-                    showUserInfo(userInfo);
-                },
-                error: function (err) {
-                    window.location = "/account/login";
-                }
-            })
-        } else {
-            window.reload();
-        }
     }
-
     function showUserInfo(userInfo) {
-        console.log(userInfo);
         $(".first-name").val(userInfo.firstName);
         $(".last-name").val(userInfo.lastName);
         $(".email").val(userInfo.email);
@@ -53,8 +21,16 @@ $(document).ready(function () {
             $(".email").addClass("is-invalid");
             $(".email").removeClass("is-valid");
         }
-    }
 
+        if (userInfo.phoneVerified) {
+            $(".mobile").removeClass("is-invalid");
+            $(".mobile").addClass("is-valid");
+        } else {
+            $(".mobile").addClass("is-invalid");
+            $(".mobile").removeClass("is-valid");
+        }
+
+    }
     //    change  profile picture
     $(".pic-chnage-btn").click(function () {
         var input = document.createElement("input");
@@ -77,6 +53,14 @@ $(document).ready(function () {
         })
     });
 
+    $.getScript('/vendors/data/countries.json', function (data) {
+        data = JSON.parse(data);
+        for (let i = 0; i < data.length; i++) {
+            const short_code = data[i].abbreviation;
+            const name = data[i].country;
+            $(".country").append(`<option value="${short_code}"> ${name} </option>`);
+        }
+    });
 });
 
 

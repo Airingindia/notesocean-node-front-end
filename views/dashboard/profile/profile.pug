@@ -5,13 +5,14 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Profile
-        include ../includes/bootstrap
+        include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/profile.css')
+        style
+            include ../../../public/stylesheets/dashboard/profile/profile.css
     body
-        include ../includes/dashHeader
+        include ../../includes/dashHeader
         section.row
-            include ../includes/dashAside
+            include ../../includes/dashAside
             .col-9.shadow.second-side.pb-5
                 h3 My profile
                 .container.mt-5
@@ -36,12 +37,12 @@ html(lang="en")
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Email Address
-                                        input(type="text").form-control.email
+                                        input(type="text",readonly).form-control.email
                                         .valid-feedback
                                             span Email Verified
                                         .invalid-feedback
                                             span.mx-2 Email is not Verified
-                                            a(href="/") click here to verify
+                                            a(href="/dashboard/profile/verify-email") click here to verify
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Mobile Number
@@ -64,7 +65,9 @@ html(lang="en")
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Country
-                                        input(type="text").form-control.country
+                                        select.form-select.country
+                                            option(value="one",disabled,selected) choose... 
+
                     .row.mt-5
                         .col-12.d-flex.justify-content-between
                             h6.text-danger Payment Information
@@ -96,8 +99,8 @@ html(lang="en")
 
     script(src="/vendors/hammer/hammer.min.js")
     script 
-        include ../../public/javascripts/common.js
+        include ../../../public/javascripts/common.js
     script 
-        include ../../public/javascripts/dashboard/dashboard.js
+        include ../../../public/javascripts/dashboard/dashboard.js
     script 
-        include ../../public/javascripts/dashboard/profile.js
+        include ../../../public/javascripts/dashboard/profile/profile.js

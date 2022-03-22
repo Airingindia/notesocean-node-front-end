@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Verify email | Notes Ocean
+        include ../../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        style
+            include ../../../public/stylesheets/dashboard/profile/verify-email.css
+    body
+        include ../../includes/dashHeader
+        section.row
+            include ../../includes/dashAside
+            .col-9.second-side
+                .d-flex.justify-content-center.align-items-center
+                    .card.p-5.border-0(style="height:80vh;width:100%")
+                        h5.my-3 Email Address Verification
+                        span.mobile-text Enter the code we just send 4 digit verification code  on your email address 
+                        b.text-danger.email-label.my-2  sachinshera5@gmail.com
+                        .d-flex.flex-row.mt-5.mx-auto
+                            input.form-control(type='text' autofocus,maxlength="1")
+                            input.form-control(type='text' maxlength="1")
+                            input.form-control(type='text' maxlength="1")
+                            input.form-control(type='text' maxlength="1")
+                        button.btn.btn-primary.mt-5.w-25.mx-auto.verify-btn verify
+                        .text-center.mt-5
+                            span.d-block.mobile-text Don&apos;t receive the code?
+                            span.font-weight-bold.text-danger.cursor Resend
+
+
+    script(src="/vendors/hammer/hammer.min.js")
+    script 
+        include ../../../public/javascripts/common.js
+    script 
+        include ../../../public/javascripts/dashboard/dashboard.js
+    script 
+        include ../../../public/javascripts/dashboard/profile/verify-email.js

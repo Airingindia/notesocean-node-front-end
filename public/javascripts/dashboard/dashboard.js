@@ -14,21 +14,13 @@ $(document).ready(function () {
           sessionStorage.setItem("userid", userinfo);
           // console.log(userinfo);
           amplitude.getInstance().setUserId(userinfo);
-
+          getuserData();
         } else {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userinfo");
-          localStorage.removeItem("userdata");
-          setCookie("token", "", 0);
-          window.location = "/session-expire";
+          clearAllBrowserData();
         }
       },
       error: function (err) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userinfo");
-        localStorage.removeItem("userdata");
-        setCookie("token", "", 0);
-        window.location = "/session-expire";
+        clearAllBrowserData();
       },
     });
   } else {
@@ -82,6 +74,8 @@ $(document).ready(function () {
       window.location = url;
     });
   });
+
+
 
   // button active function
 
@@ -160,15 +154,53 @@ $(document).ready(function () {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
-  // set user profilepic
-  if (localStorage.getItem('userdata') !== null) {
-    const userdata = JSON.parse(localStorage.getItem("userdata"));
-    const profilepic = userdata.profileImage;
-    if (profilepic !== null) {
-      $(".navbar-user-pic").attr("src", profilepic);
+
+  // get user data
+
+  function getuserData() {
+    if (localStorage.getItem("userdata") == null) {
+      $.ajax({
+        type: "GET",
+        url: sessionStorage.getItem("api") + "/users",
+        headers: {
+          Authorization: localStorage.getItem("token")
+        },
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+          data = JSON.stringify(data);
+          localStorage.setItem("userdata", data);
+          showuserPic();
+        },
+        error: function (err) {
+
+        }
+      })
     } else {
-      $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
+      showuserPic();
     }
+  }
+
+  // set user profilepic
+  function showuserPic() {
+    if (localStorage.getItem('userdata') !== null) {
+      const userdata = JSON.parse(localStorage.getItem("userdata"));
+      const profilepic = userdata.profileImage;
+      if (profilepic !== null) {
+        $(".navbar-user-pic").attr("src", profilepic);
+      } else {
+        $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
+      }
+    }
+  }
+
+  function clearAllBrowserData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userinfo");
+    localStorage.removeItem("userdata");
+    setCookie("token", "", 0);
+    window.location = "/session-expire";
   }
 
 });
