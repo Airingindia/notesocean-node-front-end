@@ -16,6 +16,10 @@ header i.fa-bell {
     border: none;
 }
 
+.text-primary {
+    color: #FB0100 !important;
+}
+
 .text-danger {
     color: #FB0100 !important
 }
@@ -163,9 +167,7 @@ input[type="color"]:focus,
         align-items: center;
     }
 
-    .second-side .container .card {
-        box-shadow: none !important;
-    }
+
 
     .second-side .container .card-content {
         box-shadow: none !important;

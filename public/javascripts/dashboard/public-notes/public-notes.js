@@ -1,22 +1,37 @@
 $(document).ready(function () {
+
     // get user public notes
-    $.ajax({
-        type: "GET",
-        url: sessionStorage.getItem("api") + "/products",
-        contentType: "application/json",
-        processData: false,
-        headers: {
-            Authorization: localStorage.getItem("token")
-        },
-        success: function (data) {
-            // console.log(data);
-            // return;
-            if (data.requested.length !== 0) {
-                $(".public-notes-container").html("");
+    function loadData() {
+        $.ajax({
+            type: "GET",
+            url: sessionStorage.getItem("api") + "/products",
+            contentType: "application/json",
+            processData: false,
+            headers: {
+                Authorization: localStorage.getItem("token")
+            },
+            beforeSend: function () {
+                $(".loading-public-notes").removeClass("d-none");
+            },
+            success: function (data) {
+                showData(data);
+            },
+            error: function (err) {
                 $(".loading-public-notes").addClass("d-none");
-                $(".public-notes-container").removeClass("d-none");
-                $(".no-public-notes").addClass("d-none");
-                for (let i = 0; i < data.requested.length; i++) {
+                $(".public-notes-container").addClass("d-none");
+                $(".no-public-notes").removeClass("d-none");
+            }
+        });
+    }
+    loadData();
+    function showData(data) {
+        if (data.requested.length !== 0) {
+            $(".public-notes-container").html("");
+            $(".loading-public-notes").addClass("d-none");
+            $(".public-notes-container").removeClass("d-none");
+            $(".no-public-notes").addClass("d-none");
+            for (let i = 0; i < data.requested.length; i++) {
+                if (data.requested[i].userId == sessionStorage.getItem("userid")) {
                     let id = data.requested[i].id;
                     let name = data.requested[i].name;
                     let timestamp = data.requested[i].timestamp;
@@ -24,38 +39,46 @@ $(document).ready(function () {
                     let thumbnails = data.requested[i].thumbnails;
                     timestamp = timeDifference(timestamp);
                     let size = bytesToSize(data.requested[i].size);
+                    let fileType = data.requested[i].fileType;
+                    let pages = data.requested[i].pages;
+                    let views = data.requested[i].views;
                     $(".public-notes-container").append(`
-                    <div class="row shadow rounded my-3 p-2 public-notes-item" data-route="${id}">
-    <div class="col-md-1">
-        <center><img class="w-100 lozad "  data-src="${thumbnails.split(",")[0]}" src="${thumbnails.split(",")[0]}" /></center>
-    </div>
-    <div class="col-md-7 d-flex align-items-center">
-        <div>
-            <h6> ${name}</h6>
-            <p class="d-none">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime porro adipisci sint voluptas voluptatum, minus harum eius exercitationem quam fugiat.</p>
-        </div>
-    </div>
-    <div class="col-md-2 d-flex align-items-center">
-        <h6> ${timestamp}</h6>
-    </div>
-</div>
-                    `);
-
+                    <div class="col-md-3">
+                    <div class="card shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
+                    <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
+                    <div class="card-body"></div>
+                    <div class="card-footer bg-white border-0">
+                        <h6 class="card-title">  ${name} </h6>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span>${fileType}</span>
+                            </div>
+                            <div>
+                                <p class="card-text"> </p><i class="fa fa-clock-o mx-1"></i><span> ${timestamp} </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span> ${pages} pages </span>
+                            </div>
+                            <div>
+                                <p class="card-text"> </p><i class="fa fa-globe mx-1"></i><span>${views} views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>`);
                 }
-                publicNotesRoute();
-            } else {
-                $(".loading-public-notes").addClass("d-none");
-                $(".public-notes-container").addClass("d-none");
-                $(".no-public-notes").removeClass("d-none");
+
             }
-        },
-        error: function (err) {
+            publicNotesRoute();
+        } else {
             $(".loading-public-notes").addClass("d-none");
             $(".public-notes-container").addClass("d-none");
             $(".no-public-notes").removeClass("d-none");
         }
-    });
-
+    }
     function timeDifference(previous) {
         const current = Date.now();
         var msPerMinute = 60 * 1000;
@@ -105,4 +128,28 @@ $(document).ready(function () {
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
+
+
+    $("form").submit(function (event) {
+        event.preventDefault();
+        const input = $("input").val();
+        if (input.length !== 0) {
+            $.ajax({
+                type: "GET",
+                url: sessionStorage.getItem("api") + "/products/search/" + input,
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                beforeSend: function () {
+                    $(".loading-public-notes").removeClass("d-none");
+                },
+                success: function (data) {
+                    showData(data);
+
+                }
+            })
+        } else {
+            loadData();
+        }
+    })
 });

@@ -4,11 +4,14 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Private Notes
+        title Private Notes | Notes Ocean
         include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
-        link(rel="stylesheet" href="/stylesheets/loader.css")
+        style
+            include ../../../public/stylesheets/dashboard/dashboard.css
+        style
+            include ../../../public/stylesheets/loader.css
+        style
+            include ../../../public/stylesheets/dashboard/my-notes.css
     body
         include ../../includes/dashHeader
         section.row
@@ -25,6 +28,13 @@ html(lang="en")
                             button.btn-primary.add-new
                                 i.fa.fa-cloud-upload.m-1
                                 span Upload
+                .row 
+                    .col-12
+                        .container
+                            form
+                                .input-group
+                                    input(type="search" placeholder="Search private notes..." aria-label="Search  private notes").form-control
+                                    button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
                 .row.container-fulid.notes-container-row.mt-3
                 .row.no-private-notes.d-none
                     .card.border-0
@@ -74,11 +84,13 @@ html(lang="en")
                                 .card-body.p-0.viewer
 
 
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src="/vendors/sweetalert/sweetalert.min.js")
-    script 
-        include ../../../public/javascripts/common.js
-    script 
-        include ../../../public/javascripts/dashboard/dashboard.js
-    script
-        include ../../../public/javascripts/dashboard/private-notes/private-notes.js
+        script(src="/vendors/hammer/hammer.min.js") 
+        script(src="/vendors/sweetalert/sweetalert.min.js")
+        script 
+            include ../../../public/vendors/sweetalert/sweetalert.min.js
+        script 
+            include ../../../public/javascripts/common.js
+        script 
+            include ../../../public/javascripts/dashboard/dashboard.js
+        script
+            include ../../../public/javascripts/dashboard/private-notes/private-notes.js

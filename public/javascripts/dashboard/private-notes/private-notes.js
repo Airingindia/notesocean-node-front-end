@@ -1,67 +1,79 @@
 $(document).ready(function () {
     // get all private notes
 
-    $.ajax({
-        type: "GET",
-        url: sessionStorage.getItem("api") + "/notes",
-        headers: {
-            Authorization: localStorage.getItem("token")
-        },
-        beforeSend: function () { },
-        success: function (data) {
-            $(".loading-private-notes").addClass("d-none");
-            if (data.length !== 0) {
-                for (let i = 0; i < data.length; i++) {
-                    var name;
-                    if ($(window).width() < 769) {
-                        name = data[i].name.substring(0, 12) + "..";
-                    }
-                    name = data[i].name;
-                    let fileType = data[i].fileType;
-                    let id = data[i].id;
-                    let size = data[i].size;
-                    let timestamp = data[i].timestamp;
-                    let ago_time = timeDifference(timestamp);
-                    let actual_size = bytesToSize(size);
-                    let url = data[i].file;
-                    let img = "/images/icons/" + fileType + ".png";
-                    let type = data[i].fileType;
-
-                    $(".notes-container-row").append(`
-                    <div class="col-6 col-lg-2 my-2">
-                        <div class="card  border-0 rounded shadow w-100 h-100 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}">
-                                
-                                <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
-                                <div class="card-body border-0 py-2">
-                                    <p class="card-title">${name} </p>
-                                </div>
-                                <div class="card-footer border-0 bg-white">
-                                    <p class="card-text text-muted"> <i class="fa fa-clock-o mx-1"></i><span> ${ago_time} </span></p>
-
-                                    <p class="card-text d-flex align-items-center justify-content-between">
-                                    
-                                    <span class="text-muted"> 
-                                    <i class="fa fa-database mx-1">
-                                    </i>
-                                    <span> ${actual_size} </span>
-                                    </span>                                    
-                                    </p>
-                                </div>
-                          
-                        
-                        </div>
-                    </div>
-                    `);
-                }
-                fileOpner();
-            } else {
-                $(".no-private-notes").removeClass("d-none");
+    function loaddata() {
+        $.ajax({
+            type: "GET",
+            url: sessionStorage.getItem("api") + "/notes",
+            headers: {
+                Authorization: localStorage.getItem("token")
+            },
+            beforeSend: function () {
+                $(".loading-private-notes").removeClass("d-none");
+            },
+            success: function (data) {
+                showData(data);
+            },
+            error: function (err) {
+                console.log(err);
             }
-        },
-        error: function (err) {
-            console.log(err);
+        });
+    }
+
+    loaddata();
+
+    function showData(data) {
+        $(".notes-container-row").html("");
+        $(".loading-private-notes").addClass("d-none");
+        if (data.length !== 0) {
+            $(".no-private-notes").addClass("d-none");
+            for (let i = 0; i < data.length; i++) {
+                var name;
+                if ($(window).width() < 769) {
+                    name = data[i].name.substring(0, 12) + "..";
+                }
+                name = data[i].name;
+                let fileType = data[i].fileType;
+                let id = data[i].id;
+                let size = data[i].size;
+                let timestamp = data[i].timestamp;
+                let ago_time = timeDifference(timestamp);
+                let actual_size = bytesToSize(size);
+                let url = data[i].file;
+                let img = "/images/icons/" + fileType + ".png";
+                let type = data[i].fileType;
+
+                $(".notes-container-row").append(`
+                <div class="col-6 col-lg-2 my-2">
+                    <div class="card  border-0 rounded shadow w-100 h-100 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}">
+                            
+                            <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
+                            <div class="card-body border-0 py-2">
+                                <p class="card-title">${name} </p>
+                            </div>
+                            <div class="card-footer border-0 bg-white">
+                                <p class="card-text text-muted"> <i class="fa fa-clock-o mx-1"></i><span> ${ago_time} </span></p>
+
+                                <p class="card-text d-flex align-items-center justify-content-between">
+                                
+                                <span class="text-muted"> 
+                                <i class="fa fa-database mx-1">
+                                </i>
+                                <span> ${actual_size} </span>
+                                </span>                                    
+                                </p>
+                            </div>
+                      
+                    
+                    </div>
+                </div>
+                `);
+            }
+            fileOpner();
+        } else {
+            $(".no-private-notes").removeClass("d-none");
         }
-    });
+    }
 
 
     function timeDifference(previous) {
@@ -271,5 +283,29 @@ $(document).ready(function () {
         link.click();
         link.remove();
     }
+
+    // search private notes
+    $("form").submit(function (event) {
+        event.preventDefault();
+        const input = $("input").val();
+        if (input.length !== 0) {
+            $.ajax({
+                type: "GET",
+                url: sessionStorage.getItem("api") + "/notes/search/" + input,
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                beforeSend: function () {
+                    $(".loading-private-notes").removeClass("d-none");
+                },
+                success: function (data) {
+                    console.log(data);
+                    showData(data.notes);
+                }
+            })
+        } else {
+            loaddata();
+        }
+    });
 
 });

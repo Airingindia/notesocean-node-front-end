@@ -2,62 +2,100 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Public notes
         include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
-        link(rel="stylesheet", href="/stylesheets/loader.css")
+        style
+            include ../../../public/stylesheets/dashboard/dashboard.css
+        style
+            include ../../../public/stylesheets/dashboard/my-notes.css
+        style
+            include ../../../public/stylesheets/loader.css
+        style
+            include ../../../public/stylesheets/loader.css
     body
         include ../../includes/dashHeader
         section.row
-                include ../../includes/dashAside
-                .col-md-10.pb-5.second-side
-                    .div.d-flex.justify-content-between
-                            .div
-                                h3.heading-title Public Notes
-                                small.heading-text These notes are publically accessible and you will get rewards
-                            .div.p-3
-                                a(href="/dashboard/public-notes/new")
-                                    button.btn-primary.add-new
-                                        i.fa.fa-plus.m-1
-                                        span New
-                    .public-notes-container.container.mt-3.d-none.py-4
-                    
-                        
-                    .row.no-public-notes.d-none
-                                        .card.border-0
-                                            .card-content
-                                                center
-                                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                                    .card-body
-                                                        h2 No Public notes uploaded Yet
-                                                        a(href="/dashboard/public-notes/new")
-                                                            button.btn.btn-primary 
-                                                                i.fa.fa-cloud-upload.mx-1
-                                                                span Upload New Notes
-                    .row.loading-public-notes
-                                        center 
-                                            .lds-roller
-                                                div
-                                                div
-                                                div
-                                                div
-                                                div
-                                                div
-                                                div
-                                                div
-                                            p.loading-notice Your public notes are loading... please wait...
+            include ../../includes/dashAside
+            .col-md-10.pb-5.second-side
+                .div.d-flex.justify-content-between
+                    .div
+                        h3.heading-title Public Notes
+                        small.heading-text These notes are publically accessible and you will get rewards
+                    .div.p-3
+                        a(href="/dashboard/public-notes/new")
+                            button.btn-primary.add-new
+                                i.fa.fa-plus.m-1
+                                span New
+                .row 
+                    .col-12
+                        .container
+                            form
+                                .input-group
+                                    input(type="search" placeholder="Search public notes..." aria-label="Search  public notes").form-control
+                                    button.btn.btn-primary.btn-sm(aria-label="Search") Search
+                .public-notes-container.container-fluid.mt-3.py-4.row 
+                    .col-md-3.d-none
 
-            
+                        .card
+                            img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png" style="height:100%;width:100%")
+                            .card-body
+                            .card-footer
+
+                                h6.card-title Lorem ipsum dolor sit amet.
+                                div.d-flex.justify-content-between
+                                    div
+                                        p.card-text 
+                                        i.fa.fa-file.mx-1
+                                        span PDF
+                                    div
+                                        p.card-text 
+                                        i.fa.fa-clock-o.mx-1
+                                        span 10 minute ago
+                                div.d-flex.justify-content-between
+                                    div
+                                        p.card-text 
+                                        i.fa.fa-file.mx-1
+                                        span 10 pages
+                                    div
+                                        p.card-text 
+                                        i.fa.fa-globe.mx-1
+                                        span 10 views
 
 
 
 
-
-    script(src='/javascripts/common.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/javascripts/dashboard/public-notes/public-notes.js')
-    script(src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js")
+                .row.no-public-notes.d-none
+                    .card.border-0
+                        .card-content
+                            center
+                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                .card-body
+                                    h2 No Public notes uploaded Yet
+                                    a(href="/dashboard/public-notes/new")
+                                        button.btn.btn-primary 
+                                            i.fa.fa-cloud-upload.mx-1
+                                            span Upload New Notes
+                .row.loading-public-notes
+                    center 
+                        .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                        p.loading-notice Your public notes are loading... please wait...
+        script(src='/javascripts/common.js')
+        script
+            include ../../../public/vendors/hammer/hammer.min.js
+        script
+            include ../../../public/javascripts/dashboard/dashboard.js
+        script
+            include ../../../public/javascripts/dashboard/public-notes/public-notes.js
+        //- script(src="/vendors/hammer/hammer.min.js") 
+        //- script(src='/javascripts/dashboard/dashboard.js')
+        //- script(src='/javascripts/dashboard/public-notes/public-notes.js')
