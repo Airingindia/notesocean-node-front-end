@@ -8,6 +8,8 @@ html(lang="en")
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         style
+            include ../../../public/stylesheets/loader.css
+        style
             include ../../../public/stylesheets/dashboard/profile/profile.css
     body
         include ../../includes/dashHeader
@@ -23,35 +25,44 @@ html(lang="en")
                             .row
                                 .col-md-12
                                     div.profile-user-pic.d-flex.justify-content-center
-                                        img(src="/images/dummy-user.jpeg")
+                                        img(src="").user-profile-img
+                                        .row.pic-uploading-roller.d-flex.justify-content-center.align-items-center.d-none
+                                            .lds-roller
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
+                                                div
                                     div.d-flex.justify-content-center.py-2
                                         p.pic-chnage-btn change
                                 .col-md-6.mt-3
                                     .form-group 
                                         label First Name 
-                                        input(type="text").form-control.first-name
+                                        input(type="text").form-control.first-name.input-item#firstName
+                                        .valid-feedback
+                                        .invalid-feedback
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Last Name 
-                                        input(type="text").form-control.last-name
+                                        input(type="text").form-control.last-name.input-item#lastName
+                                        .valid-feedback
+                                        .invalid-feedback
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Email Address
-                                        input(type="text",readonly).form-control.email
+                                        input(type="text",readonly).form-control.email.input-item#email
                                         .valid-feedback
-                                            span Email Verified
                                         .invalid-feedback
-                                            span.mx-2 Email is not Verified
-                                            a(href="/dashboard/profile/verify-email") click here to verify
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Mobile Number
-                                        input(type="text").form-control.mobile
+                                        input(type="number").form-control.mobile.input-item#mobile
                                         .valid-feedback
-                                            span Mobile Number Verified
                                         .invalid-feedback
-                                            span.mx-2 Mobile number is not Verified
-                                            a(href="/") click here to verify
+
                     .row.mt-5
                         .col-12.d-flex.justify-content-between
                             h6.text-danger Address Information
@@ -61,12 +72,18 @@ html(lang="en")
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Address
-                                        input(type="text").form-control.address
+                                        input(type="text").form-control.address.input-item#address
+                                        .valid-feedback
+                                        .invalid-feedback
+
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Country
-                                        select.form-select.country
-                                            option(value="one",disabled,selected) choose... 
+                                        select.form-select.country(name="country").input-item#country
+                                            option(value="one",disabled,selected) choose...
+                                        .valid-feedback
+                                        .invalid-feedback
+
 
                     .row.mt-5
                         .col-12.d-flex.justify-content-between
@@ -96,11 +113,12 @@ html(lang="en")
                             i.fa.fa-power-off.mx-1
                             span Log Out
 
-
-    script(src="/vendors/hammer/hammer.min.js")
-    script 
-        include ../../../public/javascripts/common.js
-    script 
-        include ../../../public/javascripts/dashboard/dashboard.js
-    script 
-        include ../../../public/javascripts/dashboard/profile/profile.js
+        section
+            .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index:9999')
+        script(src="/vendors/hammer/hammer.min.js")
+        script 
+            include ../../../public/javascripts/common.js
+        script 
+            include ../../../public/javascripts/dashboard/dashboard.js
+        script 
+            include ../../../public/javascripts/dashboard/profile/profile.js

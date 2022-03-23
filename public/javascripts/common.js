@@ -26,6 +26,7 @@ $(document).ready(function () {
                 success: function (data) {
                     localStorage.setItem("userdata", JSON.stringify(data));
                     showProfilePic();
+                    window.location = window.location.href;
                 }
             });
         } else {
@@ -37,11 +38,13 @@ $(document).ready(function () {
 
     function showProfilePic() {
         const userData = JSON.parse(localStorage.getItem("userdata"));
-        const profile_pic = userData.profileImage;
+        var profile_pic = userData.profileImage;
         if (profile_pic !== null) {
             $(".user-icon-box img").attr("src", profile_pic);
+            $(".navbar-user-pic").attr("src", profile_pic);
         } else {
             $(".user-icon-box img").attr("src", "/images/dummy/user_dummy.jpg");
+            $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
         }
     };
 
@@ -50,10 +53,11 @@ $(document).ready(function () {
         $(".search-box").slideToggle("show");
         $(".search-btn-close").slideToggle("show");
         $(".search-btn").slideToggle("hide");
-    })
+    });
 
-
-
-
+    // notice close
+    $(".close-notice").click(function () {
+        $(".notice-box").html("");
+    });
 
 });

@@ -14,7 +14,6 @@ $(document).ready(function () {
           sessionStorage.setItem("userid", userinfo);
           // console.log(userinfo);
           amplitude.getInstance().setUserId(userinfo);
-          getuserData();
         } else {
           clearAllBrowserData();
         }
@@ -154,33 +153,6 @@ $(document).ready(function () {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
-
-  // get user data
-
-  function getuserData() {
-    if (localStorage.getItem("userdata") == null) {
-      $.ajax({
-        type: "GET",
-        url: sessionStorage.getItem("api") + "/users",
-        headers: {
-          Authorization: localStorage.getItem("token")
-        },
-        beforeSend: function () {
-
-        },
-        success: function (data) {
-          data = JSON.stringify(data);
-          localStorage.setItem("userdata", data);
-          showuserPic();
-        },
-        error: function (err) {
-
-        }
-      })
-    } else {
-      showuserPic();
-    }
-  }
 
   // set user profilepic
   function showuserPic() {

@@ -2,8 +2,8 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Upload  private notes
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
@@ -12,23 +12,23 @@ html(lang="en")
     body
         include ../../includes/dashHeader
         section.row
-                include ../../includes/dashAside
-                .col-10.second-side
-                    .container.content-box
-                            h3 Upload Private Notes
-                            p.mt-2.text-danger *Before you upload please read the following instructions*
-                            //- p You are uploading private notes , this notes will be private and will not be published to the public
-                            p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
-                            
-                            p If you want to published to the public and earn money or rewards  
-                                a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
-                    .container.uploader-box
-                            form(class="dropzone",id="file-upload")               
+            include ../../includes/dashAside
+            .col-10.second-side
+                .container.content-box
+                    h3 Upload Private Notes
+                    p.mt-2.text-danger *Before you upload please read the following instructions*
+                    //- p You are uploading private notes , this notes will be private and will not be published to the public
+                    p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
 
-section
-  .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index: 11')
-    script(src='/javascripts/common.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/vendors/dropzone/dropzone.min.js')
-    script(src='/javascripts/dashboard//private-notes/upload-private-notes.js')
+                    p If you want to published to the public and earn money or rewards  
+                        a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
+                .container.uploader-box
+                    form(class="dropzone" id="file-upload")               
+
+        section
+            .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index: 11')
+        script(src='/javascripts/common.js')
+        script(src="/vendors/hammer/hammer.min.js") 
+        script(src='/javascripts/dashboard/dashboard.js')
+        script(src='/vendors/dropzone/dropzone.min.js')
+        script(src='/javascripts/dashboard//private-notes/upload-private-notes.js')
