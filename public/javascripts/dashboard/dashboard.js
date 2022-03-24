@@ -64,7 +64,7 @@ $(document).ready(function () {
 
   // aide routes
 
-  $("aside button").each(function () {
+  $(".dash-aside button").each(function () {
     $(this).click(function () {
       if ($(window).width() < 769) {
         $(this).html(`<i class="fa fa-spinner fa-spin text-danger"> </i>`);
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
   function Dashroute() {
     const path = window.location.pathname;
-    $("aside button[route='" + path + "']").addClass("active");
+    $(".dash-aside button[route='" + path + "']").addClass("active");
   }
 
   Dashroute();

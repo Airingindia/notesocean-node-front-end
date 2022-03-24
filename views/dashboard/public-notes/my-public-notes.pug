@@ -15,69 +15,64 @@ html(lang="en")
         style
             include ../../../public/stylesheets/loader.css
     body
-        include ../../includes/dashHeader
-        section.row
-            include ../../includes/dashAside
-            .col-md-10.pb-5.second-side
-                .div.d-flex.justify-content-between
-                    .div
-                        h3.heading-title Public Notes
-                        small.heading-text These notes are publically accessible and you will get rewards
-                    .div.p-3
-                        a(href="/dashboard/public-notes/new")
-                            button.btn-primary.add-new
-                                i.fa.fa-plus.m-1
-                                span New
-                .row 
-                    .col-12
-                        .container
-                            form
-                                .input-group
-                                    input(type="search" placeholder="Search public notes..." aria-label="Search  public notes").form-control
-                                    button.btn.btn-primary.btn-sm(aria-label="Search") Search
-                .public-notes-container.container-fluid.mt-3.py-4.row 
-                    .col-md-3.d-none
-
-                        .card
-                            img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png" style="height:100%;width:100%")
-                            .card-body
-                            .card-footer
-
-                                h6.card-title Lorem ipsum dolor sit amet.
-                                div.d-flex.justify-content-between
-                                    div
-                                        p.card-text 
-                                        i.fa.fa-file.mx-1
-                                        span PDF
-                                    div
-                                        p.card-text 
-                                        i.fa.fa-clock-o.mx-1
-                                        span 10 minute ago
-                                div.d-flex.justify-content-between
-                                    div
-                                        p.card-text 
-                                        i.fa.fa-file.mx-1
-                                        span 10 pages
-                                    div
-                                        p.card-text 
-                                        i.fa.fa-globe.mx-1
-                                        span 10 views
-
-
-
-
-                .row.no-public-notes.d-none
-                    .card.border-0
-                        .card-content
-                            center
-                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+        header
+            include ../../includes/dashHeader
+        section
+            .row
+                include ../../includes/dashAside
+                .col-md-10.second-side
+                    .upload-header.d-flex.justify-content-between
+                        div
+                            h2.header-title Public Notes
+                            small.header-text These notes are  publically accessible and you will be get any rewards
+                        div
+                            a(href="/dashboard/public-notes/new")
+                                button.btn-primary.add-new
+                                    i.fa.fa-cloud-upload.m-1
+                                    span Upload
+                    .search-container
+                        form
+                            .input-group
+                                input(type="search" placeholder="Search public notes..." aria-label="Search  public notes").form-control
+                                button.btn.btn-primary.btn-sm.search-btn(aria-label="Search" type="submit") Search
+                    .public-notes-container.container-fluid.mt-3.py-4.row 
+                        .col-md-3.d-none
+                            .card
+                                img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png" style="height:100%;width:100%")
                                 .card-body
-                                    h2 No Public notes uploaded Yet
-                                    a(href="/dashboard/public-notes/new")
-                                        button.btn.btn-primary 
-                                            i.fa.fa-cloud-upload.mx-1
-                                            span Upload New Notes
-                .row.loading-public-notes
+                                .card-footer
+
+                                    h6.card-title Lorem ipsum dolor sit amet.
+                                    div.d-flex.justify-content-between
+                                        div
+                                            p.card-text 
+                                            i.fa.fa-file.mx-1
+                                            span PDF
+                                        div
+                                            p.card-text 
+                                            i.fa.fa-clock-o.mx-1
+                                            span 10 minute ago
+                                    div.d-flex.justify-content-between
+                                        div
+                                            p.card-text 
+                                            i.fa.fa-file.mx-1
+                                            span 10 pages
+                                        div
+                                            p.card-text 
+                                            i.fa.fa-globe.mx-1
+                                            span 10 views
+                    .row.no-public-notes.d-none
+                        .card.border-0
+                            .card-content
+                                center
+                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                    .card-body
+                                        h2 No Public notes uploaded Yet
+                                        a(href="/dashboard/public-notes/new")
+                                            button.btn.btn-primary 
+                                                i.fa.fa-cloud-upload.mx-1
+                                                span Upload New Notes
+                    .row.loading-public-notes
                     center 
                         .lds-roller
                             div

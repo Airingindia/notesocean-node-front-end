@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    $(".user-Mobile-label").html(userdata.phone);
     $("input").each(function () {
         $(this).on("input", function () {
 
@@ -43,9 +45,22 @@ $(document).ready(function () {
             }
         });
 
-        if (count == 4) {
+        if (count == 6) {
             // verify otp
-            alert(code);
+            $.ajax({
+                type: "POST",
+                url: sessionStorage.getItem("api"),
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                beforeSend: function () {
+                    $(".verify-btn").prop("disabled", true);
+                    $(".verify-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> <span> verifing... </span>`);
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            })
 
         } else {
             $("input").each(function () {

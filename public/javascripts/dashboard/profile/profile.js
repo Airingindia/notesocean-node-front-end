@@ -22,7 +22,7 @@ $(document).ready(function () {
         } else {
             $(".email").addClass("is-invalid");
             $(".email").removeClass("is-valid");
-            $(".email").next().next().html(`<span> Email is not verified </span> <a href="/profile/verify-email" class="mx-2"> Verify</a>`);
+            $(".email").next().next().html(`<span> Email is not verified </span> <a href="/dashboard/profile/verify-email" class="mx-2"> Verify</a>`);
         }
 
         if (userInfo.phoneVerified) {
@@ -32,7 +32,7 @@ $(document).ready(function () {
         } else {
             $(".mobile").addClass("is-invalid");
             $(".mobile").removeClass("is-valid");
-            $(".mobile").next().next().html(`<span> Mobile  is not verified </span> <a href="/profile/verify-mobile" class="mx-2"> Verify</a>`);
+            $(".mobile").next().next().html(`<span> Mobile  is not verified </span> <a href="/dashboard/profile/verify-mobile" class="mx-2"> Verify</a>`);
         }
 
     }
@@ -224,8 +224,6 @@ $(document).ready(function () {
             });
         }
     });
-
-
 });
 
 

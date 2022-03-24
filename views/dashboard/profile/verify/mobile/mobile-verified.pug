@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title verified email | Notes Ocean
+        include ../../../../includes/bootstrap
+        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        style.
+            .design-box{
+                width:100px;
+                height:100px;
+                border-radius:50%;
+                background:red;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-size:50px;
+                color:white;
+            }
+            .verify-content{
+                position:absolute;
+                top :50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+                width:100%;
+            }
+    body
+        include ../../../../includes/dashHeader
+        section.row
+            include ../../../../includes/dashAside
+            .col-9.second-side
+                .verify-content
+                    .design-box.mx-auto
+                        i.fa.fa-check
+                    h5.text-center.my-3 Your mobile number is verified
+
+
+
+    script(src="/vendors/hammer/hammer.min.js")
+    script 
+        include ../../../../../public/javascripts/common.js
+    script 
+        include ../../../../../public/javascripts/dashboard/dashboard.js

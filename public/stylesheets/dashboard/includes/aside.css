@@ -1,0 +1,131 @@
+.dash-aside {
+    position: fixed;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
+    top: 10%;
+    width: 15%;
+}
+
+.second-side {
+    padding-top: 10px;
+    position: fixed;
+    left: 15%;
+    background-color: #fff;
+    z-index: 100;
+    top: 10%;
+    height: 100vh;
+    overflow: scroll;
+    width: 85%;
+}
+
+.dash-aside .card-content {
+    padding: 10px;
+}
+
+
+
+.dash-aside button {
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px 8px;
+    margin: 10px 0;
+    text-align: left;
+    border: none;
+
+}
+
+.dash-aside i {
+    margin: 10px 10px;
+}
+
+.dash-aside button.active {
+    background: red;
+    color: #fff;
+}
+
+.dash-aside button:focus,
+.dash-aside button:focus,
+.dash-aside button:active {
+    border: none;
+}
+
+/* responsive */
+
+@media (max-width:769px) {
+    .dash-aside {
+        position: fixed;
+        left: 0;
+        background-color: #fff;
+        z-index: 100;
+        top: inherit;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .second-side {
+        position: fixed;
+        background-color: #fff;
+        z-index: 100;
+        top: 10%;
+        height: 80vh;
+        overflow: scroll;
+        width: 100%;
+    }
+
+    .dash-aside i {
+        margin: 0px 0px !important;
+    }
+
+    .dash-aside {
+        position: fixed;
+        z-index: 999 !important;
+        bottom: 0px !important;
+        left: 0% !important;
+        width: 100% !important;
+        box-shadow: 0px 0px 10px #ccc;
+        background-color: #fff;
+    }
+
+
+    .dash-aside .card-content {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+    }
+
+    .dash-aside .card {
+        width: 100% !important;
+    }
+
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .item-text {
+        display: none !important;
+    }
+
+    .second-side {
+        position: absolute;
+        top: 10%;
+        left: 0% !important;
+        height: 75vh !important;
+        z-index: -9 !important;
+        overflow: scroll;
+        box-shadow: none !important;
+    }
+
+    .dash-aside button {
+        background: #fff;
+        border-radius: none;
+        max-width: fit-content;
+        max-height: fit-content;
+        padding: 10px 15px;
+    }
+}

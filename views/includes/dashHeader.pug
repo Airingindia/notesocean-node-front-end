@@ -1,7 +1,8 @@
-header
-  nav.navbar.navbar-expand-lg.navbar-light.bg-white.mt-3
-    .container-fluid.d-flex.justify-content-between
-      a.navbar-brand(href='/')
-        img(src='/images/dash-logo.svg' alt='notesocean-logo').logo
-      a.nav-link(href="/dashboard/profile")
-        img(src='/images/dummy/user_dummy.jpg' alt='user-pic').navbar-user-pic
+style
+  include ../../public/stylesheets/dashboard/includes/header.css
+nav.navbar.navbar-expand-lg.navbar-light.bg-white
+  .container-fluid.d-flex.justify-content-between
+    a.navbar-brand(href='/dashboard')
+      img(src='/images/dash-logo.svg' alt='notesocean-logo').logo
+    a.nav-link(href="/dashboard/profile")
+      img(src='/images/dummy/user_dummy.jpg' alt='user-pic').navbar-user-pic

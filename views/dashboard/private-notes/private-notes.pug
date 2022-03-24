@@ -6,59 +6,58 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Private Notes | Notes Ocean
         include ../../includes/bootstrap
-        style
-            include ../../../public/stylesheets/dashboard/dashboard.css
+
         style
             include ../../../public/stylesheets/loader.css
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
     body
-        include ../../includes/dashHeader
-        section.row
-            include ../../includes/dashAside
-            .col-md-10.second-side
-                .row.upload-header
-                    .col-6
-                        h2.header-title Private Notes
-                        small.header-text These notes are not publically accessible and you will be get any rewards
-                        br  
-                        small.header-text This is your  private cloud you can store multiple types of file
-                    .col-6.px-3
-                        a(href="/dashboard/private-notes/new")
-                            button.btn-primary.add-new
-                                i.fa.fa-cloud-upload.m-1
-                                span Upload
-                .row 
-                    .col-12
-                        .container
-                            form
-                                .input-group
-                                    input(type="search" placeholder="Search private notes..." aria-label="Search  private notes").form-control
-                                    button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
-                .row.container-fulid.notes-container-row.mt-3
-                .row.no-private-notes.d-none
-                    .card.border-0
-                        .card-content
-                            center
-                                img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                .card-body
-                                    h2 No private notes uploaded Yet
-                                    a(href="/dashboard/private-notes/new")
-                                        button.btn.btn-primary 
-                                            i.fa.fa-cloud-upload.mx-1
-                                            span Upload New Notes
-                .loading-private-notes
-                    center 
-                        .lds-roller
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                        p.loading-notice Your private notes are loading... please wait...
+        header
+            include ../../includes/dashHeader
+        section.main-section
+            .row
+                include ../../includes/dashAside
+                .col-md-10.second-side
+                    .upload-header.d-flex.justify-content-between
+                        div
+                            h2.header-title Private Notes
+                            small.header-text These notes are not publically accessible and you will be get any rewards
+                            br  
+                            small.header-text This is your  private cloud you can store multiple types of file
+                        div
+                            a(href="/dashboard/private-notes/new")
+                                button.btn-primary.add-new
+                                    i.fa.fa-cloud-upload.m-1
+                                    span Upload
+                    .search-container
+                        form
+                            .input-group
+                                input(type="search" placeholder="Search private notes..." aria-label="Search  private notes").form-control
+                                button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
+                    .row.notes-container-row.mt-3
+                    .row.no-private-notes.d-none
+                        .card.border-0
+                            .card-content
+                                center
+                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                    .card-body
+                                        h2 No private notes uploaded Yet
+                                        a(href="/dashboard/private-notes/new")
+                                            button.btn.btn-primary 
+                                                i.fa.fa-cloud-upload.mx-1
+                                                span Upload New Notes
+                    .loading-private-notes
+                        center 
+                            .lds-roller
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                            p.loading-notice Your private notes are loading... 
         section
             .modal#file-open-modal(tabindex='-1').fade.p-0
                 .modal-dialog.modal-fullscreen.p-0
@@ -86,8 +85,7 @@ html(lang="en")
 
         script(src="/vendors/hammer/hammer.min.js") 
         script(src="/vendors/sweetalert/sweetalert.min.js")
-        script 
-            include ../../../public/vendors/sweetalert/sweetalert.min.js
+        script(src="/vendors/sweetalert/sweetalert.min")
         script 
             include ../../../public/javascripts/common.js
         script 
