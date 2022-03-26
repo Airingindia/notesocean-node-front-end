@@ -35,7 +35,7 @@ $(document).ready(function () {
                     let id = data.requested[i].id;
                     let name = data.requested[i].name;
                     let timestamp = data.requested[i].timestamp;
-                    // let description = data.requested[i].description;
+                    let description = data.requested[i].description;
                     let thumbnails = data.requested[i].thumbnails;
                     timestamp = timeDifference(timestamp);
                     let size = bytesToSize(data.requested[i].size);
@@ -43,32 +43,35 @@ $(document).ready(function () {
                     let pages = data.requested[i].pages;
                     let views = data.requested[i].views;
                     $(".public-notes-container").append(`
-                    <div class="col-md-3">
-                    <div class="card shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
-                    <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
-                    <div class="card-body"></div>
-                    <div class="card-footer bg-white border-0">
-                        <h6 class="card-title">  ${name} </h6>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span>${fileType}</span>
+                    <div class="col-md-3 my-3">
+                        <div class="card h-100  shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
+                            <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
+                            <div class="card-body pb-0"> 
+                                <h6 class="card-title">  ${name.substring(0, 100)} </h6>
+                                <p class="card-text"> ${description.substring(0, 150)}</p>
                             </div>
-                            <div>
-                                <p class="card-text"> </p><i class="fa fa-clock-o mx-1"></i><span> ${timestamp} </span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span> ${pages} pages </span>
-                            </div>
-                            <div>
-                                <p class="card-text"> </p><i class="fa fa-globe mx-1"></i><span>${views} views</span>
+                            <div class="card-footer bg-white border-0">
+                               
+                                <div class="d-flex justify-content-between text-muted">
+                                    <div>
+                                        <p class="card-text"> </p><i class="fa fa-file-text mx-1"></i><span>${fileType.toUpperCase()}</span>
+                                    </div>
+                                    <div>
+                                        <p class="card-text"> </p><i class="fa fa-clock-o mx-1"></i><span> ${timestamp} </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between text-muted">
+                                    <div>
+                                        <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span> ${pages} pages </span>
+                                    </div>
+                                    <div>
+                                        <p class="card-text"> </p><i class="fa fa-globe mx-1"></i><span>${views} views</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                </div>`);
+                `);
                 }
 
             }

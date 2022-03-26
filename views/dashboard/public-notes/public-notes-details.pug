@@ -2,55 +2,69 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Public notes
-        include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Public notes | Notes Ocean
+        include ../../includes/dashcommon
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
-        link(rel="stylesheet", href="/stylesheets/loader.css")
-        link(rel='stylesheet' href='/stylesheets/dashboard/upload-public-notes.css')
-        link(rel='stylesheet' href='/stylesheets/animate.css')
     body
-        include ../../includes/dashHeader
-        section.row
+        header
+            include ../../includes/dashHeader
+        section.main-section
+            .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
                     .row.shadow.public-notes-details-container.d-none
-                        h2.m-2 Public Notes Details
-                        .col-md-2
+                        .col-md-4
                             center
-                                img(src="/images/dummy/collection2.png").w-75.rounded.notes-img.shadow
+                                img(src="/images/dummy/collection2.png").public-notes-details-thumbnails
                         .col-md-6
-                            div.px-2
-                                h4.public-notes-title Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, sapiente? 
-                                p.public-notes-description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi quis ea aliquam ipsam dolores natus est provident ab sunt blanditiis.
-                            .div.d-flex.justify-content-around
-                                .div
+                            div
+                                h5.public-notes-title
+                                p.public-notes-description 
+                            div.d-flex.text-center
+                                .div.mx-2
+
                                     i.fa.fa-thumbs-up.text-danger.mx-1
-                                    span.public-notes-likes-count 50
-                                .div
+                                        span.public-notes-likes-count.mx-1.text-dark
+                                    span Like
+
+                                .div.mx-2
                                     i.fa.fa-thumbs-down.text-danger.mx-1
-                                    span.public-notes-dislikes-count 5
-                                .div
+                                        span.public-notes-dislikes-count.mx-1.text-dark
+                                    span Dislike
+
+                                .div.mx-2
                                     i.fa.fa-globe.text-danger.mx-1
-                                    span.public-notes-views-count 10k
-                                .div
+                                        span.public-notes-views-count.mx-1.text-dark
+                                    span views
+
+                                .div.mx-2
                                     i.fa.fa-comment.text-danger.mx-1
-                                    span.public-notes-comment-count 30
-                        .col-md-4.d-flex.justify-content-center.py-5
-                            div
-                                button.btn.btn-sm.btn-dark.mx-1.public-notes-edit-btn
-                                    i.fa.fa-edit.mx-1
-                                    span Edit
-                            div
-                                button.btn.btn-primary.btn-sm.mx-1.delete-puublic-note
-                                    i.fa.fa-trash.mx-1
-                                    span Delete
-                        .col-12
-                            h5.text-center Daily  Performance
-                            #daily-views(style="height:60vh").w-100
-                            
+                                        span.public-notes-comment-count.mx-1.text-dark
+                                    span Comments
+
+                            div.d-flex.justify-content-start.mt-5
+                                div
+                                    button.btn.btn-sm.btn-dark.mx-1.public-notes-edit-btn
+                                        i.fa.fa-edit.mx-1
+                                        span Edit
+
+                                div
+                                    button.btn.btn-primary.btn-sm.mx-1.delete-puublic-note
+                                        i.fa.fa-trash.mx-1
+                                        span Delete
+                                div
+                                    button.btn.btn-warning.btn-sm.mx-1.delete-puublic-note
+                                        i.fa.fa-eye.mx-1
+                                        span preview
+                                div
+                                    button.btn.btn-info.btn-sm.mx-1.delete-puublic-note
+                                        i.fa.fa-share.mx-1
+                                        span Share
+                    .carts
+                        #daily-views
+
                     .row.notes-removed.d-none
                         .card.border-0
                             .card-content
@@ -59,64 +73,45 @@ html(lang="en")
                                     .card-body
                                         h6 The note you are looking for it may removed or insufficient permissions to access
                     .row.loading-public-notes
-                                    center
-                                        .lds-roller
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                            div
-                                        p Your public notes details are loading... please wait...
-                    .modal#edit-public-notes-modal(tabindex='-1').fade
-                            .modal-dialog.modal-xl
-                                    .modal-content.bg-white
-                                        .modal-header
-                                            h5 
-                                                span Edit 
-                                                span.public-notes-modal-title.text-danger 
-                                        
-                                            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-                                        .modal-body
-                                            p.text-warning *You can update only title,  description and tags*
-                                            form.form.form-responsive
-                                                .form-group
-                                                    label Title 
-                                                    input.note-title(type="text").form-control
-                                                    .invalid-feedback
-                                                        p.invalid-title-error invalid title
-                                                    .valid-feedback
-                                                        p looks good
-                                                .form-group 
-                                                    label Descriptions
-                                                    textarea.form-control.note-descriptions(style="height:15vh")
-                                                    .invalid-feedback
-                                                        p.invalid-descriptions-error invalid Description
-                                                    .valid-feedback
-                                                        p looks good
-                                                .form-group.my-3
-                                                    div.d-flex.align-item-end.justify-content-between.my-2
-                                                        label Tags
-                                                            i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='ffhfghhgfhg' data-bs-placement="top", data-bs-trigger="focus",tabindex="0")
-                                                        i.fa.fa-times.close(title="Clear all tags").cleartags
-                                                    section.section-preview
-                                                        .chips.chips-placeholder(tabindex='0')
-                                                            
-                                                            
-                                                            input.input.active(placeholder='Enter a tag').tag-input
-                                                        .invalid-feedback
-                                                                p.invalid-title-error invalid title
-                                                        .valid-feedback
-                                                                p looks good
-                                        .modal-footer
-                                            button.btn.btn-primary(type='button').public-notes-update-btn Update
+                        center
+                            .lds-roller
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                            p Your public notes details are loading... please wait...
+                div.modal#edit-public-notes-modal
+                    .modal-dialog.modal-xl
+                        .modal-content.bg-white
+                            .modal-header
+                                h5 Edit this note                          
+                            .modal-body
+                                p.text-warning *You can update only title and descriptions*
+                                form.form.form-responsive
+                                    .form-group
+                                        label Title 
+                                        input.note-title(type="text").form-control
+                                        .invalid-feedback
+                                            p.invalid-title-error invalid title
+                                        .valid-feedback
+                                            p looks good
+                                    .form-group 
+                                        label Descriptions
+                                        textarea.form-control.note-descriptions(style="height:15vh")
+                                        .invalid-feedback
+                                            p.invalid-descriptions-error invalid Description
+                                        .valid-feedback
+                                            p looks good
+                            .modal-footer
+                                button.btn.btn-dark(type='button' data-bs-dismiss='modal' aria-label='Close') Cancel
+                                button.btn.btn-primary(type='button').public-notes-update-btn Update
 
 
-    script(src='/javascripts/common.js')
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src="https://www.gstatic.com/charts/loader.js")
-    script(src='/vendors/sweetalert/sweetalert.min.js')
-    script(src='/javascripts/dashboard/public-notes/public-notes-details.js')
+        script
+            include ../../../public/javascripts/dashboard/public-notes/public-notes-details.js
+        script(src="https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js")
+        script(src="/javascripts/loader.js")

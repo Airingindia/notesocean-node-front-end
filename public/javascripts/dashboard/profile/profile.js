@@ -14,7 +14,9 @@ $(document).ready(function () {
         $(".mobile").val(userInfo.phone);
         $(".address").val(userInfo.address);
         $(".country").val(userInfo.country);
-        $(".user-profile-img").attr("src", userInfo.profileImage);
+        if (userInfo.profileImage !== null) {
+            $(".user-profile-img").attr("src", userInfo.profileImage);
+        }
         if (userInfo.emailVerified) {
             $(".email").removeClass("is-invalid");
             $(".email").addClass("is-valid");

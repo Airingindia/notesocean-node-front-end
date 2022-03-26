@@ -59,20 +59,16 @@ router.get("/:page/:parameter", (req, res, next) => {
     }
 
     else if (alias == "profile" && parameter == "verify-email") {
-        // check user email is verified or not
-        // if verified show verified page
-        // else show verification page
-        // res.render("dashboard/profile/verify/email/email-verified");
         res.render("dashboard/profile/verify/email/verify-email");
-        // console.log(req.cookies.token);
+    }
+    else if (alias == "profile" && parameter == "verified-email") {
+        res.render("dashboard/profile/verify/email/email-verified");
     }
     else if (alias == "profile" && parameter == "verify-mobile") {
-        // check user email is verified or not
-        // if verified show verified page
-        // else show verification page
-        // res.render("dashboard/profile/verify/mobile/mobile-verified");
         res.render("dashboard/profile/verify/mobile/verify-mobile");
-        // console.log(req.cookies.token);
+    }
+    else if (alias == "profile" && parameter == "verified-mobile") {
+        res.render("dashboard/profile/verify/mobile/mobile-verified");
     }
 
 

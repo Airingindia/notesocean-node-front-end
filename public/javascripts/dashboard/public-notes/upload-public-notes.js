@@ -3,7 +3,11 @@ Dropzone.autoDiscover = false;
 $(function () {
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone(".dropzone", {
-        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:30px'> </i> <br>  <br> <h6> Drop your PDF here </h6>`,
+        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h4> Drag or drop your files to upload </h4> <br>
+        <small> <b> Note : </b>  you can upload only these supported file types  </small> <br>
+        <small> 
+        pdf ppt xls xlsx doc docx pptx gsheet xltx 
+        </small>`,
         autoProcessQueue: false,
         maxFilesize: 100,
         addRemoveLinks: true,
@@ -11,7 +15,7 @@ $(function () {
         parallelUploads: 1,
         maxFiles: 1,
         uploadMultiple: false,
-        acceptedFiles: ".pdf",
+        acceptedFiles: ".pdf,.ppt,.pptx,.xls,.xlsx,.doc,.docs",
         url: sessionStorage.getItem("api") + "/products",
         method: "post",
         headers: {
@@ -33,7 +37,10 @@ $(function () {
                 })
                     .then((willDelete) => {
                         if (willDelete) {
-                            window.location = "/dashboard/public-notes/" + uploadedId;
+                            window.location = "/notes/" + uploadedId;
+                        } else {
+                            $("form").trigger("reset");
+                            myDropzone.removeAllFiles();
                         }
                     });
                 // swal("success", "your note are uploaded successfully", "success");
@@ -97,13 +104,8 @@ $(function () {
         $('.upload-notes-btn').prop('disabled', false);
     });
 
-    myDropzone.on("totaluploadprogress", function (progress) {
-        $(".progress").css({ display: "block" });
-        document.querySelector(".progress-bar").style.width = progress + "%";
-        $(".progress-bar").html(progress + "%");
-    });
-
-    $('.upload-notes-btn').click(function () {
+    $('form').submit(function (event) {
+        event.preventDefault();
         // check all field is not null
         console.log(myDropzone.files.length);
         if ($(".note-title").hasClass("is-valid") && $(".note-descriptions").hasClass("is-valid") && myDropzone.files.length > 0) {
@@ -189,87 +191,6 @@ $(function () {
     };
     validate();
 });
-
-$(document).ready(function () {
-    function tags() {
-        $(".tag-input").on("blur", function () {
-            let tag = $(this).val();
-            // alert(tag);
-            if (tag !== "") {
-                addtag(tag);
-            }
-            $(this).val("");
-        });
-
-        $(".tag-input").keyup(function (event) {
-            if (event.keyCode === 13 || event.keyCode == 188) {
-                let tag = $(this).val();
-                // alert(tag);
-                if (tag !== "") {
-                    addtag(tag);
-                }
-                $(this).val("");
-            }
-        });
-
-
-        function addtag(tag) {
-            if (tag.indexOf(",") !== -1) {
-                let taglist = tag.split(",");
-                for (let i = 0; i < taglist.length; i++) {
-                    if (taglist[i].trim().length > 1) {
-                        $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${taglist[i].trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                    }
-                }
-            } else {
-                if (tag.trim().length > 1) {
-                    $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${tag.trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                }
-            }
-            remove();
-        }
-
-        function remove() {
-            $(".chips .chip i").each(function () {
-                $(this).click(function () {
-                    let parent = $(this).parent();
-                    $(parent).remove();
-                });
-            });
-        }
-
-        remove();
-
-        function clearAlltags() {
-            $(".cleartags").click(function () {
-                $(".chips .chip").each(function () {
-                    $(this).remove();
-                });
-            });
-
-        }
-
-        function showClearBtn() {
-            let chipLength = $(".chip").length;
-            if (chipLength !== 0) {
-                $(".cleartags").css({ "display": "block" });
-            } else {
-                $(".cleartags").css({ "display": "none" });
-            }
-        }
-
-        setInterval(() => {
-            showClearBtn();
-        }, 2000);
-        clearAlltags();
-    }
-
-    tags();
-
-    // hide popover on click 
-
-});
-
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl, { html: true })

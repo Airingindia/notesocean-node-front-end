@@ -6,7 +6,10 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title verified email | Notes Ocean
         include ../../../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
+        style
+            include ../../../../../public/stylesheets/dashboard/dashboard.css
+        script 
+            include ../../../../../public/javascripts/dashboard/profile/verify/email/verified-email.js
         style.
             .design-box{
                 width:100px;
@@ -26,6 +29,7 @@ html(lang="en")
                 transform:translate(-50%,-50%);
                 width:100%;
             }
+
     body
         include ../../../../includes/dashHeader
         section.row

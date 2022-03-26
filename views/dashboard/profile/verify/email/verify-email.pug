@@ -31,12 +31,13 @@ html(lang="en")
                         .text-center.mt-5
                             span.d-block.mobile-text Don&apos;t receive the code?
                             span.font-weight-bold.text-danger.cursor Resend
+        section
+            .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index:9999')
 
-
-    script(src="/vendors/hammer/hammer.min.js")
-    script 
-        include ../../../../../public/javascripts/common.js
-    script 
-        include ../../../../../public/javascripts/dashboard/dashboard.js
-    script 
-        include ../../../../../public/javascripts/dashboard/profile/verify/email/verify-email.js
+        script(src="/vendors/hammer/hammer.min.js")
+        script 
+            include ../../../../../public/javascripts/common.js
+        script 
+            include ../../../../../public/javascripts/dashboard/dashboard.js
+        script 
+            include ../../../../../public/javascripts/dashboard/profile/verify/email/verify-email.js

@@ -5,10 +5,8 @@ head
   meta(name="description" content="Access your personal dashboard, view the notes result , earning result  and many more")
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  include ../includes/bootstrap
-  link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-  link(rel="stylesheet" href="/stylesheets/loader.css")
-  title Dashboard
+  include ../includes/dashcommon
+  title Dashboard | Notes Ocean
   body
     header
       include ../includes/dashHeader  
@@ -90,17 +88,8 @@ head
                       div
                       div
 
-
-
-
-
-
-
-
-script(src='/javascripts/common.js')
-script(src="/vendors/hammer/hammer.min.js") 
-script(src='/javascripts/dashboard/dashboard.js')
-script(src='/javascripts/loader.js')
-script(src='/javascripts/dashboard/charts.js')
+    script(src="/javascripts/loader.js")
+    script 
+      include ../../public/javascripts/dashboard/charts.js
 
 

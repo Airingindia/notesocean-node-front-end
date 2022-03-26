@@ -2,78 +2,58 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Upload Public Notes
-        include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/upload-public-notes.css')
-        link(rel='stylesheet' href='/stylesheets/animate.css')
+        include ../../includes/dashcommon
+        link(rel='stylesheet' href='https://static.ncdn.in/vendor/dropzone/dropzone.min.css')
+        link(rel='stylesheet' href='https://static.ncdn.in/vendor/animate.css')
+        style
+            include ../../../public/stylesheets/dashboard/upload-public-notes.css
     body
         include ../../includes/dashHeader
-        section.row
+        section.main-section
+            .row
                 include ../../includes/dashAside
                 .col-10.p-2.content.shadow.second-side
-                    .container
-                            h3 Upload Public Notes
-                    .container.pb-5
+                    div.my-3
+                        h4 Upload Public Note
+                    div
                         form
-                            .row
-                                    .col-md-8
-                                        .form-group.my-3
-                                            label Note title
-                                            i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top",data-bs-trigger="focus",tabindex="0")
-                                            input(type="text",placeholder="Eg:- Class 12th chemistry chapter 2",data-json=`{"very-long": "piece of ","data": true}`).form-control.note-title
-                                            .invalid-feedback
-                                                p.invalid-title-error invalid title
-                                            .valid-feedback
-                                                p looks good
-                                        .form-group.my-3
-                                            label Description
-                                            i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top",data-bs-trigger="focus",tabindex="0")
-                                            textarea.form-control(placeholder="Eg:- Every solid does not dissolve in a given liquid. While sodium chloride and sugar dissolve readily in wate",rows="5").note-descriptions
-                                            .invalid-feedback
-                                                p.invalid-descriptions-error invalid Description
-                                            .valid-feedback
-                                                p looks good
-                                        .form-group.my-3
-                                            div.d-flex.align-item-end.justify-content-between.my-2
-                                                label Tags
-                                                    i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover'  data-bs-content='ffhfghhgfhg' data-bs-placement="top", data-bs-trigger="focus",tabindex="0")
-                                                i.fa.fa-times.close(title="Clear all tags").cleartags
-                                            section.section-preview
-                                                .chips.chips-placeholder(tabindex='0')
-                                                    .chip.btn(contenteditable="true") class 12th
-                                                        i.fa.fa-times-circle.mx-1
-                                                    .chip.btn(contenteditable="true") chemistry
-                                                        i.fa.fa-times-circle.mx-1
-                                                    
-                                                    input.input.active(placeholder='Enter a tag').tag-input
-                                                .invalid-feedback
-                                                        p.invalid-title-error invalid title
-                                                .valid-feedback
-                                                        p looks good
+                            .form-group.my-3
+                                label Note title
+                                i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
+                                input(type="text" placeholder="",data-json=`{"very-long": "piece of ","data": true}`).form-control.note-title
+                                .invalid-feedback
+                                    p.invalid-title-error invalid title
+                                .valid-feedback
+                                    p looks good
+                            .form-group.my-3
+                                label Description
+                                i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
+                                textarea.form-control(placeholder="" rows="5").note-descriptions
+                                .invalid-feedback
+                                    p.invalid-descriptions-error invalid Description
+                                .valid-feedback
+                                    p looks good
+                            .form-group.mt-4
+                                div(class="dropzone" id="file-upload") 
+                                .invalid-feedback
+                                    p.invalid-file-error Please select a file
+                                .valid-feedback
+                                    p looks good
+                            .form-group.my-3
+                                .progress.my-3
+                                    .progress-bar.progress-bar-primary(role='progressbar' data-dz-uploadprogress='')
+                                span.progress-text
+                                button.btn.btn-primary.mx-auto.upload-notes-btn Upload
 
-                                    .col-md-4
-                                        .form-group.mt-5
-                                            div(class="dropzone",id="file-upload") 
-                                            .invalid-feedback
-                                                        p.invalid-file-error Please select a file
-                                            .valid-feedback
-                                                        p looks good
-                                        .form-group.my-5
-                                            .progress.my-3
-                                                .progress-bar.progress-bar-primary(role='progressbar' data-dz-uploadprogress='')
-                                            span.progress-text
-                                            button.btn.btn-primary.mx-auto.upload-notes-btn Upload
-                        
-                        
-                
 
-    script(src='/javascripts/common.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/vendors/sweetalert/sweetalert.min.js')
-    script(src='/vendors/dropzone/dropzone.min.js')
-    script(src='/javascripts/dashboard/public-notes/upload-public-notes.js')
+
+
+
+
+        script(src='https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js')
+        script(src='https://static.ncdn.in/vendor/dropzone/dropzone.min.js')
+        script 
+            include ../../../public/javascripts/dashboard/public-notes/upload-public-notes.js

@@ -1,200 +1,67 @@
 $(document).ready(function () {
     const public_notes_id = window.location.pathname.split("/")[3];
-    $.ajax({
-        type: "GET",
-        url: sessionStorage.getItem("api") + "/products/" + public_notes_id,
-        ContentType: "application/json",
-        processData: false,
-        headers: {
-            Authorization: localStorage.getItem("token")
-        },
-        success: function (data) {
-            if (data.length !== 0) {
-
-                $(".loading-public-notes").addClass("d-none");
-                $(".public-notes-details-container").removeClass("d-none");
-                console.log(data);
-                let id = data.id;
-                let name = data.name;
-                let thumbnails = data.thumbnails;
-                let views = data.views;
-                let dislikes = data.dislikes;
-                let likes = data.likes;
-                let timestamp = data.timestamp;
-                let description = data.description;
-                let tags = data.tags;
-
-                $(".public-notes-title").html(name);
-                $(".public-notes-likes-count").html(likes);
-                $(".public-notes-dislikes-count").html(dislikes);
-                $(".public-notes-views-count").html(formatViews(views));
-                $(".notes-img").attr("src", thumbnails.split(",")[0]);
-                $(".public-notes-description").html(description);
-                $(".note-title").val(name);
-                $(".note-descriptions").val(description);
-                dailyViews();
-                deleteNote();
-                updateNote();
-                validate();
-                addtag(tags);
-                $(".tag-input").on("blur", function () {
-                    let tag = $(this).val();
-                    // alert(tag);
-                    if (tag !== "") {
-                        addtag(tag);
-                    }
-                    $(this).val("");
-                });
-
-                $(".tag-input").keyup(function (event) {
-                    if (event.keyCode === 13 || event.keyCode == 188) {
-                        let tag = $(this).val();
-                        // alert(tag);
-                        if (tag !== "") {
-                            addtag(tag);
-                        }
-                        $(this).val("");
-                    }
-                });
-
-
-                function addtag(tag) {
-                    if (tag.indexOf(",") !== -1) {
-                        let taglist = tag.split(",");
-                        for (let i = 0; i < taglist.length; i++) {
-                            if (taglist[i].trim().length > 1) {
-                                $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${taglist[i].trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                            }
-                        }
+    function getNoteDetails() {
+        $.ajax({
+            type: "GET",
+            url: sessionStorage.getItem("api") + "/products/" + public_notes_id,
+            ContentType: "application/json",
+            processData: false,
+            headers: {
+                Authorization: localStorage.getItem("token")
+            },
+            success: function (data) {
+                if (data.product !== null) {
+                    if (data.product.length !== 0) {
+                        showData(data);
+                        $(".loading-public-notes").addClass("d-none");
+                        $(".public-notes-details-container").removeClass("d-none");
                     } else {
-                        if (tag.trim().length > 1) {
-                            $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${tag.trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                        }
+                        $(".loading-public-notes").addClass("d-none");
+                        $(".notes-removed").removeClass("d-none");
+                        $(".public-notes-details-container").addClass("d-none");
                     }
-                    remove();
+                } else {
+                    $(".loading-public-notes").addClass("d-none");
+                    $(".notes-removed").removeClass("d-none");
+                    $(".public-notes-details-container").addClass("d-none");
                 }
-
-                function remove() {
-                    $(".chips .chip i").each(function () {
-                        $(this).click(function () {
-                            let parent = $(this).parent();
-                            $(parent).remove();
-                        });
-                    });
-                }
-
-                remove();
-
-                function clearAlltags() {
-                    $(".cleartags").click(function () {
-                        $(".chips .chip").each(function () {
-                            $(this).remove();
-                        });
-                    });
-
-                }
-
-                function showClearBtn() {
-                    let chipLength = $(".chip").length;
-                    if (chipLength !== 0) {
-                        $(".cleartags").css({ "display": "block" });
-                    } else {
-                        $(".cleartags").css({ "display": "none" });
-                    }
-                }
-
-                setInterval(() => {
-                    showClearBtn();
-                }, 2000);
-                clearAlltags();
-            } else {
+            },
+            error: function (err) {
                 $(".loading-public-notes").addClass("d-none");
                 $(".notes-removed").removeClass("d-none");
                 $(".public-notes-details-container").addClass("d-none");
             }
-        },
-        error: function (err) {
-            $(".loading-public-notes").addClass("d-none");
-            $(".notes-removed").removeClass("d-none");
-            $(".public-notes-details-container").addClass("d-none");
-        }
-    });
-    const tagFunction = function () {
-        $(".tag-input").on("blur", function () {
-            let tag = $(this).val();
-            // alert(tag);
-            if (tag !== "") {
-                addtag(tag);
-            }
-            $(this).val("");
         });
+    }
 
-        $(".tag-input").keyup(function (event) {
-            if (event.keyCode === 13 || event.keyCode == 188) {
-                let tag = $(this).val();
-                // alert(tag);
-                if (tag !== "") {
-                    addtag(tag);
-                }
-                $(this).val("");
-            }
-        });
+    function showData(data) {
+        let id = data.product.id;
+        let name = data.product.name;
+        let thumbnails = data.product.thumbnails;
+        let views = data.product.views;
+        let dislikes = data.product.dislikes;
+        let likes = data.product.likes;
+        let timestamp = data.product.timestamp;
+        let description = data.product.description;
+        let tags = data.product.tags;
 
+        $(".public-notes-title").html(name);
+        $(".public-notes-likes-count").html(likes);
+        $(".public-notes-dislikes-count").html(dislikes);
+        $(".public-notes-views-count").html(formatViews(views));
+        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0]);
+        $(".public-notes-description").html(description);
+        $(".note-title").val(name);
+        $(".note-descriptions").val(description);
+    }
+    getNoteDetails();
+    setTimeout(() => {
+        dailyViews();
+    }, 1000);
 
-        function addtag(tag) {
-            if (tag.indexOf(",") !== -1) {
-                let taglist = tag.split(",");
-                for (let i = 0; i < taglist.length; i++) {
-                    if (taglist[i].trim().length > 1) {
-                        $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${taglist[i].trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                    }
-                }
-            } else {
-                if (tag.trim().length > 1) {
-                    $(".tag-input").before(`<div class="chip btn" contenteditable="true">  ${tag.trim()}  <i class="fa fa-times-circle mx-1"> </i> </div>`);
-                }
-            }
-            remove();
-        }
-
-        function remove() {
-            $(".chips .chip i").each(function () {
-                $(this).click(function () {
-                    let parent = $(this).parent();
-                    $(parent).remove();
-                });
-            });
-        }
-
-        remove();
-
-        function clearAlltags() {
-            $(".cleartags").click(function () {
-                $(".chips .chip").each(function () {
-                    $(this).remove();
-                });
-            });
-
-        }
-
-        function showClearBtn() {
-            let chipLength = $(".chip").length;
-            if (chipLength !== 0) {
-                $(".cleartags").css({ "display": "block" });
-            } else {
-                $(".cleartags").css({ "display": "none" });
-            }
-        }
-
-        setInterval(() => {
-            showClearBtn();
-        }, 2000);
-        clearAlltags();
-    };
     function dailyViews() {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
-
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Day', 'Views', "Likes"],
@@ -215,9 +82,13 @@ $(document).ready(function () {
             ]);
 
             var options = {
-                title: '',
+                title: 'Daily views and like report',
+                width: "100%",
+                height: 300,
                 curveType: 'function',
-                legend: { position: 'bottom' }
+                legend: { position: 'bottom' },
+                width: "100%",
+                height: 300,
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('daily-views'));
@@ -227,7 +98,9 @@ $(document).ready(function () {
     };
 
     function deleteNote() {
+
         $(".delete-puublic-note").click(function () {
+
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this Note! ",
@@ -267,55 +140,19 @@ $(document).ready(function () {
                 });
         });
     };
-
     function updateNote() {
         $(".public-notes-edit-btn").click(function () {
             $("#edit-public-notes-modal").modal('show');
             $(".public-notes-update-btn").click(function () {
+                validate();
                 if ($(".note-title").hasClass("is-valid") && $(".note-descriptions").hasClass("is-valid")) {
                     var title = $(".note-title").val();
                     var description = $(".note-descriptions").val();
-                    let tags = [];
-                    $(".chip").each(function () {
-                        let one = $(this).html().split(`<i class="fa fa-times-circle mx-1"> </i>`);
-                        tags.push(one[0].trim());
-
-                        // console.log($(this).html().split('<i class="fa fa-times-circle mx-1"> </i>'));
-                    });
-                    var newTags = tags.toString();
-
                     const data = JSON.stringify({
                         name: title,
-                        tags: newTags,
                         description: description
                     });
-                    // console.log(tags);
-                    // return;
-                    $.ajax({
-                        type: "PUT",
-                        url: sessionStorage.getItem('api') + "/products/" + public_notes_id,
-                        headers: {
-                            Authorization: localStorage.getItem("token")
-                        },
-                        contentType: "application/json",
-                        processData: false,
-                        data: data,
-                        beforeSend: function () {
-                            $(".public-notes-update-btn").html(`<i class="fa fa-spinner fa-spin"></i> </i> Please wait ...`);
-                            $(".public-notes-update-btn").prop("disabled", true);
-                        },
-                        success: function (data) {
-                            $(".public-notes-update-btn").html(`Update`);
-                            $(".public-notes-update-btn").prop("disabled", false);
-                            swal("success!", "Note successfully updated", "success");
-                            $(".public-notes-description").html($(".note-descriptions").val());
-                            $(".public-notes-title").html($(".note-title").val());
-                            $("#edit-public-notes-modal").modal('hide');
-                        }, error: function (error) {
-                            swal("oops!", "Note can't be update right now", "error");
-                            $("#edit-public-notes-modal").modal('hide');
-                        }
-                    });
+                    updateNoteData(data);
                 } else if (!$(".note-title").hasClass("is-valid")) {
                     $(".note-title").addClass("is-invalid")
                 } else if (!$(".note-descriptions").hasClass("is-valid")) {
@@ -325,7 +162,33 @@ $(document).ready(function () {
 
         });
     }
-
+    function updateNoteData(data) {
+        $.ajax({
+            type: "PUT",
+            url: sessionStorage.getItem('api') + "/products/" + public_notes_id,
+            headers: {
+                Authorization: localStorage.getItem("token")
+            },
+            contentType: "application/json",
+            processData: false,
+            data: data,
+            beforeSend: function () {
+                $(".public-notes-update-btn").html(`<i class="fa fa-spinner fa-spin"></i> </i> Please wait ...`);
+                $(".public-notes-update-btn").prop("disabled", true);
+            },
+            success: function (data) {
+                $(".public-notes-update-btn").html(`Update`);
+                $(".public-notes-update-btn").prop("disabled", false);
+                swal("success!", "Note successfully updated", "success");
+                $(".public-notes-description").html($(".note-descriptions").val());
+                $(".public-notes-title").html($(".note-title").val());
+                $("#edit-public-notes-modal").modal('hide');
+            }, error: function (error) {
+                swal("oops!", "Note can't be update right now", "error");
+                $("#edit-public-notes-modal").modal('hide');
+            }
+        });
+    }
     function validate() {
         $(".note-title").on("input", function () {
             if ($(this).val().length > 30) {
@@ -432,4 +295,9 @@ $(document).ready(function () {
         if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
         if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
     };
+
+    //  call functions
+    deleteNote();
+    updateNote();
+
 });

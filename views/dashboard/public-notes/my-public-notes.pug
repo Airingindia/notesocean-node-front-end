@@ -4,20 +4,14 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Public notes
-        include ../../includes/bootstrap
-        style
-            include ../../../public/stylesheets/dashboard/dashboard.css
+        title Public notes | Notes Ocean
+        include ../../includes/dashcommon
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
-        style
-            include ../../../public/stylesheets/loader.css
-        style
-            include ../../../public/stylesheets/loader.css
     body
         header
             include ../../includes/dashHeader
-        section
+        section.main-section
             .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
@@ -35,33 +29,8 @@ html(lang="en")
                             .input-group
                                 input(type="search" placeholder="Search public notes..." aria-label="Search  public notes").form-control
                                 button.btn.btn-primary.btn-sm.search-btn(aria-label="Search" type="submit") Search
-                    .public-notes-container.container-fluid.mt-3.py-4.row 
-                        .col-md-3.d-none
-                            .card
-                                img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png" style="height:100%;width:100%")
-                                .card-body
-                                .card-footer
-
-                                    h6.card-title Lorem ipsum dolor sit amet.
-                                    div.d-flex.justify-content-between
-                                        div
-                                            p.card-text 
-                                            i.fa.fa-file.mx-1
-                                            span PDF
-                                        div
-                                            p.card-text 
-                                            i.fa.fa-clock-o.mx-1
-                                            span 10 minute ago
-                                    div.d-flex.justify-content-between
-                                        div
-                                            p.card-text 
-                                            i.fa.fa-file.mx-1
-                                            span 10 pages
-                                        div
-                                            p.card-text 
-                                            i.fa.fa-globe.mx-1
-                                            span 10 views
-                    .row.no-public-notes.d-none
+                    .public-notes-container.mt-3.py-4.row 
+                    .no-public-notes.d-none
                         .card.border-0
                             .card-content
                                 center
@@ -72,25 +41,18 @@ html(lang="en")
                                             button.btn.btn-primary 
                                                 i.fa.fa-cloud-upload.mx-1
                                                 span Upload New Notes
-                    .row.loading-public-notes
-                    center 
-                        .lds-roller
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                            div
-                        p.loading-notice Your public notes are loading... please wait...
-        script(src='/javascripts/common.js')
-        script
-            include ../../../public/vendors/hammer/hammer.min.js
-        script
-            include ../../../public/javascripts/dashboard/dashboard.js
+                    .loading-public-notes
+                        center 
+                            .lds-roller
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                            p.loading-notice Your public notes are loading... please wait...
+
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes.js
-        //- script(src="/vendors/hammer/hammer.min.js") 
-        //- script(src='/javascripts/dashboard/dashboard.js')
-        //- script(src='/javascripts/dashboard/public-notes/public-notes.js')
