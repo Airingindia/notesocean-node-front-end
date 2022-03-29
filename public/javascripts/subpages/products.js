@@ -49,7 +49,7 @@ $(document).ready(function () {
     function addReactionAction(action) {
         $.ajax({
             type: "POST",
-            url: sessionStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/reacts/" + action,
+            url: localStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/reacts/" + action,
             headers: {
                 Authorization: localStorage.getItem("token")
             },
@@ -149,7 +149,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/users/" + viewerid,
+                url: localStorage.getItem("api") + "/users/" + viewerid,
                 success: function (data) {
                     showCommentBox(data);
                     localStorage.setItem("userdata", JSON.stringify(data));
@@ -233,7 +233,7 @@ $(document).ready(function () {
             // COMMENT AJAX
             $.ajax({
                 type: "POST",
-                url: sessionStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/comments",
+                url: localStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/comments",
                 processData: false,
                 contentType: "application/json",
                 data: JSON.stringify({
@@ -287,17 +287,55 @@ $(document).ready(function () {
         $(".report-modal").modal("show");
     });
 
-    // load realted notes
-    // const tags = $("meta[name='keyword']").attr("content").replace(",", " ");
-    // alert(tags);
-    // $.ajax({
-    //     type: "GET",
-    //     url: api_url + "/products/search/" + tags,
-    //     beforeSend: function () { },
-    //     success: function (data) {
-    //         console.log(data);
-    //     }
-    // })
-    //  api not implementation due to api not working properly
+
+    //  socket io
+    const socket = io();
+    if (localStorage.getItem("userdata") !== null) {
+        const udata = JSON.parse(localStorage.getItem("userdata"));
+        var data = {
+            firstName: udata.firstName,
+            lastName: udata.lastName,
+            userid: udata.id,
+            pic: udata.profileImage
+        }
+        socket.emit("join", {
+            noteId: window.location.pathname.split("/")[2],
+            userdata: data
+        });
+    } else {
+        var data = {
+            firstName: "Guest",
+            lastName: "User",
+            userid: 0,
+            pic: "/images/dummy/user_dummy.jpg"
+        }
+        socket.emit("join", {
+            noteId: window.location.pathname.split("/")[2],
+            userdata: data
+        });
+    }
+
+
+    socket.on("joined", user => {
+        console.log("joined", user);
+    });
+
+    socket.on("left", user => {
+        console.log("left", user);
+    });
+
+    socket.on("liveusers", users => {
+        $(".live-users-container").html("");
+        for (let i = 0; i < users.length; i++) {
+            let pic = users[i].pic;
+            let userid = users[i].userid;
+            let firstName = users[i].firstName;
+            let lastName = users[i].lastName;
+            $(".live-users-container").append(`
+            <a class="mx-1" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}" style="width:30px;height:30px;border-radius:50%" /></a>
+            `);
+        }
+    })
+
 });
 

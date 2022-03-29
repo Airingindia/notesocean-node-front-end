@@ -7,6 +7,8 @@ const urlMaker = require("../services/url.services");
 const timeService = require('../services/time.services');
 const productControllers = require("../controllers/product.controller");
 const collectionController = require('../controllers/collection.controller');
+const socketServices = require("../services/socket.services");
+const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
 
 // homepage route
@@ -19,37 +21,45 @@ router.get('/', async function (req, res, next) {
         url: urlMaker
       }
     );
-  });
+  }).catch((error) => {
+    console.log("error");
+  })
 });
 
 // notes page route
+
+
 
 router.get("/notes/:id", async (req, res, next) => {
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
   }
-  const product = await productControllers.getInfo(req.params.id, token);
-  if (!product.status) {
-    const userData = await profileControllers.getInfo(product.product.userId);
-    if (userData.id) {
+
+  try {
+    const product = await productControllers.getInfo(req.params.id, token);
+
+    try {
+      const userData = await profileControllers.getInfo(product.product.userId);
       res.render("view-products", {
         data: product, timeService: timeService, user: userData, api: api_url
       });
-    } else {
+    } catch (e) {
+      const userData = {
+        id: 0,
+        firstName: "Notes",
+        lastName: "Ocean",
+        profileImage: "/images/dummy/user_dummy.jpg",
+      }
       res.render("view-products", {
-        data: product.product, timeService: timeService, user: {
-          fistName: "Notes",
-          lastName: "Ocean",
-          profileImage: "/images/logo.png",
-          id: ""
-        }
+        data: product, timeService: timeService, user: userData, api: api_url
       });
     }
-  } else {
+  } catch {
     res.status(404);
     res.render("notfound");
   }
+
 });
 
 // profile page routes
@@ -73,6 +83,17 @@ router.get("/profile/:user_id", async (req, res, next) => {
 });
 
 // collection page route
+
+//  login page route
+router.get("/login", (req, res, next) => {
+  res.render("account/login");
+});
+
+// sign page route 
+
+router.get("/signup", (req, res, next) => {
+  res.render("account/signup");
+});
 
 router.get("/collection/:collecton_id", async (req, res, next) => {
   let collecton_id = req.params.collecton_id;

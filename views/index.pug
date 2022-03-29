@@ -67,7 +67,7 @@ html(lang="en")
             img(src="https://admedia.notesocean.com/amazon/Amazon_Audible_1068x260.jpg" style="width:100%;height:200px").desktop-top-bannner
             img(src="https://admedia.notesocean.com/amazon/Amazon_Audible_300x250.jpg" style="width:100%;height:200px").mobile-top-bannner
         .row.public-now-row
-          - for (var i = 0; i < data.length; ++i) {
+          - for (var i = 0; i < data.length;i++) {
             - let name  = data[i].product.name;
             - if (name.length > 80)  name = name.substring(0,80)+"..";
             - let thumbnails = data[i].product.thumbnails.split(",")[0];

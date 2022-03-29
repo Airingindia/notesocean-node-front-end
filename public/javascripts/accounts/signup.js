@@ -44,7 +44,7 @@ $(document).ready(function () {
         form.append("users", new Blob([JSON.stringify(usersData)], { type: "application/json" }));
         $.ajax({
             type: "POST",
-            url: sessionStorage.getItem("api") + "/users",
+            url: localStorage.getItem("api") + "/users",
             processData: false,
             contentType: false,
             data: form,
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $.ajax({
                         type: "POST",
-                        url: sessionStorage.getItem("api") + "/authenticate/email-sign-in",
+                        url: localStorage.getItem("api") + "/authenticate/email-sign-in",
                         processData: false,
                         contentType: "application/json",
                         data: JSON.stringify({
@@ -108,7 +108,7 @@ $(document).ready(function () {
     });
 
     $(".google-auth-btn").click(function () {
-        window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
+        window.location = localStorage.getItem("api") + "/authenticate/google-sign-in";
     });
 
 

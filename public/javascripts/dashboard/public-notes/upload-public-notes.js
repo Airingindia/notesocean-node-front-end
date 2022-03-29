@@ -16,7 +16,7 @@ $(function () {
         maxFiles: 1,
         uploadMultiple: false,
         acceptedFiles: ".pdf,.ppt,.pptx,.xls,.xlsx,.doc,.docs",
-        url: sessionStorage.getItem("api") + "/products",
+        url: localStorage.getItem("api") + "/products",
         method: "post",
         headers: {
             Authorization: localStorage.getItem("token"),
@@ -123,7 +123,7 @@ $(function () {
 
     function validate() {
         $(".note-title").on("input", function () {
-            if ($(this).val().length > 30) {
+            if ($(this).val().length > 50) {
                 $(".note-title").addClass("is-valid");
                 $(".note-title").removeClass("is-invalid");
             }
@@ -136,7 +136,7 @@ $(function () {
             else {
                 $(".note-title").addClass("is-invalid");
                 $(".note-title").removeClass("is-valid");
-                $(".invalid-title-error").html("Title should be at least 30 characters");
+                $(".invalid-title-error").html("Title should be at least 50 characters");
             }
         });
         $(".note-title").on("change", function () {
@@ -158,7 +158,7 @@ $(function () {
         // description validations
 
         $(".note-descriptions").on("input", function () {
-            if ($(this).val().length > 40) {
+            if ($(this).val().length > 150) {
                 $(".note-descriptions").addClass("is-valid");
                 $(".note-descriptions").removeClass("is-invalid");
             }
@@ -170,7 +170,7 @@ $(function () {
             else {
                 $(".note-descriptions").addClass("is-invalid");
                 $(".note-descriptions").removeClass("is-valid");
-                $(".invalid-descriptions-error").html("Descriptions should be at least 40 characters");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 150 characters");
             }
         });
         $(".note-descriptions").on("change", function () {

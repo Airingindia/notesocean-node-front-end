@@ -2,14 +2,14 @@ $(document).ready(function () {
     amplitude.getInstance().logEvent("change page ", {
         path: window.location.href
     });
-    if (sessionStorage.getItem("home") == null || sessionStorage.getItem("env") == null || sessionStorage.getItem("api") == null) {
+    if (localStorage.getItem("home") == null || localStorage.getItem("env") == null || localStorage.getItem("api") == null) {
         $.ajax({
             type: "GET",
             url: "/api/env",
             success: function (data) {
-                sessionStorage.setItem("home", data.home);
-                sessionStorage.setItem("env", data.env);
-                sessionStorage.setItem("api", data.api);
+                localStorage.setItem("home", data.home);
+                localStorage.setItem("env", data.env);
+                localStorage.setItem("api", data.api);
             }
         });
     }
@@ -18,7 +18,7 @@ $(document).ready(function () {
             const userId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
             $.ajax({
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/users/" + userId,
+                url: localStorage.getItem("api") + "/users/" + userId,
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },
@@ -30,7 +30,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $(".user-icon-box a").html(`<button class="btn btn-sm btn-primary navbar-login-btn"> Login</button>`);
+            $(".user-icon-box").html(`<a href="/login"> <button class="btn btn-sm btn-primary navbar-login-btn"> Login</button> </a>`);
         }
     } else {
         showProfilePic();

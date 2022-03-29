@@ -16,7 +16,7 @@ $(function () {
         maxFiles: 4,
         uploadMultiple: false,
         acceptedFiles: ".pdf,.txt,.png,.jpg,.jpeg,.doc,.docx,.xls,.xls,.ppt,.pptx,.csv",
-        url: sessionStorage.getItem("api") + "/notes",
+        url: localStorage.getItem("api") + "/notes",
         method: "post",
         headers: {
             Authorization: localStorage.getItem("token"),

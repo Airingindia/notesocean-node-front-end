@@ -4,7 +4,7 @@ $(document).ready(function () {
     function loaddata() {
         $.ajax({
             type: "GET",
-            url: sessionStorage.getItem("api") + "/notes",
+            url: localStorage.getItem("api") + "/notes",
             headers: {
                 Authorization: localStorage.getItem("token")
             },
@@ -131,7 +131,7 @@ $(document).ready(function () {
             if ($(input).hasClass("is-valid")) {
                 $.ajax({
                     type: "PUT",
-                    url: sessionStorage.getItem("api") + "/notes/" + id,
+                    url: localStorage.getItem("api") + "/notes/" + id,
                     headers: {
                         Authorization: localStorage.getItem("token")
                     },
@@ -232,7 +232,7 @@ $(document).ready(function () {
                             if (willDelete) {
                                 $.ajax({
                                     type: "DELETE",
-                                    url: sessionStorage.getItem("api") + "/notes/" + note_id,
+                                    url: localStorage.getItem("api") + "/notes/" + note_id,
                                     contentType: "application/json",
                                     processData: false,
                                     headers: {
@@ -291,7 +291,7 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/notes/search/" + input,
+                url: localStorage.getItem("api") + "/notes/search/" + input,
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },

@@ -5,7 +5,7 @@ $(document).ready(function () {
     const private_notes_id = window.location.pathname.split("/")[3];
     $.ajax({
         type: "GET",
-        url: sessionStorage.getItem("api") + "/notes/" + private_notes_id,
+        url: localStorage.getItem("api") + "/notes/" + private_notes_id,
         headers: {
             Authorization: localStorage.getItem("token")
         },

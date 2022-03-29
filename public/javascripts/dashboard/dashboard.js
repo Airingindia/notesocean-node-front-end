@@ -4,14 +4,14 @@ $(document).ready(function () {
     // check valid token
     $.ajax({
       type: "GET",
-      url: sessionStorage.getItem("api") + "/validate",
+      url: localStorage.getItem("api") + "/validate",
       headers: {
         Authorization: token,
       },
       success: function (data) {
         if (data == true) {
           const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
-          sessionStorage.setItem("userid", userinfo);
+          localStorage.setItem("userid", userinfo);
           // console.log(userinfo);
           amplitude.getInstance().setUserId(userinfo);
         } else {
@@ -37,14 +37,14 @@ $(document).ready(function () {
     setCookie("token", "", 0);
     $.ajax({
       type: "GET",
-      url: sessionStorage.getItem("api") + "/authenticate/logout",
+      url: localStorage.getItem("api") + "/authenticate/logout",
       headers: {
         Authorization: token,
       },
       success: function (data) {
         $.ajax({
           type: "GET",
-          url: sessionStorage.getItem("api") + "/logout",
+          url: localStorage.getItem("api") + "/logout",
           headers: {
             Authorization: token,
           },

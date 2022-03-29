@@ -49,7 +49,7 @@ $(document).ready(function () {
             // verify otp
             $.ajax({
                 type: "POST",
-                url: sessionStorage.getItem("api"),
+                url: localStorage.getItem("api"),
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },

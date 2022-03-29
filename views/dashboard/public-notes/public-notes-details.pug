@@ -7,6 +7,7 @@ html(lang="en")
         title Public notes | Notes Ocean
         include ../../includes/dashcommon
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
+        link(rel="stylesheet" href="/vendors/sheron/shareon.min.css")
     body
         header
             include ../../includes/dashHeader
@@ -55,13 +56,13 @@ html(lang="en")
                                         i.fa.fa-trash.mx-1
                                         span Delete
                                 div
-                                    button.btn.btn-warning.btn-sm.mx-1.delete-puublic-note
+                                    button.btn.btn-warning.btn-sm.mx-1.note-preview-btn
                                         i.fa.fa-eye.mx-1
                                         span preview
-                                div
-                                    button.btn.btn-info.btn-sm.mx-1.delete-puublic-note
-                                        i.fa.fa-share.mx-1
-                                        span Share
+                                //- div
+                                //-     button.btn.btn-info.btn-sm.mx-1.note-share-btn
+                                //-         i.fa.fa-share.mx-1
+                                //-         span Share
                     .carts
                         #daily-views
 
@@ -109,8 +110,21 @@ html(lang="en")
                             .modal-footer
                                 button.btn.btn-dark(type='button' data-bs-dismiss='modal' aria-label='Close') Cancel
                                 button.btn.btn-primary(type='button').public-notes-update-btn Update
-
-
+                .share-modal.modal
+                    .modal-dialog.modal-dialog-centered.modal-lg
+                        .modal-content.border-0
+                            .modal-header.bg-white.border-0
+                                h5.text-center Share 
+                                button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                            .modal-body.bg-white.border-0
+                                .shareon.d-flex.justify-content-center
+                                    a.facebook(data-url="" ,data-title="").share-item
+                                    a.linkedin(data-url="" ,data-title="").share-item
+                                    button.reddit(data-url="" data-title="").share-item
+                                    button.telegram(data-url="" ,data-title="").share-item
+                                    button.twitter(data-url="" ,data-title="").share-item
+                                    button.whatsapp(data-url="" ,data-title="").share-item
+        script(src="/vendors/sheron/shareon.iife.js")
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes-details.js
         script(src="https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js")

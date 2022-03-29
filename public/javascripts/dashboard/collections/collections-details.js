@@ -3,7 +3,7 @@ $(document).ready(function () {
     const collection_id = window.location.pathname.split("/")[3];
     $.ajax({
         type: "GET",
-        url: sessionStorage.getItem("api") + "/collections/" + collection_id,
+        url: localStorage.getItem("api") + "/collections/" + collection_id,
         contentType: "application/json",
         processData: false,
         headers: {
@@ -63,7 +63,7 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: sessionStorage.getItem("api") + "/collections/" + collection_id,
+                            url: localStorage.getItem("api") + "/collections/" + collection_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
@@ -93,7 +93,7 @@ $(document).ready(function () {
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
-            url: sessionStorage.getItem("api") + "/products",
+            url: localStorage.getItem("api") + "/products",
             headers: {
                 Authorization: localStorage.getItem("token")
             },
@@ -102,7 +102,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.requested.length > 0) {
-                    sessionStorage.setItem("public-notes", JSON.stringify(data));
+                    localStorage.setItem("public-notes", JSON.stringify(data));
                     // $("#public-notes").html("");
                     $(".loading-public-notes").addClass("d-none");
                     $(".public-notes-row-modal").html("");
@@ -221,7 +221,7 @@ $(document).ready(function () {
             form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
             $.ajax({
                 type: "PUT",
-                url: sessionStorage.getItem("api") + "/collections/" + collection_id,
+                url: localStorage.getItem("api") + "/collections/" + collection_id,
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },
@@ -241,7 +241,7 @@ $(document).ready(function () {
                     if (selected_notes_arry.length !== 0) {
                         $.ajax({
                             type: "POST",
-                            url: sessionStorage.getItem("api") + "/collections/" + collections_id + "/products/" + selected_notes_arry.toString(),
+                            url: localStorage.getItem("api") + "/collections/" + collections_id + "/products/" + selected_notes_arry.toString(),
                             headers: {
                                 Authorization: localStorage.getItem("token")
                             },

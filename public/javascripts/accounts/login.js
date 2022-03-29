@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type: "POST",
-            url: sessionStorage.getItem("api") + "/authenticate/email-sign-in",
+            url: localStorage.getItem("api") + "/authenticate/email-sign-in",
             processData: false,
             contentType: "application/json",
             data: JSON.stringify(userData),
@@ -81,7 +81,7 @@ $(document).ready(function () {
     }
 
     $(".google-auth-btn").click(function () {
-        window.location = sessionStorage.getItem("api") + "/authenticate/google-sign-in";
+        window.location = localStorage.getItem("api") + "/authenticate/google-sign-in";
     });
 
     function setCookie(cname, cvalue, exdays) {

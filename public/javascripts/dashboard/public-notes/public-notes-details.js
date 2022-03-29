@@ -3,7 +3,7 @@ $(document).ready(function () {
     function getNoteDetails() {
         $.ajax({
             type: "GET",
-            url: sessionStorage.getItem("api") + "/products/" + public_notes_id,
+            url: localStorage.getItem("api") + "/products/" + public_notes_id,
             ContentType: "application/json",
             processData: false,
             headers: {
@@ -53,6 +53,9 @@ $(document).ready(function () {
         $(".public-notes-description").html(description);
         $(".note-title").val(name);
         $(".note-descriptions").val(description);
+
+        $(".share-item").attr("data-url", localStorage.getItem("home") + "/notes/" + public_notes_id);
+        $(".share-item").attr("data-title", "I uploaded this notes on Notes Ocean and i earned money for this , please checkout my note");
     }
     getNoteDetails();
     setTimeout(() => {
@@ -112,7 +115,7 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: sessionStorage.getItem("api") + "/products/" + public_notes_id,
+                            url: localStorage.getItem("api") + "/products/" + public_notes_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
@@ -165,7 +168,7 @@ $(document).ready(function () {
     function updateNoteData(data) {
         $.ajax({
             type: "PUT",
-            url: sessionStorage.getItem('api') + "/products/" + public_notes_id,
+            url: localStorage.getItem('api') + "/products/" + public_notes_id,
             headers: {
                 Authorization: localStorage.getItem("token")
             },
@@ -295,6 +298,14 @@ $(document).ready(function () {
         if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
         if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
     };
+    Shareon.init();
+
+    $(".note-preview-btn").click(function () {
+        window.location = "/notes/" + public_notes_id;
+    })
+    $(".note-share-btn").click(function () {
+        $(".share-modal").modal("show");
+    })
 
     //  call functions
     deleteNote();

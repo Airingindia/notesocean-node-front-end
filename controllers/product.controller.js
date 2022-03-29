@@ -4,7 +4,12 @@ const getProductInfo = async (productid, token) => {
         return getProductInfoWithToken(productid, token);
     }
     const response = await httpServices.get("/products/" + productid);
-    return response.body;
+    if (response.statusCode == 200) {
+        return response.body;
+    } else {
+        return throwErr;
+    }
+
 }
 
 const getProductInfoWithToken = async (productid, token) => {
@@ -12,7 +17,7 @@ const getProductInfoWithToken = async (productid, token) => {
     if (response.status == 200) {
         return response.body;
     } else {
-        return getProductInfo(productid, "");
+        return throwErr;
     }
 }
 module.exports = {

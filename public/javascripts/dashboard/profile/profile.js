@@ -63,7 +63,7 @@ $(document).ready(function () {
             // update  pic with ajax
             $.ajax({
                 type: "PUT",
-                url: sessionStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+                url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
                 processData: false,
                 contentType: false,
                 data: formdata,
@@ -181,7 +181,7 @@ $(document).ready(function () {
         if (inputCount == 6) {
             $.ajax({
                 type: "PUT",
-                url: sessionStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+                url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
                 processData: false,
                 contentType: false,
                 data: formdata,

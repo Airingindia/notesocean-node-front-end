@@ -2,7 +2,7 @@ $(document).ready(function () {
     // get userdata 
     $.ajax({
         type: "GET",
-        url: sessionStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+        url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
         beforeSend: function () {
 
         },
@@ -67,14 +67,14 @@ $(document).ready(function () {
             });
 
             if (count == 6) {
-                if (sessionStorage.getItem("emailData") !== null) {
-                    var data = JSON.parse(sessionStorage.getItem("emailData"));
+                if (localStorage.getItem("emailData") !== null) {
+                    var data = JSON.parse(localStorage.getItem("emailData"));
                     data.code = Number(code);
                     data = JSON.stringify(data);
                     // verify otp
                     $.ajax({
                         type: "POST",
-                        url: sessionStorage.getItem("api") + "/authenticate/verify-email",
+                        url: localStorage.getItem("api") + "/authenticate/verify-email",
                         headers: {
                             Authorization: localStorage.getItem("token")
                         },
@@ -151,14 +151,14 @@ $(document).ready(function () {
         $.ajax(
             {
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/authenticate/verify-email",
+                url: localStorage.getItem("api") + "/authenticate/verify-email",
                 headers: {
                     Authorization: localStorage.getItem("token")
                 }, beforeSend: function () {
 
                 },
                 success: function (data) {
-                    sessionStorage.setItem("emailData", JSON.stringify(data))
+                    localStorage.setItem("emailData", JSON.stringify(data))
                     verify();
                 }, error: function () {
                     $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">

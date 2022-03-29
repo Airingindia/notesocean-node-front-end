@@ -4,7 +4,7 @@ $(document).ready(function () {
     function loadData() {
         $.ajax({
             type: "GET",
-            url: sessionStorage.getItem("api") + "/products",
+            url: localStorage.getItem("api") + "/products",
             contentType: "application/json",
             processData: false,
             headers: {
@@ -31,7 +31,7 @@ $(document).ready(function () {
             $(".public-notes-container").removeClass("d-none");
             $(".no-public-notes").addClass("d-none");
             for (let i = 0; i < data.requested.length; i++) {
-                if (data.requested[i].userId == sessionStorage.getItem("userid")) {
+                if (data.requested[i].userId == localStorage.getItem("userid")) {
                     let id = data.requested[i].id;
                     let name = data.requested[i].name;
                     let timestamp = data.requested[i].timestamp;
@@ -44,7 +44,7 @@ $(document).ready(function () {
                     let views = data.requested[i].views;
                     $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
-                        <div class="card h-100  shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
+                        <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
                             <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
                             <div class="card-body pb-0"> 
                                 <h6 class="card-title">  ${name.substring(0, 100)} </h6>
@@ -139,7 +139,7 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/products/search/" + input,
+                url: localStorage.getItem("api") + "/products/search/" + input,
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },

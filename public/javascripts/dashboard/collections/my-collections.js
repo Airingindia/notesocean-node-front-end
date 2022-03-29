@@ -2,7 +2,7 @@ $(document).ready(function () {
     // get users collections
     $.ajax({
         type: "GET",
-        url: sessionStorage.getItem("api") + "/collections",
+        url: localStorage.getItem("api") + "/collections",
         contentType: "application/json",
         processData: false,
         headers: {

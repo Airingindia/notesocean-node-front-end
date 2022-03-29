@@ -120,6 +120,10 @@ html(lang="en")
                                         img(src=user.profileImage alt=user.firstName).user-image
                                     .flex-grow-0.ms-2
                                         h6 #{user.firstName} #{user.lastName}
+                        .col-12.mt-1
+                            p You are reading with
+                            .live-users-container 
+
                         .col-12.mt-3
                             #commentbox.collapse
                                 .card.card-body.p-0.border-0.commnet-form.d-none
@@ -261,6 +265,7 @@ html(lang="en")
             }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
             });
         include includes/footer
+        script(src="/socket.io/socket.io.js")
         script
             include ../public/javascripts/common.js
         script(src="/vendors/sheron/shareon.iife.js")

@@ -44,7 +44,7 @@ $(document).ready(function () {
             last_access = page;
             $.ajax({
                 type: "GET",
-                url: sessionStorage.getItem("api") + "/products/feeds/" + page,
+                url: localStorage.getItem("api") + "/products/feeds/" + page,
                 headers: {
                     Authorization: localStorage.getItem("token")
                 },

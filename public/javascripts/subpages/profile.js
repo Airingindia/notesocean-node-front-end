@@ -17,7 +17,7 @@ $(document).ready(function () {
     // get user details
     // $.ajax({
     //     type: "GET",
-    //     url: sessionStorage.getItem("api") + "/users/" + userid,
+    //     url: localStorage.getItem("api") + "/users/" + userid,
     //     beforeSend: function () {
 
     //     },
