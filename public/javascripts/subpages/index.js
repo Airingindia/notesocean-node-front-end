@@ -45,9 +45,6 @@ $(document).ready(function () {
             $.ajax({
                 type: "GET",
                 url: localStorage.getItem("api") + "/products/feeds/" + page,
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                },
                 beforeSend: function () {
                     //  ads place
                     let ad1 = ads[last_access - 1];

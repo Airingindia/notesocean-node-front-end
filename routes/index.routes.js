@@ -35,16 +35,12 @@ router.get("/notes/:id", async (req, res, next) => {
   if (req.cookies.token) {
     token = req.cookies.token;
   }
-
-  try {
-    const product = await productControllers.getInfo(req.params.id, token);
-
-    try {
-      const userData = await profileControllers.getInfo(product.product.userId);
+  productControllers.getInfo(req.params.id, token).then((product) => {
+    profileControllers.getInfo(product.product.userId).then((userData) => {
       res.render("view-products", {
         data: product, timeService: timeService, user: userData, api: api_url
       });
-    } catch (e) {
+    }).catch((error) => {
       const userData = {
         id: 0,
         firstName: "Notes",
@@ -54,12 +50,11 @@ router.get("/notes/:id", async (req, res, next) => {
       res.render("view-products", {
         data: product, timeService: timeService, user: userData, api: api_url
       });
-    }
-  } catch {
+    });
+  }).catch((error) => {
     res.status(404);
     res.render("notfound");
-  }
-
+  })
 });
 
 // profile page routes

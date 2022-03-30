@@ -290,8 +290,9 @@ $(document).ready(function () {
 
     //  socket io
     const socket = io();
+    const udata = JSON.parse(localStorage.getItem("userdata"));
     if (localStorage.getItem("userdata") !== null) {
-        const udata = JSON.parse(localStorage.getItem("userdata"));
+
         var data = {
             firstName: udata.firstName,
             lastName: udata.lastName,
@@ -305,7 +306,7 @@ $(document).ready(function () {
     } else {
         var data = {
             firstName: "Guest",
-            lastName: "User",
+            lastName: "",
             userid: 0,
             pic: "/images/dummy/user_dummy.jpg"
         }
@@ -326,14 +327,30 @@ $(document).ready(function () {
 
     socket.on("liveusers", users => {
         $(".live-users-container").html("");
+        $('.live-reading').html(`You are reading with ${users.length} people`);
         for (let i = 0; i < users.length; i++) {
             let pic = users[i].pic;
             let userid = users[i].userid;
             let firstName = users[i].firstName;
             let lastName = users[i].lastName;
-            $(".live-users-container").append(`
-            <a class="mx-1" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}" style="width:30px;height:30px;border-radius:50%" /></a>
-            `);
+            if (localStorage.getItem("userdata") !== null) {
+                if (userid == udata.id) {
+                    $(".live-users-container").append(`
+                    <a class="mx-1 my-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> You </a>
+                    `);
+                } else {
+
+                    $(".live-users-container").append(`
+                    <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> ${firstName} ${lastName} </a>
+                    `);
+                }
+            } else {
+                $(".live-users-container").append(`
+                <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> ${firstName} ${lastName} </a>
+                `);
+            }
+
+
         }
     })
 
