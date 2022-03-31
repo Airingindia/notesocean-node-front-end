@@ -31,7 +31,7 @@ $(document).ready(function () {
         let firstName = $("form input[name='fistName']").val();
         let lastName = $("form input[name='lastName']").val();
         let email = $("form input[name='email']").val();
-        let mobile = $("form input[name='mobile']").val();
+        let mobile = $("form input[name='phone']").val();
         let choosePassword = $("form input[name='password']").val();
         var form = new FormData();
         const usersData = {

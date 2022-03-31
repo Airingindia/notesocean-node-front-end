@@ -12,8 +12,8 @@ const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
 
 // homepage route
-router.get('/', async function (req, res, next) {
-  await homeControllers.getFeed().then((data) => {
+router.get('/', function (req, res, next) {
+  homeControllers.getFeed().then((data) => {
     res.render("index",
       {
         data: data,
@@ -22,7 +22,7 @@ router.get('/', async function (req, res, next) {
       }
     );
   }).catch((error) => {
-    console.log("error");
+    console.log(error);
   })
 });
 
@@ -30,7 +30,7 @@ router.get('/', async function (req, res, next) {
 
 
 
-router.get("/notes/:id", async (req, res, next) => {
+router.get("/notes/:id", (req, res, next) => {
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
@@ -52,8 +52,10 @@ router.get("/notes/:id", async (req, res, next) => {
       });
     });
   }).catch((error) => {
-    res.status(404);
-    res.render("notfound");
+
+    console.log(error);
+    // res.status(404);
+    // res.render("notfound");
   })
 });
 

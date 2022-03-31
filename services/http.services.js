@@ -1,8 +1,8 @@
 require("dotenv").config();
 const ajax = require('supertest');
 const api_endpoint = process.env.API_URL;
-const postRequest = async (api_path) => {
-    return new Promise(async (resolve, reject) => {
+const postRequest = (api_path) => {
+    return new Promise((resolve, reject) => {
         ajax(api_endpoint)
             .post(api_path)
             .send().then((response) => {
@@ -13,8 +13,8 @@ const postRequest = async (api_path) => {
     });
 }
 
-const getRequest = async (api_path) => {
-    return new Promise(async (resolve, reject) => {
+const getRequest = (api_path) => {
+    return new Promise((resolve, reject) => {
         ajax(api_endpoint)
             .get(api_path)
             .send().then((response) => {
@@ -25,8 +25,8 @@ const getRequest = async (api_path) => {
     });
 }
 
-const getRequestWithToken = async (api_path, token) => {
-    return new Promise(async (resolve, reject) => {
+const getRequestWithToken = (api_path, token) => {
+    return new Promise((resolve, reject) => {
         ajax(api_endpoint)
             .get(api_path)
             .set("Authorization", token)

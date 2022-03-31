@@ -2,51 +2,40 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Collections
         include ../../includes/bootstrap
         link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
         link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
-        link(rel="stylesheet", href="/stylesheets/loader.css")
+        link(rel="stylesheet" href="/stylesheets/loader.css")
     body
-        include ../../includes/dashHeader
-        .row
-            include ../../includes/dashAside
-            .col-10.p-2.content.second-side
-                .row
-                        .col-6.px-3.p-2
-                            h2 Collections
-                            small.colletion-heating-text Collections is like a your favroite music playlist
-                            
-                        .col-6.p-2
+        header
+            include ../../includes/dashHeader
+        section.main-section
+            .row
+                include ../../includes/dashAside
+                .col-10.second-side
+                    .d-flex.justify-content-between
+                        div
+                            h2.header-title Private Notes
+                            small.header-text These notes are not publically accessible and you will be get any rewards
+                            br  
+                            small.header-text This is your  private cloud you can store multiple types of file
+                        div
                             a(href="/dashboard/collections/new")
-                                button.btn-primary.add-new
+                                button.btn-primary.add-new.btn-sm
                                     i.fa.fa-plus.m-1
-                                    span New
-                .container-fluid.mt-3
-                        .row.my-colleaction-row.container
-                            //- .col-md-3.my-2
-                            //-     .card.border-0.shadow
-                            //-         .card-content
-                            //-             img.card-img-top(src="/images/dummy/collection2.png")
-                            //-             .card-body.border-0
-                            //-                 h6.collection-title Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, vel.
-                            //-                 p.collection-private-notes 
-                                                i.fa.fa-lock.mx-1
-                                                span Private Notes  : 100
-                                            p.collection-public-notes 
-                                                i.fa.fa-users.mx-1
-                                                span Public Notes  : 100        
-                        .row.no-collections
-                            .card.border-0.p-0
-                                .card-content.p-0
-                                    center
-                                        img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                        .card-body
-                                            h2 No Collections created Yet
-                                            a(href="/dashboard/collections/new")
-                                                button.btn.btn-primary Create New
+                                    span New Collection
+                    .no-collections
+                        .card.border-0.p-0
+                            .card-content.p-0
+                                center
+                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
+                                    .card-body
+                                        h2 No Collections created Yet
+                                        a(href="/dashboard/collections/new")
+                                            button.btn.btn-primary Create New
                         .row.loading-collections
                             center 
                                 .lds-roller
@@ -59,10 +48,7 @@ html(lang="en")
                                     div
                                     div
                                 p.loading-colletion-text Your Collections are loading... please wait...
-
-
         script(src='/javascripts/common.js')
         script(src="/vendors/hammer/hammer.min.js") 
         script(src='/javascripts/dashboard/dashboard.js')
         script(src="/javascripts/dashboard/collections/my-collections.js")
-        

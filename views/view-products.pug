@@ -5,33 +5,33 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        meta(name="description",content=`${(data.product.description)}`)
+        meta(name="description",content=`${(data.product.description.substring(0,145))}`)
         meta(name="keyword",content=`${(data.product.tags)}`)
-        title #{data.product.name} | Notes ocean
+        title #{data.product.name.substring(0,40)} | Notes ocean
         link(rel="canonical",href=`https://notesocean.com/notes/${(data.product.id)}`)
 
         //-  og 
-        meta(property='og:title' content=`${(data.product.name)}`)
+        meta(property='og:title' content=`${(data.product.name.substring(0,40))}`)
         meta(property='og:site_name' content='Notes ocean')
         meta(property='og:url' content=`https://notesocean.com/notes/${(data.product.id)}`)
-        meta(property='og:description' content=`${(data.product.description)}`)
+        meta(property='og:description' content=`${(data.product.description.substring(0,145))}`)
         meta(property='og:type' content='product.item')
         meta(property='og:image' content=`${(data.product.thumbnails.split(",")[0])}`)
 
         //- twitter card
         meta(name='twitter:card' content='summary')
         meta(name='twitter:site' content='@real_notesocean')
-        meta(name='twitter:title' content=`${(data.product.name)}`)
-        meta(name='twitter:description' content=`${(data.product.description)}`)
+        meta(name='twitter:title' content=`${(data.product.name.substring(0,40))}`)
+        meta(name='twitter:description' content=`${(data.product.description.substring(0,145))}`)
         meta(name='twitter:image' content=`${(data.product.thumbnails.split(",")[0])}`)
         //- schema.org
         script(type='application/ld+json').
             {
                 "@context": "https://schema.org/",
                 "@type": "Product",
-                "name":  #{data.product.name},
+                "name":  #{data.product.name.substring(0,40)},
                 "image": #{data.product.thumbnails.split(",")[0]},
-                "description": #{data.product.description},
+                "description": #{data.product.description.substring(0,145)},
                 "brand": {
                 "@type": "Brand",
                 "name": "Notes Ocean"
@@ -46,7 +46,7 @@ html(lang="en")
         include includes/bootstrap
         style
             include ../public/stylesheets/subpages/product.css
-        link(rel="stylesheet" href="/vendors/sheron/shareon.min.css")
+        link(rel="stylesheet" href="https://static.ncdn.in/vendor/sheron/shareon.min.css")
         style 
             include ../public/stylesheets/loader.css
 
@@ -268,8 +268,8 @@ html(lang="en")
         script(src="/socket.io/socket.io.js")
         script
             include ../public/javascripts/common.js
-        script(src="/vendors/sheron/shareon.iife.js")
-        script(src="/vendors/wow/wow.min.js")
+        script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
+        script(src="https://static.ncdn.in/vendor/wow/wow.min.js")
         script
             include ../public/javascripts/subpages/products.js
         script.

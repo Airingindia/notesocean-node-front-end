@@ -1,14 +1,32 @@
 doctype html
-html(lang="en")
+html(lang="en-US")
   head
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Find the Perfact Notes
+    title Find the Perfact Notes | Notes Ocean
+
+    meta(name="description",content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
+    meta(name="keyword",content=`notes,notes ocean, free pdf notes , download pdf , upsc pdf , ssc pdf , free pdf download,sell pdf, engineering notes , medical notes, pharma notes, bihar board notes , cbse notes`)
+
+    link(rel="canonical",href=`https://notesocean.com`)
+
+    meta(property='og:title', content=`Notes Ocean`)
+    meta(property='og:site_name' content='Notes Ocean')
+    meta(property='og:url' content=`https://notesocean.com`)
+    meta(property='og:description' content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
+    meta(property='og:type' content='website')
+    meta(property='og:image' content=`https://notesocean.com/logo.png`)
+
+    meta(name='twitter:card' content='website')
+    meta(name='twitter:site' content='@real_notesocean')
+    meta(name='twitter:title' content=`Notes Ocean`)
+    meta(name='twitter:description' content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
+    meta(name='twitter:image' content=`https://notesocean.com/logo.png`)
+
     include includes/bootstrap
     //- include includes/amplitude 
-    style
-      include ../public/stylesheets/subpages/index.css
+    link(rel="stylesheet" href="/stylesheets/subpages/index.css")
     link(rel="manifest" href="/manifest.webmanifest")
 
     //- schema .org
@@ -29,12 +47,12 @@ html(lang="en")
       "@context": "https://schema.org",
       "@type": "Corporation",
       "name": "Notes ocean",
-      "alternateName": "Notes Ocean LLP",
+      "alternateName": "Notes Ocean Private Limited",
       "url": "https://notesocean.com",
       "logo": "https://notesocean.com/logo.png",
       "contactPoint": [{
       "@type": "ContactPoint",
-      "telephone": "8045685522",
+      "telephone": "+918045685522",
       "contactType": "customer service",
       "contactOption": "HearingImpairedSupported",
       "areaServed": "IN",
@@ -83,7 +101,7 @@ html(lang="en")
             - let profilePic = data[i].user.profileImage;
             -var  pic;
             - if(profilePic!==null) pic = profilePic.split(",")[0];
-            -else pic = "/images/user.jfif";  
+            - else pic = "/images/user.jfif";  
 
             .col-md-3.my-2
               a(href="/notes/"+id)
@@ -96,7 +114,7 @@ html(lang="en")
                     .row
                       .col-12.dflex.justify-content-center
                         a(href="/profile/"+user_id)
-                          img(src=pic,alt="user image").user-image
+                          img(src=pic,alt=full_name).user-image
                         span.card-text
                           a(href="/profile/"+user_id).mx-2.user-name-text=full_name
                       .col-12
@@ -112,34 +130,11 @@ html(lang="en")
                             i.fa.fa-clock-o.mx-1
                             small=actual_time
           - }    
-            //- .col-md-3
-            //-     .card.h-100.shadow.border-0
-            //-         .card-header.border-0.bg-white
-            //-             h6.card-title Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
-            //-         img(src="/images/dummy/collection.png" alt="").card-img-top
-            //-         .card-footer.border-0
-            //-             .row
-            //-                 .col-2.dflex.justify-content-center.align-items-center
-            //-                     img(src="/images/dummy-user.jpeg" alt="user image").user-image
-            //-                 .col-10
-            //-                     //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-            //-                     p.card-text
-            //-                         a(href="/").user-name-text Sachin Kumar
-            //-                     p.card-text
-            //-                         span
-            //-                             i.fa.fa-globe.mx-1
-            //-                             small 100 
-            //-                         span.mx-1
-            //-                             i.fa.fa-file.mx-1 
-            //-                             small 10 pages
-            //-                         span.mx-1
-            //-                             i.fa.fa-clock-o.mx-1
-            //-                             small 1 minute ago
+
     include includes/footer
-    script
-      include ../public/javascripts/common.js
-    script
-      include ../public/javascripts/subpages/index.js
-    script(src="/vendors/wow/wow.min.js")
+    script(src="https://static.ncdn.in/vendor/wow/wow.min.js")
+    script(src="/javascripts/common.js")
+    script(src="/javascripts/subpages/index.js")
+
     script.
       new WOW().init();
