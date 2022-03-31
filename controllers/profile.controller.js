@@ -1,11 +1,16 @@
 const httpServices = require("../services/http.services");
-const getuserinfo = async (userid) => {
-    const response = await httpServices.get("/users/" + userid);
-    if (response.statusCode == 200) {
-        return response.body;
-    } else {
-        return throwErr;
-    }
+const getuserinfo = (userid) => {
+    return new Promise((resolve, reject) => {
+        httpServices.get("/users/" + userid).then((response) => {
+            if (response.statusCode == 200) {
+                resolve(response.body);
+            } else {
+                reject(response);
+            }
+        }).catch((error) => {
+            reject(error);
+        })
+    })
 }
 
 module.exports = {

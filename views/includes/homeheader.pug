@@ -1,0 +1,26 @@
+style
+    include ../../public//stylesheets/style.css
+//- link(rel='stylesheet' href='/stylesheets/style.css')
+nav
+    .container-fluid.d-flex.justify-content-between.pt-2
+        .logo-box
+            a(href="/")
+                //- img(src="/images/logo.png" width="40").mobile-logo
+                img(src="/images/dash-logo.svg" width="80%" alt="notes ocean logo").desktop-logo.m-1
+        .search-box.w-50.d-none
+            form(action="/search")
+                .input-group
+                    input(type="search" placeholder="Ex- class 10th math notes" name="query").form-control
+                    button(type="submit" aria-label="search notes and collections ").btn.btn-outline-secondary
+                        i.fa.fa-search
+        .user-box.d-flex.justify-content-between
+            div.upload-box.mx-3
+                a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.text-light
+                    i.fa.fa-cloud-upload(title="upload new notes").mx-1
+                    span Upload Notes
+            div.mobile-search-box.m-2
+                i.fa.fa-search(title="Search notes").search-btn
+                i.fa.fa-times(title="close").search-btn-close
+            div.user-icon-box
+                a(href="/dashboard")
+                    img(src="/images/dummy-user.jpeg" alt="notes ocean user image")

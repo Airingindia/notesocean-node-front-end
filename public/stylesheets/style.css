@@ -6,9 +6,6 @@
     display: block;
 }
 
-.navbar-login-btn {
-    margin: 5px 5px;
-}
 
 .mobile-search-box {
     display: none;
@@ -86,8 +83,6 @@ header {
 }
 
 .upload-box i {
-    font-size: 25px;
-    margin: 10px;
     cursor: pointer;
 }
 

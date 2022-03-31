@@ -30,7 +30,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $(".user-icon-box").html(`<a href="/login"> <button class="btn btn-sm btn-primary navbar-login-btn"> Login</button> </a>`);
+            $(".user-icon-box").html(`<a href="/login"> <button class="btn btn-sm btn-primary navbar-login-btn"> <i  class="fa fa-user mx-1"> </i> Login</button> </a>`);
         }
     } else {
         showProfilePic();

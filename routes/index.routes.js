@@ -1,6 +1,5 @@
-var express = require('express');
-var router = express.Router();
-const path = require('path');
+const express = require('express');
+const router = express.Router();
 const homeControllers = require('../controllers/home.controller');
 const profileControllers = require("../controllers/profile.controller");
 const urlMaker = require("../services/url.services");
@@ -40,6 +39,7 @@ router.get("/notes/:id", (req, res, next) => {
       res.render("view-products", {
         data: product, timeService: timeService, user: userData, api: api_url
       });
+      next();
     }).catch((error) => {
       const userData = {
         id: 0,
@@ -50,12 +50,12 @@ router.get("/notes/:id", (req, res, next) => {
       res.render("view-products", {
         data: product, timeService: timeService, user: userData, api: api_url
       });
+
+      next();
     });
   }).catch((error) => {
-
-    console.log(error);
-    // res.status(404);
-    // res.render("notfound");
+    res.status(404);
+    res.render("notfound");
   })
 });
 
@@ -64,18 +64,20 @@ router.get("/notes/:id", (req, res, next) => {
 router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
-    const userInfo = await profileControllers.getInfo(user_id);
-    if (userInfo.exception) {
-      res.status(404);
-      res.render("notfound");
-    } else {
+    profileControllers.getInfo(user_id).then((userInfo) => {
       res.render("profile", {
         profile: userInfo
       });
-    }
+      next();
+    }).catch((error) => {
+      res.status(404);
+      res.render("notfound");
+      next();
+    })
   } else {
     res.status(404);
     res.render("notfound");
+    next();
   }
 });
 
