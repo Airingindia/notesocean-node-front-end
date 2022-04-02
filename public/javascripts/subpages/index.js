@@ -186,4 +186,82 @@ $(document).ready(function () {
             .replace(/^-*/, '')              // Remove starting dashes
             .replace(/-*$/, '');             // Remove trailing dashes
     }
+
+
+    // live notes
+    const socket = io();
+
+    var owl = $('.live-notes');
+
+    $('.live-notes').owlCarousel({
+        loop: false,
+        margin: 10,
+        nav: false,
+        autoplay: true,
+        autoWidth: true,
+        autoHeight: true,
+        items: 4,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 4
+            }
+        }
+    })
+
+    socket.on("liveNotes", data => {
+        for (let i = 0; i < $(".owl-item").length; i++) {
+            $(".live-notes").trigger('remove.owl.carousel', [i]).trigger('refresh.owl.carousel');
+        }
+        // $(".live-notes").html("");
+        var array = Object.entries(data).map(function (entry) {
+            key = entry[0];
+            value = entry[1];
+
+            nested_object = value;
+            nested_object.key = key;
+
+            return nested_object;
+        });
+        var products = [];
+        var users = {};
+        if (array.length !== 0) {
+
+            var unique_notes = array.filter((value, index, self) => self.findIndex((m) => m.product.product_id === value.product.product_id) === index);
+            for (let i = 0; i < $(".owl-item").length; i++) {
+                $(".live-notes").trigger('remove.owl.carousel', [i]).trigger('refresh.owl.carousel');
+            }
+            for (let i = 0; i < unique_notes.length; i++) {
+                let product = unique_notes[i].product;
+                let content = `
+                <div class="py-1">
+  <a href="/notes/">
+        <div class="card shadow border-0 rounded h-100 wow public-notes-item">
+            <div class="card-header border-0 bg-white">
+                <p class="card-title"> ${product.name}</p>
+            </div>
+            <div class="card-body border-0 notes-thumbnails" style="background-image:url(${product.thumbnail.split(",")[0]})"></div>
+            <div class="card-footer border-0 bg-white">
+                <div class="row">
+                    <div class="col-12 dflex justify-content-center"><a href="/profile/"><img class="user-image" src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user" /></a><span class="card-text"><a class="mx-2 user-name-text" href="/profile/">sachin kumar</a></span></div>
+                    <div class="col-12">
+                        <p class="card-text notes-details-text"><span><i class="fa fa-globe mx-1"></i><small>100 views</small></span><span class="mx-1"><i class="fa fa-file mx-1"> </i><small>10 pages</small></span><span class="mx-1"><i class="fa fa-clock mx-1"></i><small>1 hours ago</small></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+  </div>
+                `;
+                $('.live-notes').owlCarousel().trigger('add.owl.carousel', [jQuery('<div class="owl-item">' + content + '</div>')]).trigger('refresh.owl.carousel');
+            }
+        }
+    });
+
+
 });

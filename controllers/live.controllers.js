@@ -10,6 +10,7 @@ io.on("connection", (socket) => {
         roomId = data.noteId;
         const userdata = data.userdata;
         await socket.join(roomId);
+
         // send all user except this user
         socket.broadcast.to(roomId).emit("joined", userdata);
         liveusers[socket.id] = userdata;
@@ -22,10 +23,13 @@ io.on("connection", (socket) => {
             clients.forEach(function (data, counter) {
                 var socketId = data;
                 roomuser.push(liveusers[socketId]);
+
             });
             await io.to(roomId).emit("liveusers", roomuser);
             roomuser = [];
         }
+
+        io.emit("liveNotes", liveusers);
     });
 
     socket.on("disconnect", async () => {
@@ -45,6 +49,8 @@ io.on("connection", (socket) => {
             roomuser = [];
         }
 
-    });
+        io.emit("liveNotes", liveusers);
 
-})
+    });
+    io.emit("liveNotes", liveusers);
+});

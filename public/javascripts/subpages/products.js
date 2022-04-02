@@ -291,13 +291,31 @@ $(document).ready(function () {
     //  socket io
     const socket = io();
     const udata = JSON.parse(localStorage.getItem("userdata"));
+
+    const productData = JSON.parse($("body").attr("data-product"));
+
     if (localStorage.getItem("userdata") !== null) {
 
         var data = {
             firstName: udata.firstName,
             lastName: udata.lastName,
             userid: udata.id,
-            pic: udata.profileImage
+            pic: udata.profileImage,
+            product: {
+                name: productData.product.name,
+                thumbnail: productData.product.thumbnails,
+                product_id: productData.product.id,
+                timestamp: productData.product.timestamp,
+                view: productData.product.views,
+                user: {
+                    firstName: productData.users.firstName,
+                    lastName: productData.users.lastName,
+                    userId: productData.users.id,
+                    profileImage: productData.users.profileImage
+
+                }
+            }
+
         }
         socket.emit("join", {
             noteId: window.location.pathname.split("/")[2],

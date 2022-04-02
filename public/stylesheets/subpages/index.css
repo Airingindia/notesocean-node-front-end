@@ -6,6 +6,21 @@
     background-size: cover;
 }
 
+.live-notes-section .notes-thumbnails {
+    height: 300px !important;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.live-reading-heading{
+    font-size: 20px;
+}
+
+.owl-height{
+    height:auto !important;
+}
+
 @media (min-width:768px)
 {
     .public-notes-item:hover {
@@ -15,7 +30,7 @@
     }
 }
 
-.public-now-row .user-image {
+.public-now-row .user-image ,.live-notes-section .user-image{
     border-radius: 50%;
     width: 20px;
     height: 20px;

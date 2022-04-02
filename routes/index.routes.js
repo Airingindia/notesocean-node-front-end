@@ -34,28 +34,43 @@ router.get("/notes/:id", (req, res, next) => {
   if (req.cookies.token) {
     token = req.cookies.token;
   }
-  productControllers.getInfo(req.params.id, token).then((product) => {
-    profileControllers.getInfo(product.product.userId).then((userData) => {
-      res.render("view-products", {
-        data: product, timeService: timeService, user: userData, api: api_url
-      });
-      next();
-    }).catch((error) => {
-      const userData = {
-        id: 0,
-        firstName: "Notes",
-        lastName: "Ocean",
-        profileImage: "/images/dummy/user_dummy.jpg",
-      }
-      res.render("view-products", {
-        data: product, timeService: timeService, user: userData, api: api_url
-      });
+  // productControllers.getInfo(req.params.id, token).then((product) => {
+  //   profileControllers.getInfo(product.product.userId).then((userData) => {
+  //     res.render("view-products", {
+  //       data: product, timeService: timeService, user: userData, api: api_url
+  //     });
+  //     next();
+  //   }).catch((error) => {
+  //     const userData = {
+  //       id: 0,
+  //       firstName: "Notes",
+  //       lastName: "Ocean",
+  //       profileImage: "/images/dummy/user_dummy.jpg",
+  //     }
+  //     res.render("view-products", {
+  //       data: product, timeService: timeService, user: userData, api: api_url
+  //     });
+  //     next();
+  //   });
+  // }).catch((error) => {
+  //   res.render("notfound");
+  //   next();
+  // })
 
-      next();
+
+  productControllers.getInfo(req.params.id, token).then((product) => {
+    const userData = {
+      id: 0,
+      firstName: "Notes",
+      lastName: "Ocean",
+      profileImage: "/images/dummy/user_dummy.jpg",
+    }
+    res.render("view-products", {
+      data: product, timeService: timeService, user: userData, api: api_url
     });
   }).catch((error) => {
-    res.status(404);
     res.render("notfound");
+    next();
   })
 });
 
@@ -70,12 +85,11 @@ router.get("/profile/:user_id", async (req, res, next) => {
       });
       next();
     }).catch((error) => {
-      res.status(404);
       res.render("notfound");
       next();
     })
   } else {
-    res.status(404);
+
     res.render("notfound");
     next();
   }
@@ -106,11 +120,9 @@ router.get("/collection/:collecton_id", async (req, res, next) => {
         user: userInfo
       });
     } else {
-      res.status(404);
       res.render("notfound");
     }
   } else {
-    res.status(404);
     res.render("notfound");
   }
 });
