@@ -1,15 +1,18 @@
 .notes-thumbnails {
     height: 250px !important;
-    /* width: 350px !important; */
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.public-notes-item:hover {
+@media (min-width:768px)
+{
+    .public-notes-item:hover {
 
-    transition: all 0.2s linear;
-    transform: scale(1.10, 1.10);
+        transition: all 0.2s linear;
+        transform: scale(1.10, 1.10);
+    }
 }
 
 .public-now-row .user-image {
@@ -22,28 +25,16 @@
     padding: 0% 0%;
 }
 
-/* .card-footer,
-.card-header {
-    background: #FF5F6D;
-
-    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);
-
-    background: linear-gradient(to right, #FFC371, #FF5F6D);
-
-
-} */
-
-
+/* 
 
 body {
     background: #E0EAFC;
-    /* fallback for old browsers */
+   
     background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
-    /* Chrome 10-25, Safari 5.1-6 */
+   
     background: linear-gradient(to right, #CFDEF3, #E0EAFC);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-}
+} */
 
 .desktop-top-bannner {
     display: block;
@@ -64,8 +55,8 @@ body {
 }
 
 .banner-search {
-    background-image: url('../../images/notebook.svg');
-    height: 55vh;
+    background-image: url("https://static.ncdn.in/public/images/notebook.svg");
+    height: 70vh;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -78,8 +69,7 @@ form.example input[type=text] {
     font-size: 17px;
     border:  none !important;
     border-radius: 2px 0px 0px 2px;
-    float: left;
-    width: 90%;
+    width: 70%;
     background: #ffff;
     border-right: none;
     text-align: center;
@@ -90,7 +80,6 @@ form.example input[type=text]:focus {
 }
 
 form.example button {
-    float: left;
     width: 10%;
     padding: 5px;
     background: #ffff;
@@ -137,9 +126,8 @@ form.example::after {
     .banner-search {
         padding: 5%;
         background-size: cover;
-        height: 40vh !important;
-        margin-top: 15%;
-        /* display: inline-block */
+        height: 50vh !important;
+        margin-top: 5%;
         display: block;
         justify-content: top;
         align-items: top;
@@ -162,5 +150,12 @@ form.example::after {
 
         padding: 5px 0px;
     }
+
+    form.example input[type=text] {
+       
+        width: 90%;
+        
+    }
+    
 
 }

@@ -53,7 +53,7 @@ $(document).ready(function () {
                     $(".public-now-row").append(`
                         <div class="col-md-3 my-2">
                             <a href="${ad1.link}"> 
-                                    <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item">
+                                    <div class="card shadow border-0 rounded h-100 wow public-notes-item">
                                     <div class="card-header border-0 bg-white">
                                     <p class="card-title"> <span class="text-danger" style="font-weight:bold">Ad </span>  ${ad1.name.substring(0, 80)} </p>
                                     </div>
@@ -95,7 +95,7 @@ $(document).ready(function () {
                             $(".public-now-row").append(`
                         <div class="col-md-3 my-2">
                             <a href="/notes/${id}"> 
-                                    <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item" data-id="${id}">
+                                    <div class="card shadow border-0 rounded h-100 wow  public-notes-item" data-id="${id}">
                                         <div class="card-header border-0 bg-white">
                                             <p class="card-title"> ${name} </p>
                                         </div>
@@ -120,7 +120,7 @@ $(document).ready(function () {
                                                         <small>  ${pages} </small>
                                                         </span>
                                                     <span class="mx-1">
-                                                        <i class="fa fa-clock-o mx-1"></i>
+                                                        <i class="fa fa-clock mx-1"></i>
                                                         <small> ${actual_time} </small>
                                                     </span>
                                                 </p>

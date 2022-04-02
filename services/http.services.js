@@ -5,10 +5,14 @@ const postRequest = (api_path) => {
     return new Promise((resolve, reject) => {
         ajax(api_endpoint)
             .post(api_path)
-            .send().then((response) => {
-                resolve(response);
-            }).catch((error) => {
-                reject(error);
+            .send()
+            .expect(200)
+            .end(function (err, response) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(response);
+                }
             });
     });
 }
@@ -17,11 +21,15 @@ const getRequest = (api_path) => {
     return new Promise((resolve, reject) => {
         ajax(api_endpoint)
             .get(api_path)
-            .send().then((response) => {
-                resolve(response);
-            }).catch((error) => {
-                reject(error);
-            })
+            .send()
+            .expect(200)
+            .end(function (err, response) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(response);
+                }
+            });
     });
 }
 
@@ -30,11 +38,15 @@ const getRequestWithToken = (api_path, token) => {
         ajax(api_endpoint)
             .get(api_path)
             .set("Authorization", token)
-            .send().then((response) => {
-                resolve(response);
-            }).catch((error) => {
-                reject(error);
-            })
+            .send()
+            .expect(200)
+            .end(function (err, response) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(response);
+                }
+            });
     });
 }
 

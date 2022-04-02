@@ -43,8 +43,8 @@ $(document).ready(function () {
             $(".user-icon-box img").attr("src", profile_pic);
             $(".navbar-user-pic").attr("src", profile_pic);
         } else {
-            $(".user-icon-box img").attr("src", "/images/dummy/user_dummy.jpg");
-            $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
+            $(".user-icon-box img").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
+            $(".navbar-user-pic").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
         }
     };
 

@@ -22,13 +22,13 @@ html(lang="en-US")
     meta(name='twitter:site' content='@real_notesocean')
     meta(name='twitter:title' content=`Notes Ocean`)
     meta(name='twitter:description' content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
-    meta(name='twitter:image' content=`https://notesocean.com/logo.png`)
+    meta(name='twitter:image' content=`https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-retina-152x152.png`)
 
     include includes/bootstrap
     //- include includes/amplitude 
     style
       include ../public/stylesheets/subpages/index.css
-    link(rel="manifest" href="/manifest.webmanifest")
+    link(rel="manifest" href="https://static.ncdn.in/public/manifest.webmanifest")
     //- schema .org
     script(type="application/ld+json").
       {
@@ -79,74 +79,80 @@ html(lang="en-US")
       include ./includes/homeheader
     section.banner-search
       .headings.text-center
-        h1.animate__animated.animate__fadeInUp Find the Perfect 
+        h1.animate__animated.animate__fadeInUp.my-4 Find the Perfect 
           span.public Notes
-        p.animate__animated.animate__fadeInUp
-          | Notesocean is the best destination for students
+        p.animate__animated.animate__fadeInUp Notesocean is the best destination for students
           br
-          |  to find perfect notes for every subjects , chapters &amp; courses.
+          span to find perfect notes for every subjects , chapters &amp; courses.
         br
         form.example.animate__animated.animate__fadeInUp(action='/search')
           input(type='text' placeholder='search your notes' name='query')
           button(type='submit')
             i.fa.fa-search
-
-
+        .realted-searches.mt-2
+          a(href="/search?query=engineering").text-danger.mx-1 
+            small Engineeering Notes
+          a(href="/search?query=class+12th").text-danger.mx-1 
+            small Class 12th Notes
+          a(href="/search?query=cbse").text-danger.mx-1 
+            small CBSE Notes
+          a(href="/search?query=ncrt").text-danger.mx-1 
+            small NCRT Notes
     section
-      div
-        .row.public-now-row
-          - for (var i = 0; i < data.length;i++) {
-            - let name  = data[i].product.name;
-            - if (name.length > 80)  name = name.substring(0,80)+"..";
-            - let thumbnails = data[i].product.thumbnails.split(",")[0];
-            - let views = data[i].product.views+" views";
-            - let id = data[i].product.id;
-            - let timestamp = data[i].product.timestamp;
-            - let pages = data[i].product.pages +" Pages";
-            - let actual_time = getTime.get(timestamp);
-            - let seoUrl = url.make(name);
-            //- user details
-            - let full_name = data[i].user.firstName+" "+data[i].user.lastName;
-            - let user_id = data[i].user.id;
-            - let profilePic = data[i].user.profileImage;
-            -var  pic;
-            - if(profilePic!==null) pic = profilePic.split(",")[0];
-            - else pic = "/images/user.jfif";  
+      .row.public-now-row
+        - for (var i = 0; i < data.length;i++) {
+          - let name  = data[i].product.name;
+          - if (name.length > 80)  name = name.substring(0,80)+"..";
+          - let thumbnails = data[i].product.thumbnails.split(",")[0];
+          - let views = data[i].product.views+" views";
+          - let id = data[i].product.id;
+          - let timestamp = data[i].product.timestamp;
+          - let pages = data[i].product.pages +" Pages";
+          - let actual_time = getTime.get(timestamp);
+          - let seoUrl = url.make(name);
+          //- user details
+          - let full_name = data[i].user.firstName+" "+data[i].user.lastName;
+          - let user_id = data[i].user.id;
+          - let profilePic = data[i].user.profileImage;
+          -var  pic;
+          - if(profilePic!==null) pic = profilePic.split(",")[0];
+          - else pic = "https://static.ncdn.in/public/images/user.jfif";  
 
-            .col-md-3.my-2
-              a(href="/notes/"+id)
-                .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id=id)
-                  .card-header.border-0.bg-white
-                    p.card-title #{name}
-                  //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
-                  .card-body.border-0(style=`background-image:url(${(thumbnails)})`).notes-thumbnails
-                  .card-footer.border-0.bg-white
-                    .row
-                      .col-12.dflex.justify-content-center
-                        a(href="/profile/"+user_id)
-                          img(src=pic,alt=full_name).user-image
-                        span.card-text
-                          a(href="/profile/"+user_id).mx-2.user-name-text=full_name
-                      .col-12
-                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                        p.card-text.notes-details-text
-                          span
-                            i.fa.fa-globe.mx-1
-                            small=views
-                          span.mx-1
-                            i.fa.fa-file.mx-1 
-                            small=pages
-                          span.mx-1
-                            i.fa.fa-clock-o.mx-1
-                            small=actual_time
-          - }    
+          .col-md-3.my-2
+            a(href="/notes/"+id)
+              .card.shadow.border-0.rounded.h-100.wow.public-notes-item(data-id=id)
+                .card-header.border-0.bg-white
+                  p.card-title #{name}
+                //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
+                .card-body.border-0(style=`background-image:url(${(thumbnails)})`).notes-thumbnails
+                .card-footer.border-0.bg-white
+                  .row
+                    .col-12.dflex.justify-content-center
+                      a(href="/profile/"+user_id)
+                        img(src=pic,alt=full_name).user-image
+                      span.card-text
+                        a(href="/profile/"+user_id).mx-2.user-name-text=full_name
+                    .col-12
+                      //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                      p.card-text.notes-details-text
+                        span
+                          i.fa.fa-globe.mx-1
+                          small=views
+                        span.mx-1
+                          i.fa.fa-file.mx-1 
+                          small=pages
+                        span.mx-1
+                          i.fa.fa-clock.mx-1
+                          small=actual_time
+        - }    
 
     include includes/footer
     script(src="https://static.ncdn.in/vendor/wow/wow.min.js")
+    script.
+      new WOW().init();
     script
       include ../public/javascripts/common.js
     script
       include ../public/javascripts/subpages/index.js
 
-    script.
-      new WOW().init();
+
