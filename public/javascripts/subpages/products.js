@@ -305,8 +305,9 @@ $(document).ready(function () {
                 name: productData.product.name,
                 thumbnail: productData.product.thumbnails,
                 product_id: productData.product.id,
-                timestamp: productData.product.timestamp,
-                view: productData.product.views,
+                timestamp: getTime(productData.product.timestamp),
+                views: productData.product.views,
+                pages: productData.product.pages,
                 user: {
                     firstName: productData.users.firstName,
                     lastName: productData.users.lastName,
