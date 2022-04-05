@@ -5,21 +5,19 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Create new collections
-        include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
-        link(rel="stylesheet" href="/stylesheets/loader.css")
+        include ../../includes/dashcommon
+        style
+            include ../../../public/stylesheets/dashboard/collection/createCollection.css
     body
         header
             include ../../includes/dashHeader
         section.main-section
             .row
                 include ../../includes/dashAside
-                .col-10.p-2.content.shadow.second-side
-                    .container
-                        h3 Create new collections
-                        .container.pt-4
-
+                .col-10.second-side.shadow
+                    .container-fluid
+                        h3.heading Create new collection
+                        div.mt-3
                             form.form
                                 .form-group.w-50.my-2
                                     label Collection Name
@@ -35,9 +33,7 @@ html(lang="en")
                                         p.invalid-title-error Collection descriptions should be atleast 20 characters
                                     .valid-feedback
                                         p looks good
-                                .form-group.w-50.my-2
-                                    label.card-text Select collection Banner
-                                        img.card-img-top.select-banner-img(src="/images/dummy/collection_thumbnail.png" alt="").w-100.border
+
                             .notes-container
                                 label Select Public Notes
                                 .row.collection-notes-row
@@ -67,48 +63,48 @@ html(lang="en")
                                 button.btn.btn-primary.submit-btn
                                     span Create collection
                                     i.fa.fa-plus.mx-1 
-                        .modal(tabindex='-1')#select-public-notes-modal.fade
-                            .modal-dialog.modal-fullscreen
-                                .modal-content
-                                    .modal-header
-                                        .div 
-                                            h5.modal-title Select Public Notes                                   
-                                        .div 
-                                            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-                                    .modal-body
-                                        form
-                                            .row.public-notes-row-modal
-                                                //- .col-md-2
-                                                //-     .form-check.form-check-inline
-                                                //-     .card.border-0.shadow.rounded
-                                                //-         .card-header.bg-white.border-0
-                                                //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
-                                                //-         img(src="/images/dummy/collection.png").card-img-top
-                                                //-         .card-body.border-0
-                                                //-             p.card-text Lorem ipsum dolor sit amet.
-                                                //- .col-md-2
-                                                //-     .form-check.form-check-inline
-                                                //-     .card.border-0.shadow.rounded
-                                                //-         .card-header.border-0.bg-white
-                                                //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
-                                                //-         img(src="/images/dummy/collection.png").card-img-top
-                                                //-         .card-body.border-0
-                                                //-            p.card-text Lorem ipsum dolor sit amet.
+            .modal(tabindex='-1')#select-public-notes-modal.fade
+                .modal-dialog.modal-fullscreen
+                    .modal-content
+                        .modal-header
+                            .div 
+                                h5.modal-title Add Notes in collections                                  
+                            .div 
+                                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-body
+                            form
+                                .row.public-notes-row-modal
+                                    //- .col-md-2
+                                    //-     .form-check.form-check-inline
+                                    //-     .card.border-0.shadow.rounded
+                                    //-         .card-header.bg-white.border-0
+                                    //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
+                                    //-         img(src="/images/dummy/collection.png").card-img-top
+                                    //-         .card-body.border-0
+                                    //-             p.card-text Lorem ipsum dolor sit amet.
+                                    //- .col-md-2
+                                    //-     .form-check.form-check-inline
+                                    //-     .card.border-0.shadow.rounded
+                                    //-         .card-header.border-0.bg-white
+                                    //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
+                                    //-         img(src="/images/dummy/collection.png").card-img-top
+                                    //-         .card-body.border-0
+                                    //-            p.card-text Lorem ipsum dolor sit amet.
 
-                                        .row.loading-public-notes
-                                            center 
-                                                .lds-roller
-                                                    div
-                                                    div
-                                                    div
-                                                    div
-                                                    div
-                                                    div
-                                                    div
-                                                    div
-                                                p Your public notes are loading... please wait...    
-                                    .modal-footer
-                                        button.btn.btn-primary.collection-add-btn Select
+                            .row.loading-public-notes
+                                center 
+                                    .lds-roller
+                                        div
+                                        div
+                                        div
+                                        div
+                                        div
+                                        div
+                                        div
+                                        div
+                                    p Your public notes are loading... please wait...    
+                        .modal-footer
+                            button.btn.btn-primary.collection-add-btn Select
     script(src='/javascripts/common.js')
     script(src="/vendors/hammer/hammer.min.js") 
     script(src='/javascripts/dashboard/dashboard.js')

@@ -1,0 +1,29 @@
+
+.search-container{
+    width:50%;
+}
+.search-container input{
+    border-radius: 0px;
+}
+input,textarea{
+    border-radius: 0px !important;
+}
+input:focus,input:active,input:hover,textarea:focus,textarea:active,textarea:hover{
+    border-radius: 0px !important;
+    outline:none !important;
+    box-shadow: none !important;
+}
+.modal-content{
+    border-radius: 2px !important;
+    outline:none !important;
+    background-clip: none !important;
+}
+@media(max-width:768px){
+    .second-side .header-text{
+        display: none;
+    }
+    .search-container{
+        width:100%;
+        margin-top: 10px;
+    }
+}

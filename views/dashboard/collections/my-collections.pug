@@ -4,11 +4,10 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Collections
-        include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
-        link(rel="stylesheet" href="/stylesheets/loader.css")
+        title Collections | Notes Ocean
+        include ../../includes/dashcommon
+        style
+            include ../../../public/stylesheets/dashboard/collection/myCollection.css
     body
         header
             include ../../includes/dashHeader
@@ -16,18 +15,20 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-10.second-side
-                    .d-flex.justify-content-between
+                    .heading-container.d-flex.justify-content-between
                         div
-                            h2.header-title Private Notes
-                            small.header-text These notes are not publically accessible and you will be get any rewards
-                            br  
-                            small.header-text This is your  private cloud you can store multiple types of file
+                            h2.header-title Collections
+                            small.header-text Collections and their notes is publically visible to everyone
                         div
-                            a(href="/dashboard/collections/new")
-                                button.btn-primary.add-new.btn-sm
-                                    i.fa.fa-plus.m-1
-                                    span New Collection
-                    .no-collections
+                            button.btn-primary.btn.create-collection-btn
+                                i.fa.fa-plus.m-1
+                                span New
+                    .search-container
+                        form
+                            .input-group
+                                input(type="search" placeholder="Search collections" aria-label="Search collections").form-control
+                                button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
+                    .no-collections.d-none
                         .card.border-0.p-0
                             .card-content.p-0
                                 center
@@ -48,7 +49,29 @@ html(lang="en")
                                     div
                                     div
                                 p.loading-colletion-text Your Collections are loading... please wait...
-        script(src='/javascripts/common.js')
-        script(src="/vendors/hammer/hammer.min.js") 
-        script(src='/javascripts/dashboard/dashboard.js')
-        script(src="/javascripts/dashboard/collections/my-collections.js")
+                    .collections-list-container
+                .modal.create-collections-modal
+                    .modal-dialog.modal-dialog-centered
+                        .modal-content.border-0
+                            form
+                                .modal-header.border-0
+                                    h6.modal-title Create Collection
+                                .modal-body.border-0
+
+                                    .form-group.my-2
+                                        label Collection Name
+                                        input(type="text" maxlength="300" minlength="20" name="collectionName").form-control
+                                        .valid-feedback
+                                            span Looks Good
+                                        .invalid-feedback
+                                            span Name should not be empty
+                                    .form-group.my-2
+                                        label Collection Descriptions
+                                        textarea( rows="5" name="collectionDescription").form-control
+                                .modal-footer.border-0
+                                    button.btn.btn-dark(type='button' data-bs-dismiss='modal') Cancel
+                                    button.btn.btn-primary(type='submit') Create 
+
+        script(src='https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js')
+        script
+            include ../../../public/javascripts/dashboard/collections/my-collections.js

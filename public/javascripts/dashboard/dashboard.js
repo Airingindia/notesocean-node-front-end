@@ -1,40 +1,37 @@
 $(document).ready(function () {
-  const token = localStorage.getItem("token");
+  var token = localStorage.getItem("token");
   if (token !== null) {
+    var userId = token.split(".")[1];
+    userId = JSON.parse(atob(userId)).userId;
+    amplitude.getInstance().setUserId(userId);
+
     // check valid token
-    $.ajax({
-      type: "GET",
-      url: localStorage.getItem("api") + "/validate",
-      headers: {
-        Authorization: token,
-      },
-      success: function (data) {
-        if (data == true) {
-          const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
-          localStorage.setItem("userid", userinfo);
-          // console.log(userinfo);
-          amplitude.getInstance().setUserId(userinfo);
-        } else {
-          clearAllBrowserData();
-        }
-      },
-      error: function (err) {
-        clearAllBrowserData();
-      },
-    });
+    // $.ajax({
+    //   type: "GET",
+    //   url: localStorage.getItem("api") + "/validate",
+    //   headers: {
+    //     Authorization: token,
+    //   },
+    //   success: function (data) {
+    //     if (data == true) {
+    //       const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
+    //       localStorage.setItem("userid", userinfo);
+    //       // console.log(userinfo);
+    //       amplitude.getInstance().setUserId(userinfo);
+    //     } else {
+    //       clearAllBrowserData();
+    //     }
+    //   },
+    //   error: function (err) {
+    //     clearAllBrowserData();
+    //   },
+    // });
   } else {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userinfo");
-    localStorage.removeItem("userdata");
-    setCookie("token", "", 0);
-    window.location = "/session-expire";
+    clearAllBrowserData();
   }
 
   $(".logout-btn").click(function () {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userinfo");
-    localStorage.removeItem("userdata");
-    setCookie("token", "", 0);
+
     $.ajax({
       type: "GET",
       url: localStorage.getItem("api") + "/authenticate/logout",
@@ -49,7 +46,7 @@ $(document).ready(function () {
             Authorization: token,
           },
           success: function (data) {
-            window.location = "/account/login";
+            clearAllBrowserData();
           },
           error: function (err) {
             window.location = "/account/login";
