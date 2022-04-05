@@ -54,11 +54,12 @@ $(document).ready(function () {
                         <div class="col-md-3 my-2">
                             <div class="card shadow border-0 rounded h-100 wow public-notes-item">
                                 <ins class="adsbygoogle"
-                                style="display:inline-block;width:336px;height:280px"
+                                style="display:block"
                                 data-ad-client="ca-pub-3834928493837917"
-                                data-ad-slot="7023455181"
-                                data-ad-test="on">
-                                </ins>
+                                data-ad-slot="9881514825"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"
+                                data-adtest="on"></ins>
                             </div>
                            
                         </div>
