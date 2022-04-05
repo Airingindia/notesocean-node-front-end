@@ -52,7 +52,7 @@ $(document).ready(function () {
                     //  ad1 append
                     $(".public-now-row").append(`
                         <div class="col-md-3 my-2">
-                            <div class="card shadow border-0 rounded h-100">
+                            <div class="card shadow border-0 rounded h-100 wow public-notes-item">
                                 <ins class="adsbygoogle"
                                 style="display:inline-block;width:336px;height:280px"
                                 data-ad-client="ca-pub-3834928493837917"
@@ -60,8 +60,10 @@ $(document).ready(function () {
                                 data-ad-test="on">
                                 </ins>
                             </div>
+                           
                         </div>
                     `);
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                     // ad2 place
                 },
                 success: function (data) {
