@@ -1,4 +1,22 @@
+//  ad blocker code snippet credit: https://stackoverflow.com/questions/4869154/how-to-detect-adblock-on-my-website
+async function detectAdBlock() {
+    let adBlockEnabled = false
+    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    try {
+        await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
+    } catch (e) {
+        adBlockEnabled = true
+    } finally {
+        if (adBlockEnabled) {
+            document.querySelector(".main-section").remove();
+            document.querySelector(".ad-blocker-detected").classList.remove("d-none");
+            // alert("blocked");
+        }
+    }
+}
+
 $(document).ready(function () {
+    detectAdBlock();
     amplitude.getInstance().logEvent("change page ", {
         path: window.location.href
     });

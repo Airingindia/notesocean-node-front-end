@@ -82,9 +82,6 @@ html(lang="en-US")
   body
     header
       include ./includes/homeheader
-    section 
-
-
     section.w-100.banner-search
       .headings.text-center
         h1.animate__animated.animate__fadeInUp.my-4 Find the Perfect 
@@ -169,9 +166,7 @@ html(lang="en-US")
         //-               span.mx-1
         //-                 i.fa.fa-clock.mx-1
         //-                 small 1 hours ago
-
-
-    section.w-100.mt-3
+    section.w-100.main-section.mt-3
       h2.mx-3 Recent uploaded notes
       .row.public-now-row
         - for (var i = 0; i < data.length;i++) {
@@ -219,6 +214,46 @@ html(lang="en-US")
                           i.fa.fa-clock.mx-1
                           small=actual_time
         - }    
+    section.ad-blocker-detected.mt-3.d-none
+      .container
+        .row
+          .col-md-5
+            img(src="/images/illustrations/learning.svg").w-100
+          .col-md-7
+            h1.text-danger Oops!
+            h2 It seems, you are using ad blocker
+
+            br
+            h5 How ad blocker effect our student and us
+            p Our students doing hardwroking and continues uploading notes to help other students and they earn some pocket money, if you use ad blocker we will face problem to pay them.
+            p You will lose great service , where you get freely premium notes and study material , other website/app may charge you cost.
+            p You don't have to pay any cost to access all notes , we and our students only earn from advertising free
+            p Plese help students to do hardwork and support each other
+
+            h6 Get help form here to disable ad blocker
+            a(href="https://www.wikihow.com/Disable-Your-Ad-Blocker" target="_blank" style="text-decoration:underline;").text-danger Disable Ad blocker
+
+
+
+    section.javascript-blocked
+      div.row.mt-4
+        .col-md-5
+          img(src="/images/illustrations/nojs.svg").w-100
+        .col-md-7
+          div.container
+            h3.mt-2 Sorry, we can't load more content because 
+              span.text-danger  Javascript disabled
+            p For full functionality of this site it is necessary to enable JavaScript. 
+            a(href="https://www.enablejavascript.io/" style="text-decoration:underline;color:blue") Here are the  instructions how to enable JavaScript in your web browser
+            br
+            br
+
+            h4 Here some tutorial videos that can help you
+            a(href="https://www.youtube.com/watch?v=c2whlEdtlUA" style="text-decoration:underline;color:blue") Enable javascript in chrome Android
+            br
+            a(href="https://www.youtube.com/watch?v=jxUU4YltU98" style="text-decoration:underline;color:blue") Enable javascript in chrome Windows
+
+
     include includes/footer
     script(src="/socket.io/socket.io.js")
     script(src="/vendors/swiper/swiper-bundle.min.js")
