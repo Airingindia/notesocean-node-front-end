@@ -1,30 +1,4 @@
 $(document).ready(function () {
-    const ads = [
-        {
-            name: "Class 10 Sanskrit Shemushi + Class 10 Sanskrit Workbook Abhyaswan Bhav",
-            timestamp: 1647108474,
-            image: "https://admedia.notesocean.com/amazon/sanskrit.png",
-            link: "https://amzn.to/3JaL7W7"
-        },
-        {
-            name: "CBSE All In One Social Science Class 10 for 2022 Exam (Updated edition for Term 1 ",
-            timestamp: 1647108474,
-            image: "https://admedia.notesocean.com/amazon+1.png",
-            link: "https://amzn.to/3tR04Gg"
-        },
-        {
-            name: " Basic Electrical Engineering | First Edition | By Pearson",
-            timestamp: 1647108474,
-            image: "https://m.media-amazon.com/images/P/B08153W5PZ.01._SCLZZZZZZZ_SX500_.jpg",
-            link: "https://amzn.to/3Jk4g7O"
-        },
-        {
-            name: "Mechanics of Materials (SI Edition) Paperback – 5 April 2018",
-            timestamp: 1647108474,
-            image: "https://m.media-amazon.com/images/I/510Kc+VbQdL._SL160_.jpg",
-            link: "https://amzn.to/3CGsSVV"
-        },
-    ];
     var access = 1;
     var last_access = 0;
     function scrollFunction() {
@@ -47,11 +21,10 @@ $(document).ready(function () {
                 url: localStorage.getItem("api") + "/products/feeds/" + page,
                 beforeSend: function () {
                     //  ads place
-                    let ad1 = ads[last_access - 1];
-                    let ad2 = ads[last_access];
+
                     //  ad1 append
                     $(".public-now-row").append(`
-                        <div class="col-md-3 my-2">
+                        <div class="col-md-3 my-2 content-item">
                             <div class="card shadow border-0 rounded h-100 wow public-notes-item">
                                 <ins class="adsbygoogle"
                                 style="display:block"
@@ -65,10 +38,12 @@ $(document).ready(function () {
                         </div>
                     `);
                     (adsbygoogle = window.adsbygoogle || []).push({});
+
+
                     // ad2 place
                 },
                 success: function (data) {
-                    // console.log(data);
+
                     if (data.requested.length !== 0) {
                         access++;
                         for (let i = 0; i < data.requested.length; i++) {

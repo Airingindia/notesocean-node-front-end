@@ -5,10 +5,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Private Notes | Notes Ocean
-        include ../../includes/bootstrap
-
-        style
-            include ../../../public/stylesheets/loader.css
+        include ../../includes/dashcss
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
     body
@@ -83,12 +80,6 @@ html(lang="en")
                                 .card-body.p-0.viewer
 
 
-        script(src="/vendors/hammer/hammer.min.js") 
-        script(src="/vendors/sweetalert/sweetalert.min.js")
-        script(src="/vendors/sweetalert/sweetalert.min")
-        script 
-            include ../../../public/javascripts/common.js
-        script 
-            include ../../../public/javascripts/dashboard/dashboard.js
+        include ../../includes/dashjs
         script
             include ../../../public/javascripts/dashboard/private-notes/private-notes.js

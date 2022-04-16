@@ -5,7 +5,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Collections | Notes Ocean
-        include ../../includes/dashcommon
+        include ../../includes/dashcss
         style
             include ../../../public/stylesheets/dashboard/collection/myCollection.css
     body
@@ -28,15 +28,15 @@ html(lang="en")
                             .input-group
                                 input(type="search" placeholder="Search collections" aria-label="Search collections").form-control
                                 button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
-                    .no-collections.d-none
+                    .no-collections.w-100.d-none
                         .card.border-0.p-0
                             .card-content.p-0
                                 center
                                     img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
                                     .card-body
                                         h2 No Collections created Yet
-                                        a(href="/dashboard/collections/new")
-                                            button.btn.btn-primary Create New
+                                        button.btn.btn-primary.create-collection-btn Create New
+
                         .row.loading-collections
                             center 
                                 .lds-roller
@@ -49,7 +49,37 @@ html(lang="en")
                                     div
                                     div
                                 p.loading-colletion-text Your Collections are loading... please wait...
-                    .collections-list-container
+                    .collections.border-0
+                        ol.list-group.border-0.collections-rows
+                        //-     li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                        //-         a(href="#") 
+                        //-             .ms-2.me-auto
+                        //-                 .fw-bold  Subheading
+                        //-                 span Cras justo odio
+                        //-         span.badge.bg-danger.rounded-pill 14
+                        //-     li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                        //-         a(href="#") 
+                        //-             .ms-2.me-auto
+                        //-                 .fw-bold  Subheading
+                        //-                 span Cras justo odio
+                        //-         span.badge.bg-danger.rounded-pill 14
+                        //-     li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                        //-         a(href="#") 
+                        //-             .ms-2.me-auto
+                        //-                 .fw-bold  Subheading
+                        //-                 span Cras justo odio
+                        //-         span.badge.bg-danger.rounded-pill 14
+                    .loading-collections
+                        .lds-roller
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div 
+
                 .modal.create-collections-modal
                     .modal-dialog.modal-dialog-centered
                         .modal-content.border-0
@@ -60,7 +90,7 @@ html(lang="en")
 
                                     .form-group.my-2
                                         label Collection Name
-                                        input(type="text" maxlength="300" minlength="20" name="collectionName").form-control
+                                        input(type="text" maxlength="300" minlength="10" name="collectionName").form-control
                                         .valid-feedback
                                             span Looks Good
                                         .invalid-feedback
@@ -71,7 +101,22 @@ html(lang="en")
                                 .modal-footer.border-0
                                     button.btn.btn-dark(type='button' data-bs-dismiss='modal') Cancel
                                     button.btn.btn-primary(type='submit') Create 
-
-        script(src='https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js')
+                .modal.collections-context-menu.fade
+                    .modal-dialog.modal-dialog-centered
+                        .modal-content.border-0
+                            .modal-header.border-0
+                                .modal-title Options
+                            .modal-body.border-0.px-0
+                                .list-group.border-0.p-0
+                                    a.list-group-item.list-group-item-action.border-0(href='#')#delete-collections
+                                        i.fa.fa-trash.mx-1
+                                        span Delete 
+                                    a.list-group-item.list-group-item-action.border-0(href='#')#edit-collections
+                                        i.fa.fa-edit.mx-1
+                                        span Edit 
+                                    a.list-group-item.list-group-item-action.border-0(href='#')#preview-collections 
+                                        i.fa.fa-eye.mx-1
+                                        span Preview 
+        include ../../includes/dashjs
         script
             include ../../../public/javascripts/dashboard/collections/my-collections.js

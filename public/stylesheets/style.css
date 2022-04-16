@@ -1,4 +1,3 @@
-
 .mobile-logo {
     display: none;
 }
@@ -11,17 +10,15 @@
 .mobile-search-box {
     display: none;
 }
+.dark-logo{
+    display: none;
+}
 
 @media (max-width: 768px) {
-    /* .mobile-logo {
-        display: block;
+  
+    .desktop-logo{
         width: 50%;
     }
-
-    .desktop-logo {
-        display: none;
-    } */
-
     .upload-box {
         display: none;
     }
@@ -89,9 +86,8 @@ header {
 
 .user-icon-box img {
     border-radius: 50% !important;
-    width: 35px;
-    height: 35px;
-    margin: 5px;
+    width: 30px;
+    height: 30px;
 }
 
 textarea:focus,

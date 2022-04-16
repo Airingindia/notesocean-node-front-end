@@ -36,6 +36,8 @@ app.use(function (req, res, next) {
   res.render("notfound");
 });
 
+
+
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.message);

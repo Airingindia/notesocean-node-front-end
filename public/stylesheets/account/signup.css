@@ -1,9 +1,37 @@
 @import "../animate.css";
 
+
+
+.btn-grad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+.btn-grad {
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+.link{
+   color: #4158D0 !important;
+
+}
+
+
 /* Using a string */
 .form-group {
     margin: 40px 0;
 }
+
+
 
 .form-group input {
     border: none;
@@ -11,7 +39,7 @@
     box-shadow: none;
     border-bottom: 1px solid #323232;
     border-radius: 0;
-    padding: 0 30px;
+    padding: 10px 40px;
 }
 
 .form-group label {
@@ -21,14 +49,15 @@
 .form-group i {
     position: absolute;
     font-size: 20px;
+    margin: 10px !important;
 }
 
 .form-group #right {
     left: 84%;
 }
 
-form {
-    width: 70%;
+.signup-form,.login-form {
+    width: 50%;
 }
 
 textarea:focus,
@@ -84,9 +113,9 @@ section .btn {
 
 }
 
-@media (max-width:812px) {
+@media (max-width:1000px) {
     .desktop-img {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -101,3 +130,26 @@ section .btn {
     z-index: 999;
     background-color: white;
 }
+
+
+.main-section .row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-section .desktop-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.main-section .desktop-img img{
+    width: 100%;
+}
+
+/*  dark mode  */
+
+
+/* form control */

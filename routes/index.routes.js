@@ -10,6 +10,11 @@ const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
 
+
+// test page route
+router.get("/test", (req, res, next) => {
+  res.render("test");
+})
 // homepage route
 router.get('/', function (req, res, next) {
   homeControllers.getFeed().then((data) => {
@@ -26,8 +31,6 @@ router.get('/', function (req, res, next) {
 });
 
 // notes page route
-
-
 
 router.get("/notes/:id", (req, res, next) => {
   var token = "";
@@ -108,7 +111,7 @@ router.get("/signup", (req, res, next) => {
   res.render("account/signup");
 });
 
-router.get("/collection/:collecton_id", async (req, res, next) => {
+router.get("/collections/:collecton_id", async (req, res, next) => {
   let collecton_id = req.params.collecton_id;
   if (!isNaN(collecton_id)) {
     const collection = await collectionController.getCollection(collecton_id);

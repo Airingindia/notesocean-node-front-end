@@ -5,14 +5,78 @@ async function detectAdBlock() {
     try {
         await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
     } catch (e) {
-        adBlockEnabled = true
+        adBlockEnabled = true;
+        amplitude.getInstance().logEvent("adblocked", {
+            lavel: "low"
+        });
     } finally {
         if (adBlockEnabled) {
-            document.querySelector(".main-section").remove();
-            document.querySelector(".ad-blocker-detected").classList.remove("d-none");
-            // alert("blocked");
+            if (window.location.pathname.indexOf("dashboard") == 1) {
+                document.querySelector(".second-side").innerHTML = `
+                <div class="text-center" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:100%">
+                <h1 class="text-danger"> <i class="fa fa-info-circle text-dager"> </i> Opps! </h1>
+                <h2  class="text-danger"> Failed to Connect Server </h2>
+                        <p> Your Adblocker or third app party are blocking the request 
+                        <br>
+                        They can intercept your browsing data , please remove that application or try diffrent browser </p>
+                </div>
+               `;
+            } else {
+                document.querySelector(".main-section").remove();
+                document.querySelector(".ad-blocker-detected").classList.remove("d-none");
+            }
         }
     }
+}
+//  ad blocker snippet - https://www.geeksforgeeks.org/how-to-detect-adblocker-using-javascript/
+function adb() {
+    let fakeAd = document.createElement("div");
+    fakeAd.className = "textads banner-ads banner_ads ad-unit ad-zone ad-space adsbox"
+
+    fakeAd.style.height = "1px"
+
+    document.body.appendChild(fakeAd)
+
+    let x_width = fakeAd.offsetHeight;
+    let msg = document.getElementById("msg")
+
+
+    if (x_width) {
+        detectAdBlock();
+    } else {
+        amplitude.getInstance().logEvent("adblocked", {
+            "lavel": "moderate"
+        });
+        if (window.location.pathname.indexOf("dashboard") == 1) {
+            document.querySelector(".second-side").innerHTML = `
+            <div class="text-center" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:100%">
+                    <h1 class="text-danger"> <i class="fa fa-info-circle text-dager"> </i> Opps! </h1>
+                    <h2  class="text-danger"> Failed to Connect Server </h2>
+                    <p> Your Adblocker or third app party blocking request 
+                    <br>
+                    They can intercept your files , please remove that application or try diffrent browser </p>
+                    
+            </div>
+           `;
+        } else {
+            document.querySelector(".main-section").remove();
+            document.querySelector(".ad-blocker-detected").classList.remove("d-none");
+        }
+
+    }
+}
+
+// adb();
+
+// detect dark mode snippet
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    amplitude.getInstance().logEvent("color-mode", {
+        mode: "dark"
+    });
+} else {
+    amplitude.getInstance().logEvent("color-mode", {
+        mode: "light"
+    });
 }
 
 $(document).ready(function () {
@@ -48,10 +112,13 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $(".user-icon-box").html(`<a href="/login"> <button class="btn btn-sm btn-primary navbar-login-btn"> <i  class="fa fa-user mx-1"> </i> Login</button> </a>`);
+            $("nav .login-button").removeClass("d-none");
+            $("nav .user-icon-box").addClass("d-none");
         }
     } else {
         showProfilePic();
+        $(".login-button").addClass("d-none");
+        $(".user-icon-box").removeClass("d-none");
     }
 
     function showProfilePic() {
@@ -61,6 +128,7 @@ $(document).ready(function () {
             $(".user-icon-box img").attr("src", profile_pic);
             $(".navbar-user-pic").attr("src", profile_pic);
         } else {
+
             $(".user-icon-box img").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
             $(".navbar-user-pic").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
         }

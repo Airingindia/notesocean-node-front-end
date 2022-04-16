@@ -4,7 +4,18 @@ const getUserCollection = async (collectionID) => {
     return response.body;
 }
 
+const setCollectionview = (collectionID) => {
+    return new Promise((resolve, reject) => {
+        httpServices.post("/collections/" + collectionID).then((response) => {
+            resolve(response);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+
 
 module.exports = {
-    getCollection: getUserCollection
+    getCollection: getUserCollection,
+    addView: setCollectionview
 }

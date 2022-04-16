@@ -1,23 +1,18 @@
 style
     include ../../public//stylesheets/style.css
 nav
-    .d-flex.justify-content-between.pt-2
+    div.d-flex.justify-content-between.align-items-center
         .logo-box
             a(href="/")
                 //- img(src="/images/logo.png" width="40").mobile-logo
-                img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="80%" alt="notes ocean logo").desktop-logo.m-1
-        .search-box.w-50.d-none
-            form(action="/search")
-                .input-group
-                    input(type="search" placeholder="Ex- class 10th math notes" name="query").form-control
-                    button(type="submit" aria-label="search notes and collections ").btn.btn-outline-secondary
-                        i.fa.fa-search
+                img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.light-logo
+                img(src="/images/dark-log.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.dark-logo
         .user-box.d-flex.justify-content-between
-            div.upload-box.mx-3
+            div.upload-box
                 a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.text-light
                     i.fa.fa-cloud-upload(title="upload new notes").mx-1
                     span Upload Notes
-            div.mobile-search-box.m-2
+            div.mobile-search-box
                 i.fa.fa-search(title="Search notes").search-btn
                 i.fa.fa-times(title="close").search-btn-close
             div.user-icon-box

@@ -1,12 +1,15 @@
 style
-  include ../../public//stylesheets/style.css
+  include ../../public/stylesheets/style.css
+style
+    include ../../public/stylesheets/dark-mode.css
 //- link(rel='stylesheet' href='/stylesheets/style.css')
 nav
-  .container-fluid.d-flex.justify-content-between.pt-2
+  div.d-flex.justify-content-between.align-items-center
     .logo-box
       a(href="/")
         //- img(src="/images/logo.png" width="40").mobile-logo
-        img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="80%" alt="notes ocean logo").desktop-logo.m-1
+        img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.light-logo
+        img(src="/images/dark-log.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.dark-logo
     .search-box.w-50
       form(action="/search")
         .input-group
@@ -16,10 +19,17 @@ nav
     .user-box.d-flex.justify-content-between
       div.upload-box.mx-3
         a(href="/dashboard/public-notes/new")
-          i.fa.fa-cloud-upload(title="upload new notes")
-      div.mobile-search-box.m-2
+          .btn.btn-dark-outline
+            i.fa.fa-cloud-upload(title="upload new notes")
+            span 
+              small Upload Notes
+      div.mobile-search-box
         i.fa.fa-search(title="Search notes").search-btn
         i.fa.fa-times(title="close").search-btn-close
-      div.user-icon-box
+      div.login-button.d-flex.justify-content-center.align-items-center.mx-3.d-none
+        a(href="/dashboard").btn.btn-primary 
+          i.fa.fa-user.mx-2
+          span Login
+      div.user-icon-box.d-flex.justify-content-center.align-items-center.mx-2.d-none
         a(href="/dashboard")
           img(src="https://static.ncdn.in/public/images/dummy-user.jpeg" alt="notes ocean user image")

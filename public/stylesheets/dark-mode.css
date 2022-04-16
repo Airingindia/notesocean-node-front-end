@@ -1,0 +1,88 @@
+@media (prefers-color-scheme: dark) {
+    body,header,footer,.navbar,.footer{
+        background-color: #232225 !important;
+        border-color: #fff !important;
+    }
+    
+    /* form control */
+
+    
+    textarea:focus,
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="datetime"]:focus,
+    input[type="datetime-local"]:focus,
+    input[type="date"]:focus,
+    input[type="month"]:focus,
+    input[type="time"]:focus,
+    input[type="week"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    input[type="search"]:focus,
+    input[type="tel"]:focus,
+    input[type="color"]:focus,
+    .uneditable-input:focus {
+        border-color: none !important;
+        box-shadow: none;
+        outline: 0 none;
+    }
+
+
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    .uneditable-input {
+       background-color: black !important;
+       color: #FFFFFF !important;
+       border: none !important;
+    }
+
+    .shadow{
+        box-shadow: none !important;
+        /* border: 0.11px solid #cccc !important; */
+    }
+
+   
+
+    .form-group label {
+        color: #fff;
+    }
+
+    
+    .form-group i {
+      color: #fff;
+    }
+
+    /* text color */
+
+    h1,h2,h3,h4,h5,h6,span,a{
+        color:#eff3f0;
+    }
+
+    /* logo change */
+
+    .light-logo{
+        display: none !important;
+    }
+
+    .dark-logo{
+        display: block !important;
+    }
+
+    .btn{
+        color: #fff !important;
+    }
+}

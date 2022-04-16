@@ -1,0 +1,20 @@
+doctype html
+head
+    meta(charset='utf-8')
+    title Box Content Preview Demo
+    // polyfill.io only loads a Promise polyfill if your browser needs one
+    script(src='https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise')
+    // Latest version of Preview SDK for your locale
+    script(src='https://cdn01.boxcdn.net/platform/preview/2.84.0/en-US/preview.js')
+    link(rel='stylesheet' href='https://cdn01.boxcdn.net/platform/preview/2.84.0/en-US/preview.css')
+body
+    .preview-container(style='height:400px;width:575px')
+    script.
+        var preview = new Box.Preview();
+        preview.show({
+        token:"tIHTZUfFD0rCL3fanamwhA03xgSzPJpq",
+        container: '.preview-container',
+        showDownload: true,
+        file:"https://notesocean.com/1741/conceptual-framework-of-employment-relations-block-1-ms-24-unit-1.pdf"
+        // Comment out the following if you are using your own access token and file ID
+        });
