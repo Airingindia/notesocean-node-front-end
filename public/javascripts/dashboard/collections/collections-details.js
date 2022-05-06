@@ -1,53 +1,61 @@
 $(document).ready(function () {
     // get collection details
+
+
     const collection_id = window.location.pathname.split("/")[3];
-    $.ajax({
-        type: "GET",
-        url: localStorage.getItem("api") + "/collections/" + collection_id,
-        contentType: "application/json",
-        processData: false,
-        headers: {
-            Authorization: localStorage.getItem("token")
-        },
-        success: function (data) {
-            console.log(data);
-            if (data !== undefined) {
-                $(".collection-name").val(data.name);
-                $("textarea").val(data.description);
-                $(".select-banner-img").attr("src", data.thumbnails);
-                deleteCollection();
-                const box = $(".add-notes-box").parent();
-                var public_notes = data.products;
-                if (public_notes.length > 0) {
-                    for (let i = 0; i < public_notes.length; i++) {
-                        let note_id = public_notes[i].id;
-                        let note_thumbnails = public_notes[i].thumbnails;
-                        let name = public_notes[0].name;
-                        $(box).before(`<div class="col-md-2 my-3 public-notes-item" data-id="${note_id}">
-                    <div class="card h-100  rounded w-100">
-                    <img class="card-img-top" src="${note_thumbnails.split(",")[0]}" /><i class="fa fa-times-circle delete-note-from-collection"></i>
-                    <div class="card-body border-0"> </div>
-                        <div class="card-footer border-0 bg-white">
-                            <h6 class="card-title"> ${name}</h6>
+
+
+    function getCollectionDetails() {
+        $.ajax({
+            type: "GET",
+            url: localStorage.getItem("api") + "/collections/" + collection_id,
+            contentType: "application/json",
+            processData: false,
+            headers: {
+                Authorization: localStorage.getItem("token")
+            },
+            success: function (data) {
+                console.log(data);
+                if (data !== undefined) {
+                    $(".collection-name").val(data.name);
+                    $("textarea").val(data.description);
+                    $(".select-banner-img").attr("src", data.thumbnails);
+                    deleteCollection();
+                    const box = $(".add-notes-box").parent();
+                    var public_notes = data.products;
+                    if (public_notes.length > 0) {
+                        for (let i = 0; i < public_notes.length; i++) {
+                            let note_id = public_notes[i].id;
+                            let note_thumbnails = public_notes[i].thumbnails;
+                            let name = public_notes[0].name;
+                            $(box).before(`<div class="col-md-2 my-3 public-notes-item" data-id="${note_id}">
+                        <div class="card h-100  rounded w-100">
+                        <img class="card-img-top" src="${note_thumbnails.split(",")[0]}" /><i class="fa fa-times-circle delete-note-from-collection"></i>
+                        <div class="card-body border-0"> </div>
+                            <div class="card-footer border-0 bg-white">
+                                <h6 class="card-title"> ${name}</h6>
+                            </div>
                         </div>
-                    </div>
-                </div>`);
-                    };
-                    getAllPublicNotes();
+                    </div>`);
+                        };
+                        getAllPublicNotes();
+                    }
+
+                } else {
+                    $(".collection-removed").css({ display: "block" });
+                    $(".notes-details-row").addClass("d-none");
                 }
 
-            } else {
-                $(".collection-removed").css({ display: "block" });
-                $(".notes-details-row").addClass("d-none");
+
+
+            },
+            error: function (err) {
+                console.log(err);
             }
+        });
+    }
 
-
-
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
+    getCollectionDetails();
 
 
     function deleteCollection() {
@@ -132,11 +140,8 @@ $(document).ready(function () {
     getAllPublicNotes();
     // add notes and delete functions
 
-    $(".add-notes-box").click(function () {
-        const add_box_parent = $(this).parent();
-        // console.log(add_box_parent);
+    $(".plus").click(function () {
         $("#select-public-notes-modal").modal("show");
-        // getAllPublicNotes();
     });
 
     function deleteNotesFormCollection() {
@@ -166,21 +171,41 @@ $(document).ready(function () {
         $(".collection-add-btn").click(function () {
             $(".public-notes-item").remove();
             const box = $(".add-notes-box").parent();
+            var selected_notes_arry = [];
             $(".public-notes-row-modal .card input").each(function () {
                 if ($(this).prop('checked')) {
                     const card = ($(this).parent().parent());
                     const note_id = $(card).attr("data-id");
                     const thumbnails = $(card).attr("data-thumbnails");
                     const name = $(card).attr("data-name");
-                    $(box).before(`<div class="col-md-2 my-3 public-notes-item" data-id="${note_id}">
-                    <div class="card h-100  rounded w-100">
-                    <img class="card-img-top" src="${thumbnails}" /><i class="fa fa-times-circle delete-note-from-collection"></i>
-                    <div class="card-body border-0"> </div>
-                        <div class="card-footer border-0 bg-white">
-                            <h6 class="card-title"> ${name}</h6>
-                        </div>
-                    </div>
-                </div>`);
+                    selected_notes_arry.push(note_id);
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_arry.toString(),
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    new Noty({
+                        theme: "nest",
+                        type: "success",
+                        text: '<i class="fa fa-check-circle">  </i>  Failed to add notes , please try again later',
+                        closeWith: ['click', 'button'],
+                        timeout: 3000,
+                    }).show();
+                }, error: function (e) {
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-info-circle">  </i>  Failed to add notes , please try again later',
+                        closeWith: ['click', 'button'],
+                        timeout: 3000,
+                    }).show();
                 }
             });
             deleteNotesFormCollection();

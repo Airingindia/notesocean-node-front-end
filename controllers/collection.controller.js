@@ -14,6 +14,16 @@ const setCollectionview = (collectionID) => {
     })
 }
 
+const getPublicCollection = ()=>{
+    return  new  Promise((resolve,reject)=>{
+        httpServices.get('/getpubliccollection').then((response)=>{
+            resolve(response);
+        }).catch((errordata)=>{
+            reject(errordata);
+        })
+    })
+}
+
 
 module.exports = {
     getCollection: getUserCollection,

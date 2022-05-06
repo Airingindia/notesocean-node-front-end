@@ -1,0 +1,33 @@
+.colllection-notes-selector .card-header,.colllection-notes-selector .card-footer,.colllection-notes-selector .card-body{
+    background-color: #ffff;
+    border: #ffff;
+}
+.colllection-notes-selector .card-header{
+    padding: 10px 10px;
+    clear: both;
+}
+
+.plus h1{
+    font-size: 100px;
+}
+
+.colllection-notes-selector .card-header i{
+   float: right;
+   cursor: pointer;
+}
+@media (min-width:768px){
+    .colllection-notes-selector img{
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width:768px){
+    .colllection-notes-selector{
+        flex-flow: wrap;
+    }
+
+    .colllection-notes-selector>div{
+        width: 50%;
+    }
+}

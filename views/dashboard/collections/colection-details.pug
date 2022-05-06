@@ -2,100 +2,94 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Create new collections
-        include ../../includes/bootstrap
-        link(rel='stylesheet' href='/stylesheets/dashboard/dashboard.css')
-        link(rel='stylesheet' href='/stylesheets/dashboard/collections.css')
-        link(rel="stylesheet", href="/stylesheets/loader.css")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Collection Name
+        include ../../includes/dashcss
+        style
+            include ../../../public/stylesheets/dashboard/collection/collectionDetails.css
     body
-    include ../../includes/dashHeader
-    .row
-        include ../../includes/dashAside
-        .col-10.p-2.content.shadow
-           .container
-                h3 Create new collections
-                .container.pt-4
-                   
-                    form.form
-                        .row
-                            .col-md-6
-                                .form-group.my-2
-                                    label Collection Name
-                                    input(type="text").form-control(placeholder="Class 10th all math mcq pdf").collection-name
-                                    .invalid-feedback
-                                        p.invalid-title-error Collection name should be atleast 10 characters
-                                    .valid-feedback
-                                        p looks good
-                                .form-group.my-2
-                                    label Collection Descriptions
-                                    textarea.form-control(rows="5",cols="10")
-                                    .invalid-feedback
-                                        p.invalid-title-error Collection descriptions should be atleast 20 characters
-                                    .valid-feedback
-                                        p looks good
-                            .col-md-6
-                                .form-group.w-50.my-2
-                                    label.card-text Select collection Banner
-                                        img.card-img-top.select-banner-img(src="/images/dummy/collection_thumbnail.png", alt="").w-100.border
-                    .notes-container
-                        label Select Public Notes
-                        .row.collection-notes-row
-                            //- .col-md-2.my-3
-                            //-     .card.border-0.shadow.rounded.w-100
-                            //-         img.card-img-top(src="/images/dummy/collection2.png")
-                            //-         i.fa.fa-times-circle.delete-note-from-collection
-                            //-         .card-body
-                            //-             h6.card-title Personal
-                            //- .col-md-2.my-3
-                            //-     .card.border-0.shadow.rounded.w-100
-                            //-         img.card-img-top(src="/images/dummy/collection2.png")
-                            //-         i.fa.fa-times-circle.delete-note-from-collection
-                            //-         .card-body
-                            //-             h6.card-title Personal
-                            //- .col-md-2.my-3
-                            //-     .card.border-0.shadow.rounded.w-100
-                            //-         img.card-img-top(src="/images/dummy/collection2.png")
-                            //-         i.fa.fa-times-circle.delete-note-from-collection
-                            //-         .card-body
-                            //-             h6.card-title Personal
-                            .col-md-2.my-3
-                                .card.rounded.add-notes-box
-                                    img.card-img-top(src="/images/dummy/white.png")
-                                    i.fa.fa-plus-circle
-                    
-                        button.btn.btn-primary.submit-btn
-                            span Update collection
-                            i.fa.fa-plus.mx-1 
+        header
+            include ../../includes/dashHeader
+        section.main-section
+            .row
+                include ../../includes/dashAside
+                .col-10.second-side
+                    div
+                        form.form
+                            .row
+                                .col-md-4
+                                    h5 Collection Details
+                                    .form-group.my-2
+                                        label Collection Name
+                                        input(type="text").form-control(placeholder="Class 10th all math mcq pdf").collection-name
+                                        .invalid-feedback
+                                            p.invalid-title-error Collection name should be atleast 10 characters
+                                        .valid-feedback
+                                            p looks good
+                                    .form-group.my-2
+                                        label Collection Descriptions
+                                        textarea.form-control(rows="4" cols="5")
+                                        .invalid-feedback
+                                            p.invalid-title-error Collection descriptions should be atleast 20 characters
+                                        .valid-feedback
+                                            p looks good
+                                .col-md-8
+                                    h5 Collection Notes
+                                    .colllection-notes-selector.d-flex
+                                        .collection-notes-item
+                                            .card
+                                                .card-header
+                                                    i.fa.fa-times
+                                                .card-body
+                                                    img.card-img-top(src="/images/dummy/collection.png")
+                                                .card-footer
+                                                    .card-text Notes name
+                                        .collection-notes-item
+                                            .card 
+                                                .card-header
+                                                    i.fa.fa-times
+                                                .card-body
+                                                    img.card-img-top(src="/images/dummy/collection.png")
+                                                .card-footer
+                                                    .card-text Notes name
+                                        .collection-notes-item.plus
+                                            .card.h-100
+                                                .card-body.d-flex.justify-content-center.align-items-center.p-5
+                                                    h1.fa.fa-plus
+
+                                .col-12
+                                    button(type="submit").btn.btn-primary.mt-3 Update
+
                 .modal(tabindex='-1')#select-public-notes-modal.fade
                     .modal-dialog.modal-fullscreen
                         .modal-content
                             .modal-header
                                 .div 
-                                    h5.modal-title Select Public Notes                                   
+                                    h6.modal-title Add Public Notes                                   
                                 .div 
-                                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
                             .modal-body
                                 form
+                                    .container-fluid
                                         .row.public-notes-row-modal
-                                            //- .col-md-2
-                                            //-     .form-check.form-check-inline
-                                            //-     .card.border-0.shadow.rounded
-                                            //-         .card-header.bg-white.border-0
-                                            //-             input#inlineCheckbox1.form-check-input(type='checkbox', value='option1')
-                                            //-         img(src="/images/dummy/collection.png").card-img-top
-                                            //-         .card-body.border-0
-                                            //-             p.card-text Lorem ipsum dolor sit amet.
-                                            //- .col-md-2
-                                            //-     .form-check.form-check-inline
-                                            //-     .card.border-0.shadow.rounded
-                                            //-         .card-header.border-0.bg-white
-                                            //-             input#inlineCheckbox1.form-check-input(type='checkbox', value='option1')
-                                            //-         img(src="/images/dummy/collection.png").card-img-top
-                                            //-         .card-body.border-0
-                                            //-            p.card-text Lorem ipsum dolor sit amet.
-                                        
+                                        //- .col-md-2
+                                        //-     .form-check.form-check-inline
+                                        //-     .card.border-0.shadow.rounded
+                                        //-         .card-header.bg-white.border-0
+                                        //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
+                                        //-         img(src="/images/dummy/collection.png").card-img-top
+                                        //-         .card-body.border-0
+                                        //-             p.card-text Lorem ipsum dolor sit amet.
+                                        //- .col-md-2
+                                        //-     .form-check.form-check-inline
+                                        //-     .card.border-0.shadow.rounded
+                                        //-         .card-header.border-0.bg-white
+                                        //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
+                                        //-         img(src="/images/dummy/collection.png").card-img-top
+                                        //-         .card-body.border-0
+                                        //-            p.card-text Lorem ipsum dolor sit amet.
+
                                 .row.loading-public-notes
                                     center 
                                         .lds-roller
@@ -109,10 +103,7 @@ html(lang="en")
                                             div
                                         p Your public notes are loading... please wait...    
                             .modal-footer
-                                button.btn.btn-primary.collection-add-btn Select
-    script(src='/javascripts/common.js')
-    script(src="/vendors/hammer/hammer.min.js") 
-    script(src='/javascripts/dashboard/dashboard.js')
-    script(src='/vendors/sweetalert/sweetalert.min.js')
-    //- script(src="/javascripts/dashboard/collections/create-new-collection.js")
-    script(src="/javascripts/dashboard/collections/collections-details.js")
+                                button.btn.btn-primary.collection-add-btn Add
+
+        include ../../includes/dashjs
+        script(src="/javascripts/dashboard/collections/collections-details.js")
