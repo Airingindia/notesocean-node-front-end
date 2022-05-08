@@ -15,6 +15,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 showData(data);
+
             },
             error: function (err) {
                 $(".loading-public-notes").addClass("d-none");
@@ -25,24 +26,22 @@ $(document).ready(function () {
     }
     loadData();
     function showData(data) {
+        console.log(data.requested.length);
         if (data.requested.length !== 0) {
-            $(".public-notes-container").html("");
             $(".loading-public-notes").addClass("d-none");
-            $(".public-notes-container").removeClass("d-none");
             $(".no-public-notes").addClass("d-none");
             for (let i = 0; i < data.requested.length; i++) {
-                if (data.requested[i].userId == localStorage.getItem("userid")) {
-                    let id = data.requested[i].id;
-                    let name = data.requested[i].name;
-                    let timestamp = data.requested[i].timestamp;
-                    let description = data.requested[i].description;
-                    let thumbnails = data.requested[i].thumbnails;
-                    timestamp = timeDifference(timestamp);
-                    let size = bytesToSize(data.requested[i].size);
-                    let fileType = data.requested[i].fileType;
-                    let pages = data.requested[i].pages;
-                    let views = data.requested[i].views;
-                    $(".public-notes-container").append(`
+                let id = data.requested[i].id;
+                let name = data.requested[i].name;
+                let timestamp = data.requested[i].timestamp;
+                let description = data.requested[i].description;
+                let thumbnails = data.requested[i].thumbnails;
+                timestamp = timeDifference(timestamp);
+                let size = bytesToSize(data.requested[i].size);
+                let fileType = data.requested[i].fileType;
+                let pages = data.requested[i].pages;
+                let views = data.requested[i].views;
+                $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
                         <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
                             <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
@@ -72,7 +71,6 @@ $(document).ready(function () {
                         </div>
                     </div>
                 `);
-                }
 
             }
             publicNotesRoute();

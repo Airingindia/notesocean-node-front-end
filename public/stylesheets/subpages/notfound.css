@@ -88,3 +88,26 @@
         height: 86px;
     }
 }
+
+/* dark mode css */
+
+@media (prefers-color-scheme: dark) {
+    .notfound .notfound-404 h1>span {
+        color: white;
+    }
+
+    .notfound .notfound-404 h1 {
+        color: white;
+    }
+
+    .notfound h2 {
+        color: white;
+    }
+
+    .notfound p {
+        color: white;
+    }
+
+
+
+}

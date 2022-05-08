@@ -12,8 +12,8 @@ const api_url = process.env.API_URL;
 
 
 // test page route
-router.get("/test", (req, res, next) => {
-  res.render("test");
+router.get("/google-signin", (req, res, next) => {
+  res.redirect(api_url + "/authenticate/google-sign-in");
 })
 // homepage route
 router.get('/', function (req, res, next) {

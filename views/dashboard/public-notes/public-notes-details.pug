@@ -5,9 +5,8 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Public notes | Notes Ocean
-        include ../../includes/dashcommon
+        include ../../includes/dashcss
         link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
-        link(rel="stylesheet" href="/vendors/sheron/shareon.min.css")
     body
         header
             include ../../includes/dashHeader
@@ -125,6 +124,7 @@ html(lang="en")
                                     button.twitter(data-url="" ,data-title="").share-item
                                     button.whatsapp(data-url="" ,data-title="").share-item
         script(src="/vendors/sheron/shareon.iife.js")
+        include ../../includes/dashcss
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes-details.js
         script(src="https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js")

@@ -1,28 +1,4 @@
 $(document).ready(function () {
-    //    input label toggle
-    // $("inpudggt").each(function () {
-    //     $(this).click(function () {
-    //         $(this).parent().find('label').removeClass('d-none');
-    //         $(this).parent().find('i').css({
-    //             "margin-top": "25px"
-    //         });
-    //         $(this).attr("placeholder", "");
-    //     });
-    //     $(this).on("blur", function () {
-    //         $(this).parent().find('label').addClass('d-none');
-    //         const placeholder = $(this).parent().find('label').attr("for");
-    //         $(this).attr("placeholder", placeholder);
-    //         $(this).parent().find('i').css({
-    //             "margin-top": "0px"
-    //         });
-    //     });
-
-    //     $(this).on("change", function () {
-    //         $(this).parent().find('label').addClass('d-none');
-    //         const placeholder = $(this).parent().find('label').attr("for");
-    //         $(this).attr("placeholder", placeholder);
-    //     });
-    // });;
 
     $("form").submit(function (event) {
         event.preventDefault();
@@ -48,28 +24,37 @@ $(document).ready(function () {
                 const authToken = data.token;
                 localStorage.setItem("token", authToken);
                 setCookie("token", authToken, 100);
-                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-success text-light">
-                    <strong class="me-auto"> <i  class="fa fa-check-circle text-white mx-1"> </i>  Success!</strong>
-                </div>
-                <div class="toast-body">
-                    Login successful
-                </div>
-            </div>`);
+                new Noty({
+                    theme: "nest",
+                    type: "success",
+                    text: '<i class="fa fa-check-circle">  </i>  Login Successful',
+                    timeout: 3000,
+                }).show();
                 window.location = "/dashboard";
             },
-            error: function (err) {
-                $(".login-btn").html("Login");
-                $(".login-btn").prop("disabled", false);
-                const errortext = err.responseJSON.description;
-                $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-danger text-light">
-                    <strong class="me-auto">  <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
-                </div>
-                <div class="toast-body">
-                    ${errortext}
-                </div>
-            </div>`);
+            complete: function (data) {
+                if (data.status == 400) {
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-check-circle">  </i> Incorrect email address or password',
+                        timeout: 3000,
+                        closeWith: ['click', 'button'],
+                    }).show();
+                    $(".login-btn").html("Login");
+                    $(".login-btn").prop("disabled", false);
+                }
+                if (data.status == 0) {
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-check-circle">  </i> Failed to connect server , please try again',
+                        timeout: 3000,
+                        closeWith: ['click', 'button'],
+                    }).show();
+                    $(".login-btn").html("Login");
+                    $(".login-btn").prop("disabled", false);
+                }
             }
         })
     });
@@ -90,7 +75,4 @@ $(document).ready(function () {
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-
-    // log out
-
 })

@@ -31,7 +31,7 @@ $(document).ready(function () {
   }
 
   $(".logout-btn").click(function () {
-
+    clearAllBrowserData();
     $.ajax({
       type: "GET",
       url: localStorage.getItem("api") + "/authenticate/logout",
@@ -49,12 +49,12 @@ $(document).ready(function () {
             clearAllBrowserData();
           },
           error: function (err) {
-            window.location = "/account/login";
+            window.location = "/login";
           },
         });
       },
       error: function (err) {
-        window.location = "/account/login";
+        window.location = "/login";
       },
     });
   });
@@ -168,8 +168,8 @@ $(document).ready(function () {
     localStorage.removeItem("token");
     localStorage.removeItem("userinfo");
     localStorage.removeItem("userdata");
-    setCookie("token", "", 0);
-    window.location = "/session-expire";
+    document.cookie = "token" + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location = "/login";
   }
 
 });

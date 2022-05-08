@@ -54,15 +54,12 @@ $(document).ready(function () {
             },
             success: function (data) {
                 localStorage.setItem("userInfo", JSON.stringify(data));
-                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-success text-light">
-                    <strong class="me-auto">  <i  class="fa fa-check-circle text-white mx-1"> </i> Success!</strong>
-                </div>
-                <div class="toast-body">
-                    Your account has been created successfully!, we are logging you in your dashboard
-                </div>
-            </div>`);
-
+                new Noty({
+                    theme: "nest",
+                    type: "success",
+                    text: '<i class="fa fa-check-circle">  </i> Account Created Successfully',
+                    timeout: 3000,
+                }).show();
                 setTimeout(function () {
                     $.ajax({
                         type: "POST",
@@ -79,39 +76,60 @@ $(document).ready(function () {
                             setCookie("token", authToken, 100);
                             window.location = "/dashboard";
                         }, error: function (jqXHR, textStatus) {
-                            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header bg-danger text-light">
-                                <strong class="me-auto">  <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
-                            </div>
-                            <div class="toast-body">
-                                Login failed!, Forwading to login to page
-                            </div>
-                        </div>`);
-                            window.location = "/account/login";
+                            new Noty({
+                                theme: "nest",
+                                type: "error",
+                                text: '<i class="fa fa-check-circle">  </i> Failed to auto login  , please login again',
+                                timeout: 3000,
+                            }).show();
+                            setTimeout(() => {
+                                window.location = "/login";
+                            }, 1000);
                         }
                     })
-                }, 2000);
+                }, 1000);
             },
             error: function (err) {
-                $(".signup-btn").prop("disabled", false);
-                $(".signup-btn").html(`Signup`);
-                const errortext = err.responseJSON.description;
-                $(".notice-box").html(` <div id="liveToast" class="toast  fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-danger text-light">
-                    <strong class="me-auto"> <i  class="fa fa-info-circle text-white mx-1"> </i> Error!</strong>
-                </div>
-                <div class="toast-body">
-                    ${errortext}
-                </div>
-            </div>`);
-                setTimeout(function () { $(".notice-box").html("") }, 5000);
-            }
+                if (err.status == 0) {
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-check-circle">  </i> Failed  to connect server , please check your internet connection ',
+                        timeout: 5000,
+                    }).show();
+                }
+                else if (err.status == 406) {
+                    $(".signup-btn").prop("disabled", false);
+                    $(".signup-btn").html(`Signup`);
+                    const errortext = err.responseJSON.description;
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-check-circle">  </i> Failed  , ' + errortext,
+                        timeout: 5000,
+                    }).show();
+                }
+                else {
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: '<i class="fa fa-check-circle">  </i> Somthing went wrong , please try again later',
+                        timeout: 5000,
+                    }).show();
+
+                    amplitude.getInstance().logEvent("error", {
+                        page: "signup",
+                        coause: "undefined response from server"
+                    });
+                }
+            },
+
         })
     });
 
-    $(".google-auth-btn").click(function () {
+    function googleLogin() {
         window.location = localStorage.getItem("api") + "/authenticate/google-sign-in";
-    });
+    }
 
 
     function setCookie(cname, cvalue, exdays) {

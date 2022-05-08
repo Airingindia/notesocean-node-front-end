@@ -5,9 +5,8 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Upload Public Notes
-        include ../../includes/dashcommon
-        link(rel='stylesheet' href='https://static.ncdn.in/vendor/dropzone/dropzone.min.css')
-        link(rel='stylesheet' href='https://static.ncdn.in/vendor/animate.css')
+        include ../../includes/dashcss
+        link(rel="stylesheet" href="/vendors/dropzone/dropzone.min.css")
         style
             include ../../../public/stylesheets/dashboard/upload-public-notes.css
     body
@@ -49,13 +48,7 @@ html(lang="en")
                                     .progress-bar.progress-bar-primary(role='progressbar' data-dz-uploadprogress='')
                                 span.progress-text
                                 button.btn.btn-primary.mx-auto.upload-notes-btn Upload
-
-
-
-
-
-
-        script(src='https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js')
-        script(src='https://static.ncdn.in/vendor/dropzone/dropzone.min.js')
+        include ../../includes/dashjs
+        script(src="/vendors/dropzone/dropzone.min.js")
         script 
             include ../../../public/javascripts/dashboard/public-notes/upload-public-notes.js

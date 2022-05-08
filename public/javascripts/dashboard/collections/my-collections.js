@@ -27,23 +27,32 @@ $(document).ready(function () {
 
     function showCollection(colllections) {
         $(".collections-rows").html("");
+
         for (let i = 0; i < colllections.length; i++) {
-            var productlength = ``;
+            var productlength = 0;
             if (colllections[i].products !== undefined) {
-                productlength = `<span class="badge bg-danger rounded-pill"> ${colllections[i].totalProducts}</span></li>`;
+                productlength = colllections[i].totalProducts;
             }
+
             $(".collections-rows").append(`
-                <li class="list-group-item  py-4 rounded my-2 shadow d-flex justify-content-between align-items-start border-0"  data-id="${colllections[i].id}" style="box-shadow:0px 0px 0px 0px #ccc">
-                <a href="/dashboard/collections/${colllections[i].id}">
-                <div class="ms-2 me-auto">
-                    <div class="mb-3"> ${colllections[i].name} </div> 
-                   
-                    <span> 
-                        <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(colllections[i].timestamp)}</small> 
-                    </span>
+                <li class="list-group-item rounded my-2 shadow   border-0"  data-id="${colllections[i].id}" style="box-shadow:0px 0px 0px 0px #ccc">
+                <a href="/dashboard/collections/${colllections[i].id}" class="w-100">
+                <div class=" collection-item-content">
+                   <div class="collection-item-content-box "> 
+                   <img src="${colllections[i].thumbnails}" class="collection-items-thumbnails">
+                   <div class="mb-3 mx-1"> ${colllections[i].name} </div> 
+                   </div>
+
+                  <div> 
+                  <small class="text-muted">  <i class="fa fa-file mx-1"></i>   ${productlength} Notes </small> 
+                     
+                  <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(colllections[i].timestamp)}</small> 
+
+                  </div>
+                    
                 </div>
                 </a>
-               ${productlength}
+             
                 </li>
                
             `);
@@ -68,6 +77,8 @@ $(document).ready(function () {
             if (name.length !== 0) {
                 $('input[name="collectionName"]').removeClass("is-invalid");
                 var form = new FormData();
+                const file = $("input[type='file']").prop("files")[0];
+                form.append("file", file);
                 var collection_json = {
                     name: name.trim(),
                     description: description
@@ -95,21 +106,39 @@ $(document).ready(function () {
                         data = JSON.parse(data);
                         $("button[type='submit']").html("Create");
                         $("button[type='submit']").prop("disabled", false);
-                        swal("success", "Collection created", "success");
+                        new Noty({
+                            theme: "sunset",
+                            type: "success",
+                            text: '<i class="fa fa-check-circle">  </i>  ' + name + " Collection Created ",
+                            timeout: 4000,
+                        }).show();
                         $(".create-collections-modal").modal("hide");
 
+
+
+
                         $(".collections-rows").prepend(`
-                        <li class="list-group-item  py-4 rounded my-2 shadow d-flex justify-content-between align-items-start border-0" style="box-shadow:0px 0px 0px 0px #ccc">
-                        <a href="/dashboard/collections/${data.id}">
-                        <div class="ms-2 me-auto">
-                            <div class="mb-3"> ${data.name} </div> 
-                           
-                            <span> 
-                                <small class="text-muted">  <i class="fa fa-clock mx-1"></i>  ${timeDifference(data.timestamp)} </small> 
-                            </span>
-                        </div>
+                        <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
+                        <a href="/dashboard/collections/${data.i}" class="w-100">
+                            <div class="collection-item-content">
+                                <div class="collection-item-content-box">
+                                    <img src="${data.thumbnails}" class="collection-items-thumbnails">
+                                        <div class="mb-3 mx-1"> ${data.name} </div>
+                                </div>
+
+                                <div> 
+                                <small class="text-muted">  <i class="fa fa-file mx-1"></i>  0 Notes </small> 
+                                   
+                                <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(data.timestamp)} </small> 
+              
+                                </div>
+
+                                
+
+                            </div>
                         </a>
-                        </li>
+                       
+                    </li>
                        
                     `);
 
@@ -117,7 +146,12 @@ $(document).ready(function () {
                     error: function (error) {
                         $("button[type='submit']").html("Create");
                         $("button[type='submit']").prop("disabled", false);
-                        swal("error", "Collection  not created", "error");
+                        new Noty({
+                            theme: "nest",
+                            type: "error",
+                            text: '<i class="fa fa-check-circle">  </i>  ' + name + " : Failed to create collection",
+                            timeout: 4000,
+                        }).show();
                         $(".create-collections-modal").modal("hide");
                     }
                 })
@@ -181,6 +215,10 @@ $(document).ready(function () {
     function deleteCollection() {
         $("#delete-collections").click(function () {
             const collection_id = $(this).attr("data-id");
+
+
+
+
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this collection!",
@@ -207,13 +245,23 @@ $(document).ready(function () {
                                 $("#delete-collections").html("Delete");
                                 $(".collections-rows").find(`.list-group-item[data-id="${collection_id}"]`).trigger("remove");
                                 $(".collections-context-menu").modal("hide");
+
+                                new Noty({
+                                    theme: "sunset",
+                                    type: "error",
+                                    text: '<i class="fa fa-check-circle">  </i> Collection Deleted ',
+                                    timeout: 4000,
+                                }).show();
                             },
                             error: function (err) {
                                 $("#delete-collections").prop("disabled", false);
                                 $("#delete-collections").html("Delete");
-                                swal("Error !, Somthing went wrong please try again after sometimes!", {
-                                    icon: "error",
-                                });
+                                new Noty({
+                                    theme: "sunset",
+                                    type: "error",
+                                    text: '<i class="fa fa-check-circle">  </i> Failed to delete collection',
+                                    timeout: 4000,
+                                }).show();
                                 $(".collections-context-menu").modal("hide");
                             }
                         })

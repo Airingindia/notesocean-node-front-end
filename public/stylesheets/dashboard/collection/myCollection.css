@@ -1,45 +1,106 @@
-.bg-danger{
-    background-color:#FB0100 !important;
+.bg-danger {
+    background-color: #FB0100 !important;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 }
-.loading-collections,.no-collections{
+
+.loading-collections,
+.no-collections {
     position: fixed;
     top: 50%;
-    left:50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
-.collections-context-menu .list-group-item:hover{
+
+.collections-context-menu .list-group-item:hover {
     background-color: #FB0100;
     color: #fff;
 }
-.search-container{
-    width:50%;
+
+.search-container {
+    width: 50%;
 }
-.search-container input{
+
+.search-container input {
     border-radius: 0px;
 }
-input,textarea{
+
+input,
+textarea {
     border-radius: 0px !important;
 }
-input:focus,input:active,input:hover,textarea:focus,textarea:active,textarea:hover{
+
+input:focus,
+input:active,
+input:hover,
+textarea:focus,
+textarea:active,
+textarea:hover {
     border-radius: 0px !important;
-    outline:none !important;
+    outline: none !important;
     box-shadow: none !important;
 }
-.modal-content{
+
+.modal-content {
     border-radius: 2px !important;
-    outline:none !important;
+    outline: none !important;
     background-clip: none !important;
 }
-@media(max-width:768px){
-    .second-side .header-text{
+
+.collection-items-thumbnails {
+    width: 100px;
+    height: 100px;
+}
+
+.collection-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-item-content-box {
+    display: flex;
+    align-items: center;
+    width: 80%;
+
+}
+
+@media(max-width:768px) {
+    .second-side .header-text {
         display: none;
     }
-    .search-container{
-        width:100%;
+
+    .search-container {
+        width: 100%;
         margin-top: 10px;
     }
+
+
+    .collection-item-content {
+        display: block;
+    }
+
+
+    .collection-item-content-box {
+        display: block;
+        width: 100%;
+
+    }
+
+    .collection-items-thumbnails {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    a:hover {
+        color: black;
+    }
+
+
+
+
 }
