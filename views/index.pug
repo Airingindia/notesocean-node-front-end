@@ -79,7 +79,7 @@ html(lang="en-US")
       }
   body
     header
-      include ./includes/homeheader
+      include ./includes/navbar
     section.banner-search
       .headings.text-center
         h1.animate__animated.animate__fadeInUp.my-4 Find the Perfect 
@@ -165,7 +165,7 @@ html(lang="en-US")
         //-                 i.fa.fa-clock.mx-1
         //-                 small 1 hours ago
     section.w-100.main-section.mt-3
-      h3.mx-3 Recent uploaded notes
+      h4.mx-3 Recent uploaded notes
       .row.public-now-row
         - for (var i = 0; i < data.length;i++) {
           - let name  = data[i].product.name;
@@ -188,18 +188,18 @@ html(lang="en-US")
           .col-md-3.my-2
             a(href="/notes/"+id)
               .card.shadow.border-0.rounded.h-100.wow.public-notes-item(data-id=id)
-                .card-header.border-0
+                .card-header.border-0.px-1
                   p.card-title #{name}
                 //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
                 .card-body.border-0(style=`background-image:url(${(thumbnails)})`).notes-thumbnails
-                .card-footer.border-0
+                .card-footer.border-0.px-1
                   .row
                     .col-12
                       a(href="/profile/"+user_id)
                         img(src=pic,alt=full_name).user-image
-                      span.card-text
+                      small.card-text
                         a(href="/profile/"+user_id).mx-2.user-name-text=full_name
-                    .col-12.mt-1
+                    .col-12.mt-2
                       //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
                       p.card-text.notes-details-text
                         span
@@ -222,11 +222,11 @@ html(lang="en-US")
             h2 It seems, you are using ad blocker
 
             br
-            h5 How ad blocker effect our student and us
-            p Our students doing hardwroking and continues uploading notes to help other students and they earn some pocket money, if you use ad blocker we will face problem to pay them.
-            p You will lose great service , where you get freely premium notes and study material , other website/app may charge you cost.
-            p You don't have to pay any cost to access all notes , we and our students only earn from advertising free
-            p Plese help students to do hardwork and support each other
+            //- h5 How ad blocker effect our student and us
+            //- p Our students doing hardwroking and continues uploading notes to help other students and they earn some pocket money, if you use ad blocker we will face problem to pay them.
+            //- p You will lose great service , where you get freely premium notes and study material , other website/app may charge you cost.
+            //- p You don't have to pay any cost to access all notes , we and our students only earn from advertising free
+            //- p Plese help students to do hardwork and support each other
 
             h6 Get help form here to disable ad blocker
             a(href="https://www.wikihow.com/Disable-Your-Ad-Blocker" target="_blank" style="text-decoration:underline;").text-danger Disable Ad blocker

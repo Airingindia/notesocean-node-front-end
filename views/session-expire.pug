@@ -2,21 +2,21 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Session Expire
         include includes/bootstrap
-        link(rel="manifest", href="/manifest.webmanifest")
-        
+        link(rel="manifest" href="/manifest.webmanifest")
+
         style(type='text/css').
-           .main-content{
-            position:absolute;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%);
-            z-index: 100;
-           }
-        
+            .main-content{
+                position:absolute;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%);
+                z-index: 100;
+            }
+
     body 
         header
             include includes/navbar
@@ -24,8 +24,8 @@ html(lang="en")
             h2.text-center Session has expired
             p.text-center It seems you have changed your password or login on another device
             center 
-                a(href="/account/login").btn.btn-primary.text-center  
+                a(href="/login").btn.btn-primary.text-center  
                     i.fa.fa-key.mx-2
                     span Login Again
-                
+
         script(src="/javascripts/common.js")

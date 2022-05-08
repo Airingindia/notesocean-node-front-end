@@ -1,27 +1,48 @@
 @import "../animate.css";
 
 
+/* dark mode css */
 
-.btn-grad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+@media (prefers-color-scheme: dark) {
+    p {
+        color: white;
+    }
+
+    .facebook-login-btn {
+        color: white;
+    }
+
+    .google-login-btn {
+        color: white;
+    }
+
+}
+
+
 .btn-grad {
-   text-align: center;
-   text-transform: uppercase;
-   transition: 0.5s;
-   background-size: 200% auto;
-   color: white;            
-   box-shadow: 0 0 20px #eee;
-   display: block;
- }
+    background-image: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%)
+}
 
- .btn-grad:hover {
-   background-position: right center; /* change the direction of the change here */
-   color: #fff;
-   text-decoration: none;
- }
+.btn-grad {
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    display: block;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
 
 
-.link{
-   color: #4158D0 !important;
+.link {
+    color: #4158D0 !important;
 
 }
 
@@ -56,7 +77,8 @@
     left: 84%;
 }
 
-.signup-form,.login-form {
+.signup-form,
+.login-form {
     width: 50%;
 }
 
@@ -132,20 +154,20 @@ section .btn {
 }
 
 
-.main-section .row{
+.main-section .row {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main-section .desktop-img{
+.main-section .desktop-img {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
-.main-section .desktop-img img{
+.main-section .desktop-img img {
     width: 100%;
 }
 

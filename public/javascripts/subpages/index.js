@@ -69,44 +69,43 @@ $(document).ready(function () {
                                 pic = "/images/user.jfif";
                             }
                             $(".public-now-row").append(`
-                        <div class="col-md-3 my-2">
-                            <a href="/notes/${id}"> 
-                                    <div class="card shadow border-0 rounded h-100 wow  public-notes-item" data-id="${id}">
-                                        <div class="card-header border-0 bg-white">
-                                            <p class="card-title"> ${name} </p>
-                                        </div>
-                                    <div class="card-body border-0 notes-thumbnails" style="background-image:url(${thumbnails});background-size:cover"></div>
-                                    <div class="card-footer border-0 bg-white">
-                                        <div class="row">
-                                            <div class="col-12 dflex justify-content-center">
-                                            <a href="/profile/${user_id}"> 
-                                            <img class="user-image" src="${pic}" alt="user image" alt="${Full_name}"/>
-                                            </a>
-                                            <span class="card-text">
-                                            <a class="mx-2 user-name-text" href="/profile/${user_id}"> ${Full_name}  </a>
-                                            </span></div>
-                                            <div class="col-12">
-                                                <p class="card-text notes-details-text">
-                                                    <span>
-                                                        <i class="fa fa-globe mx-1"></i>
-                                                        <small> ${views} </small>
-                                                    </span>
-                                                    <span class="mx-1">
-                                                        <i class="fa fa-file mx-1"> </i>
-                                                        <small>  ${pages} </small>
-                                                        </span>
-                                                    <span class="mx-1">
-                                                        <i class="fa fa-clock mx-1"></i>
-                                                        <small> ${actual_time} </small>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                            <div class="col-md-3 my-2"><a href="/notes/undefined">
+        <div class="card shadow border-0 rounded h-100 wow public-notes-item">
+            <div class="card-header border-0 px-1">
+                <p class="card-title"> ${name}</p>
+            </div>
+            <div class="card-body border-0 notes-thumbnails" style="background-image:url(${thumbnails})"></div>
+            <div class="card-footer border-0 px-1">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/profile/${user_id}">
+                            <img class="user-image" src="${profilePic}"/>
+                        </a>
+                        <small class="card-text">
+                            <a class="mx-2 user-name-text" href="/profile/${user_id}">${Full_name} </a>
+                        </small>
                     </div>
-                        `);
+                    <div class="col-12 mt-2">
+                        <div class="card-text notes-details-text">
+                        <span>
+                            <i class="fa fa-globe"></i>
+                            <small class="mx-1"> ${views}</small>
+                        </span>
+                        <span class="mx-1">
+                            <i class="fa fa-file mx-1"> </i>
+                            <small> ${pages}</small>
+                        </span>
+                        <span class="mx-1">
+                            <i class="fa fa-clock mx-1"></i>
+                            <small>${actual_time}</small>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a></div>
+                                `);
                         }
                     } else {
                         last_access = access;

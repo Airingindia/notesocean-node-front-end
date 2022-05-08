@@ -10,15 +10,17 @@
 .mobile-search-box {
     display: none;
 }
-.dark-logo{
+
+.dark-logo {
     display: none;
 }
 
 @media (max-width: 768px) {
-  
-    .desktop-logo{
-        width: 50%;
+
+    .desktop-logo {
+        width: 70%;
     }
+
     .upload-box {
         display: none;
     }
@@ -33,6 +35,10 @@
 
     .mobile-search-box {
         display: block;
+    }
+
+    .realted-searches {
+        display: none;
     }
 
 

@@ -146,4 +146,14 @@ $(document).ready(function () {
         $(".notice-box").html("");
     });
 
+    // hide homepage header search bar
+
+    function hideHomepageSearchbar() {
+        if (window.location.pathname == "/") {
+            $(".search-box").addClass("d-none");
+        }
+    }
+
+    hideHomepageSearchbar();
+
 });
