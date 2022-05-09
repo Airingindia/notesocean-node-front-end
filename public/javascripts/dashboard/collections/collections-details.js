@@ -15,7 +15,6 @@ $(document).ready(function () {
                 Authorization: localStorage.getItem("token")
             },
             success: function (data) {
-                console.log(data);
                 if (data !== undefined) {
                     $(".collection-name").val(data.name);
                     $("textarea").val(data.description);
@@ -45,12 +44,10 @@ $(document).ready(function () {
                     $(".collection-removed").css({ display: "block" });
                     $(".notes-details-row").addClass("d-none");
                 }
-
-
-
             },
             error: function (err) {
-                console.log(err);
+                $(".collection-removed").css({ display: "block" });
+                $(".notes-details-row").addClass("d-none");
             }
         });
     }
@@ -147,9 +144,26 @@ $(document).ready(function () {
     function deleteNotesFormCollection() {
         $(".delete-note-from-collection").each(function () {
             $(this).click(function () {
-                const parent = $(this).parent().parent();
+                const noteid = $(this).attr("data-note-id");
+                const parent = $(this).parent().parent().parent();
                 $(parent).remove();
+            });
+
+            $(this).parent().parent().parent().on("contextmenu", function () {
+                var cont = $(this);
+                $(".collections-context-menu").modal("show");
+                const noteid = $(this).find("i").attr("data-note-id");
+                $("#delete-collections").click(function () {
+                    $(cont).remove();
+                    $(".collections-context-menu").modal("hide");
+                });
+
+                $("#preview-collections ").click(function () {
+                    window.location = "/dashboard/public-notes/" + noteid;
+                })
+                return false;
             })
+
         })
     }
 
@@ -167,51 +181,76 @@ $(document).ready(function () {
         })
     }
 
+    function uncheckall() {
+        $(".public-notes-row-modal .card").each(function () {
+            const checkbox = $(this).find("input");
+            $(checkbox).prop('checked', false);
+        })
+    }
+
     function addNotesToCollection() {
         $(".collection-add-btn").click(function () {
             $(".public-notes-item").remove();
             const box = $(".add-notes-box").parent();
             var selected_notes_arry = [];
+            const selected = getSelectedNotes();
             $(".public-notes-row-modal .card input").each(function () {
                 if ($(this).prop('checked')) {
                     const card = ($(this).parent().parent());
                     const note_id = $(card).attr("data-id");
                     const thumbnails = $(card).attr("data-thumbnails");
                     const name = $(card).attr("data-name");
-                    selected_notes_arry.push(note_id);
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_arry.toString(),
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                },
-                beforeSend: function () {
+                    // console.log(selected.findIndex((select) => { return select == note_id }));
+                    if (selected.findIndex((select) => { return select == note_id }) == -1) {
+                        var notes_data = {
+                            note_id: note_id,
+                            name: name,
+                            thumbnails: thumbnails
+                        }
+                        selected_notes_arry.push(notes_data);
+                    }
 
-                },
-                success: function (data) {
-                    new Noty({
-                        theme: "nest",
-                        type: "success",
-                        text: '<i class="fa fa-check-circle">  </i>  Failed to add notes , please try again later',
-                        closeWith: ['click', 'button'],
-                        timeout: 3000,
-                    }).show();
-                }, error: function (e) {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-info-circle">  </i>  Failed to add notes , please try again later',
-                        closeWith: ['click', 'button'],
-                        timeout: 3000,
-                    }).show();
                 }
             });
+
+            // make a ajax call to add notes in collection
+
+
+            addNotes(selected_notes_arry);
+            uncheckall();
             deleteNotesFormCollection();
             $("#select-public-notes-modal").modal("hide");
         });
     }
+
+    function getSelectedNotes() {
+        var selected = [];
+        $(".delete-note-from-collection").each(function () {
+            var noteid = $(this).attr("data-note-id");
+            selected.push(noteid);
+        });
+
+        return selected;
+    }
+
+
+    function addNotes(data) {
+        for (let i = 0; i < data.length; i++) {
+            let name = data[i].name;
+            let id = data[i].note_id;
+            let thumbnails = data[i].thumbnails;
+            $(".collection-notes-item.plus").before(`<div class="collection-notes-item col-md-4 my-1">
+            <div class="card p-0">
+                <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>
+                <div class="card-body p-0"><img class="card-img-top collection-notes-thumbnail w-100" src="${thumbnails}" /></div>
+                <div class="card-footer">
+                    <div class="card-text"> <small> ${name.substring(0, 50)} ...</small></div>
+                </div>
+            </div>
+        </div>`);
+        }
+    }
+
 
     var selected_banner_file;
     $(".select-banner-img").click(function () {
@@ -225,7 +264,8 @@ $(document).ready(function () {
         });
     });
 
-    $(".submit-btn").click(function () {
+    $("form").submit(function (event) {
+        event.preventDefault();
         // get all selected notesocean
         var selected_notes_arry = [];
         $(".public-notes-item").each(function () {
@@ -235,9 +275,9 @@ $(document).ready(function () {
         const collection_description = $("textarea").val();
         if (collection_name.length > 10 && collection_description.length > 20) {
             var form = new FormData();
-            if (selected_banner_file !== undefined) {
-                form.append("file", selected_banner_file);
-            }
+            // if (selected_banner_file !== undefined) {
+            //     form.append("file", selected_banner_file);
+            // }
             var collection_json = {
                 name: collection_name,
                 description: collection_description

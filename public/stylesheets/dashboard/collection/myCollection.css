@@ -53,6 +53,7 @@ textarea:hover {
 .collection-items-thumbnails {
     width: 100px;
     height: 100px;
+    border-radius: 5px;
 }
 
 .collection-item-content {
@@ -66,6 +67,14 @@ textarea:hover {
     align-items: center;
     width: 80%;
 
+}
+
+.collections-rows {
+    width: 70%;
+}
+
+.heading-container {
+    width: 70%;
 }
 
 @media(max-width:768px) {
@@ -98,6 +107,15 @@ textarea:hover {
 
     a:hover {
         color: black;
+    }
+
+
+    .collections-rows {
+        width: 100%;
+    }
+
+    .heading-container {
+        width: 100%;
     }
 
 

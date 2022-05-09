@@ -47,24 +47,24 @@ $(document).ready(function () {
                             <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
                             <div class="card-body pb-0"> 
                                 <h6 class="card-title">  ${name.substring(0, 100)} </h6>
-                                <p class="card-text"> ${description.substring(0, 150)}</p>
+                                
                             </div>
                             <div class="card-footer bg-white border-0">
                                
                                 <div class="d-flex justify-content-between text-muted">
                                     <div>
-                                        <p class="card-text"> </p><i class="fa fa-file-text mx-1"></i><span>${fileType.toUpperCase()}</span>
+                                        <i class="fa fa-file-text mx-1"></i><small>${fileType.toUpperCase()}</small>
                                     </div>
                                     <div>
-                                        <p class="card-text"> </p><i class="fa fa-clock-o mx-1"></i><span> ${timestamp} </span>
+                                      <i class="fa fa-clock mx-1"></i><small> ${timestamp} </small>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between text-muted">
                                     <div>
-                                        <p class="card-text"> </p><i class="fa fa-file mx-1"></i><span> ${pages} pages </span>
+                                       <i class="fa fa-file mx-1"></i><small> ${pages} pages </small>
                                     </div>
                                     <div>
-                                        <p class="card-text"> </p><i class="fa fa-globe mx-1"></i><span>${views} views</span>
+                                        <i class="fa fa-globe mx-1"></i><small>${views} views</small>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,21 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     showData(data);
+                    new Noty({
+                        theme: "sunset",
+                        type: "success",
+                        text: '<i class="fa fa-check-circle">  </i> Filter by ' + input + " ",
+                        timeout: 4000,
+                    }).show();
 
+                },
+                error: function () {
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: '<i class="fa fa-info-circle">  </i>  Failed to search notes',
+                        timeout: 4000,
+                    }).show();
                 }
             })
         } else {

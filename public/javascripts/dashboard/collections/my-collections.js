@@ -35,9 +35,9 @@ $(document).ready(function () {
             }
 
             $(".collections-rows").append(`
-                <li class="list-group-item rounded my-2 shadow   border-0"  data-id="${colllections[i].id}" style="box-shadow:0px 0px 0px 0px #ccc">
-                <a href="/dashboard/collections/${colllections[i].id}" class="w-100">
-                <div class=" collection-item-content">
+                <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${colllections[i].id}" style="box-shadow:0px 0px 0px 0px #ccc">
+                <a href="/dashboard/collections/${colllections[i].id}">
+                <div class="collection-item-content">
                    <div class="collection-item-content-box "> 
                    <img src="${colllections[i].thumbnails}" class="collection-items-thumbnails">
                    <div class="mb-3 mx-1"> ${colllections[i].name} </div> 

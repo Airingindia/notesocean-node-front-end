@@ -18,7 +18,7 @@ html(lang="en")
                     div
                         form.form
                             .row
-                                .col-md-4
+                                .col-12
                                     h5 Collection Details
                                     .form-group.my-2
                                         label Collection Name
@@ -34,32 +34,52 @@ html(lang="en")
                                             p.invalid-title-error Collection descriptions should be atleast 20 characters
                                         .valid-feedback
                                             p looks good
-                                .col-md-8
+                                .col-12
                                     h5 Collection Notes
-                                    .colllection-notes-selector.d-flex
-                                        .collection-notes-item
-                                            .card
-                                                .card-header
-                                                    i.fa.fa-times
-                                                .card-body
-                                                    img.card-img-top(src="/images/dummy/collection.png")
-                                                .card-footer
-                                                    .card-text Notes name
-                                        .collection-notes-item
-                                            .card 
-                                                .card-header
-                                                    i.fa.fa-times
-                                                .card-body
-                                                    img.card-img-top(src="/images/dummy/collection.png")
-                                                .card-footer
-                                                    .card-text Notes name
-                                        .collection-notes-item.plus
+                                    .colllection-notes-selector.row
+                                        //- .collection-notes-item.col-md-4
+                                        //-     .card
+                                        //-         .card-header
+                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6048")
+                                        //-         .card-body
+                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
+                                        //-         .card-footer
+                                        //-             .card-text 
+                                        //-                 small Notes name dfghdfhfgh
+                                        //- .collection-notes-item.col-md-4
+                                        //-     .card 
+                                        //-         .card-header
+                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6050")
+                                        //-         .card-body
+                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
+                                        //-         .card-footer
+                                        //-             .card-text 
+                                        //-                 small Notes name
+                                        //- .collection-notes-item.col-md-4
+                                        //-     .card 
+                                        //-         .card-header
+                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6049")
+                                        //-         .card-body
+                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
+                                        //-         .card-footer
+                                        //-             .card-text 
+                                        //-                 small Notes name
+                                        //- .collection-notes-item.col-md-4
+                                        //-     .card 
+                                        //-         .card-header
+                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="21432")
+                                        //-         .card-body
+                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
+                                        //-         .card-footer
+                                        //-             .card-text 
+                                        //-                 small Notes name
+                                        .collection-notes-item.plus.col-md-4
                                             .card.h-100
                                                 .card-body.d-flex.justify-content-center.align-items-center.p-5
                                                     h1.fa.fa-plus
 
                                 .col-12
-                                    button(type="submit").btn.btn-primary.mt-3 Update
+                                    button(type="submit").submit-btn.btn.btn-primary.mt-3 Update
 
                 .modal(tabindex='-1')#select-public-notes-modal.fade
                     .modal-dialog.modal-fullscreen
@@ -104,6 +124,18 @@ html(lang="en")
                                         p Your public notes are loading... please wait...    
                             .modal-footer
                                 button.btn.btn-primary.collection-add-btn Add
-
+            .modal.collections-context-menu
+                .modal-dialog.modal-dialog-centered.modal-sm
+                    .modal-content.border-0
+                        .modal-header.border-0
+                            .modal-title Options
+                        .modal-body.border-0.px-0.py-1
+                            .list-group.border-0.p-0
+                                a.list-group-item.list-group-item-action.border-0(href='#')#delete-collections
+                                    i.fa.fa-times.mx-1
+                                    span Remove
+                                a.list-group-item.list-group-item-action.border-0(href='#')#preview-collections 
+                                    i.fa.fa-eye.mx-1
+                                    span Preview 
         include ../../includes/dashjs
         script(src="/javascripts/dashboard/collections/collections-details.js")
