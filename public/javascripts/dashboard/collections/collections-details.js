@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    // get collection details
-
-
     const collection_id = window.location.pathname.split("/")[3];
-
 
     function getCollectionDetails() {
         $.ajax({
@@ -15,21 +11,19 @@ $(document).ready(function () {
                 Authorization: localStorage.getItem("token")
             },
             success: function (data) {
-                if (data !== undefined) {
+                if (data) {
+                    $(".loading-collection").addClass("d-none");
+                    $(".collection-container").removeClass("d-none");
                     $(".collection-name").val(data.name);
                     $("textarea").val(data.description);
                     $(".select-banner-img").attr("src", data.thumbnails);
-                    deleteCollection();
                     const box = $(".add-notes-box").parent();
                     var public_notes = data.products;
-                    if (public_notes.length > 0) {
-                        addNotes(data);
-                        getAllPublicNotes();
-                    }
-
+                    getAllPublicNotes();
                 } else {
-                    $(".collection-removed").css({ display: "block" });
-                    $(".notes-details-row").addClass("d-none");
+                    $(".collection-removed").removeClass("d-none");
+                    $(".loading-collection").addClass("d-none");
+                    $(".collection-container").remove();
                 }
             },
             error: function (err) {
@@ -38,50 +32,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    getCollectionDetails();
-
-
-    function deleteCollection() {
-        $(".delete-collection").click(function () {
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this collection!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: localStorage.getItem("api") + "/collections/" + collection_id,
-                            contentType: "application/json",
-                            processData: false,
-                            headers: {
-                                Authorization: localStorage.getItem("token")
-                            },
-                            success: function (data) {
-                                swal("Success ! Your collection deleted succefully!", {
-                                    icon: "success",
-                                    button: "continue"
-                                }).then((function () {
-                                    window.location = "/dashboard/collections";
-                                }));
-                            },
-                            error: function (err) {
-                                swal("Error !, Somthing went wrong please try again after sometimes!", {
-                                    icon: "error",
-                                });
-                            }
-                        })
-
-                    }
-                });
-        });
-    }
-
-
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
@@ -113,21 +63,11 @@ $(document).ready(function () {
                 </div>
                     `);
                     }
-                    deleteNotesFormCollection();
                     check();
-                    addNotesToCollection();
                 }
             }
         });
     }
-
-    getAllPublicNotes();
-    // add notes and delete functions
-
-    $(".plus").click(function () {
-        $("#select-public-notes-modal").modal("show");
-    });
-
     function deleteNotesFormCollection() {
         $(".delete-note-from-collection").each(function () {
             $(this).click(function () {
@@ -155,8 +95,6 @@ $(document).ready(function () {
 
         })
     }
-
-
     function check() {
         $(".public-notes-row-modal .card").each(function () {
             $(this).click(function () {
@@ -179,6 +117,9 @@ $(document).ready(function () {
     }
 
     function addNotesToCollection() {
+        $(".plus").click(function () {
+            $("#select-public-notes-modal").modal("show");
+        });
         $(".collection-add-btn").click(function () {
             $(".public-notes-item").remove();
             const box = $(".add-notes-box").parent();
@@ -253,7 +194,6 @@ $(document).ready(function () {
         return selected;
     }
 
-
     function addNotes(data) {
         for (let i = 0; i < data.length; i++) {
             let name = data[i].name;
@@ -272,73 +212,82 @@ $(document).ready(function () {
     }
 
 
-    var selected_banner_file;
-    $(".select-banner-img").click(function () {
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
-        $(input).click();
-        $(input).on("change", function (event) {
-            selected_banner_file = $(this).prop('files')[0];
-            $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
+    function updateCollection() {
+        var selected_banner_file;
+        $(".select-banner-img").click(function () {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "image/*";
+            $(input).click();
+            $(input).on("change", function (event) {
+                selected_banner_file = $(this).prop('files')[0];
+                $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
+            });
         });
-    });
 
-    $("form").submit(function (event) {
-        event.preventDefault();
-        // get all selected notesocean
-        var selected_notes_arry = [];
-        $(".public-notes-item").each(function () {
-            selected_notes_arry.push($(this).attr("data-id"));
-        });
-        const collection_name = $(".collection-name").val();
-        const collection_description = $("textarea").val();
-        if (collection_name.length > 10 && collection_description.length > 20) {
-            var form = new FormData();
-            // if (selected_banner_file !== undefined) {
-            //     form.append("file", selected_banner_file);
-            // }
-            var collection_json = {
-                name: collection_name,
-                description: collection_description
-            }
-            // form.append("collections", collection_json);
-            form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
-            $.ajax({
-                type: "PUT",
-                url: localStorage.getItem("api") + "/collections/" + collection_id,
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                },
-                data: form,
-                processData: false,
-                contentType: false,
-                mimeType: "multipart/form-data",
-                beforeSend: function () {
-                    $(".submit-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> Please wait...");
-                    $(".submit-btn").prop("disabled", true);
-                },
-                success: function (data) {
-                    //  show success  when collection will update 
-                },
-                error: function () {
-                    swal("Error", "Somthing went wrong please try again after sometimes ", "error");
+        $("fordgfdm").submit(function (event) {
+            event.preventDefault();
+            // get all selected notesocean
+            var selected_notes_arry = [];
+            $(".public-notes-item").each(function () {
+                selected_notes_arry.push($(this).attr("data-id"));
+            });
+            const collection_name = $(".collection-name").val();
+            const collection_description = $("textarea").val();
+            if (collection_name.length > 10 && collection_description.length > 20) {
+                var form = new FormData();
+                // if (selected_banner_file !== undefined) {
+                //     form.append("file", selected_banner_file);
+                // }
+                var collection_json = {
+                    name: collection_name,
+                    description: collection_description
                 }
-            })
+                // form.append("collections", collection_json);
+                form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
+                $.ajax({
+                    type: "PUT",
+                    url: localStorage.getItem("api") + "/collections/" + collection_id,
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    },
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    mimeType: "multipart/form-data",
+                    beforeSend: function () {
+                        $(".submit-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> Please wait...");
+                        $(".submit-btn").prop("disabled", true);
+                    },
+                    success: function (data) {
+                        //  show success  when collection will update 
+                    },
+                    error: function () {
+                        swal("Error", "Somthing went wrong please try again after sometimes ", "error");
+                    }
+                })
 
-        } else if (collection_name.length < 10) {
-            $(".collection-name").addClass("is-invalid");
-            $(".collection-name").click(function () {
-                $(this).removeClass("is-invalid");
-            })
-        } else if (collection_description.length < 20) {
-            $("textarea").addClass("is-invalid");
-            $("textarea").click(function () {
-                $(this).removeClass("is-invalid");
-            })
-        }
+            } else if (collection_name.length < 10) {
+                $(".collection-name").addClass("is-invalid");
+                $(".collection-name").click(function () {
+                    $(this).removeClass("is-invalid");
+                })
+            } else if (collection_description.length < 20) {
+                $("textarea").addClass("is-invalid");
+                $("textarea").click(function () {
+                    $(this).removeClass("is-invalid");
+                })
+            }
 
-    });
+        });
 
+    }
+    // windown onload function call
 
+    addNotesToCollection();
+    getAllPublicNotes();
+    deleteNotesFormCollection();
+    getCollectionDetails();
+    check();
+    uncheckall();
 });

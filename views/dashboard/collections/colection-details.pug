@@ -15,7 +15,7 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-10.second-side
-                    div
+                    div.d-none.collection-container
                         form.form
                             .row
                                 .col-12
@@ -80,7 +80,21 @@ html(lang="en")
 
                                 .col-12
                                     button(type="submit").submit-btn.btn.btn-primary.mt-3 Update
-
+                    div.collection-removed.d-none
+                        div.collection-removed-info.text-center.mx-auto
+                            i.fa.fa-info
+                        h6.text-center This collection can't access it may removed or insufficient permission
+                    div.loading-collection
+                        center 
+                            .lds-roller
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
                 .modal(tabindex='-1')#select-public-notes-modal.fade
                     .modal-dialog.modal-fullscreen
                         .modal-content

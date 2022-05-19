@@ -23,6 +23,30 @@
     width: 50%;
 }
 
+.collection-removed,
+.loading-collection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.collection-removed-info {
+    border-radius: 50%;
+    background-color: yellow;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collection-removed-info i {
+    font-size: 30px;
+    color: black;
+}
 
 
 
