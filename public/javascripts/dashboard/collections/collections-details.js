@@ -23,20 +23,7 @@ $(document).ready(function () {
                     const box = $(".add-notes-box").parent();
                     var public_notes = data.products;
                     if (public_notes.length > 0) {
-                        for (let i = 0; i < public_notes.length; i++) {
-                            let note_id = public_notes[i].id;
-                            let note_thumbnails = public_notes[i].thumbnails;
-                            let name = public_notes[0].name;
-                            $(box).before(`<div class="col-md-2 my-3 public-notes-item" data-id="${note_id}">
-                        <div class="card h-100  rounded w-100">
-                        <img class="card-img-top" src="${note_thumbnails.split(",")[0]}" /><i class="fa fa-times-circle delete-note-from-collection"></i>
-                        <div class="card-body border-0"> </div>
-                            <div class="card-footer border-0 bg-white">
-                                <h6 class="card-title"> ${name}</h6>
-                            </div>
-                        </div>
-                    </div>`);
-                        };
+                        addNotes(data);
                         getAllPublicNotes();
                     }
 
@@ -147,6 +134,7 @@ $(document).ready(function () {
                 const noteid = $(this).attr("data-note-id");
                 const parent = $(this).parent().parent().parent();
                 $(parent).remove();
+                alert(noteid);
             });
 
             $(this).parent().parent().parent().on("contextmenu", function () {
@@ -156,6 +144,7 @@ $(document).ready(function () {
                 $("#delete-collections").click(function () {
                     $(cont).remove();
                     $(".collections-context-menu").modal("hide");
+                    alert(noteid);
                 });
 
                 $("#preview-collections ").click(function () {
@@ -166,6 +155,7 @@ $(document).ready(function () {
 
         })
     }
+
 
     function check() {
         $(".public-notes-row-modal .card").each(function () {
@@ -193,6 +183,7 @@ $(document).ready(function () {
             $(".public-notes-item").remove();
             const box = $(".add-notes-box").parent();
             var selected_notes_arry = [];
+            let selected_notes_ids = [];
             const selected = getSelectedNotes();
             $(".public-notes-row-modal .card input").each(function () {
                 if ($(this).prop('checked')) {
@@ -208,15 +199,44 @@ $(document).ready(function () {
                             thumbnails: thumbnails
                         }
                         selected_notes_arry.push(notes_data);
+                        selected_notes_ids.push(note_id);
                     }
 
                 }
             });
 
             // make a ajax call to add notes in collection
-
-
-            addNotes(selected_notes_arry);
+            $.ajax({
+                type: "POST",
+                url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                },
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $(".collection-add-btn").html(` <i class="fa fa-spinner fa-spin"> </i> Adding..`);
+                },
+                success: function (data) {
+                    $(".collection-add-btn").html(`Add`);
+                    new Noty({
+                        theme: "nest",
+                        type: "success",
+                        text: "Notes added",
+                        timeout: 4000,
+                    }).show();
+                    addNotes(selected_notes_arry);
+                },
+                error: function (errr) {
+                    $(".collection-add-btn").html(`Add`);
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: "Faild to add notes , please try after sometimes",
+                        timeout: 4000,
+                    }).show();
+                }
+            });
             uncheckall();
             deleteNotesFormCollection();
             $("#select-public-notes-modal").modal("hide");
@@ -299,60 +319,7 @@ $(document).ready(function () {
                     $(".submit-btn").prop("disabled", true);
                 },
                 success: function (data) {
-                    $(".submit-btn").html(`<i class="fa fa-plus mx-1 ">  </i> <span> Create Collection </span>`);
-                    $(".submit-btn").prop("disabled", false);
-                    data = JSON.parse(data);
-                    var collections_id = data.id;
-                    if (selected_notes_arry.length !== 0) {
-                        $.ajax({
-                            type: "POST",
-                            url: localStorage.getItem("api") + "/collections/" + collections_id + "/products/" + selected_notes_arry.toString(),
-                            headers: {
-                                Authorization: localStorage.getItem("token")
-                            },
-                            beforeSend: function () {
-
-                            },
-                            success: function (data) {
-                                //    success message
-                                swal({
-                                    title: "Created!",
-                                    text: "your collection updated successfully",
-                                    icon: "success",
-                                    buttons: ["Continue"],
-                                    dangerMode: true,
-                                })
-                                    .then((willDelete) => {
-                                        if (willDelete) {
-                                            window.location = "/dashboard/collections/" + collections_id;
-                                        } else {
-                                            $(".collection-name").val("");
-                                            $("textarea").val("");
-                                            $(".public-notes-item").remove();
-                                            $(".select-banner-img").attr("src", "/images/dummy/collection_thumbnail.png");
-                                        }
-                                    });
-                            }
-                        });
-                    } else {
-                        swal({
-                            title: "Created!",
-                            text: "your collection Updated successfully",
-                            icon: "success",
-                            buttons: ["Continue"],
-                            dangerMode: true,
-                        })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    window.location = "/dashboard/collections/" + collections_id;
-                                } else {
-                                    $(".collection-name").val("");
-                                    $("textarea").val("");
-                                    $(".public-notes-item").remove();
-                                    $(".select-banner-img").attr("src", "/images/dummy/collection_thumbnail.png");
-                                }
-                            });
-                    }
+                    //  show success  when collection will update 
                 },
                 error: function () {
                     swal("Error", "Somthing went wrong please try again after sometimes ", "error");
