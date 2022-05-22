@@ -1,19 +1,30 @@
 @import "../animate.css";
 
+p {
+    color: black !important;
+}
+
+.facebook-login-btn {
+    color: black !important;
+}
+
+.google-login-btn {
+    color: black !important;
+}
 
 /* dark mode css */
 
 @media (prefers-color-scheme: dark) {
     p {
-        color: white;
+        color: lightgray !important;
     }
 
     .facebook-login-btn {
-        color: white;
+        color: lightgray !important;
     }
 
     .google-login-btn {
-        color: white;
+        color: lightgray !important;
     }
 
 }

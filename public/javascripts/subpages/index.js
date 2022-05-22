@@ -69,7 +69,7 @@ $(document).ready(function () {
                                 pic = "/images/user.jfif";
                             }
                             $(".public-now-row").append(`
-                            <div class="col-md-3 my-2"><a href="/notes/undefined">
+                            <div class="col-md-3 my-2"><a href="/notes/${id}">
         <div class="card shadow border-0 rounded h-100 wow public-notes-item">
             <div class="card-header border-0 px-1">
                 <p class="card-title"> ${name}</p>

@@ -1,19 +1,20 @@
 .notes-thumbnails {
     height: 250px !important;
     width: 100%;
-    background-position: center;
+    /* background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .live-notes-section .notes-thumbnails {
-    height: 300px !important;
+    height: 250px !important;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.h2{
+
+.h2 {
     font-size: 20px;
 }
 
@@ -22,33 +23,33 @@
 }
 
 
-.live-notes-section{
+.live-notes-section {
     background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%);
 }
-.owl-height{
-    height:auto !important;
+
+.owl-height {
+    height: auto !important;
 }
+
 .swiper .swiper-slide {
-    height: 420px !important;
+    height: 320px !important;
 }
-@media (min-width:768px)
-{
-    .public-notes-item:hover {
+
+@media (min-width:768px) {
+    /* .public-notes-item:hover {
 
         transition: all 0.2s linear;
         transform: scale(1.10, 1.10);
-    }
+    } */
 }
 
-.public-now-row .user-image ,.live-notes-section .user-image{
+.public-now-row .user-image,
+.live-notes-section .user-image {
     border-radius: 50%;
     width: 20px;
     height: 20px;
 }
 
-.public-now-row {
-    padding: 0% 0%;
-}
 
 .desktop-top-bannner {
     display: block;
@@ -81,7 +82,7 @@
 form.example input[type=text] {
     padding: 5px;
     font-size: 17px;
-    border:  none !important;
+    border: none !important;
     border-radius: 2px 0px 0px 2px;
     width: 70%;
     background: #ffff;
@@ -138,10 +139,10 @@ form.example::after {
 
 @media (max-width:768px) {
     .banner-search {
-        padding: 5%;
+        padding: 1%;
         background-size: cover;
         height: 50vh !important;
-        margin-top: 5%;
+        /* margin-top: 5%; */
         display: block;
         justify-content: top;
         align-items: top;
@@ -160,44 +161,69 @@ form.example::after {
     .headings {
         width: 100% !important;
     }
+
     form.example button {
 
         padding: 5px 0px;
     }
 
     form.example input[type=text] {
-       
+
         width: 90%;
-        
+
     }
-    
+
 
 }
 
 
+.public-notes-item.card,
+.public-notes-item.card .card-header,
+.public-notes-item.card .card-body,
+.public-notes-item.card .card-footer {
+    background-color: #fff !important;
+    color: black !important;
+}
+
+.public-notes-item.card,
+.public-notes-item.card .card-header,
+.public-notes-item.card .card-body,
+.public-notes-item.card .card-footer {
+    background-color: #fff !important;
+}
 
 /* dark mode */
 
 
 @media (prefers-color-scheme: dark) {
-    .banner-search button i{
-          color: white;
+    .public-notes-item.card .card-header {
+        color: #aaa !important;
     }
-    .banner-search button{
+
+    .banner-search button i {
+        color: white;
+    }
+
+    .banner-search button {
         background-color: black !important;
     }
 
-    .public-notes-item.card, .public-notes-item.card .card-header, .public-notes-item.card .card-body, .public-notes-item.card .card-footer{
-          background-color: #232225 !important;
+    .public-notes-item.card,
+    .public-notes-item.card .card-header,
+    .public-notes-item.card .card-body,
+    .public-notes-item.card .card-footer {
+        background-color: #232225 !important;
     }
 
-    .public-notes-item .card-footer{
+    .public-notes-item .card-footer {
         color: #cccc !important;
     }
-    .public-notes-item .card-footer a{
+
+    .public-notes-item .card-footer a {
         color: #cccc !important;
     }
-    .public-notes-item .card-footer span{
+
+    .public-notes-item .card-footer span {
         color: #cccc !important;
     }
 
@@ -205,14 +231,4 @@ form.example::after {
         color: #eff3f0 !important;
         font-size: 15px;
     }
-  }
-
-
-  
-@media (prefers-color-scheme: light) {
-   
-
-    .public-notes-item.card, .public-notes-item.card .card-header, .public-notes-item.card .card-body, .public-notes-item.card .card-footer{
-          background-color: #fff !important;
-    }
-  }
+}

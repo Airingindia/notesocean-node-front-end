@@ -28,7 +28,9 @@ router.get('/', function (req, res, next) {
   }).catch((error) => {
     console.log(error);
   })
+  // res.render("index");
 });
+
 
 // notes page route
 

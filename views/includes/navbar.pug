@@ -2,34 +2,29 @@ style
   include ../../public/stylesheets/style.css
 style
   include ../../public/stylesheets/dark-mode.css
-//- link(rel='stylesheet' href='/stylesheets/style.css')
 nav
   div.d-flex.justify-content-between.align-items-center
     .logo-box
       a(href="/")
-        //- img(src="/images/logo.png" width="40").mobile-logo
-        img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.light-logo
-        img(src="https://static.ncdn.in/public/images/dark-log.svg" width="100%" alt="notes ocean logo").desktop-logo.m-1.dark-logo
+        img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="100%" alt="notes ocean logo").desktop-logo.light-logo
+        img(src="https://static.ncdn.in/public/images/dark-log.svg" width="100%" alt="notes ocean logo").desktop-logo.dark-logo
     .search-box.w-50
       form(action="/search")
         .input-group
           input(type="search" placeholder="Ex- class 10th math notes" name="query").form-control
           button(type="submit" aria-label="search notes and collections ").btn.btn-outline-secondary
             i.fa.fa-search
-    .user-box.d-flex.justify-content-between
-      div.upload-box.mx-3
+    .user-box.d-flex
+      div.upload-box
         a(href="/dashboard/public-notes/new")
           .btn.btn-dark-outline
             i.fa.fa-cloud-upload(title="upload new notes")
             span 
               small Upload Notes
-      div.mobile-search-box
-        i.fa.fa-search(title="Search notes").search-btn
-        i.fa.fa-times(title="close").search-btn-close
-      div.login-button.d-flex.justify-content-center.align-items-center.mx-3.d-none
-        a(href="/login").btn.btn-primary 
+      div.login-button.d-flex.justify-content-center.align-items-center.d-none
+        a(href="/login").btn.btn-primary.btn-sm
           i.fa.fa-user.mx-2
           span Login
-      div.user-icon-box.d-flex.justify-content-center.align-items-center.mx-2.d-none
+      div.user-icon-box.d-flex.justify-content-center.align-items-center
         a(href="/dashboard")
           img(src="https://static.ncdn.in/public/images/dummy-user.jpeg" alt="notes ocean user image")

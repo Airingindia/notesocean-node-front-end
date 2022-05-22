@@ -6,6 +6,12 @@
     display: block;
 }
 
+body {
+    width: 100% !important;
+}
+
+
+
 
 .mobile-search-box {
     display: none;
@@ -15,10 +21,33 @@
     display: none;
 }
 
+footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+    padding: 30px;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer,
+.footer-credit {
+    background-color: #29292A !important;
+    color: #fff;
+}
+
+footer a,
+footer li {
+    font-size: 13px;
+    color: #fff !important;
+}
+
 @media (max-width: 768px) {
 
     .desktop-logo {
-        width: 100%;
+        width: 80%;
     }
 
     .upload-box {
@@ -41,6 +70,17 @@
         display: none;
     }
 
+    .login-button i {
+        display: none;
+    }
+
+    footer {
+        display: block;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+
 
 }
 
@@ -52,30 +92,22 @@
     display: block;
 } */
 
-header {
+/* header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
     background-color: #fff;
-}
+} */
 
-.main-section {
+/* .main-section {
     margin-top: 70px;
-}
+} */
 
-header ul {
-    list-style: none;
-}
 
-header ul li a {
-    text-transform: none;
-    color: black !important;
-}
 
 header {
-    padding: 0px !important;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -129,13 +161,13 @@ input[type="color"]:focus,
 
 
 
+
+
+
 a {
     text-decoration: none;
     color: black;
 }
-
-
-
 
 .card-footer {
     position: absolute;
