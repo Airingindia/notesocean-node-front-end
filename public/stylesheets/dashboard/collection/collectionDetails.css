@@ -48,6 +48,14 @@
     color: black;
 }
 
+input,
+textarea,
+.card,
+section img,
+button {
+    border-radius: 0px !important;
+}
+
 
 
 @media (min-width:768px) {

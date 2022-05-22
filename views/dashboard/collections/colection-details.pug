@@ -34,6 +34,12 @@ html(lang="en")
                                             p.invalid-title-error Collection descriptions should be atleast 20 characters
                                         .valid-feedback
                                             p looks good
+
+                                    .form-group.my-2
+                                        label Collection Thumbnail(720x100 px) 
+                                        br
+                                        img.card-img-top.select-banner-img(src="/images/dummy/collection.png" style="width:100%;height:100px")
+                                        a.btn.btn-sm.mt-1.change-img-btn Change
                                 .col-12
                                     h5 Collection Notes
                                     .colllection-notes-selector.row
@@ -78,8 +84,6 @@ html(lang="en")
                                                 .card-body.d-flex.justify-content-center.align-items-center.p-5
                                                     h1.fa.fa-plus
 
-                                .col-12
-                                    button(type="submit").submit-btn.btn.btn-primary.mt-3 Update
                     div.collection-removed.d-none
                         div.collection-removed-info.text-center.mx-auto
                             i.fa.fa-info

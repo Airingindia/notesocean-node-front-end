@@ -35,7 +35,7 @@ $(document).ready(function () {
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails;
+                let thumbnails = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);
                 let fileType = data.requested[i].fileType;

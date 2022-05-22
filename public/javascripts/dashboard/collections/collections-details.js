@@ -16,10 +16,10 @@ $(document).ready(function () {
                     $(".collection-container").removeClass("d-none");
                     $(".collection-name").val(data.name);
                     $("textarea").val(data.description);
-                    $(".select-banner-img").attr("src", data.thumbnails);
+                    $(".select-banner-img").attr("src", data.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/700x100/filters:format(webp)/filters:quality(100)"));
                     const box = $(".add-notes-box").parent();
-                    var public_notes = data.products;
                     getAllPublicNotes();
+                    addNotes(data.products);
                 } else {
                     $(".collection-removed").removeClass("d-none");
                     $(".loading-collection").addClass("d-none");
@@ -53,8 +53,8 @@ $(document).ready(function () {
                         $(".public-notes-row-modal").append(`
                     <div class="col-md-2 container my-3 ">
                         <div class="form-check form-check-inline"></div>
-                            <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].id}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0]}">
-                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0]}" data-src="${data.requested[i].thumbnails.split(",")[0]}" height="190px" />
+                            <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].id}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}">
+                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" data-src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}}" height="190px" />
                                 <div class="card-body border-0"> </div>
                                 <div class="card-footer border-0 bg-white">
                                     <p class="card-text"> ${data.requested[i].name} </p>
@@ -71,27 +71,52 @@ $(document).ready(function () {
     function deleteNotesFormCollection() {
         $(".delete-note-from-collection").each(function () {
             $(this).click(function () {
-                const noteid = $(this).attr("data-note-id");
+                var btn = $(this);
+                var noteid = $(this).attr("data-note-id");
                 const parent = $(this).parent().parent().parent();
-                $(parent).remove();
-                alert(noteid);
+
+                $.ajax({
+                    type: "DELETE",
+                    url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + noteid,
+                    headers: {
+                        Authorization: localStorage.getItem("token"),
+                        DeviceId: amplitude.getInstance().options.deviceId
+                    },
+                    beforeSend: function () {
+                        $(btn).removeClass("fa-times");
+                        $(btn).addClass("fa-spinner fa-spin");
+                    },
+                    success: function (data) {
+                        new Noty({
+                            theme: "nest",
+                            type: "success",
+                            text: "Note Deleted",
+                            timeout: 4000,
+                        }).show();
+                        $(parent).remove();
+                    },
+                    complete: function () {
+                        $(btn).addClass("fa-times");
+                        $(btn).removeClass("fa-spinner fa-spin");
+                    }
+                })
             });
 
-            $(this).parent().parent().parent().on("contextmenu", function () {
-                var cont = $(this);
-                $(".collections-context-menu").modal("show");
-                const noteid = $(this).find("i").attr("data-note-id");
-                $("#delete-collections").click(function () {
-                    $(cont).remove();
-                    $(".collections-context-menu").modal("hide");
-                    alert(noteid);
-                });
+            // $(this).parent().parent().parent().on("contextmenu", function () {
+            //     var cont = $(this);
+            //     $(".collections-context-menu").modal("show");
+            //     const noteid = $(this).find("i").attr("data-note-id");
+            //     $("#delete-collections").click(function () {
+            //         $(cont).remove();
+            //         $(".collections-context-menu").modal("hide");
+            //         alert(noteid);
+            //     });
 
-                $("#preview-collections ").click(function () {
-                    window.location = "/dashboard/public-notes/" + noteid;
-                })
-                return false;
-            })
+            //     $("#preview-collections ").click(function () {
+            //         window.location = "/dashboard/public-notes/" + noteid;
+            //     })
+            //     return false;
+            // })
 
         })
     }
@@ -135,7 +160,7 @@ $(document).ready(function () {
                     // console.log(selected.findIndex((select) => { return select == note_id }));
                     if (selected.findIndex((select) => { return select == note_id }) == -1) {
                         var notes_data = {
-                            note_id: note_id,
+                            id: note_id,
                             name: name,
                             thumbnails: thumbnails
                         }
@@ -147,43 +172,49 @@ $(document).ready(function () {
             });
 
             // make a ajax call to add notes in collection
-            $.ajax({
-                type: "POST",
-                url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                },
-                processData: false,
-                contentType: false,
-                beforeSend: function () {
-                    $(".collection-add-btn").html(` <i class="fa fa-spinner fa-spin"> </i> Adding..`);
-                },
-                success: function (data) {
-                    $(".collection-add-btn").html(`Add`);
-                    new Noty({
-                        theme: "nest",
-                        type: "success",
-                        text: "Notes added",
-                        timeout: 4000,
-                    }).show();
-                    addNotes(selected_notes_arry);
-                },
-                error: function (errr) {
-                    $(".collection-add-btn").html(`Add`);
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: "Faild to add notes , please try after sometimes",
-                        timeout: 4000,
-                    }).show();
-                }
-            });
+            if (selected_notes_arry.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
+                    headers: {
+                        Authorization: localStorage.getItem("token"),
+                        DeviceId: amplitude.getInstance().options.deviceId
+                    },
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $(".collection-add-btn").html(` <i class="fa fa-spinner fa-spin"> </i> Adding..`);
+                    },
+                    success: function (data) {
+                        $(".collection-add-btn").html(`Add`);
+                        new Noty({
+                            theme: "nest",
+                            type: "success",
+                            text: "Notes added",
+                            timeout: 4000,
+                        }).show();
+                        addNotes(selected_notes_arry);
+                    },
+                    error: function (errr) {
+                        $(".collection-add-btn").html(`Add`);
+                        new Noty({
+                            theme: "nest",
+                            type: "error",
+                            text: "Faild to add notes , please try after sometimes",
+                            timeout: 4000,
+                        }).show();
+                    },
+                    complete: function () {
+                        $("#select-public-notes-modal").modal("hide");
+                    }
+                });
+            } else {
+                $("#select-public-notes-modal").modal("hide");
+            }
             uncheckall();
             deleteNotesFormCollection();
-            $("#select-public-notes-modal").modal("hide");
         });
     }
-
     function getSelectedNotes() {
         var selected = [];
         $(".delete-note-from-collection").each(function () {
@@ -197,8 +228,8 @@ $(document).ready(function () {
     function addNotes(data) {
         for (let i = 0; i < data.length; i++) {
             let name = data[i].name;
-            let id = data[i].note_id;
-            let thumbnails = data[i].thumbnails;
+            let id = data[i].id;
+            let thumbnails = data[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
             $(".collection-notes-item.plus").before(`<div class="collection-notes-item col-md-4 my-1">
             <div class="card p-0">
                 <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>
@@ -209,12 +240,15 @@ $(document).ready(function () {
             </div>
         </div>`);
         }
+
+        deleteNotesFormCollection();
+        return;
+
+
     }
-
-
-    function updateCollection() {
+    function updatethumbnail() {
         var selected_banner_file;
-        $(".select-banner-img").click(function () {
+        $(".change-img-btn").click(function () {
             const input = document.createElement("input");
             input.type = "file";
             input.accept = "image/*";
@@ -222,16 +256,75 @@ $(document).ready(function () {
             $(input).on("change", function (event) {
                 selected_banner_file = $(this).prop('files')[0];
                 $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
+                selected_banner_file = $(this).prop('files')[0];
+                $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
+                var form = new FormData();
+                var collection_json = {
+                    name: $("input.collection-name").val(),
+                    description: $("textarea").val()
+                }
+                // form.append("collections", collection_json);
+                form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
+                form.append("file", selected_banner_file);
+                $.ajax({
+                    type: "PUT",
+                    url: localStorage.getItem("api") + "/collections/" + collection_id,
+                    headers: {
+                        Authorization: localStorage.getItem("token"),
+                        DeviceId: amplitude.getInstance().options.deviceId
+
+                    },
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    mimeType: "multipart/form-data",
+                    beforeSend: function () {
+                        // $(".submit-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> Please wait...");
+                        // $(".submit-btn").prop("disabled", true);
+                    },
+                    success: function (data) {
+                        new Noty({
+                            theme: "nest",
+                            type: "success",
+                            text: "Thumbnail uploaded successfully",
+                            timeout: 4000,
+                        }).show();
+                    },
+                    error: function () {
+                        new Noty({
+                            theme: "nest",
+                            type: "error",
+                            text: "Failed to update thumbnail",
+                            timeout: 4000,
+                        }).show()
+                    }
+                })
             });
         });
+    }
+    updatethumbnail();
+    function updateCollection() {
+        var timeoutId;
+        $('textarea').on('input propertychange change', function () {
+            // console.log('Textarea Change');
 
-        $("fordgfdm").submit(function (event) {
-            event.preventDefault();
-            // get all selected notesocean
-            var selected_notes_arry = [];
-            $(".public-notes-item").each(function () {
-                selected_notes_arry.push($(this).attr("data-id"));
-            });
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function () {
+                // Runs 1 second (1000 ms) after the last change    
+                updatedata();
+            }, 1000);
+        });
+        $('input.collection-name').on('input propertychange change', function () {
+            // console.log('Textarea Change');
+
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function () {
+                // Runs 1 second (1000 ms) after the last change    
+                updatedata();
+            }, 1000);
+        });
+
+        function updatedata() {
             const collection_name = $(".collection-name").val();
             const collection_description = $("textarea").val();
             if (collection_name.length > 10 && collection_description.length > 20) {
@@ -249,21 +342,31 @@ $(document).ready(function () {
                     type: "PUT",
                     url: localStorage.getItem("api") + "/collections/" + collection_id,
                     headers: {
-                        Authorization: localStorage.getItem("token")
+                        Authorization: localStorage.getItem("token"),
+                        DeviceId: amplitude.getInstance().options.deviceId
                     },
                     data: form,
                     processData: false,
                     contentType: false,
                     mimeType: "multipart/form-data",
                     beforeSend: function () {
-                        $(".submit-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> Please wait...");
-                        $(".submit-btn").prop("disabled", true);
+
                     },
                     success: function (data) {
-                        //  show success  when collection will update 
+                        new Noty({
+                            theme: "nest",
+                            type: "success",
+                            text: "Collection Details updated",
+                            timeout: 4000,
+                        }).show();
                     },
                     error: function () {
-                        swal("Error", "Somthing went wrong please try again after sometimes ", "error");
+                        new Noty({
+                            theme: "nest",
+                            type: "error",
+                            text: "Failed to update collection details",
+                            timeout: 4000,
+                        }).show();
                     }
                 })
 
@@ -278,15 +381,14 @@ $(document).ready(function () {
                     $(this).removeClass("is-invalid");
                 })
             }
-
-        });
+        }
 
     }
+    updateCollection();
     // windown onload function call
-
     addNotesToCollection();
     getAllPublicNotes();
-    deleteNotesFormCollection();
+
     getCollectionDetails();
     check();
     uncheckall();

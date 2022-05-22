@@ -51,7 +51,7 @@ $(document).ready(function () {
                             if (name.length > 80) {
                                 name = name.substring(0, 80);
                             }
-                            let thumbnails = data.requested[i].product.thumbnails.split(",")[0];
+                            let thumbnails = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x480/filters:format(webp)/filters:quality(100)");
                             let views = data.requested[i].product.views + " views";
                             let id = data.requested[i].product.id;
                             let timestamp = data.requested[i].product.timestamp;
@@ -74,7 +74,7 @@ $(document).ready(function () {
             <div class="card-header border-0 px-1">
                 <p class="card-title"> ${name}</p>
             </div>
-            <div class="card-body border-0 notes-thumbnails" style="background-image:url(${thumbnails})"></div>
+            <img src= "${thumbnails} "class="card-img-top notes-thumbnails">
             <div class="card-footer border-0 px-1">
                 <div class="row">
                     <div class="col-12">

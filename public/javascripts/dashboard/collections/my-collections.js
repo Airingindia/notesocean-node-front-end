@@ -39,7 +39,7 @@ $(document).ready(function () {
                 <a href="/dashboard/collections/${colllections[i].id}">
                 <div class="collection-item-content">
                    <div class="collection-item-content-box "> 
-                   <img src="${colllections[i].thumbnails}" class="collection-items-thumbnails">
+                   <img src="${colllections[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
                    <div class="mb-3 mx-1"> ${colllections[i].name} </div> 
                    </div>
 

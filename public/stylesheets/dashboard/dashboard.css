@@ -2,6 +2,10 @@
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important
 }
 
+.second-side {
+    border-left: 0.5px solid #ccc;
+}
+
 @media (max-width:769px) {
     .card-shadow {
         box-shadow: none !important
