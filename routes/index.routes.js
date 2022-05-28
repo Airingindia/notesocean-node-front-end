@@ -11,6 +11,7 @@ const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
 
 
+
 // test page route
 router.get("/google-signin", (req, res, next) => {
   res.redirect(api_url + "/authenticate/google-sign-in");
@@ -39,30 +40,7 @@ router.get("/notes/:id", (req, res, next) => {
   if (req.cookies.token) {
     token = req.cookies.token;
   }
-  // productControllers.getInfo(req.params.id, token).then((product) => {
-  //   profileControllers.getInfo(product.product.userId).then((userData) => {
-  //     res.render("view-products", {
-  //       data: product, timeService: timeService, user: userData, api: api_url
-  //     });
-  //     next();
-  //   }).catch((error) => {
-  //     const userData = {
-  //       id: 0,
-  //       firstName: "Notes",
-  //       lastName: "Ocean",
-  //       profileImage: "/images/dummy/user_dummy.jpg",
-  //     }
-  //     res.render("view-products", {
-  //       data: product, timeService: timeService, user: userData, api: api_url
-  //     });
-  //     next();
-  //   });
-  // }).catch((error) => {
-  //   res.render("notfound");
-  //   next();
-  // })
-
-
+  var deviceId = req.cookies.ampuser;
   productControllers.getInfo(req.params.id, token).then((product) => {
     const userData = {
       id: 0,
@@ -73,10 +51,78 @@ router.get("/notes/:id", (req, res, next) => {
     res.render("view-products", {
       data: product, timeService: timeService, user: userData, api: api_url
     });
+    next();
+    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
+      console.log(response);
+      next();
+    });
   }).catch((error) => {
     res.render("notfound");
     next();
-  })
+  });
+
+
+
+});
+
+router.get("/:id/:name.pdf", (req, res, next) => {
+  var token = "";
+  if (req.cookies.token) {
+    token = req.cookies.token;
+  }
+  var deviceId = req.cookies.ampuser;
+  productControllers.getInfo(req.params.id, token).then((product) => {
+    const userData = {
+      id: 0,
+      firstName: "Notes",
+      lastName: "Ocean",
+      profileImage: "/images/dummy/user_dummy.jpg",
+    }
+    res.render("view-products", {
+      data: product, timeService: timeService, user: userData, api: api_url
+    });
+    next();
+    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
+      console.log(response);
+      next();
+    });
+  }).catch((error) => {
+    res.render("notfound");
+    next();
+  });
+
+
+
+});
+
+router.get("/:id/:name.html", (req, res, next) => {
+  var token = "";
+  if (req.cookies.token) {
+    token = req.cookies.token;
+  }
+  var deviceId = req.cookies.ampuser;
+  productControllers.getInfo(req.params.id, token).then((product) => {
+    const userData = {
+      id: 0,
+      firstName: "Notes",
+      lastName: "Ocean",
+      profileImage: "/images/dummy/user_dummy.jpg",
+    }
+    res.render("view-products", {
+      data: product, timeService: timeService, user: userData, api: api_url
+    });
+    next();
+    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
+      console.log(response);
+      next();
+    });
+  }).catch((error) => {
+    res.render("notfound");
+    next();
+  });
+
+
+
 });
 
 // profile page routes
@@ -85,6 +131,7 @@ router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
+      console.log(userInfo);
       res.render("profile", {
         profile: userInfo
       });

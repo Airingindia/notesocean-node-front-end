@@ -6,12 +6,12 @@ $(document).ready(function () {
     if (localStorage.getItem("token") !== null) {
         const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
         amplitude.getInstance().logEvent("product view", {
-            product_id: window.location.pathname.split("/")[2],
+            product_id: document.querySelector("body").getAttribute("data-product-id"),
             userid: viewerid
         });
     } else {
         amplitude.getInstance().logEvent("product view", {
-            product_id: window.location.pathname.split("/")[2],
+            product_id: document.querySelector("body").getAttribute("data-product-id"),
         });
     }
 
@@ -49,57 +49,47 @@ $(document).ready(function () {
     function addReactionAction(action) {
         $.ajax({
             type: "POST",
-            url: localStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/reacts/" + action,
+            url: localStorage.getItem("api") + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/reacts/" + action,
             headers: {
                 Authorization: localStorage.getItem("token")
             },
             success: function (data) {
                 if (action == 1) {
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-success text-light">
-                    <strong class="me-auto"> <i  class="fa fa-thumbs-up text-white mx-1"> </i>  Liked!</strong>
-                </div>
-                <div class="toast-body">
-                   You liked this note 
-                </div>
-            </div>`);
+                    new Noty({
+                        theme: "sunset",
+                        type: "success",
+                        text: "Liked Added",
+                        timeout: 4000,
+                    }).show();
                     const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
                     amplitude.getInstance().logEvent("product liked", {
-                        product_id: window.location.pathname.split("/")[2],
+                        product_id: document.querySelector("body").getAttribute("data-product-id"),
                         userid: viewerid
                     });
                 } else {
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-success text-light">
-                        <strong class="me-auto"> <i  class="fa fa-thumbs-down text-white mx-1"> </i>  Disliked!</strong>
-                    </div>
-                    <div class="toast-body">
-                       You disliked this note 
-                    </div>
-                </div>`);
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: "Disliked Added",
+                        timeout: 4000,
+                    }).show();
                     const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
                     amplitude.getInstance().logEvent("product disliked", {
-                        product_id: window.location.pathname.split("/")[2],
+                        product_id: document.querySelector("body").getAttribute("data-product-id"),
                         userid: viewerid
                     });
                 }
 
-                setTimeout(() => {
-                    $(".notice-box").html("");
-                }, 5000);
+
             },
             error: function () {
-                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-danger text-light">
-                    <strong class="me-auto"> <i  class="fa fa-info-circle text-white mx-1"> </i> Opps! </strong>
-                </div>
-                <div class="toast-body">
-                somthing went wrong , please try after sometimes or relogin  you account
-                </div>
-            </div>`);
-                setTimeout(() => {
-                    $(".notice-box").html("");
-                }, 5000);
+                new Noty({
+                    theme: "sunset",
+                    type: "error",
+                    text: "Somthing went wrong , please try after sometimes",
+                    timeout: 4000,
+                }).show();
+
             }
 
         });
@@ -112,7 +102,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: api_url + "/products/" + window.location.pathname.split("/")[2] + "/comments/" + 0,
+        url: api_url + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments/" + 0,
         beforeSend: function () { },
         success: function (data) {
             $(".comment-length").html(data.length);
@@ -233,7 +223,7 @@ $(document).ready(function () {
             // COMMENT AJAX
             $.ajax({
                 type: "POST",
-                url: localStorage.getItem("api") + "/products/" + window.location.pathname.split("/")[2] + "/comments",
+                url: localStorage.getItem("api") + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments",
                 processData: false,
                 contentType: "application/json",
                 data: JSON.stringify({
@@ -319,7 +309,7 @@ $(document).ready(function () {
 
         }
         socket.emit("join", {
-            noteId: window.location.pathname.split("/")[2],
+            noteId: document.querySelector("body").getAttribute("data-product-id"),
             userdata: data
         });
     } else {
@@ -330,7 +320,7 @@ $(document).ready(function () {
             pic: "/images/dummy/user_dummy.jpg"
         }
         socket.emit("join", {
-            noteId: window.location.pathname.split("/")[2],
+            noteId: document.querySelector("body").getAttribute("data-product-id"),
             userdata: data
         });
     }

@@ -46,17 +46,17 @@ html(lang="en-US")
         section
             .container.my-5
                 div.d-flex.justify-content-center.align-items-center
-                    img(src=profile.profileImage, alt=`${(profile.firstName)} ${(profile.lastName)}`,width="200px" height="200px").profile-image
+                    img(src=profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)"), alt=`${(profile.firstName)} ${(profile.lastName)}`,width="200px" height="200px").profile-image
                 div.my-3
                     center
                         h1 #{profile.firstName} #{profile.lastName}
-                        small 
-                            i.fa.fa-book.mx-1
-                            span Notes 100
-                        br
-                        small
-                            i.fa.fa-database.mx-1 
-                            span Collections 10
+                        //- small 
+                        //-     i.fa.fa-book.mx-1
+                        //-     span Notes 100
+                        //- br
+                        //- small
+                        //-     i.fa.fa-database.mx-1 
+                        //-     span Collections 10
             .container-fluid.content-box.mt-3
                 ul#pills-tab.nav.nav-pills.mb-3(role='tablist').d-flex.justify-content-center.mt-2
                     li.nav-item(role='presentation')
@@ -67,90 +67,78 @@ html(lang="en-US")
                     #pills-notes.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-notes-tab') 
                         //-  show users notes 
                         .row.public-now-row
-                            .col-md-3.my-2
-                                a(href="/notes/")
-                                    .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
-                                        .card-header.border-0.bg-white
-                                            p.card-title Lorem ipsum dolor sit amet.
-                                        .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
-                                        .card-footer.border-0.bg-white
-                                            .row
-                                                .col-12
-                                                    //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                                                    p.card-text.notes-details-text
-                                                        span
-                                                            i.fa.fa-globe.mx-1
-                                                            small 100 views
-                                                        span.mx-1
-                                                            i.fa.fa-file.mx-1 
-                                                            small 10 pages
-                                                        span.mx-1
-                                                            i.fa.fa-clock-o.mx-1
-                                                            small 10 minute ago
+                            h1.text-center.mt-5.notes-loader
+                                i.fa.fa-spinner.fa-spin
+                            h5.text-center.mt-5.no-public-notes.d-none
+                                i.fa.fa-info-circle.mx-1.text-warning
+                                span No Public Notes Uploaded By User
+                            //- .col-md-3.my-2
+                            //-     a(href="/notes/")
+                            //-         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
+                            //-             .card-header.border-0
+                            //-                 p.card-title Lorem ipsum dolor sit amet.
+                            //-             img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")
+                            //-             .card-footer.border-0
+                            //-                 .row
+                            //-                     .col-12
+                            //-                         //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
+                            //-                         p.card-text.notes-details-text
+                            //-                             span
+                            //-                                 i.fa.fa-globe.mx-1
+                            //-                                 small 100 views
+                            //-                             span.mx-1
+                            //-                                 i.fa.fa-file.mx-1 
+                            //-                                 small 10 pages
+                            //-                             span.mx-1
+                            //-                                 i.fa.fa-clock-o.mx-1
+                            //-                                 small 10 minute ago
 
-                            .col-md-3.my-2
-                                a(href="/notes/")
-                                    .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
-                                        .card-header.border-0.bg-white
-                                            p.card-title Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
-                                        .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
-                                        .card-footer.border-0.bg-white
-                                            .row
-                                                .col-12
-                                                    p.card-text.notes-details-text
-                                                        span
-                                                            i.fa.fa-globe.mx-1
-                                                            small 100 views
-                                                        span.mx-1
-                                                            i.fa.fa-file.mx-1 
-                                                            small 10 pages
-                                                        span.mx-1
-                                                            i.fa.fa-clock-o.mx-1
-                                                            small 10 minute ago               
+                            //- .col-md-3.my-2
+                            //-     a(href="/notes/")
+                            //-         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
+                            //-             .card-header.border-0
+                            //-                 p.card-title Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            //-             //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
+                            //-             .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
+                            //-             .card-footer.border-0
+                            //-                 .row
+                            //-                     .col-12
+                            //-                         p.card-text.notes-details-text
+                            //-                             span
+                            //-                                 i.fa.fa-globe.mx-1
+                            //-                                 small 100 views
+                            //-                             span.mx-1
+                            //-                                 i.fa.fa-file.mx-1 
+                            //-                                 small 10 pages
+                            //-                             span.mx-1
+                            //-                                 i.fa.fa-clock-o.mx-1
+                            //-                                 small 10 minute ago               
                     #pills-collection.tab-pane.fade(role='tabpanel' aria-labelledby='pills-collection-tab') 
-                        .container-fluid
-                            .row.user-collection-cont
-                                .col-md-3.my-2
-                                    a(href="#")
-                                        .cont.d-flex.justify-content-center.align-items-center
-                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646423316510_158_0.png")
-                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
-                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.2)")
-                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
-                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
-                                .col-md-3.my-2
-                                    a(href="#")
-                                        .cont
-                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
-                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
-                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
-                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
-                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
-                                .col-md-3.my-2
-                                    a(href="#")
-                                        .cont.d-flex.justify-content-center.align-items-center
-                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646423316510_158_0.png")
-                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
-                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
-                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
-                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
-                                .col-md-3.my-2
-                                    a(href="#")
-                                        .cont
-                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
-                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
-                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
-                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
-                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
-                                .col-md-3.my-2
-                                    a(href="#")
-                                        .cont
-                                            img(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png")
-                                            .img-warpper.text-light.d-flex.justify-content-center.align-items-end
-                                                div.text-center.py-3.px-1.collection-text-box.animate__animated.animate__fadeInUp(style="background: rgba(0, 0, 0, 0.3)")
-                                                    h6.card-white.align-text-bottom Lorem ipsum dolor sit amet.
-                                                    small Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate numquam similique repudiandae optio?
+                        .collections.border-0
+                            ol.list-group.border-0.collections-rows.mx-auto
+                                h1.text-center.mt-5.collection-loader
+                                    i.fa.fa-spinner.fa-spin
+                                h5.text-center.mt-5.no-public-collection.d-none
+                                    i.fa.fa-info-circle.mx-1.text-warning
+                                    span No Collections Created By User
+                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                                //-     a(href="#") 
+                                //-         .ms-2.me-auto
+                                //-             .fw-bold  Subheading
+                                //-             span Cras justo odio
+                                //-     span.badge.bg-danger.rounded-pill 14
+                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                                //-     a(href="#") 
+                                //-         .ms-2.me-auto
+                                //-             .fw-bold  Subheading
+                                //-             span Cras justo odio
+                                //-     span.badge.bg-danger.rounded-pill 14
+                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
+                                //-     a(href="#") 
+                                //-         .ms-2.me-auto
+                                //-             .fw-bold  Subheading
+                                //-             span Cras justo odio
+                                //-     span.badge.bg-danger.rounded-pill 14
 
 
 

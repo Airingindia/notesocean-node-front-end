@@ -51,46 +51,118 @@ section {
     height: 30px;
 }
 
+.card,
+.card-header,
+.card-footer,
+.modal-header,
+.modal-body,
+.modal-footer {
+    background: #fff;
+    color: black !important;
+}
+
+/* dark mode css */
+@media (prefers-color-scheme: dark) {
+
+    .card,
+    .card-header,
+    .card-footer,
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        background: #232225;
+        color: white !important;
+        box-shadow: none !important;
+    }
+
+    .collection-row-item {
+        background: #232225;
+        color: white !important;
+        border: 0.5px solid #ccc !important;
+    }
+
+    .collection-item-content-box {
+        color: white !important;
+    }
+
+    .text-muted {
+        color: white !important;
+    }
+
+    .nav-link {
+        color: white !important;
+    }
+}
+
+/* collection */
 
 
-.user-collection-cont .cont {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+.collection-items-thumbnails {
+    width: 100px;
+    height: 100px;
     border-radius: 5px;
 }
 
-.user-collection-cont img {
-    /* position: absolute;
-    top: 0;
-    left: 0; */
-    width: 350px !important;
-    height: 350px !important;
-    z-index: -10;
+.collection-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-item-content-box {
+    display: flex;
+    align-items: center;
+    width: 80%;
+
+}
+
+.collections-rows {
+    width: 70%;
 }
 
 
-.user-collection-cont .img-warpper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(0, 0, 0, 0.1) !important;
-    z-index: 100 !important;
-}
 
-.collection-text-box {
-    display: none;
-}
+@media(max-width:768px) {
 
-.user-collection-cont .cont:hover .collection-text-box {
-    transition: all 1s linear;
-    display: block;
-}
-
-@media(max-width:769px) {
-    .collection-text-box {
+    .collection-item-content {
         display: block;
     }
+
+
+    .collection-item-content-box {
+        display: block;
+        width: 100%;
+
+    }
+
+    .collection-items-thumbnails {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    a:hover {
+        color: black;
+    }
+
+
+    .collections-rows {
+        width: 100%;
+    }
+
+
 }

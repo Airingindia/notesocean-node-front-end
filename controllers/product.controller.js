@@ -1,4 +1,7 @@
+require("dotenv").config();
+const api_endpoint = process.env.API_URL;
 const httpServices = require("../services/http.services");
+const ajax = require('supertest');
 const getProductInfo = async (productid, token) => {
     if (token.length > 10) {
         return getProductInfoWithToken(productid, token);
@@ -43,7 +46,37 @@ const getProductInfoWithToken = async (productid, token) => {
     });
 
 }
+
+const addViews = async (productid, token, deviceId) => {
+    return new Promise(async (resolve, reject) => {
+        if (token !== "") {
+            ajax(api_endpoint)
+                .post("/views/products/" + productid)
+                .set("Authorization", token)
+                .set("DeviceId", deviceId)
+                .send()
+                .end((error, response) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(response.body);
+                })
+        } else {
+            ajax(api_endpoint)
+                .post("/views/products/" + productid)
+                .set("DeviceId", deviceId)
+                .send()
+                .end((error, response) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(response.body);
+                })
+        }
+    })
+}
 module.exports = {
     getInfo: getProductInfo,
-    getInfoWithAuth: getProductInfoWithToken
+    getInfoWithAuth: getProductInfoWithToken,
+    addViews: addViews
 }

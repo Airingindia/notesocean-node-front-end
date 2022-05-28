@@ -50,19 +50,19 @@ html(lang="en")
         style 
             include ../public/stylesheets/loader.css
 
-    body(data-api=api,data-product=data)
-        header 
+    body(data-api=api,data-product=data,data-product-id=data.product.id)
+        header
             include includes/navbar
-        section
+        section.main-section-top
             .main-content-box
-                .card.bg-white.border-0.p-0.shadow
-                    .card-header.bg-white.border-0.shadow.border-0
+                .card.border-0.p-0.shadow
+                    .card-header.border-0.shadow.border-0
                         h1.card-title=data.product.name
                         p.card-text=data.product.description
-                    .card-body.bg-white.border-0.p-0.pdf-cont
+                    .card-body.border-0.p-0.pdf-cont
                         //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
                         #pdfShow(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf")
-                .card.shadow
+                .card.shadow.info-bar
                     .row.px-2
                         .col-md-4.py-2
                             p.card-text.notes-details-text.text-muted
@@ -208,10 +208,10 @@ html(lang="en")
             .share-modal.modal
                 .modal-dialog.modal-dialog-centered.modal-lg
                     .modal-content.border-0
-                        .modal-header.bg-white.border-0
+                        .modal-header.border-0
                             h5.text-center Share 
                             button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
-                        .modal-body.bg-white.border-0
+                        .modal-body.border-0
                             .shareon.d-flex.justify-content-center
                                 a.facebook 
                                 a.linkedin
@@ -222,10 +222,10 @@ html(lang="en")
             .report-modal.modal(tabindex="1")
                 .modal-dialog.modal-dialog-centered.modal-lg
                     .modal-content.border-0
-                        .modal-header.bg-white.border-0
+                        .modal-header.border-0
                             h5.text-center Report this note 
                             button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
-                        .modal-body.bg-white.border-0
+                        .modal-body.border-0
                             h6 Choose Report type 
                             .container.py-0
                                 form
@@ -244,10 +244,10 @@ html(lang="en")
             .user-not-login-modal.modal
                 .modal-dialog.modal-dialog-centered.modal-lg
                     .modal-content.border-0
-                        .modal-header.bg-white.border-0
+                        .modal-header.border-0
                             //- h6 Login 
                             button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
-                        .modal-body.bg-white.border-0.text-center
+                        .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
                             a(href="/account/login").btn.btn-sm.btn-primary Login
 

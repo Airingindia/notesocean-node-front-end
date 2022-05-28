@@ -8,6 +8,7 @@
     "test": "node ./bin/www"
   },
   "dependencies": {
+    "@amplitude/node": "^1.10.0",
     "@sendgrid/mail": "^7.6.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

@@ -92,25 +92,6 @@ footer li {
     display: block;
 } */
 
-/* header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    background-color: #fff;
-} */
-
-/* .main-section {
-    margin-top: 70px;
-} */
-
-
-
-header {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .btn-primary {
     background-color: #FB0100;
     color: #fff !important;

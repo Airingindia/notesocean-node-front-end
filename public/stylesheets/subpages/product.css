@@ -1,7 +1,3 @@
-section {
-    margin-top: 50px;
-}
-
 .sdk-HeaderView-header {
     background: white !important;
 }
@@ -12,6 +8,11 @@ section {
 
 h1 {
     font-size: 20px;
+    color: black;
+}
+
+h1.card-title {
+    color: black !important;
 }
 
 .icon-item {
@@ -19,16 +20,16 @@ h1 {
 }
 
 .main-content-box {
-    width: 70%;
+    width: 80%;
     float: left;
 }
 
 .realted-notes-container {
-    width: 30%;
+    width: 20%;
     float: left;
     padding: 10px 1%;
-    background: inherit;
-    /* fallback for old browsers */
+    background: #ffff;
+    color: black;
 
 }
 
@@ -40,18 +41,10 @@ h1 {
     height: 150px;
 }
 
-footer {
+footer,
+.footer-credit {
     float: left;
     width: 100%;
-}
-
-body {
-    background: #E0EAFC;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #CFDEF3, #E0EAFC);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 div#amzn-native-ad-0 {
@@ -75,6 +68,7 @@ div#amzn-native-ad-0 {
     z-index: 999 !important;
     background-color: white;
     transform: translate(-50%, -50%);
+    color: black;
 }
 
 .commentbox-input {
@@ -82,14 +76,14 @@ div#amzn-native-ad-0 {
     border-top: none !important;
 }
 
-/* .comment-add-btn:hover,
+
 .comment-add-btn:active,
 .comment-add-btn:focus {
     background: #FF0000 !important;
     color: white !important;
-} */
+}
 
-.btn-primary:hover,
+*/ .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
     background: #FF0000 !important;
@@ -123,10 +117,9 @@ div#amzn-native-ad-0 {
 
     .realted-notes-container {
         width: 100%;
-        clear: both;
+        clear: left;
         padding: 10px 1%;
-        background: inherit;
-        /* fallback for old browsers */
+        background: white;
 
     }
 
@@ -142,4 +135,49 @@ div#amzn-native-ad-0 {
         clear: both;
         width: 100%;
     }
+}
+
+/* light mode */
+
+.card,
+.card-header,
+.card-footer,
+.modal-header,
+.modal-body,
+.modal-footer {
+    background: #ffff;
+    color: black !important;
+    box-shadow: none !important;
+}
+
+/* dark mode code */
+
+@media (prefers-color-scheme: dark) {
+
+    h1.card-title {
+        color: white !important;
+    }
+
+    .card,
+    .card-header,
+    .card-footer,
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        background: #232225;
+        color: white !important;
+        box-shadow: none !important;
+    }
+
+    .main-section-top {
+        border-top: 1px solid black;
+    }
+
+    .realted-notes-container {
+        float: left;
+        padding: 10px 1%;
+        background: #232225;
+        color: white !important;
+    }
+
 }

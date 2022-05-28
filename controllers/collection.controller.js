@@ -1,5 +1,5 @@
 const httpServices = require("../services/http.services");
-const getUserCollection = async (collectionID) => {
+const getCollectionDetails = async (collectionID) => {
     const response = await httpServices.get("/collections/" + collectionID);
     return response.body;
 }
@@ -14,18 +14,29 @@ const setCollectionview = (collectionID) => {
     })
 }
 
-const getPublicCollection = ()=>{
-    return  new  Promise((resolve,reject)=>{
-        httpServices.get('/getpubliccollection').then((response)=>{
+const getPublicCollection = () => {
+    return new Promise((resolve, reject) => {
+        httpServices.get('/getpubliccollection').then((response) => {
             resolve(response);
-        }).catch((errordata)=>{
+        }).catch((errordata) => {
             reject(errordata);
+        })
+    })
+}
+
+const getUserCollection = (userid) => {
+    return new Promise((resolve, reject) => {
+        httpServices.get("/collections/users/" + userid).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
         })
     })
 }
 
 
 module.exports = {
-    getCollection: getUserCollection,
-    addView: setCollectionview
+    getCollectionDetails: getCollectionDetails,
+    addView: setCollectionview,
+    getUserCollection: getUserCollection
 }
