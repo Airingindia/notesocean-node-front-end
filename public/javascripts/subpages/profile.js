@@ -16,12 +16,12 @@ $(document).ready(function () {
     }
     //  get uset public  notes 
 
-    window.onload = function () {
+
+    function loaduserpublicnotes() {
         $.ajax({
             type: "GET",
             url: localStorage.getItem("api") + "/products/users/" + userid,
             beforeSend: function () {
-
             },
             success: function (data) {
                 $(".notes-loader").addClass("d-none");
@@ -65,6 +65,9 @@ $(document).ready(function () {
                 }).show();
             }
         });
+    }
+
+    function loadusercollection() {
         $.ajax({
             type: "GET",
             url: localStorage.getItem("api") + "/collections/users/" + userid,
@@ -73,7 +76,6 @@ $(document).ready(function () {
             },
             headers: {
                 Authorization: localStorage.getItem("token"),
-                DeviceId: amplitude.getInstance().options.deviceId
             },
             success: function (data) {
                 $(".collection-loader").addClass("d-none");
@@ -125,7 +127,6 @@ $(document).ready(function () {
         });
     }
 
-
     function timeDifference(previous) {
         const current = Date.now();
         var msPerMinute = 60 * 1000;
@@ -160,4 +161,7 @@ $(document).ready(function () {
             return Math.round(elapsed / msPerYear) + ' years ago';
         }
     };
+
+    loadusercollection();
+    loaduserpublicnotes();
 });

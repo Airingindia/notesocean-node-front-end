@@ -17,14 +17,14 @@ html(lang="en-US")
         meta(property='og:url' content=`https://notesocean.com/profile/${(profile.id)}`)
         meta(property='og:description' content=`500 Notes , 753 Collections - See Notes Ocean notes and collections from  ${(profile.firstName)} ${(profile.lastName)}`)
         meta(property='og:type' content='profile')
-        meta(property='og:image' content=`${(profile.profileImage)}`)
+        meta(property='og:image' content=`${(profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)"))}`)
 
 
         meta(name='twitter:card' content='summary')
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`${(profile.firstName)} ${(profile.lastName)}`)
         meta(name='twitter:description' content=`500 Notes , 753 Collections - See Notes Ocean notes and collections from  ${(profile.firstName)} ${(profile.lastName)}`)
-        meta(name='twitter:image' content=`${(profile.profileImage)}`)
+        meta(name='twitter:image' content=`${(profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)"))}`)
 
         script(type='application/ld+json').
             {
@@ -32,7 +32,7 @@ html(lang="en-US")
                 "@type": "Person",
                 "name": "#{profile.firstName} #{profile.lastName}",
                 "url": "https://notesocean.com/profile/#{profile.id}",
-                "image": "#{profile.profileImage}",
+                "image": "#{profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)")}" 
                 "jobTitle": "user",
                 "worksFor": {
                 "@type": "Organization",

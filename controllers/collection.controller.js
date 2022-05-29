@@ -1,7 +1,16 @@
 const httpServices = require("../services/http.services");
 const getCollectionDetails = async (collectionID) => {
-    const response = await httpServices.get("/collections/" + collectionID);
-    return response.body;
+    return new Promise((resolve, reject) => {
+        httpServices.get("/collections/" + collectionID).then((response) => {
+            if (response.statusCode == 200) {
+                resolve(response.body);
+            } else {
+                reject(response.statusCode);
+            }
+        }).catch((error) => {
+            reject(error);
+        })
+    })
 }
 
 const setCollectionview = (collectionID) => {

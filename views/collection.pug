@@ -16,44 +16,44 @@ html(lang="en")
         meta(property='og:url' content=`https://notesocean.com/collection/${(collection.id)}`)
         meta(property='og:description' content=`${(collection.description)}`)
         meta(property='og:type' content='product.item')
-        meta(property='og:image' content=`${(collection.thumbnails)}`)
+        meta(property='og:image' content=`${(collection.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)"))}`)
 
         //- twitter card
         meta(name='twitter:card' content='summary')
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`${(collection.name)}`)
         meta(name='twitter:description' content=`${(collection.description)}`)
-        meta(name='twitter:image' content=`${(collection.thumbnails)}`)
+        meta(name='twitter:image' content=`${(collection.thumbnails .replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)"))}`)
         //- schema.org
         include includes/bootstrap
         style
             include ../public/stylesheets/subpages/collection.css
         //- schema notes breadcumb
 
+        //json ld
+
+        script(type="application/ld+json").
+            {
+            "@context": "https://schema.org/", 
+            "@type": "BreadcrumbList", 
+            "itemListElement": 
+                #{jsonld}
+            }
+
     body 
         header 
             include includes/navbar
         section
-            .collection-info-container.container
-                .d-flex.bg-white.rounded.border-danger.justify-content-center
-                    .flex-shrink-3.collection-img-cont
-                        img(src=collection.thumbnails alt=collection.name).collection-thumbnails
-                    .flex-grow-0.ms-3.collection-details-cont.py-3
-                        h1=collection.name
-                        p=collection.description
-                        p 
-                            i.fa.fa-book.mx-1
-                            span=collection.products.length 
-                            span.mx-1 notes
-                        .user-profile.mt-4
-                            a(href=`/profile/${(user.id)}`)
-                                .d-flex.align-items-center.collection-user-info
-                                    .flex-shrink-0
-                                        img(src='/images/dummy-user.jpeg' alt='...').collection-user-image
-                                    .flex-grow-1.ms-1
-                                        h2 #{user.firstName} #{user.lastName}
+            .collection-info-container.text-center
+                h1.mt-5.collection-title=collection.name
+                p.mt-3.collection-description=collection.description
+                p 
+                    i.fa.fa-book.mx-1
+                    span=collection.products.length 
+                    span.mx-1 notes
+
             div.px-3
-                h3 #{collection.name} notes
+                h3 Notes
             .row.public-now-row.mx-1
                 -for (var i = 0;i<collection.products.length;i++){
                     -var product_id = collection.products[i].id;
@@ -66,10 +66,10 @@ html(lang="en")
                 .col-md-3.my-2
                     a(href=`/notes/${(product_id)}`)
                         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
-                            .card-header.border-0.bg-white
+                            .card-header.border-0
                                 p.card-title=product_name
-                            .card-body.border-0(style=`background-image:url(${(product_thumbnails)});background-size:cover`).notes-thumbnails
-                            .card-footer.border-0.bg-white
+                            img.card-img-top.notes-thumbnails(src=product_thumbnails)
+                            .card-footer.border-0
                                 .row
                                     .col-12
                                         //- p.card-title Lorem, ipsum dolor sit ametssdgdg

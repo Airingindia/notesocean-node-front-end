@@ -22,7 +22,6 @@ const getRequest = (api_path) => {
         ajax(api_endpoint)
             .get(api_path)
             .send()
-            .expect(200)
             .end(function (err, response) {
                 if (err) {
                     reject(err);
