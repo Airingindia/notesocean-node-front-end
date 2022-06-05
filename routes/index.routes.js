@@ -12,7 +12,6 @@ const api_url = process.env.API_URL;
 
 
 
-// test page route
 router.get("/google-signin", (req, res, next) => {
   res.redirect(api_url + "/authenticate/google-sign-in");
 })
@@ -31,6 +30,10 @@ router.get('/', function (req, res, next) {
   })
   // res.render("index");
 });
+
+router.get("/upload", (req, res, next) => {
+  res.redirect("/dashboard/public-notes/new");
+})
 
 
 // notes page route

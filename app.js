@@ -9,6 +9,7 @@ const apiRoutes = require('./routes/api.routes');
 const dashboardRoutes = require('./routes/dashboard.routes');
 const aboutRoutes = require('./routes/about.routes');
 const contactRoutes = require("./routes/contact.routes");
+const sitemapRoutes = require("./routes/sitemap.routes");
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +28,7 @@ app.use("/api", apiRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
+app.use("/sitemaps", sitemapRoutes);
 
 app.use("/contact", contactRoutes);
 app.use("/contact-us", contactRoutes);

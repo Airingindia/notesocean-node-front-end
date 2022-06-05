@@ -6,10 +6,6 @@
     display: block;
 }
 
-body {
-    width: 100% !important;
-}
-
 
 
 
@@ -23,7 +19,7 @@ body {
 
 footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 100px;
     padding: 30px;
 }
