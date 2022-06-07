@@ -38,4 +38,10 @@ router.get('/recent-notes.xml', (req, res, next) => {
     // res.send("okay");
 });
 
+// most viewed sitemap route
+
+router.get('/most-viewed.xml', async function (req, res, next) {
+    res.render("top-notes");
+})
+
 module.exports = router;
