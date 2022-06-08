@@ -1,0 +1,49 @@
+/* desktop navbar css */
+nav.desktop-navbar {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    padding-top: 12px;
+}
+
+.desktop-navbar-profile-container {
+    border-radius: 50%;
+
+}
+
+.desktop-navbar-profile-container img {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.desktop-navbar-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.desktop-navbar-item.brand {
+    width: 30%;
+}
+
+.desktop-navbar-item.search {
+    width: 30%;
+}
+
+.desktop-navbar-item.navigation {
+    width: 30%;
+}
+
+.desktop-navbar-item.navigation ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+
+}
+
+.desktop-navbar-item.navigation ul li {
+    margin: 0px 10px;
+}
+
+.input-group-text {
+    background-color: #fff;
+    color: #FF0000;
+}

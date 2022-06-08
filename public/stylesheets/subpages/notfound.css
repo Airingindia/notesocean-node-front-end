@@ -91,7 +91,7 @@
 
 /* dark mode css */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: darkkk) {
     .notfound .notfound-404 h1>span {
         color: white;
     }

@@ -1,0 +1,36 @@
+.footer a {
+    text-decoration: none !important;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    padding: 30px;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer,
+.footer-credit {
+    background-color: #29292A !important;
+    color: #fff;
+}
+
+footer a,
+footer li {
+    font-size: 15px;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* media query */
+@media (max-width: 768px) {
+    footer {
+        display: block;
+        margin-top: 10px;
+        padding: 10px;
+    }
+}

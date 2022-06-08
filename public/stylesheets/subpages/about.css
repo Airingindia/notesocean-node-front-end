@@ -1,3 +1,17 @@
+/* card customizing for light mode  */
+
+.card,
+.card-header,
+.card-footer,
+.card-footer {
+    background-color: #fff !important;
+    border: none !important;
+}
+
+.text-red {
+    color: #FF0606;
+}
+
 .banner_main {
     height: 50vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5),
@@ -40,13 +54,6 @@
     height: 10px;
 }
 
-.about_section h2 {
-    /* font-size: 2rem; */
-}
-
-.about_section {
-    /* font-size: 1.5rem; */
-}
 
 .about_section ul {
     list-style-type: none;

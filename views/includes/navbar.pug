@@ -1,30 +1,36 @@
 style
-  include ../../public/stylesheets/style.css
-style
-  include ../../public/stylesheets/dark-mode.css
-nav.shadow
-  div.d-flex.justify-content-between.align-items-center
-    .logo-box
+  include ../../public/stylesheets/subpages/navbar.css
+script
+  include ../../public/javascripts/subpages/navbar.js
+nav.desktop-navbar
+  .desktop-navbar-container
+    .desktop-navbar-item.brand
       a(href="/")
-        img(src="https://static.ncdn.in/public/images/dash-logo.svg" width="100%" alt="notes ocean logo").desktop-logo.light-logo
-        img(src="https://static.ncdn.in/public/images/dark-log.svg" width="100%" alt="notes ocean logo").desktop-logo.dark-logo
-    .search-box.w-50
-      form(action="/search")
+        img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="")
+    .desktop-navbar-item.search
+      form(method="GET" action="/search")
         .input-group
-          input(type="search" placeholder="Ex- class 10th math notes" name="query").form-control
-          button(type="submit" aria-label="search notes and collections ").btn.btn-outline-secondary
-            i.fa.fa-search
-    .user-box.d-flex
-      div.upload-box
-        a(href="/dashboard/public-notes/new")
-          .btn.btn-dark-outline
-            i.fa.fa-cloud-upload(title="upload new notes")
-            span 
-              small Upload Notes
-      div.login-button.d-flex.justify-content-center.align-items-center.d-none
-        a(href="/login").btn.btn-primary.btn-sm
-          i.fa.fa-user.mx-2
-          span Login
-      div.user-icon-box.d-flex.justify-content-center.align-items-center
-        a(href="/dashboard")
-          img(src="https://static.ncdn.in/public/images/dummy-user.jpeg" alt="notes ocean user image")
+          input.form-control(type='text' placeholder="Search notes" aria-label="search" aria-describedby='search' name="query")
+          span#basic-addon2.input-group-text 
+            button(type="submit").btn.p-0
+              i.fa.fa-search
+
+    .desktop-navbar-item.navigation
+      ul
+        li
+          a(href='/upload').btn.btn-outline-secondary
+            i.fa.fa-cloud-upload
+            span  Upload Notes
+        li.d-none.login-navbar-item
+          a(href='/login').btn.btn-outline-secondary
+            i.fa.fa-cloud-upload
+            span    Login
+        li.loading-nav-item
+          a(href='#').btn.btn-outline-secondary
+            i.fa.fa-spinner.fa-spin
+        li.d-none.dashboard-nav-item
+          a(href='/dashboard').btn.btn-outline-dark
+            .desktop-navbar-profile-container
+              img(src="")
+              span.user-profile-name
+nav.mobile-navbar

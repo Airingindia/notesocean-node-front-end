@@ -152,7 +152,7 @@ div#amzn-native-ad-0 {
 
 /* dark mode code */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: darkkk) {
 
     h1.card-title {
         color: white !important;

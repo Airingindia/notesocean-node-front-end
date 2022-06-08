@@ -206,7 +206,8 @@ form.example::after {
 /* dark mode */
 
 
-@media (prefers-color-scheme: dark) {
+
+@media (prefers-color-scheme: darkkk) {
     /* live notes section */
 
     .live-notes-section {
@@ -257,4 +258,5 @@ form.example::after {
         color: #eff3f0 !important;
         font-size: 15px;
     }
+
 }
