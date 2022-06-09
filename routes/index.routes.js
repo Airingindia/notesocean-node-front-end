@@ -17,18 +17,18 @@ router.get("/google-signin", (req, res, next) => {
 })
 // homepage route
 router.get('/', function (req, res, next) {
-  homeControllers.getFeed().then((data) => {
-    res.render("index",
-      {
-        data: data,
-        getTime: timeService,
-        url: urlMaker
-      }
-    );
-  }).catch((error) => {
-    console.log(error);
-  })
-  // res.render("index");
+  // homeControllers.getFeed().then((data) => {
+  //   res.render("index",
+  //     {
+  //       data: data,
+  //       getTime: timeService,
+  //       url: urlMaker
+  //     }
+  //   );
+  // }).catch((error) => {
+  //   console.log(error);
+  // })
+  res.render("index");
 });
 
 router.get("/upload", (req, res, next) => {

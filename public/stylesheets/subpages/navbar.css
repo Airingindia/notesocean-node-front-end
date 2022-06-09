@@ -2,6 +2,12 @@
 nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     padding-top: 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
 }
 
 .desktop-navbar-profile-container {
@@ -46,4 +52,46 @@ nav.desktop-navbar {
 .input-group-text {
     background-color: #fff;
     color: #FF0000;
+}
+
+
+
+.btn-grad-nav-login-dash {
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border: none;
+}
+
+.btn-grad-nav-login-dash span {
+    color: white;
+}
+
+.btn-grad-nav-login-dash:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-grad-nav-upload {
+    background-image: linear-gradient(to right, #1F1C2C 0%, #928DAB 51%, #1F1C2C 100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border: none;
+}
+
+.btn-grad-nav-upload span {
+    color: white;
+}
+
+.btn-grad-nav-upload:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
 }
