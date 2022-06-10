@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "build": "node ./bin/www",
-    "test": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@amplitude/node": "^1.10.0",
