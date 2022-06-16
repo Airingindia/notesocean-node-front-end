@@ -135,12 +135,7 @@ $(document).ready(function () {
         }
     };
 
-    $(".mobile-search-box").click(function () {
-        $(".logo-box").slideToggle("hide");
-        $(".search-box").slideToggle("show");
-        $(".search-btn-close").slideToggle("show");
-        $(".search-btn").slideToggle("hide");
-    });
+
 
     // notice close
     $(".close-notice").click(function () {
@@ -177,4 +172,37 @@ $(document).ready(function () {
     }
 
 
+});
+
+
+$(document).ready(function () {
+    console.log(window.location.origin);
+    // if (window.location.origin == "http://localhost:3000" || window.location.origin == "https://dev.notesocean.com" || window.location.origin == "http://dev.notesocean.com") {
+    //     $("header").prepend(`<span style="text-align:center;color:red">  This is development version  of Notes ocean , please don't use if you are not a developer </span>`);
+    // }
+    // new Noty({
+    //     theme: "nest",
+    //     type: "error",
+    //     text: "This is development version  of Notes ocean , please don't use if you are not a developer",
+    //     timeout: 4000,
+    // }).show();
+
+    function mavbar() {
+        $(".mobile-menus-bars-button").click(function () {
+            $(".mobile-menu-wrapper").css({ display: "flex" })
+            $(".mobile-search-wrapper").css({ display: "none" });
+        });
+
+        $(".mobile-menus-wrapper-close-btn").click(function () {
+            $(".mobile-menu-wrapper").css({ display: "none" });
+            $(".mobile-search-wrapper").css({ display: "none" });
+        });
+
+        $(".mobile-menu-search-btn").click(function () {
+            $(".mobile-menu-wrapper").css({ display: "none" });
+            $(".mobile-search-wrapper").css({ display: "flex" });
+        })
+    }
+
+    mavbar();
 });

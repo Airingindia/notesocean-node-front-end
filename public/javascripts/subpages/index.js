@@ -194,6 +194,7 @@ $(document).ready(function () {
     //     },
     // });
     // live noets function
+
     socket.on("liveNotes", data => {
         if (Object.keys(data).length !== 0) {
             var array = Object.entries(data).map(function (entry) {
@@ -205,8 +206,11 @@ $(document).ready(function () {
             });
             var products = [];
             var users = {};
+            livenotescount = array.length;
             if (array.length !== 0) {
-                $(".live-notes-section").removeClass("d-none");
+
+                $(".live-reading").removeClass("d-none");
+
                 var unique_notes = array.filter((value, index, self) => self.findIndex((m) => m.product.product_id === value.product.product_id) === index);
                 $(".live-reading .row").html("");
                 var count = 0;
@@ -235,7 +239,7 @@ $(document).ready(function () {
                     </div>
                 </a></div>`;
 
-                    if (count < 6) {
+                    if (count < 12) {
                         count++;
                         $(".live-reading .row").append(content);
                     }
@@ -243,11 +247,15 @@ $(document).ready(function () {
 
                 }
             } else {
-                $(".live-notes-section").addClass("d-none");
+                $(".live-reading").addClass("d-none");
+                $(".live-reading .row").html("");
             }
         }
 
     });
+
+
+
 
     //  most views notes
 
@@ -272,7 +280,7 @@ $(document).ready(function () {
                                 let thumbnails = data.requested[i].thumbnails;
                                 let views = data.requested[i].views;
                                 let timestamp = getTime(data.requested[i].timestamp);
-                                let content = `<div class="col-6 col-lg-4 mt-3"><a href="/notes/${product_id}">
+                                let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
                                 <div class="card shadow border-0 h-100">
                                     <div class="card-header">  ${name}</div>
                                     <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
@@ -293,6 +301,51 @@ $(document).ready(function () {
             }
         })
     };
+
+    function recentNotes() {
+        let hit = false;
+        let count = 0;
+        $(window).scroll(function (event) {
+            let visibility = $(".recent-notes").css("visibility");
+            if (!hit) {
+                if (visibility !== "hidden") {
+                    hit = true;
+                    $.ajax({
+                        type: "GET",
+                        url: localStorage.getItem("api") + "/products/feeds/0",
+                        beforeSend: function () { },
+                        success: function (data) {
+                            $(".recent-notes .row").html("");
+                            for (let i = 0; i < data.requested.length; i++) {
+                                let product_id = data.requested[i].product.id;
+                                let name = data.requested[i].product.name;
+                                let pages = data.requested[i].product.pages;
+                                let thumbnails = data.requested[i].product.thumbnails;
+                                let views = data.requested[i].product.views;
+                                let timestamp = getTime(data.requested[i].product.timestamp);
+                                let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
+                                <div class="card shadow border-0 h-100">
+                                    <div class="card-header">  ${name}</div>
+                                    <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
+                                    <div class="card-footer">
+                                        <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
+                                    </div>
+                                </div>
+                            </a></div>`;
+
+                                if (count < 6) {
+                                    count++;
+                                    $(".recent-notes .row").append(content);
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    recentNotes();
 
     mostViewed();
 

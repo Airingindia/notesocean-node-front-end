@@ -7,18 +7,33 @@ nav.desktop-navbar
     .desktop-navbar-item.brand
       a(href="/")
         img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="")
-    .desktop-navbar-item.search
+    .desktop-navbar-item.search.search-box
       form(method="GET" action="/search")
         .input-group
           input.form-control(type='text' placeholder="Search notes" aria-label="search" aria-describedby='search' name="query")
           span#basic-addon2.input-group-text 
             button(type="submit").btn.p-0
               i.fa.fa-search
-
     .desktop-navbar-item.navigation
       ul
         li
-          a(href='/upload').btn.btn-outline-secondary.btn-grad-nav-upload
+          a(href='/courses/all').btn
+            span  Courses
+        li
+          a(href='/subjects/all').btn
+            span  Subjects
+        li
+          a(href='/notes/recent').btn
+            span  Recent
+        li
+          a(href='/notes/top').btn
+            span  Top
+        li
+          a(href='/notes/request/all').btn
+            i.fa.fa-hand-holding-hand
+            span  Request Notes
+        li
+          a(href='/upload').btn
             i.fa.fa-cloud-upload
             span  Upload Notes
         li.d-none.login-navbar-item
@@ -34,3 +49,68 @@ nav.desktop-navbar
               img(src="")
               span.user-profile-name
 nav.mobile-navbar
+  .menu-bars
+    i.fa.fa-bars.mobile-menus-bars-button
+  .brand-info
+    a(href="/")
+      img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="") 
+  .search-cont
+    i.fa.fa-search.mobile-menu-search-btn
+  .mobile-menu-wrapper
+    .menu-wrapper-header
+      .menu-bars
+        i.fa.fa-times.mobile-menus-wrapper-close-btn
+      .brand-info
+        a(href="/")
+          img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="Notes ocean logo")
+      .search-cont
+        i.fa.fa-search.mobile-menu-search-btn
+    .menu-wrapper-navs
+      ul
+        li
+          a(href='/courses/all').btn
+            span  Courses
+        li
+          a(href='/subjects/all').btn
+            span  Subjects
+        li
+          a(href='/notes/recent').btn
+            span  Recent
+        li
+          a(href='/notes/top').btn
+            span  Top
+
+    .mobile-nav-wrapper-footer
+      ul
+        li
+          a(href='/notes/request/all').btn
+            i.fa.fa-hand-holding-hand
+            span  Request Notes
+        li
+          a(href='/upload').btn
+            i.fa.fa-cloud-upload
+            span  Upload Notes
+        li.d-none.login-navbar-item
+          a(href='/login').btn.btn-outline-secondary.btn-grad-nav-login-dash
+            i.fa.fa-user
+            span    Login
+        li.loading-nav-item
+          a(href='#').btn.btn-outline-secondary
+            i.fa.fa-spinner.fa-spin
+        li.d-none.dashboard-nav-item
+          a(href='/dashboard').btn.btn-outline-dark.btn-grad-nav-login-dash
+            .desktop-navbar-profile-container
+              img(src="")
+              span.user-profile-name
+  .mobile-search-wrapper
+    .mobile-search-wrapper-header
+      .menu-bars
+        i.fa.fa-times.mobile-menus-wrapper-close-btn
+      .brand-info
+        a(href="/")
+          img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="Notes ocean logo")
+      .search-cont
+        i.fa.fa-search.mobile-menu-search-btn
+    form(action="/search" method="GET")
+      input(type="text" placeholder="Search Notes" name="query").form-control.rounded-0
+      button.btn.btn-danger.rounded-0(type="submit") Search

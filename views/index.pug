@@ -100,7 +100,7 @@ html(lang="en-US")
             small CBSE Notes
           a(href="/search?query=ncrt").text-danger.mx-3 
             small NCRT Notes
-    section.live-reading
+    section.live-reading.d-none
       .container.py-5
         h3 Live 
           span.color-red Reading
@@ -170,7 +170,7 @@ html(lang="en-US")
           //-           small
           //-             i.fa.fa-clock
           //-             span  100 Minutes ago
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -181,7 +181,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -192,7 +192,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -203,7 +203,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -214,7 +214,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -225,7 +225,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -243,7 +243,7 @@ html(lang="en-US")
           span.color-red Courses
         p Find your notes by your courses 
           a(href="/all-courses").color-red View all
-        .container
+        .container.categories-item-cont
           .row
             .col-6.col-lg-4.mt-3
               a(href="/courses/software-engineering")
@@ -296,7 +296,7 @@ html(lang="en-US")
           span.color-red Subjects
         p Find your notes by your subjects 
           a(href="/all-subjects").color-red View all
-        .container
+        .container.categories-item-cont
           .row
             .col-6.col-lg-4.mt-3
               a(href="/subject/mathematics")
@@ -347,7 +347,7 @@ html(lang="en-US")
         small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
           a(href="/notes/most-views-notes").color-red View All
         .row
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -358,7 +358,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -369,7 +369,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -380,7 +380,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -391,7 +391,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header
@@ -402,7 +402,80 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-          .col-6.col-lg-4.mt-3.skeleton-live-loader
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+    section.recent-notes.wow.animate__animated.animate__fadeInUp
+      .container.py-5
+        h3 Recent Uploaded  
+          span.color-red Notes
+        small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
+          a(href="/notes/recent-uploaded").color-red View All
+        .row
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")
               .card.border-0
                 .card-header

@@ -48,6 +48,9 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "public-notes" && parameter == "new") {
         res.render("dashboard/public-notes/upload-public-notes");
     }
+    else if (alias == "public-notes" && parameter == "create") {
+        res.render("dashboard/public-notes/create-public-notes");
+    }
     else if (alias == "private-notes" && parameter == "new") {
         res.render("dashboard/private-notes/upload-private-notes");
     }
