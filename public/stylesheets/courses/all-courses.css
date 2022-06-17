@@ -1,0 +1,142 @@
+.main-section {
+    margin-top: 80px;
+}
+
+.categories a {
+    text-decoration: none;
+}
+
+
+.categories .card {
+    border-radius: 0px;
+
+
+}
+
+
+
+.categories .card:hover {
+    background-position: right center;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    transform: scale(1.10, 1.10);
+}
+
+.one-bg {
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}
+
+.two-bg {
+    background-color: #FBDA61;
+    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+}
+
+.three-bg {
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+
+}
+
+.four-bg {
+    background-color: #A9C9FF;
+    background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+
+}
+
+.categories .card h4 {
+    color: black;
+
+    text-transform: uppercase;
+    background-image: linear-gradient(-225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #323232 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: ani 2s linear infinite;
+    display: inline-block;
+}
+
+.categories .card p {
+    color: black !important;
+    margin-top: 10px;
+    font-size: 15px;
+
+
+}
+
+
+
+.categories-btn {
+    background-image: linear-gradient(to right, #323232 0%, #323232 51%, #323232 100%);
+    transition: 0.5s;
+    background-size: 100% auto;
+    color: white !important;
+    box-shadow: none;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 10px;
+    font-size: 12px;
+}
+
+
+.categories-btn:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.categories-btn a {
+    color: #fff !important;
+}
+
+.animate-charcter {
+    text-transform: uppercase;
+    background-image: linear-gradient(-225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #fff800 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+}
+
+
+@keyframes ani {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .categories-item-cont {
+        padding: 0% 10px !important;
+    }
+
+    .categories-item-cont .card {
+        padding: 10px 10px !important;
+    }
+
+    .categories-item-cont h4 {
+        font-size: 18px;
+    }
+}

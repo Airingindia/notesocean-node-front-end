@@ -33,14 +33,6 @@ h1.card-title {
 
 }
 
-.related-notes-item {
-    margin: 10px 0px;
-}
-
-.related-notes-item img {
-    height: 150px;
-}
-
 footer,
 .footer-credit {
     float: left;
@@ -96,7 +88,74 @@ div#amzn-native-ad-0 {
     height: 70vh;
 }
 
+.info-bar a,
+.realted-notes-container a {
+    text-decoration: none;
+    color: black;
+}
+
+/*  */
+.related-notes-item .card {
+    padding: 0px !important;
+}
+
+.related-notes-item .card,
+.related-notes-item .card-header,
+.related-notes-item .card-footer {
+    background-color: #fff;
+    border: none !important;
+}
+
+.related-notes-item .card-body,
+.related-notes-item .card-footer {
+    padding: 0px !important;
+}
+
+.related-notes-item-info {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    font-size: 12px;
+    font-weight: 300;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+.related-notes-item .card-header {
+    font-size: 20px !important;
+    font-weight: 300 !important;
+}
+
+.related-notes-item-user-info {
+    display: flex;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.related-notes-item-user-info div {
+    margin: 0px 5px;
+}
+
+.related-notes-item-user-info img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* media queries */
+
+@media (min-width: 769px) {
+    .main-section-top {
+        margin-top: 70px;
+    }
+}
+
 @media (max-width:768px) {
+
+    .main-section-top {
+        margin-top: 80px;
+    }
+
     .icon-group {
         justify-content: start !important;
     }
@@ -123,13 +182,7 @@ div#amzn-native-ad-0 {
 
     }
 
-    .related-notes-item {
-        margin: 10px 0px;
-    }
 
-    .related-notes-item img {
-        height: 150px;
-    }
 
     footer {
         clear: both;
@@ -181,3 +234,7 @@ div#amzn-native-ad-0 {
     }
 
 }
+
+/*  */
+
+/*  */

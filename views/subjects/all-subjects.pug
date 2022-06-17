@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title All Subjects
+        include ../includes/bootstrap
+        style 
+            include ../../public/stylesheets/courses/all-courses.css
+    body 
+
+        header
+            include ../includes/navbar
+        section.main-section
+            section.categories.categories-courses.wow.animate__animated.animate__fadeInU
+                .container.categories-item-cont
+                    .row
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-1")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 Mathematics
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes 
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-2")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 Science 
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes 
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-3")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 English
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes 
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-4")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 Sanskrit
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes  
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-5")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 Hindi
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes 
+                        .col-6.col-lg-4.mt-3
+                            a(href="/courses/class-6")
+                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                    h4 Social Science
+                                    p Lorem ipsum dolor sit amet.
+                                    button.categories-btn.btn View Notes 
+
+
+
+        include ../includes/footer
+        script
+            include ../../public/javascripts/common.js

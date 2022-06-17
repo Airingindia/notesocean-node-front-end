@@ -110,7 +110,7 @@ nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     z-index: 999;
     background-color: #fff;
-    padding: 0px 10px;
+    padding: 10px 10px;
 }
 
 .mobile-navbar i {
@@ -119,7 +119,7 @@ nav.desktop-navbar {
 }
 
 .mobile-menu-wrapper {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -142,7 +142,7 @@ nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     z-index: 999;
     background-color: #fff;
-    padding: 0px 10px;
+    padding: 10px 10px;
     font-size: 20px;
 }
 
@@ -154,7 +154,7 @@ nav.desktop-navbar {
     display: flex;
     justify-content: center;
     width: 100%;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -180,7 +180,7 @@ nav.desktop-navbar {
 }
 
 .mobile-nav-wrapper-footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     box-shadow: 0px 0px 10px #ccc;
@@ -199,7 +199,7 @@ nav.desktop-navbar {
 }
 
 .mobile-search-wrapper {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -222,7 +222,7 @@ nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     z-index: 999;
     background-color: #fff;
-    padding: 0px 10px;
+    padding: 10px 10px;
     font-size: 20px;
 }
 
@@ -237,6 +237,14 @@ nav.desktop-navbar {
 }
 
 /* media queries */
+
+.mobile-navbar input:focus,
+.mobile-navbar input:hover,
+.mobile-navbar input:active {
+    box-shadow: none;
+    outline: none;
+}
+
 
 @media (min-width: 769px) {
     nav.desktop-navbar {
@@ -258,3 +266,5 @@ nav.desktop-navbar {
         display: flex;
     }
 }
+
+/* maine section margin */
