@@ -279,10 +279,12 @@ $(document).ready(function () {
                     contentType: false,
                     mimeType: "multipart/form-data",
                     beforeSend: function () {
-                        // $(".submit-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> Please wait...");
-                        // $(".submit-btn").prop("disabled", true);
+                        $(".change-img-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> updating...");
+                        $(".change-img-btn").prop("disabled", true);
                     },
                     success: function (data) {
+                        $(".change-img-btn").html("Change");
+                        $(".change-img-btn").prop("disabled", false);
                         new Noty({
                             theme: "nest",
                             type: "success",
@@ -291,6 +293,8 @@ $(document).ready(function () {
                         }).show();
                     },
                     error: function () {
+                        $(".change-img-btn").html("Change");
+                        $(".change-img-btn").prop("disabled", false);
                         new Noty({
                             theme: "nest",
                             type: "error",

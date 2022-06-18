@@ -119,7 +119,7 @@ $(document).ready(function () {
 
                         $(".collections-rows").prepend(`
                         <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
-                        <a href="/dashboard/collections/${data.i}" class="w-100">
+                        <a href="/dashboard/collections/${data.id}" class="w-100">
                             <div class="collection-item-content">
                                 <div class="collection-item-content-box">
                                     <img src="${data.thumbnails}" class="collection-items-thumbnails">

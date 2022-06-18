@@ -7,6 +7,10 @@ const api_url = process.env.API_URL;
 router.get('/', async function (req, res, next) {
     res.redirect("/");
 });
+router.get("/live-reading", (req, res, next) => {
+    res.render("notes/live-reading");
+});
+
 router.get("/most-viewed", (req, res, next) => {
     productControllers.getMostViewedNotes().then((notes) => {
         res.render("notes/most-viewed", {
@@ -53,4 +57,7 @@ router.get("/:id", (req, res, next) => {
     }
 
 });
+
+
+
 module.exports = router;
