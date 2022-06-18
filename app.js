@@ -13,6 +13,7 @@ const contactRoutes = require("./routes/contact.routes");
 const sitemapRoutes = require("./routes/sitemap.routes");
 const coursesRoute = require("./routes/courses.routes");
 const subjectRoutes = require("./routes/subjects.routes");
+const notesRoutes = require("./routes/notes.routes");
 
 const app = express();
 
@@ -35,11 +36,14 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
 app.use("/sitemaps", sitemapRoutes);
-
+app.use("/notes", notesRoutes);
 app.use("/contact", contactRoutes);
 app.use("/contact-us", contactRoutes);
 app.use("/courses", coursesRoute);
 app.use("/subjects", subjectRoutes);
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   // next(createError(404));

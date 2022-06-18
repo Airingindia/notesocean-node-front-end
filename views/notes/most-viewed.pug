@@ -1,0 +1,118 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Most Viewed Notes
+        include ../includes/bootstrap
+        style
+            include ../../public/stylesheets/notes/most-viewed.css
+    body 
+        header
+            include ../includes/navbar
+        section.most-viewd-notes.wow.animate__animated.animate__fadeInUp.main-section
+            .container-fluid.py-5
+                h1 Most Viewed Notes 
+                .row
+                    - for (let i = 0; i < notes.requested.length;i++){
+                        - let name = notes.requested[i].name;
+                        - let description = notes.requested[i].description;
+                        - let id = notes.requested[i].id;
+                        - let userId = notes.requested[i].userId;
+                        - let thumbnails = notes.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
+                        - let size = notes.requested[i].size;
+                        - let pages = notes.requested[i].pages;
+                        - let timestamp = timeService.get(notes.requested[i].timestamp);
+                        - let views = notes.requested[i].views;
+                        .col-md-6.col-lg-4.col-xl-3.mt-3
+                            a(href="/notes/"+id)
+                                .card.shadow.border-0
+                                    .card-header #{name}
+                                    .card-body.p-0
+                                        img.card-img-top(src=thumbnails)
+                                    .card-footer
+                                        .notes-profile-cont
+                                            a(href="#")
+                                                img(src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user image ").notes-cont-profile-pic
+                                                span.text-muted  Sachin Kumar 
+                                        .notes-cont-info.d-flex.justify-content-between.text-muted.mt-2
+                                            small
+                                                i.fa.fa-globe 
+                                                span  #{views} Views
+                                            small
+                                                i.fa.fa-file 
+                                                span  #{pages} pages 
+                                            small
+                                                i.fa.fa-clock
+                                                span  #{timestamp}
+                    -}
+                    //- .col-md-6.col-lg-4.col-xl-3.mt-3
+                    //-     a(href="#")
+                    //-         .card.shadow.border-0
+                    //-             .card-header Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, reprehenderit.
+                    //-             .card-body.p-0
+                    //-                 img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")
+                    //-             .card-footer
+                    //-                 .notes-profile-cont
+                    //-                     a(href="#")
+                    //-                         img(src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user image ").notes-cont-profile-pic
+                    //-                         span.text-muted  Sachin Kumar 
+                    //-                 .notes-cont-info.d-flex.justify-content-between.text-muted.mt-2
+                    //-                     small
+                    //-                         i.fa.fa-globe 
+                    //-                         span  100 Views
+                    //-                     small
+                    //-                         i.fa.fa-file 
+                    //-                         span  100 pages 
+                    //-                     small
+                    //-                         i.fa.fa-clock
+                    //-                         span  100 Minutes ago
+                    //- .col-md-6.col-lg-4.col-xl-3.mt-3
+                    //-     a(href="#")
+                    //-         .card.shadow.border-0
+                    //-             .card-header Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, reprehenderit.
+                    //-             .card-body.p-0
+                    //-                 img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")
+                    //-             .card-footer
+                    //-                 .notes-profile-cont
+                    //-                     a(href="#")
+                    //-                         img(src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user image ").notes-cont-profile-pic
+                    //-                         span.text-muted  Sachin Kumar 
+                    //-                 .notes-cont-info.d-flex.justify-content-between.text-muted.mt-2
+                    //-                     small
+                    //-                         i.fa.fa-globe 
+                    //-                         span  100 Views
+                    //-                     small
+                    //-                         i.fa.fa-file 
+                    //-                         span  100 pages 
+                    //-                     small
+                    //-                         i.fa.fa-clock
+                    //-                         span  100 Minutes ago
+                    //- .col-md-6.col-lg-4.col-xl-3.mt-3
+                        a(href="#")
+                            .card.shadow.border-0
+                                .card-header Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, reprehenderit.
+                                .card-body.p-0
+                                    img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")
+                                .card-footer
+                                    .notes-profile-cont
+                                        a(href="#")
+                                            img(src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user image ").notes-cont-profile-pic
+                                            span.text-muted  Sachin Kumar 
+                                    .notes-cont-info.d-flex.justify-content-between.text-muted.mt-2
+                                        small
+                                            i.fa.fa-globe 
+                                            span  100 Views
+                                        small
+                                            i.fa.fa-file 
+                                            span  100 pages 
+                                        small
+                                            i.fa.fa-clock
+                                            span  100 Minutes ago
+
+        include ../includes/footer
+        script
+            include ../../public/javascripts/common.js
+        script.
+            new WOW().init();

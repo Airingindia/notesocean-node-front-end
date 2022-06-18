@@ -43,16 +43,16 @@ html(lang="en")
                 "price": "0"
                 }
             }
-        include includes/bootstrap
+        include ../includes/bootstrap
         style
-            include ../public/stylesheets/subpages/product.css
+            include ../../public/stylesheets/subpages/product.css
         link(rel="stylesheet" href="https://static.ncdn.in/vendor/sheron/shareon.min.css")
         style 
-            include ../public/stylesheets/loader.css
+            include ../../public/stylesheets/loader.css
 
     body(data-api=api,data-product=data,data-product-id=data.product.id)
         header
-            include includes/navbar
+            include ../includes/navbar
         section.main-section-top
             .main-content-box
                 .card.border-0.p-0.shadow
@@ -271,13 +271,13 @@ html(lang="en")
             metaData:{fileName: "basic-civil-mechanical-engineering-book-free-pdf"}
             }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
             });
-        include includes/footer
+        include ../includes/footer
         script(src="/socket.io/socket.io.js")
         script
-            include ../public/javascripts/common.js
+            include ../../public/javascripts/common.js
         script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
         script(src="https://static.ncdn.in/vendor/wow/wow.min.js")
         script
-            include ../public/javascripts/subpages/products.js
+            include ../../public/javascripts/subpages/products.js
         script.
             new WOW().init();

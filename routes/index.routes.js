@@ -17,55 +17,11 @@ router.get("/google-signin", (req, res, next) => {
 })
 // homepage route
 router.get('/', function (req, res, next) {
-  // homeControllers.getFeed().then((data) => {
-  //   res.render("index",
-  //     {
-  //       data: data,
-  //       getTime: timeService,
-  //       url: urlMaker
-  //     }
-  //   );
-  // }).catch((error) => {
-  //   console.log(error);
-  // })
   res.render("index");
 });
 
 router.get("/upload", (req, res, next) => {
   res.redirect("/dashboard/public-notes/new");
-})
-
-
-// notes page route
-
-router.get("/notes/:id", (req, res, next) => {
-  var token = "";
-  if (req.cookies.token) {
-    token = req.cookies.token;
-  }
-  var deviceId = req.cookies.ampuser;
-  productControllers.getInfo(req.params.id, token).then((product) => {
-    const userData = {
-      id: 0,
-      firstName: "Notes",
-      lastName: "Ocean",
-      profileImage: "/images/dummy/user_dummy.jpg",
-    }
-    res.render("view-products", {
-      data: product, timeService: timeService, user: userData, api: api_url
-    });
-    next();
-    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
-      console.log(response);
-      next();
-    });
-  }).catch((error) => {
-    res.render("notfound");
-    next();
-  });
-
-
-
 });
 
 router.get("/:id/:name.pdf", (req, res, next) => {
@@ -81,7 +37,7 @@ router.get("/:id/:name.pdf", (req, res, next) => {
       lastName: "Ocean",
       profileImage: "/images/dummy/user_dummy.jpg",
     }
-    res.render("view-products", {
+    res.render("notes/view-notes", {
       data: product, timeService: timeService, user: userData, api: api_url
     });
     next();
@@ -111,7 +67,7 @@ router.get("/:id/:name.html", (req, res, next) => {
       lastName: "Ocean",
       profileImage: "/images/dummy/user_dummy.jpg",
     }
-    res.render("view-products", {
+    res.render("notes/view-notes", {
       data: product, timeService: timeService, user: userData, api: api_url
     });
     next();
@@ -120,12 +76,10 @@ router.get("/:id/:name.html", (req, res, next) => {
       next();
     });
   }).catch((error) => {
+    res.status(404);
     res.render("notfound");
     next();
   });
-
-
-
 });
 
 // profile page routes
@@ -140,11 +94,12 @@ router.get("/profile/:user_id", async (req, res, next) => {
       });
       next();
     }).catch((error) => {
+      res.status(404);
       res.render("notfound");
       next();
     })
   } else {
-
+    res.status(404);
     res.render("notfound");
     next();
   }
