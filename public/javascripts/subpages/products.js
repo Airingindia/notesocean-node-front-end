@@ -345,23 +345,37 @@ $(document).ready(function () {
             if (localStorage.getItem("userdata") !== null) {
                 if (userid == udata.id) {
                     $(".live-users-container").append(`
-                    <a class="mx-1 my-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> You </a>
+                    <a class="mx-1 my-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> </a>
                     `);
                 } else {
 
                     $(".live-users-container").append(`
-                    <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> ${firstName} ${lastName} </a>
+                    <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
                     `);
                 }
             } else {
                 $(".live-users-container").append(`
-                <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> ${firstName} ${lastName} </a>
+                <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
                 `);
             }
 
 
         }
-    })
+    });
 
+
+    //  realted notes
+
+    function showRelatedNotes() {
+        $.ajax({
+            type: "GET",
+            url: localStorage.getItem("api") + "/related/notes",
+            beforeSend: function () { },
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    }
+    // showRelatedNotes();
 });
 

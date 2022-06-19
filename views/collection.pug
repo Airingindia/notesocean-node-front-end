@@ -44,7 +44,7 @@ html(lang="en")
     body 
         header 
             include includes/navbar
-        section
+        section.main-section
             .collection-info-container.text-center
                 h1.mt-5.collection-title=collection.name
                 p.mt-3.collection-description=collection.description
@@ -67,10 +67,11 @@ html(lang="en")
                 .col-md-3.my-2
                     a(href=`/notes/${(product_id)}`)
                         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
-                            .card-header.border-0
+                            .card-header.border-0.bg-white
                                 p.card-title=product_name
-                            img.card-img-top.notes-thumbnails(src=product_thumbnails)
-                            .card-footer.border-0
+                            .card-body
+                                img.card-img-top.notes-thumbnails(src=product_thumbnails)
+                            .card-footer.border-0.bg-white
                                 .row
                                     .col-12
                                         //- p.card-title Lorem, ipsum dolor sit ametssdgdg

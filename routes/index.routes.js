@@ -11,7 +11,6 @@ const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
 
 
-
 router.get("/google-signin", (req, res, next) => {
   res.redirect(api_url + "/authenticate/google-sign-in");
 })
@@ -88,12 +87,12 @@ router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
-      console.log(userInfo);
       res.render("profile", {
         profile: userInfo
       });
       next();
     }).catch((error) => {
+      console.log(error);
       res.status(404);
       res.render("notfound");
       next();

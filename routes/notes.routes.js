@@ -29,7 +29,6 @@ router.get("/:id", (req, res, next) => {
         if (req.cookies.token) {
             token = req.cookies.token;
         }
-        var deviceId = req.cookies.ampuser;
         productControllers.getInfo(req.params.id, token).then((product) => {
             const userData = {
                 id: 0,
@@ -41,10 +40,16 @@ router.get("/:id", (req, res, next) => {
                 data: product, timeService: timeService, user: userData, api: api_url
             });
             next();
-            productControllers.addViews(product.product.id, token, deviceId).then((response) => {
-                console.log(response);
-                next();
-            });
+            if (req.cookies.ampuser) {
+                var deviceId = req.cookies.ampuser;
+                productControllers.addViews(product.product.id, token, deviceId).then((response) => {
+                    console.log(response);
+                    next();
+                }).catch((error) => {
+
+                });
+            }
+
         }).catch((error) => {
             console.log(error);
             res.render("notfound");

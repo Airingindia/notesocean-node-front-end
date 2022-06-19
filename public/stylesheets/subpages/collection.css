@@ -1,3 +1,7 @@
+.main-section {
+    margin-top: 80px;
+}
+
 .collection-info-container h1 {
     font-size: 25px;
 }
@@ -11,7 +15,8 @@
 }
 
 .collection-info-container i,
-.collection-info-container span {
+.collection-info-container span,
+.collection-info-container p {
     color: black;
 }
 
@@ -33,6 +38,12 @@
 
 .public-now-row {
     padding: 0% 0%;
+
+}
+
+.public-now-row a {
+    text-decoration: none;
+    color: black;
 }
 
 h2 {
@@ -55,32 +66,5 @@ h3 {
         margin: 20px 0px !important;
         border-bottom: 1px solid #ccc;
         padding-bottom: 10px;
-    }
-}
-
-@media (prefers-color-scheme: darkkk) {
-
-    .card,
-    .card-header,
-    .card-footer,
-    .modal-header,
-    .modal-body,
-    .modal-footer {
-        background: #232225;
-        color: white !important;
-        box-shadow: none !important;
-    }
-
-    .collection-title {
-        color: white;
-    }
-
-    .collection-description {
-        color: white;
-    }
-
-    .collection-info-container i,
-    .collection-info-container span {
-        color: white;
     }
 }

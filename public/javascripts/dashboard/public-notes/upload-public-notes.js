@@ -43,7 +43,6 @@ $(function () {
                             myDropzone.removeAllFiles();
                         }
                     });
-                // swal("success", "your note are uploaded successfully", "success");
             } else {
                 swal("error", "somthing sent wrong , please try again", "error");
             }
@@ -67,7 +66,13 @@ $(function () {
             description: description
         };
         formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
-        console.log(xhr);
+
+        // new Noty({
+        //     theme: "nest",
+        //     type: "error",
+        //     text: '<i class="fa fa-check-circle">  </i>  ' + name + " : Failed to create collection",
+        //     timeout: 4000,
+        // }).show();
 
 
     });
@@ -102,8 +107,22 @@ $(function () {
         $(".note-title").removeClass("is-invalid");
         $('.upload-notes-btn').html("Upload");
         $('.upload-notes-btn').prop('disabled', false);
+        if (file.xhr.status == 500) {
+            new Noty({
+                theme: "nest",
+                type: "error",
+                text: "something went wrong uploading file , please try again later",
+                timeout: 4000,
+            }).show();
+        }
+        console.log(file.xhr.status);
     });
 
+
+    $(".upload-notes-btn").click(function () {
+        $("form").submit();
+        $(".modal").modal("hide");
+    });
     $('form').submit(function (event) {
         event.preventDefault();
         // check all field is not null
@@ -158,7 +177,7 @@ $(function () {
         // description validations
 
         $(".note-descriptions").on("input", function () {
-            if ($(this).val().length > 150) {
+            if ($(this).val().length > 100) {
                 $(".note-descriptions").addClass("is-valid");
                 $(".note-descriptions").removeClass("is-invalid");
             }
@@ -170,7 +189,7 @@ $(function () {
             else {
                 $(".note-descriptions").addClass("is-invalid");
                 $(".note-descriptions").removeClass("is-valid");
-                $(".invalid-descriptions-error").html("Descriptions should be at least 150 characters");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 100 characters");
             }
         });
         $(".note-descriptions").on("change", function () {
@@ -190,6 +209,21 @@ $(function () {
         });
     };
     validate();
+
+
+
+    $(".accept-upload").click(function () {
+        $(".modal").modal("show");
+        let checkbox = $(".form-check-input");
+        $(checkbox).click(function () {
+            if ($(checkbox).prop("checked")) {
+                $(".upload-notes-btn").prop("disabled", false);
+            } else {
+                $(".upload-notes-btn").prop("disabled", true);
+            }
+        })
+
+    });
 });
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
