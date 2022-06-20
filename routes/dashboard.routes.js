@@ -10,36 +10,34 @@ router.get('/:page', async function (req, res, next) {
     var alias = req.params.page;
     if (alias == "private-notes") {
         res.render("dashboard/private-notes/private-notes");
-    } else if (alias == "profile") {
+    }
+    // profile
+    else if (alias == "profile") {
         res.render("dashboard/profile/profile");
     }
-
-    else if (alias == "upload-private-notes") {
-        res.render("dashboard/upload-private-notes");
-    } else if (alias == "public-notes") {
+    //  public notes
+    else if (alias == "public-notes") {
         res.render("dashboard/public-notes/my-public-notes");
-    } else if (alias == "upload-public-notes") {
-        res.render("dashboard/upload-public-notes");
-    } else if (alias == "collections") {
-        res.render("dashboard/collections/my-collections");
-    } else if (alias == "create-new-collections") {
-        res.render("dashboard/collections/create-new-collections");
     }
-    else if (alias == "colection-details") {
-        res.render("dashboard/collections/colection-details");
-
+    else if (alias == "collections") {
+        res.render("dashboard/collections/my-collections");
+    }
+    else if (alias == "earning") {
+        res.render("dashboard/earning/my-earning");
+    }
+    else {
+        res.status(404);
+        res.render("notfound");
     }
 });
 
 router.get("/:page/:parameter", (req, res, next) => {
     var alias = req.params.page;
     var parameter = req.params.parameter;
-    if (alias == "colection-details") {
-        res.render("dashboard/collections/colection-details");
-    } else if (alias == "collections" && parameter == "new") {
-        res.render("dashboard/collections/create-new-collections");
-    }
-    else if (alias == "collections" && !isNaN(parameter)) {
+    // if (alias == "collections" && parameter == "new") {
+    //     res.render("dashboard/collections/create-new-collections");
+    // }
+    if (alias == "collections" && !isNaN(parameter)) {
         res.render("dashboard/collections/colection-details");
     }
     else if (alias == "public-notes" && !isNaN(parameter)) {
@@ -73,8 +71,10 @@ router.get("/:page/:parameter", (req, res, next) => {
     else if (alias == "profile" && parameter == "verified-mobile") {
         res.render("dashboard/profile/verify/mobile/mobile-verified");
     }
-
-
+    else {
+        res.status(404);
+        res.render("notfound");
+    }
 });
 
 module.exports = router;
