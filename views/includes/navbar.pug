@@ -10,7 +10,7 @@ nav.desktop-navbar
     .desktop-navbar-item.search.search-box
       form(method="GET" action="/search")
         .input-group
-          input.form-control(type='text' placeholder="Search notes" aria-label="search" aria-describedby='search' name="query")
+          input.form-control(type='search' placeholder="Search notes" aria-label="search" aria-describedby='search' name="query",required)
           span#basic-addon2.input-group-text 
             button(type="submit").btn.p-0
               i.fa.fa-search
@@ -112,5 +112,5 @@ nav.mobile-navbar
       .search-cont
         i.fa.fa-search.mobile-menu-search-btn
     form(action="/search" method="GET")
-      input(type="text" placeholder="Search Notes" name="query").form-control.rounded-0
+      input(type="search" placeholder="Search Notes" name="query",required).form-control.rounded-0
       button.btn.btn-danger.rounded-0(type="submit") Search

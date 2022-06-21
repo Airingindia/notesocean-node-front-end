@@ -89,9 +89,24 @@ const getMostViewedNotes = () => {
         })
     });
 };
+
+const searchProducts = (query) => {
+    return new Promise((resolve, reject) => {
+        httpServices.get("/products/search/" + query).then((response) => {
+            if (response.status == 200) {
+                resolve(response.body);
+            } else {
+                reject(response);
+            }
+        }).catch((error) => {
+            reject(error);
+        })
+    });
+}
 module.exports = {
     getInfo: getProductInfo,
     getInfoWithAuth: getProductInfoWithToken,
     addViews: addViews,
-    getMostViewedNotes: getMostViewedNotes
+    getMostViewedNotes: getMostViewedNotes,
+    searchProducts: searchProducts
 }

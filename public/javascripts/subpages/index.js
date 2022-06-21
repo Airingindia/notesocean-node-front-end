@@ -274,12 +274,12 @@ $(document).ready(function () {
                         success: function (data) {
                             $(".most-viewd-notes .row").html("");
                             for (let i = 0; i < data.requested.length; i++) {
-                                let product_id = data.requested[i].id;
-                                let name = data.requested[i].name;
-                                let pages = data.requested[i].pages;
-                                let thumbnails = data.requested[i].thumbnails;
-                                let views = data.requested[i].views;
-                                let timestamp = getTime(data.requested[i].timestamp);
+                                let product_id = data.requested[i].product.id;
+                                let name = data.requested[i].product.name;
+                                let pages = data.requested[i].product.pages;
+                                let thumbnails = data.requested[i].product.thumbnails;
+                                let views = data.requested[i].product.views;
+                                let timestamp = getTime(data.requested[i].product.timestamp);
                                 let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
                                 <div class="card shadow border-0 h-100">
                                     <div class="card-header">  ${name}</div>

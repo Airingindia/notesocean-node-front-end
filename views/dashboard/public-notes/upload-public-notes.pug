@@ -41,26 +41,26 @@ html(lang="en")
                                 .valid-feedback
                                     p looks good
                             .form-group.my-3
-                                button.btn.btn-primary.mx-auto.accept-upload(type="button") Upload
-            .modal.fade
-                .modal-dialog.modal-dialog-centered
-                    .modal-content
-                        .modal-header.border-0
-                            span.text-danger Terms and conditions
-                        .modal-body.border-0
-                            h6 Your notes should follows these conditions
-                            ul
-                                li Notes should not be copied notes of any person or organization
-                                li Notes should not be promote any kind of sexual,terror or religious activites
-                                li Notes should originally owned by you
-                            div
-                                input.form-check-input( type="checkbox")
-                                label.form-check-label.mx-1 I accept all 
-                                    a(href="/terms-of-service/upload-public-notes")  terms 
-                                    span and
-                                    a(href="/terms-of-service/upload-public-notes") conditions 
-                        .modal-footer.border-0
-                            button.btn.btn-primary.mx-auto.upload-notes-btn(disabled="true") Upload Now
+                                button.btn.btn-primary.mx-auto.upload-notes-btn Upload
+            //- .modal.fade
+            //-     .modal-dialog.modal-dialog-centered
+            //-         .modal-content
+            //-             .modal-header.border-0
+            //-                 span.text-danger Terms and conditions
+            //-             .modal-body.border-0
+            //-                 h6 Your notes should follows these conditions
+            //-                 ul
+            //-                     li Notes should not be copied notes of any person or organization
+            //-                     li Notes should not be promote any kind of sexual,terror or religious activites
+            //-                     li Notes should originally owned by you
+            //-                 div
+            //-                     input.form-check-input( type="checkbox")
+            //-                     label.form-check-label.mx-1 I accept all 
+            //-                         a(href="/terms-of-service/upload-public-notes")  terms 
+            //-                         span and
+            //-                         a(href="/terms-of-service/upload-public-notes") conditions 
+            //-             .modal-footer.border-0
+            //-                 button.btn.btn-primary.mx-auto.upload-notes-btn(disabled="true") Upload Now
         include ../../includes/dashjs
         script(src="/vendors/dropzone/dropzone.min.js")
         script 

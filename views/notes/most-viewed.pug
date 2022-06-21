@@ -8,36 +8,6 @@ html(lang="en")
         include ../includes/bootstrap
         style
             include ../../public/stylesheets/notes/most-viewed.css
-        script(type="application/ld+json").
-            {
-                "@context": "https://schema.org/", 
-                "@type": "BreadcrumbList", 
-                "itemListElement": 
-                [
-
-                   #{userInfo}
-                    {
-                        "@type": "ListItem", 
-                        "position": 1, 
-                        "name": "",
-                        "item": ""  
-                    },
-                    {
-                        "@type": "ListItem", 
-                        "position": 2, 
-                        "name": "",
-                        "item": ""  
-                    },
-                    {
-                        "@type": "ListItem", 
-                        "position": 3, 
-                        "name": "",
-                        "item": ""  
-                    }
-                ]
-            }
-        script(type="text/javascript").
-
     body 
         header
             include ../includes/navbar
@@ -45,16 +15,19 @@ html(lang="en")
             .container-fluid.py-5
                 h1 Most Viewed Notes 
                 .row
-                    - for (let i = 0; i < notes.requested.length;i++){
-                        - let name = notes.requested[i].name;
-                        - let description = notes.requested[i].description;
-                        - let id = notes.requested[i].id;
-                        - let userId = notes.requested[i].userId;
-                        - let thumbnails = notes.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
-                        - let size = notes.requested[i].size;
-                        - let pages = notes.requested[i].pages;
-                        - let timestamp = timeService.get(notes.requested[i].timestamp);
-                        - let views = notes.requested[i].views;
+                    - for (let i = 0; i < data.requested.length;i++){
+                        - let name = data.requested[i].product.name;
+                        - let description = data.requested[i].product.description;
+                        - let id = data.requested[i].product.id;
+                        - let userId = data.requested[i].user.id;
+                        - let thumbnails = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
+                        - let size = data.requested[i].product.size;
+                        - let pages = data.requested[i].product.pages;
+                        - let timestamp = timeService.get(data.requested[i].product.timestamp);
+                        - let views = data.requested[i].product.views;
+                        - let firstName = data.requested[i].user.firstName;
+                        - let lastName = data.requested[i].user.lastName;
+                        - let profileImage = data.requested[i].user.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com","https://profiles.ncdn.in/fit-in/25x25/filters:format(webp)/filters:quality(100)");
                         .col-md-6.col-lg-4.col-xl-3.mt-3
                             a(href="/notes/"+id)
                                 .card.shadow.border-0
@@ -63,9 +36,9 @@ html(lang="en")
                                         img.card-img-top(src=thumbnails)
                                     .card-footer
                                         .notes-profile-cont
-                                            a(href="#")
-                                                img(src="https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/112/1648464247150_112.jpg" alt="user image ").notes-cont-profile-pic
-                                                span.text-muted  Sachin Kumar 
+                                            a(href="/profile/"+userId)
+                                                img(src=profileImage alt="user image ").notes-cont-profile-pic
+                                                span.text-muted  #{firstName}  #{lastName}
                                         .notes-cont-info.d-flex.justify-content-between.text-muted.mt-2
                                             small
                                                 i.fa.fa-globe 

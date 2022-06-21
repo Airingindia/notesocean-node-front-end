@@ -7,6 +7,7 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         meta(name="description",content=`${(data.product.description.substring(0,145))}`)
         meta(name="keyword",content=`${(data.product.tags)}`)
+        meta(name="author",content=`${(data.users.firstName)} ${(data.users.firstName)}`)
         title #{data.product.name.substring(0,40)} | Notes ocean
         link(rel="canonical",href=`https://notesocean.com/notes/${(data.product.id)}`)
 
@@ -30,17 +31,17 @@ html(lang="en")
                 "@context": "https://schema.org/",
                 "@type": "Product",
                 "name":  "#{data.product.name.substring(0,40)}" ,
-                "image": "#{data.product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)")}" ,
-                "description":"#{data.product.description.substring(0,145)}" 
+                "image": "#{data.product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)")}",
+                "description":"#{data.product.description.substring(0,145)}",
                 "brand": {
-                "@type": "Brand",
-                "name": "Notes Ocean"
+                    "@type": "Brand",
+                    "name": "Notes Ocean"
                 },
                 "offers": {
-                "@type": "Offer",
-                "url": "https://notesocean.com/notes/#{data.product.id}",
-                "priceCurrency": "INR",
-                "price": "0"
+                    "@type": "Offer",
+                    "url": "https://notesocean.com/notes/#{data.product.id}",
+                    "priceCurrency": "INR",
+                    "price": "0"
                 }
             }
         include ../includes/bootstrap
@@ -75,7 +76,7 @@ html(lang="en")
                                 span.mx-1
                                     i.fa.fa-clock.mx-1
                                     small #{timeService.get(data.product.timestamp)}
-                        .col-md-8.py-2
+                        .col-md-12.py-2
                             .icon-group.d-flex.justify-content-end
                                 - if(data.react !== null && data.react.react == 1){
                                 .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.react.timestamp))}` aria-label="like")
@@ -114,12 +115,12 @@ html(lang="en")
                                     i.fa.fa-share.mx-1
                                     span.icon-text Share
                         .col-12.mt-3
-                            a(href=`/profile/${(user.id)}`)
+                            a(href=`/profile/${(data.users.id)}`)
                                 .d-flex
                                     .flex-shrink-3
-                                        img(src=user.profileImage alt=user.firstName).user-image
+                                        img(src=data.users.profileImage alt=data.users.firstName).user-image
                                     .flex-grow-0.ms-2
-                                        h6  #{user.firstName} #{user.lastName}
+                                        h6  #{data.users.firstName} #{data.users.lastName}
                         .col-12.mt-1
                             p.live-reading
                             .live-users-container 

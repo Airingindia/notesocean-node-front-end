@@ -152,8 +152,21 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   const query = req.query.query;
-  console.log(query);
-  res.render("search");
+  if (query.length !== 0) {
+    productControllers.searchProducts(query).then((product) => {
+      res.render("search", {
+        data: product,
+        query: query,
+        time: timeService
+      });
+    }).catch((err) => {
+      res.status(404);
+      res.render("notfound");
+    })
+  } else {
+    res.redirect("/");
+  }
+
 });
 
 

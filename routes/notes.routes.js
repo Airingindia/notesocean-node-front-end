@@ -13,8 +13,9 @@ router.get("/live-reading", (req, res, next) => {
 
 router.get("/most-viewed", (req, res, next) => {
     productControllers.getMostViewedNotes().then((notes) => {
+        console.log(notes);
         res.render("notes/most-viewed", {
-            notes: notes, timeService: timeService
+            data: notes, timeService: timeService
         });
     }).catch((err) => {
         res.status(404).render("notfound");
@@ -30,14 +31,8 @@ router.get("/:id", (req, res, next) => {
             token = req.cookies.token;
         }
         productControllers.getInfo(req.params.id, token).then((product) => {
-            const userData = {
-                id: 0,
-                firstName: "Notes",
-                lastName: "Ocean",
-                profileImage: "/images/dummy/user_dummy.jpg",
-            }
             res.render("notes/view-notes", {
-                data: product, timeService: timeService, user: userData, api: api_url
+                data: product, timeService: timeService, api: api_url
             });
             next();
             if (req.cookies.ampuser) {
