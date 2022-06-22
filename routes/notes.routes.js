@@ -13,7 +13,6 @@ router.get("/live-reading", (req, res, next) => {
 
 router.get("/most-viewed", (req, res, next) => {
     productControllers.getMostViewedNotes().then((notes) => {
-        console.log(notes);
         res.render("notes/most-viewed", {
             data: notes, timeService: timeService
         });
