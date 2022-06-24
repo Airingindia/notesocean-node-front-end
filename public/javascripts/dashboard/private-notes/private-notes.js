@@ -4,9 +4,9 @@ $(document).ready(function () {
     function loaddata() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/notes",
+            url: atob(getCookie("api")) + "/notes",
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             beforeSend: function () {
                 $(".loading-private-notes").removeClass("d-none");
@@ -131,9 +131,9 @@ $(document).ready(function () {
             if ($(input).hasClass("is-valid")) {
                 $.ajax({
                     type: "PUT",
-                    url: localStorage.getItem("api") + "/notes/" + id,
+                    url: atob(getCookie("api")) + "/notes/" + id,
                     headers: {
-                        Authorization: localStorage.getItem("token")
+                        Authorization: getCookie("token")
                     },
                     contentType: "application/json",
                     processData: false,
@@ -232,11 +232,11 @@ $(document).ready(function () {
                             if (willDelete) {
                                 $.ajax({
                                     type: "DELETE",
-                                    url: localStorage.getItem("api") + "/notes/" + note_id,
+                                    url: atob(getCookie("api")) + "/notes/" + note_id,
                                     contentType: "application/json",
                                     processData: false,
                                     headers: {
-                                        Authorization: localStorage.getItem("token")
+                                        Authorization: getCookie("token")
                                     },
                                     beforeSend: function () {
                                         $(".private-note-delete-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> Please wait ...`);
@@ -291,9 +291,9 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: localStorage.getItem("api") + "/notes/search/" + input,
+                url: atob(getCookie("api")) + "/notes/search/" + input,
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 },
                 beforeSend: function () {
                     $(".loading-private-notes").removeClass("d-none");
@@ -307,5 +307,19 @@ $(document).ready(function () {
             loaddata();
         }
     });
+
+
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
 });

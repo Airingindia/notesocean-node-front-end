@@ -1,12 +1,15 @@
+require("dotenv").config();
 var express = require('express');
 var router = express.Router();
-
+const api_url = process.env.API_URL;
 router.get('/', async function (req, res, next) {
+    res.cookie("api", btoa(api_url));
     res.render("dashboard/my-dashboard");
     // console.log(req.pages);
 });
 
 router.get('/:page', async function (req, res, next) {
+    res.cookie("api", btoa(api_url));
     var alias = req.params.page;
     if (alias == "private-notes") {
         res.render("dashboard/private-notes/private-notes");
@@ -32,6 +35,7 @@ router.get('/:page', async function (req, res, next) {
 });
 
 router.get("/:page/:parameter", (req, res, next) => {
+    res.cookie("api", btoa(api_url));
     var alias = req.params.page;
     var parameter = req.params.parameter;
     // if (alias == "collections" && parameter == "new") {

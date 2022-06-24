@@ -13,6 +13,17 @@ const getuserinfo = (userid) => {
     })
 }
 
+const logout = (token) => {
+    return new Promise((resolve, reject) => {
+        httpServices.getWithAuth("/authenticate/logout", token).then((response) => {
+            resolve(response);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+
 module.exports = {
-    getInfo: getuserinfo
+    getInfo: getuserinfo,
+    logout: logout
 }

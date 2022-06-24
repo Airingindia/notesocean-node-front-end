@@ -16,10 +16,10 @@ $(function () {
         maxFiles: 4,
         uploadMultiple: false,
         acceptedFiles: ".pdf,.txt,.png,.jpg,.jpeg,.doc,.docx,.xls,.xls,.ppt,.pptx,.csv",
-        url: localStorage.getItem("api") + "/notes",
+        url: atob(getCookie("api")) + "/notes",
         method: "post",
         headers: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: getCookie("token"),
         }
     });
     myDropzone.on("sending", function (file, xhr, formData) {
@@ -29,40 +29,36 @@ $(function () {
 
     myDropzone.on("complete", function (file) {
         myDropzone.removeFile(file);  //should remove after implement api
+        let response = file;
         console.log(file);
-        if (file.status == "success") {
-            let responseJson = JSON.parse(file.xhr.response);
-            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-success text-light">
-                <strong class="me-auto">Success!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-            </div>
-            <div class="toast-body">
-              <span class="text-danger mx-1" style="font-weight:bold;"> ${file.name} </span>  <span>  uploaded successfully </span>
-            </div>
-        </div>`);
+        if (file.accepted == true) {
+            if (file.status == "success") {
+                new Noty({
+                    theme: "nest",
+                    type: "success",
+                    text: responseJson.name + " uploaded successfully",
+                    timeout: 3000,
+                }).show();
+            }
+            if (file.status == "error") {
+                new Noty({
+                    theme: "nest",
+                    type: "success",
+                    text: "Faild to upload, plese try after sometimes ",
+                    timeout: 3000,
+                }).show();
+            }
+        } else {
+            new Noty({
+                theme: "nest",
+                type: "warning",
+                text: "unsupported file",
+                timeout: 3000,
+            }).show();
         }
-        else if (file.hasOwnProperty("xhr")) {
-            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-danger text-light">
-                <strong class="me-auto">Error!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-            </div>
-            <div class="toast-body">
-              <span class="text-danger mx-1"> Somthing went wrong , please try after sometimes
-            </div>
-        </div>`);
+        if (response.xhr.status == 401) {
+            window.location = "/session-expire";
         }
-        else {
-            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-warning text-light">
-                    <strong class="me-auto">Warning!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                </div>
-                <div class="toast-body">
-                  <span class="text-danger mx-1" style="font-weight:bold;"> ${file.name} </span>  <span>  Unsopported File Type </span>
-                </div>
-            </div>`);
-        }
-
-
         closeToast();
     });
     myDropzone.on("addedfile", function (file) {
@@ -76,3 +72,17 @@ function closeToast() {
         $(".notice-box").html("");
     })
 };
+
+
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}

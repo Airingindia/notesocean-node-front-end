@@ -85,25 +85,14 @@ $(document).ready(function () {
     amplitude.getInstance().logEvent("change page ", {
         path: window.location.href
     });
-    if (localStorage.getItem("home") == null || localStorage.getItem("env") == null || localStorage.getItem("api") == null) {
-        $.ajax({
-            type: "GET",
-            url: "/api/env",
-            success: function (data) {
-                localStorage.setItem("home", data.home);
-                localStorage.setItem("env", data.env);
-                localStorage.setItem("api", data.api);
-            }
-        });
-    }
     if (localStorage.getItem("userdata") == null) {
         if (localStorage.getItem("token") !== null) {
             const userId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
             $.ajax({
                 type: "GET",
-                url: localStorage.getItem("api") + "/users/" + userId,
+                url: atob(getCookie("api")) + "/users/" + userId,
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 },
                 beforeSend: function () { },
                 success: function (data) {
@@ -151,6 +140,8 @@ $(document).ready(function () {
     }
 
     hideHomepageSearchbar();
+
+
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -170,23 +161,10 @@ $(document).ready(function () {
             setCookie('ampuser', amplitude.getInstance().options.deviceId, 10);
         }
     }
-
-
 });
 
 
 $(document).ready(function () {
-    console.log(window.location.origin);
-    // if (window.location.origin == "http://localhost:3000" || window.location.origin == "https://dev.notesocean.com" || window.location.origin == "http://dev.notesocean.com") {
-    //     $("header").prepend(`<span style="text-align:center;color:red">  This is development version  of Notes ocean , please don't use if you are not a developer </span>`);
-    // }
-    // new Noty({
-    //     theme: "nest",
-    //     type: "error",
-    //     text: "This is development version  of Notes ocean , please don't use if you are not a developer",
-    //     timeout: 4000,
-    // }).show();
-
     function mavbar() {
         $(".mobile-menus-bars-button").click(function () {
             $(".mobile-menu-wrapper").css({ display: "flex" })

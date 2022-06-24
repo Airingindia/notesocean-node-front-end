@@ -1,31 +1,9 @@
 $(document).ready(function () {
-  var token = localStorage.getItem("token");
+  var token = getCookie("token");
   if (token !== null) {
     var userId = token.split(".")[1];
     userId = JSON.parse(atob(userId)).userId;
     amplitude.getInstance().setUserId(userId);
-
-    // check valid token
-    // $.ajax({
-    //   type: "GET",
-    //   url: localStorage.getItem("api") + "/validate",
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    //   success: function (data) {
-    //     if (data == true) {
-    //       const userinfo = JSON.parse(atob(token.split(".")[1])).userId;
-    //       localStorage.setItem("userid", userinfo);
-    //       // console.log(userinfo);
-    //       amplitude.getInstance().setUserId(userinfo);
-    //     } else {
-    //       clearAllBrowserData();
-    //     }
-    //   },
-    //   error: function (err) {
-    //     clearAllBrowserData();
-    //   },
-    // });
   } else {
     clearAllBrowserData();
   }
@@ -34,14 +12,14 @@ $(document).ready(function () {
     clearAllBrowserData();
     $.ajax({
       type: "GET",
-      url: localStorage.getItem("api") + "/authenticate/logout",
+      url: atob(getCookie("api")) + "/authenticate/logout",
       headers: {
         Authorization: token,
       },
       success: function (data) {
         $.ajax({
           type: "GET",
-          url: localStorage.getItem("api") + "/logout",
+          url: atob(getCookie("api")) + "/logout",
           headers: {
             Authorization: token,
           },
@@ -141,13 +119,17 @@ $(document).ready(function () {
     });
   }
 
-  // 
-  // cookie expire
   function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
 

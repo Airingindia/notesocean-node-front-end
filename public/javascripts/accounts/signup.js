@@ -1,30 +1,5 @@
 
 $(document).ready(function () {
-    //    input label toggle
-    // $("inpuut").each(function () {
-    //     $(this).click(function () {
-    //         $(this).parent().find('label').removeClass('d-none');
-    //         $(this).parent().find('i').css({
-    //             "margin-top": "25px"
-    //         });
-    //         $(this).attr("placeholder", "");
-    //     });
-    //     $(this).on("blur", function () {
-    //         $(this).parent().find('label').addClass('d-none');
-    //         const placeholder = $(this).parent().find('label').attr("for");
-    //         $(this).attr("placeholder", placeholder);
-    //         $(this).parent().find('i').css({
-    //             "margin-top": "0px"
-    //         });
-    //     });
-
-    //     $(this).on("change", function () {
-    //         $(this).parent().find('label').addClass('d-none');
-    //         const placeholder = $(this).parent().find('label').attr("for");
-    //         $(this).attr("placeholder", placeholder);
-    //     });
-    // });;
-
     // form validations 
     $("form").submit(function (event) {
         event.preventDefault();
@@ -44,7 +19,7 @@ $(document).ready(function () {
         form.append("users", new Blob([JSON.stringify(usersData)], { type: "application/json" }));
         $.ajax({
             type: "POST",
-            url: localStorage.getItem("api") + "/users",
+            url: atob(getCookie("api")) + "/users",
             processData: false,
             contentType: false,
             data: form,
@@ -63,7 +38,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $.ajax({
                         type: "POST",
-                        url: localStorage.getItem("api") + "/authenticate/email-sign-in",
+                        url: atob(getCookie("api")) + "/authenticate/email-sign-in",
                         processData: false,
                         contentType: "application/json",
                         data: JSON.stringify({
@@ -72,7 +47,6 @@ $(document).ready(function () {
                         }),
                         success: function (data) {
                             const authToken = data.token;
-                            localStorage.setItem("token", authToken);
                             setCookie("token", authToken, 100);
                             window.location = "/dashboard";
                         }, error: function (jqXHR, textStatus) {
@@ -90,6 +64,8 @@ $(document).ready(function () {
                 }, 1000);
             },
             error: function (err) {
+                $(".signup-btn").prop("disabled", false);
+                $(".signup-btn").html(`Signup`);
                 if (err.status == 0) {
                     new Noty({
                         theme: "nest",
@@ -127,15 +103,16 @@ $(document).ready(function () {
         })
     });
 
-    function googleLogin() {
-        window.location = localStorage.getItem("api") + "/authenticate/google-sign-in";
-    }
-
-
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
 });
