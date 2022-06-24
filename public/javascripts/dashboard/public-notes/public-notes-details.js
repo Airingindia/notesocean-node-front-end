@@ -3,11 +3,11 @@ $(document).ready(function () {
     function getNoteDetails() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/products/" + public_notes_id,
+            url: atob(getCookie("api")) + "/products/" + public_notes_id,
             ContentType: "application/json",
             processData: false,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             success: function (data) {
                 if (data.product !== null) {
@@ -115,11 +115,11 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: localStorage.getItem("api") + "/products/" + public_notes_id,
+                            url: atob(getCookie("api")) + "/products/" + public_notes_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
-                                Authorization: localStorage.getItem("token")
+                                Authorization: getCookie("token")
                             },
                             beforeSend: function () {
                                 $(".delete-puublic-note").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> Please wait ...`);
@@ -168,9 +168,9 @@ $(document).ready(function () {
     function updateNoteData(data) {
         $.ajax({
             type: "PUT",
-            url: localStorage.getItem('api') + "/products/" + public_notes_id,
+            url: atob(getCookie("api")) + "/products/" + public_notes_id,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             contentType: "application/json",
             processData: false,
@@ -310,5 +310,17 @@ $(document).ready(function () {
     //  call functions
     deleteNote();
     updateNote();
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
 });

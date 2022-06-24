@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require('express');
 var router = express.Router();
 const timeService = require('../services/time.services');
@@ -5,13 +6,16 @@ const productControllers = require("../controllers/product.controller");
 const api_url = process.env.API_URL;
 
 router.get('/', async function (req, res, next) {
+    res.cookie("api", btoa(api_url));
     res.redirect("/");
 });
 router.get("/live-reading", (req, res, next) => {
+    res.cookie("api", btoa(api_url));
     res.render("notes/live-reading");
 });
 
 router.get("/most-viewed", (req, res, next) => {
+    res.cookie("api", btoa(api_url));
     productControllers.getMostViewedNotes().then((notes) => {
         res.render("notes/most-viewed", {
             data: notes, timeService: timeService
@@ -24,6 +28,7 @@ router.get("/most-viewed", (req, res, next) => {
 })
 
 router.get("/:id", (req, res, next) => {
+    res.cookie("api", btoa(api_url));
     if (!isNaN(req.params.id)) {
         var token = "";
         if (req.cookies.token) {

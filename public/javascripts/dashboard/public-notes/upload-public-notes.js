@@ -16,10 +16,10 @@ $(function () {
         maxFiles: 1,
         uploadMultiple: false,
         acceptedFiles: ".pdf,.ppt,.pptx,.xls,.xlsx,.doc,.docs",
-        url: localStorage.getItem("api") + "/products",
+        url: atob(getCookie("api")) + "/products",
         method: "post",
         headers: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: getCookie("token"),
         },
         success: function (data) {
             let uploadedfile = JSON.parse(data.xhr.response);
@@ -66,15 +66,6 @@ $(function () {
             description: description
         };
         formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
-
-        // new Noty({
-        //     theme: "nest",
-        //     type: "error",
-        //     text: '<i class="fa fa-check-circle">  </i>  ' + name + " : Failed to create collection",
-        //     timeout: 4000,
-        // }).show();
-
-
     });
 
     myDropzone.on("addedfile", function (file) {
@@ -115,7 +106,10 @@ $(function () {
                 timeout: 4000,
             }).show();
         }
-        console.log(file.xhr.status);
+
+        if (file.xhr.status == 401) {
+            window.location = "/session-expire";
+        }
     });
 
 
@@ -224,10 +218,18 @@ $(function () {
         })
 
     });
-});
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl, { html: true })
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 });
 
 

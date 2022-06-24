@@ -4,11 +4,11 @@ $(document).ready(function () {
     function getCollectionDetails() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/collections/" + collection_id,
+            url: atob(getCookie("api")) + "/collections/" + collection_id,
             contentType: "application/json",
             processData: false,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             success: function (data) {
                 if (data) {
@@ -35,9 +35,9 @@ $(document).ready(function () {
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/products",
+            url: atob(getCookie("api")) + "/products",
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             before: function () {
                 $(".public-notes-row-modal").html("");
@@ -77,9 +77,9 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "DELETE",
-                    url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + noteid,
+                    url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + noteid,
                     headers: {
-                        Authorization: localStorage.getItem("token"),
+                        Authorization: getCookie("token"),
                         DeviceId: amplitude.getInstance().options.deviceId
                     },
                     beforeSend: function () {
@@ -175,9 +175,9 @@ $(document).ready(function () {
             if (selected_notes_arry.length > 0) {
                 $.ajax({
                     type: "POST",
-                    url: localStorage.getItem("api") + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
+                    url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
                     headers: {
-                        Authorization: localStorage.getItem("token"),
+                        Authorization: getCookie("token"),
                         DeviceId: amplitude.getInstance().options.deviceId
                     },
                     processData: false,
@@ -268,9 +268,9 @@ $(document).ready(function () {
                 form.append("file", selected_banner_file);
                 $.ajax({
                     type: "PUT",
-                    url: localStorage.getItem("api") + "/collections/" + collection_id,
+                    url: atob(getCookie("api")) + "/collections/" + collection_id,
                     headers: {
-                        Authorization: localStorage.getItem("token"),
+                        Authorization: getCookie("token"),
                         DeviceId: amplitude.getInstance().options.deviceId
 
                     },
@@ -344,9 +344,9 @@ $(document).ready(function () {
                 form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
                 $.ajax({
                     type: "PUT",
-                    url: localStorage.getItem("api") + "/collections/" + collection_id,
+                    url: atob(getCookie("api")) + "/collections/" + collection_id,
                     headers: {
-                        Authorization: localStorage.getItem("token"),
+                        Authorization: getCookie("token"),
                         DeviceId: amplitude.getInstance().options.deviceId
                     },
                     data: form,
@@ -396,4 +396,16 @@ $(document).ready(function () {
     getCollectionDetails();
     check();
     uncheckall();
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 });

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     const userid = window.location.pathname.split("/")[2];
-    if (localStorage.getItem("token") !== null) {
-        const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
+    if (getCookie("token") !== undefined) {
+        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
         amplitude.getInstance().logEvent("view profile", {
             path: window.location.href,
             viewedBy: viewerid,
@@ -20,7 +20,7 @@ $(document).ready(function () {
     function loaduserpublicnotes() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/products/users/" + userid,
+            url: atob(getCookie("api")) + "/products/users/" + userid,
             beforeSend: function () {
             },
             success: function (data) {
@@ -70,12 +70,12 @@ $(document).ready(function () {
     function loadusercollection() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/collections/users/" + userid,
+            url: atob(getCookie("api")) + "/collections/users/" + userid,
             beforeSend: function () {
 
             },
             headers: {
-                Authorization: localStorage.getItem("token"),
+                Authorization: getCookie("token"),
             },
             success: function (data) {
                 $(".collection-loader").addClass("d-none");
@@ -162,6 +162,20 @@ $(document).ready(function () {
         }
     };
 
-    loadusercollection();
-    loaduserpublicnotes();
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    window.onload = function () {
+        loadusercollection();
+        loaduserpublicnotes();
+    }
 });

@@ -3,8 +3,8 @@ $(document).ready(function () {
     // sherron init
     Shareon.init();
     // amplitude
-    if (localStorage.getItem("token") !== null) {
-        const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
+    if (getCookie("token") !== undefined) {
+        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
         amplitude.getInstance().logEvent("product view", {
             product_id: document.querySelector("body").getAttribute("data-product-id"),
             userid: viewerid
@@ -26,8 +26,8 @@ $(document).ready(function () {
         var action = 0;
         $(".react-btn").each(function () {
             $(this).click(function () {
-                const token = localStorage.getItem("token");
-                if (token !== null) {
+                const token = getCookie("token");
+                if (token !== undefined) {
                     const count = Number($(this).find(".react-count").html());
                     if ($(this).hasClass("active")) {
                         $(this).removeClass("active");
@@ -49,11 +49,12 @@ $(document).ready(function () {
     function addReactionAction(action) {
         $.ajax({
             type: "POST",
-            url: localStorage.getItem("api") + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/reacts/" + action,
+            url: atob(getCookie("api")) + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/reacts/" + action,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             success: function (data) {
+                const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
                 if (action == 1) {
                     new Noty({
                         theme: "sunset",
@@ -61,7 +62,7 @@ $(document).ready(function () {
                         text: "Liked Added",
                         timeout: 4000,
                     }).show();
-                    const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
+
                     amplitude.getInstance().logEvent("product liked", {
                         product_id: document.querySelector("body").getAttribute("data-product-id"),
                         userid: viewerid
@@ -73,7 +74,6 @@ $(document).ready(function () {
                         text: "Disliked Added",
                         timeout: 4000,
                     }).show();
-                    const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
                     amplitude.getInstance().logEvent("product disliked", {
                         product_id: document.querySelector("body").getAttribute("data-product-id"),
                         userid: viewerid
@@ -102,7 +102,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: api_url + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments/" + 0,
+        url: atob(getCookie("api")) + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments/" + 0,
         beforeSend: function () { },
         success: function (data) {
             $(".comment-length").html(data.length);
@@ -129,9 +129,8 @@ $(document).ready(function () {
 
 
     // comments function
-    if (localStorage.getItem("token") !== null) {
-
-        const viewerid = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
+    if (getCookie("token") !== undefined) {
+        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
         var userdata = localStorage.getItem("userdata");
         if (userdata !== null) {
             userdata = JSON.parse(userdata);
@@ -139,7 +138,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "GET",
-                url: localStorage.getItem("api") + "/users/" + viewerid,
+                url: atob(getCookie("api")) + "/users/" + viewerid,
                 success: function (data) {
                     showCommentBox(data);
                     localStorage.setItem("userdata", JSON.stringify(data));
@@ -223,14 +222,14 @@ $(document).ready(function () {
             // COMMENT AJAX
             $.ajax({
                 type: "POST",
-                url: localStorage.getItem("api") + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments",
+                url: atob(getCookie("api")) + "/products/" + document.querySelector("body").getAttribute("data-product-id") + "/comments",
                 processData: false,
                 contentType: "application/json",
                 data: JSON.stringify({
                     content: $(".commentbox-input").val().trim()
                 }),
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 }, beforeSend: function () {
                     $(".comment-add-btn").prop("disabled", true);
                     $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
@@ -369,7 +368,7 @@ $(document).ready(function () {
     function showRelatedNotes() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/related/notes",
+            url: atob(getCookie("api")) + "/related/notes",
             beforeSend: function () { },
             success: function (data) {
                 console.log(data);
@@ -377,5 +376,17 @@ $(document).ready(function () {
         })
     }
     // showRelatedNotes();
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 });
 

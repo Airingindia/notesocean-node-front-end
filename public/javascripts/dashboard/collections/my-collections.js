@@ -3,11 +3,11 @@ $(document).ready(function () {
     function getCollection() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/collections",
+            url: atob(getCookie("api")) + "/collections",
             contentType: "application/json",
             processData: false,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             success: function (data) {
                 $(".loading-collections").css({ display: "none" });
@@ -23,7 +23,7 @@ $(document).ready(function () {
         });
     }
 
-    getCollection();
+
 
     function showCollection(colllections) {
         $(".collections-rows").html("");
@@ -62,7 +62,7 @@ $(document).ready(function () {
 
     }
     // collection routes
-    deleteCollection();
+
 
 
     function createCollection() {
@@ -87,9 +87,9 @@ $(document).ready(function () {
                 form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
                 $.ajax({
                     type: "POST",
-                    url: localStorage.getItem("api") + "/collections",
+                    url: atob(getCookie("api")) + "/collections",
                     headers: {
-                        Authorization: localStorage.getItem("token")
+                        Authorization: getCookie("token")
                     },
                     processData: false,
                     contentType: false,
@@ -161,7 +161,7 @@ $(document).ready(function () {
             }
         })
     };
-    createCollection();
+
 
     function timeDifference(previous) {
         const current = Date.now();
@@ -230,11 +230,11 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: localStorage.getItem("api") + "/collections/" + collection_id,
+                            url: atob(getCookie("api")) + "/collections/" + collection_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
-                                Authorization: localStorage.getItem("token")
+                                Authorization: getCookie("token")
                             },
                             beforeSend: function () {
                                 $("#delete-collections").prop("disabled", true);
@@ -270,5 +270,25 @@ $(document).ready(function () {
                 });
         });
     }
+
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    window.onload = function () {
+
+        createCollection();
+        deleteCollection();
+        getCollection();
+    }
+
 
 });

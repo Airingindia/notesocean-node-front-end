@@ -4,11 +4,11 @@ $(document).ready(function () {
     function loadData() {
         $.ajax({
             type: "GET",
-            url: localStorage.getItem("api") + "/products",
+            url: atob(getCookie("api")) + "/products",
             contentType: "application/json",
             processData: false,
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: getCookie("token")
             },
             beforeSend: function () {
                 $(".loading-public-notes").removeClass("d-none");
@@ -137,9 +137,9 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: localStorage.getItem("api") + "/products/search/" + input,
+                url: atob(getCookie("api")) + "/products/search/" + input,
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 },
                 beforeSend: function () {
                     $(".loading-public-notes").removeClass("d-none");
@@ -166,5 +166,18 @@ $(document).ready(function () {
         } else {
             loadData();
         }
-    })
+    });
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
 });

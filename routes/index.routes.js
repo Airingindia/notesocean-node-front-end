@@ -12,21 +12,22 @@ const api_url = process.env.API_URL;
 
 
 router.get("/google-signin", (req, res, next) => {
+  res.cookie("api", btoa(api_url));
   res.redirect(api_url + "/authenticate/google-sign-in");
 })
 // homepage route
 router.get('/', function (req, res, next) {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("index");
 });
 
 router.get("/upload", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.redirect("/dashboard/public-notes/new");
 });
 
 router.get("/:id/:name.pdf", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
@@ -51,13 +52,10 @@ router.get("/:id/:name.pdf", (req, res, next) => {
     res.render("notfound");
     next();
   });
-
-
-
 });
 
 router.get("/:id/:name.html", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
@@ -88,7 +86,7 @@ router.get("/:id/:name.html", (req, res, next) => {
 // profile page routes
 
 router.get("/profile/:user_id", async (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
@@ -125,7 +123,7 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.get("/collections/:collecton_id", async (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   let collecton_id = req.params.collecton_id;
   if (!isNaN(collecton_id)) {
     collectionController.getCollectionDetails(collecton_id).then((collection) => {
@@ -159,7 +157,7 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 // search page route
 
 router.get("/search", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   const query = req.query.query;
   if (query.length !== 0) {
     productControllers.searchProducts(query).then((product) => {
@@ -180,32 +178,32 @@ router.get("/search", (req, res, next) => {
 
 
 router.get("/privacy-policies", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/privacy");
 });
 
 router.get("/terms-and-condition", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/terms");
 });
 
 router.get("/about-us", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/about");
 });
 
 router.get("/contact-us", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact");
 });
 
 router.get("/contact-us/success", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact-success");
 });
 
 router.get("/contact-us/error", (req, res, next) => {
-  res.cookie("api", api_url);
+  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact-error");
 });
 
@@ -234,7 +232,4 @@ router.get("/logout", (req, res, next) => {
   res.clearCookie("token");
   res.render("session-expire");
 });
-
-
-
 module.exports = router;

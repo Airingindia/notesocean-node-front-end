@@ -85,63 +85,6 @@ $(document).ready(function () {
     amplitude.getInstance().logEvent("change page ", {
         path: window.location.href
     });
-    if (localStorage.getItem("userdata") == null) {
-        if (localStorage.getItem("token") !== null) {
-            const userId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId;
-            $.ajax({
-                type: "GET",
-                url: atob(getCookie("api")) + "/users/" + userId,
-                headers: {
-                    Authorization: getCookie("token")
-                },
-                beforeSend: function () { },
-                success: function (data) {
-                    localStorage.setItem("userdata", JSON.stringify(data));
-                    showProfilePic();
-                    window.location = window.location.href;
-                }
-            });
-        } else {
-            $("nav .login-button").removeClass("d-none");
-            $("nav .user-icon-box").addClass("d-none");
-        }
-    } else {
-        showProfilePic();
-        $(".login-button").addClass("d-none");
-        $(".user-icon-box").removeClass("d-none");
-    }
-
-    function showProfilePic() {
-        const userData = JSON.parse(localStorage.getItem("userdata"));
-        var profile_pic = userData.profileImage;
-        if (profile_pic !== null) {
-            $(".user-icon-box img").attr("src", profile_pic);
-            $(".navbar-user-pic").attr("src", profile_pic);
-        } else {
-
-            $(".user-icon-box img").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
-            $(".navbar-user-pic").attr("src", "https://static.ncdn.in/public/images/dummy/user_dummy.jpg");
-        }
-    };
-
-
-
-    // notice close
-    $(".close-notice").click(function () {
-        $(".notice-box").html("");
-    });
-
-    // hide homepage header search bar
-
-    function hideHomepageSearchbar() {
-        if (window.location.pathname == "/") {
-            $(".search-box").addClass("d-none");
-        }
-    }
-
-    hideHomepageSearchbar();
-
-
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -161,26 +104,4 @@ $(document).ready(function () {
             setCookie('ampuser', amplitude.getInstance().options.deviceId, 10);
         }
     }
-});
-
-
-$(document).ready(function () {
-    function mavbar() {
-        $(".mobile-menus-bars-button").click(function () {
-            $(".mobile-menu-wrapper").css({ display: "flex" })
-            $(".mobile-search-wrapper").css({ display: "none" });
-        });
-
-        $(".mobile-menus-wrapper-close-btn").click(function () {
-            $(".mobile-menu-wrapper").css({ display: "none" });
-            $(".mobile-search-wrapper").css({ display: "none" });
-        });
-
-        $(".mobile-menu-search-btn").click(function () {
-            $(".mobile-menu-wrapper").css({ display: "none" });
-            $(".mobile-search-wrapper").css({ display: "flex" });
-        })
-    }
-
-    mavbar();
 });

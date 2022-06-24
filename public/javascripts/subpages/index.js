@@ -269,7 +269,7 @@ $(document).ready(function () {
                     hit = true;
                     $.ajax({
                         type: "GET",
-                        url: localStorage.getItem("api") + "/products/top-performing-products",
+                        url: atob(getCookie("api")) + "/products/top-performing-products",
                         beforeSend: function () { },
                         success: function (data) {
                             $(".most-viewd-notes .row").html("");
@@ -312,7 +312,7 @@ $(document).ready(function () {
                     hit = true;
                     $.ajax({
                         type: "GET",
-                        url: localStorage.getItem("api") + "/products/feeds/0",
+                        url: atob(getCookie("api")) + "/products/feeds/0",
                         beforeSend: function () { },
                         success: function (data) {
                             $(".recent-notes .row").html("");
@@ -348,6 +348,16 @@ $(document).ready(function () {
     recentNotes();
 
     mostViewed();
-
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
 });

@@ -2,10 +2,14 @@ $(document).ready(function () {
     // get profile info
     //check if user has stored profile information 
     function first() {
-        if (localStorage.getItem('userdata') !== null) {
-            const userInfo = JSON.parse(localStorage.getItem('userdata'));
-            showUserInfo(userInfo);
-        }
+        $.ajax({
+            type: "GET",
+            url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
+            success: function (data) {
+                localStorage.setItem("userdata", JSON.stringify(data));
+                showUserInfo(data);
+            }
+        })
     }
     function showUserInfo(userInfo) {
         $(".first-name").val(userInfo.firstName);
@@ -63,12 +67,12 @@ $(document).ready(function () {
             // update  pic with ajax
             $.ajax({
                 type: "PUT",
-                url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+                url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
                 processData: false,
                 contentType: false,
                 data: formdata,
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 },
                 beforeSend: function () {
                     $(".pic-uploading-roller").removeClass("d-none");
@@ -181,12 +185,12 @@ $(document).ready(function () {
         if (inputCount == 6) {
             $.ajax({
                 type: "PUT",
-                url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+                url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
                 processData: false,
                 contentType: false,
                 data: formdata,
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 },
                 beforeSend: function () {
                     $(".profile-update-btn").prop("disabled", true);
@@ -226,11 +230,17 @@ $(document).ready(function () {
             });
         }
     });
-});
 
 
-
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl, { html: true })
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 });

@@ -2,7 +2,7 @@ $(document).ready(function () {
     // get userdata 
     $.ajax({
         type: "GET",
-        url: localStorage.getItem("api") + "/users/" + JSON.parse(atob(localStorage.getItem("token").split(".")[1])).userId,
+        url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
         beforeSend: function () {
 
         },
@@ -74,9 +74,9 @@ $(document).ready(function () {
                     // verify otp
                     $.ajax({
                         type: "POST",
-                        url: localStorage.getItem("api") + "/authenticate/verify-email",
+                        url: atob(getCookie("api")) + "/authenticate/verify-email",
                         headers: {
-                            Authorization: localStorage.getItem("token")
+                            Authorization: getCookie("token")
                         },
                         processData: false,
                         contentType: "application/json",
@@ -151,9 +151,9 @@ $(document).ready(function () {
         $.ajax(
             {
                 type: "GET",
-                url: localStorage.getItem("api") + "/authenticate/verify-email",
+                url: atob(getCookie("api")) + "/authenticate/verify-email",
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: getCookie("token")
                 }, beforeSend: function () {
 
                 },
@@ -176,4 +176,16 @@ $(document).ready(function () {
             }
         )
     };
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 })

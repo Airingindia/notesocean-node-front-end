@@ -1,9 +1,21 @@
 $(document).ready(function () {
   var token = getCookie("token");
-  if (token !== null) {
+  if (token !== undefined) {
     var userId = token.split(".")[1];
     userId = JSON.parse(atob(userId)).userId;
     amplitude.getInstance().setUserId(userId);
+    $.ajax({
+      type: "GET",
+      url: atob(getCookie("api")) + "/validate",
+      headers: {
+        Authorization: getCookie("token")
+      },
+      success: function (data) {
+        if (data == false) {
+          clearAllBrowserData();
+        }
+      }
+    })
   } else {
     clearAllBrowserData();
   }
@@ -137,7 +149,7 @@ $(document).ready(function () {
   function showuserPic() {
     if (localStorage.getItem('userdata') !== null) {
       const userdata = JSON.parse(localStorage.getItem("userdata"));
-      const profilepic = userdata.profileImage;
+      const profilepic = userdata.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
       if (profilepic !== null) {
         $(".navbar-user-pic").attr("src", profilepic);
       } else {
@@ -145,6 +157,8 @@ $(document).ready(function () {
       }
     }
   }
+
+  showuserPic();
 
   function clearAllBrowserData() {
     localStorage.removeItem("token");
