@@ -6,7 +6,8 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Public notes | Notes Ocean
         include ../../includes/dashcss
-        link(rel='stylesheet' href='/stylesheets/dashboard/my-notes.css')
+        style
+            include ../../../public/stylesheets/dashboard/public-notes/public-notes-details.css
     body
         header
             include ../../includes/dashHeader
@@ -16,9 +17,8 @@ html(lang="en")
                 .col-md-10.second-side
                     .row.public-notes-details-container.d-none
                         .col-md-4
-                            center
-                                img(src="/images/dummy/collection2.png").public-notes-details-thumbnails
-                        .col-md-6
+                            img(src="/images/dummy/collection2.png").public-notes-details-thumbnails
+                        .col-md-8
                             div
                                 h5.public-notes-title
                                 p.public-notes-description 
@@ -62,9 +62,6 @@ html(lang="en")
                                 //-     button.btn.btn-info.btn-sm.mx-1.note-share-btn
                                 //-         i.fa.fa-share.mx-1
                                 //-         span Share
-                    .carts
-                        #daily-views
-
                     .row.notes-removed.d-none
                         .card.border-0
                             .card-content
@@ -128,4 +125,3 @@ html(lang="en")
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes-details.js
         script(src="https://static.ncdn.in/vendor/sweetalert/sweetalert.min.js")
-        script(src="/javascripts/loader.js")

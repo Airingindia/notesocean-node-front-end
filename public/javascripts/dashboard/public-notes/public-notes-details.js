@@ -58,47 +58,6 @@ $(document).ready(function () {
         $(".share-item").attr("data-title", "I uploaded this notes on Notes Ocean and i earned money for this , please checkout my note");
     }
     getNoteDetails();
-    setTimeout(() => {
-        dailyViews();
-    }, 1000);
-
-    function dailyViews() {
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Day', 'Views', "Likes"],
-                ['1 jan', 400, 1110],
-                ['2 jan', 500, 20],
-                ['3 jan', 600, 30],
-                ['4 jan', 100, 100],
-                ['5 jan', 800, 50],
-                ['6 jan', 800, 60],
-                ['7 jan', 00, 70],
-                ['8 jan', 1200, 80],
-                ['9 jan', 1400, 90],
-                ['10 jan', 1500, 1100],
-                ['11 jan', 1600, 10],
-                ['12 jan', 1700, 5],
-                ['13 jan', 400, 11],
-                ['13 jan', 00, 134],
-            ]);
-
-            var options = {
-                title: 'Daily views and like report',
-                width: "100%",
-                height: 300,
-                curveType: 'function',
-                legend: { position: 'bottom' },
-                width: "100%",
-                height: 300,
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('daily-views'));
-
-            chart.draw(data, options);
-        }
-    };
 
     function deleteNote() {
 

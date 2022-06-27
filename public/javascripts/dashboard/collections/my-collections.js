@@ -39,7 +39,7 @@ $(document).ready(function () {
                 <a href="/dashboard/collections/${colllections[i].id}">
                 <div class="collection-item-content">
                    <div class="collection-item-content-box "> 
-                   <img src="${colllections[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
+                  
                    <div class="mb-3 mx-1"> ${colllections[i].name} </div> 
                    </div>
 
@@ -61,6 +61,8 @@ $(document).ready(function () {
         contextmenu();
 
     }
+
+    // <img src="${colllections[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
     // collection routes
 
 
@@ -77,8 +79,8 @@ $(document).ready(function () {
             if (name.length !== 0) {
                 $('input[name="collectionName"]').removeClass("is-invalid");
                 var form = new FormData();
-                const file = $("input[type='file']").prop("files")[0];
-                form.append("file", file);
+                // const file = $("input[type='file']").prop("files")[0];
+                // form.append("file", file);
                 var collection_json = {
                     name: name.trim(),
                     description: description
@@ -115,14 +117,13 @@ $(document).ready(function () {
                         $(".create-collections-modal").modal("hide");
 
 
-
+                        // <img src="${data.thumbnails}" class="collection-items-thumbnails">
 
                         $(".collections-rows").prepend(`
                         <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
                         <a href="/dashboard/collections/${data.id}" class="w-100">
                             <div class="collection-item-content">
                                 <div class="collection-item-content-box">
-                                    <img src="${data.thumbnails}" class="collection-items-thumbnails">
                                         <div class="mb-3 mx-1"> ${data.name} </div>
                                 </div>
 

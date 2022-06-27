@@ -1,0 +1,15 @@
+.public-notes-details-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.public-notes-details-thumbnails {
+    width: 100%;
+}
+
+@media(max-width:768px) {
+    .public-notes-details-container {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

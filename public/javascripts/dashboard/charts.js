@@ -140,15 +140,23 @@ $(document).ready(function () {
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Good', 11],
-                ['bad', 2],
+                ['Porfile Merit', 'Percentage'],
+                ['Merit', 75],
+                ["", 25]
             ]);
 
             var options = {
-                title: '',
+                pieHole: 1,
+                pieSliceTextStyle: {
+                    color: 'white',
+                },
+                legend: 'none',
                 width: "100%",
-                height: 300,
+                height: 400,
+                slices: {
+                    0: { color: 'red' },
+                    1: { color: '#ccc' }
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('profile-strength'));

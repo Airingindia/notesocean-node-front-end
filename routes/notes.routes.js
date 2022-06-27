@@ -62,6 +62,12 @@ router.get("/:id", (req, res, next) => {
 
 });
 
+router.get("/request/all", (req, res, next) => {
+    backURL = req.header('Referer') || '/';
+    // do your thang
+    console.log(backURL);
+})
+
 
 
 module.exports = router;

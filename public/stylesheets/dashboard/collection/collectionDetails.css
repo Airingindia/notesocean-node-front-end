@@ -1,3 +1,8 @@
+.collection-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
 .colllection-notes-selector .card-header,
 .colllection-notes-selector .card-footer,
 .colllection-notes-selector .card-body {
@@ -17,10 +22,6 @@
 .colllection-notes-selector .card-header i {
     float: right;
     cursor: pointer;
-}
-
-.form {
-    width: 50%;
 }
 
 .collection-removed,
@@ -93,8 +94,9 @@ button {
         width: 50%;
     }
 
-    .form {
+    .collection-container {
         width: 100%;
+        margin: 0 auto;
     }
 
 

@@ -93,7 +93,7 @@ $(document).ready(function () {
                     <a href="/collections/${id}">
                     <div class="collection-item-content">
                        <div class="collection-item-content-box "> 
-                       <img src="${thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
+                       
                        <div class="mb-3 mx-1"> ${name} </div> 
                        </div>
     
@@ -110,6 +110,7 @@ $(document).ready(function () {
                     </li>
     
                 `);
+                        // <img src="${thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
                     }
 
                 } else {
