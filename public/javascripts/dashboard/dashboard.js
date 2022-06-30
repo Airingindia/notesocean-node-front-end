@@ -14,6 +14,9 @@ $(document).ready(function () {
         if (data == false) {
           clearAllBrowserData();
         }
+      },
+      error: function () {
+        window.location = "/session-expire";
       }
     })
   } else {

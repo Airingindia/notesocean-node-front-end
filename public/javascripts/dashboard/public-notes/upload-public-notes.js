@@ -41,6 +41,7 @@ $(function () {
                         } else {
                             $("form").trigger("reset");
                             myDropzone.removeAllFiles();
+                            window.location = window.location.href;
                         }
                     });
             } else {

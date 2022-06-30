@@ -11,6 +11,11 @@
 }
 
 
+.social-login-btn a {
+    text-decoration: none;
+}
+
+
 .main-section .desktop-img img {
     width: 100%;
 }

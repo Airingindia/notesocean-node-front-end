@@ -90,6 +90,7 @@ router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
+      console.log(userInfo);
       res.render("profile", {
         profile: userInfo
       });
@@ -164,7 +165,7 @@ router.get("/search", (req, res, next) => {
       res.render("search", {
         data: product,
         query: query,
-        time: timeService
+        time: timeService,
       });
     }).catch((err) => {
       res.status(404);

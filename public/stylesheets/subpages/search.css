@@ -23,6 +23,12 @@ input:active {
     padding: 20px 20px !important;
 }
 
+li {
+    list-style: none !important;
+}
+
+
+
 .search-item-img {
     width: 200px;
     height: 200px;

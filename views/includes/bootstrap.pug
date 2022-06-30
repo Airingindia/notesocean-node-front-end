@@ -50,7 +50,48 @@ link(rel="preload" href="https://static.ncdn.in/vendor/bootstrap/bootstrap.bundl
 //-
 link(rel="stylesheet" href="https://static.ncdn.in/vendor/noty/noty.css")
 script(src="https://static.ncdn.in/vendor/noty/noty.min.js")
-
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Notes Ocean",
+        "url": "https://notesocean.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://notesocean.com/search?query={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+script(type='application/ld+json').
+    {
+    "@context": "https://schema.org",
+    "@type": "Corporation",
+    "name": "Notes ocean",
+    "alternateName": "Notes Ocean Private Limited",
+    "url": "https://notesocean.com",
+    "logo": "https://notesocean.com/logo.png",
+    "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+918045685522",
+    "contactType": "customer service",
+    "contactOption": "HearingImpairedSupported",
+    "areaServed": "IN",
+    "availableLanguage": ["en","Hindi"]
+    },{
+    "@type": "ContactPoint",
+    "telephone": "8045685522",
+    "contactType": "technical support",
+    "contactOption": "HearingImpairedSupported",
+    "areaServed": "IN",
+    "availableLanguage": ["en","Hindi"]
+    }],
+    "sameAs": [
+    "https://www.facebook.com/notesoceanofficial",
+    "https://twitter.com/real_notesocean",
+    "https://www.instagram.com/notesoceanofficial/",
+    "https://www.linkedin.com/company/notesocean"
+    ]
+    }
 style.
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 include amplitude

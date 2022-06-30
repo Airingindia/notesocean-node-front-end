@@ -4,6 +4,10 @@ p {
     color: black !important;
 }
 
+.social-login-btn a {
+    text-decoration: none;
+}
+
 .facebook-login-btn {
     color: black !important;
 }
@@ -11,6 +15,7 @@ p {
 .google-login-btn {
     color: black !important;
 }
+
 
 /* dark mode css */
 
