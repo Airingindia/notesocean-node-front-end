@@ -25,6 +25,12 @@ html(lang="en")
                         - let timestamp = Number(data.requested[i].product.timestamp);
                         - let description = data.requested[i].product.description;
                         - let thumbnails = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") ;
+                        - var img1 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+
+                        - var img2 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+
+                        - var img3 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+
                         - let views = data.requested[i].product.views;
                         - let pages = data.requested[i].product.pages;
                         - let firstName = data.requested[i].user.firstName;
@@ -35,7 +41,7 @@ html(lang="en")
                                 a(href="/notes/"+productid,itemprop="item")
                                     div.d-flex.shadow.search-notes-item.my-3
                                         .flex-shrink-0
-                                            img(src=thumbnails.split(",")[0] alt=productname).search-item-img
+                                            img(src=thumbnails.split(",")[0] alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px").search-item-img
                                         .flex-grow-1.ms-4.search-notes-item-details
                                             #{showtitle}
                                             h2

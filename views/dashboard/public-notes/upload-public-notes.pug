@@ -19,8 +19,8 @@ html(lang="en")
                         form
                             h4 Upload public notes
                             .form-group.my-3
-                                label Note title
-                                i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
+                                label Title
+                                //- i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
                                 input(type="text" placeholder="",data-json=`{"very-long": "piece of ","data": true}`).form-control.note-title
                                 .invalid-feedback
                                     p.invalid-title-error invalid title
@@ -28,7 +28,7 @@ html(lang="en")
                                     p looks good
                             .form-group.my-3
                                 label Description
-                                i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
+                                //- i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
                                 textarea.form-control(placeholder="" rows="5").note-descriptions
                                 .invalid-feedback
                                     p.invalid-descriptions-error invalid Description

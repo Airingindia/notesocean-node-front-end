@@ -6,7 +6,7 @@ $(function () {
         dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h4> Drag or drop your files to upload </h4> <br>
         <small> <b> Note : </b>  you can upload only these supported file types  </small> <br>
         <small> 
-        pdf ppt xls xlsx doc docx pptx gsheet xltx 
+        PDF,PPT,DOC
         </small>`,
         autoProcessQueue: false,
         maxFilesize: 100,
@@ -108,6 +108,15 @@ $(function () {
             }).show();
         }
 
+        if (file.xhr.status == 406) {
+            new Noty({
+                theme: "nest",
+                type: "error",
+                text: "he file was corrupted, or not of valid type",
+                timeout: 4000,
+            }).show();
+        }
+
         if (file.xhr.status == 401) {
             window.location = "/session-expire";
         }
@@ -144,7 +153,7 @@ $(function () {
             else if ($(this).val().length == 0) {
                 $(".note-title").addClass("is-invalid");
                 $(".note-title").removeClass("is-valid");
-                $(".invalid-title-error").html("Title can't be empty'");
+                $(".invalid-title-error").html("Title can't be empty");
                 $(".notes-title").addClass("animate__heartBeat");
             }
             else {

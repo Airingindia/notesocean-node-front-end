@@ -9,7 +9,6 @@ html(lang="en")
         meta(name="keyword",content=`${(data.product.tags)}`)
         meta(name="author",content=`${(data.users.firstName)} ${(data.users.firstName)}`)
         title #{data.product.name.substring(0,40)} | Notes ocean
-        link(rel="canonical",href=`https://notesocean.com/notes/${(data.product.id)}`)
 
         //-  og 
         meta(property='og:title' content=`${(data.product.name.substring(0,40))}`)

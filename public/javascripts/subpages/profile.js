@@ -31,6 +31,13 @@ $(document).ready(function () {
                         let name = data.requested[i].product.name;
                         let pages = data.requested[i].product.pages;
                         let thumbnails = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/350x250/filters:format(webp)/filters:quality(100)").split(",")[0];
+
+                        let img1 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)").split(",")[0];
+
+                        let img2 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)").split(",")[0];
+
+                        let img3 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)").split(",")[0];
+
                         let views = data.requested[i].product.views;
                         let id = data.requested[i].product.id;
                         let timestamp = timeDifference(data.requested[i].product.timestamp);
@@ -40,11 +47,11 @@ $(document).ready(function () {
                  <div class="card-header border-0">
                      <p class="card-title"> ${name} </p>
                  </div>
-               <img src="${thumbnails}" class="card-img-top notes-thumbnails">
+               <img src="${thumbnails}" class="card-img-top notes-thumbnails" srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px">
                  <div class="card-footer border-0">
                      <div class="row">
                          <div class="col-12">
-                             <p class="card-text notes-details-text"><span><i class="fa fa-globe mx-1"></i><small>100 views</small></span><span class="mx-1"><i class="fa fa-file mx-1"> </i><small>${pages} pages</small></span><span class="mx-1"><i class="fa fa-clock-o mx-1"></i><small> ${timestamp}</small></span></p>
+                             <p class="card-text notes-details-text"><span><i class="fa fa-globe mx-1"></i><small> ${views} views</small></span><span class="mx-1"><i class="fa fa-file mx-1"> </i><small>${pages} pages</small></span><span class="mx-1"><i class="fa fa-clock-o mx-1"></i><small> ${timestamp}</small></span></p>
                          </div>
                      </div>
                  </div>
