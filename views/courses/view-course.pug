@@ -1,0 +1,125 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        include ../includes/bootstrap
+        title #{course.replace("-", " ")} | Notes Ocean
+        meta(name="description",content=`View all the notes for  ${course}`)
+        style
+            include ../../public/stylesheets/courses/view-course.css
+    body
+        header
+            include ../includes/navbar.pug
+        section.main-section.container-fluid
+            h1.text-danger #{course.replace("-", " ")} 
+                span.text-dark notes 
+            .row(itemscope itemtype="https://schema.org/BreadcrumbList")
+                - let count = 0;
+                -for (let i = 0; i < data.requested.length; i++){
+                    - count++;
+                    - let productid = data.requested[i].product.id;
+                    - let productname = data.requested[i].product.name;
+                    - let timestamp = Number(data.requested[i].product.timestamp);
+                    - let description = data.requested[i].product.description;
+                    - let thumbnails = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") ;
+                    - var img1 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+
+                    - var img2 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+
+                    - var img3 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+
+                    - let views = data.requested[i].product.views;
+                    - let pages = data.requested[i].product.pages;
+                    - let firstName = data.requested[i].user.firstName;
+                    - let lastName = data.requested[i].user.lastName;
+                    - let userid = data.requested[i].user.id;
+                    - let profileImage = data.requested[i].user.profileImage;
+                    .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
+                        a(href="/notes/"+productid , temprop="item")
+                            .card.shadow.rounded.h-100
+                                .card-header
+                                    span(itemprop="name").card-title=productname
+                                .card-body.p-0
+                                    img.card-img-top.notes-thumbnail(src=thumbnails.split(",")[0],alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
+                                .card-footer
+                                    a(href="/profile/"+userid)
+                                        .notes-creatro-box
+                                            img.creator-img(src=profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") alt=firstName)
+                                            span.mx-2 #{firstName} #{lastName} 
+                                    .note-info-box.d-flex.justify-content-between.text-muted.mt-2
+                                        span
+                                            i.fa.fa-globe.mx-1
+                                            span #{views} views
+                                        span 
+                                            i.fa.fa-file.mx-1
+                                            span #{pages} pages
+                                        span 
+                                            i.fa.fa-clock.mx-1
+                                            span #{time.get(timestamp)} 
+                -}
+
+//- .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3
+//-     .card.shadow.rounded
+//-         .card-header
+//-             span.card-title Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, ratione.
+//-         .card-body.p-0
+//-             img.card-img-top.notes-thumbnail(src="https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/1605/1656658571640_2275_0.png")
+//-         .card-footer
+//-             a(href="#")
+//-                 .notes-creatro-box
+//-                     img.creator-img(src="https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)/1605/1656614504498_1605.jpeg")
+//-                     span.mx-2 sachin kumar 
+//-             .note-info-box.d-flex.justify-content-between.text-muted.mt-2
+//-                 span
+//-                     i.fa.fa-globe.mx-1
+//-                     span 10 view
+//-                 span 
+//-                     i.fa.fa-file.mx-1
+//-                     span 10 pages
+//-                 span 
+//-                     i.fa.fa-clock.mx-1
+//-                     span 10 minute ago
+//- .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3
+//-     .card.shadow.rounded
+//-         .card-header
+//-             span.card-title Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, ratione.
+//-         .card-body.p-0
+//-             img.card-img-top.notes-thumbnail(src="https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/1605/1656658571640_2275_0.png")
+//-         .card-footer
+//-             a(href="#")
+//-                 .notes-creatro-box
+//-                     img.creator-img(src="https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)/1605/1656614504498_1605.jpeg")
+//-                     span.mx-2 sachin kumar 
+//-             .note-info-box.d-flex.justify-content-between.text-muted.mt-2
+//-                 span
+//-                     i.fa.fa-globe.mx-1
+//-                     span 10 view
+//-                 span 
+//-                     i.fa.fa-file.mx-1
+//-                     span 10 pages
+//-                 span 
+//-                     i.fa.fa-clock.mx-1
+//-                     span 10 minute ago
+//- .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3
+//-     .card.shadow.rounded
+//-         .card-header
+//-             span.card-title Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, ratione.
+//-         .card-body.p-0
+//-             img.card-img-top.notes-thumbnail(src="https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/1605/1656658571640_2275_0.png")
+//-         .card-footer
+//-             a(href="#")
+//-                 .notes-creatro-box
+//-                     img.creator-img(src="https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)/1605/1656614504498_1605.jpeg")
+//-                     span.mx-2 sachin kumar 
+//-             .note-info-box.d-flex.justify-content-between.text-muted.mt-2
+//-                 span
+//-                     i.fa.fa-globe.mx-1
+//-                     span 10 view
+//-                 span 
+//-                     i.fa.fa-file.mx-1
+//-                     span 10 pages
+//-                 span 
+//-                     i.fa.fa-clock.mx-1
+//-                     span 10 minute ago

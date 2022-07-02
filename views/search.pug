@@ -4,6 +4,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description" content="search result of "+query+" and "+data.size+" notes found")
         title #{query} | Notes Ocean
         include includes/bootstrap
         style
@@ -13,9 +14,12 @@ html(lang="en")
             include includes/navbar
         section.main-section
             .search-container
-                h1.my-4 
-                    span.text-danger #{data.size} 
-                    span Notes Found
+                div.d-flex.justify-content-between
+                    h1
+                        span.text-danger #{data.size} 
+                        span Notes Found
+                    .filter-dropdown
+                        button.btn.btn-sm.btn-danger(data-bs-toggle="modal" data-bs-target="#modal-filter") filter
                 div.search-item-row(itemscope itemtype="https://schema.org/BreadcrumbList")
                     - let count = 0;
                     -for (let i = 0; i < data.requested.length; i++){
@@ -67,6 +71,50 @@ html(lang="en")
                                                             p.text-muted #{firstName} #{lastName}
                                 meta(itemprop="position" content=count)
                     -}
+                .modal#modal-filter
+                    .modal-dialog.modal-dialog-centered
+                        .modal-content.bg-white.border-0
+                            .modal-header.bg-white.border-0
+                                span Search Filter
+                                i(class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                            .modal-body.bg-white.border-0
+                                .row
+                                    .col-md-4.mb-3
+                                        h6.text-danger Type
+                                        .form-check
+                                            input#typefilter.form-check-input(type='radio' name='type' checked='true' value="notes")
+                                            label.form-check-label(for='type') Notes 
+                                        .form-check
+                                            input#typefilter.form-check-input(type='radio' name='type' value="collection")
+                                            label.form-check-label(for='type') Collection
+                                    .col-md-4.mb-3
+                                        h6.text-danger Pages
+                                        .form-check
+                                            input#pagesfilter.form-check-input(type='radio' name='pages' checked='true' value="default")
+                                            label.form-check-label(for='page') Deafult
+                                        .form-check
+                                            input#pagesfilter.form-check-input(type='radio' name='pages' value="0")
+                                            label.form-check-label(for='page') 1-10 page
+                                        .form-check
+                                            input#pagesfilter.form-check-input(type='radio' name='pages' value="1")
+                                            label.form-check-label(for='page') 10-20 page
+                                        .form-check
+                                            input#pagesfilter.form-check-input(type='radio' name='pages' value="3")
+                                            label.form-check-label(for='page') 20-100 page
+                                    .col-md-4.mb-3
+                                        h6.text-danger Upload Date
+                                        .form-check
+                                            input#datefilter.form-check-input(type='radio' name='date' checked='true' value="default")
+                                            label.form-check-label(for='datefilter') All time
+                                        .form-check
+                                            input#datefilter.form-check-input(type='radio' name='date' value="today")
+                                            label.form-check-label(for='datefilter') Today
+                                        .form-check
+                                            input#datefilter.form-check-input(type='radio' name='date' value="thisweek" )
+                                            label.form-check-label(for='datefilter') This week
+                                        .form-check
+                                            input#datefilter.form-check-input(type='radio' name='date' value="thismonth")
+                                            label.form-check-label(for='datefilter') This month
 
                 //- a(href="/")
                 //-     .d-flex.shadow.p-1.search-notes-item.my-3
