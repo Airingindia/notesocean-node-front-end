@@ -21,11 +21,10 @@ router.get("/most-viewed", (req, res, next) => {
             data: notes, timeService: timeService
         });
     }).catch((err) => {
+        console.log(err);
         res.status(404).render("notfound");
     });
-
-
-})
+});
 
 router.get("/:id", (req, res, next) => {
     res.cookie("api", btoa(api_url));
@@ -51,11 +50,18 @@ router.get("/:id", (req, res, next) => {
 
         }).catch((error) => {
             console.log(error);
-            res.render("notfound");
-
+            if (error.statusCode == 429) {
+                res.render("information-pages/tomanyrequest");
+            }
+            else if (error.statusCode == 401) {
+                res.redirect("/session-expire");
+            } else {
+                res.render("notfound");
+            }
             next();
         });
     } else {
+        console.log(err);
         res.status(404);
         res.render("notfound");
     }

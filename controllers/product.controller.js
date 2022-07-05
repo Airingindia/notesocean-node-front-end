@@ -15,7 +15,8 @@ const getProductInfo = async (productid, token) => {
                     reject(response);
                 }
 
-            } else {
+            }
+            else {
                 reject(response);
             }
         }).catch((error) => {
@@ -23,8 +24,6 @@ const getProductInfo = async (productid, token) => {
         })
 
     });
-
-
 }
 
 const getProductInfoWithToken = async (productid, token) => {

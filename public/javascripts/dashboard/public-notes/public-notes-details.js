@@ -49,7 +49,7 @@ $(document).ready(function () {
         $(".public-notes-likes-count").html(likes);
         $(".public-notes-dislikes-count").html(dislikes);
         $(".public-notes-views-count").html(formatViews(views));
-        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0]);
+        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)"));
         $(".public-notes-description").html(description);
         $(".note-title").val(name);
         $(".note-descriptions").val(description);

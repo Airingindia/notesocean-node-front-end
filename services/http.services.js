@@ -6,7 +6,6 @@ const postRequest = (api_path) => {
         ajax(api_endpoint)
             .post(api_path)
             .send()
-            .expect(200)
             .end(function (err, response) {
                 if (err) {
                     reject(err);
@@ -38,7 +37,6 @@ const getRequestWithToken = (api_path, token) => {
             .get(api_path)
             .set("Authorization", token)
             .send()
-            .expect(200)
             .end(function (err, response) {
                 if (err) {
                     reject(err);

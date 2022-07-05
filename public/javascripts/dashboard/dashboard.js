@@ -15,8 +15,32 @@ $(document).ready(function () {
           clearAllBrowserData();
         }
       },
-      error: function () {
-        window.location = "/session-expire";
+      error: function (error) {
+        if (error.status == 429) {
+          $(".second-side").html(`
+            <div class="tomanyaction">
+                <div class="row"> 
+                  <div class="col-md-6"> 
+                    <img src="/images/illustrations/serverdown.svg" class="w-100"> 
+                  </div>
+                  <div class="col-md-6"> 
+                    <h1> To many action  </h1>
+                    <p>  our have performed to many action within a minutes , plese wait until timer ends  </p>
+                    <h6 class="mt-5"> Please wait ... 
+                      <span id="time" class="text-danger"> </span>
+                      <span class="mx-2"> Minutes </span>
+                    </h6>
+                  </div>
+                </div>
+            </div>
+          `);
+
+          var fiveMinutes = 60 * 1,
+            display = document.querySelector('#time');
+          startTimer(fiveMinutes, display);
+        }
+        console.log(error);
+        // window.location = "/session-expire";
       }
     })
   } else {
@@ -51,6 +75,24 @@ $(document).ready(function () {
       },
     });
   });
+
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+
+      if (--timer < 0) {
+        window.location = window.location.href;
+      }
+    }, 1000);
+
+  }
 
   // aide routes
 

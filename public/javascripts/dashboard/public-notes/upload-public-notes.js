@@ -146,6 +146,7 @@ $(function () {
 
     function validate() {
         $(".note-title").on("input", function () {
+            $(".title-char-count").html("( " + $(this).val().length + " )");
             if ($(this).val().length > 50) {
                 $(".note-title").addClass("is-valid");
                 $(".note-title").removeClass("is-invalid");
@@ -181,6 +182,7 @@ $(function () {
         // description validations
 
         $(".note-descriptions").on("input", function () {
+            $(".desctiption-char-count").html("( " + $(this).val().length + " )");
             if ($(this).val().length > 100) {
                 $(".note-descriptions").addClass("is-valid");
                 $(".note-descriptions").removeClass("is-invalid");
