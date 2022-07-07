@@ -35,7 +35,13 @@ $(document).ready(function () {
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
+                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
+                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+
+                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+
+                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);
                 let fileType = data.requested[i].fileType;
@@ -44,7 +50,7 @@ $(document).ready(function () {
                 $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
                         <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
-                            <img class="card-img-top" src="${thumbnails.split(",")[0]}" style="height:200px;width:100%"  />
+                            <img class="card-img-top lozad" src="${thumbnails}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" style="height:200px;width:100%" loading="lazy"  />
                             <div class="card-body pb-0"> 
                                 <h6 class="card-title">  ${name.substring(0, 100)} </h6>
                                 

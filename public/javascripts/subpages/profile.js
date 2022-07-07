@@ -47,7 +47,7 @@ $(document).ready(function () {
                  <div class="card-header border-0">
                      <p class="card-title"> ${name} </p>
                  </div>
-               <img src="${thumbnails}" class="card-img-top notes-thumbnails" srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px">
+               <img src="${thumbnails}" class="card-img-top notes-thumbnails lozad " loading="lazy" srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px">
                  <div class="card-footer border-0">
                      <div class="row">
                          <div class="col-12">

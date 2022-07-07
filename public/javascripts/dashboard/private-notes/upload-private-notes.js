@@ -28,17 +28,17 @@ $(function () {
     });
 
     myDropzone.on("complete", function (file) {
-        myDropzone.removeFile(file);  //should remove after implement api
+        //should remove after implement api
         let response = file;
-        console.log(file);
         if (file.accepted == true) {
             if (file.status == "success") {
                 new Noty({
                     theme: "nest",
                     type: "success",
-                    text: responseJson.name + " uploaded successfully",
+                    text: file.name + " uploaded",
                     timeout: 3000,
                 }).show();
+                myDropzone.removeFile(file);
             }
             if (file.status == "error") {
                 new Noty({
@@ -47,6 +47,7 @@ $(function () {
                     text: "Faild to upload, plese try after sometimes ",
                     timeout: 3000,
                 }).show();
+                myDropzone.removeFile(file);
             }
         } else {
             new Noty({
@@ -55,23 +56,19 @@ $(function () {
                 text: "unsupported file",
                 timeout: 3000,
             }).show();
+            myDropzone.removeFile(file);
         }
         if (response.xhr.status == 401) {
             window.location = "/session-expire";
         }
-        closeToast();
     });
     myDropzone.on("addedfile", function (file) {
-        $(".notice-box").html("");
+        console.log(file);
+        return false;
     });
 });
 
 
-function closeToast() {
-    $(".close-notice").click(function () {
-        $(".notice-box").html("");
-    })
-};
 
 
 

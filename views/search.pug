@@ -41,11 +41,11 @@ html(lang="en")
                         - let lastName = data.requested[i].user.lastName;
                         - let userid = data.requested[i].user.id;
                         - let profileImage = data.requested[i].user.profileImage;
-                            div(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
+                            div(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem").wow.animate__animated.fadeIn
                                 a(href="/notes/"+productid,itemprop="item")
                                     div.d-flex.shadow.search-notes-item.my-3
                                         .flex-shrink-0
-                                            img(src=thumbnails.split(",")[0] alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px").search-item-img
+                                            img(src=thumbnails.split(",")[0] alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" loading="lazy").search-item-img.lozad
                                         .flex-grow-1.ms-4.search-notes-item-details
                                             #{showtitle}
                                             h2

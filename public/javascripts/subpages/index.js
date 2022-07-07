@@ -334,7 +334,7 @@ $(document).ready(function () {
                                 let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
                                 <div class="card shadow border-0 h-100">
                                     <div class="card-header">  ${name}</div>
-                                    <div class="card-body p-0"><img class="card-img-top" src="${mainthumbail}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" /></div>
+                                    <div class="card-body p-0"><img class="card-img-top lozad" loading="lazy"  src="${mainthumbail}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" /></div>
                                     <div class="card-footer">
                                         <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
                                     </div>

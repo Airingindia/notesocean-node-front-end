@@ -42,7 +42,7 @@ html(lang="en")
                                 .card-header
                                     span(itemprop="name").card-title=productname
                                 .card-body.p-0
-                                    img.card-img-top.notes-thumbnail(src=thumbnails.split(",")[0],alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
+                                    img.card-img-top.notes-thumbnail.lozad(src=thumbnails.split(",")[0],alt=productname,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" loading="lazy")
                                 .card-footer
                                     a(href="/profile/"+userid)
                                         .notes-creatro-box

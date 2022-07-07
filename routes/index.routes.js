@@ -9,8 +9,6 @@ const collectionController = require('../controllers/collection.controller');
 const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
 const api_url = process.env.API_URL;
-
-
 router.get("/google-signin", (req, res, next) => {
   res.cookie("api", btoa(api_url));
   res.redirect(api_url + "/authenticate/google-sign-in");
@@ -168,8 +166,12 @@ router.get("/search", (req, res, next) => {
         time: timeService,
       });
     }).catch((err) => {
-      res.status(404);
-      res.render("notfound");
+      if (err.statusCode == 429) {
+        res.render("information-pages/tomanyrequest")
+      } else {
+        res.status(404);
+        res.render("notfound");
+      }
     })
   } else {
     res.redirect("/");

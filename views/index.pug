@@ -8,9 +8,6 @@ html(lang="en-US")
 
     meta(name="description",content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
     meta(name="keyword",content=`notes,notes ocean, free pdf notes , download pdf , upsc pdf , ssc pdf , free pdf download,sell pdf, engineering notes , medical notes, pharma notes, bihar board notes , cbse notes`)
-
-    link(rel="canonical",href=`https://notesocean.com`)
-
     meta(property='og:title', content=`Notes Ocean`)
     meta(property='og:site_name' content='Notes Ocean')
     meta(property='og:url' content=`https://notesocean.com`)
@@ -29,7 +26,7 @@ html(lang="en-US")
     //- include includes/amplitude 
     style
       include ../public/stylesheets/subpages/index.css
-    link(rel="stylesheet" href="https://static.ncdn.in/vendor/swiper/swiper-bundle.min.css")
+    link(rel="stylesheet" href="https://static.ncdn.in/vendor/swiper/swiper-bundle.min.css" media="all")
     //- schema .org
   body
     header
@@ -194,7 +191,7 @@ html(lang="en-US")
                   .user-name-cont
                   .notes-cont-info
 
-    section.categories.categories-courses.wow.animate__animated.animate__fadeInUp
+    section.categories.categories-courses.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Notes By 
           span.color-red Courses
@@ -247,7 +244,7 @@ html(lang="en-US")
                   p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
                   br
                   button.categories-btn.btn View Notes
-    section.categories.categories-subject.wow.animate__animated.animate__fadeInUp
+    section.categories.categories-subject.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Notes By 
           span.color-red Subjects
@@ -297,7 +294,7 @@ html(lang="en-US")
                   p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
                   br
                   button.categories-btn.btn View Notes 
-    section.most-viewd-notes.wow.animate__animated.animate__fadeInUp
+    section.most-viewd-notes.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Most Viewed 
           span.color-red Notes
@@ -370,7 +367,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-    section.recent-notes.wow.animate__animated.animate__fadeInUp
+    section.recent-notes.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Recent Uploaded  
           span.color-red Notes
@@ -464,9 +461,6 @@ html(lang="en-US")
 
     include includes/footer
     script(src="/socket.io/socket.io.js")
-    script(src="/vendors/wow/wow.min.js")
-    script.
-      new WOW().init(); 
     script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834928493837917"
       crossorigin="anonymous")
     script

@@ -32,17 +32,15 @@ html(lang="en")
                                 input(type="search" placeholder="Search private notes..." aria-label="Search  private notes").form-control
                                 button.btn.btn-primary.btn-sm.search-btn(aria-label="Search") Search
                     .row.notes-container-row.mt-3
-                    .row.no-private-notes.d-none
-                        .card.border-0
-                            .card-content
-                                center
-                                    img.card-img-top.w-25(src="/images/dashboard/collection_not_found.svg")
-                                    .card-body
-                                        h2 No private notes uploaded Yet
-                                        a(href="/dashboard/private-notes/new")
-                                            button.btn.btn-primary 
-                                                i.fa.fa-cloud-upload.mx-1
-                                                span Upload New Notes
+                    .container.no-private-notes.mt-4.d-none
+                        center
+                            img(src="/images/dashboard/collection_not_found.svg" width="20%")
+                            .card-body
+                                h5 No private notes uploaded Yet
+                                a(href="/dashboard/private-notes/new")
+                                    button.btn.btn-primary.btn-sm
+                                        i.fa.fa-cloud-upload.mx-1
+                                        span Upload New Notes
                     .loading-private-notes
                         center 
                             .lds-roller
