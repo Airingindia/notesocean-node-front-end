@@ -20,7 +20,13 @@ const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+var dd_options = {
+  'response_code': true,
+  'tags': ['app:my_app']
+}
 
+var connect_datadog = require('connect-datadog')(dd_options);
+app.use(connect_datadog);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
