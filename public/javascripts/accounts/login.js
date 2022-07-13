@@ -1,8 +1,9 @@
 $(document).ready(function () {
-
     window.onload = function () {
-        $("form").submit(function (event) {
+        $("form.login-form").submit(function (event) {
             event.preventDefault();
+            let remember = $("input.remember-me-checked");
+            let isChecked = $(remember).prop("checked");
             let email = $("form input[type='email'").val();
             let password = $("form input[type='password']").val();
             const userData = {
@@ -11,7 +12,7 @@ $(document).ready(function () {
             }
             $.ajax({
                 type: "POST",
-                url: atob(getCookie("api")) + "/authenticate/email-sign-in",
+                url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/email-sign-in",
                 processData: false,
                 contentType: "application/json",
                 data: JSON.stringify(userData),
@@ -23,7 +24,11 @@ $(document).ready(function () {
                     $(".login-btn").html("Login");
                     $(".login-btn").prop("disabled", false);
                     const authToken = data.token;
-                    setCookie("token", authToken, 100);
+                    if (isChecked) {
+                        setCookie("token", authToken, 100);
+                    } else {
+                        setCookie("token", authToken, 1);
+                    }
                     new Noty({
                         theme: "nest",
                         type: "success",

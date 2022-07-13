@@ -8,7 +8,12 @@ const productControllers = require("../controllers/product.controller");
 const collectionController = require('../controllers/collection.controller');
 const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
+const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
+
+router.get("/test", (req, res, next) => {
+  res.render("test");
+})
 router.get("/google-signin", (req, res, next) => {
   res.cookie("api", btoa(api_url));
   res.redirect(api_url + "/authenticate/google-sign-in");
@@ -89,6 +94,10 @@ router.get("/profile/:user_id", async (req, res, next) => {
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
       // console.log(userInfo);
+      if (userInfo.profileImage == null) {
+        userInfo.profileImage = "https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/user.png";
+      }
+      res.contentType("text/html");
       res.render("profile", {
         profile: userInfo
       });
@@ -178,7 +187,6 @@ router.get("/search", (req, res, next) => {
   }
 
 });
-
 
 router.get("/privacy-policies", (req, res, next) => {
   res.cookie("api", btoa(api_url));

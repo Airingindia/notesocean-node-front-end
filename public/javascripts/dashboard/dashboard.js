@@ -38,9 +38,16 @@ $(document).ready(function () {
           var fiveMinutes = 60 * 1,
             display = document.querySelector('#time');
           startTimer(fiveMinutes, display);
+        } else if (error.status == 0) {
+          new Noty({
+            theme: "nest",
+            type: "error",
+            text: 'Failed to connect to server',
+            timeout: 5000,
+          }).show();
+        } else {
+          clearAllBrowserData();
         }
-        console.log(error);
-        // window.location = "/session-expire";
       }
     })
   } else {

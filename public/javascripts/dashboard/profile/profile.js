@@ -4,7 +4,10 @@ $(document).ready(function () {
     function first() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
+            url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userId,
+            headers: {
+                Authorization: getCookie("token")
+            },
             success: function (data) {
                 localStorage.setItem("userdata", JSON.stringify(data));
                 showUserInfo(data);

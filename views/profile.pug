@@ -4,26 +4,19 @@ html(lang="en-US")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title #{profile.firstName} #{profile.lastName} | Notes Ocean
-        meta(name="description",content=`500 Notes , 753 Collections - See Notes Ocean notes and collections from  ${(profile.firstName)} ${(profile.lastName)}`)
-        meta(name="keyword",content=` ${(profile.firstName)} ${(profile.lastName)} ,${(profile.firstName)} ${(profile.lastName)} Notes, ${(profile.firstName)} ${(profile.lastName)} notesocean, ${(profile.firstName)} ${(profile.lastName)} profile , ${(profile.firstName)} ${(profile.lastName)} notes ocean page , ${(profile.firstName)} ${(profile.lastName)} sir page , ${(profile.firstName)} ${(profile.lastName)} notes ocean pdf`)
+        title #{profile.firstName} #{profile.lastName} | View profile on notes ocean
+        meta(name="keywords",content=`${profile.firstName} ${profile.lastName},${profile.firstName} ${profile.lastName} notes, ${profile.firstName} ${profile.lastName} notes ocean , ${profile.firstName} ${profile.lastName} profile page, ${profile.firstName} ${profile.lastName} collections ,${profile.firstName} ${profile.lastName} pdf download, ${profile.firstName} ${profile.lastName} notes and collection pdf `)
         include includes/bootstrap
-        link(rel="stylesheet" href="/stylesheets/subpages/profile.css")
-
-        link(rel="canonical",href=`https://notesocean.com/profile/${(profile.id)}`)
-
         meta(property='og:title', content=`${(profile.firstName)} ${(profile.lastName)}`)
         meta(property='og:site_name' content='Notes Ocean')
         meta(property='og:url' content=`https://notesocean.com/profile/${(profile.id)}`)
-        meta(property='og:description' content=`500 Notes , 753 Collections - See Notes Ocean notes and collections from  ${(profile.firstName)} ${(profile.lastName)}`)
+        meta(property='og:description' content=`View recent,top notes and collection of ${(profile.firstName)} ${(profile.lastName)} from notes ocean `)
         meta(property='og:type' content='profile')
         meta(property='og:image' content=`${(profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)"))}`)
-
-
         meta(name='twitter:card' content='summary')
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`${(profile.firstName)} ${(profile.lastName)}`)
-        meta(name='twitter:description' content=`500 Notes , 753 Collections - See Notes Ocean notes and collections from  ${(profile.firstName)} ${(profile.lastName)}`)
+        meta(name='twitter:description' content=`View recent,top notes and collection of ${(profile.firstName)} ${(profile.lastName)} rom notes ocean`)
         meta(name='twitter:image' content=`${(profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)"))}`)
 
         script(type='application/ld+json').
@@ -31,14 +24,16 @@ html(lang="en-US")
                 "@context": "https://schema.org/",
                 "@type": "Person",
                 "name": "#{profile.firstName} #{profile.lastName}",
-                "url": "https://notesocean.com/profile/#{profile.userid}",
-                "image": "#{profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)")}",
+                "url": "https://notesocean.com/profile/#{profile.id}",
+                "image": "#{profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100/filters:format(webp)/filters:quality(100)")}" ,
                 "jobTitle": "user",
                 "worksFor": {
                 "@type": "Organization",
                 "name": "Notes ocean"
                 }
             }
+        style
+            include ../public/stylesheets/subpages/profile.css
 
     body 
         header 

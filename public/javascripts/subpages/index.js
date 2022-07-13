@@ -164,7 +164,7 @@ $(document).ready(function () {
 
 
     // live notes
-    const socket = io();
+    // const socket = io();
 
     // var swiper = new Swiper(".mySwiper", {
     //     slidesPerView: 1,
@@ -195,64 +195,64 @@ $(document).ready(function () {
     // });
     // live noets function
 
-    socket.on("liveNotes", data => {
-        if (Object.keys(data).length !== 0) {
-            var array = Object.entries(data).map(function (entry) {
-                key = entry[0];
-                value = entry[1];
-                nested_object = value;
-                nested_object.key = key;
-                return nested_object;
-            });
-            var products = [];
-            var users = {};
-            livenotescount = array.length;
-            if (array.length !== 0) {
+    // socket.on("liveNotes", data => {
+    //     if (Object.keys(data).length !== 0) {
+    //         var array = Object.entries(data).map(function (entry) {
+    //             key = entry[0];
+    //             value = entry[1];
+    //             nested_object = value;
+    //             nested_object.key = key;
+    //             return nested_object;
+    //         });
+    //         var products = [];
+    //         var users = {};
+    //         livenotescount = array.length;
+    //         if (array.length !== 0) {
 
-                $(".live-reading").removeClass("d-none");
+    //             $(".live-reading").removeClass("d-none");
 
-                var unique_notes = array.filter((value, index, self) => self.findIndex((m) => m.product.product_id === value.product.product_id) === index);
-                $(".live-reading .row").html("");
-                var count = 0;
-                for (let i = 0; i < unique_notes.length; i++) {
-
-
-                    let product = unique_notes[i].product;
-                    let name = product.name;
-                    let pages = product.pages;
-                    let product_id = product.product_id;
-                    let thumbnail = product.thumbnail;
-                    let timestamp = product.timestamp;
-                    let views = product.views;
-                    let firstName = product.user.firstName;
-                    let lastName = product.user.lastName;
-                    let profileImage = product.user.profileImage;
-                    let userId = product.user.userId;
-                    let content = `<div class="col-6 col-lg-4 mt-3"><a href="/notes/${product_id}">
-                    <div class="card shadow border-0 h-100">
-                        <div class="card-header">  ${name}</div>
-                        <div class="card-body p-0"><img class="card-img-top" src="${thumbnail.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
-                        <div class="card-footer">
-                            <div class="notes-profile-cont"><a href="/profile/${userId}"><img class="notes-cont-profile-pic" src="${profileImage}" alt="user image " /><span class="text-muted">  ${firstName}  ${lastName} </span></a></div>
-                            <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
-                        </div>
-                    </div>
-                </a></div>`;
-
-                    if (count < 12) {
-                        count++;
-                        $(".live-reading .row").append(content);
-                    }
+    //             var unique_notes = array.filter((value, index, self) => self.findIndex((m) => m.product.product_id === value.product.product_id) === index);
+    //             $(".live-reading .row").html("");
+    //             var count = 0;
+    //             for (let i = 0; i < unique_notes.length; i++) {
 
 
-                }
-            } else {
-                $(".live-reading").addClass("d-none");
-                $(".live-reading .row").html("");
-            }
-        }
+    //                 let product = unique_notes[i].product;
+    //                 let name = product.name;
+    //                 let pages = product.pages;
+    //                 let product_id = product.product_id;
+    //                 let thumbnail = product.thumbnail;
+    //                 let timestamp = product.timestamp;
+    //                 let views = product.views;
+    //                 let firstName = product.user.firstName;
+    //                 let lastName = product.user.lastName;
+    //                 let profileImage = product.user.profileImage;
+    //                 let userId = product.user.userId;
+    //                 let content = `<div class="col-6 col-lg-4 mt-3"><a href="/notes/${product_id}">
+    //                 <div class="card shadow border-0 h-100">
+    //                     <div class="card-header">  ${name}</div>
+    //                     <div class="card-body p-0"><img class="card-img-top" src="${thumbnail.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
+    //                     <div class="card-footer">
+    //                         <div class="notes-profile-cont"><a href="/profile/${userId}"><img class="notes-cont-profile-pic" src="${profileImage}" alt="user image " /><span class="text-muted">  ${firstName}  ${lastName} </span></a></div>
+    //                         <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
+    //                     </div>
+    //                 </div>
+    //             </a></div>`;
 
-    });
+    //                 if (count < 12) {
+    //                     count++;
+    //                     $(".live-reading .row").append(content);
+    //                 }
+
+
+    //             }
+    //         } else {
+    //             $(".live-reading").addClass("d-none");
+    //             $(".live-reading .row").html("");
+    //         }
+    //     }
+
+    // });
 
 
 
@@ -295,6 +295,9 @@ $(document).ready(function () {
                                     $(".most-viewd-notes .row").append(content);
                                 }
                             }
+                        },
+                        error: function () {
+                            $(".most-viewd-notes .row").html("");
                         }
                     })
                 }
@@ -346,6 +349,9 @@ $(document).ready(function () {
                                     $(".recent-notes .row").append(content);
                                 }
                             }
+                        },
+                        error: function () {
+                            $(".recent-notes .row").html("");
                         }
                     })
                 }

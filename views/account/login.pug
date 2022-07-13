@@ -4,24 +4,24 @@ head
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Login - Notes Ocean
+  meta(name="description" content="Login to your account , access your private notes,public notes ,collections and earnigns")
   include ../includes/bootstrap
   style
     include ../../public/stylesheets/account/signup.css
   style
-    include ../../public/stylesheets/account/login.css
-
+    include ../../public/stylesheets/account/login.css 
   body
     header
       include ../includes/navbar
     section.main-section
       .row
-        .col-lg-6.desktop-img
+        .col-lg-7.desktop-img
           img(src='https://static.ncdn.in/public/images/accounts/signup_bg.svg' loading='lazy' alt='signup background')
-        .col-lg-6
+        .col-lg-5
           div.mx-3.mx-lg-0
             h1 Login
             p Access dashboard,earning and many more 
-          form.login-form
+          form.login-form(method="POST")
             .form-group
               i.fa.fa-envelope
               label.animate__animated.animate__fadeInUp.d-none(for='Email') Email
@@ -31,6 +31,11 @@ head
               label.animate__animated.animate__fadeInUp.d-none(for='Password')
                 | Password
               input#password.form-control(type='password' name='password' placeholder='Password' autocomplete='new-password' required)
+            .form-check
+              input.remember-me-checked.form-check-input(type='checkbox')
+              label.form-check-label(for='flexCheckChecked') Remember Me
+                span.mx-2
+                  a(href="/privacy-policies#login-cookies-policy" target="_blank" style="color:blue") learn more
             .form-group
               button.btn.btn-primary.login-btn.btn-grad(type='submit').mr-3 Login
               div.mt-3

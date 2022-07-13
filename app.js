@@ -1,4 +1,5 @@
 // import all libs
+const compression = require('compression')
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression());
 
 
 // routing defined
@@ -47,15 +49,13 @@ app.use("/subjects", subjectRoutes);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   // next(createError(404));
+  res.statusCode(404);
   res.render("notfound");
 });
-
-
 
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.message);
-
 });
 
 module.exports = app;

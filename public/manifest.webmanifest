@@ -4,8 +4,8 @@
     "display": "browser",
     "scope": "/",
     "start_url": "/",
-    "name": "Find the perfect notes",
-    "short_name": "NOTESOCEAN",
+    "name": "Notes Ocean",
+    "short_name": "notesocean",
     "icons": [
         {
             "src": "/icon-192x192.png",

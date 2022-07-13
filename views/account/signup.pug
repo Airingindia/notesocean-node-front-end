@@ -18,7 +18,7 @@ head
           div.mx-3.mx-lg-0
             h1 Sign up
             p Register your account and take full advantages of notesocean
-          form.signup-form
+          form.signup-form(method="POST")
             .form-group
               i.fa.fa-user.left
               label.animate__animated.animate__fadeInUp.d-none(for='First Name')
@@ -28,6 +28,15 @@ head
               i.fa.fa-user
               label.animate__animated.animate__fadeInUp.d-none(for='Last Name') Last Name
               input#lastName.form-control(type='text' name='lastName' placeholder='Last Name' required='')
+            .form-group
+              i.fa.fa-flag
+              label.animate__animated.animate__fadeInUp.d-none(for='country') Country
+              input#browser.form-control(list='countries' name='country' placeholder="Country",required).form-control
+              datalist#countries
+            .form-group
+              i.fa.fa-address-card
+              label.animate__animated.animate__fadeInUp.d-none(for='Address') Address
+              input#lastName.form-control(type='text' name='address' placeholder='Address' required='')
             .form-group
               i.fa.fa-envelope
               label.animate__animated.animate__fadeInUp.d-none(for='Email') Email
@@ -44,6 +53,12 @@ head
                 | Choose
                 | Password
               input#password.form-control(type='password' name='password' placeholder='Choose Password' autocomplete='new-password' required='')
+            .form-check.mb-2 
+              input#flexCheckChecked.form-check-input(type='checkbox' value='' required='')
+              label.form-check-label(for='flexCheckChecked') I agree to the terms of the Notes Ncean 
+                a(href="/privacy-policies#account-creation-policy" target="_blank") account creation policy 
+                span and
+                a(href="/terms-and-condition#user-account-agreemment" target="_blank")   user account agreemment
             .div
               button.btn.btn-primary.signup-btn.btn-grad(type='submit').mr-3 Signup
               div.mt-3
@@ -66,6 +81,7 @@ head
                     svg.mx-1(width='23' height='23' viewbox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
                       path(fill-rule='evenodd' clip-rule='evenodd' d='M0 12.067C0 18.033 4.333 22.994 10 24V15.333H7V12H10V9.333C10 6.333 11.933 4.667 14.667 4.667C15.533 4.667 16.467 4.8 17.333 4.933V8H15.8C14.333 8 14 8.733 14 9.667V12H17.2L16.667 15.333H14V24C19.667 22.994 24 18.034 24 12.067C24 5.43 18.6 0 12 0C5.4 0 0 5.43 0 12.067Z' fill='#699BF7')
                     p Facebook 
+    include ../includes/footer.pug
     script
       include ../../public/javascripts/common.js
     script
