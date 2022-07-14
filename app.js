@@ -15,7 +15,7 @@ const sitemapRoutes = require("./routes/sitemap.routes");
 const coursesRoute = require("./routes/courses.routes");
 const subjectRoutes = require("./routes/subjects.routes");
 const notesRoutes = require("./routes/notes.routes");
-
+require("dotenv").config();
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +24,6 @@ var dd_options = {
   'response_code': true,
   'tags': ['app:my_app']
 }
-
 var connect_datadog = require('connect-datadog')(dd_options);
 app.use(connect_datadog);
 app.use(logger('dev'));
@@ -33,6 +32,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
+app.use(function (req, res, next) {
+  res.cookie("api", Buffer.from(process.env.API_URL).toString('base64'));
+  next();
+});
+
+app.use((req, res, next) => {
+  const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
+  res.setHeader('Cache-Control', 'public, max-age=' + tomiliseconds(24, 0, 0));
+  next();
+});
 
 
 // routing defined
@@ -57,6 +66,7 @@ app.use(function (req, res, next) {
   // next(createError(404));
   res.statusCode(404);
   res.render("notfound");
+  next();
 });
 
 // error handler

@@ -9,6 +9,7 @@ const fs = require('fs');
 const { PDFDocument } = require("pdf-lib");
 router.get("/", (req, res, next) => {
     res.redirect("/");
+    next();
 });
 // router.get('/', async (req, res) => {
 //     const pdfpath = path.join(__dirname, 'new.pdf');
@@ -67,23 +68,22 @@ router.get("/", (req, res, next) => {
 //     });
 // });
 router.get("/live-reading", (req, res, next) => {
-    res.cookie("api", btoa(api_url));
     res.render("notes/live-reading");
+    next();
 });
 router.get("/most-viewed", (req, res, next) => {
-    res.cookie("api", btoa(api_url));
     productControllers.getMostViewedNotes().then((notes) => {
         res.render("notes/most-viewed", {
             data: notes, timeService: timeService
         });
+        next();
     }).catch((err) => {
-        console.log(err);
         res.status(404).render("notfound");
+        next();
     });
 });
 
 router.get("/:id", (req, res, next) => {
-    res.cookie("api", btoa(api_url));
     if (!isNaN(req.params.id)) {
         var token = "";
         if (req.cookies.token) {
@@ -94,38 +94,27 @@ router.get("/:id", (req, res, next) => {
                 data: product, timeService: timeService, api: api_url
             });
             next();
-            if (req.cookies.ampuser) {
-                var deviceId = req.cookies.ampuser;
-                productControllers.addViews(product.product.id, token, deviceId).then((response) => {
-                    console.log(response);
-                    next();
-                }).catch((error) => {
-
-                });
-            }
-
         }).catch((error) => {
-            console.log(error);
             if (error.statusCode == 429) {
+                res.status(429);
                 res.render("information-pages/tomanyrequest");
+                next();
             }
             else if (error.statusCode == 401) {
                 res.redirect("/session-expire");
+                next();
             } else {
                 res.render("notfound");
             }
             next();
         });
     } else {
-        console.log(err);
         res.status(404);
         res.render("notfound");
+        next();
     }
-
 });
 router.get("/request/all", (req, res, next) => {
     backURL = req.header('Referer') || '/';
-    // do your thang
-    console.log(backURL);
 });
 module.exports = router;

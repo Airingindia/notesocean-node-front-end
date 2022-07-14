@@ -10,27 +10,21 @@ const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
 const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
+const encoded_api = Buffer.from(api_url).toString('base64');
 
-router.get("/test", (req, res, next) => {
-  res.render("test");
-})
 router.get("/google-signin", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.redirect(api_url + "/authenticate/google-sign-in");
 })
 // homepage route
 router.get('/', function (req, res, next) {
-  res.cookie("api", btoa(api_url));
   res.render("index");
 });
 
 router.get("/upload", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.redirect("/dashboard/public-notes/new");
 });
 
 router.get("/:id/:name.pdf", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
@@ -58,7 +52,6 @@ router.get("/:id/:name.pdf", (req, res, next) => {
 });
 
 router.get("/:id/:name.html", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   var token = "";
   if (req.cookies.token) {
     token = req.cookies.token;
@@ -89,7 +82,6 @@ router.get("/:id/:name.html", (req, res, next) => {
 // profile page routes
 
 router.get("/profile/:user_id", async (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   let user_id = req.params.user_id;
   if (!isNaN(user_id)) {
     profileControllers.getInfo(user_id).then((userInfo) => {
@@ -119,19 +111,18 @@ router.get("/profile/:user_id", async (req, res, next) => {
 
 //  login page route
 router.get("/login", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("account/login");
+  next();
 });
 
 // sign page route 
 
 router.get("/signup", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("account/signup");
+  next();
 });
 
 router.get("/collections/:collecton_id", async (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   let collecton_id = req.params.collecton_id;
   if (!isNaN(collecton_id)) {
     collectionController.getCollectionDetails(collecton_id).then((collection) => {
@@ -145,16 +136,17 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
         };
         jsonld.push(temp);
       }
-
-      console.log(jsonld);
       res.render("collection", {
         collection: collection,
         timeService: timeService,
         jsonld: JSON.stringify(jsonld)
       });
+      next();
 
     }).catch((error) => {
+      res.status(404);
       res.render("notfound");
+      next();
     })
 
 
@@ -165,7 +157,7 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 // search page route
 
 router.get("/search", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
+  ;
   const query = req.query.query;
   if (query.length !== 0) {
     productControllers.searchProducts(query).then((product) => {
@@ -174,6 +166,7 @@ router.get("/search", (req, res, next) => {
         query: query,
         time: timeService,
       });
+      next();
     }).catch((err) => {
       if (err.statusCode == 429) {
         res.render("information-pages/tomanyrequest")
@@ -181,41 +174,43 @@ router.get("/search", (req, res, next) => {
         res.status(404);
         res.render("notfound");
       }
+      next();
     })
   } else {
     res.redirect("/");
+    next();
   }
 
 });
 
 router.get("/privacy-policies", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/privacy");
+  next();
 });
 
 router.get("/terms-and-condition", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/terms");
+  next();
 });
 
 router.get("/about-us", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/about");
+  next();
 });
 
 router.get("/contact-us", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact");
+  next();
 });
 
 router.get("/contact-us/success", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact-success");
+  next();
 });
 
 router.get("/contact-us/error", (req, res, next) => {
-  res.cookie("api", btoa(api_url));
   res.render("information-pages/contact-error");
+  next();
 });
 
 router.get("/session-expire", (req, res, next) => {
@@ -225,10 +220,11 @@ router.get("/session-expire", (req, res, next) => {
     }).catch((err) => {
       console.log(err);
     })
+
   }
-  res.cookie("api", btoa(api_url));
   res.clearCookie("token");
   res.render("session-expire");
+  next();
 });
 
 router.get("/logout", (req, res, next) => {
@@ -239,8 +235,8 @@ router.get("/logout", (req, res, next) => {
       console.log(err);
     })
   }
-  res.cookie("api", btoa(api_url));
   res.clearCookie("token");
   res.render("session-expire");
+  next();
 });
 module.exports = router;
