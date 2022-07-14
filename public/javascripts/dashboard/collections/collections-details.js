@@ -80,7 +80,6 @@ $(document).ready(function () {
                     url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + noteid,
                     headers: {
                         Authorization: getCookie("token"),
-                        DeviceId: amplitude.getInstance().options.deviceId
                     },
                     beforeSend: function () {
                         $(btn).removeClass("fa-times");
@@ -178,7 +177,6 @@ $(document).ready(function () {
                     url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
                     headers: {
                         Authorization: getCookie("token"),
-                        DeviceId: amplitude.getInstance().options.deviceId
                     },
                     processData: false,
                     contentType: false,
@@ -271,8 +269,6 @@ $(document).ready(function () {
                     url: atob(getCookie("api")) + "/collections/" + collection_id,
                     headers: {
                         Authorization: getCookie("token"),
-                        DeviceId: amplitude.getInstance().options.deviceId
-
                     },
                     data: form,
                     processData: false,
@@ -347,7 +343,6 @@ $(document).ready(function () {
                     url: atob(getCookie("api")) + "/collections/" + collection_id,
                     headers: {
                         Authorization: getCookie("token"),
-                        DeviceId: amplitude.getInstance().options.deviceId
                     },
                     data: form,
                     processData: false,

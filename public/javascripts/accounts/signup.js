@@ -105,11 +105,6 @@ $(document).ready(function () {
                         text: '<i class="fa fa-check-circle">  </i> Somthing went wrong , please try again later',
                         timeout: 5000,
                     }).show();
-
-                    amplitude.getInstance().logEvent("error", {
-                        page: "signup",
-                        coause: "undefined response from server"
-                    });
                 }
             },
 

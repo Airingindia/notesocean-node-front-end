@@ -2,21 +2,6 @@ $(document).ready(function () {
     const api_url = $("body").attr("data-api");
     // sherron init
     Shareon.init();
-    // amplitude
-    if (getCookie("token") !== undefined) {
-        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
-        amplitude.getInstance().logEvent("product view", {
-            product_id: document.querySelector("body").getAttribute("data-product-id"),
-            userid: viewerid
-        });
-    } else {
-        amplitude.getInstance().logEvent("product view", {
-            product_id: document.querySelector("body").getAttribute("data-product-id"),
-        });
-    }
-
-    // share btn
-
     $(".share-btn").click(function () {
         $(".share-modal").modal("show");
     });
@@ -62,11 +47,6 @@ $(document).ready(function () {
                         text: "Liked Added",
                         timeout: 4000,
                     }).show();
-
-                    amplitude.getInstance().logEvent("product liked", {
-                        product_id: document.querySelector("body").getAttribute("data-product-id"),
-                        userid: viewerid
-                    });
                 } else {
                     new Noty({
                         theme: "sunset",
@@ -74,10 +54,6 @@ $(document).ready(function () {
                         text: "Disliked Added",
                         timeout: 4000,
                     }).show();
-                    amplitude.getInstance().logEvent("product disliked", {
-                        product_id: document.querySelector("body").getAttribute("data-product-id"),
-                        userid: viewerid
-                    });
                 }
 
 
@@ -277,90 +253,90 @@ $(document).ready(function () {
     });
 
 
-    //  socket io
-    const socket = io();
-    const udata = JSON.parse(localStorage.getItem("userdata"));
+    // //  socket io
+    // const socket = io();
+    // const udata = JSON.parse(localStorage.getItem("userdata"));
 
-    const productData = JSON.parse($("body").attr("data-product"));
+    // const productData = JSON.parse($("body").attr("data-product"));
 
-    if (localStorage.getItem("userdata") !== null) {
+    // if (localStorage.getItem("userdata") !== null) {
 
-        var data = {
-            firstName: udata.firstName,
-            lastName: udata.lastName,
-            userid: udata.id,
-            pic: udata.profileImage,
-            product: {
-                name: productData.product.name,
-                thumbnail: productData.product.thumbnails,
-                product_id: productData.product.id,
-                timestamp: getTime(productData.product.timestamp),
-                views: productData.product.views,
-                pages: productData.product.pages,
-                user: {
-                    firstName: productData.users.firstName,
-                    lastName: productData.users.lastName,
-                    userId: productData.users.id,
-                    profileImage: productData.users.profileImage
+    //     var data = {
+    //         firstName: udata.firstName,
+    //         lastName: udata.lastName,
+    //         userid: udata.id,
+    //         pic: udata.profileImage,
+    //         product: {
+    //             name: productData.product.name,
+    //             thumbnail: productData.product.thumbnails,
+    //             product_id: productData.product.id,
+    //             timestamp: getTime(productData.product.timestamp),
+    //             views: productData.product.views,
+    //             pages: productData.product.pages,
+    //             user: {
+    //                 firstName: productData.users.firstName,
+    //                 lastName: productData.users.lastName,
+    //                 userId: productData.users.id,
+    //                 profileImage: productData.users.profileImage
 
-                }
-            }
+    //             }
+    //         }
 
-        }
-        socket.emit("join", {
-            noteId: document.querySelector("body").getAttribute("data-product-id"),
-            userdata: data
-        });
-    } else {
-        var data = {
-            firstName: "Guest",
-            lastName: "",
-            userid: 0,
-            pic: "/images/dummy/user_dummy.jpg"
-        }
-        socket.emit("join", {
-            noteId: document.querySelector("body").getAttribute("data-product-id"),
-            userdata: data
-        });
-    }
-
-
-    socket.on("joined", user => {
-        console.log("joined", user);
-    });
-
-    socket.on("left", user => {
-        console.log("left", user);
-    });
-
-    socket.on("liveusers", users => {
-        $(".live-users-container").html("");
-        $('.live-reading').html(`You are reading with ${users.length} people`);
-        for (let i = 0; i < users.length; i++) {
-            let pic = users[i].pic;
-            let userid = users[i].userid;
-            let firstName = users[i].firstName;
-            let lastName = users[i].lastName;
-            if (localStorage.getItem("userdata") !== null) {
-                if (userid == udata.id) {
-                    $(".live-users-container").append(`
-                    <a class="mx-1 my-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> </a>
-                    `);
-                } else {
-
-                    $(".live-users-container").append(`
-                    <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
-                    `);
-                }
-            } else {
-                $(".live-users-container").append(`
-                <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
-                `);
-            }
+    //     }
+    //     socket.emit("join", {
+    //         noteId: document.querySelector("body").getAttribute("data-product-id"),
+    //         userdata: data
+    //     });
+    // } else {
+    //     var data = {
+    //         firstName: "Guest",
+    //         lastName: "",
+    //         userid: 0,
+    //         pic: "/images/dummy/user_dummy.jpg"
+    //     }
+    //     socket.emit("join", {
+    //         noteId: document.querySelector("body").getAttribute("data-product-id"),
+    //         userdata: data
+    //     });
+    // }
 
 
-        }
-    });
+    // socket.on("joined", user => {
+    //     console.log("joined", user);
+    // });
+
+    // socket.on("left", user => {
+    //     console.log("left", user);
+    // });
+
+    // socket.on("liveusers", users => {
+    //     $(".live-users-container").html("");
+    //     $('.live-reading').html(`You are reading with ${users.length} people`);
+    //     for (let i = 0; i < users.length; i++) {
+    //         let pic = users[i].pic;
+    //         let userid = users[i].userid;
+    //         let firstName = users[i].firstName;
+    //         let lastName = users[i].lastName;
+    //         if (localStorage.getItem("userdata") !== null) {
+    //             if (userid == udata.id) {
+    //                 $(".live-users-container").append(`
+    //                 <a class="mx-1 my-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" /> </a>
+    //                 `);
+    //             } else {
+
+    //                 $(".live-users-container").append(`
+    //                 <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
+    //                 `);
+    //             }
+    //         } else {
+    //             $(".live-users-container").append(`
+    //             <a class="mx-1 px-1 my-2" href="/profile/${userid}"><img src="${pic}" alt="${firstName} ${lastName}"  class="my-2" style="width:30px;height:30px;border-radius:50%" />  </a>
+    //             `);
+    //         }
+
+
+    //     }
+    // });
 
 
     //  realted notes

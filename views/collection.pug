@@ -61,26 +61,26 @@ html(lang="en")
                 .col-md-3.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
                     a(href=`/notes/${(product_id)}`,itemprop="item")
                         .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
-                                .card-header.border-0.bg-white
-                                    p(itemprop="name").card-title=product_name
-                                .card-body
-                                   img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
-                                .card-footer.border-0.bg-white
-                                    .row
-                                        .col-12
-                                            //- p.card-title Lorem, ipsum dolor sit ametssdgdg
-                                            p.card-text.notes-details-text
-                                                span
-                                                    i.fa.fa-globe.mx-1
-                                                    small=product_views
-                                                        span.mx-1 views
-                                                span.mx-1
-                                                    i.fa.fa-file.mx-1 
-                                                    small=product_pages
-                                                        span.mx-1 Pages
-                                                span.mx-1
-                                                    i.fa.fa-clock-o.mx-1
-                                                    small=product_actual_time
+                            .card-header.border-0.bg-white
+                                p(itemprop="name").card-title=product_name
+                            .card-body
+                                img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
+                            .card-footer.border-0.bg-white
+                                .row
+                                    .col-12
+                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg
+                                        p.card-text.notes-details-text
+                                            span
+                                                i.fa.fa-globe.mx-1
+                                                small=product_views
+                                                    span.mx-1 views
+                                            span.mx-1
+                                                i.fa.fa-file.mx-1 
+                                                small=product_pages
+                                                    span.mx-1 Pages
+                                            span.mx-1
+                                                i.fa.fa-clock-o.mx-1
+                                                small=product_actual_time
                     meta(itemprop="position" content=count)
                 -}
 
@@ -104,12 +104,7 @@ html(lang="en")
                 //-                             span.mx-1
                 //-                                 i.fa.fa-clock-o.mx-1
                 //-  
-        include includes/footer                               
-        script
-            include ../public/javascripts/common.js  
-        script(src="/vendors/wow/wow.min.js")
-        script.
-            new WOW().init();
+        include includes/footer
         script 
             include ../public/javascripts/subpages/collection.js
 

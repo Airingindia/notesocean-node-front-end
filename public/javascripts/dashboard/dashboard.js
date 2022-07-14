@@ -3,7 +3,6 @@ $(document).ready(function () {
   if (token !== undefined) {
     var userId = token.split(".")[1];
     userId = JSON.parse(atob(userId)).userId;
-    amplitude.getInstance().setUserId(userId);
     $.ajax({
       type: "GET",
       url: atob(getCookie("api")) + "/validate",
@@ -131,27 +130,6 @@ $(document).ready(function () {
   $(".add-new-notes-btn").click(function () {
     $(".modal").modal("show");
   });
-
-  // swipe left right
-  if ($(window).width() < 769) {
-    const swipeableEl = document.getElementsByClassName('second-side')[0];
-    // hammertime.get('pinch').set({ enable: true });
-
-    this.hammer = Hammer(swipeableEl)
-    this.hammer.on('pinchout', () => {
-      window.location = "/";
-    });
-
-    this.hammer.on('swipeleft', () => {
-      // left 
-      nextRoute();
-
-    })
-    this.hammer.on('swiperight', () => {
-      // right
-      prevRoute();
-    })
-  };
 
   function nextRoute() {
     $("aside button").each(function () {

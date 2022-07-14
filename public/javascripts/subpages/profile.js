@@ -1,22 +1,6 @@
 $(document).ready(function () {
     const userid = window.location.pathname.split("/")[2];
-    if (getCookie("token") !== undefined) {
-        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
-        amplitude.getInstance().logEvent("view profile", {
-            path: window.location.href,
-            viewedBy: viewerid,
-            profile: userid
-        });
-    } else {
-        amplitude.getInstance().logEvent("view profile", {
-            path: window.location.href,
-            viewedBy: "Guest",
-            profile: userid
-        });
-    }
     //  get uset public  notes 
-
-
     function loaduserpublicnotes() {
         $.ajax({
             type: "GET",

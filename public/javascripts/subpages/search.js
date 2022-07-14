@@ -1,17 +1,4 @@
 $(document).ready(function () {
-    // document.querySelector("input").value = window.location.search.split("?query=")[1];
-    if (getCookie("token") !== undefined) {
-        const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userId;
-        amplitude.getInstance().logEvent("search", {
-            query: window.location.search.split("?query=")[1],
-            userid: viewerid
-        });
-    } else {
-        amplitude.getInstance().logEvent("search", {
-            query: window.location.search.split("?query=")[1]
-        });
-    };
-
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);

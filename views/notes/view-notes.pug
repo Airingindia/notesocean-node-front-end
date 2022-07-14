@@ -30,8 +30,8 @@ html(lang="en")
                 "@context": "https://schema.org/",
                 "@type": "Product",
                 "name":  "#{data.product.name.substring(0,40)}" ,
-                "image": "#{data.product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)")}",
-                "description":"#{data.product.description.substring(0,145)}",
+                "image": "#{data.product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)")}" 
+                "description":"#{data.product.description.substring(0,145)}" 
                 "brand": {
                     "@type": "Brand",
                     "name": "Notes Ocean"
@@ -270,12 +270,6 @@ html(lang="en")
             }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
             });
         include ../includes/footer
-        script(src="/socket.io/socket.io.js")
-        script
-            include ../../public/javascripts/common.js
         script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
-        script(src="https://static.ncdn.in/vendor/wow/wow.min.js")
         script
             include ../../public/javascripts/subpages/products.js
-        script.
-            new WOW().init();

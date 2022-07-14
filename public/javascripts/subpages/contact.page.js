@@ -1,15 +1,6 @@
 $(document).ready(function () {
     $("form").submit(function (event) {
         event.preventDefault();
-        amplitude.getInstance().logEvent("website contact", {
-            status: "init",
-            name: $("input[name='name']").val(),
-            email: $("input[name='email']").val(),
-            phone: $("input[name='phone']").val(),
-            subject: $("input[name='subject']").val(),
-            message: $("textarea[name='message']").val()
-        });
-        const device_id = amplitude.getInstance().options.deviceId;
         const name = $("input[name='name']").val();
         const email = $("input[name='email']").val();
         const phone = $("input[name='phone']").val();
@@ -31,15 +22,9 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.status == 200) {
-                    amplitude.getInstance().logEvent("website contact", {
-                        status: "success"
-                    });
                     window.location = "/contact-us/success";
                 } else {
-                    amplitude.getInstance().logEvent("website contact", {
-                        status: "error"
-                    });
-                    window.location = "/contact-us/error";
+                    window.location = "/";
                 }
             }
         });
