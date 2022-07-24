@@ -16,7 +16,7 @@ $(function () {
         maxFiles: 4,
         uploadMultiple: false,
         acceptedFiles: ".pdf,.txt,.png,.jpg,.jpeg,.doc,.docx,.xls,.xls,.ppt,.pptx,.csv",
-        url: atob(getCookie("api")) + "/notes",
+        url: atob(decodeURIComponent(getCookie("api"))) + "/notes",
         method: "post",
         headers: {
             Authorization: getCookie("token"),

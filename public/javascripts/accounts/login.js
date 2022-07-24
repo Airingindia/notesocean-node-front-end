@@ -59,6 +59,16 @@ $(document).ready(function () {
                         }).show();
                         $(".login-btn").html("Login");
                         $(".login-btn").prop("disabled", false);
+                    } else {
+                        new Noty({
+                            theme: "nest",
+                            type: "error",
+                            text: 'Server error - please try again later',
+                            timeout: 3000,
+                            closeWith: ['click', 'button'],
+                        }).show();
+                        $(".login-btn").html("Login");
+                        $(".login-btn").prop("disabled", false);
                     }
                 }
             })
@@ -66,9 +76,8 @@ $(document).ready(function () {
     }
 
     if (getCookie("token") !== undefined) {
-        // auto login
+
         window.location = "/dashboard";
-        // console.log(getCookie("token"));
     }
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();

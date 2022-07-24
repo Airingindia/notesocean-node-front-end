@@ -5,9 +5,9 @@ $(document).ready(function () {
     userId = JSON.parse(atob(userId)).userId;
     $.ajax({
       type: "GET",
-      url: atob(getCookie("api")) + "/validate",
+      url: atob(decodeURIComponent(getCookie("api"))) + "/validate",
       headers: {
-        Authorization: getCookie("token")
+        Authorization: decodeURIComponent(getCookie("token"))
       },
       success: function (data) {
         if (data == false) {
@@ -24,7 +24,7 @@ $(document).ready(function () {
                   </div>
                   <div class="col-md-6"> 
                     <h1> To many action  </h1>
-                    <p>  our have performed to many action within a minutes , plese wait until timer ends  </p>
+                    <p>  You have performed to many action within a minutes , plese wait until timer ends  </p>
                     <h6 class="mt-5"> Please wait ... 
                       <span id="time" class="text-danger"> </span>
                       <span class="mx-2"> Minutes </span>
@@ -57,14 +57,14 @@ $(document).ready(function () {
     clearAllBrowserData();
     $.ajax({
       type: "GET",
-      url: atob(getCookie("api")) + "/authenticate/logout",
+      url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/logout",
       headers: {
         Authorization: token,
       },
       success: function (data) {
         $.ajax({
           type: "GET",
-          url: atob(getCookie("api")) + "/logout",
+          url: atob(decodeURIComponent(getCookie("api"))) + "/logout",
           headers: {
             Authorization: token,
           },
@@ -179,12 +179,17 @@ $(document).ready(function () {
   function showuserPic() {
     if (localStorage.getItem('userdata') !== null) {
       const userdata = JSON.parse(localStorage.getItem("userdata"));
-      const profilepic = userdata.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
-      if (profilepic !== null) {
-        $(".navbar-user-pic").attr("src", profilepic);
+      if (userdata.profileImage !== null && userdata.profileImage !== undefined) {
+        const profilepic = userdata.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
+        if (profilepic !== null) {
+          $(".navbar-user-pic").attr("src", profilepic);
+        } else {
+          $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
+        }
       } else {
         $(".navbar-user-pic").attr("src", "/images/dummy/user_dummy.jpg");
       }
+
     }
   }
 

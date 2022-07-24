@@ -4,15 +4,15 @@ $(document).ready(function () {
     function loaddata() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/notes",
+            url: atob(decodeURIComponent(getCookie("api"))) + "/notes",
             headers: {
-                Authorization: getCookie("token")
+                Authorization: decodeURIComponent(getCookie("token"))
             },
             beforeSend: function () {
                 $(".loading-private-notes").removeClass("d-none");
             },
             success: function (data) {
-                showData(data);
+                showData(data.requested);
             },
             error: function (err) {
                 console.log(err);
@@ -23,7 +23,7 @@ $(document).ready(function () {
     loaddata();
 
     function showData(data) {
-        $(".notes-container-row").html("");
+        // $(".notes-container-row").html("");  
         $(".loading-private-notes").addClass("d-none");
         if (data.length !== 0) {
             $(".no-private-notes").addClass("d-none");
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 }
                 name = data[i].name;
                 let fileType = data[i].fileType;
-                let id = data[i].id;
+                let id = data[i].uuid;
                 let size = data[i].size;
                 let timestamp = data[i].timestamp;
                 let ago_time = timeDifference(timestamp);
@@ -131,9 +131,9 @@ $(document).ready(function () {
             if ($(input).hasClass("is-valid")) {
                 $.ajax({
                     type: "PUT",
-                    url: atob(getCookie("api")) + "/notes/" + id,
+                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + id,
                     headers: {
-                        Authorization: getCookie("token")
+                        Authorization: decodeURIComponent(getCookie("token"))
                     },
                     contentType: "application/json",
                     processData: false,
@@ -232,7 +232,7 @@ $(document).ready(function () {
                             if (willDelete) {
                                 $.ajax({
                                     type: "DELETE",
-                                    url: atob(getCookie("api")) + "/notes/" + note_id,
+                                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + note_id,
                                     contentType: "application/json",
                                     processData: false,
                                     headers: {
@@ -291,7 +291,7 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: atob(getCookie("api")) + "/notes/search/" + input,
+                url: atob(decodeURIComponent(getCookie("api"))) + "/notes/search/" + input,
                 headers: {
                     Authorization: getCookie("token")
                 },

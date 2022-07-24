@@ -75,7 +75,7 @@ p {
 
 .signup-form,
 .login-form {
-    width: 50%;
+    width: 60%;
 }
 
 datalist#browsers:focus,
@@ -132,7 +132,7 @@ section .btn {
 
     form {
         width: 90% !important;
-        margin: 5% auto;
+        margin: 0% auto;
     }
 
     .main-section {
@@ -140,6 +140,7 @@ section .btn {
     }
 
 }
+
 
 @media (max-width:1000px) {
     .desktop-img {
@@ -149,6 +150,7 @@ section .btn {
 
 .main-section {
     margin-top: 100px;
+    width: 99%;
 }
 
 
@@ -157,20 +159,3 @@ section .btn {
     justify-content: center;
     align-items: center;
 }
-
-/* 
-.main-section .desktop-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-
-.main-section .desktop-img img {
-    width: 100%;
-}
-
-/*  dark mode  */
-
-
-/* form control */

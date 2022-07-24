@@ -1,3 +1,10 @@
+section{
+    width: 99%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .mobile-text {
     color: #989696b8;
     font-size: 15px

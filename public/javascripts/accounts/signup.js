@@ -61,8 +61,8 @@ $(document).ready(function () {
                         success: function (data) {
                             const authToken = data.token;
                             setCookie("token", authToken, 1);
-                            window.location = "/dashboard";
-                        }, error: function (jqXHR, textStatus) {
+                            window.location = "/dashboard/profile/verify-email";
+                        }, error: function () {
                             new Noty({
                                 theme: "nest",
                                 type: "error",
@@ -87,7 +87,7 @@ $(document).ready(function () {
                         timeout: 5000,
                     }).show();
                 }
-                else if (err.status == 406) {
+                else if (err.status == 409) {
                     $(".signup-btn").prop("disabled", false);
                     $(".signup-btn").html(`Signup`);
                     const errortext = err.responseJSON.description;

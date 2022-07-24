@@ -3,7 +3,9 @@ head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Signup
+  title Signup | Notes ocean
+  meta(name="description" content="Create a new account with notes ocean and upload your notes and earn")
+  meta(name="keywords" content="notes ocean, notesocean, notes ocean signup, notes ocean create account, notes ocean upload notes")
   include ../includes/bootstrap
   style
     include ../../public/stylesheets/account/signup.css
@@ -13,11 +15,11 @@ head
     section.main-section
       .row
         .col-md-6.desktop-img
-          img(src='/images/accounts/signup_bg.svg' loading='lazy' alt='notes ocean signup background')
+          img.w-100(src='/images/accounts/signup_bg.svg' loading='lazy' alt='notes ocean signup background')
         .col-md-6
           div.mx-3.mx-lg-0
             h1 Sign up
-            p Register your account and take full advantages of notesocean
+            p Create a new account with notes ocean, upload your notes , request notes and earn money
           form.signup-form(method="POST")
             .form-group
               i.fa.fa-user.left

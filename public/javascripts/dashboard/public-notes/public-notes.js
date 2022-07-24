@@ -4,7 +4,7 @@ $(document).ready(function () {
     function loadData() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/products",
+            url: atob(decodeURIComponent(getCookie("api"))) + "/products",
             contentType: "application/json",
             processData: false,
             headers: {
@@ -143,7 +143,7 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: atob(getCookie("api")) + "/products/search/" + input,
+                url: atob(decodeURIComponent(getCookie("api"))) + "/products/search/" + input,
                 headers: {
                     Authorization: getCookie("token")
                 },

@@ -2,19 +2,19 @@ $(document).ready(function () {
     // get userdata 
     $.ajax({
         type: "GET",
-        url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
+        url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userUuid,
         beforeSend: function () {
 
         },
         success: function (data) {
             if (data.emailVerified) {
-                window.location = "/dashboard/profile/verified-email";
+                window.location = "/dashboard";
             } else {
                 show();
                 sendCode();
             }
         }, error: function () {
-            window.location = "/dashboard/profile";
+            window.location = "/dashboard";
         }
     })
     const userdata = JSON.parse(localStorage.getItem("userdata"));
@@ -74,9 +74,9 @@ $(document).ready(function () {
                     // verify otp
                     $.ajax({
                         type: "POST",
-                        url: atob(getCookie("api")) + "/authenticate/verify-email",
+                        url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/verify-email",
                         headers: {
-                            Authorization: getCookie("token")
+                            Authorization: decodeURIComponent(getCookie("token"))
                         },
                         processData: false,
                         contentType: "application/json",
@@ -92,50 +92,38 @@ $(document).ready(function () {
                                 const userdata = JSON.parse(localStorage.getItem("userdata"));
                                 userdata.emailVerified = true;
                                 localStorage.setItem("userdata", JSON.stringify(userdata));
-                                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header bg-success text-light">
-                                <strong class="me-auto">Success !</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                            </div>
-                            <div class="toast-body">
-                               <span> your email is successfully verified </span>
-                            </div>
-                        </div>`);
-                                setTimeout(() => {
-                                    $(".notice-box").html("");
-                                    window.location = "/dashboard/profile/verified-email";
-                                }, 2000);
+                                new Noty({
+                                    theme: "nest",
+                                    type: "success",
+                                    text: 'Email verified successfully!',
+                                    timeout: 3000,
+                                    closeWith: ['click', 'button'],
+                                }).show();
+                                window.location = "/dashboard";
+
                             } else {
-                                $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header bg-danger text-light">
-                            <strong class="me-auto">Error !</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                        </div>
-                        <div class="toast-body">
-                           <span> Incorrect verification code, please enter valide code </span>
-                        </div>
-                    </div>`);
-                                setTimeout(() => {
-                                    $(".notice-box").html("");
-                                }, 5000);
+                                new Noty({
+                                    theme: "nest",
+                                    type: "error",
+                                    text: 'Incorrect verification code !',
+                                    timeout: 3000,
+                                    closeWith: ['click', 'button'],
+                                }).show();
                             }
                         }, error: function () {
-                            $(".verify-btn").prop("disabled", false);
-                            $(".verify-btn").html(`verify`);
+                            new Noty({
+                                theme: "nest",
+                                type: "error",
+                                text: 'Somthing went wrong, please try again',
+                                timeout: 3000,
+                                closeWith: ['click', 'button'],
+                            }).show();
+                            window.location = "/dashboard";
 
-                            $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header bg-danger text-light">
-                            <strong class="me-auto">Error !</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                        </div>
-                        <div class="toast-body">
-                           <span> Failed to validate your code , please try again  </span>
-                        </div>
-                    </div>`);
-                            setTimeout(() => {
-                                $(".notice-box").html("");
-                            }, 5000);
                         }
                     });
                 } else {
-                    window.location = "/dashboard/profile";
+                    window.location = "/dashboard";
                 }
             } else {
                 $("input").each(function () {
@@ -151,9 +139,9 @@ $(document).ready(function () {
         $.ajax(
             {
                 type: "GET",
-                url: atob(getCookie("api")) + "/authenticate/verify-email",
+                url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/verify-email",
                 headers: {
-                    Authorization: getCookie("token")
+                    Authorization: decodeURIComponent(getCookie("token"))
                 }, beforeSend: function () {
 
                 },

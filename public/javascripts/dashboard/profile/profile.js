@@ -4,7 +4,7 @@ $(document).ready(function () {
     function first() {
         $.ajax({
             type: "GET",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userId,
+            url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid,
             headers: {
                 Authorization: getCookie("token")
             },
