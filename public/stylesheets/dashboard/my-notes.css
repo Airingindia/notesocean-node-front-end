@@ -81,6 +81,17 @@ textarea {
     height: 300px;
 }
 
+.no-public-notes,.no-private-notes{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.no-public-notes img,.no-private-notes img{
+    width: 200px;
+}
+
 @media (max-width:769px) {
 
     .search-container {

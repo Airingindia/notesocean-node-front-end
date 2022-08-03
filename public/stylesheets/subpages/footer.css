@@ -3,10 +3,12 @@
 }
 
 footer {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 100px;
     padding: 30px;
+    bottom: 0;
 }
 
 footer ul {

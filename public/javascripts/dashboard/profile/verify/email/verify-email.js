@@ -1,5 +1,7 @@
 $(document).ready(function () {
     // get userdata 
+    const userdata = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(userdata);
     $.ajax({
         type: "GET",
         url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userUuid,
@@ -17,7 +19,7 @@ $(document).ready(function () {
             window.location = "/dashboard";
         }
     })
-    const userdata = JSON.parse(localStorage.getItem("userdata"));
+
     function show() {
         $(".user-email-label").html(userdata.email);
         $("input").each(function () {
@@ -86,31 +88,18 @@ $(document).ready(function () {
                             $(".verify-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> <span> verifing... </span>`);
                         },
                         success: function (data) {
-                            $(".verify-btn").prop("disabled", false);
-                            $(".verify-btn").html(`verify`);
-                            if (data) {
-                                const userdata = JSON.parse(localStorage.getItem("userdata"));
-                                userdata.emailVerified = true;
-                                localStorage.setItem("userdata", JSON.stringify(userdata));
-                                new Noty({
-                                    theme: "nest",
-                                    type: "success",
-                                    text: 'Email verified successfully!',
-                                    timeout: 3000,
-                                    closeWith: ['click', 'button'],
-                                }).show();
-                                window.location = "/dashboard";
-
-                            } else {
-                                new Noty({
-                                    theme: "nest",
-                                    type: "error",
-                                    text: 'Incorrect verification code !',
-                                    timeout: 3000,
-                                    closeWith: ['click', 'button'],
-                                }).show();
-                            }
-                        }, error: function () {
+                            const userdata = JSON.parse(localStorage.getItem("userInfo"));
+                            userdata.emailVerified = true;
+                            localStorage.setItem("userInfo", JSON.stringify(userdata));
+                            // new Noty({
+                            //     theme: "nest",
+                            //     type: "success",
+                            //     text: 'Email verified successfully!',
+                            //     timeout: 3000,
+                            //     closeWith: ['click', 'button'],
+                            // }).show();
+                            // window.location = "/dashboard";
+                        }, error: function (error) {
                             new Noty({
                                 theme: "nest",
                                 type: "error",
@@ -118,8 +107,6 @@ $(document).ready(function () {
                                 timeout: 3000,
                                 closeWith: ['click', 'button'],
                             }).show();
-                            window.location = "/dashboard";
-
                         }
                     });
                 } else {

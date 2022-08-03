@@ -41,11 +41,11 @@ router.get('/:page', async function (req, res, next) {
 router.get("/:page/:parameter", (req, res, next) => {
     var alias = req.params.page;
     var parameter = req.params.parameter;
-    if (alias == "collections" && !isNaN(parameter)) {
+    if (alias == "collections") {
         res.render("dashboard/collections/colection-details");
         next();
     }
-    else if (alias == "public-notes" && !isNaN(parameter)) {
+    else if (alias == "public-notes" && parameter.length > 10) {
         res.render("dashboard/public-notes/public-notes-details");
         next();
     }

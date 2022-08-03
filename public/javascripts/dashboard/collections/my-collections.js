@@ -13,7 +13,6 @@ $(document).ready(function () {
                 $(".loading-collections").css({ display: "none" });
                 if (data.size !== 0) {
                     showCollection(data.requested.sort((a, b) => { return b.timestamp - a.timestamp }));
-                    // console.log(data.requested.sort((a, b) => { return b.timestamp - a.timestamp })); sort data by time
                 } else {
                     $(".no-collections").removeClass("d-none");
                 }
@@ -35,8 +34,8 @@ $(document).ready(function () {
             }
 
             $(".collections-rows").append(`
-                <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${colllections[i].id}" style="box-shadow:0px 0px 0px 0px #ccc">
-                <a href="/dashboard/collections/${colllections[i].id}">
+                <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${colllections[i].uuid}" style="box-shadow:0px 0px 0px 0px #ccc">
+                <a href="/dashboard/collections/${colllections[i].uuid}">
                 <div class="collection-item-content">
                    <div class="collection-item-content-box "> 
                   
@@ -121,13 +120,13 @@ $(document).ready(function () {
 
                         $(".collections-rows").prepend(`
                         <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
-                        <a href="/dashboard/collections/${data.id}" class="w-100">
+                        <a href="/dashboard/collections/${data.uuid}" class="w-100">
                             <div class="collection-item-content">
                                 <div class="collection-item-content-box">
                                         <div class="mb-3 mx-1"> ${data.name} </div>
                                 </div>
 
-                                <div> 
+                                <div class=""> 
                                 <small class="text-muted">  <i class="fa fa-file mx-1"></i>  0 Notes </small> 
                                    
                                 <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(data.timestamp)} </small> 

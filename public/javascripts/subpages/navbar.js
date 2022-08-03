@@ -6,6 +6,9 @@ $(document).ready(function () {
             let pic = JSON.parse(localStorage.getItem("userdata")).profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
             $(".dashboard-nav-item img").attr("src", pic);
             $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userdata")).firstName + " " + JSON.parse(localStorage.getItem("userdata")).lastName);
+        } else {
+            $(".dashboard-nav-item img").attr("src", "/images/dummy/user_dummy.jpg");
+            $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName);
         }
     } else {
         $(".login-navbar-item").removeClass("d-none");

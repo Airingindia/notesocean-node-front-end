@@ -124,33 +124,30 @@ router.get("/signup", (req, res, next) => {
 
 router.get("/collections/:collecton_id", async (req, res, next) => {
   let collecton_id = req.params.collecton_id;
-  if (!isNaN(collecton_id)) {
-    collectionController.getCollectionDetails(collecton_id).then((collection) => {
-      var jsonld = [];
-      for (var i = 0; i < collection.products.length; i++) {
-        let temp = {
-          "@type": "ListItem",
-          "position": `"${i + 1}"`,
-          "name": `"${collection.products[i].name}"`,
-          "item": `"https://notesocean.com/notes/${collection.products[i].id}"`
-        };
-        jsonld.push(temp);
-      }
-      res.render("collection", {
-        collection: collection,
-        timeService: timeService,
-        jsonld: JSON.stringify(jsonld)
-      });
-      next();
+  collectionController.getCollectionDetails(collecton_id).then((collection) => {
+    var jsonld = [];
+    for (var i = 0; i < collection.products.length; i++) {
+      let temp = {
+        "@type": "ListItem",
+        "position": `"${i + 1}"`,
+        "name": `"${collection.products[i].name}"`,
+        "item": `"https://notesocean.com/notes/${collection.products[i].id}"`
+      };
+      jsonld.push(temp);
+    }
+    res.render("collection", {
+      collection: collection,
+      timeService: timeService,
+      jsonld: JSON.stringify(jsonld)
+    });
+    next();
 
-    }).catch((error) => {
-      res.status(404);
-      res.render("notfound");
-      next();
-    })
-
-
-  }
+  }).catch((error) => {
+    console.log(error);
+    res.status(404);
+    res.render("notfound");
+    next();
+  })
 });
 
 // other pages routes

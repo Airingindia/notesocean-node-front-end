@@ -15,6 +15,7 @@ const sitemapRoutes = require("./routes/sitemap.routes");
 const coursesRoute = require("./routes/courses.routes");
 const subjectRoutes = require("./routes/subjects.routes");
 const notesRoutes = require("./routes/notes.routes");
+const requesRoutes = require("./routes/request.routes");
 require("dotenv").config();
 const app = express();
 
@@ -27,15 +28,15 @@ var dd_options = {
 var connect_datadog = require('connect-datadog')(dd_options);
 app.use(connect_datadog);
 app.use(logger('dev'));
+app.use(function (req, res, next) {
+  res.cookie("api", Buffer.from(process.env.API_URL).toString('base64'));
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
-app.use(function (req, res, next) {
-  res.cookie("api", Buffer.from(process.env.API_URL).toString('base64'));
-  next();
-});
 
 app.use((req, res, next) => {
   const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
@@ -53,6 +54,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
 app.use("/sitemaps", sitemapRoutes);
+app.use("/notes/request", requesRoutes);
 app.use("/notes", notesRoutes);
 app.use("/contact", contactRoutes);
 app.use("/contact-us", contactRoutes);
@@ -63,15 +65,14 @@ app.use("/subjects", subjectRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  // next(createError(404));
-  res.statusCode(404);
+  res.status(404);
   res.render("notfound");
   next();
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log(err.message);
+  console.log(err);
 });
 
 module.exports = app;

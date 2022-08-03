@@ -26,6 +26,7 @@ $(function () {
             let uploadedId = uploadedfile.id;
             let uploadedfilename = uploadedfile.name;
             let status = data.status;
+            console.log(data);
 
             if (status == "success") {
                 swal({
@@ -39,7 +40,7 @@ $(function () {
                         if (willDelete) {
                             window.location = "/notes/" + uploadedId;
                         } else {
-                            $("form").trigger("reset");
+                            // $("form").trigger("reset");
                             myDropzone.removeAllFiles();
                             window.location = window.location.href;
                         }

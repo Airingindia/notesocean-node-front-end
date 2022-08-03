@@ -18,6 +18,9 @@ $(document).ready(function () {
 
             },
             error: function (err) {
+                if (err.status == 401) {
+                    window.location = "/session-expire";
+                }
                 $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-container").addClass("d-none");
                 $(".no-public-notes").removeClass("d-none");
@@ -26,21 +29,19 @@ $(document).ready(function () {
     }
     loadData();
     function showData(data) {
-        console.log(data.requested.length);
         if (data.requested.length !== 0) {
             $(".loading-public-notes").addClass("d-none");
             $(".no-public-notes").addClass("d-none");
             for (let i = 0; i < data.requested.length; i++) {
-                let id = data.requested[i].id;
+                let id = data.requested[i].uuid;
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
-                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
+                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
+                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
 
-                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
-
-                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
 
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);

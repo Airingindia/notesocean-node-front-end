@@ -84,37 +84,29 @@ router.get("/most-viewed", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-    if (!isNaN(req.params.id)) {
-        var token = "";
-        if (req.cookies.token) {
-            token = req.cookies.token;
-        }
-        productControllers.getInfo(req.params.id, token).then((product) => {
-            res.render("notes/view-notes", {
-                data: product, timeService: timeService, api: api_url
-            });
-            next();
-        }).catch((error) => {
-            if (error.statusCode == 429) {
-                res.status(429);
-                res.render("information-pages/tomanyrequest");
-                next();
-            }
-            else if (error.statusCode == 401) {
-                res.redirect("/session-expire");
-                next();
-            } else {
-                res.render("notfound");
-            }
-            next();
-        });
-    } else {
-        res.status(404);
-        res.render("notfound");
-        next();
+    var token = "";
+    if (req.cookies.token) {
+        token = req.cookies.token;
     }
-});
-router.get("/request/all", (req, res, next) => {
-    backURL = req.header('Referer') || '/';
+    productControllers.getInfo(req.params.id, token).then((product) => {
+        res.render("notes/view-notes", {
+            data: product, timeService: timeService, api: api_url
+        });
+        next();
+    }).catch((error) => {
+        console.log(error);
+        if (error.statusCode == 429) {
+            res.status(429);
+            res.render("information-pages/tomanyrequest");
+            next();
+        }
+        else if (error.statusCode == 401) {
+            res.redirect("/session-expire");
+            next();
+        } else {
+            res.render("notfound");
+        }
+        next();
+    });
 });
 module.exports = router;

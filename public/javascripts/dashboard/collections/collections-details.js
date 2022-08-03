@@ -15,6 +15,7 @@ $(document).ready(function () {
                     $(".loading-collection").addClass("d-none");
                     $(".collection-container").removeClass("d-none");
                     $(".collection-name").val(data.name);
+                    $("title").html(data.name);
                     $("textarea").val(data.description);
                     $(".select-banner-img").attr("src", data.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/700x100/filters:format(webp)/filters:quality(100)"));
                     const box = $(".add-notes-box").parent();
@@ -53,7 +54,7 @@ $(document).ready(function () {
                         $(".public-notes-row-modal").append(`
                     <div class="col-md-2 container my-3 ">
                         <div class="form-check form-check-inline"></div>
-                            <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].id}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}">
+                            <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].uuid}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}">
                                 <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" data-src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}}" height="190px" />
                                 <div class="card-body border-0"> </div>
                                 <div class="card-footer border-0 bg-white">
@@ -226,8 +227,8 @@ $(document).ready(function () {
     function addNotes(data) {
         for (let i = 0; i < data.length; i++) {
             let name = data[i].name;
-            let id = data[i].id;
-            let thumbnails = data[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)");
+            let id = data[i].uuid;
+            let thumbnails = data[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/300x300/filters:format(webp)/filters:quality(100)");
             $(".collection-notes-item.plus").before(`<div class="collection-notes-item col-md-4 my-1">
             <div class="card p-0">
                 <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>

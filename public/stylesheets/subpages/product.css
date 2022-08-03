@@ -22,6 +22,7 @@ h1.card-title {
 .main-content-box {
     width: 80%;
     float: left;
+    position: relative;
 }
 
 .realted-notes-container {

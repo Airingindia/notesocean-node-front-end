@@ -65,17 +65,18 @@ textarea:hover {
 .collection-item-content-box {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 70%;
     align-items: center;
 
 }
 
 .collections-rows {
-    width: 70%;
+    width: 50%;
 }
 
+
 .heading-container {
-    width: 70%;
+    width: 50%;
 }
 
 @media(max-width:768px) {

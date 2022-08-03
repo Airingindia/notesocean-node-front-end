@@ -10,8 +10,9 @@ $(document).ready(function () {
                 Authorization: getCookie("token")
             },
             success: function (data) {
-                if (data.product !== null) {
-                    if (data.product.length !== 0) {
+                console.log(data);
+                if (data.products !== null) {
+                    if (data.products.length !== 0) {
                         showData(data);
                         $(".loading-public-notes").addClass("d-none");
                         $(".public-notes-details-container").removeClass("d-none");
@@ -35,21 +36,21 @@ $(document).ready(function () {
     }
 
     function showData(data) {
-        let id = data.product.id;
-        let name = data.product.name;
-        let thumbnails = data.product.thumbnails;
-        let views = data.product.views;
-        let dislikes = data.product.dislikes;
-        let likes = data.product.likes;
-        let timestamp = data.product.timestamp;
-        let description = data.product.description;
-        let tags = data.product.tags;
+        let id = data.products.uuid;
+        let name = data.products.name;
+        let thumbnails = data.products.thumbnails;
+        let views = data.products.views;
+        let dislikes = data.products.dislikes;
+        let likes = data.products.likes;
+        let timestamp = data.products.timestamp;
+        let description = data.products.description;
+        let tags = data.products.tags;
 
         $(".public-notes-title").html(name);
         $(".public-notes-likes-count").html(likes);
         $(".public-notes-dislikes-count").html(dislikes);
         $(".public-notes-views-count").html(formatViews(views));
-        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)"));
+        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x500/"));
         $(".public-notes-description").html(description);
         $(".note-title").val(name);
         $(".note-descriptions").val(description);

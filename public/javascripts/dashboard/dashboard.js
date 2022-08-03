@@ -3,52 +3,52 @@ $(document).ready(function () {
   if (token !== undefined) {
     var userId = token.split(".")[1];
     userId = JSON.parse(atob(userId)).userId;
-    $.ajax({
-      type: "GET",
-      url: atob(decodeURIComponent(getCookie("api"))) + "/validate",
-      headers: {
-        Authorization: decodeURIComponent(getCookie("token"))
-      },
-      success: function (data) {
-        if (data == false) {
-          clearAllBrowserData();
-        }
-      },
-      error: function (error) {
-        if (error.status == 429) {
-          $(".second-side").html(`
-            <div class="tomanyaction">
-                <div class="row"> 
-                  <div class="col-md-6"> 
-                    <img src="/images/illustrations/serverdown.svg" class="w-100"> 
-                  </div>
-                  <div class="col-md-6"> 
-                    <h1> To many action  </h1>
-                    <p>  You have performed to many action within a minutes , plese wait until timer ends  </p>
-                    <h6 class="mt-5"> Please wait ... 
-                      <span id="time" class="text-danger"> </span>
-                      <span class="mx-2"> Minutes </span>
-                    </h6>
-                  </div>
-                </div>
-            </div>
-          `);
+    // $.ajax({
+    //   type: "GET",
+    //   url: atob(decodeURIComponent(getCookie("api"))) + "/validate",
+    //   headers: {
+    //     Authorization: decodeURIComponent(getCookie("token"))
+    //   },
+    //   success: function (data) {
+    //     if (data == false) {
+    //       clearAllBrowserData();
+    //     }
+    //   },
+    //   error: function (error) {
+    //     if (error.status == 429) {
+    //       $(".second-side").html(`
+    //         <div class="tomanyaction">
+    //             <div class="row"> 
+    //               <div class="col-md-6"> 
+    //                 <img src="/images/illustrations/serverdown.svg" class="w-100"> 
+    //               </div>
+    //               <div class="col-md-6"> 
+    //                 <h1> Too many action  </h1>
+    //                 <p>  You have performed too many action within a minutes , plese wait until timer ends  </p>
+    //                 <h6 class="mt-5"> Please wait ... 
+    //                   <span id="time" class="text-danger"> </span>
+    //                   <span class="mx-2"> Minutes </span>
+    //                 </h6>
+    //               </div>
+    //             </div>
+    //         </div>
+    //       `);
 
-          var fiveMinutes = 60 * 1,
-            display = document.querySelector('#time');
-          startTimer(fiveMinutes, display);
-        } else if (error.status == 0) {
-          new Noty({
-            theme: "nest",
-            type: "error",
-            text: 'Failed to connect to server',
-            timeout: 5000,
-          }).show();
-        } else {
-          clearAllBrowserData();
-        }
-      }
-    })
+    //       var fiveMinutes = 60 * 1,
+    //         display = document.querySelector('#time');
+    //       startTimer(fiveMinutes, display);
+    //     } else if (error.status == 0) {
+    //       new Noty({
+    //         theme: "nest",
+    //         type: "error",
+    //         text: 'Failed to connect to server',
+    //         timeout: 5000,
+    //       }).show();
+    //     } else {
+    //       clearAllBrowserData();
+    //     }
+    //   }
+    // })
   } else {
     clearAllBrowserData();
   }
@@ -177,10 +177,10 @@ $(document).ready(function () {
 
   // set user profilepic
   function showuserPic() {
-    if (localStorage.getItem('userdata') !== null) {
-      const userdata = JSON.parse(localStorage.getItem("userdata"));
-      if (userdata.profileImage !== null && userdata.profileImage !== undefined) {
-        const profilepic = userdata.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
+    if (localStorage.getItem('userInfo') !== null) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (userInfo.profileImage !== null && userInfo.profileImage !== undefined) {
+        const profilepic = userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
         if (profilepic !== null) {
           $(".navbar-user-pic").attr("src", profilepic);
         } else {
@@ -198,9 +198,28 @@ $(document).ready(function () {
   function clearAllBrowserData() {
     localStorage.removeItem("token");
     localStorage.removeItem("userinfo");
-    localStorage.removeItem("userdata");
+    localStorage.removeItem("userInfo");
     document.cookie = "token" + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     window.location = "/login";
   }
+
+  // get user info 
+
+  function getUserInfo() {
+    if (localStorage.getItem("userInfo") == null || localStorage.getItem("userInfo") == undefined) {
+      $.ajax({
+        type: "GET",
+        url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid,
+        headers: {
+          Authorization: getCookie("token")
+        },
+        success: function (data) {
+          localStorage.setItem("userInfo", JSON.stringify(data));
+          showUserInfo(data);
+        }
+      })
+    }
+  };
+  getUserInfo();
 
 });

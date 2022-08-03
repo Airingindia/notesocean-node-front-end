@@ -9,7 +9,7 @@ $(document).ready(function () {
                 Authorization: getCookie("token")
             },
             success: function (data) {
-                localStorage.setItem("userdata", JSON.stringify(data));
+                localStorage.setItem("userInfo", JSON.stringify(data));
                 showUserInfo(data);
             }
         })
@@ -24,6 +24,21 @@ $(document).ready(function () {
         if (userInfo.profileImage !== null) {
             $(".user-profile-img").attr("src", userInfo.profileImage);
         }
+        // if (email.hasOwnProperty("emailVerified")) {
+        //     if (userInfo.emailVerified) {
+        //         $(".email").removeClass("is-invalid");
+        //         $(".email").addClass("is-valid");
+        //         $(".email").next().html(`<span> Verified </span> `);
+        //     } else {
+        //         $(".email").addClass("is-invalid");
+        //         $(".email").removeClass("is-valid");
+        //         $(".email").next().next().html(`<span> Email is not verified </span> <a href="/dashboard/profile/verify-email" class="mx-2"> Verify</a>`);
+        //     }
+        // } else {
+        //     $(".email").removeClass("is-invalid");
+        //     $(".email").addClass("is-valid");
+        //     $(".email").next().html(`<span> Verified </span> `);
+        // }
         if (userInfo.emailVerified) {
             $(".email").removeClass("is-invalid");
             $(".email").addClass("is-valid");
@@ -33,6 +48,7 @@ $(document).ready(function () {
             $(".email").removeClass("is-valid");
             $(".email").next().next().html(`<span> Email is not verified </span> <a href="/dashboard/profile/verify-email" class="mx-2"> Verify</a>`);
         }
+
 
         if (userInfo.phoneVerified) {
             $(".mobile").removeClass("is-invalid");
@@ -53,7 +69,7 @@ $(document).ready(function () {
         $(input).click();
         $(input).on("change", function () {
             var file = this.files[0];
-            const data = JSON.parse(localStorage.getItem("userdata"));
+            const data = JSON.parse(localStorage.getItem("userInfo"));
             var imgObj = URL.createObjectURL(file);
             var jsonData = {
                 firstName: data.firstName,
@@ -87,19 +103,15 @@ $(document).ready(function () {
                     $(".pic-uploading-roller").addClass("d-none");
                     $(".user-profile-img").removeClass("d-none");
                     $(".profile-update-btn").prop("disabled", false);
-                    localStorage.setItem("userdata", JSON.stringify(data));
+                    localStorage.setItem("userInfo", JSON.stringify(data));
                     $(".user-profile-img").attr("src", imgObj);
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-success text-light">
-                    <strong class="me-auto">Success!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                </div>
-                <div class="toast-body">
-                   <span>  Picture updated </span>
-                </div>
-            </div>`);
-                    setTimeout(() => {
-                        $(".notice-box").html("");
-                    }, 3000);
+                    new Noty({
+                        theme: "nest",
+                        type: "success",
+                        text: 'Picture updated successfully!',
+                        timeout: 2000,
+                    }).show();
+
                 },
                 error: function (err) {
                     $(".pic-chnage-btn").html(`Change`);
@@ -202,7 +214,7 @@ $(document).ready(function () {
                 success: function (data) {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
-                    localStorage.setItem("userdata", JSON.stringify(data));
+                    localStorage.setItem("userInfo", JSON.stringify(data));
                     $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-light">
                     <strong class="me-auto">Success!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
