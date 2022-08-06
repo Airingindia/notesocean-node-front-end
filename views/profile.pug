@@ -38,21 +38,14 @@ html(lang="en-US")
     body 
         header 
             include includes/navbar
-        section
-            .container.my-5
+        section.container-fluid
+            .profile-box
                 div.d-flex.justify-content-center.align-items-center
                     img(src=profile.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)"), alt=`${(profile.firstName)} ${(profile.lastName)}`,width="200px" height="200px").profile-image
                 div.my-3
                     center
-                        h1 #{profile.firstName} #{profile.lastName}
-                        //- small 
-                        //-     i.fa.fa-book.mx-1
-                        //-     span Notes 100
-                        //- br
-                        //- small
-                        //-     i.fa.fa-database.mx-1 
-                        //-     span Collections 10
-            .container-fluid.content-box.mt-3
+                        h1.profile-name #{profile.firstName} #{profile.lastName}
+            .content-box
                 ul#pills-tab.nav.nav-pills.mb-3(role='tablist').d-flex.justify-content-center.mt-2
                     li.nav-item(role='presentation')
                         button#pills-notes-tab.nav-link.active(data-bs-toggle='pill' data-bs-target='#pills-notes' type='button' role='tab' aria-controls='pills-notes' aria-selected='true') Notes
@@ -67,47 +60,7 @@ html(lang="en-US")
                             h5.text-center.mt-5.no-public-notes.d-none
                                 i.fa.fa-info-circle.mx-1.text-warning
                                 span No Public Notes Uploaded By User
-                            //- .col-md-3.my-2
-                            //-     a(href="/notes/")
-                            //-         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
-                            //-             .card-header.border-0
-                            //-                 p.card-title Lorem ipsum dolor sit amet.
-                            //-             img.card-img-top(src="https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png")
-                            //-             .card-footer.border-0
-                            //-                 .row
-                            //-                     .col-12
-                            //-                         //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                            //-                         p.card-text.notes-details-text
-                            //-                             span
-                            //-                                 i.fa.fa-globe.mx-1
-                            //-                                 small 100 views
-                            //-                             span.mx-1
-                            //-                                 i.fa.fa-file.mx-1 
-                            //-                                 small 10 pages
-                            //-                             span.mx-1
-                            //-                                 i.fa.fa-clock-o.mx-1
-                            //-                                 small 10 minute ago
 
-                            //- .col-md-3.my-2
-                            //-     a(href="/notes/")
-                            //-         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item(data-id)
-                            //-             .card-header.border-0
-                            //-                 p.card-title Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            //-             //- img(src=thumbnails, alt="" height="200px").card-img-top.notes-thumbnails
-                            //-             .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
-                            //-             .card-footer.border-0
-                            //-                 .row
-                            //-                     .col-12
-                            //-                         p.card-text.notes-details-text
-                            //-                             span
-                            //-                                 i.fa.fa-globe.mx-1
-                            //-                                 small 100 views
-                            //-                             span.mx-1
-                            //-                                 i.fa.fa-file.mx-1 
-                            //-                                 small 10 pages
-                            //-                             span.mx-1
-                            //-                                 i.fa.fa-clock-o.mx-1
-                            //-                                 small 10 minute ago               
                     #pills-collection.tab-pane.fade(role='tabpanel' aria-labelledby='pills-collection-tab') 
                         .collections.border-0
                             ol.list-group.border-0.collections-rows.mx-auto
@@ -116,28 +69,6 @@ html(lang="en-US")
                                 h5.text-center.mt-5.no-public-collection.d-none
                                     i.fa.fa-info-circle.mx-1.text-warning
                                     span No Collections Created By User
-                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
-                                //-     a(href="#") 
-                                //-         .ms-2.me-auto
-                                //-             .fw-bold  Subheading
-                                //-             span Cras justo odio
-                                //-     span.badge.bg-danger.rounded-pill 14
-                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
-                                //-     a(href="#") 
-                                //-         .ms-2.me-auto
-                                //-             .fw-bold  Subheading
-                                //-             span Cras justo odio
-                                //-     span.badge.bg-danger.rounded-pill 14
-                                //- li.list-group-item.d-flex.justify-content-between.align-items-start.border-0
-                                //-     a(href="#") 
-                                //-         .ms-2.me-auto
-                                //-             .fw-bold  Subheading
-                                //-             span Cras justo odio
-                                //-     span.badge.bg-danger.rounded-pill 14
-
-
-
-
         include includes/footer
         script
             include ../public/javascripts/subpages/profile.js

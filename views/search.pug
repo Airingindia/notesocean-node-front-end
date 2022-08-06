@@ -14,33 +14,34 @@ html(lang="en")
             include includes/navbar
         section.main-section
             .search-container
-                div.d-flex.justify-content-between
+                -if(data.requested.length <0){
+                    div.d-flex.justify-content-between
                     h1
                         span.text-danger #{data.size} 
                         span Notes Found
-                    .filter-dropdown
-                        button.btn.btn-sm.btn-danger(data-bs-toggle="modal" data-bs-target="#modal-filter") filter
+                    //- .filter-dropdown
+                    //-     button.btn.btn-sm.btn-danger(data-bs-toggle="modal" data-bs-target="#modal-filter") filter
                 div.search-item-row(itemscope itemtype="https://schema.org/BreadcrumbList")
                     - let count = 0;
                     -for (let i = 0; i < data.requested.length; i++){
                         - count++;
-                        - let productid = data.requested[i].product.id;
-                        - let productname = data.requested[i].product.name;
-                        - let timestamp = Number(data.requested[i].product.timestamp);
-                        - let description = data.requested[i].product.description;
-                        - let thumbnails = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") ;
-                        - var img1 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                        - let productid = data.requested[i].uuid;
+                        - let productname = data.requested[i].name;
+                        - let timestamp = Number(data.requested[i].timestamp);
+                        - let description = data.requested[i].description;
+                        - let thumbnails = data.requested[i].thumbnails.replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") ;
+                        - var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
 
-                        - var img2 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+                        - var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
 
-                        - var img3 = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                        - var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
 
-                        - let views = data.requested[i].product.views;
-                        - let pages = data.requested[i].product.pages;
-                        - let firstName = data.requested[i].user.firstName;
-                        - let lastName = data.requested[i].user.lastName;
-                        - let userid = data.requested[i].user.id;
-                        - let profileImage = data.requested[i].user.profileImage;
+                        - let views = data.requested[i].views;
+                        - let pages = data.requested[i].pages;
+                        - let firstName = data.requested[i].users.firstName;
+                        - let lastName = data.requested[i].users.lastName;
+                        - let userid = data.requested[i].users.uuid;
+                        - let profileImage = data.requested[i].users.profileImage == null ? "/images/dummy/user_dummy.jpg" :  data.requested[i].users.profileImage ;
                             div(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem").wow.animate__animated.fadeIn
                                 a(href="/notes/"+productid,itemprop="item")
                                     div.d-flex.shadow.search-notes-item.my-3
@@ -71,6 +72,29 @@ html(lang="en")
                                                             p.text-muted #{firstName} #{lastName}
                                 meta(itemprop="position" content=count)
                     -}
+                -}else{
+                    div.container.not-found-container
+                        .row
+                            .col-lg-6
+                                img(src="/images/illustrations/notFound.svg")
+                            .col-lg-6.d-flex.justify-content-center.align-items-center
+                                div
+                                    h1 Your search did not match any notes or collection
+                                    b Hint:
+                                    li 
+                                        small Try less word or sentence
+                                    li 
+                                        small Try diffrent word or sentence 
+                                    li 
+                                        small Use correct spelled  sentence
+
+                        div.request-info.mt-5
+                            h1.text-danger But notes ocean never disappoint you, we will send your notes in 24 hours
+                            p Submit your request, our notes ocean students will fulfill your notes requiremnt 
+                            a.btn.btn-dark.text-light(href="/request/new") Request notes
+
+                -}
+
                 .modal#modal-filter
                     .modal-dialog.modal-dialog-centered
                         .modal-content.bg-white.border-0
@@ -115,57 +139,6 @@ html(lang="en")
                                         .form-check
                                             input#datefilter.form-check-input(type='radio' name='date' value="thismonth")
                                             label.form-check-label(for='datefilter') This month
-
-                //- a(href="/")
-                //-     .d-flex.shadow.p-1.search-notes-item.my-3
-                //-         .flex-shrink-0
-                //-             img(src='https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png' alt='...').search-item-img
-                //-         .flex-grow-1.ms-3.search-notes-item-details
-                //-             h2 This is some content from a media component. You can replace this with any content and adjust it as needed.
-                //-             p Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita eligendi praesentium nemo impedit modi dignissimos quis hic non iusto quae?
-                //-             div.d-flex
-                //-                 p.ml-2
-                //-                     i.fa.fa-globe.mx-1
-                //-                     span 100 views
-                //-                 p.mx-2
-                //-                     i.fa.fa-file.mx-1
-                //-                     span 100 pages
-                //-                 p.mx-2
-                //-                     i.fa.fa-clock-o.mx-1
-                //-                     span 10 minute ago
-
-                //-             .creator-box
-                //-                 a(href="/")
-                //-                     .d-flex.align-items-center
-                //-                         .flex-shrink-0
-                //-                             img(src='/images/dummy-user.jpeg' alt='...').creator-img
-                //-                         .flex-grow-1.ms-3
-                //-                             h3 Sachin kumar
-                //- a(href="/")
-                //-     .d-flex.shadow.p-1.search-notes-item.my-3
-                //-         .flex-shrink-0
-                //-             img(src='https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/112/1647064353819_6038_0.png' alt='...').search-item-img
-                //-         .flex-grow-1.ms-3.search-notes-item-details
-                //-             h2 This is some content from a media component. You can replace this with any content and adjust it as needed.
-                //-             p Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita eligendi praesentium nemo impedit modi dignissimos quis hic non iusto quae?
-                //-             div.d-flex
-                //-                 p.ml-2
-                //-                     i.fa.fa-globe.mx-1
-                //-                     span 100 views
-                //-                 p.mx-2
-                //-                     i.fa.fa-file.mx-1
-                //-                     span 100 pages
-                //-                 p.mx-2
-                //-                     i.fa.fa-clock-o.mx-1
-                //-                     span 10 minute ago
-
-                //-             .creator-box
-                //-                 a(href="/")
-                //-                     .d-flex.align-items-center
-                //-                         .flex-shrink-0
-                //-                             img(src='/images/dummy-user.jpeg' alt='...').creator-img
-                //-                         .flex-grow-1.ms-3
-                //-                             h3 Sachin kumar
         script
             include ../public/javascripts/subpages/search.js
 

@@ -2,6 +2,10 @@
     margin-top: 80px;
 }
 
+.collection-info-container,.main-content-container{
+    width: 60%;
+}
+
 .collection-info-container h1 {
     font-size: 25px;
 }
@@ -22,7 +26,7 @@
 
 .notes-thumbnails {
     width: 100%;
-    height: 250px;
+    height: 200px;
 }
 
 .public-notes-item:hover {
@@ -56,6 +60,9 @@ h3 {
 }
 
 @media (max-width:769px) {
+    .collection-info-container,.main-content-container{
+        width: 100%;
+    }
 
     .collection-info-container>.d-flex {
         display: block !important;

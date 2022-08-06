@@ -1,0 +1,77 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title=data.message + " | Notes Ocean"
+        include ../includes/bootstrap.pug
+        style
+            include ../../public/stylesheets/request/view-request.css
+    body
+        header
+            include ../includes/navbar.pug
+        section
+            h1=data.subject
+            p=data.message
+            a.btn.btn-sm.btn-outline-secondary(href="/profile/"+data.users.uuid)
+                img.user-img(src=`${(data.users.profileImage)}`) 
+                span.mx-1  #{data.users.firstName}  #{data.users.lastName}
+            -if(acceptedProduct==null){
+                div.mt-4
+                    h4.text-warning No notes accepted !
+                    p You can now upload your notes , it may chances to be accepted by the requester.
+                    a.btn.btn-outline-dark.text-dark(href="/upload/"+data.uuid) Upload  your notes
+            -}
+            div.mt-4
+                h4 Uploaded Notes
+                p These are some uploaded notes by the users
+                div.uploaded-notes-row
+                    a(href="#")
+                        .shadow.p-2.mb-2.bg-white.rounded.uploaded-notes-item
+                            div
+                                img.notes-thumb(src="https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/77cc6c30-7c5f-42a8-ae7d-266c4325bee8/1659770286352_0_0.png")
+                            div
+                                h6 user email verification pending user email verification pending dfghfdhg
+                                p user email verification pendinguser email verification pendinguser email verification pendinguser email verification pendinguser email verification pending dfhfghgfh
+                                a.btn(href="/profile/"+data.users.uuid)
+                                    img.user-img(src=`${(data.users.profileImage)}`) 
+                                    span.mx-1  #{data.users.firstName}  #{data.users.lastName}  
+                                div.d-flex.align-items-center.uploaded-notes-info
+                                    small
+                                        i.fa.fa-clock.mr-1
+                                        span 10 minutes ago 
+                                    small
+                                        i.fa.fa-file.mr-1
+                                        span 10 pages
+                                    small
+                                        i.fa.fa-globe.mr-1
+                                        span 100 views
+                                    small
+                                        i.fa.fa-thumbs-up.mr-1
+                                        small 100 likes       
+                    a(href="#")
+                        .shadow.p-2.mb-2.bg-white.rounded.uploaded-notes-item
+                            div
+                                img.notes-thumb(src="https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/77cc6c30-7c5f-42a8-ae7d-266c4325bee8/1659770286352_0_0.png")
+                            div
+                                h6 user email verification pending user email verification pending dfghfdhg
+                                p user email verification pendinguser email verification pendinguser email verification pendinguser email verification pendinguser email verification pending dfhfghgfh
+                                a.btn(href="/profile/"+data.users.uuid)
+                                    img.user-img(src=`${(data.users.profileImage)}`) 
+                                    span.mx-1  #{data.users.firstName}  #{data.users.lastName}  
+                                div.d-flex.align-items-center.uploaded-notes-info
+                                    small
+                                        i.fa.fa-clock.mr-1
+                                        span 10 minutes ago 
+                                    small
+                                        i.fa.fa-file.mr-1
+                                        span 10 pages
+                                    small
+                                        i.fa.fa-globe.mr-1
+                                        span 100 views
+                                    small
+                                        i.fa.fa-thumbs-up.mr-1
+                                        small 100 likes                    
+
+

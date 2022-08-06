@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title New Request | Notes ocean
+        meta(name="description" content="Request new notes,our students and teachers will upload according to your request")
+        include ../includes/bootstrap.pug
+        style
+            include ../../public/stylesheets/request/new-request.css
+    body
+        header
+            include ../includes/navbar.pug
+        section
+            -if(isLoggedIn==true){
+                .no-login.text-center
+                    h4 You are not loggd in 
+                    p To make a request you have to create or login your account
+                    a.btn.btn-dark(href="/login?dest=/request/new") Login 
+            -}
+        section
+            -if(isLoggedIn==false){
+                form
+                    h1 Request
+                    p We are here to help you at every point , request your notes and our student will upload notes accroding to you
+                    .form-group
+                        label Subject
+                        input.form-control(placeholder="Class 10th mathematics notes" type="text",required)
+                    .form-group
+                        label Message
+                        textarea.form-control(placeholder="i need class 10th mathematics notes of first chapter" rows="5",required)
+                    .form-group.mt-4
+                        button(type="submit").btn.btn-dark Request
+            -}
+        script
+            include ../../public/javascripts/request/new-request.js
+
+

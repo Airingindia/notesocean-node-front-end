@@ -12,19 +12,19 @@ $(document).ready(function () {
                 if (data.requested.length !== 0) {
                     $(".public-now-row").html("");
                     for (let i = 0; i < data.requested.length; i++) {
-                        let name = data.requested[i].product.name;
-                        let pages = data.requested[i].product.pages;
-                        let thumbnails = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/350x250/filters:format(webp)/filters:quality(100)").split(",")[0];
+                        let name = data.requested[i].name;
+                        let pages = data.requested[i].pages;
+                        let thumbnails = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/350x250/filters:format(webp)/filters:quality(100)").split(",")[0];
 
-                        let img1 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)").split(",")[0];
+                        let img1 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)").split(",")[0];
 
-                        let img2 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)").split(",")[0];
+                        let img2 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)").split(",")[0];
 
-                        let img3 = data.requested[i].product.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)").split(",")[0];
+                        let img3 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)").split(",")[0];
 
-                        let views = data.requested[i].product.views;
-                        let id = data.requested[i].product.id;
-                        let timestamp = timeDifference(data.requested[i].product.timestamp);
+                        let views = data.requested[i].views;
+                        let id = data.requested[i].uuid;
+                        let timestamp = timeDifference(data.requested[i].timestamp);
                         $(".public-now-row").append(`
                 <div class="col-md-3 my-2"><a href="/notes/${id}">
              <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item" data-id="data-id">
@@ -51,7 +51,7 @@ $(document).ready(function () {
                 new Noty({
                     theme: "sunset",
                     type: "error",
-                    text: "Failed to connect  server , please try after sometimes",
+                    text: "Somthing went wrong , please try after sometimes",
                     timeout: 4000,
                 }).show();
             }
@@ -74,34 +74,28 @@ $(document).ready(function () {
                     $(".collections-rows").html("");
                     for (let i = 0; i < data.requested.length; i++) {
                         let name = data.requested[i].name;
-                        let id = data.requested[i].id;
+                        let id = data.requested[i].uuid;
                         let totalProducts = data.requested[i].totalProducts;
                         let description = data.requested[i].description;
                         let timestamp = data.requested[i].timestamp;
                         let thumbnails = data.requested[i].thumbnails;
                         $(".collections-rows").append(`
-                    <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${id}" style="box-shadow:0px 0px 0px 0px #ccc">
-                    <a href="/collections/${id}">
-                    <div class="collection-item-content">
-                       <div class="collection-item-content-box "> 
-                       
-                       <div class="mb-3 mx-1"> ${name} </div> 
-                       </div>
-    
-                      <div> 
-                      <small class="text-muted">  <i class="fa fa-file mx-1"></i>   ${totalProducts} Notes </small> 
-    
-                      <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(timestamp)}</small> 
-    
-                      </div>
-    
-                    </div>
-                    </a>
+                    <li class="list-group-item collection-row-item rounded my-2 border-0"  data-id="${id}">
+                        <a href="/collections/${id}">
+                            <div class="collection-item-content">
+                                    <div class="collection-item-content-box "> 
+                                        <div class="mb-3 mx-1 w-80"> ${name} </div> 
+                                    </div>
+                                    <div > 
+                                        <small class="text-muted">  <i class="fa fa-file mx-1"></i>   ${totalProducts} Notes </small> 
+                                        <br>
+                                        <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(timestamp)}</small> 
+                                    </div>
+                            </div>
+                        </a>
     
                     </li>
-    
                 `);
-                        // <img src="${thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
                     }
 
                 } else {
@@ -112,7 +106,7 @@ $(document).ready(function () {
                 new Noty({
                     theme: "sunset",
                     type: "error",
-                    text: "Failed to connect  server , please try after sometimes",
+                    text: "Somthing went wrong , please try after sometimes",
                     timeout: 4000,
                 }).show();
             }

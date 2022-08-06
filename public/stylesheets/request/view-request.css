@@ -1,0 +1,47 @@
+section{
+    width: 60%;
+    margin: 100px auto;
+}
+
+h1{
+    font-size: 25px;
+}
+
+section a img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.uploaded-notes-info small{
+    margin: 0px 10px;
+}
+.uploaded-notes-row a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.uploaded-notes-item{
+    display: flex;
+}
+
+.uploaded-notes-row .notes-thumb{
+    width:200px;
+    height: 150px;
+    border-radius: 0px;
+}
+
+@media (max-width: 768px) {
+    section{
+        width: 95%;
+        margin: 100px auto;
+    }
+    .uploaded-notes-item{
+        display: block;
+    }
+    .uploaded-notes-row .notes-thumb{
+        width:100%;
+        height: 150px;
+        border-radius: 0px;
+    }
+    
+}

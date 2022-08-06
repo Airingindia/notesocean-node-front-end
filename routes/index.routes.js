@@ -24,6 +24,10 @@ router.get("/upload", (req, res, next) => {
   res.redirect("/dashboard/public-notes/new");
 });
 
+router.get("/upload/:uuid", (req, res, next) => {
+  res.render("dashboard/public-notes/upload-public-notes");
+});
+
 router.get("/:id/:name.pdf", (req, res, next) => {
   var token = "";
   if (req.cookies.token) {
@@ -83,7 +87,7 @@ router.get("/:id/:name.html", (req, res, next) => {
 
 router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
-  if (!isNaN(user_id)) {
+  if (user_id.length > 10) {
     profileControllers.getInfo(user_id).then((userInfo) => {
       // console.log(userInfo);
       if (userInfo.profileImage == null) {
@@ -156,7 +160,7 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 router.get("/search", (req, res, next) => {
   ;
   const query = req.query.query;
-  if (query.length !== 0) {
+  if (query.length > 1) {
     productControllers.searchProducts(query).then((product) => {
       res.render("search", {
         data: product,
@@ -165,6 +169,7 @@ router.get("/search", (req, res, next) => {
       });
       next();
     }).catch((err) => {
+      console.log(err);
       if (err.statusCode == 429) {
         res.render("information-pages/tomanyrequest")
       } else {

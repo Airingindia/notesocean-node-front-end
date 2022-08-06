@@ -23,5 +23,9 @@ html(lang="en")
                 br
                 p The page you are looking for might have been removed had its name changed or is temporarily unavailable.
                 form(action='/search')
-                    input#input_box.form-control(type='text' name='query' placeholder='Ex- Class 12th math solutions',required)
+                    input#input_box.form-control(type='text' name='query' placeholder='Class 12th math solutions',required)
+                div.mt-3
+                    h6 If you are unable to find notes , you can request notes
+                    p your notes will be provide in 24 hours 
+                    a.btn.btn-dark.text-light(href='/request/new') Request Notes
         include includes/footer

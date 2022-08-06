@@ -53,6 +53,23 @@ h3 {
     font-size: 15px;
 }
 
+
+
+.not-found-container{
+    padding: 5%;
+}
+
+.not-found-container img{
+    width:100%;
+    margin: 0 auto;
+}
+
+.request-info{
+    text-align: center;
+}
+
+
+
 @media(max-width:769px) {
     .search-notes-item {
         display: block !important;
@@ -75,5 +92,18 @@ h3 {
 
     .search-notes-item {
         padding: 0px 0px !important;
+    }
+    .not-found-container{
+        padding: 1%;
+    }
+
+    .not-found-container img{
+        width:100%;
+        margin: 0 auto;
+        display: none;
+    }
+
+    .request-info{
+        text-align: left;
     }
 }

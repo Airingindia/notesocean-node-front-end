@@ -44,8 +44,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// routing defined
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
@@ -54,7 +52,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
 app.use("/sitemaps", sitemapRoutes);
-app.use("/notes/request", requesRoutes);
+app.use("/request", requesRoutes);
 app.use("/notes", notesRoutes);
 app.use("/contact", contactRoutes);
 app.use("/contact-us", contactRoutes);

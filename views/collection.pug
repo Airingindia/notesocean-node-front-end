@@ -11,7 +11,7 @@ html(lang="en")
         //-  og 
         meta(property='og:title' content=`${(collection.name)}`)
         meta(property='og:site_name' content='Notes ocean')
-        meta(property='og:url' content=`https://notesocean.com/collection/${(collection.id)}`)
+        meta(property='og:url' content=`https://notesocean.com/collection/${(collection.uuid)}`)
         meta(property='og:description' content=`${(collection.description)}`)
         meta(property='og:type' content='product.item')
         //- meta(property='og:image' content=`${(collection.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)"))}`)
@@ -30,7 +30,7 @@ html(lang="en")
         header 
             include includes/navbar
         section.main-section
-            .collection-info-container.text-center
+            .collection-info-container.container
                 h1.mt-5.collection-title=collection.name
                 p.mt-3.collection-description=collection.description
                 p 
@@ -39,71 +39,50 @@ html(lang="en")
                     span.mx-1 notes
 
             div.px-3
-                h3 Notes
-            .row.public-now-row.mx-1(itemscope itemtype="https://schema.org/BreadcrumbList")
-                -let count = 0;
-                -for (var i = 0;i<collection.products.length;i++){
-                    - count++;
-                    -var product_id = collection.products[i].id;
-                    -var product_name = collection.products[i].name;
-                    - var product_thumbnails = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x280/filters:format(webp)/filters:quality(100)");
+            .container.main-content-container
+                .row.public-now-row(itemscope itemtype="https://schema.org/BreadcrumbList")
+                    -let count = 0;
+                    -for (var i = 0;i<collection.products.length;i++){
+                        - count++;
+                        -var product_id = collection.products[i].uuid;
+                        -var product_name = collection.products[i].name;
+                        - var product_thumbnails = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x280/filters:format(webp)/filters:quality(100)");
 
-                    - var img1 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                        - var img1 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
 
-                    - var img2 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+                        - var img2 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
 
-                    - var img3 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                        - var img3 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
 
-                    - var product_views = collection.products[i].views;
-                    - var product_pages = collection.products[i].pages;
-                    - var product_timestamp = collection.products[i].timestamp;
-                    - var product_actual_time = timeService.get(product_timestamp);
-                .col-md-3.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
-                    a(href=`/notes/${(product_id)}`,itemprop="item")
-                        .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
-                            .card-header.border-0.bg-white
-                                p(itemprop="name").card-title=product_name
-                            .card-body
-                                img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
-                            .card-footer.border-0.bg-white
-                                .row
-                                    .col-12
-                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg
-                                        p.card-text.notes-details-text
-                                            span
-                                                i.fa.fa-globe.mx-1
-                                                small=product_views
-                                                    span.mx-1 views
-                                            span.mx-1
-                                                i.fa.fa-file.mx-1 
-                                                small=product_pages
-                                                    span.mx-1 Pages
-                                            span.mx-1
-                                                i.fa.fa-clock-o.mx-1
-                                                small=product_actual_time
-                    meta(itemprop="position" content=count)
-                -}
-
-                //- .col-md-3.my-2
-                //-     a(href="/notes/")
-                //-         .card.shadow.border-0.rounded.h-100.wow.animate__animated.animate__fadeInUp.public-notes-item
-                //-             .card-header.border-0.bg-white
-                //-                 p.card-title Lorem ipsum dolor sit amet.
-                //-             .card-body.border-0(style=`background-image:url(https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/109/1646982826920_5055_0.png);background-size:cover`).notes-thumbnails
-                //-             .card-footer.border-0.bg-white
-                //-                 .row
-                //-                     .col-12
-                //-                         //- p.card-title Lorem, ipsum dolor sit ametssdgdg 
-                //-                         p.card-text.notes-details-text
-                //-                             span
-                //-                                 i.fa.fa-globe.mx-1
-                //-                                 small 100 views
-                //-                             span.mx-1
-                //-                                 i.fa.fa-file.mx-1 
-                //-                                 small 10 pages
-                //-                             span.mx-1
-                //-                                 i.fa.fa-clock-o.mx-1
-                //-  
+                        - var product_views = collection.products[i].views;
+                        - var product_pages = collection.products[i].pages;
+                        - var product_timestamp = collection.products[i].timestamp;
+                        - var product_actual_time = timeService.get(product_timestamp);
+                    .col-md-4.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
+                        a(href=`/notes/${(product_id)}`,itemprop="item")
+                            .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
+                                .card-header.border-0.bg-white
+                                    p(itemprop="name").card-title=product_name
+                                .card-body
+                                    img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
+                                .card-footer.border-0.bg-white
+                                    .row
+                                        .col-12
+                                            //- p.card-title Lorem, ipsum dolor sit ametssdgdg
+                                            p.card-text.notes-details-text
+                                                span
+                                                    i.fa.fa-globe.mx-1
+                                                    small=product_views
+                                                        span.mx-1 views
+                                                span.mx-1
+                                                    i.fa.fa-file.mx-1 
+                                                    small=product_pages
+                                                        span.mx-1 Pages
+                                                span.mx-1
+                                                    i.fa.fa-clock-o.mx-1
+                                                    small=product_actual_time
+                        meta(itemprop="position" content=count)
+                    -} 
         include includes/footer
         script 
             include ../public/javascripts/subpages/collection.js

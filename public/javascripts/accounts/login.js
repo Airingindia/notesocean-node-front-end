@@ -25,8 +25,21 @@ $(document).ready(function () {
                 const authToken = data.token;
                 if (isChecked) {
                     setCookie("token", authToken, 100);
+                    let loginDest = window.location.search.split("?dest=")[1];
+                    if (loginDest != undefined) {
+                        window.location.href = loginDest;
+                    } else {
+                        window.location = "/dashboard";
+                    }
                 } else {
                     setCookie("token", authToken, 1);
+                    let loginDest = window.location.search.split("?dest=")[1];
+                    if (loginDest != undefined) {
+                        window.location.href = loginDest;
+                    } else {
+                        window.location = "/dashboard";
+                    }
+
                 }
                 new Noty({
                     theme: "nest",
@@ -34,7 +47,6 @@ $(document).ready(function () {
                     text: '<i class="fa fa-check-circle">  </i>  Login Successful',
                     timeout: 3000,
                 }).show();
-                window.location = "/dashboard";
             },
             complete: function (data) {
                 if (data.status == 400) {

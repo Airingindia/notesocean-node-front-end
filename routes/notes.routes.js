@@ -89,12 +89,14 @@ router.get("/:id", (req, res, next) => {
         token = req.cookies.token;
     }
     productControllers.getInfo(req.params.id, token).then((product) => {
+        if (product.products.users.profileImage == null) {
+            product.products.users.profileImage = "/images/dummy/user_dummy.jpg";
+        }
         res.render("notes/view-notes", {
             data: product, timeService: timeService, api: api_url
         });
         next();
     }).catch((error) => {
-        console.log(error);
         if (error.statusCode == 429) {
             res.status(429);
             res.render("information-pages/tomanyrequest");
