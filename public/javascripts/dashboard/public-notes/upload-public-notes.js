@@ -3,11 +3,7 @@ Dropzone.autoDiscover = false;
 $(function () {
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone(".dropzone", {
-        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h4> Drag or drop your files to upload </h4> <br>
-        <small> <b> Note : </b>  you can upload only these supported file types  </small> <br>
-        <small> 
-        PDF,PPT,DOC
-        </small>`,
+        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h6> Drag or drop your pdf to upload </h6> `,
         autoProcessQueue: false,
         maxFilesize: 100,
         addRemoveLinks: true,
@@ -68,7 +64,48 @@ $(function () {
             description: description
         };
         formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
+        let upload = window.location.pathname.split("/")[1];
+        let requestUuid = window.location.pathname.split("/")[2];
+        if (upload == "upload") {
+            formData.append("requests", requestUuid.toString());
+        }
     });
+
+    function checkRequestUpload() {
+        let upload = window.location.pathname.split("/")[1];
+        let requestUuid = window.location.pathname.split("/")[2];
+        if (upload == "upload") {
+            $.ajax({
+                type: "GET",
+                url: atob(decodeURIComponent(getCookie("api"))) + "/requests/" + requestUuid,
+                headers: {
+                    Authorization: getCookie("token"),
+                },
+                contentType: "applicatiob/json",
+                processData: false,
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    if (data != undefined) {
+                        $(".request-subject").html(data.subject);
+                        $(".request-user").html(data.users.firstName + " " + data.users.lastName);
+                        $(".request-message").html(data.message);
+                    } else {
+                        $(".request-error").removeClass("d-none");
+                        $("form").remove();
+                    }
+
+                },
+                error: function (error) {
+                    $(".request-error").removeClass("d-none");
+                    $("form").remove();
+                }
+            })
+        }
+    }
+    checkRequestUpload();
+
 
     myDropzone.on("addedfile", function (file) {
         if (myDropzone.files.length == 0) {

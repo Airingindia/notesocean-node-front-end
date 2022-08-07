@@ -18,10 +18,22 @@ html(lang="en")
                     div.container.d-flex.justify-content-center
                         form
                             h4 Upload public notes
+                            div.border.p-2
+                                h6.text-danger Your are uploading for the following request
+                                small
+                                    span.mx-1 Subject : 
+                                    span.request-subject
+                                br
+                                small
+                                    span.mx-1 Message : 
+                                    span.request-message
+                                br
+                                small
+                                    span.mx-1 Requester : 
+                                    span.request-user
                             .form-group.my-3
                                 label Title
                                     small.title-char-count
-                                //- i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='The title is the first chance to grab the attention of viewers  and maximum chance to gain more reach' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
                                 input(type="text" placeholder="",data-json=`{"very-long": "piece of ","data": true}`).form-control.note-title
 
                                 .invalid-feedback
@@ -32,9 +44,7 @@ html(lang="en")
                             .form-group.my-3
                                 label Description
                                     small.desctiption-char-count
-                                //- i.fa.fa-info-circle.text-dark.mx-1( data-bs-toggle='popover' data-bs-content='Note descriptions enhance the viewers experience by making your note looks good and helps grab more attention' data-bs-placement="top" data-bs-trigger="focus" tabindex="0")
                                 textarea.form-control(placeholder="" rows="5").note-descriptions
-
                                 .invalid-feedback
                                     p.invalid-descriptions-error invalid Description
                                 .valid-feedback
@@ -47,25 +57,9 @@ html(lang="en")
                                     p looks good
                             .form-group.my-3
                                 button.btn.btn-primary.mx-auto.upload-notes-btn Upload
-            //- .modal.fade
-            //-     .modal-dialog.modal-dialog-centered
-            //-         .modal-content
-            //-             .modal-header.border-0
-            //-                 span.text-danger Terms and conditions
-            //-             .modal-body.border-0
-            //-                 h6 Your notes should follows these conditions
-            //-                 ul
-            //-                     li Notes should not be copied notes of any person or organization
-            //-                     li Notes should not be promote any kind of sexual,terror or religious activites
-            //-                     li Notes should originally owned by you
-            //-                 div
-            //-                     input.form-check-input( type="checkbox")
-            //-                     label.form-check-label.mx-1 I accept all 
-            //-                         a(href="/terms-of-service/upload-public-notes")  terms 
-            //-                         span and
-            //-                         a(href="/terms-of-service/upload-public-notes") conditions 
-            //-             .modal-footer.border-0
-            //-                 button.btn.btn-primary.mx-auto.upload-notes-btn(disabled="true") Upload Now
+                        div.request-error.text-center.d-none
+                            h5.text-danger The request you are trying to upload notes for is not valid !
+                            a.btn.btn-dark.text-light.mt-3(href='javascript:history.back()') Go back
         include ../../includes/dashjs
         script(src="/vendors/dropzone/dropzone.min.js")
         script 

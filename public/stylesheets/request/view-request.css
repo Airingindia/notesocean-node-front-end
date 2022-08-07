@@ -30,6 +30,10 @@ section a img{
     border-radius: 0px;
 }
 
+i{
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     section{
         width: 95%;

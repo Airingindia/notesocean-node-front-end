@@ -1,7 +1,11 @@
 .dropzone {
-    height: 300px !important;
+    height: 200px !important;
     border-radius: 5px !important;
     border: 1px solid #ccc;
+}
+
+.request-error{
+    margin-top: 20%;
 }
 
 input,
