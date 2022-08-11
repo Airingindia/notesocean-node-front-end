@@ -3,15 +3,34 @@ var express = require('express');
 var router = express.Router();
 const api_url = process.env.API_URL;
 const requestController = require("../controllers/request.controller");
+const timeService = require("../services/time.services");
 router.get("/", (req, res, next) => {
-    res.render("request/request");
+    requestController.getAll(req.cookies.token).then((requests) => {
+        var data = []
+
+        for (var i = 0; i < requests.requested.length; i++) {
+            data.push({
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": requests.requested[i].subject,
+                "item": `https://notesocean.com/request/${requests.requested[i].uuid}`
+            })
+        }
+        res.render("request/request", {
+            schema: data,
+            requests: requests,
+            time: timeService
+        })
+    }).catch((error) => {
+        console.log("error", error);
+    })
+
+        ;
 });
 
 router.get("/new", (req, res, next) => {
     let loggedin = true;
-    if (req.cookies.token != undefined || req.cookies.token != null) {
-        loggedin = false;
-    }
+    console.log(req.cookies.token);
     res.render("request/new-request.pug", {
         isLoggedIn: loggedin
     });

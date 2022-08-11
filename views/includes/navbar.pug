@@ -17,9 +17,18 @@ nav.desktop-navbar
     .desktop-navbar-item.navigation
       ul
         li
+          a(href='/subjects').btn
+            //- i.fa.fa-hand-holding-hand
+            span  Subjects
+        li
+          a(href='/courses').btn
+            //- i.fa.fa-hand-holding-hand
+            span  Courses
+        li
           a(href='/request').btn
-            i.fa.fa-hand-holding-hand
+            //- i.fa.fa-hand-holding-hand
             span  Request Notes
+
         li
           a(href='/upload').btn
             i.fa.fa-cloud-upload
@@ -72,7 +81,7 @@ nav.mobile-navbar
       ul
         li
           a(href='/request').btn
-            i.fa.fa-hand-holding-hand
+            //- i.fa.fa-hand-holding-hand
             span  Request Notes
         li
           a(href='/upload').btn

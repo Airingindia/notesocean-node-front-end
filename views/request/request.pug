@@ -6,7 +6,79 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Request Notes
         include ../includes/bootstrap
+        style 
+            include ../../public/stylesheets/request/request.css
+        //- var data = !{JSON.stringify(object).replace(/<\//g, '<\\/')};
+        script(type='application/ld+json').
+            {
+                "@context": "https://schema.org/",
+                "@type": "BreadcrumbList",
+                "itemListElement":!{JSON.stringify(schema).replace(/<\//g, '<\\/')}
+            }
     body 
         header
             include ../includes/navbar.pug
+        section.main-section
+            .container
+                .into-section
+                    .row
+                        .col-lg-5
+                            a(href='https://www.freepik.com/vectors/no-idea' rel='nofollow')
+                                img.w-100(src="/images/illustrations/sad-student.svg" alt=" student with a sad face") 
+                        .col-lg-7.d-flex.align-items-center.justify-content-center
+                            div
+                                h4 Are you tired to find you notes on internet !
+                                p But nobody is helping you , or ask to pay for it !
+                                h6 But dont worry  !
+                                h1.color-notesocean We are here to help you!
+                                p Make a request ! , many students will come up with the best notes for you !
+                                a.btn.btn-notesocean(href="/request/new") Request Now
+                -if(requests.requested.length>0){
+                    .active-request.mt-3
+                        h2.color-notesocean Active Requests
+                        p There are some active requests , please contribute to help them to find the best notes !
+                        .requests-rows
+                            -for(var i = 0; i < requests.requested.length; i++){
+                                - let subject = requests.requested[i].subject;
+                                - let message = requests.requested[i].message;
+                                - let uuid = requests.requested[i].uuid;
+                                - let participants = requests.requested[i].participants;
+                                - let participantslength = requests.requested[i].participants.length;
+                                - let status = requests.requested[i].status;
+                                - let expiryTimestamp = requests.requested[i].expiryTimestamp;
+                                - let updateTimestamp = requests.requested[i].updateTimestamp;
+                                - let userFirstName = requests.requested[i].users.firstName;
+                                - let userLastName = requests.requested[i].users.lastName;
+                                - let userUuid  = requests.requested[i].users.uuid;
+                                - let userProfileImage = requests.requested[i].users.profileImage ? requests.requested[i].users.profileImage : '/user.png';
+
+                                a(href="/request/"+uuid)
+                                    div.reuest-item.card-body.shadow.mt-2
+                                        .row
+                                            .col-lg-9
+                                                p=subject
+                                                small=message
+                                                .requester.mt-2
+                                                    div
+                                                        a(href="/profile/"+userUuid)
+                                                            img(src=userProfileImage alt="").mx-1
+                                                            span #{userFirstName} #{userLastName}
+                                            .col-lg-3
+                                                small Status : 
+                                                    -if(status=='PENDING'){
+                                                        span.text-warning #{status}
+                                                    -}else if(status=='ACCEPTED'){
+                                                        small.text-success  #{status}
+                                                    -} else if(status=='EXPIRED'){
+                                                        small.text-danger #{status}
+                                                    -}
+                                                br
+                                                small Expire in : #{time.get(expiryTimestamp)}
+                                                br
+                                                small Created at : #{time.get(updateTimestamp)}
+                                                br
+                                                small Uploaded Notes : #{participants.length}
+
+                            -}
+                -}
         include ../includes/footer.pug

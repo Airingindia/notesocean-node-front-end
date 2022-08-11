@@ -38,11 +38,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
 
-app.use((req, res, next) => {
-  const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
-  res.setHeader('Cache-Control', 'public, max-age=' + tomiliseconds(24, 0, 0));
-  next();
-});
+// app.use((req, res, next) => {
+//   const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
+//   res.setHeader('Cache-Control', 'public, max-age=' + tomiliseconds(24, 0, 0));
+//   next();
+// });
 
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
