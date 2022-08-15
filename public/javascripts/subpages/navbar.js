@@ -28,11 +28,11 @@ $(document).ready(function () {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
-    function hideHomepageSearchbar() {
-        if (window.location.pathname == "/") {
-            $(".search-box").addClass("d-none");
-        }
-    }
+    // function hideHomepageSearchbar() {
+    //     if (window.location.pathname == "/") {
+    //         $(".search-box").addClass("d-none");
+    //     }
+    // }
 
     hideHomepageSearchbar();
 

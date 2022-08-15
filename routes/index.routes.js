@@ -12,76 +12,60 @@ const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
 const encoded_api = Buffer.from(api_url).toString('base64');
 
+
+// router.get("/test", (req, res, next) => {
+//   res.render("test")
+// })
 router.get("/google-signin", (req, res, next) => {
   res.redirect(api_url + "/authenticate/google-sign-in");
 })
 // homepage route
 router.get('/', function (req, res, next) {
-  res.render("index");
+  res.render("index", {
+    home: req.originalUrl
+  });
 });
 
 router.get("/upload", (req, res, next) => {
+  if (req.cookies.token == undefined) {
+    return res.redirect("/login?dest=" + req.originalUrl);
+  }
   res.redirect("/dashboard/public-notes/new");
 });
 
 router.get("/upload/:uuid", (req, res, next) => {
+  if (req.cookies.token == undefined) {
+    return res.redirect("/login?dest=" + req.originalUrl);
+  }
   res.render("dashboard/public-notes/upload-public-notes");
 });
 
-router.get("/:id/:name.pdf", (req, res, next) => {
-  var token = "";
-  if (req.cookies.token) {
-    token = req.cookies.token;
-  }
-  var deviceId = req.cookies.ampuser;
-  productControllers.getInfo(req.params.id, token).then((product) => {
-    const userData = {
-      id: 0,
-      firstName: "Notes",
-      lastName: "Ocean",
-      profileImage: "/images/dummy/user_dummy.jpg",
-    }
-    res.render("notes/view-notes", {
-      data: product, timeService: timeService, user: userData, api: api_url
-    });
-    next();
-    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
-      console.log(response);
-      next();
-    });
-  }).catch((error) => {
-    res.render("notfound");
-    next();
-  });
-});
-
-router.get("/:id/:name.html", (req, res, next) => {
-  var token = "";
-  if (req.cookies.token) {
-    token = req.cookies.token;
-  }
-  var deviceId = req.cookies.ampuser;
-  productControllers.getInfo(req.params.id, token).then((product) => {
-    const userData = {
-      id: 0,
-      firstName: "Notes",
-      lastName: "Ocean",
-      profileImage: "/images/dummy/user_dummy.jpg",
-    }
-    res.render("notes/view-notes", {
-      data: product, timeService: timeService, user: userData, api: api_url
-    });
-    next();
-    productControllers.addViews(product.product.id, token, deviceId).then((response) => {
-      console.log(response);
-      next();
-    });
-  }).catch((error) => {
-    res.status(404);
-    res.render("notfound");
-    next();
-  });
-});
+// router.get("/:id/:name.pdf", (req, res, next) => {
+//   var token = "";
+//   if (req.cookies.token) {
+//     token = req.cookies.token;
+//   }
+//   var deviceId = req.cookies.ampuser;
+//   productControllers.getInfo(req.params.id, token).then((product) => {
+//     const userData = {
+//       id: 0,
+//       firstName: "Notes",
+//       lastName: "Ocean",
+//       profileImage: "/images/dummy/user_dummy.jpg",
+//     }
+//     res.render("notes/view-notes", {
+//       data: product, timeService: timeService, user: userData, api: api_url
+//     });
+//     ;
+//     productControllers.addViews(product.product.id, token, deviceId).then((response) => {
+//       console.log(response);
+//       ;
+//     });
+//   }).catch((error) => {
+//     res.render("notfound");
+//     ;
+//   });
+// });
 
 // profile page routes
 
@@ -97,17 +81,17 @@ router.get("/profile/:user_id", async (req, res, next) => {
       res.render("profile", {
         profile: userInfo
       });
-      next();
+      ;
     }).catch((error) => {
       console.log(error);
       res.status(404);
       res.render("notfound");
-      next();
+      ;
     })
   } else {
     res.status(404);
     res.render("notfound");
-    next();
+    ;
   }
 });
 
@@ -116,14 +100,14 @@ router.get("/profile/:user_id", async (req, res, next) => {
 //  login page route
 router.get("/login", (req, res, next) => {
   res.render("account/login");
-  next();
+  ;
 });
 
 // sign page route 
 
 router.get("/signup", (req, res, next) => {
   res.render("account/signup");
-  next();
+  ;
 });
 
 router.get("/collections/:collecton_id", async (req, res, next) => {
@@ -144,13 +128,13 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
       timeService: timeService,
       jsonld: JSON.stringify(jsonld)
     });
-    next();
+    ;
 
   }).catch((error) => {
     console.log(error);
     res.status(404);
     res.render("notfound");
-    next();
+    ;
   })
 });
 
@@ -167,7 +151,7 @@ router.get("/search", (req, res, next) => {
         query: query,
         time: timeService,
       });
-      next();
+      ;
     }).catch((err) => {
       console.log(err);
       if (err.statusCode == 429) {
@@ -176,43 +160,43 @@ router.get("/search", (req, res, next) => {
         res.status(404);
         res.render("notfound");
       }
-      next();
+      ;
     })
   } else {
     res.redirect("/");
-    next();
+    ;
   }
 
 });
 
 router.get("/privacy-policies", (req, res, next) => {
   res.render("information-pages/privacy");
-  next();
+  ;
 });
 
 router.get("/terms-and-condition", (req, res, next) => {
   res.render("information-pages/terms");
-  next();
+  ;
 });
 
 router.get("/about-us", (req, res, next) => {
   res.render("information-pages/about");
-  next();
+  ;
 });
 
 router.get("/contact-us", (req, res, next) => {
   res.render("information-pages/contact");
-  next();
+  ;
 });
 
 router.get("/contact-us/success", (req, res, next) => {
   res.render("information-pages/contact-success");
-  next();
+  ;
 });
 
 router.get("/contact-us/error", (req, res, next) => {
   res.render("information-pages/contact-error");
-  next();
+  ;
 });
 
 router.get("/session-expire", (req, res, next) => {
@@ -226,7 +210,7 @@ router.get("/session-expire", (req, res, next) => {
   }
   res.clearCookie("token");
   res.render("session-expire");
-  next();
+  ;
 });
 
 router.get("/logout", (req, res, next) => {
@@ -239,6 +223,6 @@ router.get("/logout", (req, res, next) => {
   }
   res.clearCookie("token");
   res.render("session-expire");
-  next();
+  ;
 });
 module.exports = router;

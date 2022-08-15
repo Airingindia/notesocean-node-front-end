@@ -6,9 +6,10 @@ nav.desktop-navbar
   .desktop-navbar-container
     .desktop-navbar-item.brand
       a(href="/")
-        img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="notes ocean logo")
-    .desktop-navbar-item.search.search-box
-      form(method="GET" action="/search")
+        img(src="/images/dash-logo.svg" alt="notes ocean logo")
+        //- span.desktop-brand-text=home
+    .desktop-navbar-item.search.search-box(class= home === "/" ? "d-none" : "")
+      form(method="GET" action="/search").w-100
         .input-group
           input.form-control(type='search'  value=query placeholder="Search notes" aria-label="search" aria-describedby='search' name="query",required)
           span#basic-addon2.input-group-text 
@@ -27,15 +28,15 @@ nav.desktop-navbar
         li
           a(href='/request').btn
             //- i.fa.fa-hand-holding-hand
-            span  Request Notes
-
+            span  Request
         li
           a(href='/upload').btn
-            i.fa.fa-cloud-upload
-            span  Upload Notes
+            //- i.fa.fa-cloud-upload
+            span  Upload
+
         li.d-none.login-navbar-item
           a(href='/login').btn.btn-outline-secondary.btn-grad-nav-login-dash
-            i.fa.fa-user
+            //- i.fa.fa-user
             span    Login
         li.loading-nav-item
           a(href='#').btn.btn-outline-secondary
@@ -43,7 +44,7 @@ nav.desktop-navbar
         li.d-none.dashboard-nav-item
           a(href='/dashboard').btn.btn-outline-dark.btn-grad-nav-login-dash
             .desktop-navbar-profile-container
-              img(src="" alt="user image")
+              img(src="/user.png" alt="user image")
               span.user-profile-name
 nav.mobile-navbar
   .menu-bars

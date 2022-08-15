@@ -2,10 +2,18 @@
     margin-top: 80px;
 }
 
+.into-section h1{
+    font-size: 50px;
+}
+
 .requester img{
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+.into-section img{
+   
 }
 
 .requests-rows a{

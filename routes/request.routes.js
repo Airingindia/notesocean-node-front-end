@@ -4,8 +4,9 @@ var router = express.Router();
 const api_url = process.env.API_URL;
 const requestController = require("../controllers/request.controller");
 const timeService = require("../services/time.services");
+const guest = process.env.GUEST_TOKEN;
 router.get("/", (req, res, next) => {
-    requestController.getAll(req.cookies.token).then((requests) => {
+    requestController.getAll(req.cookies.token = guest).then((requests) => {
         var data = []
 
         for (var i = 0; i < requests.requested.length; i++) {
@@ -22,37 +23,30 @@ router.get("/", (req, res, next) => {
             time: timeService
         })
     }).catch((error) => {
-        console.log("error", error);
+        res.render("errors/500")
     })
-
-        ;
 });
 
 router.get("/new", (req, res, next) => {
-    let loggedin = true;
-    console.log(req.cookies.token);
-    res.render("request/new-request.pug", {
-        isLoggedIn: loggedin
-    });
+    if (req.cookies.token == undefined) {
+        return res.redirect("/login?dest=" + req.originalUrl);
+    }
+    res.render("request/new-request.pug");
 });
 
 router.get("/:uuid", (req, res, next) => {
     let uuid = req.params.uuid;
     let token = req.cookies.token;
-    if (token == undefined) {
-        res.redirect("/login?dest=/request/" + uuid);
-    } else {
-        requestController.get(uuid, token).then((response) => {
-            console.log(response);
-            if (response.users.profileImage == null) {
-                response.users.profileImage = "/images/dummy/user_dummy.jpg";
-            }
-            console.log(response.users.profileImage);
-            res.render("request/view-request.pug", {
-                data: response
-            });
-        }).catch((error) => { console.log(error) })
-    }
+    requestController.get(uuid, token = guest).then((response) => {
+        console.log(response);
+        if (response.users.profileImage == null) {
+            response.users.profileImage = "/images/dummy/user_dummy.jpg";
+        }
+        console.log(response.users.profileImage);
+        res.render("request/view-request.pug", {
+            data: response
+        });
+    }).catch((error) => { console.log(error) })
 
 });
 

@@ -1,6 +1,6 @@
 // import all libs
+require("dotenv").config();
 const compression = require('compression')
-const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -16,17 +16,59 @@ const coursesRoute = require("./routes/courses.routes");
 const subjectRoutes = require("./routes/subjects.routes");
 const notesRoutes = require("./routes/notes.routes");
 const requesRoutes = require("./routes/request.routes");
-require("dotenv").config();
-const app = express();
-
+const rateLimit = require('express-rate-limit')
+const helmet = require('helmet');
+// express
+var express = require('express'),
+  app = express(),
+  session = require('express-session'),
+  lusca = require('lusca');
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
+// application secuity
+
+// rate limit
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minutes
+  max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter);
+
+app.use(session({
+  secret: 'notesoceansecurecookie',
+  resave: true,
+  saveUninitialized: true
+}));
+
+
+app.use(lusca({
+  csrf: true,
+  xframe: 'SAMEORIGIN',
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+  xssProtection: true,
+  nosniff: true,
+  referrerPolicy: 'same-origin'
+}));
+
+app.disable('x-powered-by');
+
+// data dog
+
 var dd_options = {
   'response_code': true,
   'tags': ['app:my_app']
 }
 var connect_datadog = require('connect-datadog')(dd_options);
 app.use(connect_datadog);
+
+//  middleware
 app.use(logger('dev'));
 app.use(function (req, res, next) {
   res.cookie("api", Buffer.from(process.env.API_URL).toString('base64'));
@@ -35,14 +77,16 @@ app.use(function (req, res, next) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
+app.use(helmet.frameguard())
 
 // app.use((req, res, next) => {
 //   const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
 //   res.setHeader('Cache-Control', 'public, max-age=' + tomiliseconds(24, 0, 0));
 //   next();
-// });
+// })
+
+// routing middleware
 
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
@@ -71,6 +115,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err);
+  res.render("errors/500");
 });
 
 module.exports = app;

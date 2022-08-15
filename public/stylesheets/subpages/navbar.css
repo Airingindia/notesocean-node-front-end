@@ -1,13 +1,13 @@
 /* desktop navbar css */
 nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-    padding-top: 12px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: #fff;
     z-index: 999;
+    padding: 10px;
 }
 
 .desktop-navbar-profile-container {
@@ -24,24 +24,57 @@ nav.desktop-navbar {
 .desktop-navbar-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.desktop-navbar-item.brand {
-    width: auto;
+.desktop-navbar-item{
+    width:auto;
 }
+
+
+.desktop-navbar-item.brand img{
+   width: auto;
+}
+
+.desktop-navbar-item.brand a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    font-weight:500;
+}
+
 
 .desktop-navbar-item.search {
-    width: 30%;
+    min-width: 40%;
 }
 
-.desktop-navbar-item.navigation {
-    width: 60%;
+@media (max-width:1025px) {
+    .desktop-brand-text{
+        display:none;
+    }
 }
+
+
+.desktop-navbar-item.search input, .desktop-navbar-item.search button,  .desktop-navbar-item.search span  {
+    border-radius: 0px !important;
+    text-align: center;
+}
+
+.desktop-navbar-item.search input:focus , .desktop-navbar-item.search input:active , .desktop-navbar-item.search input:hover {
+    border:1px solid #ccc !important;
+    
+}
+
 
 .desktop-navbar-item.navigation ul {
     display: flex;
     justify-content: end;
     list-style-type: none;
+    align-items: center;
+    margin: 0;
+    padding: 0%;
 
 }
 

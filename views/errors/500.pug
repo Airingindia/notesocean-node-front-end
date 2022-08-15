@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Internal server error
+        include ../includes/bootstrap.pug
+        style.
+            .main-section{
+                margin-top: 100px;
+            }
+            .main-section img{
+                width : 300px;
+                height :300px;   
+                margin:0 auto;
+            }
+
+            .container{
+                position:fixed;
+                top:50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+                width:50%;
+            }
+
+
+            @media(max-width:768px){
+                .container{
+                    width:100%;
+                }
+
+            }
+    body
+        header
+            include ../includes/navbar.pug
+        section.main-section
+            .container.text-center
+                //- img(src="/images/illustrations/engineering.svg" alt="internal server error")
+                h1 Internal Server Error !
+                p Our engineers are working on it , please try again later
+                |  You can also contact support team !
+                a.btn.btn-dark.text-light.btn-sm.mx-2(href='/support') Contact Support
+                br
+                small if you found any bugs or securites vulnerabilities please report it to us , you will be reward for it 
+                small
+                    a(href="mailto:bug-report@notesocean.com?subject=Bug Found on websites&bcc=admin@notesocean.com") Report Us 

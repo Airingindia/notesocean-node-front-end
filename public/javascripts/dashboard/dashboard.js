@@ -50,7 +50,7 @@ $(document).ready(function () {
     //   }
     // })
   } else {
-    clearAllBrowserData();
+    // clearAllBrowserData();
   }
 
   $(".logout-btn").click(function () {
@@ -116,12 +116,8 @@ $(document).ready(function () {
 
   // button active function
 
-  function Dashroute() {
-    const path = window.location.pathname;
-    $(".dash-aside button[route='" + path + "']").addClass("active");
-  }
 
-  Dashroute();
+  // Dashroute();
 
 
 

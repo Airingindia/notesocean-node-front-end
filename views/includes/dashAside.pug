@@ -4,27 +4,32 @@ style
   .card.p-0.border-0
     .card-content
       div
-        button(route="/dashboard")
-          span
-            i.fa.fa-home
-          span.item-text Dashboard
+        a(href="/dashboard") 
+          button(class=url === "/dashboard" ? "active" : "")
+            span
+              i.fa.fa-home
+            span.item-text Dashboard
       div
-        button(route="/dashboard/private-notes")
-          span
-            i.fa.fa-lock
-          span.item-text Private Notes
+        a(href="/dashboard/private-notes") 
+          button(class=url === "/dashboard/private-notes" ? "active" : "")
+            span
+              i.fa.fa-lock
+            span.item-text Private Notes
       div
-        button(route="/dashboard/public-notes")
-          span
-            i.fa.fa-file
-          span.item-text Public Notes
+        a(href="/dashboard/public-notes") 
+          button(class=url === "/dashboard/public-notes" ? "active" : "")
+            span
+              i.fa.fa-globe
+            span.item-text Public Notes
       div
-        button(route="/dashboard/collections")
-          span
-            i.fa.fa-database 
-          span.item-text Collections
+        a(href="/dashboard/collections") 
+          button(class=url === "/dashboard/collections" ? "active" : "")
+            span
+              i.fa.fa-folder-open
+            span.item-text Collections
       div
-        button(route="/dashboard/earning")
-          span
-            i.fa.fa-wallet
-          span.item-text Earning
+        a(href="/dashboard/earning") 
+          button(class=url === "/dashboard/earning" ? "active" : "")
+            span
+              i.fa.fa-money-bill-wave
+            span.item-text Earnings

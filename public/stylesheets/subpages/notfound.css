@@ -63,16 +63,30 @@
     text-align: center;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
-    margin-top: 20px;
+    border-radius: 0px !important;
+    border:1px solid #ccc;
 }
+
+#input_box:hover , #input_box:focus, #input_box:active {
+    background-color: #FFF;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+form input{
+    border-radius:0px !important;
+    border:1px solid #ccc;
+}
+
 
 .notfound a:hover {
     opacity: 0.8;
 }
 
-@media only screen and (max-width: 767px) {
-    .notfound .notfound-404 {
-        height: 115px;
+@media (max-width: 767px) {
+
+    .input-group{
+        flex-wrap:nowrap;
     }
 
     #input_box {
@@ -87,27 +101,4 @@
         width: 86px;
         height: 86px;
     }
-}
-
-/* dark mode css */
-
-@media (prefers-color-scheme: darkkk) {
-    .notfound .notfound-404 h1>span {
-        color: white;
-    }
-
-    .notfound .notfound-404 h1 {
-        color: white;
-    }
-
-    .notfound h2 {
-        color: white;
-    }
-
-    .notfound p {
-        color: white;
-    }
-
-
-
 }

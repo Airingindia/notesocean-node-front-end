@@ -4,7 +4,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Request Notes
+        title Request  | Notes Ocean
         include ../includes/bootstrap
         style 
             include ../../public/stylesheets/request/request.css
@@ -15,6 +15,11 @@ html(lang="en")
                 "@type": "BreadcrumbList",
                 "itemListElement":!{JSON.stringify(schema).replace(/<\//g, '<\\/')}
             }
+        meta(property='og:title' content='Request | Notes Ocean')
+        meta(property='og:site_name' content='Notes' ocean='')
+        meta(property='og:url' content='https://notesocean.com/request')
+        meta(property='og:description' content='Notes Ocean is solving the problem of notes demand introducing request feature that help to get notes in 24 hours across the world')
+        meta(property='og:type' content='article')  
     body 
         header
             include ../includes/navbar.pug
@@ -22,17 +27,16 @@ html(lang="en")
             .container
                 .into-section
                     .row
-                        .col-lg-5
+                        .col-lg-6.pt-5
+                            div
+                                h1.color-notesocean Are you tired to find you notes!
+                                p you have seen many websites that post some notes , but that was not perfect for everybody each student's need diffrent notes , so notes will help you to find your notes.
+                                p Make a request ! Many students will come up with the best notes for you.
+                                a.btn.btn-notesocean(href="/request/new") Request Now
+                        .col-lg-6
                             a(href='https://www.freepik.com/vectors/no-idea' rel='nofollow')
                                 img.w-100(src="/images/illustrations/sad-student.svg" alt=" student with a sad face") 
-                        .col-lg-7.d-flex.align-items-center.justify-content-center
-                            div
-                                h4 Are you tired to find you notes on internet !
-                                p But nobody is helping you , or ask to pay for it !
-                                h6 But dont worry  !
-                                h1.color-notesocean We are here to help you!
-                                p Make a request ! , many students will come up with the best notes for you !
-                                a.btn.btn-notesocean(href="/request/new") Request Now
+
                 -if(requests.requested.length>0){
                     .active-request.mt-3
                         h2.color-notesocean Active Requests
