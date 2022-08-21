@@ -17,10 +17,9 @@ html(lang="en")
             include ../../includes/dashAside
             .col-9.second-side.pb-5
                 .profile-container
-                    h3 My profile
+                    //- h3 My profile
                     .row
                         .col-12.d-flex.justify-content-between
-                            h6.text-danger Personal Information
                         .col-12.mt-4.user-info
                             .row
                                 .col-md-12
@@ -38,18 +37,20 @@ html(lang="en")
                                                 div
                                     div.d-flex.justify-content-center.py-2
                                         p.pic-chnage-btn change
+                                h5 Personal Information
                                 .col-md-6.mt-3
+
                                     .form-group 
                                         label First Name 
                                         input(type="text").form-control.first-name.input-item#firstName
-                                        .valid-feedback
-                                        .invalid-feedback
+                                        //- .valid-feedback
+                                        //- .invalid-feedback
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Last Name 
                                         input(type="text").form-control.last-name.input-item#lastName
-                                        .valid-feedback
-                                        .invalid-feedback
+                                        //- .valid-feedback
+                                        //- .invalid-feedback
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Email Address
@@ -64,8 +65,9 @@ html(lang="en")
                                         .invalid-feedback
 
                     .row.mt-5
+                        h5 Address Information
                         .col-12.d-flex.justify-content-between
-                            h6.text-danger Address Information
+
 
                         .col-12.mt-4.user-address
                             .row
@@ -73,39 +75,35 @@ html(lang="en")
                                     .form-group 
                                         label Address
                                         input(type="text").form-control.address.input-item#address
-                                        .valid-feedback
-                                        .invalid-feedback
 
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Country
                                         select.form-select.country(name="country").input-item#country
                                             option(value="one",disabled,selected) choose...
-                                        .valid-feedback
-                                        .invalid-feedback
 
+                    //- .row.mt-5
+                    //-     h5 Payment Information
+                    //-     .col-12.d-flex.justify-content-between
 
-                    .row.mt-5
-                        .col-12.d-flex.justify-content-between
-                            h6.text-danger Payment Information
-                        .col-12.mt-3
-                            .row
-                                .col-md-3.mt-3
-                                    .form-group 
-                                        label Payment Mode
-                                        input(type="text",disabled,value="Bank Transfer").form-control
-                                .col-md-3.mt-3
-                                    .form-group 
-                                        label Bank Name
-                                        input(type="text").form-control
-                                .col-md-4.mt-3
-                                    .form-group 
-                                        label Account Number
-                                        input(type="text").form-control
-                                .col-md-2.mt-2
-                                    .form-group 
-                                        label IFSC Code
-                                        input(type="text").form-control
+                    //-     .col-12.mt-3
+                    //-         .row
+                    //-             .col-md-3.mt-3
+                    //-                 .form-group 
+                    //-                     label Payment Mode
+                    //-                     input(type="text",disabled,value="Bank Transfer").form-control
+                    //-             .col-md-3.mt-3
+                    //-                 .form-group 
+                    //-                     label Bank Name
+                    //-                     input(type="text").form-control
+                    //-             .col-md-4.mt-3
+                    //-                 .form-group 
+                    //-                     label Account Number
+                    //-                     input(type="text").form-control
+                    //-             .col-md-2.mt-2
+                    //-                 .form-group 
+                    //-                     label IFSC Code
+                    //-                     input(type="text").form-control
                     .btn-box.d-flex.justify-content-between
                         button.btn.btn-sm.btn-primary.my-5.profile-update-btn
                             span Update

@@ -47,7 +47,7 @@ html(lang="en")
                                 - let message = requests.requested[i].message;
                                 - let uuid = requests.requested[i].uuid;
                                 - let participants = requests.requested[i].participants;
-                                - let participantslength = requests.requested[i].participants.length;
+                                //- - let participantslength = requests.requested[i].participants.length;
                                 - let status = requests.requested[i].status;
                                 - let expiryTimestamp = requests.requested[i].expiryTimestamp;
                                 - let updateTimestamp = requests.requested[i].updateTimestamp;
@@ -68,20 +68,20 @@ html(lang="en")
                                                             img(src=userProfileImage alt="").mx-1
                                                             span #{userFirstName} #{userLastName}
                                             .col-lg-3
-                                                small Status : 
-                                                    -if(status=='PENDING'){
-                                                        span.text-warning #{status}
-                                                    -}else if(status=='ACCEPTED'){
-                                                        small.text-success  #{status}
-                                                    -} else if(status=='EXPIRED'){
-                                                        small.text-danger #{status}
-                                                    -}
-                                                br
+                                                //- small Status : 
+                                                //-     -if(status=='PENDING'){
+                                                //-         span.text-warning #{status}
+                                                //-     -}else if(status=='ACCEPTED'){
+                                                //-         small.text-success  #{status}
+                                                //-     -} else if(status=='EXPIRED'){
+                                                //-         small.text-danger #{status}
+                                                //-     -}
+                                                //- br
                                                 small Expire in : #{time.get(expiryTimestamp)}
                                                 br
-                                                small Created at : #{time.get(updateTimestamp)}
+                                                //- small Created at : #{time.get(updateTimestamp)}
                                                 br
-                                                small Uploaded Notes : #{participants.length}
+                                                //- small Uploaded Notes : #{participants.length}
 
                             -}
                 -}

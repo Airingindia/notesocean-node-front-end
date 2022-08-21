@@ -15,6 +15,7 @@ $(document).ready(function () {
                 console.log("sent");
             },
             success: function (data) {
+                console.log(data);
                 if (data.requested.length > 0) {
                     $(".uploaded-notes-row").html("");
                     for (let i = 0; i < data.requested.length; i++) {
@@ -39,10 +40,10 @@ $(document).ready(function () {
                       <div><img class="notes-thumb" src="${thumbnails}"/></div>
                       <div class="px-1">
                         <h6> ${name}</h6>
-                        <p> ${description}</p><a class="btn" href="/profile/${userUUid}"><img class="user-img" src="${userPrfileImage}"/><span class="mx-1"> sachin kmumar  </span></a>
+                        <p> ${description}</p><a class="btn btn-sm" href="/profile/${userUUid}"><img class="user-img" src="${userPrfileImage}"/><span class="mx-1"> sachin kmumar  </span></a>
                         <div class="d-flex align-items-center uploaded-notes-info"><small><i class="fa fa-clock mr-1"></i><span>${timestamp} </span></small><small><i class="fa fa-file mr-1"></i><span> ${pages} </span></small><small><i class="fa fa-globe mr-1"></i><span> ${views}views</span></small><small><i class="fa fa-thumbs-up mr-1"></i><small>${likes} likes </small></small></div>
                       </div>
-                      <button class="btn btn-danger accept-btn" data-uuid="${uuid}" style="height:max-content">Accept</button>
+                      <button class="btn btn-dark accept-btn btn-sm" data-uuid="${uuid}" style="height:max-content">Accept</button>
                     </div></a>
                     `);
                     }

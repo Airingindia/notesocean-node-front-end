@@ -4,7 +4,7 @@ $(document).ready(function () {
     function first() {
         $.ajax({
             type: "GET",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid,
+            url: atob(decodeURIComponent(getCookie("api"))) + "/users/self",
             headers: {
                 Authorization: getCookie("token")
             },
@@ -22,7 +22,12 @@ $(document).ready(function () {
         $(".address").val(userInfo.address);
         $(".country").val(userInfo.country);
         if (userInfo.profileImage !== null) {
-            $(".user-profile-img").attr("src", userInfo.profileImage);
+            if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") === -1) {
+                $(".user-profile-img").attr("src", userInfo.profileImage);
+            } else {
+                $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in"));
+            }
+
         }
         // if (email.hasOwnProperty("emailVerified")) {
         //     if (userInfo.emailVerified) {
@@ -80,13 +85,20 @@ $(document).ready(function () {
                 country: data.country
             }
 
+
+
+
             var formdata = new FormData();
             formdata.append("users", new Blob([JSON.stringify(jsonData)], { type: "application/json" }));
             formdata.append("file", file);
             // update  pic with ajax
+
+
+
+
             $.ajax({
                 type: "PUT",
-                url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
+                url: atob(getCookie("api")) + "/users",
                 processData: false,
                 contentType: false,
                 data: formdata,
@@ -114,23 +126,12 @@ $(document).ready(function () {
 
                 },
                 error: function (err) {
-                    $(".pic-chnage-btn").html(`Change`);
-                    $(".pic-uploading-roller").addClass("d-none");
-                    $(".user-profile-img").removeClass("d-none");
-                    $(".profile-update-btn").prop("disabled", false);
-                    $(".profile-update-btn").prop("disabled", false);
-                    $(".profile-update-btn").html(`Update`);
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-danger text-light">
-                        <strong class="me-auto">Error!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                    </div>
-                    <div class="toast-body">
-                       <span>Picture not updated </span>
-                    </div>
-                </div>`);
-                    setTimeout(() => {
-                        $(".notice-box").html("");
-                    }, 3000);
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: 'Pofile pic not updated, please try again later!',
+                        timeout: 2000,
+                    }).show();
                 }
             })
         })
@@ -181,9 +182,9 @@ $(document).ready(function () {
 
             if ($(this).val().trim().length !== 0) {
                 // first and late name validation
-                $(this).addClass("is-valid");
-                $(this).removeClass("is-invalid");
-                $(this).next().html(`<span>Looks good </span>`);
+                // $(this).addClass("is-valid");
+                // $(this).removeClass("is-invalid");
+                // $(this).next().html(`<span>Looks good </span>`);
                 inputCount++;
             } else {
 
@@ -200,7 +201,7 @@ $(document).ready(function () {
         if (inputCount == 6) {
             $.ajax({
                 type: "PUT",
-                url: atob(getCookie("api")) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userId,
+                url: atob(getCookie("api")) + "/users",
                 processData: false,
                 contentType: false,
                 data: formdata,
@@ -215,32 +216,22 @@ $(document).ready(function () {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
                     localStorage.setItem("userInfo", JSON.stringify(data));
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-success text-light">
-                    <strong class="me-auto">Success!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                </div>
-                <div class="toast-body">
-                   <span>  Profile updated </span>
-                </div>
-            </div>`);
-                    setTimeout(() => {
-                        $(".notice-box").html("");
-                    }, 3000);
+                    new Noty({
+                        theme: "nest",
+                        type: "success",
+                        text: ' Profile updated successfully!',
+                        timeout: 2000,
+                    }).show();
                 },
                 error: function (err) {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-danger text-light">
-                        <strong class="me-auto">Error!</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                    </div>
-                    <div class="toast-body">
-                       <span> ${err.responseJSON.description} </span>
-                    </div>
-                </div>`);
-                    setTimeout(() => {
-                        $(".notice-box").html("");
-                    }, 3000);
+                    new Noty({
+                        theme: "nest",
+                        type: "error",
+                        text: ' Profile not updated ! , please try again ',
+                        timeout: 2000,
+                    }).show();
                 }
             });
         }

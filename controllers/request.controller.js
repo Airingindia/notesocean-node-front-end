@@ -12,7 +12,12 @@ const getRequestDetails = (uuid, token) => {
 const getAllRequests = (token) => {
     return new Promise((resolve, reject) => {
         http.getWithAuth("/requests/feed/page/0/size/20", token).then((res) => {
-            resolve(res.body);
+            if (res.status == 200) {
+                resolve(res.body);
+            }
+            else {
+                reject(res.body);
+            }
         }).catch((error) => {
             reject(error);
         })

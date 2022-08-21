@@ -67,10 +67,11 @@ router.get("/", (req, res, next) => {
 //         res.send(data);
 //     });
 // });
-router.get("/live-reading", (req, res, next) => {
-    res.render("notes/live-reading");
-    next();
-});
+
+// router.get("/live-reading", (req, res, next) => {
+//     res.render("notes/live-reading");
+//     next();
+// });
 router.get("/most-viewed", (req, res, next) => {
     productControllers.getMostViewedNotes().then((notes) => {
         res.render("notes/most-viewed", {
@@ -92,23 +93,45 @@ router.get("/:id", (req, res, next) => {
         if (product.products.users.profileImage == null) {
             product.products.users.profileImage = "/images/dummy/user_dummy.jpg";
         }
+        let schema = {
+
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://notesocean.com/dfgdfgdf"
+            },
+            "headline": "This is new headlibn",
+            "description": "dghdfg dfkgh dfkgfd gfdhg kdfhg dfkj ghdfjkgk dfkjghdfkjgdfk  fdgkdfg",
+            "image": "",
+            "author": {
+                "@type": "Person",
+                "name": "sachin kumar",
+                "url": "https://notesocean.com/profile/dfgdfgdfg"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Notes Ocean",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://notesocean.com/logo.png"
+                }
+            },
+            "datePublished": "2001-10-10"
+        }
         res.render("notes/view-notes", {
-            data: product, timeService: timeService, api: api_url
+            data: product, timeService: timeService, api: api_url, schema: schema
         });
-        next();
     }).catch((error) => {
         if (error.statusCode == 429) {
             res.status(429);
             res.render("information-pages/tomanyrequest");
-            next();
         }
         else if (error.statusCode == 401) {
             res.redirect("/session-expire");
-            next();
         } else {
             res.render("notfound");
         }
-        next();
     });
 });
 module.exports = router;

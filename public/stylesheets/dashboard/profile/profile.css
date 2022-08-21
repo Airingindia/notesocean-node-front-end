@@ -30,8 +30,25 @@
 }
 
 .profile-container {
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
+}
+
+
+section input, section select {
+    border-radius: 0px !important;
+    border: 1px solid #ccc;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+section input:hover,section input:focus, section input:active, section select:hover, section select:focus, section select:active {
+    border: 1px solid #ccc !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+section button{
+    border-radius: 0px !important;
 }
 
 @media (max-width:768px) {

@@ -4,27 +4,63 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title=data.message + " | Notes Ocean"
+        title=data.subject + " | Notes Ocean"
+        meta(name="description" content=data.message)
+        meta(name="keywords" content=data.message)
+        meta(name="author" content= data.users.firstName+" "+data.users.lastName)
         include ../includes/bootstrap.pug
+        style.
+            .accept-btn{
+                display: #{ vieweruuid == data.users.uuid ? "block" : "none"};
+            }
+
+
         style
             include ../../public/stylesheets/request/view-request.css
+        script(type="application/ld+json").
+            {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://notesocean.com/request/#{data.uuid}"
+                },
+                "headline": "#{data.subject}",
+                "description": "#{data.message}",
+                "image": "https://notesocean.com/images/logo.png",  
+                "author": {
+                    "@type": "",
+                    "name": "#{data.users.firstName+" "+data.users.lastName}",
+                    "url": "https://notesocean.com#{data.users.profileImage}"
+                },  
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Notes Ocean",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://notesocean.com/images/logo.png"
+                    }
+                }
+            }
     body
         header
             include ../includes/navbar.pug
         section
             h1=data.subject
             p=data.message
-            a.btn.btn-sm.btn-outline-secondary(href="/profile/"+data.users.uuid)
+            a.btn.btn-sm(href="/profile/"+data.users.uuid)
                 img.user-img(src=`${(data.users.profileImage)}`) 
                 span.mx-1  #{data.users.firstName}  #{data.users.lastName}
             -if(acceptedProduct==null){
                 div.mt-4
-                    h4.text-warning No notes accepted !
+                    h5.text-warning No notes accepted !
                     p You can now upload your notes , it may chances to be accepted by the requester.
-                    a.btn.btn-outline-dark.text-dark(href="/upload/"+data.uuid) Upload  your notes
+                    a.btn.btn-outline-dark.btn-sm(href="/upload/"+data.uuid)
+                        i.fa.fa-cloud-upload.mx-1
+                        span Upload
             -}
             div.mt-4
-                h4 Uploaded Notes
+                h5 Uploaded Notes
                 p These are some uploaded notes by the users
 
                 div.uploaded-notes-row

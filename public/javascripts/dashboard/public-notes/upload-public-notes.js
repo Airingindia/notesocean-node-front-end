@@ -19,7 +19,7 @@ $(function () {
         },
         success: function (data) {
             let uploadedfile = JSON.parse(data.xhr.response);
-            let uploadedId = uploadedfile.id;
+            let uploadedId = uploadedfile.uuid;
             let uploadedfilename = uploadedfile.name;
             let status = data.status;
             console.log(data);
@@ -88,6 +88,7 @@ $(function () {
                 },
                 success: function (data) {
                     if (data != undefined) {
+                        $(".request-uploader").removeClass("d-none");
                         $(".request-subject").html(data.subject);
                         $(".request-user").html(data.users.firstName + " " + data.users.lastName);
                         $(".request-message").html(data.message);

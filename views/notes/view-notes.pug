@@ -23,24 +23,30 @@ html(lang="en")
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`${(data.products.name.substring(0,40))}`)
         meta(name='twitter:description' content=`${(data.products.description.substring(0,145))}`)
-        meta(name='twitter:image' content=`${(data.products.thumbnails.split(",")[0])}`)
-        //- schema.org
-        script(type='application/ld+json').
+        meta(name='twitter:image' content=`${(data.products.thumbnails)}`)
+        script(type="application/ld+json").
             {
-                "@context": "https://schema.org/",
-                "@type": "Product",
-                "name":  "#{data.products.name.substring(0,40)}" ,
-                "image": "#{data.products.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com","https://thumbnails.ncdn.in/fit-in/250x250/filters:format(webp)/filters:quality(100)")}" ,
-                "description":"#{data.products.description.substring(0,145)}" ,
-                "brand": {
-                    "@type": "Brand",
-                    "name": "Notes Ocean"
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://notesocean.com/notes/#{data.products.uuid}"
                 },
-                "offers": {
-                    "@type": "Offer",
-                    "url": "https://notesocean.com/notes/#{data.products.uuid}",
-                    "priceCurrency": "INR",
-                    "price": "0"
+                "headline": "#{data.products.name}",
+                "description": "#{data.products.description}",  
+                "image": "#{data.products.thumbnails.split(",")[0]}" ,
+                "author": {
+                    "@type": "Person",
+                    "name": "#{data.products.users.firstName} #{data.products.users.lastName}",
+                    "url": "https://notesocean.com/profile/#{data.products.users.uuid}"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Notes Ocean",
+                    "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://notesocean.com/logo.png"
+                    }
                 }
             }
         include ../includes/bootstrap

@@ -6,7 +6,7 @@ const requestController = require("../controllers/request.controller");
 const timeService = require("../services/time.services");
 const guest = process.env.GUEST_TOKEN;
 router.get("/", (req, res, next) => {
-    requestController.getAll(req.cookies.token = guest).then((requests) => {
+    requestController.getAll(req.cookies.token).then((requests) => {
         var data = []
 
         for (var i = 0; i < requests.requested.length; i++) {
@@ -37,14 +37,16 @@ router.get("/new", (req, res, next) => {
 router.get("/:uuid", (req, res, next) => {
     let uuid = req.params.uuid;
     let token = req.cookies.token;
-    requestController.get(uuid, token = guest).then((response) => {
-        console.log(response);
+    let tokenData = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString('ascii'));
+    let Vieweruuid = tokenData.userUuid;
+    requestController.get(uuid, token).then((response) => {
         if (response.users.profileImage == null) {
             response.users.profileImage = "/images/dummy/user_dummy.jpg";
         }
         console.log(response.users.profileImage);
         res.render("request/view-request.pug", {
-            data: response
+            data: response,
+            vieweruuid: Vieweruuid,
         });
     }).catch((error) => { console.log(error) })
 

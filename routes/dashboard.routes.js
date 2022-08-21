@@ -6,7 +6,6 @@ router.get('/', async function (req, res, next) {
     if (req.cookies.token == undefined) {
         return res.redirect("/login?dest=" + req.originalUrl);
     }
-
     res.render("dashboard/my-dashboard", {
         url: req.originalUrl
     });
