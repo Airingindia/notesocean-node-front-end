@@ -10,7 +10,7 @@ const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
 const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
-const encoded_api = Buffer.from(api_url).toString('base64');
+// const encoded_api = Buffer.from(api_url).toString('base64');
 
 
 // router.get("/test", (req, res, next) => {

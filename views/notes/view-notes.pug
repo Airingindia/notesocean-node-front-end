@@ -56,7 +56,7 @@ html(lang="en")
         style 
             include ../../public/stylesheets/loader.css
 
-    body(data-api=api,data-product=data,data-product-id=data.products.uuid)
+    body
         header
             include ../includes/navbar
         section.main-section-top
@@ -68,8 +68,8 @@ html(lang="en")
                     .card-body.border-0.p-0.pdf-cont
                         //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
                         #pdfShow(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf")
-                .card.shadow.info-bar
-                    .row.px-2
+                .card.shadow.info-bar.border-0
+                    .row.px-2.info-row.mt-3
                         .col-md-4.py-2
                             p.card-text.notes-details-text.text-muted
                                 span
@@ -81,29 +81,29 @@ html(lang="en")
                                 span.mx-1
                                     i.fa.fa-clock.mx-1
                                     small #{timeService.get(data.products.timestamp)}
-                        .col-md-12.py-2
-                            .icon-group.d-flex.justify-content-end
+                        .col-md-8
+                            .icon-group.d-flex.justify-content-end.text-muted
                                 - if(data.products.react !== null && data.products.react == 1){
-                                .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.react.timestamp))}` aria-label="like")
-                                    i.fa.fa-thumbs-up.mx-1
-                                    span.mx-1.icon-text Like
-                                    span.react-count #{data.products.likes}
+                                    .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.react.timestamp))}` aria-label="like",data-default=data.products.likes)
+                                        i.fa.fa-thumbs-up.mx-1
+                                        span.mx-1.icon-text Like
+                                        span.react-count #{data.products.likes}
                                 - }
                                 - else{
-                                .icon-item.mx-3.text-center.react-btn(data-action="1")
+                                .icon-item.mx-3.text-center.react-btn(data-action="1",data-default=data.products.likes)
                                     i.fa.fa-thumbs-up.mx-1
                                     span.mx-1.icon-text Like
                                     span.react-count #{data.products.likes}
                                 - }
 
                                 - if (data.products.react!== null && data.products.react == 2){
-                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",title=`You  disliked this note ${(timeService.get(data.react.timestamp))}` aria-label="dislike")
+                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.react.timestamp))}` aria-label="dislike")
                                     i.fa.fa-thumbs-down
                                     span.mx-1.icon-text Dislike
                                     span.react-count #{data.products.dislikes}
                                 - }
                                 -else{
-                                .icon-item.mx-3.text-center.mx-1.react-btn(data-action="2")
+                                .icon-item.mx-3.text-center.mx-1.react-btn(data-action="2",data-default=data.products.dislikes)
                                     i.fa.fa-thumbs-down
                                     span.mx-1.icon-text Dislike
                                     span.react-count #{data.products.dislikes}
@@ -119,17 +119,14 @@ html(lang="en")
                                 .icon-item.mx-3.text-center.share-btn
                                     i.fa.fa-share.mx-1
                                     span.icon-text Share
-                        .col-12.mt-3
+                                .icon-item.mx-3.text-center.info-button
+                                    i.fa.fa-info-circle.mx-1
+                                    span.icon-text Info
+                        .col-12
                             a(href=`/profile/${data.products.users.uuid}`)
-                                .d-flex
-                                    .flex-shrink-3
-                                        img(src=data.products.users.profileImage alt=data.products.users.firstName).user-image
-                                    .flex-grow-0.ms-2
-                                        h6  #{data.products.users.firstName} #{data.products.users.lastName}
-                        .col-12.mt-1
-                            p.live-reading
-                            .live-users-container 
-
+                                .d-flex.justify-content-start.align-items-center
+                                    img(src=data.products.users.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in") alt=data.products.users.firstName).user-image
+                                    span.mx-1 #{data.products.users.firstName} #{data.products.users.lastName}
                         .col-12.mt-3
                             #commentbox.collapse
                                 .card.card-body.p-0.border-0.commnet-form.d-none
@@ -137,13 +134,13 @@ html(lang="en")
                                         button.btn.btn-sm(type='button').p-0.px-1
                                             img(src="/images/dummy-user.jpeg" alt="" style="width:35px;height:35px;border-radius:50%").commentator-user-img
                                         input(type="text" placeholder="Type somthing .....").form-control.commentbox-input
-                                        button.btn.btn-sm.btn-primary.comment-add-btn(type='button') Comment
+                                        button.btn.btn-sm.btn-notesocean.comment-add-btn(type='button') Comment
                                     .container.px-5
                                         label.comment-error-notice
                                 .card.card-body.p-0.border-0.text-center.d-none.user-not-login
-                                    h6 You can't comment yet , login to your account and continue comment
+                                    h6 You can't comment, login to your account and continue comment
                                     div
-                                        a(href="/account/login").btn.btn-sm.btn-primary Login 
+                                        a(href="/account/login?dest=/notes/"+data.products.uuid+"#comment").btn.btn-sm.btn-primary Login 
                                 .card.my-3.border-0.px-2.commentbox-container
 
                                     .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
@@ -169,15 +166,15 @@ html(lang="en")
                                                 i.fa.fa-clock.mx-1
                                                 span 1 hour ago
 
-            .realted-notes-container
-
             .share-modal.modal
-                .modal-dialog.modal-dialog-centered.modal-lg
+                .modal-dialog.modal-dialog-centered
                     .modal-content.border-0
-                        .modal-header.border-0
-                            h5.text-center Share 
-                            button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-header.border-0.d-flex.justify-content-end.p-1
+                            i.close.fa.fa-times(data-bs-dismiss='modal' aria-label='Close')
                         .modal-body.border-0
+                            div.text-center
+                                h4.modal-title Share this note!
+                                p Share this note with your friends and classamte!
                             .shareon.d-flex.justify-content-center
                                 a.facebook 
                                 a.linkedin
@@ -185,28 +182,62 @@ html(lang="en")
                                 button.telegram
                                 button.twitter
                                 button.whatsapp
-            .report-modal.modal(tabindex="1")
+            .info-modal.modal#infoModal
                 .modal-dialog.modal-dialog-centered.modal-lg
                     .modal-content.border-0
-                        .modal-header.border-0
-                            h5.text-center Report this note 
-                            button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-header.border-0.d-flex.justify-content-end.p-2
+                            i.close.fa.fa-times(data-bs-dismiss='modal' aria-label='Close')
                         .modal-body.border-0
-                            h6 Choose Report type 
-                            .container.py-0
-                                form
-                                    .form-check
-                                        input#inlineRadio1.form-check-input(type='radio' name='report' value='Spam or misleading')
-                                        label.form-check-label(for='inlineRadio1') Spam or misleading 
-                                    .form-check
-                                        input#inlineRadio2.form-check-input(type='radio' name='report' value='Sexual/ Violent / Hateful or abusive ')
-                                        label.form-check-label(for='inlineRadio2')  Sexual/ Violent / Hateful or abusive 
-                                    .form-check
-                                        input#inlineRadio2.form-check-input(type='radio' name='report' value='Copyrighted/Trademark or other legal issue')
-                                        label.form-check-label(for='inlineRadio2')  Copyrighted/Trademark or other legal issue
-                                    label.my-3 Provide full description 
-                                    textarea.form-control(rows="5" cols="10")  
-                                    button.btn.btn-primary.my-3 Report
+                            div
+                                h4.modal-title Information about this note!
+                            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam consequatur at minima, qui tempore excepturi distinctio quia temporibus eos.
+            .report-modal.modal(tabindex="1")
+                .modal-dialog.modal-dialog-centered.modal-lg 
+                    //- .container
+                    //-     .d-flex.justify-content-center.align-items-center
+                    //-         img(src="/images/animation/success-animation.gif").report-success-animation
+                    //-     div.text-center
+                    //-         h1 Reported Successfully
+                    //-         p Thank you for reporting this note. We will review this note and if necessary we will remove it.               
+                    .modal-content.border-0
+                        .modal-header.border-0.display-flex
+                            div(style="flex-direction:column;")
+                                h5.modal-title Report
+                                p Reporting note will help us to improve us to provide a valid notes.
+                                small If you are business,orginazation or valid copyright holder please report 
+                                    a(href="/report/"+data.products.uuid) here
+                            span.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        -if(token.length > 20){
+                            .modal-body.border-0
+                                h6 Choose Subject 
+                                .container.py-0
+                                    form.report-form
+                                        .form-check
+                                            input#report.form-check-input(type='radio' name='subject' value='False Information',required)
+                                            label.form-check-label(for='report') False Information
+                                        .form-check
+                                            input#report.form-check-input(type='radio' name='subject' value='Spam or misleading',required)
+                                            label.form-check-label(for='report') Spam or misleading 
+                                        .form-check
+                                            input#report.form-check-input(type='radio' name='subject' required value='Sexual/ Violent / Hateful or abusive ')
+                                            label.form-check-label(for='report')  Sexual/ Violent / Hateful or abusive 
+                                        .form-check
+                                            input#report.form-check-input(type='radio' name='subject' required value='Copyrighted/Trademark or other legal issue')
+                                            label.form-check-label(for='report')  Copyrighted/Trademark or other legal issue
+                                        .form-group
+                                            label Message
+                                            textarea.form-control(rows="5" cols="10",,name="message",required).rounded-0  
+                                        button.btn.btn-notesocean.my-3.report-btn Report
+                                -}
+                        -if(token.length < 20){
+                            .modal-body.border-0.text-center
+                                h4.text-warning You need to login to report note
+                                span If you are business,orginazation or copyright holder please report 
+                                    a(href="/report") here 
+                                div.my-3
+                                    a(href="/account/login?dest=/notes/"+data.products.uuid+"#report").btn.btn-sm.btn-notesocean Login
+                        -}  
+
             .user-not-login-modal.modal
                 .modal-dialog.modal-dialog-centered.modal-lg
                     .modal-content.border-0
@@ -215,7 +246,7 @@ html(lang="en")
                             button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
-                            a(href="/account/login").btn.btn-sm.btn-primary Login
+                            a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-primary Login
         script(src="https://documentcloud.adobe.com/view-sdk/main.js")
         script(type='text/javascript').
             document.addEventListener("adobe_dc_view_sdk.ready", function(){

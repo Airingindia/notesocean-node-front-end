@@ -16,7 +16,8 @@ const coursesRoute = require("./routes/courses.routes");
 const subjectRoutes = require("./routes/subjects.routes");
 const notesRoutes = require("./routes/notes.routes");
 const requesRoutes = require("./routes/request.routes");
-const rateLimit = require('express-rate-limit')
+const policiesRoutes = require("./routes/policies.routes");
+const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 // express
 var express = require('express'),
@@ -35,27 +36,29 @@ const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minutes
   max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  legacyHeaders: true, // Disable the `X-RateLimit-*` headers
 })
 
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
 
-app.use(session({
-  secret: 'notesoceansecurecookie',
-  resave: true,
-  saveUninitialized: true
-}));
+// app.use(session({
+//   secret: 'notesoceansecurecookie',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+
+// }));
 
 
-app.use(lusca({
-  csrf: true,
-  xframe: 'SAMEORIGIN',
-  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
-  xssProtection: true,
-  nosniff: true,
-  referrerPolicy: 'same-origin'
-}));
+// app.use(lusca({
+//   csrf: true,
+//   xframe: 'SAMEORIGIN',
+//   hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+//   xssProtection: true,
+//   nosniff: true,
+//   referrerPolicy: 'same-origin',
+// }));
 
 app.disable('x-powered-by');
 
@@ -69,24 +72,27 @@ var connect_datadog = require('connect-datadog')(dd_options);
 app.use(connect_datadog);
 
 //  middleware
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(function (req, res, next) {
-  res.cookie("api", Buffer.from(process.env.API_URL).toString('base64'));
+  if (req.hostname == "localhost") {
+    var api = process.env.LOCAL_API_URL;
+  } else if (req.hostname == "dev.notesocean.com") {
+    var api = process.env.DEV_API_URL;
+  } else if (req.hostname == "notesocean.com") {
+    var api = process.env.PROD_API_URL;
+  } else {
+    return res.render("error/500");
+  }
+  res.cookie("api", Buffer.from(api).toString('base64'));
   next();
 });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
 app.use(helmet.frameguard())
 
-// app.use((req, res, next) => {
-//   const tomiliseconds = (hrs, min, sec) => (hrs * 60 * 60 + min * 60 + sec) * 1000;
-//   res.setHeader('Cache-Control', 'public, max-age=' + tomiliseconds(24, 0, 0));
-//   next();
-// })
-
-// routing middleware
 
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
@@ -102,7 +108,7 @@ app.use("/contact", contactRoutes);
 app.use("/contact-us", contactRoutes);
 app.use("/courses", coursesRoute);
 app.use("/subjects", subjectRoutes);
-
+app.use("/policies", policiesRoutes);
 
 
 // catch 404 and forward to error handler

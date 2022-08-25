@@ -20,9 +20,7 @@ h1.card-title {
 }
 
 .main-content-box {
-    width: 80%;
-    float: left;
-    position: relative;
+    width: 99%;
 }
 
 .realted-notes-container {
@@ -143,6 +141,11 @@ div#amzn-native-ad-0 {
     border-radius: 50%;
 }
 
+.report-success-animation{
+    width: 200px;
+    height: 200px;
+}
+
 /* media queries */
 
 @media (min-width: 769px) {
@@ -152,7 +155,12 @@ div#amzn-native-ad-0 {
 }
 
 @media (max-width:768px) {
-
+    .info-row div{
+        margin-top: 5px !important;
+    }
+    .react-btn{
+        margin-left: 0px !important;
+    }
     .main-section-top {
         margin-top: 80px;
     }

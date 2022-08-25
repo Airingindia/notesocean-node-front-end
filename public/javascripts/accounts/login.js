@@ -27,7 +27,7 @@ $(document).ready(function () {
                     setCookie("token", authToken, 100);
                     let loginDest = window.location.search.split("?dest=")[1];
                     if (loginDest != undefined) {
-                        window.location.href = loginDest;
+                        window.location.href = loginDest + window.location.hash.trim();
                     } else {
                         window.location = "/dashboard";
                     }
@@ -35,7 +35,7 @@ $(document).ready(function () {
                     setCookie("token", authToken, 1);
                     let loginDest = window.location.search.split("?dest=")[1];
                     if (loginDest != undefined) {
-                        window.location.href = loginDest;
+                        window.location.href = loginDest + window.location.hash.trim();
                     } else {
                         window.location = "/dashboard";
                     }

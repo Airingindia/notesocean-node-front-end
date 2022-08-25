@@ -1,0 +1,49 @@
+doctype html
+html(lang="en-US")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Payment Policy | Notes ocean
+        meta(name="description" content="We are a platform that allows students and teachers to upload notes and share them with their friends.our payment system and distribution system is based on the principle of views per page")
+        include ../includes/bootstrap.pug
+        style.
+            section{
+                margin-top: 100px;
+            }
+            h4{
+                margin:20px 0px;
+            }
+    body
+        header
+            include ../includes/navbar.pug
+        section.container
+            h1 Payment policy
+            p This policy is designed to help you understand the payment policy of Notes Ocean.
+            span We are a platform that allows students and teachers to upload notes and share them with their friends.
+            span our payment system and distribution system is based on the principle of views per page
+            h4 Payment processing
+            p We will process your payment as soon as you make the payment. We will not hold any money on our account. We will not be able to process your payment if we do not have the funds. We will not be able to process your payment if you do not have the funds in your account. 
+            h4 Payment distribution
+            p We will distribute the students and teachers who have uploaded the notes.
+                | we will distribute the payment directly to the bank account, UPI, and Paypal account.
+                | we will not send any app wallet like Paytm wallet, amazon pay etc.
+                | Minimum withdrawal limit will be Rs.50  and no maximum
+            h4 Earning calculation
+            strong We estimate you're earning a note page view per user.
+            br
+            span if a user views a note page then the uploader will earn 50 paise per view per user.
+                | other pages will view will  not calculate for earning like profile, collections pages.
+                |  you can view you each notes earning in your dashboad or profile page.
+            h4 Payment gateway
+            p we will use the payment gateway to process your payment. 
+            | we will use various payment getaways according to your country and region. we will look best payment gateways to send your earnings to your bank account or wallet.
+            | The processing fee of your payment is accordingly  to our partner payment gateways  that will deduct from your account 
+            h4 Payment foreign policy
+            p we have different payment gateways for different countries.
+                | Currently, we are using stripe, Razorpay and PayPal.
+                | if your country does not support these gateways please inform at support@notesocean.com.
+                |  If any country may have restriction or any issue with payment  then will not able to pocess  payment and your earnign remais in your account
+    include ../includes/footer.pug
+
+

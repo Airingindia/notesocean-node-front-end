@@ -9,7 +9,6 @@ const fs = require('fs');
 const { PDFDocument } = require("pdf-lib");
 router.get("/", (req, res, next) => {
     res.redirect("/");
-    next();
 });
 // router.get('/', async (req, res) => {
 //     const pdfpath = path.join(__dirname, 'new.pdf');
@@ -77,10 +76,8 @@ router.get("/most-viewed", (req, res, next) => {
         res.render("notes/most-viewed", {
             data: notes, timeService: timeService
         });
-        next();
     }).catch((err) => {
         res.status(404).render("notfound");
-        next();
     });
 });
 
@@ -92,35 +89,11 @@ router.get("/:id", (req, res, next) => {
     productControllers.getInfo(req.params.id, token).then((product) => {
         if (product.products.users.profileImage == null) {
             product.products.users.profileImage = "/images/dummy/user_dummy.jpg";
-        }
-        let schema = {
-
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "https://notesocean.com/dfgdfgdf"
-            },
-            "headline": "This is new headlibn",
-            "description": "dghdfg dfkgh dfkgfd gfdhg kdfhg dfkj ghdfjkgk dfkjghdfkjgdfk  fdgkdfg",
-            "image": "",
-            "author": {
-                "@type": "Person",
-                "name": "sachin kumar",
-                "url": "https://notesocean.com/profile/dfgdfgdfg"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Notes Ocean",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://notesocean.com/logo.png"
-                }
-            },
-            "datePublished": "2001-10-10"
+        } else if (product.products.users.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") == -1) {
+            product.products.users.profileImage = product.products.users.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
         }
         res.render("notes/view-notes", {
-            data: product, timeService: timeService, api: api_url, schema: schema
+            data: product, timeService: timeService, api: api_url, token: token
         });
     }).catch((error) => {
         if (error.statusCode == 429) {
