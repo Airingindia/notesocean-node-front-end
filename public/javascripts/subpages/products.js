@@ -40,7 +40,7 @@ $(document).ready(function () {
         });;
 
     }
-    likeAndDislike();
+
     // like and dislike ajax
     function addReactionAction(action) {
         $.ajax({
@@ -140,27 +140,26 @@ $(document).ready(function () {
 
         });
     }
-    urlanys();
-    toggler();
-    loadComments();
-
-
 
     // comments function
     function commentValidator() {
-        if (getCookie("token") !== undefined) {
+        if (getCookie("token") != undefined || getCookie("token") != null) {
             const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userUuid;
-            var userdata = localStorage.getItem("userdata");
-            if (userdata !== null) {
+            var userdata = localStorage.getItem("userInfo");
+            if (userdata != null || userdata != undefined) {
                 userdata = JSON.parse(userdata);
                 showCommentBox(userdata);
             } else {
                 $.ajax({
                     type: "GET",
-                    url: atob(getCookie("api")) + "/users/" + viewerid,
+                    url: atob(getCookie("api")) + "/users/self",
+                    headers: {
+                        Authorization: getCookie("token")
+                    },
                     success: function (data) {
-                        showCommentBox(data);
                         localStorage.setItem("userInfo", JSON.stringify(data));
+                        showCommentBox(data);
+
                     }
                 })
             }
@@ -170,13 +169,17 @@ $(document).ready(function () {
             $(".commnet-form").addClass("d-none");
         }
     }
-    commentValidator();
+
     function showCommentBox(userdata) {
         $(".user-not-login").addClass("d-none");
         $(".commnet-form").removeClass("d-none");
         const userFullName = userdata.firstName + " " + userdata.lastName;
         const userPic = userdata.profileImage;
-        $(".commentator-user-img").attr("src", userPic.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in"));
+        if (userPic != null || userPic != undefined) {
+            $(".commentator-user-img").attr("src", userPic.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in"));
+        } else {
+            $(".commentator-user-img").attr("src", "/images/dummy/user_dummy.jpg");
+        }
     }
 
     const getTime = (previous) => {
@@ -247,9 +250,12 @@ $(document).ready(function () {
                     var firstName = JSON.parse(userdata).firstName;
                     var lastName = JSON.parse(userdata).lastName;
                     var uuid = JSON.parse(userdata).uuid;
-                    var profileImage = JSON.parse(userdata).profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
-
-                    console.log(userdata);
+                    var profileImage = JSON.parse(userdata).profileImage;
+                    if (profileImage != null || profileImage != undefined) {
+                        profileImage = profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
+                    } else {
+                        profileImage = "/images/dummy/user_dummy.jpg";
+                    }
                 } else {
                     return false;
                 }
@@ -300,7 +306,7 @@ $(document).ready(function () {
         });
     }
     // add comments
-    addComments();
+
     // showRelatedNotes();
 
     function getCookie(name) {
@@ -369,7 +375,12 @@ $(document).ready(function () {
             })
         })
     };
-
+    likeAndDislike();
+    urlanys();
+    toggler();
+    commentValidator();
+    addComments();
     report();
+    loadComments();
 });
 

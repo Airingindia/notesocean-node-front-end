@@ -66,8 +66,13 @@ html(lang="en")
                         h1.card-title=data.products.name
                         p.card-text=data.products.description
                     .card-body.border-0.p-0.pdf-cont
-                        //- iframe(src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="100%")
-                        #pdfShow(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf")
+                        -if(view=="default"){
+                            iframe( allowtransparency="true" style="background: #FFFFFF;" frameborder="1" src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf#toolbar=0" width="100%" height="100%")
+                        -}else{
+                            #pdfShow.active(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf", data-name=data.products.name data-client=clientid)
+                        -}
+
+
                 .card.shadow.info-bar.border-0
                     .row.px-2.info-row.mt-3
                         .col-md-4.py-2
@@ -83,8 +88,8 @@ html(lang="en")
                                     small #{timeService.get(data.products.timestamp)}
                         .col-md-8
                             .icon-group.d-flex.justify-content-end.text-muted
-                                - if(data.products.react !== null && data.products.react == 1){
-                                    .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.react.timestamp))}` aria-label="like",data-default=data.products.likes)
+                                - if(data.reacts != null && data.reacts.react == "LIKE"){
+                                    .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
                                         i.fa.fa-thumbs-up.mx-1
                                         span.mx-1.icon-text Like
                                         span.react-count #{data.products.likes}
@@ -96,8 +101,8 @@ html(lang="en")
                                     span.react-count #{data.products.likes}
                                 - }
 
-                                - if (data.products.react!== null && data.products.react == 2){
-                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.react.timestamp))}` aria-label="dislike")
+                                - if (data.reacts != null && data.reacts.react == "DISLIKE"){
+                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
                                     i.fa.fa-thumbs-down
                                     span.mx-1.icon-text Dislike
                                     span.react-count #{data.products.dislikes}
@@ -143,28 +148,28 @@ html(lang="en")
                                         a(href="/account/login?dest=/notes/"+data.products.uuid+"#comment").btn.btn-sm.btn-primary Login 
                                 .card.my-3.border-0.px-2.commentbox-container
 
-                                    .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
-                                        .flex-shrink-0
-                                            a(href="/")
-                                                img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
-                                        .flex-grow-1.ms-3
-                                            h6 Sachin kumar
-                                            span This is some content from a media component. You can replace this with any content and adjust it as needed
-                                            br
-                                            small.text-muted 
-                                                i.fa.fa-clock-o.mx-1
-                                                span 1 hour ago 
-                                    .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
-                                        .flex-shrink-0
-                                            a(href="/")
-                                                img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
-                                        .flex-grow-1.ms-3
-                                            h6 Rahul kumar
-                                            span This is some content from a media component. You can replace this with any content and adjust it as needed
-                                            br
-                                            small.text-muted 
-                                                i.fa.fa-clock.mx-1
-                                                span 1 hour ago
+                                    //- .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
+                                    //-     .flex-shrink-0
+                                    //-         a(href="/")
+                                    //-             img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
+                                    //-     .flex-grow-1.ms-3
+                                    //-         h6 Sachin kumar
+                                    //-         span This is some content from a media component. You can replace this with any content and adjust it as needed
+                                    //-         br
+                                    //-         small.text-muted 
+                                    //-             i.fa.fa-clock-o.mx-1
+                                    //-             span 1 hour ago 
+                                    //- .d-flex.my-2.commentbox-item.wow.animate__animated.animate__fadeInUp
+                                    //-     .flex-shrink-0
+                                    //-         a(href="/")
+                                    //-             img(src='/images/dummy-user.jpeg' alt='...' style="width:35px;height:35px;border-radius:50%")
+                                    //-     .flex-grow-1.ms-3
+                                    //-         h6 Rahul kumar
+                                    //-         span This is some content from a media component. You can replace this with any content and adjust it as needed
+                                    //-         br
+                                    //-         small.text-muted 
+                                    //-             i.fa.fa-clock.mx-1
+                                    //-             span 1 hour ago
 
             .share-modal.modal
                 .modal-dialog.modal-dialog-centered
@@ -189,8 +194,25 @@ html(lang="en")
                             i.close.fa.fa-times(data-bs-dismiss='modal' aria-label='Close')
                         .modal-body.border-0
                             div
-                                h4.modal-title Information about this note!
-                            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam consequatur at minima, qui tempore excepturi distinctio quia temporibus eos.
+                                h4.modal-title Information
+                            p Notes Ocean is not holding any copyright on the content of the notes. All the content is owned by the user who uploaded. We are not responsible any copyrighted content. We are just a platform to help you share your notes. we regularly monitor the user uploaded notes and delete the notes if  we find any copyright infringement.
+                            p If you have any questions or suggestions, please feel free to contact us at 
+                                a(href="mailto:contact@notesocean.com") contact@notesocean.com 
+                                span or report 
+                                a(href="/report/"+data.products.uuid) here
+                            div.switcher.mt-2
+                                p If you are facing any problem  with pdf viewer  , switch to
+                                    -if(view=="default"){
+                                        a(href=`/notes/${data.products.uuid}`).btn.btn-notesocean.btn-sm.mx-1
+                                            i.fa.fa-repeat.mx-1
+                                            span Standard
+                                    -}else{
+                                        a(href=`/notes/${data.products.uuid}?viewer=default`).btn.btn-notesocean.btn-sm.mx-1
+                                            i.fa.fa-repeat.mx-1
+                                            span Classic
+                                    -}
+
+
             .report-modal.modal(tabindex="1")
                 .modal-dialog.modal-dialog-centered.modal-lg 
                     //- .container
@@ -247,15 +269,11 @@ html(lang="en")
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
                             a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-primary Login
-        script(src="https://documentcloud.adobe.com/view-sdk/main.js")
-        script(type='text/javascript').
-            document.addEventListener("adobe_dc_view_sdk.ready", function(){
-            var adobeDCView = new AdobeDC.View({clientId: "791e6a57b798444482ba43e80a4091a0", divId: "pdfShow"});
-            adobeDCView.previewFile({
-            content:{location: {url:document.querySelector(" #pdfShow").getAttribute("data-url")}},
-            metaData:{fileName: "basic-civil-mechanical-engineering-book-free-pdf"}
-            }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: true});
-            });
+        -if(view!="default"){
+            script(src="https://documentcloud.adobe.com/view-sdk/main.js")
+        -}
+        script
+            include ../../public/javascripts/notes/viewer.js
         include ../includes/footer
         script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
         script

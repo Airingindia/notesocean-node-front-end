@@ -82,6 +82,11 @@ nav.desktop-navbar {
     margin: 0px 10px;
 }
 
+.desktop-navbar-item.navigation a{
+    text-decoration: none;
+    color: black;
+}
+
 .input-group-text {
     background-color: #fff;
     color: #FF0000;

@@ -17,6 +17,7 @@ const subjectRoutes = require("./routes/subjects.routes");
 const notesRoutes = require("./routes/notes.routes");
 const requesRoutes = require("./routes/request.routes");
 const policiesRoutes = require("./routes/policies.routes");
+const reportRoutes = require("./routes/report.routes");
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 // express
@@ -109,6 +110,7 @@ app.use("/contact-us", contactRoutes);
 app.use("/courses", coursesRoute);
 app.use("/subjects", subjectRoutes);
 app.use("/policies", policiesRoutes);
+app.use("/report", reportRoutes);
 
 
 // catch 404 and forward to error handler

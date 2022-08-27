@@ -1,0 +1,94 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Report Notes | Notes ocean
+        meta(name="description" content="If you found any copyright issue please report it here")
+        include ../includes/bootstrap.pug
+        style.
+            .main-section{
+                margin-top:100px;
+            }
+            form{
+                width:80%;
+                margin:0 auto;
+            }
+    body
+        header
+            include ../includes/navbar.pug
+        section.main-section
+            form
+                h1 New Report
+                p We are here to help you at every point , report any copyright issue you found here and our team will take care of it 
+                .row
+                    .col-md-6
+                        h6 Required Infomation
+                        .form-group
+                            label Note Url *
+                            -if(id !== undefined){
+                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required , readonly ,value=`https://notesocean.com/notes/`+id)
+                            -}else{
+                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required )
+                            -}
+
+                        .form-group.my-2
+                            label First Name *
+                            input.form-control(type="text" required)
+                        .form-group.my-2
+                            label Last Name *
+                            input.form-control(type="text" required)
+                        .form-group.my-2
+                            label Email Address *
+                            input.form-control(type="email" required)
+                        .form-group.my-2
+                            label Phone Number *
+                                small  ( with country code)
+                            input.form-control(type="tel" required)
+                        .form-group.my-2
+                            label Address *
+                            textarea.form-control(required)
+                    .col-md-6
+                        h6 Company Infomation
+                        .form-group.my-2
+                            label Company Name
+                                small  (optional)
+                            input.form-control(type="text")
+                        .form-group.my-2
+                            label Website
+                                small  (optional)
+                            input.form-control(type="url" )
+                        .form-group.my-2
+                            label Address
+                                small  (optional)
+                            textarea.form-control
+                        .form-group.my-2
+                            label Email 
+                                small  (optional)
+                            input.form-control(type="email")
+                        .form-group.my-2
+                            label Phone Number
+                                small  (optional)
+                            input.form-control(type="tel")
+                        .form-group.my-2
+                            label CIN
+                                small  (optional)
+                            input.form-control(type="text")
+                    .col-md-6
+                        h5 Legal Infomation
+                        small.text-info Provide atlest one of the following infomation
+                        .form-group.my-2
+                            label ROC Number / Diary No  / Copyright Number
+                                small  (only applicable for India and USA)
+                            input.form-control(type="url" , placeholder="Enter ROC Number, Diary No or Copyright Number if any") 
+                        .form-group.my-2
+                            label Proof URL  
+                            input.form-control(type="url" , placeholder="Enter a url that proves you own or you have the right to use the content") 
+                        .form-group.my-2
+                            label Proof Image 
+                            input.form-control(type="file" accept="image/*" , placeholder =" Upload a image that proves you own or you have the right to use the content")
+                        .form-group.mt-4
+                            button(type="submit").btn.btn-dark Submit
+        include ../includes/footer.pug
+

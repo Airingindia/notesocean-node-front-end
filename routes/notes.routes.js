@@ -82,6 +82,7 @@ router.get("/most-viewed", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
+    var view = req.query.viewer;
     var token = "";
     if (req.cookies.token) {
         token = req.cookies.token;
@@ -92,8 +93,15 @@ router.get("/:id", (req, res, next) => {
         } else if (product.products.users.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") == -1) {
             product.products.users.profileImage = product.products.users.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
         }
+
+        var clientid = "";
+        if (process.env.NODE_ENV == "DEV") {
+            clientid = process.env.ADOBE_TEST_CLIENT_ID;
+        } else {
+            clientid = process.env.ADOBE_CLIENT_ID;
+        }
         res.render("notes/view-notes", {
-            data: product, timeService: timeService, api: api_url, token: token
+            data: product, timeService: timeService, api: api_url, token: token, clientid: clientid, view: view
         });
     }).catch((error) => {
         if (error.statusCode == 429) {

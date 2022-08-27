@@ -117,12 +117,13 @@ style.
     }   
 
 noscript
+    h1 Your browser does not support JavaScript!
     style(type='text/css').
-        .live-notes-section{
-            display:none;
-        }
         .javascript-blocked{
             display:block;
+        }
+        body{
+            display:none;
         }
 script.
     new WOW().init(); 
