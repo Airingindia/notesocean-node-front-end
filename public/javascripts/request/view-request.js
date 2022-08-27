@@ -12,10 +12,12 @@ $(document).ready(function () {
             contentType: "application/json",
             processData: false,
             beforeSend: function () {
-                console.log("sent");
+
             },
             success: function (data) {
-                console.log(data);
+                if (data == undefined) {
+                    return false;
+                }
                 if (data.requested.length > 0) {
                     $(".uploaded-notes-row").html("");
                     for (let i = 0; i < data.requested.length; i++) {
@@ -37,14 +39,15 @@ $(document).ready(function () {
                         $(".uploaded-notes-row").append(`
                     <a href="/notes/${uuid}">
                     <div class="shadow p-2 mb-2 bg-white rounded uploaded-notes-item">
-                      <div><img class="notes-thumb" src="${thumbnails}"/></div>
-                      <div class="px-1">
+                      <img class="notes-thumb" src="${thumbnails}"/>
+                      <div class=" uploaded-notes-item-info">
                         <h6> ${name}</h6>
                         <p> ${description}</p><a class="btn btn-sm" href="/profile/${userUUid}"><img class="user-img" src="${userPrfileImage}"/><span class="mx-1"> sachin kmumar  </span></a>
                         <div class="d-flex align-items-center uploaded-notes-info"><small><i class="fa fa-clock mr-1"></i><span>${timestamp} </span></small><small><i class="fa fa-file mr-1"></i><span> ${pages} </span></small><small><i class="fa fa-globe mr-1"></i><span> ${views}views</span></small><small><i class="fa fa-thumbs-up mr-1"></i><small>${likes} likes </small></small></div>
                       </div>
                       <button class="btn btn-dark accept-btn btn-sm" data-uuid="${uuid}" style="height:max-content">Accept</button>
-                    </div></a>
+                    </div>
+                    </a>
                     `);
                     }
                     acceptProduct();
@@ -56,7 +59,14 @@ $(document).ready(function () {
         });
     }
 
-    getUploadedProducts();
+
+    if ($(".uploaded-notes-row").hasClass("uploaded-notes-row")) {
+        getUploadedProducts();
+    }
+
+
+
+    // getUploadedProducts();
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -66,22 +76,42 @@ $(document).ready(function () {
     function acceptProduct() {
         $(".accept-btn").each(function () {
             $(this).click(function () {
+                var btn = this;
                 let uuid = $(this).attr("data-uuid");
-                swal({
-                    title: "Are you sure?",
-                    text: "Once accepted, you will not be able to accept another notes ",
-                    icon: "info",
-                    buttons: ["Cancel", "Accept"],
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                type: "GET",
-                                url: atob(decodeURIComponent(getCookie("api"))) + "/"
-                            })
-                        }
-                    })
+                let requestUuid = window.location.pathname.split("/request/")[1];
+                console.log(requestUuid);
+                $.ajax({
+                    type: 'POST',
+                    url: atob(decodeURIComponent(getCookie("api"))) + "/requests/" + requestUuid + "/products/" + uuid,
+                    beforeSend: function () {
+                        $(btn).html("<i class='fa fa-spinner fa-spin'></i> Accepting ...");
+                    },
+                    headers: {
+                        Authorization: getCookie("token"),
+                    },
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (data) {
+                        new Noty({
+                            type: 'success',
+                            text: 'Note Accepted!',
+                            timeout: 2000
+                        });
+                        $(btn).removeClass("btn-dark");
+                        $(btn).addClass("btn-success");
+                        $(btn).html("Accepted");
+                        setTimeout(() => {
+                            window.location.href = window.location.href;
+                        }, 2000);
+                    },
+                    error: function (error) {
+                        new Noty({
+                            type: 'error',
+                            text: 'Something went wrong , please try again later',
+                            timeout: 2000
+                        })
+                    }
+                });
             })
         })
     }

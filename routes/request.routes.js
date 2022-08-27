@@ -43,12 +43,14 @@ router.get("/:uuid", (req, res, next) => {
         if (response.users.profileImage == null) {
             response.users.profileImage = "/images/dummy/user_dummy.jpg";
         }
-        console.log(response.users.profileImage);
         res.render("request/view-request.pug", {
             data: response,
             vieweruuid: Vieweruuid,
+            time: timeService
         });
-    }).catch((error) => { console.log(error) })
+    }).catch((error) => {
+        res.render("notfound");
+    })
 
 });
 

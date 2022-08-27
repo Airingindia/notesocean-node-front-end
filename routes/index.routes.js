@@ -12,12 +12,8 @@ const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
 // const encoded_api = Buffer.from(api_url).toString('base64');
 
-
-// router.get("/test", (req, res, next) => {
-//   res.render("test")
-// })
 router.get("/google-signin", (req, res, next) => {
-  res.redirect(api_url + "/authenticate/google-sign-in");
+  res.redirect(Buffer.from(req.cookies.api, "base64").toString("ascii") + "/authenticate/google-sign-in");
 })
 // homepage route
 router.get('/', function (req, res, next) {
@@ -72,8 +68,7 @@ router.get("/upload/:uuid", (req, res, next) => {
 router.get("/profile/:user_id", async (req, res, next) => {
   let user_id = req.params.user_id;
   if (user_id.length > 10) {
-    profileControllers.getInfo(user_id).then((userInfo) => {
-      // console.log(userInfo);
+    profileControllers.getInfo(user_id, req).then((userInfo) => {
       if (userInfo.profileImage == null) {
         userInfo.profileImage = "https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/user.png";
       }
@@ -112,7 +107,7 @@ router.get("/signup", (req, res, next) => {
 
 router.get("/collections/:collecton_id", async (req, res, next) => {
   let collecton_id = req.params.collecton_id;
-  collectionController.getCollectionDetails(collecton_id).then((collection) => {
+  collectionController.getCollectionDetails(collecton_id, req).then((collection) => {
     var jsonld = [];
     for (var i = 0; i < collection.products.length; i++) {
       let temp = {
@@ -142,10 +137,10 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 // search page route
 
 router.get("/search", (req, res, next) => {
-  ;
   const query = req.query.query;
   if (query.length > 1) {
-    productControllers.searchProducts(query).then((product) => {
+    productControllers.searchProducts(query, req).then((product) => {
+      res.status(200);
       res.render("search", {
         data: product,
         query: query,
@@ -153,18 +148,15 @@ router.get("/search", (req, res, next) => {
       });
       ;
     }).catch((err) => {
-      console.log(err);
       if (err.statusCode == 429) {
         res.render("information-pages/tomanyrequest")
       } else {
-        res.status(404);
         res.render("notfound");
       }
       ;
     })
   } else {
-    res.redirect("/");
-    ;
+    res.render("error/500");
   }
 
 });
@@ -201,7 +193,7 @@ router.get("/contact-us/error", (req, res, next) => {
 
 router.get("/session-expire", (req, res, next) => {
   if (req.cookies.token != undefined) {
-    profileControllers.logout(req.cookies.token).then((response) => {
+    profileControllers.logout(req.cookies.token, req).then((response) => {
       console.log("user logout");
     }).catch((err) => {
       console.log(err);

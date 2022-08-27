@@ -15,7 +15,7 @@ section a img{
 .uploaded-notes-info small{
     margin: 0px 10px;
 }
-.uploaded-notes-row a {
+.uploaded-notes-row a , .accepted-note a {
     text-decoration: none;
     color: inherit;
 }
@@ -24,7 +24,7 @@ section a img{
     display: flex;
 }
 
-.uploaded-notes-row .notes-thumb{
+.uploaded-notes-row .notes-thumb , .accepted-note .notes-thumb{
     width:200px;
     height: 150px;
     border-radius: 0px;
@@ -32,6 +32,11 @@ section a img{
 
 i{
     cursor: pointer;
+}
+
+.uploaded-notes-item-info{
+    width: 75%;
+    padding: 5px 10px;
 }
 
 @media (max-width: 768px) {
@@ -46,6 +51,15 @@ i{
         width:100%;
         height: 150px;
         border-radius: 0px;
+    }
+
+    .uploaded-notes-item-info{
+        width:100%;
+        padding: 0px;
+    }
+    .accept-btn{
+        width: 50%;
+        margin: 10px auto;
     }
     
 }

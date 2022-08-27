@@ -160,7 +160,7 @@ $(document).ready(function () {
                     url: atob(getCookie("api")) + "/users/" + viewerid,
                     success: function (data) {
                         showCommentBox(data);
-                        localStorage.setItem("userdata", JSON.stringify(data));
+                        localStorage.setItem("userInfo", JSON.stringify(data));
                     }
                 })
             }

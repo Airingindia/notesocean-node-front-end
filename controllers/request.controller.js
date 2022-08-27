@@ -2,7 +2,12 @@ const http = require("./../services/http.services");
 const getRequestDetails = (uuid, token) => {
     return new Promise((resolve, reject) => {
         http.getWithAuth("/requests/" + uuid, token).then((res) => {
-            resolve(res.body);
+            if (res.status == 200) {
+                resolve(res.body);
+            }
+            else {
+                reject(res.body);
+            }
         }).catch((error) => {
             reject(error);
         })

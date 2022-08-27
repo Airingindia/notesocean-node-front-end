@@ -37,7 +37,7 @@ const limiter = rateLimit({
   max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: true, // Disable the `X-RateLimit-*` headers
-})
+});
 
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
@@ -113,7 +113,6 @@ app.use("/policies", policiesRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  res.status(404);
   res.render("notfound");
   next();
 });
@@ -122,6 +121,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   console.log(err);
   res.render("errors/500");
+  next();
 });
 
 module.exports = app;
