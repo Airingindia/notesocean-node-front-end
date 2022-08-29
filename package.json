@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node bin/www",
+    "build": "node bin/www",
+    "start": "node bin/www"
   },
   "dependencies": {
     "@amplitude/node": "^1.10.0",
