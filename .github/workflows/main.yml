@@ -31,7 +31,7 @@ jobs:
       run: git pull
 
     - name: "Install Dependencies"
-      run: npm
+      run: npm install
 
     - name: "Build for production"
       run: npm build
