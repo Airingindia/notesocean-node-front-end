@@ -32,3 +32,6 @@ jobs:
 
     - name: "Install Dependencies"
       run: npm install
+
+    - name: "Build Application"
+      run: node ./bin/www
