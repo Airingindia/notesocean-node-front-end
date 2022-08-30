@@ -1,8 +1,8 @@
-name: Notesocean CI
+name: Notesocean Production CI
 
 on:
   push:
-    branches: [ "main" ]  
+    branches: [ "prod" ]  
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}        
     
     - name: "Checkout to Main branch"
-      run: git checkout main
+      run: git checkout prod
 
     - name: "Pull Latest code"
       run: git pull
