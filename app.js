@@ -79,6 +79,9 @@ app.use(function (req, res, next) {
     var api = process.env.LOCAL_API_URL;
   } else if (req.hostname == "dev.notesocean.com") {
     var api = process.env.DEV_API_URL;
+  }
+  else if (req.hostname == "live.notesocean.com") {
+    var api = process.env.DEV_API_URL;
   } else if (req.hostname == "notesocean.com") {
     var api = process.env.PROD_API_URL;
   } else {
