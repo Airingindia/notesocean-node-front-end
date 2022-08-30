@@ -75,18 +75,7 @@ app.use(connect_datadog);
 //  middleware
 // app.use(logger('dev'));
 app.use(function (req, res, next) {
-  if (req.hostname == "localhost") {
-    var api = process.env.LOCAL_API_URL;
-  } else if (req.hostname == "dev.notesocean.com") {
-    var api = process.env.DEV_API_URL;
-  }
-  else if (req.hostname == "live.notesocean.com") {
-    var api = process.env.DEV_API_URL;
-  } else if (req.hostname == "notesocean.com") {
-    var api = process.env.PROD_API_URL;
-  } else {
-    return res.render("error/500");
-  }
+  var api = process.env.API_URL;
   res.cookie("api", Buffer.from(api).toString('base64'));
   next();
 });
