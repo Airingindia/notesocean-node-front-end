@@ -125,9 +125,35 @@
     text-align: center;
 }
 
+/* tech partner */
+.tech-partner{
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    justify-content:space-around;
+}
+
+.tech-partner img{
+    width: 100px;
+}
+
 @media (max-width: 768px) {
     .illustrations-img {
         display: none;
+    }
+    .tech-partner{
+        margin-top: 50px;
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .tech-partner img{
+        margin: 10px auto;
+        width: 100px;
     }
 }
 

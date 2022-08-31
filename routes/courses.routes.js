@@ -17,16 +17,11 @@ router.get('/', async function (req, res, next) {
 
 router.get("/:course", (req, res, next) => {
     productControllers.searchProducts(req.params.course.replace("-", " ")).then((product) => {
-        if (product.size !== 0) {
-            res.render("courses/view-course", {
-                data: product,
-                time: timeService,
-                course: req.params.course
-            });
-        } else {
-            res.status(404);
-            res.render("notfound");
-        }
+        res.render("courses/view-course", {
+            data: product,
+            time: timeService,
+            course: req.params.course
+        });
 
     }).catch((err) => {
         console.log(err);

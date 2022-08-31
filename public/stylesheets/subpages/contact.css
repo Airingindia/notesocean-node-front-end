@@ -82,3 +82,13 @@ div.column2 {
     /* WebKit browsers */
     padding-left: 10px;
 }
+
+.contact-heading{
+    width: 50%;
+}
+
+@media (max-width:769px){
+    .contact-heading{
+        width: 100%;
+    }
+}

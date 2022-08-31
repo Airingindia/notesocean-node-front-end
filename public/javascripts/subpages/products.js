@@ -340,8 +340,8 @@ $(document).ready(function () {
                     Authorization: getCookie("token")
                 },
                 beforeSend: function () {
-                    $(".report-btn").prop("disabled", true);
-                    $(".report-btn").html(`<i class="fa fa-spinner fa-spin">  </i> Please wait...`);
+                    $(".report-btn-modal").prop("disabled", true);
+                    $(".report-btn-modal").html(`<i class="fa fa-spinner fa-spin">  </i> Please wait...`);
                 },
                 success: function (data) {
                     $(".report-modal .modal-content").html(`
@@ -352,8 +352,9 @@ $(document).ready(function () {
                       <button class="my-3 btn btn-notesocean" data-bs-dismiss='modal'> Close </button>
                     </div>
                     `);
-                    $(".report-btn").prop("disabled", false);
-                    $(".report-btn").html(`Report`);
+                    $(".report-btn-modal").prop("disabled", false);
+                    $(".report-btn-modal").html("Report");
+
                     new Noty({
                         theme: "sunset",
                         type: "success",
@@ -369,8 +370,8 @@ $(document).ready(function () {
                         text: "Somthing went wrong , please try after sometimes",
                         timeout: 4000,
                     }).show();
-                    $(".report-btn").prop("disabled", false);
-                    $(".report-btn").html(`Report`);
+                    $(".report-btn-modal").prop("disabled", false);
+                    $(".report-btn-modal").html("Report");
                 }
             })
         })

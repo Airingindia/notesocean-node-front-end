@@ -4,7 +4,7 @@ nav.desktop-navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 99.9%;
     background-color: #fff;
     z-index: 999;
     padding: 10px;
@@ -53,6 +53,12 @@ nav.desktop-navbar {
 @media (max-width:1025px) {
     .desktop-brand-text{
         display:none;
+    }
+    .desktop-navbar-item.brand img {
+        width: 130px;
+    }
+    .desktop-navbar-item a {
+        font-size: 12px;
     }
 }
 

@@ -19,19 +19,11 @@ router.get('/', async function (req, res, next) {
 
 router.get("/:subject", (req, res, next) => {
     productControllers.searchProducts(req.params.subject).then((product) => {
-        if (product.size !== 0) {
-            res.render("subjects/view-subject", {
-                data: product,
-                time: timeService,
-                subject: req.params.subject
-            });
-
-        } else {
-            res.status(404);
-            res.render("notfound");
-
-        }
-
+        res.render("subjects/view-subject", {
+            data: product,
+            time: timeService,
+            subject: req.params.subject
+        });
     }).catch((err) => {
         res.status(404);
         res.render("notfound");
