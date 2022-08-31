@@ -59,183 +59,111 @@ html(lang="en-US")
         h3 Notes By 
           span.color-red Courses
         p Find your notes by your courses 
-          a(href="/courses/all").color-red View all
+          a(href="/courses").color-red View all
         .container.categories-item-cont
           .row
-            .col-6.col-lg-4.mt-3
-              a(href="/courses/software-engineering")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Software
-                  h4 Enginnering
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="#")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 UPSC & 
-                  h4 BPSC
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="#")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 NCERT &
-                  h4 CBSE
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="#")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Pharmacy 
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="#")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Nursing
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="#")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 LAW
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes
+            -for(let i = 0;i<12;i++){
+              - var item = courses[Math.floor(Math.random()*courses.length)];
+              .col-6.col-lg-4.mt-3
+                a(href="/courses/"+url.make(item))
+                  .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                    h6 #{item}
+            -}
+
     section.categories.categories-subject.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Notes By 
           span.color-red Subjects
         p Find your notes by your subjects 
-          a(href="/subjects/all").color-red View all
+          a(href="/subjects").color-red View all
         .container.categories-item-cont
           .row
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/mathematics")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Matematics
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/english")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 English
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/chemistry")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Chemistry
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/biology")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Biology 
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/physics")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Physics
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-            .col-6.col-lg-4.mt-3
-              a(href="/subjects/geoghraphy")
-                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                  h4 Geoghraphy
-                  p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, illo.
-                  br
-                  button.categories-btn.btn View Notes 
-    section.most-viewd-notes.wow.animate__animated.animate__fadeIn
-      .container.py-5
-        h3 Most Viewed 
-          span.color-red Notes
-        small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
-          a(href="/notes/most-viewed").color-red View All
-        .row
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+            -for(let i = 0;i<12;i++){
+              - var item = subjects[Math.floor(Math.random()*subjects.length)];
+              .col-6.col-lg-4.mt-3
+                a(href="/subjects/"+url.make(item))
+                  .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                    h6 #{item}
+            -}
+    //- section.most-viewd-notes.wow.animate__animated.animate__fadeIn
+    //-   .container.py-5
+    //-     h3 Most Viewed 
+    //-       span.color-red Notes
+    //-     small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
+    //-       a(href="/notes/most-viewed").color-red View All
+    //-     .row
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
-          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-            a(href="#")
-              .card.border-0
-                .card-header
-                  p 
-                .card-body.p-0
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
+    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+    //-         a(href="#")
+    //-           .card.border-0
+    //-             .card-header
+    //-               p 
+    //-             .card-body.p-0
 
-                .card-footer
-                  .notes-profile-cont
-                  .user-name-cont
-                  .notes-cont-info
+    //-             .card-footer
+    //-               .notes-profile-cont
+    //-               .user-name-cont
+    //-               .notes-cont-info
     section.recent-notes.wow.animate__animated.animate__fadeIn
       .container.py-5
         h3 Recent Uploaded  
           span.color-red Notes
-        small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
-          a(href="/notes/recent-uploaded").color-red View All
+        small These are some of the recent notes uploaded by our users.
+          //- a(href="/notes/recent-uploaded").color-red View All
         .row
           .col-md-6.col-lg-4.mt-3.skeleton-live-loader
             a(href="#")

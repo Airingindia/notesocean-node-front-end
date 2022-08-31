@@ -10,6 +10,9 @@ const socketServices = require("../services/socket.services");
 const liveControlllers = require("../controllers/live.controllers");
 const { route } = require('./notes.routes');
 const api_url = process.env.API_URL;
+const url = require("./../services/url.services");
+const subjects = require("./../routes/all-subject.json");
+const courses = require("./../routes/all-courses.json");
 // const encoded_api = Buffer.from(api_url).toString('base64');
 
 router.get("/google-signin", (req, res, next) => {
@@ -18,7 +21,10 @@ router.get("/google-signin", (req, res, next) => {
 // homepage route
 router.get('/', function (req, res, next) {
   res.render("index", {
-    home: req.originalUrl
+    home: req.originalUrl,
+    subjects: subjects,
+    courses: courses,
+    url: url
   });
 });
 
@@ -70,8 +76,12 @@ router.get("/profile/:user_id", async (req, res, next) => {
   if (user_id.length > 10) {
     profileControllers.getInfo(user_id, req).then((userInfo) => {
       if (userInfo.profileImage == null) {
-        userInfo.profileImage = "https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com/user.png";
+        userInfo.profileImage = "/images/dummy/user_dummy.jpg";
       }
+      else if (userInfo.profileImage.indexOf("'https://profiles.ncdn.in") == -1) {
+        userInfo.profileImage = userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/100x100");
+      }
+
       res.contentType("text/html");
       res.render("profile", {
         profile: userInfo

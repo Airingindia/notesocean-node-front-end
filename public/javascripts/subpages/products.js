@@ -5,7 +5,7 @@ $(document).ready(function () {
     // like function
     function likeAndDislike() {
         var lastCount = 0;
-        var action = 0;
+        var action = "NEUTRAL";
         function reset() {
             $(".react-btn").each(function () {
                 let init = $(this).attr("data-default");
@@ -29,7 +29,7 @@ $(document).ready(function () {
                     } else {
                         $(".react-btn").removeClass("active");
                         $(this).addClass("active");
-                        action = Number($(this).attr("data-action"));
+                        action = $(this).attr("data-action");
                         addReactionAction(action);
                         $(this).find(".react-count").html(count + 1);
                     }
@@ -50,14 +50,14 @@ $(document).ready(function () {
                 Authorization: getCookie("token")
             },
             success: function (data) {
-                if (action == 1) {
+                if (action == "LIKE") {
                     new Noty({
                         theme: "sunset",
                         type: "success",
                         text: "Liked",
                         timeout: 4000,
                     }).show();
-                } else {
+                } else if (action == "DISLIKE") {
                     new Noty({
                         theme: "sunset",
                         type: "error",
