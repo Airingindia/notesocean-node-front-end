@@ -1,814 +1,143 @@
 [
     {
-        "type":"Engineering",
-        "courses":[
-            {
-                "courseName":"Computer Science and Engineering",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"BASIC ELECTRICAL AND ELECTRONICS ENGINEERING",
-                                "description":"Introduction of the fundamental concepts of electricity and electronics that involve direct current, alternating current, series and parallel resistive circuits, inductance, capacitance, transformers, motors, electronic components, and various types of test equipment found in industry."
-                            },
-                            {
-                                "name":"BASIC ELECTRICAL AND ELECTRONICS ENGINEERING LAB",
-                                "description":"Gain practical exposure through performing experiments related to basic concepts of electronics and Electrical Engineering in this lab and develop skills in circuit formulation and obtaining the desired output results."
-                            },
-                            {
-                                "name":"BASIC ENGINEERING MECHANICS",
-                                "description":"Provides Understanding of application of engineering mechanics in solving engineering problems and analysis of various forces, moments, centroid, moment of inertia, static-dynamic motion and their applications in real life situations."
-                            },
-                            {
-                                "name":"COMPUTER PROGRAMMING",
-                                "description":"The course introduces structured programming and utilizes the modular features of the C language. It will also strengthen problem solving and program design techniques effectively to generate high quality applications based on C."
-                            },
-                            {
-                                "name":"ENGINEERING PHYSICS LAB",
-                                "description":"An introductory laboratory associated with engineering physics courses. Experiments from different areas of physics are performed."
-                            },
-                            {
-                                "name":"MATHEMATICS",
-                                "description":"An introductory laboratory associated with engineering physics courses. Experiments from different areas of physics are performed."
-                            },
-                            {
-                                "name":"ENGLISH",
-                                "description":""
-                            },
-                            {
-                                "name":"Manufacturing Process",
-                                "description":""
-                            },
-                            {
-                                "name":"Chemistry",
-                                "description":""
-                            },
-                            {
-                                "name":"Biology",
-                                "description":""
-                            }
-                        ]
-                    },
-                    {
-                        "name":"semester 2",
-                        "description":"",
-                        "subjects":[
-                            {
-                                "name":"DIFFERENTIAL EQUATIONS AND VECTOR CALCULUSG",
-                                "description":"This course deals with the ordinary and higher order differential equations, Partial differential equations and Numerical Methods."
-                            },
-                            {
-                                "name":"DIGITAL ELECTRONICS",
-                                "description":"This course covers the digital circuits like combinational and sequential logic circuits, number systems, Boolean algebra, logic families, medium scale integration and large scale integration circuits, analog to digital and digital to analog conversion, and other related topics."
-                            },
-                            {
-                                "name":"DIGITAL ELECTRONICS LABORATORY",
-                                "description":"This course covers the practical implementation of digital circuits like combinational and sequential logic circuits, number systems, Boolean algebra, logic families, medium scale integration and large scale integration circuits, analog to digital and digital to analog conversion, and other related hardwares."
-                            },
-                            {
-                                "name":"ENGINEERING GRAPHICS",
-                                "description":"Inculcate the knowledge of basic geometries, geometric tools, shapes and procedures used for engineering drawings and different concepts of theory of projections, development and sectioning, isometric projections and development of surfaces."
-                            },
-                            {
-                                "name":"ENVIRONMENTAL STUDIES",
-                                "description":"Provide basic introduction of the environment and its various components and impart knowledge about the need, various policies and methods to protect the environment."
-                            },
-                            {
-                                "name":"ENVIRONMENTAL STUDIES",
-                                "description":"Introduces web programming principles that relate to web design and emphasize on designing the effective web pages with the help of CSS which will help in designing professional web pages and flow of the data between web pages."
-                            },
-                            {
-                                "name":"OBJECT ORIENTED PROGRAMMING",
-                                "description":"Introduces basic programming constructs and use the newly acquired skills to solve extensive programming problems and programming design techniques effectively to generate applications in C++ programming language in Dev C++ compiler."
-                            }
-                        ]
-                    }
-                    
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"Lovely Professional University",
-                        "college location":"Phagwara, Punjab",
-                        "rating":"4.2",
-                        "description":"Established in 2005, Lovely Professional University (LPU) is a private university located in Jalandhar, Punjab",
-                        "logo":"https://www.lpu.in/images/logo/logo-media.svg"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
+        "category": "CBSE Courses",
+        "list": [
+            "Class  5",
+            "Class  6",
+            "Class  7",
+            "Class  8",
+            "Class  9",
+            "Class  10",
+            "Class  11",
+            "Class  12"
         ]
     },
     {
-        "type":"Agriculture",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
+        "category": "Under Gaduate Degree",
+        "list": [
+            "B.Tech Computer Science & Engineering with Specialization in Data Science",
+            "B.Tech Cloud Technology & Information Security",
+            "B.Sc. (Hons.) Agriculture",
+            "B.Sc. (Hons.) Agriculture (Integrated)",
+            "B.Sc. Mathematics (Hons.)",
+            "B.Sc. Chemistry (Hons.)",
+            "B.Sc. Medical",
+            "B.Tech Electronics & Communication Engineering",
+            "BDS",
+            "B.Sc. Nursing",
+            "B.Sc. Nursing",
+            "B.Com. – LLB (Hons.)",
+            "BBA – LLB (Hons.)",
+            "B.A.LL.B.",
+            "BPT",
+            "B. Pharmacy",
+            "BSc Food Science (Hons) with Specialization in Food Science & Technology",
+            "BSc Food Science (Honors) with Specialization in Nutrition & Dietetics",
+            "BSc (Hospitality & Hotel Administration)",
+            "Bachelor of Hotel Management and Catering Technology (BHM&CT)",
+            "BCA",
+            "B.COM (Hons.)",
+            "BBA",
+            "B.Sc. Physics ( Hons)",
+            "B.Tech Mechanical Engineering",
+            "B.Tech Electrical Engineering",
+            "B.Tech Civil Engineering",
+            "B.Sc. Non-Medical",
+            "B.Sc. Biotechnology (Hons)",
+            "B.Tech Biotechnology",
+            "B.Tech Computer Science & Engineering",
+            "B.Tech Computer Science & Engineering with Specialization in Data Science",
+            "B.Tech Cloud Technology & Information Security",
+            "B.Sc. Mathematics (Hons.)",
+            "B.Sc. Chemistry (Hons.)",
+            "B.Sc. Medical",
+            "B.Tech Electronics & Communication Engineering",
+            "BCA",
+            "B.Sc. Physics ( Hons)",
+            "B.Tech Mechanical Engineering",
+            "B.Tech Electrical Engineering",
+            "B.Tech Civil Engineering",
+            "B.Sc. Biotechnology (Hons)",
+            "B.Tech Biotechnology",
+            "B.Tech Computer Science & Engineering",
+            "BSc Food Science (Hons) with Specialization in Food Science & Technology",
+            "BSc Food Science (Honors) with Specialization in Nutrition & Dietetics",
+            "BSc (Hospitality & Hotel Administration)",
+            "Bachelor of Hotel Management and Catering Technology (BHM&CT)",
+            "B.COM (Hons.)",
+            "BBA",
+            "BCA",
+            "B. Pharmacy",
+            "B.Sc. Nursing",
+            "B.Sc. Nursing",
+            "BPT",
+            "B.Com. – LLB (Hons.)",
+            "BBA – LLB (Hons.)",
+            "B.A.LL.B. (5Year Integrated Course)",
+            "BDS"
         ]
     },
     {
-        "type":"Food Technology",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Biotechnology",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Management",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Commerce",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Economics",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Law",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Architecture",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Pharmaceutical Sciences",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Applied Medical Sciencess",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Psychology",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"History",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Sociology",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Political Science",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Public Administration",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Geography",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "type":"Geography",
-        "courses":[
-            {
-                "courseName":"software enginenring",
-                "duration":"4 year",
-                "description":"lorem ipsum",
-                "semesters":[
-                    {
-                        "name":"semester 1",
-                        "description":"lorem ipsum dolor sit amet, consectetur adipisicing",
-                        "subjects":[
-                            {
-                                "name":"bele",
-                                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-                            }
-                        ]
-                    }
-                ],
-                "colleges":
-                [
-                    {
-            
-                        "collegeName":"mmdu",
-                        "college location":"mullana ambala",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    },
-                    {
-            
-                        "collegeName":"lpu",
-                        "college location":"india",
-                        "rating":"3.5",
-                        "description":"this is good college",
-                        "logo":"website.com/logo.png"
-                    }
-                ]
-            }
+        "category": "Post Gaduate Degree",
+        "list": [
+            "M.Sc. Agriculture (Specialization in Entomology)",
+            "M.Sc. Agriculture (Specialization in Agronomy)",
+            "M.Tech Electronics & Communication Engineering",
+            "MDS in Public Health Dentistry",
+            "MDS in Periodontology",
+            "MDS in Oral & Maxillofacial Pathology & Oral Microbiology",
+            "MDS in Prosthodontics & Crown & Bridge",
+            "MDS in Conservative Dentistry & Endodontics",
+            "MDS in Pediatrics & Preventive Dentistry",
+            "MDS in Orthodontics & Dentofacial Orthopedics",
+            "MDS in Oral Medicine & Radiology",
+            "M.Sc. Nursing (Specialization in Medical Surg., Community Health, Pediatrics, Psychiatric & Obstetrics & Gynecology)",
+            "MDS",
+            "MDS in Oral & Maxillofacial Surgery",
+            "M. Pharm. (Pharmaceutics)",
+            "M. Pharm. (Pharmaceutical Quality Assurance)",
+            "M. Pharm. (Pharmacology)",
+            "M.Sc. (Dietetics & Nutrition)",
+            "MCA",
+            "MBA",
+            "M.Sc Physics",
+            "M.Tech Mechanical Engineering",
+            "M.Sc. Mathematics",
+            "M.Tech Civil Engineering",
+            "M.Sc. Chemistry",
+            "M.Sc. Botany",
+            "M.Sc. Microbiology",
+            "M.Sc. Biotechnology",
+            "M.Tech Computer Science & Engineering",
+            "M.Tech Electronics & Communication Engineering",
+            "MCA",
+            "M.Sc Physics",
+            "M.Tech Mechanical Engineering",
+            "M.Sc. Mathematics",
+            "M.Tech Civil Engineering",
+            "M.Sc. Chemistry",
+            "M.Sc. Botany",
+            "M.Sc. Microbiology",
+            "M.Sc. Biotechnology",
+            "M.Tech Computer Science & Engineering",
+            "M.Sc. (Dietetics & Nutrition)",
+            "MBA",
+            "MCA",
+            "M. Pharm. (Pharmaceutics)",
+            "M. Pharm. (Pharmaceutical Quality Assurance)",
+            "M. Pharm. (Pharmacology)",
+            "M.Sc. Nursing (Specialization in Medical Surg., Community Health, Pediatrics, Psychiatric & Obstetrics & Gynecology)",
+            "MPT",
+            "MDS in Public Health Dentistry",
+            "MDS in Periodontology",
+            "MDS in Oral & Maxillofacial Pathology & Oral Microbiology",
+            "MDS in Prosthodontics & Crown & Bridge",
+            "MDS in Conservative Dentistry & Endodontics",
+            "MDS in Pediatrics & Preventive Dentistry",
+            "MDS in Orthodontics & Dentofacial Orthopedics",
+            "MDS in Oral Medicine & Radiology",
+            "MDS",
+            "MDS in Oral & Maxillofacial Surgery"
         ]
     }
-
-
-
 ]

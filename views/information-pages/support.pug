@@ -1,0 +1,64 @@
+doctype html
+head
+    meta(charset='utf-8')
+    title Support | Notes Ocean
+    // meta
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(name='description' content='This is support page of Notes Ocean. We provide support to our users and also to our developers.')
+    meta(name='keyword' content='support, support notes ocean, notes ocean support page, contact with notes ocean')
+    include ../includes/bootstrap
+    style.
+        .main-container{
+            margin-top: 100px;
+        }
+        .support-img{
+            width :300px;
+        }
+    script(type='text/javascript').
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/60c050bd65b7290ac634ed03/1f7njmpge';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    body 
+        header 
+            include ../includes/navbar
+        section.main-container
+            div.d-flex.align-items-center.justify-content-center
+                img(src="/images/animation/support-chat.gif" alt="support chat image").support-img
+            div.text-center
+                h1 Support for users
+                p We are here to help you. 
+                p Connect with messenger chat or chatbot to get help. 
+                .container
+
+            // Messenger Chat plugin Code
+            #fb-root
+            // Your Chat plugin code
+            #fb-customer-chat.fb-customerchat
+            script.
+                var chatbox = document.getElementById('fb-customer-chat');
+                chatbox.setAttribute("page_id", "100227415369764");
+                chatbox.setAttribute("attribution", "biz_inbox");
+            // Your SDK code
+            script.
+                window.fbAsyncInit = function() {
+                FB.init({
+                xfbml            : true,
+                version          : 'v14.0'
+                });
+                };
+                (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+
+
+        include ../includes/footer

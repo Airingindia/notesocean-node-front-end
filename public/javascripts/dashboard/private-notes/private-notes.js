@@ -15,7 +15,33 @@ $(document).ready(function () {
                 showData(data.requested);
             },
             error: function (err) {
-                console.log(err);
+                if (err.status == 401) {
+                    window.location = "/session-expire";
+                }
+                else if (err.status == 500) {
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: "Internal Server Error",
+                        timeout: 4000,
+                    }).show();
+                }
+                else if (err.status == 0) {
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: "Server is not responding",
+                        timeout: 4000,
+                    }).show();
+                } else {
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: "Failed to load notes, somthing went wrong",
+                        timeout: 4000,
+                    }).show();
+                }
+
             }
         });
     }
@@ -49,17 +75,18 @@ $(document).ready(function () {
                             
                             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
                             <div class="card-body border-0 py-2">
-                                <p class="card-title">${name} </p>
+                               
                             </div>
                             <div class="card-footer border-0 bg-white">
-                                <p class="card-text text-muted"> <i class="fa fa-clock-o mx-1"></i><span> ${ago_time} </span></p>
+                            <p class="card-title">${name} </p>
+                                <small class="card-text text-muted"> <i class="fa fa-clock mx-1"></i><span> ${ago_time} </span></small>
 
                                 <p class="card-text d-flex align-items-center justify-content-between">
                                 
                                 <span class="text-muted"> 
                                 <i class="fa fa-database mx-1">
                                 </i>
-                                <span> ${actual_size} </span>
+                                <small> ${actual_size} </small>
                                 </span>                                    
                                 </p>
                             </div>
@@ -200,24 +227,52 @@ $(document).ready(function () {
         $(".private-note-item").each(function () {
             $(this).click(function () {
                 const parent = $(this).parent();
-                const url = $(this).attr("data-url");
                 const type = $(this).attr("data-type");
                 const note_id = $(this).attr("data-id");
                 const name = $(this).attr("data-name");
-                $(".private-notes-moda-title").html(name);
-                var src;
-                if (type == "doc" || type == "csv" || type == "docx" || type == "ppt" || type == "pptx") {
-                    src = `<iframe style="display:inline;width:100%;height:100%;" src="https://view.officeapps.live.com/op/embed.aspx?src=${url}" </iframe>`;
-                    $(".viewer").html(src);
-                } else if (type == "png" || type == "jpeg" || type == "jpg") {
-                    src = `<img src="${url}" > `;
-                    $(".viewer").html(`<center> ${src} </center>`);
-                } else {
-                    src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
-                    $(".viewer").html(src);
+                // get note url
+                $.ajax({
+                    type: "GET",
+                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + note_id,
+                    headers: {
+                        Authorization: decodeURIComponent(getCookie("token"))
+                    },
+                    contentType: "application/json",
+                    processData: false,
+                    beforeSend: function () { },
+                    success: function (data) {
+                        showFile(data.name, data.type, data.file);
+                    },
+                    error: function (errorData) {
+                        new Noty({
+                            theme: "sunset",
+                            type: "error",
+                            text: "Faild to open file",
+                            timeout: 4000,
+                        }).show();
+                    }
+                });
+
+                function showFile(name, type, url) {
+                    $(".private-notes-moda-title").html(name);
+                    var src;
+                    if (type == "doc" || type == "csv" || type == "docx" || type == "ppt" || type == "pptx") {
+                        src = `<iframe style="display:inline;width:100%;height:100%;" src="https://view.officeapps.live.com/op/embed.aspx?src=${url}" </iframe>`;
+                        $(".viewer").html(src);
+                    } else if (type == "png" || type == "jpeg" || type == "jpg") {
+                        src = `<img src="${url}" > `;
+                        $(".viewer").html(`<center> ${src} </center>`);
+                    } else {
+                        src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
+                        $(".viewer").html(src);
+                    }
+
+                    $("#file-open-modal").modal("show");
+                    $(".private-notes-download").click(function () {
+                        download(url, name);
+                    });
                 }
 
-                $("#file-open-modal").modal("show");
                 // delete function
                 $(".private-notes-delete-btn").click(function () {
                     // delete 
@@ -263,9 +318,7 @@ $(document).ready(function () {
                         });
                 });
                 // download private notes
-                $(".private-notes-download").click(function () {
-                    download(url, name);
-                });
+
                 // rename private notes
                 // $(".private-notes-rename-btn").click(function () {
                 //     alert(note_id);

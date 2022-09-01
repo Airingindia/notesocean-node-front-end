@@ -14,14 +14,7 @@ $(document).ready(function () {
                     for (let i = 0; i < data.requested.length; i++) {
                         let name = data.requested[i].name;
                         let pages = data.requested[i].pages;
-                        let thumbnails = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/350x250/filters:format(webp)/filters:quality(100)").split(",")[0];
-
-                        let img1 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)").split(",")[0];
-
-                        let img2 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)").split(",")[0];
-
-                        let img3 = data.requested[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)").split(",")[0];
-
+                        let thumbnails = data.requested[i].thumbnails.replace("https://thumbnails.ncdn.in/", "https://thumbnails.ncdn.in/fit-in/400x400/");
                         let views = data.requested[i].views;
                         let id = data.requested[i].uuid;
                         let timestamp = timeDifference(data.requested[i].timestamp);
@@ -31,7 +24,7 @@ $(document).ready(function () {
                  <div class="card-header border-0">
                      <p class="card-title"> ${name} </p>
                  </div>
-               <img src="${thumbnails}" class="card-img-top notes-thumbnails lozad " loading="lazy" srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px">
+               <img src="${thumbnails}" class="card-img-top notes-thumbnails lozad " loading="lazy">
                  <div class="card-footer border-0">
                      <div class="row">
                          <div class="col-12">

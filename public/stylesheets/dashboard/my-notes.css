@@ -91,6 +91,9 @@ textarea {
 .no-public-notes img,.no-private-notes img{
     width: 200px;
 }
+.private-notes .card-footer{
+    padding: 0px 10px;
+}
 
 @media (max-width:769px) {
 

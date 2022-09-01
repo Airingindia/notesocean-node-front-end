@@ -24,7 +24,7 @@ html(lang="en")
             include includes/navbar
         section.main-section
             .search-container
-                -if(data.requested){
+                -if(data.size > 0){
                     div.d-flex.justify-content-between
                     h1
                         span.text-danger #{data.size} 
@@ -105,10 +105,10 @@ html(lang="en")
                                     li 
                                         small Use correct spelled  sentence
 
-                        div.request-info.mt-5
-                            h1.text-danger But notes ocean never disappoint you, we will send your notes in 24 hours
+                        div.request-info.mt-5.container
+                            h3.text-danger But notes ocean never disappoint you, we will send your notes in 24 hours
                             p Submit your request, our notes ocean students will fulfill your notes requiremnt 
-                            a.btn.btn-dark.text-light(href="/request/new") Request notes
+                            a.btn.btn-notesocean.text-light.btn-sm(href="/request/new") Request notes
 
                 -}
 

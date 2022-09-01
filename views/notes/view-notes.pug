@@ -67,9 +67,9 @@ html(lang="en")
                         p.card-text=data.products.description
                     .card-body.border-0.p-0.pdf-cont
                         -if(view=="default"){
-                            iframe( allowtransparency="true" style="background: #FFFFFF;" frameborder="1" src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf#toolbar=0" width="100%" height="100%")
+                            iframe( allowtransparency="true" style="background: #FFFFFF;" frameborder="1" src=data.products.file width="100%" height="100%")
                         -}else{
-                            #pdfShow.active(data-url="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf", data-name=data.products.name data-client=clientid)
+                            #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
                         -}
 
 
@@ -89,26 +89,26 @@ html(lang="en")
                         .col-md-8
                             .icon-group.d-flex.justify-content-end.text-muted
                                 - if(data.reacts != null && data.reacts.react == "LIKE"){
-                                    .icon-item.mx-3.text-center.react-btn.active(data-action="1" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
+                                    .icon-item.mx-3.text-center.react-btn.active(data-action="LIKE" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
                                         i.fa.fa-thumbs-up.mx-1
                                         span.mx-1.icon-text Like
                                         span.react-count #{data.products.likes}
                                 - }
                                 - else{
-                                .icon-item.mx-3.text-center.react-btn(data-action="1",data-default=data.products.likes)
+                                .icon-item.mx-3.text-center.react-btn(data-action="LIKE",data-default=data.products.likes)
                                     i.fa.fa-thumbs-up.mx-1
                                     span.mx-1.icon-text Like
                                     span.react-count #{data.products.likes}
                                 - }
 
                                 - if (data.reacts != null && data.reacts.react == "DISLIKE"){
-                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="2",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
+                                .icon-item.mx-3.text-center.mx-1.react-btn.active(data-action="DISLIKE",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
                                     i.fa.fa-thumbs-down
                                     span.mx-1.icon-text Dislike
                                     span.react-count #{data.products.dislikes}
                                 - }
                                 -else{
-                                .icon-item.mx-3.text-center.mx-1.react-btn(data-action="2",data-default=data.products.dislikes)
+                                .icon-item.mx-3.text-center.mx-1.react-btn(data-action="DISLIKE",data-default=data.products.dislikes)
                                     i.fa.fa-thumbs-down
                                     span.mx-1.icon-text Dislike
                                     span.react-count #{data.products.dislikes}
@@ -200,17 +200,17 @@ html(lang="en")
                                 a(href="mailto:contact@notesocean.com") contact@notesocean.com 
                                 span or report 
                                 a(href="/report/"+data.products.uuid) here
-                            div.switcher.mt-2
-                                p If you are facing any problem  with pdf viewer  , switch to
-                                    -if(view=="default"){
-                                        a(href=`/notes/${data.products.uuid}`).btn.btn-notesocean.btn-sm.mx-1
-                                            i.fa.fa-repeat.mx-1
-                                            span Standard
-                                    -}else{
-                                        a(href=`/notes/${data.products.uuid}?viewer=default`).btn.btn-notesocean.btn-sm.mx-1
-                                            i.fa.fa-repeat.mx-1
-                                            span Classic
-                                    -}
+                            //- div.switcher.mt-2
+                            //-     p If you are facing any problem  with pdf viewer  , switch to
+                            //-         -if(view=="default"){
+                            //-             a(href=`/notes/${data.products.uuid}`).btn.btn-notesocean.btn-sm.mx-1
+                            //-                 i.fa.fa-repeat.mx-1
+                            //-                 span Standard
+                            //-         -}else{
+                            //-             a(href=`/notes/${data.products.uuid}?viewer=default`).btn.btn-notesocean.btn-sm.mx-1
+                            //-                 i.fa.fa-repeat.mx-1
+                            //-                 span Classic
+                            //-         -}
 
 
             .report-modal.modal(tabindex="1")
@@ -249,7 +249,7 @@ html(lang="en")
                                         .form-group
                                             label Message
                                             textarea.form-control(rows="5" cols="10",,name="message",required).rounded-0  
-                                        button.btn.btn-notesocean.my-3.report-btn Report
+                                        button.btn.btn-notesocean.my-3.report-btn-modal Report
                                 -}
                         -if(token.length < 20){
                             .modal-body.border-0.text-center

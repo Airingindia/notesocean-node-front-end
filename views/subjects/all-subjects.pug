@@ -4,68 +4,42 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title  Subjects |  Notes Ocean sdfdf
-        meta(name="description",content=`Find your notes by subjects`)
-        meta(name="keyword",content=`mathematics,science,hindi,biology, notes ocean math notes, engilish notes, chemistry notes , biology notes`)
+        title Subjects | Notes Ocean
+        meta(name="description",content=`Find your notes by courses`)
+        meta(name="keyword",content=`upsc,engineering,medical,management`)
         meta(property='og:title', content=`Notes Ocean`)
         meta(property='og:site_name' content='Notes Ocean')
-        meta(property='og:url' content=`https://notesocean.com/subjects/all`)
-        meta(property='og:description' content=`Find your notes by subjects`)
+        meta(property='og:description' content=`Find your notes by courses`)
         meta(property='og:type' content='website')
         meta(property='og:image' content=`https://notesocean.com/logo.png`)
 
         meta(name='twitter:card' content='website')
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`Notes Ocean`)
-        meta(name='twitter:description' content=`Find your notes by subjects`)
+        meta(name='twitter:description' content=`Find your notes by courses`)
+
         include ../includes/bootstrap
         style 
-            include ../../public/stylesheets/courses/all-courses.css
+            include ../../public/stylesheets/subjects/all-subjects.css
     body 
 
         header
             include ../includes/navbar
         section.main-section
-            section.categories.categories-courses.wow.animate__animated.animate__fadeInU
-                .container.categories-item-cont
-                    .row
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-1")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 Mathematics
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes 
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-2")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 Science 
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes 
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-3")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 English
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes 
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-4")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 Sanskrit
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes  
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-5")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 Hindi
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes 
-                        .col-6.col-lg-4.mt-3
-                            a(href="/courses/class-6")
-                                .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                                    h4 Social Science
-                                    p Lorem ipsum dolor sit amet.
-                                    button.categories-btn.btn View Notes 
+            -for(let i = 0; i < subjects.length; i++){
+                -let category = subjects[i].category;
+                -let list = subjects[i].list;
+                section.categories.categories-courses.wow.animate__animated.animate__fadeInU.my-3
+                    .container.categories-item-cont
+                        h2 #{category}
+                        .row
+                            - for(let j = 0;j<list.length;j++){
+                                .col-6.col-lg-3.mt-3
+                                    a(href="subjects/"+url.make(list[j]))
+                                        .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                                            p #{list[j]}
+                            -}
 
 
-
+            -}
         include ../includes/footer

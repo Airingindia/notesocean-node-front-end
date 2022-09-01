@@ -22,28 +22,14 @@ $(document).ready(function () {
         $(".address").val(userInfo.address);
         $(".country").val(userInfo.country);
         if (userInfo.profileImage !== null) {
-            if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") === -1) {
-                $(".user-profile-img").attr("src", userInfo.profileImage);
-            } else {
-                $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in"));
+            if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") !== -1) {
+                $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100"));
             }
-
+            else if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") !== -1) {
+                $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/100x100"));
+            }
         }
-        // if (email.hasOwnProperty("emailVerified")) {
-        //     if (userInfo.emailVerified) {
-        //         $(".email").removeClass("is-invalid");
-        //         $(".email").addClass("is-valid");
-        //         $(".email").next().html(`<span> Verified </span> `);
-        //     } else {
-        //         $(".email").addClass("is-invalid");
-        //         $(".email").removeClass("is-valid");
-        //         $(".email").next().next().html(`<span> Email is not verified </span> <a href="/dashboard/profile/verify-email" class="mx-2"> Verify</a>`);
-        //     }
-        // } else {
-        //     $(".email").removeClass("is-invalid");
-        //     $(".email").addClass("is-valid");
-        //     $(".email").next().html(`<span> Verified </span> `);
-        // }
+
         if (userInfo.emailVerified) {
             $(".email").removeClass("is-invalid");
             $(".email").addClass("is-valid");
