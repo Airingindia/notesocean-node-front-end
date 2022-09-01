@@ -223,6 +223,10 @@ router.get("/logout", (req, res, next) => {
   }
   res.clearCookie("token");
   res.render("session-expire");
-  ;
+});
+// support page route
+
+router.get("/support", (req, res, next) => {
+  res.render("information-pages/support");
 });
 module.exports = router;

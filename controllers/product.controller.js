@@ -14,7 +14,6 @@ const getProductInfo = async (productid, token) => {
                 } else {
                     reject(response);
                 }
-
             }
             else {
                 reject(response);
