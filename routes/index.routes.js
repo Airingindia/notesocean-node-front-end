@@ -136,7 +136,6 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
     ;
 
   }).catch((error) => {
-    console.log(error);
     res.status(404);
     res.render("notfound");
     ;
@@ -163,7 +162,6 @@ router.get("/search", (req, res, next) => {
       } else {
         res.render("notfound");
       }
-      ;
     })
   } else {
     res.render("error/500");

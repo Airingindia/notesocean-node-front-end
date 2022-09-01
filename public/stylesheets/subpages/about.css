@@ -137,7 +137,14 @@
     width: 100px;
 }
 
+.company-info{
+    width: 50%;
+}
 @media (max-width: 768px) {
+    
+    .company-info{
+        width:100%;
+    }
     .illustrations-img {
         display: none;
     }

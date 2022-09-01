@@ -20,6 +20,13 @@ $(document).ready(function () {
             error: function (err) {
                 if (err.status == 401) {
                     window.location = "/session-expire";
+                } else {
+                    new Noty({
+                        theme: "sunset",
+                        type: "error",
+                        text: "Faild to load public notes ",
+                        timeout: 1000,
+                    }).show();
                 }
                 $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-container").addClass("d-none");
@@ -37,11 +44,11 @@ $(document).ready(function () {
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
-                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
-                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
+                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
+                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
+                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:4500x400/');
 
-                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x300/');
+                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
 
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);
@@ -53,10 +60,11 @@ $(document).ready(function () {
                         <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
                             <img class="card-img-top lozad" src="${thumbnails}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" style="height:200px;width:100%" loading="lazy"  />
                             <div class="card-body pb-0"> 
-                                <h6 class="card-title">  ${name.substring(0, 100)} </h6>
+                               
                                 
                             </div>
                             <div class="card-footer bg-white border-0">
+                            <p class="card-title">  ${name.substring(0, 100)} </p>
                                
                                 <div class="d-flex justify-content-between text-muted">
                                     <div>

@@ -5,11 +5,11 @@
 }
 
 footer {
-    width: 100%;
+    width: 99.9%;
     display: flex;
     justify-content: space-between;
     margin-top: 100px;
-    padding: 30px;
+    padding: 10px 30px;
 }
 
 footer ul {
