@@ -62,12 +62,21 @@ html(lang="en-US")
           a(href="/courses").color-red View all
         .container.categories-item-cont
           .row
+            - let count = 0;
             -for(let i = 0;i<12;i++){
+              - count++;
               - var item = courses[Math.floor(Math.random()*courses.length)];
-              .col-6.col-lg-4.mt-3
-                a(href="/courses/"+url.make(item))
-                  .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                    h6 #{item}
+
+                .col-6.col-lg-4.mt-3
+                  a(href="/courses/"+url.make(item))
+                    .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center.w-100.h-100
+                      h6 #{item}
+              -if(count ==3|| count == 6 || count == 9 ){
+                .col-6.col-lg-4.mt-3
+                  //- courses and subject item ads here
+                  div#div-gpt-ad-1662116680408-0.card.shadow.border-0.w-100.h-100.ad-container-item
+              -}
+
             -}
 
     section.categories.categories-subject.wow.animate__animated.animate__fadeIn
@@ -78,12 +87,19 @@ html(lang="en-US")
           a(href="/subjects").color-red View all
         .container.categories-item-cont
           .row
+            - let counter = 0;
             -for(let i = 0;i<12;i++){
+              - counter++;
               - var item = subjects[Math.floor(Math.random()*subjects.length)];
-              .col-6.col-lg-4.mt-3
-                a(href="/subjects/"+url.make(item))
-                  .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
-                    h6 #{item}
+                .col-6.col-lg-4.mt-3
+                  a(href="/subjects/"+url.make(item))
+                    .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                      h6 #{item}
+                -if(counter == 3 || counter == 6 || counter == 9){
+                  .col-6.col-lg-4.mt-3
+                    //- courses and subject item ads here
+                    div#div-gpt-ad-1662116680408-0.card.shadow.border-0.w-100.h-100.ad-container-item
+              -}
             -}
     //- section.most-viewd-notes.wow.animate__animated.animate__fadeIn
     //-   .container.py-5
@@ -251,6 +267,17 @@ html(lang="en-US")
     include includes/footer
     script
       include ../public/javascripts/subpages/index.js
+    script.
+      window.googletag = window.googletag || {cmd: []};
+      googletag.cmd.push(function() {
+      googletag.defineSlot('/22810108276/subject-and-courses-in-homepage', ['fluid'], 'div-gpt-ad-1662116680408-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+      });
+
+    script.
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1662116680408-0'); });
+
 
 
 

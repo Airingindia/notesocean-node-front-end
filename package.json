@@ -2,11 +2,10 @@
   "name": "notesocean",
   "version": "0.0.0",
   "private": true,
-  "main": "bin/wwww",
   "scripts": {
-    "dev": "node ./bin/www.js",
-    "build": "node ./bin/www.js",
-    "start": "node ./bin/www.js"
+    "dev": "node ./bin/www",
+    "build": "node ./bin/www",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@amplitude/node": "^1.10.0",
