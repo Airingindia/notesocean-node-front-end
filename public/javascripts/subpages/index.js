@@ -156,4 +156,16 @@ $(document).ready(function () {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
+
+    // show ads 
+
+    function showAds() {
+        // .card.shadow (adsbygoogle = window.adsbygoogle || []).push({});
+        $("ins.adsbygoogle").each(function () {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+    }
+
+
+    showAds();
 });
