@@ -24,13 +24,13 @@ $(document).ready(function () {
                 adobeViewer.getAPIs().then(apis => {
                     apis.getPDFMetadata()
                         .then((metadata) => {
-                            console.log(metadata);
+                            $(".ads-box").remove();
                         })
                         .catch(() => {
-                            console.log("error");
+                            $(".ads-box").remove();
                         });
                 }).catch((error) => {
-                    console.log(error);
+                    $(".ads-box").remove();
                 });
             });
         });

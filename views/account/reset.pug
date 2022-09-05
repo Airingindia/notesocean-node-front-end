@@ -1,0 +1,38 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Reset Password | Notes ocean
+    meta(name="description" content="if you forgot your password, reset your password  here!")
+    meta(name="keywords" content="Reset password, notes ocean, change password, notes ocean reset password, notes ocean change password")
+    include ../includes/bootstrap
+    style
+        include ../../public/stylesheets/account/signup.css
+    link(rel="stylesheet" href="/stylesheets/animate.css")
+    body
+        header
+            include ../includes/navbar
+        section.main-section
+            form.w-25.mx-auto
+                h2 Forget your password?
+                p Don't worry , we will help you to reset your password
+                .form-group.email-form
+                    i.fa.fa-envelope
+                    //- label(for="email address") Enter Email Address
+                    input(type="email" placeholder="Enter Email Address" name="email").form-control
+                    button(type="button").btn.btn-notesocean.send-code.my-3 Send Code
+                .form-group.verify-form.animate__animated.animate__backInUp.d-none
+                    i.fa.fa-lock
+                    input(type="number" placeholder="Enter code" name="code" ).form-control
+                    button(type="button").btn.btn-notesocean.verify-code.my-3 verify code
+                .form-group.password-form.animate__animated.animate__backInUp.d-none
+                    i.fa.fa-lock
+                    input(type="text" placeholder="New Password" name="new-password").form-control
+                    br
+                    i.fa.fa-lock
+                    input(type="text" placeholder="Confirm New Password" name="confirm-password").form-control
+                    button(type="button").btn.btn-notesocean.reset-password.my-3 Reset password
+        include ../includes/footer
+        script
+            include ../../public/javascripts/accounts/signup.js

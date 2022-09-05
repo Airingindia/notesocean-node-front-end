@@ -66,6 +66,10 @@ html(lang="en")
                         h1.card-title=data.products.name
                         p.card-text=data.products.description
                     .card-body.border-0.p-0.pdf-cont
+                        .ads-box
+                            ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='5386213842' data-ad-format='auto' data-full-width-responsive='true')
+                            script.
+                                (adsbygoogle = window.adsbygoogle || []).push({});
                         -if(view=="default"){
                             iframe( allowtransparency="true" style="background: #FFFFFF;" frameborder="1" src=data.products.file width="100%" height="100%")
                         -}else{
@@ -188,7 +192,7 @@ html(lang="en")
                                 button.twitter
                                 button.whatsapp
             .info-modal.modal#infoModal
-                .modal-dialog.modal-dialog-centered.modal-lg
+                .modal-dialog.modal-dialog-centered
                     .modal-content.border-0
                         .modal-header.border-0.d-flex.justify-content-end.p-2
                             i.close.fa.fa-times(data-bs-dismiss='modal' aria-label='Close')
@@ -214,13 +218,7 @@ html(lang="en")
 
 
             .report-modal.modal(tabindex="1")
-                .modal-dialog.modal-dialog-centered.modal-lg 
-                    //- .container
-                    //-     .d-flex.justify-content-center.align-items-center
-                    //-         img(src="/images/animation/success-animation.gif").report-success-animation
-                    //-     div.text-center
-                    //-         h1 Reported Successfully
-                    //-         p Thank you for reporting this note. We will review this note and if necessary we will remove it.               
+                .modal-dialog.modal-dialog-centered            
                     .modal-content.border-0
                         .modal-header.border-0.display-flex
                             div(style="flex-direction:column;")
@@ -253,22 +251,20 @@ html(lang="en")
                                 -}
                         -if(token.length < 20){
                             .modal-body.border-0.text-center
-                                h4.text-warning You need to login to report note
-                                span If you are business,orginazation or copyright holder please report 
-                                    a(href="/report") here 
+                                h4.text-danger You need to login to report!
                                 div.my-3
                                     a(href="/account/login?dest=/notes/"+data.products.uuid+"#report").btn.btn-sm.btn-notesocean Login
                         -}  
 
             .user-not-login-modal.modal
-                .modal-dialog.modal-dialog-centered.modal-lg
+                .modal-dialog.modal-dialog-centered
                     .modal-content.border-0
                         .modal-header.border-0
                             //- h6 Login 
                             button.btn-close.btn-sm(type='button' data-bs-dismiss='modal' aria-label='Close')
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
-                            a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-primary Login
+                            a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-notesocean Login
         -if(view!="default"){
             script(src="https://documentcloud.adobe.com/view-sdk/main.js")
         -}

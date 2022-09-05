@@ -49,8 +49,7 @@ p {
 
 
 
-.form-group input,
-.form-group select {
+.form-group input {
     border: none;
     outline: none;
     box-shadow: none;
@@ -75,7 +74,7 @@ p {
 
 .signup-form,
 .login-form {
-    width: 60%;
+    width: 100%;
 }
 
 datalist#browsers:focus,
@@ -125,8 +124,36 @@ section .btn {
     background-color: #FB0100 !important;
 }
 
+
+.select2-container{
+    display: block;
+    width: 100% !important;
+}
+.select2-container--default .select2-selection--single{
+    border: none !important;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #323232 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+}
+
+.signup-form .col-md-6{
+    padding: 0px !important;
+}
+
+.desktop-img img {
+    transform: scaleX(-1);
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+
 @media(max-width:950px) {
-    .desktop-img {
+    .desktop-img img {
         display: none;
     }
 
@@ -139,11 +166,13 @@ section .btn {
         margin-top: 105px !important;
     }
 
+   
+
 }
 
 
 @media (max-width:1000px) {
-    .desktop-img {
+    .desktop-img img {
         display: none !important;
     }
 }
@@ -157,5 +186,10 @@ section .btn {
 .main-section .row {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    margin: 0 auto !important;
 }
+
+
+/* animation */
+

@@ -16,6 +16,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get("/:course", (req, res, next) => {
+    let search = req.params.course.replace(/-/g, ',');
     productControllers.searchProducts(req.params.course.replace("-", " ")).then((product) => {
         res.render("courses/view-course", {
             data: product,

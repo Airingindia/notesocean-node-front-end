@@ -83,8 +83,17 @@ div#amzn-native-ad-0 {
 
 
 .pdf-cont {
-    width: 100%;
+    width: 99.9%;
     height: 70vh;
+    position: relative;
+}
+
+.ads-box{
+    position: absolute;
+    z-index:999;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .info-bar a,

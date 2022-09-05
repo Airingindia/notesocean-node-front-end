@@ -1,5 +1,11 @@
 
 $(document).ready(function () {
+    $(document).ready(function () {
+        $('#countries').select2({
+            placeholder: 'Select your country',
+            selectOnClose: true,
+        });
+    });
     // form validations
     $.getScript('/vendors/data/countries.json', function (data) {
         data = JSON.parse(data);

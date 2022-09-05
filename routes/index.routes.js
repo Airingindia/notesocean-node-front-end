@@ -105,8 +105,11 @@ router.get("/profile/:user_id", async (req, res, next) => {
 //  login page route
 router.get("/login", (req, res, next) => {
   res.render("account/login");
-  ;
 });
+
+router.get("/reset-password", (req, res, next) => {
+  res.render("account/reset");
+})
 
 // sign page route 
 
