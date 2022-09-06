@@ -91,19 +91,19 @@ $(document).ready(function () {
                             const userdata = JSON.parse(localStorage.getItem("userInfo"));
                             userdata.emailVerified = true;
                             localStorage.setItem("userInfo", JSON.stringify(userdata));
-                            // new Noty({
-                            //     theme: "nest",
-                            //     type: "success",
-                            //     text: 'Email verified successfully!',
-                            //     timeout: 3000,
-                            //     closeWith: ['click', 'button'],
-                            // }).show();
-                            // window.location = "/dashboard";
+                            new Noty({
+                                theme: "nest",
+                                type: "success",
+                                text: 'Email verified successfully!',
+                                timeout: 3000,
+                                closeWith: ['click', 'button'],
+                            }).show();
+                            window.location = "/dashboard";
                         }, error: function (error) {
                             new Noty({
                                 theme: "nest",
                                 type: "error",
-                                text: 'Somthing went wrong, please try again',
+                                text: 'Wrong code!',
                                 timeout: 3000,
                                 closeWith: ['click', 'button'],
                             }).show();
@@ -136,17 +136,7 @@ $(document).ready(function () {
                     localStorage.setItem("emailData", JSON.stringify(data))
                     verify();
                 }, error: function () {
-                    $(".notice-box").html(` <div id="liveToast" class="toast fade show border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-danger text-light">
-                        <strong class="me-auto">Error !</strong> <i class="fa fa-times close close-notice" data-dismiss="toast" aria-label="Close"> </i>
-                    </div>
-                    <div class="toast-body">
-                       <span> Failed to send verification to your email , plese try after sometimes  </span>
-                    </div>
-                </div>`);
-                    setTimeout(() => {
-                        $(".notice-box").html("");
-                    }, 5000);
+                    window.location = "/dashboard";
                 }
             }
         )

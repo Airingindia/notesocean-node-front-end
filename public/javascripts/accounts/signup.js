@@ -7,15 +7,22 @@ $(document).ready(function () {
         });
     });
     // form validations
-    $.getScript('/vendors/data/countries.json', function (data) {
-        data = JSON.parse(data);
-        localStorage.setItem("countriesData", JSON.stringify(data));
-        for (let i = 0; i < data.length; i++) {
-            const short_code = data[i].abbreviation;
-            const name = data[i].country;
-            $("#countries").append(`<option value="${short_code}"> ${name} </option>`);
+    $.ajax({
+        type:"GET",
+        url: atob(decodeURIComponent(getCookie("api")))+"/countries",
+        success: function (data) {
+            for (let i = 0; i < data.requested.length; i++) {
+                const short_code = data.requested[i].iso3;
+                const name = data.requested[i].niceName;
+                $("#countries").append(`<option value="${short_code}"> ${name} </option>`);
+            }
         }
-    });
+    })
+    // $.getScript('/vendors/data/countries.json', function (data) {
+    //     data = JSON.parse(data);
+    //     localStorage.setItem("countriesData", JSON.stringify(data));
+       
+    // });
     $("form.signup-form").submit(function (event) {
         event.preventDefault();
         let firstName = $("form input[name='fistName']").val();
@@ -24,7 +31,7 @@ $(document).ready(function () {
         let mobile = $("form input[name='phone']").val();
         let choosePassword = $("form input[name='password']").val();
         let address = $("form input[name='address']").val();
-        let country = $("form input[name='country']").val();
+        let country = $("#countries").val();
         var form = new FormData();
         const usersData = {
             firstName: firstName,
