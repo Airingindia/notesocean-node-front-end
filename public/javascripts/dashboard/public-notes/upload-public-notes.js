@@ -187,8 +187,8 @@ $(function () {
 
     function validate() {
         $(".note-title").on("input", function () {
-            $(".title-char-count").html("( " + $(this).val().length + " )");
-            if ($(this).val().length > 50) {
+            $(".title-char-count").html("( " + $(this).val().trim().length + " )");
+            if ($(this).val().trim().length > 20) {
                 $(".note-title").addClass("is-valid");
                 $(".note-title").removeClass("is-invalid");
             }
@@ -201,7 +201,7 @@ $(function () {
             else {
                 $(".note-title").addClass("is-invalid");
                 $(".note-title").removeClass("is-valid");
-                $(".invalid-title-error").html("Title should be at least 50 characters");
+                $(".invalid-title-error").html("Title should be at least 20 characters");
             }
         });
         $(".note-title").on("change", function () {
@@ -223,8 +223,8 @@ $(function () {
         // description validations
 
         $(".note-descriptions").on("input", function () {
-            $(".desctiption-char-count").html("( " + $(this).val().length + " )");
-            if ($(this).val().length > 100) {
+            $(".desctiption-char-count").html("( " + $(this).val().trim().length + " )");
+            if ($(this).val().trim().length > 50) {
                 $(".note-descriptions").addClass("is-valid");
                 $(".note-descriptions").removeClass("is-invalid");
             }
@@ -236,7 +236,7 @@ $(function () {
             else {
                 $(".note-descriptions").addClass("is-invalid");
                 $(".note-descriptions").removeClass("is-valid");
-                $(".invalid-descriptions-error").html("Descriptions should be at least 100 characters");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 50 characters");
             }
         });
         $(".note-descriptions").on("change", function () {

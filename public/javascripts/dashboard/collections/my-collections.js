@@ -17,7 +17,8 @@ $(document).ready(function () {
                     $(".no-collections").removeClass("d-none");
                 }
             }, error: function (error) {
-                console.log(error);
+                $(".loading-collections").css({ display: "none" });
+                $(".no-collections").removeClass("d-none");
             }
         });
     }
@@ -26,7 +27,6 @@ $(document).ready(function () {
 
     function showCollection(colllections) {
         $(".collections-rows").html("");
-
         for (let i = 0; i < colllections.length; i++) {
             var productlength = 0;
             if (colllections[i].products !== undefined) {

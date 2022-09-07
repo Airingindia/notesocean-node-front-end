@@ -58,12 +58,12 @@ html(lang="en")
                         - var product_pages = collection.products[i].pages;
                         - var product_timestamp = collection.products[i].timestamp;
                         - var product_actual_time = timeService.get(product_timestamp);
-                    .col-md-4.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
+                    .col-md-3.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
                         a(href=`/notes/${(product_id)}`,itemprop="item")
                             .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
                                 .card-header.border-0.bg-white
                                     p(itemprop="name").card-title=product_name
-                                .card-body
+                                .card-body.p-0
                                     img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
                                 .card-footer.border-0.bg-white
                                     .row
