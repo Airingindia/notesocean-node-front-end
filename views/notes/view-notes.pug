@@ -255,11 +255,26 @@ html(lang="en")
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
                             a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-notesocean Login
-        -if(view!="default"){
-            script(src="https://documentcloud.adobe.com/view-sdk/main.js")
-        -}
-        script
-            include ../../public/javascripts/notes/viewer.js
+        script(src="https://documentcloud.adobe.com/view-sdk/main.js")
+        script.
+            document.addEventListener("adobe_dc_view_sdk.ready", function () {
+            var adobeDCView = new AdobeDC.View({ clientId: document.querySelector("#pdfShow").getAttribute("data-client"), divId: "pdfShow" });
+            adobeDCView.previewFile(
+                {
+                    content: { location: { url: document.querySelector("#pdfShow").getAttribute("data-url") } },
+                    metaData: { fileName: document.querySelector(" #pdfShow").getAttribute("data-name") }
+                },
+                {
+                    embedMode: "SIZED_CONTAINER",
+                    showDownloadPDF: false,
+                    showPrintPDF: false,
+                    enableLinearization: true,
+                    showAnnotationTools: false,
+                    enableFormFilling: false,
+                    hasReadOnlyAccess: true
+                }
+                );
+            });
         include ../includes/footer
         script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
         script
