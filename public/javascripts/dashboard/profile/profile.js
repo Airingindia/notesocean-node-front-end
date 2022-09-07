@@ -1,10 +1,12 @@
 $(document).ready(function () {
+    
+//    console.log(CryptoJS.enc.Base64.parse(getCookie("api")).toString(CryptoJS.enc.Utf8) );
     // get profile info
     //check if user has stored profile information 
     function first() {
         $.ajax({
             type: "GET",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/users/self",
+            url: app.getApi() + "/users/self",
             headers: {
                 Authorization: getCookie("token")
             },
@@ -25,7 +27,7 @@ $(document).ready(function () {
             if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") !== -1) {
                 $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100"));
             }
-            else if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") !== -1) {
+            else if (userInfo.profileImage.indexOf("https://profiles.ncdn.in") !== -1) {
                 $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/100x100"));
             }
         }
@@ -70,26 +72,18 @@ $(document).ready(function () {
                 address: data.address,
                 country: data.country
             }
-
-
-
-
             var formdata = new FormData();
             formdata.append("users", new Blob([JSON.stringify(jsonData)], { type: "application/json" }));
             formdata.append("file", file);
             // update  pic with ajax
-
-
-
-
             $.ajax({
                 type: "PUT",
-                url: atob(getCookie("api")) + "/users",
+                url: app.getApi() + "/users",
                 processData: false,
                 contentType: false,
                 data: formdata,
                 headers: {
-                    Authorization: getCookie("token")
+                    Authorization: app.getToken()
                 },
                 beforeSend: function () {
                     $(".pic-uploading-roller").removeClass("d-none");

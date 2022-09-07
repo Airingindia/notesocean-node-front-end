@@ -1,33 +1,30 @@
 //- preconnect and pre fetching
-link(rel='dns-prefetch' href='https://static.ncdn.in')
-link(rel='dns-prefetch' href='https://admedia.ncdn.in')
-link(rel='dns-prefetch' href='https://product.ncdn.in')
-link(rel='dns-prefetch' href='https://thumbnail.static.ncdn.in')
 link(rel='dns-prefetch' href='https://fonts.googleapis.com')
 //-mobile optimized links
 meta(name="mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="default")
-link(rel='apple-touch-icon' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-60x60.png')
-link(rel='apple-touch-icon' sizes='60x60' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-76x76.png')
-link(rel='apple-touch-icon' sizes='114x114' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
-link(rel='apple-touch-icon' sizes='144x144' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
-//- libs
-link(rel='stylesheet' href='https://static.ncdn.in/vendor/bootstrap/bootstrap.min.css' media="all")
-link(rel='stylesheet' href='/vendors/fontawesome-free-6.1.1-web/css/all.css' media="all")
-link(rel="stylesheet" href="https://static.ncdn.in/vendor/noty/noty.css" media="all")
-link(href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="all")
+link(rel='apple-touch-icon' href='/touch-icons/apple-touch-icon-iphone-60x60.png')
+link(rel='apple-touch-icon' sizes='60x60' href='/touch-icons/apple-touch-icon-ipad-76x76.png')
+link(rel='apple-touch-icon' sizes='114x114' href='/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
+link(rel='apple-touch-icon' sizes='144x144' href='/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
 //- libs css
-script(src='https://static.ncdn.in/vendor/jquery/jquery-3.6.0.min.js' type="application/javascript")
-script(src='https://static.ncdn.in/vendor/bootstrap/bootstrap.js' type="application/javascript" ) 
-script(src="https://static.ncdn.in/vendor/noty/noty.min.js" type="application/javascript" )
-script(src="https://static.ncdn.in/vendor/lozad/lozad.min.js" type="application/javascript" )
-script(src="https://static.ncdn.in/vendor/wow/wow.min.js" type="application/javascript")
+link(rel='stylesheet' href='/vendors/bootstrap/bootstrap.min.css' media="all")
+link(rel='stylesheet' href='/vendors/fontawesome-free-6.1.1-web/css/all.css' media="all")
+link(rel="stylesheet" href="/vendors/noty/noty.css" media="all")
+link(href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="all")
+//- libs js
+script(src='/vendors/jquery/jquery.js' type="application/javascript")
+script(src='/vendors/bootstrap/bootstrap.js' type="application/javascript" ) 
+script(src="/vendors/noty/noty.min.js" type="application/javascript" )
+script(src="/vendors/lozad/lozad.min.js" type="application/javascript" )
+script(src="/vendors/wow/wow.min.js" type="application/javascript")
+script(src="/vendors/crypto/crypto-js.min.js")
 //- icons
-link(rel="shortcut icon" href="https://static.ncdn.in/public/icon-192x192.png")
-link(rel='apple-touch-icon-precomposed' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-60x60.png')
-link(rel='apple-touch-icon-precomposed' sizes='60x60' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-76x76.png')
-link(rel='apple-touch-icon-precomposed' sizes='114x114' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
-link(rel='apple-touch-icon-precomposed' sizes='144x144' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
+link(rel="shortcut icon" href="/icon-192x192.png")
+link(rel='apple-touch-icon-precomposed' href='/touch-icons/apple-touch-icon-iphone-60x60.png')
+link(rel='apple-touch-icon-precomposed' sizes='60x60' href='/touch-icons/apple-touch-icon-ipad-76x76.png')
+link(rel='apple-touch-icon-precomposed' sizes='114x114' href='/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
+link(rel='apple-touch-icon-precomposed' sizes='144x144' href='/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
@@ -136,5 +133,26 @@ script.
     gtag('config', 'G-QCGYD0XM2C');
 script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834928493837917"
     crossorigin="anonymous")
+script.
+    class notesocean{
+        getApi(){
+            return CryptoJS.enc.Base64.parse(getCookie("api")).toString(CryptoJS.enc.Utf8);
+        }
+        getToken(){
+            return getCookie("token")
+        }
+    }
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    var app = new notesocean();
 
 
