@@ -136,7 +136,7 @@ script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
 script.
     class notesocean{
         getApi(){
-            return CryptoJS.enc.Base64.parse(getCookie("api")).toString(CryptoJS.enc.Utf8);
+            return CryptoJS.enc.Base64.parse(decodeURIComponent(getCookie("api"))).toString(CryptoJS.enc.Utf8);
         }
         getToken(){
             return getCookie("token")
