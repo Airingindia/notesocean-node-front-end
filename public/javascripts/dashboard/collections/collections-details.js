@@ -4,7 +4,7 @@ $(document).ready(function () {
     function getCollectionDetails() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/collections/" + collection_id,
+            url: app.getApi() + "/collections/" + collection_id,
             contentType: "application/json",
             processData: false,
             headers: {
@@ -36,7 +36,7 @@ $(document).ready(function () {
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/products",
+            url: app.getApi() + "/products",
             headers: {
                 Authorization: getCookie("token")
             },
@@ -78,7 +78,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "DELETE",
-                    url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + noteid,
+                    url: app.getApi() + "/collections/" + collection_id + "/products/" + noteid,
                     headers: {
                         Authorization: getCookie("token"),
                     },
@@ -175,7 +175,7 @@ $(document).ready(function () {
             if (selected_notes_arry.length > 0) {
                 $.ajax({
                     type: "POST",
-                    url: atob(getCookie("api")) + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
+                    url: app.getApi() + "/collections/" + collection_id + "/products/" + selected_notes_ids.toString(),
                     headers: {
                         Authorization: getCookie("token"),
                     },
@@ -267,7 +267,7 @@ $(document).ready(function () {
                 form.append("file", selected_banner_file);
                 $.ajax({
                     type: "PUT",
-                    url: atob(getCookie("api")) + "/collections/" + collection_id,
+                    url: app.getApi() + "/collections/" + collection_id,
                     headers: {
                         Authorization: getCookie("token"),
                     },
@@ -341,7 +341,7 @@ $(document).ready(function () {
                 form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
                 $.ajax({
                     type: "PUT",
-                    url: atob(getCookie("api")) + "/collections/" + collection_id,
+                    url: app.getApi() + "/collections/" + collection_id,
                     headers: {
                         Authorization: getCookie("token"),
                     },

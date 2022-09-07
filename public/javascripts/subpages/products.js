@@ -45,7 +45,7 @@ $(document).ready(function () {
     function addReactionAction(action) {
         $.ajax({
             type: "POST",
-            url: atob(getCookie("api")) + "/products/" + window.location.pathname.split("/").pop() + "/reacts/" + action,
+            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/reacts/" + action,
             headers: {
                 Authorization: getCookie("token")
             },
@@ -110,7 +110,7 @@ $(document).ready(function () {
     function loadComments() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/products/" + window.location.pathname.split("/").pop() + "/comments/" + 0,
+            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments/" + 0,
             beforeSend: function () { },
             success: function (data) {
                 $(".comment-length").html(data.size);
@@ -152,7 +152,7 @@ $(document).ready(function () {
             } else {
                 $.ajax({
                     type: "GET",
-                    url: atob(getCookie("api")) + "/users/self",
+                    url: app.getApi() + "/users/self",
                     headers: {
                         Authorization: getCookie("token")
                     },
@@ -261,7 +261,7 @@ $(document).ready(function () {
                 }
                 $.ajax({
                     type: "POST",
-                    url: atob(getCookie("api")) + "/products/" + window.location.pathname.split("/").pop() + "/comments",
+                    url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
                     processData: false,
                     contentType: "application/json",
                     data: JSON.stringify({
@@ -329,7 +329,7 @@ $(document).ready(function () {
             let productId = window.location.pathname.split("/").pop();
             $.ajax({
                 type: "POST",
-                url: atob(getCookie("api")) + "/products/" + productId + "/reports",
+                url: app.getApi() + "/products/" + productId + "/reports",
                 processData: false,
                 contentType: "application/json",
                 data: JSON.stringify({

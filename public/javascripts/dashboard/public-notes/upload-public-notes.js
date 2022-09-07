@@ -12,7 +12,7 @@ $(function () {
         maxFiles: 1,
         uploadMultiple: false,
         acceptedFiles: ".pdf",
-        url: atob(decodeURIComponent(getCookie("api"))) + "/products",
+        url: app.getApi() + "/products",
         method: "post",
         chunking: false,
         forceChunking: false,
@@ -79,7 +79,7 @@ $(function () {
         if (upload == "upload") {
             $.ajax({
                 type: "GET",
-                url: atob(decodeURIComponent(getCookie("api"))) + "/requests/" + requestUuid,
+                url: app.getApi() + "/requests/" + requestUuid,
                 headers: {
                     Authorization: getCookie("token"),
                 },

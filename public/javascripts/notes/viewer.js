@@ -20,19 +20,19 @@ $(document).ready(function () {
 
             // end previewFile
 
-            resultPromise.then(adobeViewer => {
-                adobeViewer.getAPIs().then(apis => {
-                    apis.getPDFMetadata()
-                        .then((metadata) => {
-                            $(".ads-box").remove();
-                        })
-                        .catch(() => {
-                            $(".ads-box").remove();
-                        });
-                }).catch((error) => {
-                    $(".ads-box").remove();
-                });
-            });
+            // resultPromise.then(adobeViewer => {
+            //     adobeViewer.getAPIs().then(apis => {
+            //         apis.getPDFMetadata()
+            //             .then((metadata) => {
+            //                 $(".ads-box").remove();
+            //             })
+            //             .catch(() => {
+            //                 $(".ads-box").remove();
+            //             });
+            //     }).catch((error) => {
+            //         $(".ads-box").remove();
+            //     });
+            // });
         });
     };
 });

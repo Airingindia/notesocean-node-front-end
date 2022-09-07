@@ -4,7 +4,7 @@ $(document).ready(function () {
     function loaddata() {
         $.ajax({
             type: "GET",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/notes",
+            url: app.getApi() + "/notes",
             headers: {
                 Authorization: decodeURIComponent(getCookie("token"))
             },
@@ -159,7 +159,7 @@ $(document).ready(function () {
             if ($(input).hasClass("is-valid")) {
                 $.ajax({
                     type: "PUT",
-                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + id,
+                    url: app.getApi() + "/notes/" + id,
                     headers: {
                         Authorization: decodeURIComponent(getCookie("token"))
                     },
@@ -234,7 +234,7 @@ $(document).ready(function () {
                 // get note url
                 $.ajax({
                     type: "GET",
-                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + note_id,
+                    url: app.getApi() + "/notes/" + note_id,
                     headers: {
                         Authorization: decodeURIComponent(getCookie("token"))
                     },
@@ -288,7 +288,7 @@ $(document).ready(function () {
                             if (willDelete) {
                                 $.ajax({
                                     type: "DELETE",
-                                    url: atob(decodeURIComponent(getCookie("api"))) + "/notes/" + note_id,
+                                    url: app.getApi() + "/notes/" + note_id,
                                     contentType: "application/json",
                                     processData: false,
                                     headers: {
@@ -345,7 +345,7 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: atob(decodeURIComponent(getCookie("api"))) + "/notes/search/" + input,
+                url: app.getApi() + "/notes/search/" + input,
                 headers: {
                     Authorization: getCookie("token")
                 },

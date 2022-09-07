@@ -66,17 +66,7 @@ html(lang="en")
                         h1.card-title=data.products.name
                         p.card-text=data.products.description
                     .card-body.border-0.p-0.pdf-cont
-                        .ads-box
-                            ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='5386213842' data-ad-format='auto' data-full-width-responsive='true')
-                            script.
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                        -if(view=="default"){
-                            iframe( allowtransparency="true" style="background: #FFFFFF;" frameborder="1" src=data.products.file width="100%" height="100%")
-                        -}else{
-                            #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
-                        -}
-
-
+                        #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
                 .card.shadow.info-bar.border-0
                     .row.px-2.info-row.mt-3
                         .col-md-4.py-2

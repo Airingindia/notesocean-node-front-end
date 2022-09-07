@@ -9,7 +9,7 @@ $(document).ready(function () {
     // form validations
     $.ajax({
         type:"GET",
-        url: atob(decodeURIComponent(getCookie("api")))+"/countries",
+        url: app.getApi()+"/countries",
         success: function (data) {
             for (let i = 0; i < data.requested.length; i++) {
                 const short_code = data.requested[i].iso3;
@@ -45,7 +45,7 @@ $(document).ready(function () {
         form.append("users", new Blob([JSON.stringify(usersData)], { type: "application/json" }));
         $.ajax({
             type: "POST",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/users",
+            url: app.getApi() + "/users",
             processData: false,
             contentType: false,
             data: form,
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $.ajax({
                         type: "POST",
-                        url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/email-sign-in",
+                        url: app.getApi() + "/authenticate/email-sign-in",
                         processData: false,
                         contentType: "application/json",
                         data: JSON.stringify({

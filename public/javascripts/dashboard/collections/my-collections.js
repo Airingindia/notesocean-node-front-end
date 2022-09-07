@@ -3,7 +3,7 @@ $(document).ready(function () {
     function getCollection() {
         $.ajax({
             type: "GET",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/collections",
+            url: app.getApi() + "/collections",
             contentType: "application/json",
             processData: false,
             headers: {
@@ -88,7 +88,7 @@ $(document).ready(function () {
                 form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
                 $.ajax({
                     type: "POST",
-                    url: atob(decodeURIComponent(getCookie("api"))) + "/collections",
+                    url: app.getApi() + "/collections",
                     headers: {
                         Authorization: getCookie("token")
                     },
@@ -230,7 +230,7 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: atob(decodeURIComponent(getCookie("api"))) + "/collections/" + collection_id,
+                            url: app.getApi() + "/collections/" + collection_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
@@ -283,12 +283,10 @@ $(document).ready(function () {
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-    window.onload = function () {
-
-        createCollection();
-        deleteCollection();
-        getCollection();
-    }
+    
+    createCollection();
+    deleteCollection();
+    getCollection();
 
 
 });

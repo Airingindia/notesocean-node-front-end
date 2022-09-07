@@ -30,7 +30,7 @@ html(lang="en")
         header 
             include includes/navbar
         section.main-section
-            .collection-info-container.container
+            .collection-info-container.px-3
                 h1.mt-5.collection-title=collection.name
                 p.mt-3.collection-description=collection.description
                 p 
@@ -38,8 +38,8 @@ html(lang="en")
                     span=collection.products.length 
                     span.mx-1 notes
 
-            div.px-3
-            .container.main-content-container
+            div
+            .main-content-container.px-3
                 .row.public-now-row(itemscope itemtype="https://schema.org/BreadcrumbList")
                     -let count = 0;
                     -for (var i = 0;i<collection.products.length;i++){

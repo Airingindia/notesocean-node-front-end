@@ -5,7 +5,7 @@ $(document).ready(function () {
     userId = JSON.parse(atob(userId)).userId;
     // $.ajax({
     //   type: "GET",
-    //   url: atob(decodeURIComponent(getCookie("api"))) + "/validate",
+    //   url: app.getApi() + "/validate",
     //   headers: {
     //     Authorization: decodeURIComponent(getCookie("token"))
     //   },
@@ -57,14 +57,14 @@ $(document).ready(function () {
     clearAllBrowserData();
     $.ajax({
       type: "GET",
-      url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/logout",
+      url: app.getApi() + "/authenticate/logout",
       headers: {
         Authorization: token,
       },
       success: function (data) {
         $.ajax({
           type: "GET",
-          url: atob(decodeURIComponent(getCookie("api"))) + "/logout",
+          url: app.getApi() + "/logout",
           headers: {
             Authorization: token,
           },
@@ -205,7 +205,7 @@ $(document).ready(function () {
     if (localStorage.getItem("userInfo") == null || localStorage.getItem("userInfo") == undefined) {
       $.ajax({
         type: "GET",
-        url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid,
+        url: app.getApi() + "/users/" + JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid,
         headers: {
           Authorization: getCookie("token")
         },

@@ -3,7 +3,7 @@ $(document).ready(function () {
     function getNoteDetails() {
         $.ajax({
             type: "GET",
-            url: atob(getCookie("api")) + "/products/" + public_notes_id,
+            url: app.getApi() + "/products/" + public_notes_id,
             ContentType: "application/json",
             processData: false,
             headers: {
@@ -75,7 +75,7 @@ $(document).ready(function () {
                     if (willDelete) {
                         $.ajax({
                             type: "DELETE",
-                            url: atob(getCookie("api")) + "/products/" + public_notes_id,
+                            url: app.getApi() + "/products/" + public_notes_id,
                             contentType: "application/json",
                             processData: false,
                             headers: {
@@ -128,7 +128,7 @@ $(document).ready(function () {
     function updateNoteData(data) {
         $.ajax({
             type: "PUT",
-            url: atob(getCookie("api")) + "/products/" + public_notes_id,
+            url: app.getApi() + "/products/" + public_notes_id,
             headers: {
                 Authorization: getCookie("token")
             },

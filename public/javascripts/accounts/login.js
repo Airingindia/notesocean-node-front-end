@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type: "POST",
-            url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/email-sign-in",
+            url: app.getApi() + "/authenticate/email-sign-in",
             processData: false,
             contentType: "application/json",
             data: JSON.stringify(userData),
