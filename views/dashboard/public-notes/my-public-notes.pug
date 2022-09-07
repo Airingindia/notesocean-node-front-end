@@ -17,11 +17,16 @@ html(lang="en")
                 .col-md-10.second-side
                     .upload-header.d-flex.justify-content-between
                         div
-                            h2.header-title Public Notes
+                            h2.header-title Public Notes 
+                                span 
+                                    small.text-muted
+                                        |  ( 
+                                        span.total-notes
+                                        |  )
                             small.header-text These notes are  publically accessible and you will be get any rewards
                         div
                             a(href="/dashboard/public-notes/new")
-                                button.btn-primary.add-new
+                                button.btn-notesocean.add-new
                                     i.fa.fa-cloud-upload.m-1
                                     span Upload
                     .search-container

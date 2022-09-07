@@ -13,6 +13,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 showData(data.requested);
+                $(".total-notes").html(data.size);
             },
             error: function (err) {
                 if (err.status == 401) {
@@ -261,7 +262,7 @@ $(document).ready(function () {
                         $(".viewer").html(src);
                     } else if (type == "png" || type == "jpeg" || type == "jpg") {
                         src = `<img src="${url}" > `;
-                        $(".viewer").html(`<center> ${src} </center>`);
+                        $(".viewer").html(`<div class="d-flex justify-content-center align-items-center"> ${src} </div>`);
                     } else {
                         src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
                         $(".viewer").html(src);
