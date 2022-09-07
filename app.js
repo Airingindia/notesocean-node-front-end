@@ -28,52 +28,15 @@ var express = require('express'),
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-
-// application secuity
-
-// rate limit
-const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minutes
-  max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: true, // Disable the `X-RateLimit-*` headers
-});
-
-// Apply the rate limiting middleware to all requests
-app.use(limiter);
-
-// app.use(session({
-//   secret: 'notesoceansecurecookie',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-
-// }));
-
-
-// app.use(lusca({
-//   csrf: true,
-//   xframe: 'SAMEORIGIN',
-//   hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
-//   xssProtection: true,
-//   nosniff: true,
-//   referrerPolicy: 'same-origin',
-// }));
-
 app.disable('x-powered-by');
-
-// data dog
-
 var dd_options = {
   'response_code': true,
   'tags': ['app:my_app']
 }
+
 var connect_datadog = require('connect-datadog')(dd_options);
 app.use(connect_datadog);
 
-//  middleware
-// app.use(logger('dev'));
 app.use(function (req, res, next) {
   var api = process.env.API_URL;
   res.cookie("api", Buffer.from(api).toString('base64'));
@@ -85,7 +48,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
 app.use(helmet.frameguard())
-
+// routess
 
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);

@@ -14,14 +14,14 @@ const getRequestDetails = (uuid, token) => {
     })
 };
 
-const getAllRequests = (token) => {
+const getAllRequests = () => {
     return new Promise((resolve, reject) => {
         http.get("/requests/feed/page/0/size/20").then((res) => {
             if (res.status == 200) {
                 resolve(res.body);
             }
             else {
-                reject(res.body);
+                reject(res);
             }
         }).catch((error) => {
             reject(error);

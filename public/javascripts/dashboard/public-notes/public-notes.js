@@ -15,6 +15,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 showData(data);
+                $(".total-notes").html(data.size);
 
             },
             error: function (err) {
