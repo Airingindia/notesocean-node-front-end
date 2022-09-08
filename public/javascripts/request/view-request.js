@@ -5,7 +5,7 @@ $(document).ready(function () {
         let requestUuid = window.location.pathname.split("/request/")[1];
         $.ajax({
             type: 'GET',
-            url: atob(decodeURIComponent(getCookie("api"))) + "/requests/" + requestUuid + "/products",
+            url: app.getApi() + "/requests/" + requestUuid + "/products",
             headers: {
                 Authorization: getCookie("token"),
             },
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 console.log(requestUuid);
                 $.ajax({
                     type: 'POST',
-                    url: atob(decodeURIComponent(getCookie("api"))) + "/requests/" + requestUuid + "/products/" + uuid,
+                    url:  app.getApi() + "/requests/" + requestUuid + "/products/" + uuid,
                     beforeSend: function () {
                         $(btn).html("<i class='fa fa-spinner fa-spin'></i> Accepting ...");
                     },

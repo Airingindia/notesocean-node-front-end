@@ -1,27 +1,25 @@
 $(document).ready(function () {
     // get users collections
-    function getCollection() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/collections",
-            contentType: "application/json",
-            processData: false,
-            headers: {
-                Authorization: getCookie("token")
-            },
-            success: function (data) {
-                $(".loading-collections").css({ display: "none" });
-                if (data.size !== 0) {
-                    showCollection(data.requested.sort((a, b) => { return b.timestamp - a.timestamp }));
-                } else {
-                    $(".no-collections").removeClass("d-none");
-                }
-            }, error: function (error) {
-                $(".loading-collections").css({ display: "none" });
+    $.ajax({
+        type: "GET",
+        url: app.getApi() + "/collections",
+        contentType: "application/json",
+        processData: false,
+        headers: {
+            Authorization: getCookie("token")
+        },
+        success: function (data) {
+            $(".loading-collections").css({ display: "none" });
+            if (data.size !== 0) {
+                showCollection(data.requested.sort((a, b) => { return b.timestamp - a.timestamp }));
+            } else {
                 $(".no-collections").removeClass("d-none");
             }
-        });
-    }
+        }, error: function (error) {
+            $(".loading-collections").css({ display: "none" });
+            $(".no-collections").removeClass("d-none");
+        }
+    });
 
 
 
@@ -60,11 +58,6 @@ $(document).ready(function () {
         contextmenu();
 
     }
-
-    // <img src="${colllections[i].thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" class="collection-items-thumbnails">
-    // collection routes
-
-
 
     function createCollection() {
         $(".create-collection-btn").click(function () {

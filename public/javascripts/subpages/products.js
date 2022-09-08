@@ -144,7 +144,7 @@ $(document).ready(function () {
     // comments function
     function commentValidator() {
         if (getCookie("token") != undefined || getCookie("token") != null) {
-            const viewerid = JSON.parse(atob(getCookie("token").split(".")[1])).userUuid;
+            const viewerid = JSON.parse(getCookie("token").split(".")[1]).userUuid;
             var userdata = localStorage.getItem("userInfo");
             if (userdata != null || userdata != undefined) {
                 userdata = JSON.parse(userdata);

@@ -4,7 +4,7 @@ $(document).ready(function () {
     console.log(userdata);
     $.ajax({
         type: "GET",
-        url: atob(decodeURIComponent(getCookie("api"))) + "/users/" + JSON.parse(atob(getCookie("token").split(".")[1])).userUuid,
+        url: app.getApi() + "/users/" + JSON.parse(getCookie("token").split(".")[1]).userUuid,
         beforeSend: function () {
 
         },
@@ -76,7 +76,7 @@ $(document).ready(function () {
                     // verify otp
                     $.ajax({
                         type: "POST",
-                        url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/verify-email",
+                        url: app.getApi() + "/authenticate/verify-email",
                         headers: {
                             Authorization: decodeURIComponent(getCookie("token"))
                         },
@@ -126,7 +126,7 @@ $(document).ready(function () {
         $.ajax(
             {
                 type: "GET",
-                url: atob(decodeURIComponent(getCookie("api"))) + "/authenticate/verify-email",
+                url: app.getApi() + "/authenticate/verify-email",
                 headers: {
                     Authorization: decodeURIComponent(getCookie("token"))
                 }, beforeSend: function () {

@@ -5,7 +5,7 @@ $(document).ready(function () {
         let message = $("textarea").val();
         $.ajax({
             type: "POST",
-            url: decodeURIComponent(atob(getCookie("api"))) + "/requests",
+            url: app.getApi() + "/requests",
             headers: {
                 Authorization: getCookie("token")
             },

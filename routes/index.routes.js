@@ -103,6 +103,11 @@ router.get("/profile/:user_id", async (req, res, next) => {
 // collection page route
 
 //  login page route
+
+router.get("/login/:token",(req,res,next)=>{
+  res.cookie("token",req.params.token);
+  res.redirect("/dashboard");
+})
 router.get("/login", (req, res, next) => {
   if (req.cookies.token != undefined) {
     return res.redirect("/dashboard");
