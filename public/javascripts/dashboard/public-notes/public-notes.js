@@ -48,14 +48,11 @@ $(document).ready(function () {
                     $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
                     <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-3834928493837917"
-                        data-ad-slot="8600546453"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
+                    style="display:inline-block;width:336px;height:280px"
+                    data-ad-client="ca-pub-3834928493837917"
+                    data-ad-slot="1394357315"></ins>
                     </div>`);
                     (adsbygoogle = window.adsbygoogle || []).push({});
-                   
                 }
                 let id = data.requested[i].uuid;
                 let name = data.requested[i].name;
