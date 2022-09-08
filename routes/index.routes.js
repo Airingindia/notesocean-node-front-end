@@ -105,8 +105,16 @@ router.get("/profile/:user_id", async (req, res, next) => {
 //  login page route
 
 router.get("/login/:token",(req,res,next)=>{
-  res.cookie("token",req.params.token);
-  res.redirect("/dashboard");
+  profileControllers.validateToken(req.params.token).then((response)=>{
+   if(response.body){
+      res.cookie("token",response.body.token);
+      res.redirect("/dashboard");
+   }else{
+      res.redirect("/login");
+   }
+  }).catch((error)=>{
+    res.redirect("/login");
+  })
 })
 router.get("/login", (req, res, next) => {
   if (req.cookies.token != undefined) {

@@ -23,7 +23,18 @@ const logout = (token) => {
     })
 }
 
+const validateToken = (token) => {
+    return new Promise((resolve, reject) => {
+        httpServices.getWithAuth("/validate", token).then((response) => {
+            resolve(response);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+
 module.exports = {
     getInfo: getuserinfo,
-    logout: logout
+    logout: logout,
+    validateToken: validateToken
 }
