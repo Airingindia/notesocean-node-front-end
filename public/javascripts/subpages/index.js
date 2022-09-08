@@ -44,7 +44,20 @@ $(document).ready(function () {
                 $("section.most-viewd-notes").addClass("d-none");
             } else {
                 $("section.most-viewd-notes").removeClass("d-none");
+                let adshow = 0;
                 for (let i = 0; i < data.requested.length; i++) {
+                    adshow++;
+                    if(adshow == 3){
+                        adshow = 0;
+                        $(".most-viewd-notes .row").append(`
+                        <div class="col-lg-4 col-sm-6 mt-3">
+                        <ins class="adsbygoogle"
+                        style="display:inline-block;width:250px;height:250px"
+                        data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="1394357315"></ins>
+                        </div>`);
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
                     let product_id = data.requested[i].uuid;
                     let name = data.requested[i].name;
                     let pages = data.requested[i].pages;
@@ -198,7 +211,20 @@ $(document).ready(function () {
             if (data.requested.length <= 0) {
                 $(".section.recent-notes").removeClass("d-none");
             } else {
+                let adshow = 0;
                 for (let i = 0; i < data.requested.length; i++) {
+                    adshow++;
+                    if(adshow == 3){
+                        adshow = 0;
+                        $(".recent-notes .row").append(`
+                        <div class="col-lg-4 col-sm-6 mt-3">
+                        <ins class="adsbygoogle"
+                        style="display:inline-block;width:250px;height:250px"
+                        data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="1394357315"></ins>
+                        </div>`);
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
                     let product_id = data.requested[i].uuid;
                     let name = data.requested[i].name;
                     let pages = data.requested[i].pages;
