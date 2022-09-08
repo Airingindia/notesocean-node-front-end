@@ -48,7 +48,7 @@ $(document).ready(function () {
                     $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
                     <ins class="adsbygoogle"
-                    style="display:inline-block;width:336px;height:280px"
+                    style="display:inline-block;width:336px;height:250px"
                     data-ad-client="ca-pub-3834928493837917"
                     data-ad-slot="1394357315"></ins>
                     </div>`);
