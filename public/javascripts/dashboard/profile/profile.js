@@ -26,7 +26,10 @@ $(document).ready(function () {
         $(".email").val(userInfo.email);
         $(".mobile").val(userInfo.phone);
         $(".address").val(userInfo.address);
-        $(".country").val(userInfo.country);
+        // $(".country").val(userInfo.country);
+        // $(".country").select2("val", userInfo.country);
+        $(".country").select2().val(userInfo.country).trigger("change");
+        console.log(userInfo.country);
         if (userInfo.profileImage !== null) {
             if (userInfo.profileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") !== -1) {
                 $(".user-profile-img").attr("src", userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/100x100"));
@@ -116,17 +119,27 @@ $(document).ready(function () {
         })
     });
 
-    $.ajax({
-        type:"GET",
-        url: app.getApi()+"/countries",
-        success: function (data) {
-            for (let i = 0; i < data.requested.length; i++) {
-                const short_code = data.requested[i].iso3;
-                const name = data.requested[i].niceName;
-                $(".country").append(`<option value="${short_code}"> ${name} </option>`);
-            }
+    if(localStorage.getItem("countries") != null){
+        let data =JSON.parse(localStorage.getItem("countries"));
+        for (let i = 0; i < data.requested.length; i++) {
+            const short_code = data.requested[i].iso3;
+            const name = data.requested[i].niceName;
+            $(".country").append(`<option value="${short_code}"> ${name} </option>`);
         }
-    })
+    }else{
+        $.ajax({
+            type:"GET",
+            url: app.getApi()+"/countries",
+            success: function (data) {
+                localStorage.setItem("countries", JSON.stringify(data));
+                for (let i = 0; i < data.requested.length; i++) {
+                    const short_code = data.requested[i].iso3;
+                    const name = data.requested[i].niceName;
+                    $(".country").append(`<option value="${short_code}"> ${name} </option>`);
+                }
+            }
+        });
+    }
 
     // update user profile information
     $(".profile-update-btn").click(function () {
@@ -171,12 +184,12 @@ $(document).ready(function () {
         if (inputCount == 6) {
             $.ajax({
                 type: "PUT",
-                url: atob(getCookie("api")) + "/users",
+                url: app.getApi() + "/users",
                 processData: false,
                 contentType: false,
                 data: formdata,
                 headers: {
-                    Authorization: getCookie("token")
+                    Authorization: app.getToken("token")
                 },
                 beforeSend: function () {
                     $(".profile-update-btn").prop("disabled", true);

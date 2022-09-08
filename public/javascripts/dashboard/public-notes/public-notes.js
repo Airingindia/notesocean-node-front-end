@@ -40,7 +40,23 @@ $(document).ready(function () {
         if (data.requested.length !== 0) {
             $(".loading-public-notes").addClass("d-none");
             $(".no-public-notes").addClass("d-none");
+            let adshow = 0;
             for (let i = 0; i < data.requested.length; i++) {
+                adshow++;
+                if(adshow == 5){
+                    adshow = 0;
+                    $(".public-notes-container").append(`
+                    <div class="col-md-3 my-3">
+                    <ins class="adsbygoogle"
+                        style="display:block"
+                        data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="8600546453"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>
+                    </div>`);
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                   
+                }
                 let id = data.requested[i].uuid;
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
