@@ -1,21 +1,25 @@
+
 $(document).ready(function () {
-    
-//    console.log(CryptoJS.enc.Base64.parse(getCookie("api")).toString(CryptoJS.enc.Utf8) );
-    // get profile info
-    //check if user has stored profile information 
-    function first() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/users/self",
-            headers: {
-                Authorization: getCookie("token")
-            },
-            success: function (data) {
-                localStorage.setItem("userInfo", JSON.stringify(data));
-                showUserInfo(data);
-            }
-        })
-    }
+    $('.country').select2({
+        placeholder: 'Select your country',
+        selectOnClose: true,
+    })
+
+    $.ajax({
+        type: "GET",
+        url: app.getApi() + "/users/self",
+        headers: {
+            Authorization: getCookie("token")
+        },
+        success: function (data) {
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            showUserInfo(data);
+        },
+        error: function (err) {
+            app.alert(err.status, err.statusText);
+            
+        }
+    })
     function showUserInfo(userInfo) {
         $(".first-name").val(userInfo.firstName);
         $(".last-name").val(userInfo.lastName);
@@ -106,37 +110,23 @@ $(document).ready(function () {
 
                 },
                 error: function (err) {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: 'Pofile pic not updated, please try again later!',
-                        timeout: 2000,
-                    }).show();
+                    app.alert(err.status, err.responseJSON.description);
                 }
             })
         })
     });
 
-    if (localStorage.getItem("countriesData") == null) {
-        $.getScript('/vendors/data/countries.json', function (data) {
-            data = JSON.parse(data);
-            localStorage.setItem("countriesData", JSON.stringify(data));
-            for (let i = 0; i < data.length; i++) {
-                const short_code = data[i].abbreviation;
-                const name = data[i].country;
+    $.ajax({
+        type:"GET",
+        url: app.getApi()+"/countries",
+        success: function (data) {
+            for (let i = 0; i < data.requested.length; i++) {
+                const short_code = data.requested[i].iso3;
+                const name = data.requested[i].niceName;
                 $(".country").append(`<option value="${short_code}"> ${name} </option>`);
             }
-            first();
-        });
-    } else {
-        const data = JSON.parse(localStorage.getItem("countriesData"));
-        for (let i = 0; i < data.length; i++) {
-            const short_code = data[i].abbreviation;
-            const name = data[i].country;
-            $(".country").append(`<option value="${short_code}"> ${name} </option>`);
         }
-        first();
-    }
+    })
 
     // update user profile information
     $(".profile-update-btn").click(function () {
@@ -206,12 +196,7 @@ $(document).ready(function () {
                 error: function (err) {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: ' Profile not updated ! , please try again ',
-                        timeout: 2000,
-                    }).show();
+                    app.alert(err.status, err.responseJSON.description);
                 }
             });
         }

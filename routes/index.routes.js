@@ -104,6 +104,9 @@ router.get("/profile/:user_id", async (req, res, next) => {
 
 //  login page route
 router.get("/login", (req, res, next) => {
+  if (req.cookies.token != undefined) {
+    return res.redirect("/dashboard");
+  }
   res.render("account/login");
 });
 
@@ -114,6 +117,9 @@ router.get("/reset-password", (req, res, next) => {
 // sign page route 
 
 router.get("/signup", (req, res, next) => {
+  if (req.cookies.token != undefined) {
+    return res.redirect("/dashboard");
+  }
   res.render("account/signup");
   ;
 });

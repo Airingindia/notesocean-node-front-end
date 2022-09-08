@@ -18,13 +18,12 @@ const notesRoutes = require("./routes/notes.routes");
 const requesRoutes = require("./routes/request.routes");
 const policiesRoutes = require("./routes/policies.routes");
 const reportRoutes = require("./routes/report.routes");
-const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 // express
-var express = require('express'),
-  app = express(),
-  session = require('express-session'),
-  lusca = require('lusca');
+var express = require('express');
+const app = express();
+
+// view engine setup
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

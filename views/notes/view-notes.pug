@@ -55,7 +55,11 @@ html(lang="en")
         link(rel="stylesheet" href="https://static.ncdn.in/vendor/sheron/shareon.min.css")
         style 
             include ../../public/stylesheets/loader.css
-
+        link(href='https://fonts.googleapis.com/css2?family=Nixie+One&display=swap' rel='stylesheet')
+        style.
+            .prod-desc{
+                font-family: 'Nixie One', cursive !important;
+            }
     body
         header
             include ../includes/navbar
@@ -64,7 +68,7 @@ html(lang="en")
                 .card.border-0.p-0.shadow
                     .card-header.border-0.shadow.border-0
                         h1.card-title=data.products.name
-                        p.card-text=data.products.description
+                        p.prod-desc=data.products.description
                     .card-body.border-0.p-0.pdf-cont
                         #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
                 .card.shadow.info-bar.border-0

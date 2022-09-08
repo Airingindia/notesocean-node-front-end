@@ -41,54 +41,15 @@ $(document).ready(function () {
                     }
 
                 }
-                new Noty({
-                    theme: "nest",
-                    type: "success",
-                    text: '<i class="fa fa-check-circle">  </i>  Login Successful',
-                    timeout: 3000,
-                }).show();
+                app.alert(200, "Login successful");
             },
-            complete: function (data) {
-                if (data.status == 400) {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-check-circle">  </i> Incorrect email address or password',
-                        timeout: 3000,
-                        closeWith: ['click', 'button'],
-                    }).show();
-                    $(".login-btn").html("Login");
-                    $(".login-btn").prop("disabled", false);
-                }
-                if (data.status == 0) {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-check-circle">  </i> Failed to connect server , please try again',
-                        timeout: 3000,
-                        closeWith: ['click', 'button'],
-                    }).show();
-                    $(".login-btn").html("Login");
-                    $(".login-btn").prop("disabled", false);
-                } else {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: 'Server error - please try again later',
-                        timeout: 3000,
-                        closeWith: ['click', 'button'],
-                    }).show();
-                    $(".login-btn").html("Login");
-                    $(".login-btn").prop("disabled", false);
-                }
+            error: function (err) {
+               app.alert(err.status, err.responseJSON.description);
+                $(".login-btn").html("Login");
+                $(".login-btn").prop("disabled", false);
             }
         })
     });
-
-    if (getCookie("token") !== undefined) {
-
-        window.location = "/dashboard";
-    }
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));

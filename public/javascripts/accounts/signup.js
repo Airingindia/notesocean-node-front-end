@@ -1,10 +1,8 @@
 
 $(document).ready(function () {
-    $(document).ready(function () {
-        $('#countries').select2({
-            placeholder: 'Select your country',
-            selectOnClose: true,
-        });
+    $('#countries').select2({
+        placeholder: 'Select your country',
+        selectOnClose: true,
     });
     // form validations
     $.ajax({

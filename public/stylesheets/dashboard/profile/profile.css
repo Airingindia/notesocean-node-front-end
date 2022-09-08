@@ -1,3 +1,12 @@
+
+.select2-container{
+    display: block;
+    width: 100% !important;
+}
+
+.select2-container::-webkit-scrollbar{
+    display: none !important;
+}
 .profile-user-pic img {
     border-radius: 50%;
     width: 100px;
@@ -30,7 +39,7 @@
 }
 
 .profile-container {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
 }
 

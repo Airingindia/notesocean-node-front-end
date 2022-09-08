@@ -11,6 +11,8 @@ html(lang="en")
             include ../../../public/stylesheets/loader.css
         style
             include ../../../public/stylesheets/dashboard/profile/profile.css
+        link(rel="stylesheet" href="/vendors/select/select2.min.css")
+        script(src="/vendors/select/select2.min.js")
     body
         include ../../includes/dashHeader
         section.row
@@ -18,9 +20,8 @@ html(lang="en")
             .col-9.second-side.pb-5
                 .profile-container
                     //- h3 My profile
-                    .row
-                        .col-12.d-flex.justify-content-between
-                        .col-12.mt-4.user-info
+                    .div
+                        .div
                             .row
                                 .col-md-12
                                     div.profile-user-pic.d-flex.justify-content-center
@@ -79,10 +80,10 @@ html(lang="en")
                                 .col-md-6.mt-3
                                     .form-group 
                                         label Country
-                                        select.form-select.country(name="country").input-item#country
+                                        select.form-control.country(name="country").input-item#country
                                             option(value="one",disabled,selected) choose...
                     .btn-box.d-flex.justify-content-between
-                        button.btn.btn-sm.btn-primary.my-5.profile-update-btn
+                        button.btn.btn-sm.btn-notesocean.my-5.profile-update-btn
                             span Update
                         button.btn.btn-sm.logout-btn.my-5
                             i.fa.fa-power-off.mx-1

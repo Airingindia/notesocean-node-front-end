@@ -133,26 +133,7 @@ script.
     gtag('config', 'G-QCGYD0XM2C');
 script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834928493837917"
     crossorigin="anonymous")
-script.
-    class notesocean{
-        getApi(){
-            return CryptoJS.enc.Base64.parse(decodeURIComponent(getCookie("api"))).toString(CryptoJS.enc.Utf8);
-        }
-        getToken(){
-            return getCookie("token")
-        }
-    }
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    var app = new notesocean();
+script
+    include ../../public/javascripts/app.js
 
 
