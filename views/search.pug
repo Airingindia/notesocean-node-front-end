@@ -33,9 +33,10 @@ html(lang="en")
                     //-     button.btn.btn-sm.btn-danger(data-bs-toggle="modal" data-bs-target="#modal-filter") filter
                 div.search-item-row(itemscope itemtype="https://schema.org/BreadcrumbList")
                     - let count = 0;
-                    - let ads = 0;
+                    - let adshow = 0;
                     -for (let i = 0; i < data.requested.length; i++){
                         - count++;
+                        - adshow++;
                         - let productid = data.requested[i].uuid;
                         - let productname = data.requested[i].name;
                         - let timestamp = Number(data.requested[i].timestamp);
@@ -83,8 +84,12 @@ html(lang="en")
                                                         .flex-grow-1.ms-2.pt-3
                                                             p.text-muted #{firstName} #{lastName}
                                 meta(itemprop="position" content=count)
-                        -if(count%3 == 0){
-                            div.ad_box
+                        -if(adshow == 5){
+                            - adshow = 0;
+                            div
+                                ins.adsbygoogle(style='display:inline-block;width:468px;height:60px' data-ad-client='ca-pub-3834928493837917' data-ad-slot='4239178356')
+                                script.
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
                         -}
                     -}
                 -}else{
