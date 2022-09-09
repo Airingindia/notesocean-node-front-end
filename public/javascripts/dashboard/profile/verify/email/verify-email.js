@@ -1,27 +1,9 @@
 $(document).ready(function () {
     // get userdata 
-    const userdata = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(userdata);
-    $.ajax({
-        type: "GET",
-        url: app.getApi() + "/users/" + JSON.parse(getCookie("token").split(".")[1]).userUuid,
-        beforeSend: function () {
-
-        },
-        success: function (data) {
-            if (data.emailVerified) {
-                window.location = "/dashboard";
-            } else {
-                show();
-                sendCode();
-            }
-        }, error: function () {
-            window.location = "/dashboard";
-        }
-    })
+    
+   
 
     function show() {
-        $(".user-email-label").html(userdata.email);
         $("input").each(function () {
             $(this).on("input", function () {
 
@@ -55,92 +37,107 @@ $(document).ready(function () {
                 $(this).css({ "border": "1px solid #ccc" });
             })
         });
+        
     }
 
-    function verify() {
-        $(".verify-btn").click(function () {
-            var count = 0;
-            var code = "";
-            $("input").each(function () {
-                if ($(this).val().length !== 0) {
-                    count++;
-                    code += $(this).val();
-                }
-            });
+    var lastKeyCode = 0;
 
-            if (count == 6) {
-                if (localStorage.getItem("emailData") !== null) {
-                    var data = JSON.parse(localStorage.getItem("emailData"));
-                    data.code = Number(code);
-                    data = JSON.stringify(data);
-                    // verify otp
-                    $.ajax({
-                        type: "POST",
-                        url: app.getApi() + "/authenticate/verify-email",
-                        headers: {
-                            Authorization: decodeURIComponent(getCookie("token"))
-                        },
-                        processData: false,
-                        contentType: "application/json",
-                        data: data,
-                        beforeSend: function () {
-                            $(".verify-btn").prop("disabled", true);
-                            $(".verify-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> <span> verifing... </span>`);
-                        },
-                        success: function (data) {
-                            const userdata = JSON.parse(localStorage.getItem("userInfo"));
-                            userdata.emailVerified = true;
-                            localStorage.setItem("userInfo", JSON.stringify(userdata));
-                            new Noty({
-                                theme: "nest",
-                                type: "success",
-                                text: 'Email verified successfully!',
-                                timeout: 3000,
-                                closeWith: ['click', 'button'],
-                            }).show();
-                            window.location = "/dashboard";
-                        }, error: function (error) {
-                            new Noty({
-                                theme: "nest",
-                                type: "error",
-                                text: 'Wrong code!',
-                                timeout: 3000,
-                                closeWith: ['click', 'button'],
-                            }).show();
-                        }
-                    });
-                } else {
-                    window.location = "/dashboard";
-                }
-            } else {
-                $("input").each(function () {
-                    if ($(this).val().length == 0) {
-                        $(this).css({ "border": "1px solid red" });
-                    }
-                });
-            }
-        });
-    }
+    $('input[type="number"]').bind('keydown', function(e) {
+        lastKeyCode = e.keyCode;
+    });
+    // Bind on the input having changed.  As long as the previous character
+    // was not a space, BS or Del, trim the input.
+    $('input[type="number"]').bind('input', function(e) {
+        if(lastKeyCode != 32 && lastKeyCode != 8 && lastKeyCode != 46) {
+            $(this).val($(this).val().replace(/^\s+|\s+$/g, ''));
+        }
+    });
 
-    function sendCode() {
+
+    show();
+    $(".resend-btn").click(function(){
+      window.location = location.href;
+    });
+
+    function sendCode(){
         $.ajax(
             {
                 type: "GET",
                 url: app.getApi() + "/authenticate/verify-email",
                 headers: {
-                    Authorization: decodeURIComponent(getCookie("token"))
+                    Authorization: getCookie("token")
                 }, beforeSend: function () {
-
+    
                 },
                 success: function (data) {
-                    localStorage.setItem("emailData", JSON.stringify(data))
-                    verify();
-                }, error: function () {
+                    $(".user-email-label").html(data.email);
+                    app.alert(200,"code sent to your email address!");
+
+                    // verify
+
+                    $(".verify-btn").click(function () {
+                        var count = 0;
+                        if ($("input").val().length ==6) {
+                            count = 6;
+                        }
+
+                        data.code = Number($("input").val());
+            
+                        if (count == 6) {
+                            $.ajax({
+                                type: "POST",
+                                url: app.getApi() + "/authenticate/verify-email",
+                                headers: {
+                                    Authorization: getCookie("token")
+                                },
+                                processData: false,
+                                contentType: "application/json",
+                                data: JSON.stringify(data),
+                                beforeSend: function () {
+                                    $(".verify-btn").prop("disabled", true);
+                                    $(".verify-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> <span> verifing... </span>`);
+                                },
+                                success: function (data) {
+                                    if(data){
+                                    const userdata = JSON.parse(localStorage.getItem("userInfo"));
+                                    userdata.emailVerified = true;
+                                    localStorage.setItem("userInfo", JSON.stringify(userdata));
+                                    new Noty({
+                                        theme: "nest",
+                                        type: "success",
+                                        text: 'Email verified successfully!',
+                                        timeout: 3000,
+                                        closeWith: ['click', 'button'],
+                                    }).show();
+
+                                    window.location = "/dashboard";
+
+                                    }else{
+                                        app.alert(400,"Invalid code , please enter correct code")
+                                    }
+                                    $(".verify-btn").prop("disabled", false);
+                                    $(".verify-btn").html(`Verify`);
+                                }, error: function (error) {
+                                   app.alert(error.status,"Somthing went wrong , please try again later");
+                                   $(".verify-btn").prop("disabled", false);
+                                   $(".verify-btn").html(`Verify`);
+                                }
+                            });
+                        } else {
+                            $("input").css({ "border": "1px solid red"});
+                            app.alert(400 ,"Enter 6 digit code!");
+                        }
+                    });
+                }, error: function (error) {
+                    app.alert(error.status, "Faild to send verification code!, please try again")
                     window.location = "/dashboard";
                 }
             }
         )
-    };
+    }
+
+    sendCode();
+   
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;

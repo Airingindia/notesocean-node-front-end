@@ -26,11 +26,16 @@ section{
     cursor: pointer
 }
 
+.input-cont{
+    width: 20%;
+    margin-top: 20px;
+}
+
 input {
-    width: 50px !important;
-    height: 50px !important;
+
     border-radius: none !important;
     outline: none !important;
+    text-align: center;
 }
 
 .card {
@@ -38,38 +43,40 @@ input {
 }
 
 .verify-btn {
-    width: 25% !important;
+    width: 10% !important;
 }
 
 
 @media(max-width:768px) {
 
+    .verify-btn {
+        width: 20% !important;
+    }
+
+
+    .input-cont{
+        width: 60%;
+        margin-top: 20px;
+    }
     input {
-        width: 40px !important;
-        height: 40px !important;
         border-radius: none !important;
         outline: none !important;
     }
-
-
-    .verify-btn {
-        width: 100% !important;
-    }
-
-
 }
 
 @media(max-width:375px) {
 
     input {
-        width: 30px !important;
-        height: 30px !important;
         border-radius: none !important;
         outline: none !important;
     }
 
+    .input-cont{
+        width: 70%;
+        margin-top: 20px;
+    }
     .verify-btn {
-        width: 100% !important;
+        width:30% !important;
     }
 
 

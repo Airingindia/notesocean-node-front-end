@@ -90,33 +90,7 @@ $(document).ready(function () {
             error: function (err) {
                 $(".signup-btn").prop("disabled", false);
                 $(".signup-btn").html(`Signup`);
-                if (err.status == 0) {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-check-circle">  </i> Failed  to connect server , please check your internet connection ',
-                        timeout: 5000,
-                    }).show();
-                }
-                else if (err.status == 409) {
-                    $(".signup-btn").prop("disabled", false);
-                    $(".signup-btn").html(`Signup`);
-                    const errortext = err.responseJSON.description;
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-check-circle">  </i> Failed  , ' + errortext,
-                        timeout: 5000,
-                    }).show();
-                }
-                else {
-                    new Noty({
-                        theme: "nest",
-                        type: "error",
-                        text: '<i class="fa fa-check-circle">  </i> Somthing went wrong , please try again later',
-                        timeout: 5000,
-                    }).show();
-                }
+               app.alert(err.status, err.responseJSON.description)
             }
 
         })

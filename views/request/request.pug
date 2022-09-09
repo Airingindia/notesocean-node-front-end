@@ -37,7 +37,7 @@ html(lang="en")
                             a(href='https://www.freepik.com/vectors/no-idea' rel='nofollow')
                                 img.w-100(src="/images/illustrations/sad-student.svg" alt=" student with a sad face") 
 
-                -if(requests.requested.length>0){
+                -if(requests.requested.length !==0){
                     .active-request.mt-3
                         h2.color-notesocean Active Requests
                         p There are some active requests , please contribute to help them to find the best notes !

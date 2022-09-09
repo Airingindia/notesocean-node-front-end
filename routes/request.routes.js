@@ -22,6 +22,7 @@ router.get("/", (req, res, next) => {
             time: timeService
         })
     }).catch((error) => {
+        console.log(error);
         res.render("errors/500")
     })
 });
@@ -41,12 +42,6 @@ router.get("/:uuid", (req, res, next) => {
     requestController.get(uuid, token).then((response) => {
         if (response.users.profileImage == null) {
             response.users.profileImage = "/images/dummy/user_dummy.jpg";
-        }
-        if (response.acceptedProduct != null) {
-            if (response.acceptedProduct.thumbnails.indexOf("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com") != -1) {
-                response.acceptedProduct.thumbnails = response.acceptedProduct.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com/", "https://thumbnails.ncdn.in/40x0:400x300/");
-                response.acceptedProduct.thumbnails = response.acceptedProduct.thumbnails.split(",")[0];
-            }
         }
         res.render("request/view-request.pug", {
             data: response,
