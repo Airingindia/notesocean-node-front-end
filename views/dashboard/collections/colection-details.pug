@@ -18,30 +18,29 @@ html(lang="en")
                     div.d-none.collection-container
                         form.form
                             .row
-                                .col-12
-                                    h2.text-danger Collection Details
-                                small (your changes will autosave)
+                                .col-12.mb-4
                                     .form-group.my-2
-                                        label Collection Name
-                                        input(type="text").form-control(placeholder="Class 10th all math mcq pdf").collection-name
+                                        h6 Collection Name
+                                        input.form-control(placeholder="Class 10th all math mcq pdf",type="text").collection-name
                                         .invalid-feedback
                                             p.invalid-title-error Collection name should be atleast 10 characters
                                         .valid-feedback
                                             p looks good
                                     .form-group.my-2
-                                        label Collection Descriptions
+                                        h6 Collection Descriptions
                                         textarea.form-control(rows="4" cols="5")
                                         .invalid-feedback
                                             p.invalid-title-error Collection descriptions should be atleast 20 characters
                                         .valid-feedback
                                             p looks good
-
-                                    //- .form-group.my-2
-                                    //-     label Collection Thumbnail(500x500 px) 
-                                    //-     br
-                                    //-     img.card-img-top.select-banner-img(src="/images/dummy/collection.png")
-                                    //-     br
-                                    //-     a.btn.btn-sm.mt-1.change-img-btn.btn-primary Change
+                                    .form-group
+                                        .btn-group(role="group")
+                                            button.btn.btn-notesocean.btn-sm.update-collection-btn(type="button")
+                                                i.fa.fa-save.mx-1
+                                                span Update
+                                            button.btn.btn-dark.btn-sm.mx-1.delete-collection-btn(type="button")
+                                                i.fa.fa-trash
+                                                span  Delete
                                 .col-12
                                     h5 Collection Notes
                                     .colllection-notes-selector.row

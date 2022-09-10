@@ -1,38 +1,36 @@
 $(document).ready(function () {
     const collection_id = window.location.pathname.split("/")[3];
-
-    function getCollectionDetails() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/collections/" + collection_id,
-            contentType: "application/json",
-            processData: false,
-            headers: {
-                Authorization: getCookie("token")
-            },
-            success: function (data) {
-                if (data) {
-                    $(".loading-collection").addClass("d-none");
-                    $(".collection-container").removeClass("d-none");
-                    $(".collection-name").val(data.name);
-                    $("title").html(data.name);
-                    $("textarea").val(data.description);
-                    $(".select-banner-img").attr("src", data.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/700x100/filters:format(webp)/filters:quality(100)"));
-                    const box = $(".add-notes-box").parent();
-                    getAllPublicNotes();
-                    addNotes(data.products);
-                } else {
-                    $(".collection-removed").removeClass("d-none");
-                    $(".loading-collection").addClass("d-none");
-                    $(".collection-container").remove();
-                }
-            },
-            error: function (err) {
-                $(".collection-removed").css({ display: "block" });
-                $(".notes-details-row").addClass("d-none");
+    $.ajax({
+        type: "GET",
+        url: app.getApi() + "/collections/" + collection_id,
+        contentType: "application/json",
+        processData: false,
+        headers: {
+            Authorization: getCookie("token")
+        },
+        success: function (data) {
+            if (data) {
+                $(".loading-collection").addClass("d-none");
+                $(".collection-container").removeClass("d-none");
+                $(".collection-name").val(data.name);
+                $("title").html(data.name);
+                $("textarea").val(data.description);
+                $(".select-banner-img").attr("src", data.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/700x100/filters:format(webp)/filters:quality(100)"));
+                const box = $(".add-notes-box").parent();
+                getAllPublicNotes();
+                addNotes(data.products);
+            } else {
+                $(".collection-removed").removeClass("d-none");
+                $(".loading-collection").addClass("d-none");
+                $(".collection-container").remove();
             }
-        });
-    }
+        },
+        error: function (err) {
+            $(".collection-removed").css({ display: "block" });
+            $(".notes-details-row").addClass("d-none");
+        }
+    });
+
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
@@ -101,22 +99,6 @@ $(document).ready(function () {
                     }
                 })
             });
-
-            // $(this).parent().parent().parent().on("contextmenu", function () {
-            //     var cont = $(this);
-            //     $(".collections-context-menu").modal("show");
-            //     const noteid = $(this).find("i").attr("data-note-id");
-            //     $("#delete-collections").click(function () {
-            //         $(cont).remove();
-            //         $(".collections-context-menu").modal("hide");
-            //         alert(noteid);
-            //     });
-
-            //     $("#preview-collections ").click(function () {
-            //         window.location = "/dashboard/public-notes/" + noteid;
-            //     })
-            //     return false;
-            // })
 
         })
     }
@@ -245,151 +227,61 @@ $(document).ready(function () {
 
 
     }
-    function updatethumbnail() {
-        var selected_banner_file;
-        $(".change-img-btn").click(function () {
-            const input = document.createElement("input");
-            input.type = "file";
-            input.accept = "image/*";
-            $(input).click();
-            $(input).on("change", function (event) {
-                selected_banner_file = $(this).prop('files')[0];
-                $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
-                selected_banner_file = $(this).prop('files')[0];
-                $(".select-banner-img").attr("src", URL.createObjectURL(selected_banner_file));
-                var form = new FormData();
-                var collection_json = {
-                    name: $("input.collection-name").val(),
-                    description: $("textarea").val()
-                }
-                // form.append("collections", collection_json);
-                form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
-                form.append("file", selected_banner_file);
-                $.ajax({
-                    type: "PUT",
-                    url: app.getApi() + "/collections/" + collection_id,
-                    headers: {
-                        Authorization: getCookie("token"),
-                    },
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    mimeType: "multipart/form-data",
-                    beforeSend: function () {
-                        $(".change-img-btn").html(" <i class='fa fa-spinner fa-spin mx-1'> </i> updating...");
-                        $(".change-img-btn").prop("disabled", true);
-                    },
-                    success: function (data) {
-                        $(".change-img-btn").html("Change");
-                        $(".change-img-btn").prop("disabled", false);
-                        new Noty({
-                            theme: "nest",
-                            type: "success",
-                            text: "Thumbnail uploaded successfully",
-                            timeout: 4000,
-                        }).show();
-                    },
-                    error: function () {
-                        $(".change-img-btn").html("Change");
-                        $(".change-img-btn").prop("disabled", false);
-                        new Noty({
-                            theme: "nest",
-                            type: "error",
-                            text: "Failed to update thumbnail",
-                            timeout: 4000,
-                        }).show()
-                    }
-                })
-            });
-        });
-    }
-    updatethumbnail();
+
+    $(".update-collection-btn").click(function(){
+        updateCollection();
+    })
+
     function updateCollection() {
-        var timeoutId;
-        $('textarea').on('input propertychange change', function () {
-            // console.log('Textarea Change');
-
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(function () {
-                // Runs 1 second (1000 ms) after the last change    
-                updatedata();
-            }, 1000);
-        });
-        $('input.collection-name').on('input propertychange change', function () {
-            // console.log('Textarea Change');
-
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(function () {
-                // Runs 1 second (1000 ms) after the last change    
-                updatedata();
-            }, 1000);
-        });
-
-        function updatedata() {
-            const collection_name = $(".collection-name").val();
-            const collection_description = $("textarea").val();
-            if (collection_name.length > 10 && collection_description.length > 20) {
-                var form = new FormData();
-                // if (selected_banner_file !== undefined) {
-                //     form.append("file", selected_banner_file);
-                // }
-                var collection_json = {
-                    name: collection_name,
-                    description: collection_description
-                }
-                // form.append("collections", collection_json);
-                form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
-                $.ajax({
-                    type: "PUT",
-                    url: app.getApi() + "/collections/" + collection_id,
-                    headers: {
-                        Authorization: getCookie("token"),
-                    },
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    mimeType: "multipart/form-data",
-                    beforeSend: function () {
-
-                    },
-                    success: function (data) {
-                        new Noty({
-                            theme: "nest",
-                            type: "success",
-                            text: "Collection Details updated",
-                            timeout: 4000,
-                        }).show();
-                    },
-                    error: function () {
-                        new Noty({
-                            theme: "nest",
-                            type: "error",
-                            text: "Failed to update collection details",
-                            timeout: 4000,
-                        }).show();
-                    }
-                })
-
-            } else if (collection_name.length < 10) {
-                $(".collection-name").addClass("is-invalid");
-                $(".collection-name").click(function () {
-                    $(this).removeClass("is-invalid");
-                })
-            } else if (collection_description.length < 20) {
-                $("textarea").addClass("is-invalid");
-                $("textarea").click(function () {
-                    $(this).removeClass("is-invalid");
-                })
+        const collection_name = $(".collection-name").val();
+        const collection_description = $("textarea").val();
+        if (collection_name.length > 10) {
+            var form = new FormData();
+            var collection_json = {
+                name: collection_name,
+                description: collection_description
             }
-        }
+            form.append("collections", new Blob([JSON.stringify(collection_json)], { type: "application/json" }));
+            $.ajax({
+                type: "PUT",
+                url: app.getApi() + "/collections/" + collection_id,
+                headers: {
+                    Authorization: getCookie("token"),
+                },
+                data: form,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $(".update-collection-btn").prop("disabled",true);
+                    $(".update-collection-btn").html(` <i class="fa fa-spinner fa-spin"> </i> Updating..`);
+                },
+                success: function (data) {
+                    $(".update-collection-btn").prop("disabled",false);
+                    $(".update-collection-btn").html(` <i class="fa  fa-save"> </i> Update`);
+                    new Noty({
+                        theme: "nest",
+                        type: "success",
+                        text: "Collection updated !",
+                        timeout: 3000,
+                    }).show();
+                },
+                error: function (err) {
+                    $(".update-collection-btn").prop("disabled",false);
+                    $(".update-collection-btn").html(` <i class="fa  fa-save"> </i> Update`);
+                    app.alert(err.status, "Failed to update collection");
+                }
+            })
 
+        } else if (collection_name.length < 10) {
+            $(".collection-name").addClass("is-invalid");
+            $(".collection-name").click(function () {
+                $(this).removeClass("is-invalid");
+            })
+        }
     }
-    updateCollection();
-    // windown onload function call
+    
     addNotesToCollection();
     getAllPublicNotes();
-
-    getCollectionDetails();
     check();
     uncheckall();
 
@@ -403,5 +295,53 @@ $(document).ready(function () {
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    $(".delete-collection-btn").click(function(){
+        deleteCollection();
+    })
+
+    function deleteCollection() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this collection!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: app.getApi() + "/collections/" + collection_id,
+                        contentType: "application/json",
+                        processData: false,
+                        headers: {
+                            Authorization: getCookie("token")
+                        },
+                        beforeSend: function () {
+                            $(".delete-collection-btn").prop("disabled", true);
+                            $(".delete-collection-btn").html("Deleting...");
+                        },
+                        success: function (data) {
+                            $(".delete-collection-btn").prop("disabled", false);
+                            $(".delete-collection-btn").html("Delete");
+                            new Noty({
+                                theme: "sunset",
+                                type: "error",
+                                text: '<i class="fa fa-check-circle">  </i> Collection Deleted ',
+                                timeout: 4000,
+                            }).show();
+                            window.location = "/dashboard/collections";
+                        },
+                        error: function (err) {
+                            $(".delete-collection-btn").prop("disabled", false);
+                            $(".delete-collection-btn").html("Delete");
+                            app.alert(err.status,"Failed to delete collection");
+                        }
+                    })
+
+                }
+            });
     }
 });

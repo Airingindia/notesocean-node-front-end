@@ -144,7 +144,6 @@ $(document).ready(function () {
     // comments function
     function commentValidator() {
         if (getCookie("token") != undefined || getCookie("token") != null) {
-            const viewerid = JSON.parse(getCookie("token").split(".")[1]).userUuid;
             var userdata = localStorage.getItem("userInfo");
             if (userdata != null || userdata != undefined) {
                 userdata = JSON.parse(userdata);
@@ -160,6 +159,9 @@ $(document).ready(function () {
                         localStorage.setItem("userInfo", JSON.stringify(data));
                         showCommentBox(data);
 
+                    },
+                    error:function(err){
+                        app.alert(err.status,"Failed to load your info , please try after sometimes");
                     }
                 })
             }
@@ -245,7 +247,6 @@ $(document).ready(function () {
                 // COMMENT AJAX
                 // get user details that set on localstorage
                 const userdata = localStorage.getItem("userInfo");
-                console.log(userdata);
                 if (userdata !== null) {
                     var firstName = JSON.parse(userdata).firstName;
                     var lastName = JSON.parse(userdata).lastName;
@@ -257,6 +258,7 @@ $(document).ready(function () {
                         profileImage = "/images/dummy/user_dummy.jpg";
                     }
                 } else {
+                    app.alert(400, "somthing went wrong , please try after sometimes");
                     return false;
                 }
                 $.ajax({
@@ -280,7 +282,7 @@ $(document).ready(function () {
                         $(".comment-add-btn").html(`Comment`);
                         $(".commentbox-container").prepend(`
                         <div class="d-flex my-2 commentbox-item wow animate__animated animate__fadeInUp">
-                            <div class="flex-shrink-0"><a href="/profile/${uuid}"><img src="${profileImage}" alt="${firstName} ${lastName}" style="width:35px;height:35px;border-radius:50%" /></a></div>
+                            <div class="flex-shrink-0"><a href="#"><img src="${profileImage}" alt="${firstName} ${lastName}" style="width:35px;height:35px;border-radius:50%" /></a></div>
                             <div class="flex-grow-1 ms-3">
                                 <small class="text-muted"> ${firstName} ${lastName} </small> <br> <span> ${data.content} </span><br /><small class="text-muted"> <i class="fa fa-clock mx-1"></i><span> ${getTime(data.timestamp)}</span></small>
                             </div>

@@ -26,23 +26,19 @@ $(document).ready(function () {
     function showCollection(colllections) {
         $(".collections-rows").html("");
         for (let i = 0; i < colllections.length; i++) {
-            var productlength = 0;
-            if (colllections[i].products !== undefined) {
-                productlength = colllections[i].totalProducts;
-            }
-
+        
             $(".collections-rows").append(`
                 <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${colllections[i].uuid}" style="box-shadow:0px 0px 0px 0px #ccc">
                 <a href="/dashboard/collections/${colllections[i].uuid}">
                 <div class="collection-item-content">
-                   <div class="collection-item-content-box "> 
+                   <div class="collection-item-content-box"> 
                   
                    <div class="mb-3 mx-1"> ${colllections[i].name} </div> 
                    </div>
 
                   <div> 
-                  <small class="text-muted">  <i class="fa fa-file mx-1"></i>   ${productlength} Notes </small> 
-                     
+                  <small class="text-muted">  <i class="fa fa-file mx-1"></i> ${colllections[i].totalProducts} Notes </small> 
+                     <br>
                   <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(colllections[i].timestamp)}</small> 
 
                   </div>
@@ -120,14 +116,11 @@ $(document).ready(function () {
                                 </div>
 
                                 <div class=""> 
-                                <small class="text-muted">  <i class="fa fa-file mx-1"></i>  0 Notes </small> 
-                                   
+                                <small class="text-muted">  <i class="fa fa-file mx-1"> </i>  0 Notes </small> 
+                                   <br>
                                 <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(data.timestamp)} </small> 
               
                                 </div>
-
-                                
-
                             </div>
                         </a>
                        
@@ -208,10 +201,6 @@ $(document).ready(function () {
     function deleteCollection() {
         $("#delete-collections").click(function () {
             const collection_id = $(this).attr("data-id");
-
-
-
-
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this collection!",
@@ -279,7 +268,6 @@ $(document).ready(function () {
     
     createCollection();
     deleteCollection();
-    getCollection();
 
 
 });
