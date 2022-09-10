@@ -59,6 +59,11 @@ h3 {
     font-size: 18px;
 }
 
+.collection-info-container{
+    width: 60%;
+    margin: 0 auto;
+}
+
 @media (max-width:769px) {
     .collection-info-container,.main-content-container{
         width: 100%;

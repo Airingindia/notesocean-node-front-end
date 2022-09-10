@@ -42,46 +42,58 @@ html(lang="en")
             .main-content-container.px-3
                 .row.public-now-row(itemscope itemtype="https://schema.org/BreadcrumbList")
                     -let count = 0;
+                    - var adshow = 0;
                     -for (var i = 0;i<collection.products.length;i++){
-                        - count++;
-                        -var product_id = collection.products[i].uuid;
-                        -var product_name = collection.products[i].name;
-                        - var product_thumbnails = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x280/filters:format(webp)/filters:quality(100)");
+                            - count++;
+                            - adshow++;
+                            -var product_id = collection.products[i].uuid;
+                            -var product_name = collection.products[i].name;
+                            - var product_thumbnails = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x280/filters:format(webp)/filters:quality(100)");
 
-                        - var img1 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                            - var img1 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
 
-                        - var img2 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+                            - var img2 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
 
-                        - var img3 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                            - var img3 = collection.products[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
 
-                        - var product_views = collection.products[i].views;
-                        - var product_pages = collection.products[i].pages;
-                        - var product_timestamp = collection.products[i].timestamp;
-                        - var product_actual_time = timeService.get(product_timestamp);
-                    .col-md-3.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
-                        a(href=`/notes/${(product_id)}`,itemprop="item")
-                            .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
-                                .card-header.border-0.bg-white
-                                    p(itemprop="name").card-title=product_name
-                                .card-body.p-0
-                                    img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
-                                .card-footer.border-0.bg-white
-                                    .row
-                                        .col-12
-                                            //- p.card-title Lorem, ipsum dolor sit ametssdgdg
-                                            p.card-text.notes-details-text
-                                                span
-                                                    i.fa.fa-globe.mx-1
-                                                    small=product_views
-                                                        span.mx-1 views
-                                                span.mx-1
-                                                    i.fa.fa-file.mx-1 
-                                                    small=product_pages
-                                                        span.mx-1 Pages
-                                                span.mx-1
-                                                    i.fa.fa-clock-o.mx-1
-                                                    small=product_actual_time
-                        meta(itemprop="position" content=count)
+                            - var product_views = collection.products[i].views;
+                            - var product_pages = collection.products[i].pages;
+                            - var product_timestamp = collection.products[i].timestamp;
+                            - var product_actual_time = timeService.get(product_timestamp);
+                                .col-md-3.my-2(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
+                                    a(href=`/notes/${(product_id)}`,itemprop="item")
+                                        .card.h-100.shadow.border-0.rounded.wow.animate__animated.animate__fadeInUp.public-notes-item
+                                            .card-header.border-0.bg-white
+                                                p(itemprop="name").card-title=product_name
+                                            .card-body.p-0
+                                                img.card-img-top.notes-thumbnails(alt=product_name,src=product_thumbnails,srcset=`${img1} 320w,${img2} 480w,${img3} 800w`,sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px")
+                                            .card-footer.border-0.bg-white
+                                                .row
+                                                    .col-12
+                                                        //- p.card-title Lorem, ipsum dolor sit ametssdgdg
+                                                        p.card-text.notes-details-text
+                                                            span
+                                                                i.fa.fa-globe.mx-1
+                                                                small=product_views
+                                                                    span.mx-1 views
+                                                            span.mx-1
+                                                                i.fa.fa-file.mx-1 
+                                                                small=product_pages
+                                                                    span.mx-1 Pages
+                                                            span.mx-1
+                                                                i.fa.fa-clock-o.mx-1
+                                                                small=product_actual_time
+                                    meta(itemprop="position" content=count)
+                            - if (adshow==5){
+                                - adshow = 0;
+                                .col-md-3.d-flex.justify-content-center.align-items-center
+                                    ins(class="adsbygoogle"
+                                    style="display:inline-block;width:336px;height:280px"
+                                    data-ad-client="ca-pub-3834928493837917"
+                                    data-ad-slot="1394357315")
+                                    script.
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                            -}
                     -} 
         include includes/footer
         script 
