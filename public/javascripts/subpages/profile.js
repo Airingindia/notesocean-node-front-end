@@ -10,7 +10,20 @@ $(document).ready(function () {
             $(".notes-loader").addClass("d-none");
             if (data.requested.length !== 0) {
                 $(".public-now-row").html("");
+                let  adshow = 0;
                 for (let i = 0; i < data.requested.length; i++) {
+                    adshow++;
+                    if(adshow == 5){
+                        adshow = 0;
+                        $(".public-now-row").append(`
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                        <ins class="adsbygoogle"
+                        style="display:inline-block;width:336px;height:280px"
+                        data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="1394357315"></ins>
+                        </div>`);
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
                     let name = data.requested[i].name;
                     let pages = data.requested[i].pages;
                     let thumbnails = data.requested[i].thumbnails.replace("https://thumbnails.ncdn.in/", "https://thumbnails.ncdn.in/fit-in/400x400/");

@@ -56,18 +56,18 @@ $(document).ready(function () {
             $(".no-private-notes").addClass("d-none");
             let adshow = 0;
             for (let i = 0; i < data.length; i++) {
-                adshow++;
-                if(adshow == 5){
-                    adshow = 0;
-                    $(".notes-container-row").append(`
-                    <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <ins class="adsbygoogle"
-                    style="display:inline-block;width:336px;height:280px"
-                    data-ad-client="ca-pub-3834928493837917"
-                    data-ad-slot="1394357315"></ins>
-                    </div>`);
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                }
+                // adshow++;
+                // if(adshow == 5){
+                //     adshow = 0;
+                //     $(".notes-container-row").append(`
+                //     <div class="col-md-6 d-flex justify-content-center align-items-center">
+                //     <ins class="adsbygoogle"
+                //     style="display:inline-block;width:336px;height:280px"
+                //     data-ad-client="ca-pub-3834928493837917"
+                //     data-ad-slot="1394357315"></ins>
+                //     </div>`);
+                //     (adsbygoogle = window.adsbygoogle || []).push({});
+                // }
                 var name;
                 if ($(window).width() < 769) {
                     name = data[i].name.substring(0, 12) + "..";
