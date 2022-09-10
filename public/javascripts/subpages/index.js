@@ -52,13 +52,15 @@ $(document).ready(function () {
                         $(".most-viewd-notes .row").append(`
                         <div class="col-lg-4 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
                         <ins class="adsbygoogle"
-                        style="display:block"
+                        style="display:inline-block;width:336px;height:280px"
                         data-ad-client="ca-pub-3834928493837917"
-                        data-ad-slot="5066912970"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
+                        data-ad-slot="1394357315"></ins>
                         </div>`);
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        try{
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        }catch(e){
+                            console.log(e);
+                        }
                     }
                     let product_id = data.requested[i].uuid;
                     let name = data.requested[i].name;
@@ -104,14 +106,15 @@ $(document).ready(function () {
                         $(".recent-notes .row").append(`
                         <div class="col-lg-4 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
                         <ins class="adsbygoogle"
-                        style="display:block"
+                        style="display:inline-block;width:336px;height:280px"
                         data-ad-client="ca-pub-3834928493837917"
-                        data-ad-slot="5066912970"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-
+                        data-ad-slot="1394357315"></ins>
                         </div>`);
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        try{
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        }catch(e){
+                            console.log(e);
+                        }
                     }
                     let product_id = data.requested[i].uuid;
                     let name = data.requested[i].name;
