@@ -85,7 +85,6 @@ router.get("/courses.xml",(req,res,next)=>{
 
 router.get("/requests.xml",(req,res,next)=>{
     requestController.getAll().then((response)=>{
-        console.log(response);
         var host = req.get("host");
         var data = response.requested;
         res.contentType("application/xml");
