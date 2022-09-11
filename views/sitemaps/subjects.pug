@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    -for (var i = 0; i <data.length;i++){
-        <url>
-            <loc>  https://#{host}/notes/#{data[i].uuid} </loc>
-        </url>
+    -for(let i=0;i<subjects.length;i++){
+        -for(let j = 0;j<subjects[i].list.length;j++){
+            <loc> https://#{host}/subjects/#{url.make(subjects[i].list[j])} </loc>
+        -}
     -}
-        
 </urlset>
+
+
+        

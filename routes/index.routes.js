@@ -169,25 +169,21 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   const query = req.query.query;
-  if (query.length > 1) {
-    productControllers.searchProducts(query, req).then((product) => {
-      res.status(200);
-      res.render("search", {
-        data: product,
-        query: query,
-        time: timeService,
-      });
-      ;
-    }).catch((err) => {
-      if (err.statusCode == 429) {
-        res.render("information-pages/tomanyrequest")
-      } else {
-        res.render("notfound");
-      }
-    })
-  } else {
-    res.render("error/500");
+  if(query == undefined){
+    return res.redirect("/");
   }
+  productControllers.searchProducts(query, req).then((product) => {
+    res.status(200);
+    res.render("search", {
+      data: product,
+      query: query,
+      time: timeService,
+    });
+    ;
+  }).catch((err) => {
+    res.status(404);
+    res.render("notfound");
+  })
 
 });
 

@@ -77,7 +77,7 @@ const addViews = async (productid, token, deviceId) => {
 const getMostViewedNotes = () => {
     return new Promise((resolve, reject) => {
         httpServices.get("/products/top-performing-products").then((response) => {
-            if (response.statusCode == 200) {
+            if (response.statusCode == 200 ||  response.status == 204) {
                 resolve(response.body);
             } else {
                 reject(response);

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    -for (var i = 0; i <data.length;i++)
+    -for (var i = 0; i <data.length;i++){
         <url>
-            <loc>  https://#{host}/notes/#{data[i].product.id} </loc>
+            <loc>  https://#{host}/notes/#{data[i].uuid} </loc>
         </url>
+    -}
+        
 </urlset>

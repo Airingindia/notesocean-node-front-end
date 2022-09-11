@@ -69,6 +69,7 @@ app.use("/report", reportRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  res.status(404);
   res.render("notfound");
   next();
 });
@@ -76,6 +77,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err);
+  res.status(500);
   res.render("errors/500");
   next();
 });

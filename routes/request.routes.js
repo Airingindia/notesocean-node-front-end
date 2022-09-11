@@ -37,8 +37,14 @@ router.get("/new", (req, res, next) => {
 router.get("/:uuid", (req, res, next) => {
     let uuid = req.params.uuid;
     let token = req.cookies.token;
-    let tokenData = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString('ascii'));
-    let Vieweruuid = tokenData.userUuid;
+    var Vieweruuid;
+    if(token !=undefined){
+        let tokenData = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString('ascii'));
+         Vieweruuid = tokenData.userUuid;
+    }else{
+         Vieweruuid = "dfhfdh-fdhfghfg-fghgf";
+    }
+   
     requestController.get(uuid, token).then((response) => {
         if (response.users.profileImage == null) {
             response.users.profileImage = "/images/dummy/user_dummy.jpg";
