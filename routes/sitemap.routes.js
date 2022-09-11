@@ -13,7 +13,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/sitemap.xml', async function (req, res, next) {
-    var cate = ["/contact-us", "/about-us", "/policies/privacy", "/login", "/dashboard/public-notes/new", "/dashboard",  "/upload","/terms-and-condition", "/dashboard/profile", "/signup", "/recent-notes", "/policies/payment", "/policies/payment/refund", "/policies/payment/cancellation", "/policies/copyright", "/report", "/support", "policies/payment/payout", "/request", "/request/new","/subjects", "/courses", "/sitemaps/recent-notes.xml", "/sitemaps/most-viewed.xml","/sitemaps/subjects.xml","/sitemaps/courses.xml","/sitemaps/requests.xml"];
+    var cate = ["/contact-us", "/about-us", "/policies/privacy", "/login", "/dashboard/public-notes/new", "/dashboard",  "/upload","/terms-and-condition", "/dashboard/profile", "/signup", "/recent-notes", "/policies/payment", "/policies/payment/refund", "/policies/payment/cancellation", "/policies/copyright", "/report", "/support", "/policies/payment/payout", "/request", "/request/new","/subjects", "/courses", "/sitemaps/recent-notes.xml", "/sitemaps/most-viewed.xml","/sitemaps/subjects.xml","/sitemaps/courses.xml","/sitemaps/requests.xml"];
     var host = req.get("host");
     var data = {
         cate: cate,
