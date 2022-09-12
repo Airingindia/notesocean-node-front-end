@@ -71,6 +71,8 @@ $(document).ready(function () {
                 let views = data.requested[i].views;
                 $(".public-notes-container").append(`
                     <div class="col-md-3 my-3">
+
+                        <a href="/dashboard/public-notes/${id}"> 
                         <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
                             <img class="card-img-top lozad" src="${thumbnails}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" style="height:200px;width:100%" loading="lazy"  />
                             <div class="card-body pb-0"> 
@@ -98,6 +100,8 @@ $(document).ready(function () {
                                 </div>
                             </div>
                         </div>
+
+                        </a>
                     </div>
                 `);
 

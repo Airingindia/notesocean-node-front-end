@@ -60,6 +60,11 @@ html(lang="en")
             .prod-desc{
                 font-family: 'Nixie One', cursive !important;
             }
+
+            .modal-fullscreen{
+                width:99.9%;
+                height:100vh !important;
+            }
     body
         header
             include ../includes/navbar
@@ -259,26 +264,59 @@ html(lang="en")
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
                             a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-notesocean Login
+            .ads-modal.modal(data-bs-backdrop="static" data-bs-keyboard="false")
+                .modal-dialog.modal-fullscreen
+                    .modal-content
+                        .modal-header.border-0
+                            h5.modal-title Advertisement
+                        .modal-body.dd-flex.justify-content-center.align-items-center.border-0
+                            ins.adsbygoogle(
+                            style="display:block"
+                            data-ad-client="ca-pub-3834928493837917"
+                            data-ad-slot="8600546453"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true")
+                        .modal-footer.text-center.d-flex.justify-content-center.border-0
+                            strong Please wait ..
+                            span
+                                i.fa.fa-spinner.fa-spin.mx-1
+                                span Pdf is loading...
+                    
+            
         script(src="https://documentcloud.adobe.com/view-sdk/main.js")
         script.
-            document.addEventListener("adobe_dc_view_sdk.ready", function () {
-            var adobeDCView = new AdobeDC.View({ clientId: document.querySelector("#pdfShow").getAttribute("data-client"), divId: "pdfShow" });
-            adobeDCView.previewFile(
-                {
-                    content: { location: { url: document.querySelector("#pdfShow").getAttribute("data-url") } },
-                    metaData: { fileName: document.querySelector(" #pdfShow").getAttribute("data-name") }
-                },
-                {
-                    embedMode: "SIZED_CONTAINER",
-                    showDownloadPDF: false,
-                    showPrintPDF: false,
-                    enableLinearization: true,
-                    showAnnotationTools: false,
-                    enableFormFilling: false,
-                    hasReadOnlyAccess: true
-                }
-                );
-            });
+            $(document).ready(function() {
+                document.addEventListener("adobe_dc_view_sdk.ready", function () {
+                    var adobeDCView = new AdobeDC.View({ clientId: document.querySelector("#pdfShow").getAttribute("data-client"), divId: "pdfShow" });
+                    let resultPromise  = adobeDCView.previewFile(
+                        {
+                            content: { location: { url: document.querySelector("#pdfShow").getAttribute("data-url") } },
+                            metaData: { fileName: document.querySelector(" #pdfShow").getAttribute("data-name") }
+                        },
+                        {
+                            embedMode: "SIZED_CONTAINER",
+                            showDownloadPDF: false,
+                            showPrintPDF: false,
+                            enableLinearization: true,
+                            showAnnotationTools: false,
+                            enableFormFilling: false,
+                            hasReadOnlyAccess: true
+                        });
+                        resultPromise.then(adobeViewer => {
+                            adobeViewer.getAPIs().then(apis => {
+                            apis.getPDFMetadata()
+                            .then(result => {
+                                totalPages = result.numPages;
+                                $(".ads-modal").modal("hide");
+                            })
+                            .catch(error => $(".ads-modal").modal("hide"));
+                            });
+                        });
+                    });
+                
+                    $(".ads-modal").modal("show");
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            })
         include ../includes/footer
         script(src="https://static.ncdn.in/vendor/sheron/shareon.iife.js")
         script

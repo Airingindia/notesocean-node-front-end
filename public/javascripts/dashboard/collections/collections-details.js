@@ -63,7 +63,13 @@ $(document).ready(function () {
                     `);
                     }
                     check();
+                }else{
+                    $(".loading-public-notes").addClass("d-none");
+                    $(".public-notes-row-modal").html("");  
                 }
+            },
+            error:function(err){
+                app.alert(err.status,"Failed to load notes");
             }
         });
     }
@@ -177,13 +183,7 @@ $(document).ready(function () {
                         addNotes(selected_notes_arry);
                     },
                     error: function (errr) {
-                        $(".collection-add-btn").html(`Add`);
-                        new Noty({
-                            theme: "nest",
-                            type: "error",
-                            text: "Faild to add notes , please try after sometimes",
-                            timeout: 4000,
-                        }).show();
+                       app.alert(err.status,"Failed to add notes!"); 
                     },
                     complete: function () {
                         $("#select-public-notes-modal").modal("hide");
@@ -211,7 +211,9 @@ $(document).ready(function () {
             let name = data[i].name;
             let id = data[i].uuid;
             let thumbnails = data[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/300x300/filters:format(webp)/filters:quality(100)");
-            $(".collection-notes-item.plus").before(`<div class="collection-notes-item col-md-4 my-1">
+            $(".collection-notes-item.plus").before(`
+            <div class="collection-notes-item col-md-4 my-1">
+            <a href="/dashboard/public-notes/${id}">
             <div class="card p-0">
                 <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>
                 <div class="card-body p-0"><img class="card-img-top collection-notes-thumbnail w-100" src="${thumbnails}" /></div>
@@ -219,6 +221,7 @@ $(document).ready(function () {
                     <div class="card-text"> <small> ${name.substring(0, 50)} ...</small></div>
                 </div>
             </div>
+            </a>
         </div>`);
         }
 
