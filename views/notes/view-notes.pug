@@ -65,11 +65,6 @@ html(lang="en")
             include ../includes/navbar
         section.main-section-top
             .main-content-box
-                .card.border-0.ads-box
-                    ins.adsbygoogle(style="display:block" data-ad-client="ca-pub-3834928493837917"
-                        data-ad-slot="4327642415"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true")
                 .card.border-0.p-0.shadow
                     .card-header.border-0.shadow.border-0
                         h1.card-title=data.products.name
@@ -307,9 +302,10 @@ html(lang="en")
                             apis.getPDFMetadata()
                             .then(result => {
                                 totalPages = result.numPages;
-                                $(".ads-box").remove();
+                                //- $(".ads-box").remove();
+                                console.log(totalPages);
                             })
-                            .catch(error => $(".ads-box").remove());
+                            .catch(error => console.log(error));
                             });
                         });
                     });
