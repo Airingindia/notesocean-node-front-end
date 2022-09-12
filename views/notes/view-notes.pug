@@ -60,16 +60,16 @@ html(lang="en")
             .prod-desc{
                 font-family: 'Nixie One', cursive !important;
             }
-
-            .modal-fullscreen{
-                width:99.9%;
-                height:100vh !important;
-            }
     body
         header
             include ../includes/navbar
         section.main-section-top
             .main-content-box
+                .card.border-0.ads-box
+                    ins.adsbygoogle(style="display:block" data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="4327642415"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true")
                 .card.border-0.p-0.shadow
                     .card-header.border-0.shadow.border-0
                         h1.card-title=data.products.name
@@ -307,14 +307,14 @@ html(lang="en")
                             apis.getPDFMetadata()
                             .then(result => {
                                 totalPages = result.numPages;
-                                $(".ads-modal").modal("hide");
+                                $(".ads-box").remove();
                             })
-                            .catch(error => $(".ads-modal").modal("hide"));
+                            .catch(error => $(".ads-box").remove());
                             });
                         });
                     });
                 
-                    $(".ads-modal").modal("show");
+                    //- $(".ads-modal").modal("show");
                     (adsbygoogle = window.adsbygoogle || []).push({});
             })
         include ../includes/footer
