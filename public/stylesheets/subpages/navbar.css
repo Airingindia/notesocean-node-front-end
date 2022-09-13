@@ -10,6 +10,7 @@ nav.desktop-navbar {
     padding: 10px;
 }
 
+
 .desktop-navbar-profile-container {
     border-radius: 50%;
 
@@ -148,17 +149,20 @@ nav.desktop-navbar {
     left: 0;
     width: 99.9%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 0px;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     z-index: 999;
     background-color: #fff;
-    padding: 10px 10px;
+    padding: 10px 0px;
+}
+
+.mobile-navbar .brand-info img {
+    width: 180px;
 }
 
 .mobile-navbar i {
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -172,6 +176,7 @@ nav.desktop-navbar {
     z-index: 9999999;
     display: none;
     transition: ease-in 1s;
+    padding: 10px 0px;
 }
 
 .menu-wrapper-header {
@@ -180,14 +185,13 @@ nav.desktop-navbar {
     left: 0;
     width: 99.9%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 0px;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     z-index: 999;
     background-color: #fff;
-    padding: 10px 10px;
     font-size: 20px;
+    padding: 10px 0px;
 }
 
 .menu-wrapper-header i {

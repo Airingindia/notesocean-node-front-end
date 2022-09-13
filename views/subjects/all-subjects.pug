@@ -12,7 +12,6 @@ html(lang="en")
         meta(property='og:description' content=`Find your notes by courses`)
         meta(property='og:type' content='website')
         meta(property='og:image' content=`https://notesocean.com/logo.png`)
-
         meta(name='twitter:card' content='website')
         meta(name='twitter:site' content='@real_notesocean')
         meta(name='twitter:title' content=`Notes Ocean`)
@@ -21,7 +20,7 @@ html(lang="en")
         include ../includes/bootstrap
         style 
             include ../../public/stylesheets/subjects/all-subjects.css
-    body 
+    body
 
         header
             include ../includes/navbar
@@ -39,7 +38,5 @@ html(lang="en")
                                         .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
                                             p #{list[j]}
                             -}
-
-
             -}
         include ../includes/footer

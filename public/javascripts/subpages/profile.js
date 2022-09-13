@@ -7,6 +7,7 @@ $(document).ready(function () {
         beforeSend: function () {
         },
         success: function (data) {
+            console.log(data);
             $(".notes-loader").addClass("d-none");
             if (data.requested.length !== 0) {
                 $(".public-now-row").html("");
@@ -30,6 +31,7 @@ $(document).ready(function () {
                     let views = data.requested[i].views;
                     let id = data.requested[i].uuid;
                     let timestamp = timeDifference(data.requested[i].timestamp);
+                    let likes = data.requested[i].likes;
                     $(".public-now-row").append(`
             <div class="col-md-3 my-2"><a href="/notes/${id}">
          <div class="card shadow border-0 rounded h-100 wow animate__animated animate__fadeInUp public-notes-item" data-id="data-id">
@@ -40,7 +42,12 @@ $(document).ready(function () {
              <div class="card-footer border-0">
                  <div class="row">
                      <div class="col-12">
-                         <p class="card-text notes-details-text"><span><i class="fa fa-globe mx-1"></i><small> ${views} views</small></span><span class="mx-1"><i class="fa fa-file mx-1"> </i><small>${pages} pages</small></span><span class="mx-1"><i class="fa fa-clock-o mx-1"></i><small> ${timestamp}</small></span></p>
+                         <p class="card-text notes-details-text text-muted">
+                         <small ><i class="fa fa-globe mx-1"></i><small> ${views} views</small></small>
+                          <small><i class="fa fa-thumbs-up mx-1"></i><small> ${likes} likes </small></small>
+                         <small class="mx-1"><i class="fa fa-file mx-1"> </i><small>${pages} pages</small></small>
+                         <small class="mx-1"><i class="fa fa-clock-o mx-1"></i><small> ${timestamp}</small></small>
+                         </p>
                      </div>
                  </div>
              </div>

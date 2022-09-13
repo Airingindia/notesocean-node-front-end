@@ -23,25 +23,67 @@ $(document).ready(function () {
                 $(".login-btn").html("Login");
                 $(".login-btn").prop("disabled", false);
                 const authToken = data.token;
-                if (isChecked) {
-                    setCookie("token", authToken, 100);
-                    let loginDest = window.location.search.split("?dest=")[1];
-                    if (loginDest != undefined) {
-                        window.location.href = loginDest + window.location.hash.trim();
-                    } else {
-                        window.location = "/dashboard";
-                    }
-                } else {
-                    setCookie("token", authToken, 1);
-                    let loginDest = window.location.search.split("?dest=")[1];
-                    if (loginDest != undefined) {
-                        window.location.href = loginDest + window.location.hash.trim();
-                    } else {
-                        window.location = "/dashboard";
-                    }
+               let userinfo = localStorage.getItem("userInfo");
+               if(userinfo == null || userinfo == undefined) {
+                   $.ajax({
+                          type: "GET",
+                            url: app.getApi() + "/users/self",
+                            processData: false,
+                            contentType: "application/json",
+                            headers: {
+                              Authorization:authToken
+                            },
+                            beforeSend: function (xhr) {
+                                console.log("before send");
+                            },
+                           success: function (data) {
+                               localStorage.setItem("userInfo", JSON.stringify(data));
+                               if (isChecked) {
+                                   setCookie("token", authToken, 100);
+                                   let loginDest = window.location.search.split("?dest=")[1];
+                                   if (loginDest !== undefined) {
+                                       window.location.href = loginDest + window.location.hash.trim();
+                                   } else {
+                                       window.location = "/dashboard";
+                                   }
+                               } else {
+                                   setCookie("token", authToken, 1);
+                                   let loginDest = window.location.search.split("?dest=")[1];
+                                   if (loginDest !== undefined) {
+                                       window.location.href = loginDest + window.location.hash.trim();
+                                   } else {
+                                       window.location = "/dashboard";
+                                   }
 
-                }
-                app.alert(200, "Login successful");
+                               }
+                               app.alert(200, "Login successful");
+                          },
+                            error: function (err) {
+                              app.alert(err.status,"Faild to get user info");
+                              window.location = "/dashboard";
+                            }
+                   })
+               }else{
+                   if (isChecked) {
+                       setCookie("token", authToken, 100);
+                       let loginDest = window.location.search.split("?dest=")[1];
+                       if (loginDest !== undefined) {
+                           window.location.href = loginDest + window.location.hash.trim();
+                       } else {
+                           window.location = "/dashboard";
+                       }
+                   } else {
+                       setCookie("token", authToken, 1);
+                       let loginDest = window.location.search.split("?dest=")[1];
+                       if (loginDest !== undefined) {
+                           window.location.href = loginDest + window.location.hash.trim();
+                       } else {
+                           window.location = "/dashboard";
+                       }
+
+                   }
+                   app.alert(200, "Login successful");
+               }
             },
             error: function (err) {
                app.alert(err.status, err.responseJSON.description);

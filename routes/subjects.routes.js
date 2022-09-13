@@ -5,7 +5,6 @@ const api_url = process.env.API_URL;
 const fs = require('fs');
 const subjects = require("./subject.json");
 const url = require("./../services/url.services.js");
-
 const productControllers = require("../controllers/product.controller");
 const timeService = require('../services/time.services');
 router.get('/', async function (req, res, next) {
@@ -13,7 +12,6 @@ router.get('/', async function (req, res, next) {
         subjects: subjects,
         url: url
     });
-
 });
 
 

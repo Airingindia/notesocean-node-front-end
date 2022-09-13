@@ -7,6 +7,7 @@ html(lang="en-US")
         title #{profile.firstName} #{profile.lastName} | View profile on notes ocean
         meta(name="keywords",content=`${profile.firstName} ${profile.lastName},${profile.firstName} ${profile.lastName} notes, ${profile.firstName} ${profile.lastName} notes ocean , ${profile.firstName} ${profile.lastName} profile page, ${profile.firstName} ${profile.lastName} collections ,${profile.firstName} ${profile.lastName} pdf download, ${profile.firstName} ${profile.lastName} notes and collection pdf `)
         include includes/bootstrap
+        meta(property='description' content=`View recent,top notes and collection of ${(profile.firstName)} ${(profile.lastName)} from notes ocean `)
         meta(property='og:title', content=`${(profile.firstName)} ${(profile.lastName)}`)
         meta(property='og:site_name' content='Notes Ocean')
         meta(property='og:url' content=`https://notesocean.com/profile/${(profile.id)}`)
