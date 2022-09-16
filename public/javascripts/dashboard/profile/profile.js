@@ -1,5 +1,9 @@
 
 $(document).ready(function () {
+    //log out
+    $(".logout-btn").click(function (){
+        app.logout();
+    });
     $('.country').select2({
         placeholder: 'Select your country',
         selectOnClose: true,

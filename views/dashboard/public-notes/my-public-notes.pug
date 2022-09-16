@@ -38,26 +38,25 @@ html(lang="en")
                     .no-public-notes.d-none
                         .card.border-0
                             .card-content
-                                center
-                                    img.card-img-top(src="/images/dashboard/collection_not_found.svg")
+                                    img.card-img-top(src="/images/animation/sad.gif")
                                     .card-body
-                                        h5 No Public notes uploaded Yet
+                                        h5 I can't see any notes here
                                         a(href="/dashboard/public-notes/new")
-                                            button.btn.btn-primary 
+                                            button.btn.btn-notesocean.btn-sm
                                                 i.fa.fa-cloud-upload.mx-1
                                                 span Upload
                     .loading-public-notes
-                        center 
-                            .lds-roller
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                            p.loading-notice Your public notes are loading... 
+                            center
+                                .lds-roller
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                    div
+                                p.loading-notice Your public notes are loading...
         include ../../includes/dashjs
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes.js

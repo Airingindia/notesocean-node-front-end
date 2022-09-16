@@ -5,6 +5,7 @@ head
   meta(name="description" content="Access your personal dashboard, view the notes result , earning result  and many more")
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  script(src="/javascripts/loader.js")
   include ../includes/dashcss
   title Dashboard | Notes Ocean
   body
@@ -14,41 +15,49 @@ head
       .row
         include ../includes/dashAside
         .col-md-10.second-side
-          h3 Dashboard
+          div.d-flex.justify-content-between.align-items-center
+            h3 Dashboard
+            a.btn.btn-notesocean.btn-sm#btn(href="dashboard/public-notes/new")
+              i.fas.fa-cloud-arrow-up.mx-1
+              span Upload
           div
             .row
               .col-lg-3.col-6
                 .card.card-shadow.border-0.pt-3
                   .card-content.text-center
-                    h5
+                    h6
                       i.fa.fa-book.mx-2.text-danger
-                      span.text-danger Total notes
-                      p.text-bold.my-2 00
+                      span.text-danger Notes
+                      p.text-bold.my-2.total-notes-dash
+                        i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
                 .card.card-shadow.border-0.pt-3
                   .card-content.text-center
-                    h5
+                    h6
                       i.fa.fa-globe.mx-2.text-danger
-                      span.text-danger Total Views
-                      p.text-bold.my-2 00
+                      span.text-danger Views
+                      p.text-bold.my-2.total-views-dash
+                        i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
                 .card.card-shadow.border-0.pt-3
                   .card-content.text-center
-                    h5
+                    h6
                       i.fa.fa-thumbs-up.mx-2.text-danger
-                      span.text-danger Total Likes
-                      p.text-bold.my-2  00
+                      span.text-danger Likes
+                      p.text-bold.my-2.total-likes-dash
+                        i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
                 .card.card-shadow.border-0.pt-3
                   .card-content.text-center
-                    h5
+                    h6
                       i.fa.fa-rupee.mx-2.text-danger
-                      span.text-danger Total Earnings
-                      p.text-bold.my-2 00
+                      span.text-danger Earnings
+                      p.text-bold.my-2.total-earning-dash
+                        i.fa.fa-spinner.fa-spin
 
             .row
               .col-md-6
-                h5.text-center.mt-3 Top Notes
+                h6.text-center.mt-3 Top Notes
                 div#barchart_values.shadow
                   center(style="width:100%;height:200px;margin-top:40%")
                     .lds-roller
@@ -61,8 +70,8 @@ head
                       div
                       div
               .col-md-6
-                h5.text-center.mt-3 Daily views progress 
-                div#dailyViews.shadow
+                h6.text-center.mt-3 Recent Notes
+                #recentNotesChart.shadow
                   center(style="width:100%;height:200px;margin-top:40%")
                     .lds-roller
                       div
@@ -73,7 +82,7 @@ head
                       div
                       div
                       div
-              .col-md-6
+              .col-md-6.d-none
                 h5.text-center.mt-5 Merit
                 p.text-center This chart show your merit based on your notes activities and reports
                 #profile-strength.shadow
@@ -87,9 +96,8 @@ head
                       div
                       div
                       div
-
-    script(src="/javascripts/loader.js")
     include ../includes/dashjs
+    script(src="/javascripts/dashboard/dashboard.js")
     script 
       include ../../public/javascripts/dashboard/charts.js
 

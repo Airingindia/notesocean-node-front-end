@@ -1,41 +1,6 @@
 $(document).ready(function () {
 
-    function top5notes() {
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ["Element", "Likes", "views", { role: "style" }],
-                ["Class 10th math chapter 1", 100, 1000, "blue"],
-                ["class 12th chemistry chapter 2 notes", 200, 500, "blue"],
-                ["Class 10th math chapter 1", 200, 600, "blue"],
-                ["Class 10th math chapter 1", 100, 100, "blue"],
-                ["software engineering notes", 300, 300, "blue"]
-            ]);
 
-            var view = new google.visualization.DataView(data);
-            view.setColumns([0, 1,
-                {
-                    calc: "stringify",
-                    sourceColumn: 1,
-                    type: "string",
-                    role: "annotation"
-                },
-                2]);
-
-            var options = {
-                title: "",
-                width: "100%",
-                height: 400,
-                bar: { groupWidth: "50%" },
-                legend: { position: "none" },
-            };
-            var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-            chart.draw(view, options);
-        }
-    }
-
-    top5notes();
 
     function dailyupload() {
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -131,7 +96,7 @@ $(document).ready(function () {
         }
     }
 
-    dailyViews();
+
 
     function profileStrength() {
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -167,9 +132,9 @@ $(document).ready(function () {
 
     profileStrength();
 
+
     $(window).resize(function () {
         profileStrength();
-        dailyViews();
-        top5notes();
+        // dailyViews();
     });
 })
