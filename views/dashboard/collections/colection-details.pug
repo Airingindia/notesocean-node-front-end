@@ -8,6 +8,7 @@ html(lang="en")
         include ../../includes/dashcss
         style
             include ../../../public/stylesheets/dashboard/collection/collectionDetails.css
+        link(rel="stylesheet" href="/vendors/dropzone/dropzone.min.css")
     body
         header
             include ../../includes/dashHeader
@@ -41,45 +42,12 @@ html(lang="en")
                                             button.btn.btn-dark.btn-sm.mx-1.delete-collection-btn(type="button")
                                                 i.fa.fa-trash
                                                 span  Delete
+                                            button.btn.btn-success.btn-sm.mx-1.upload-notes-collection-btn(type="button")
+                                                i.fa.fa-cloud-arrow-up
+                                                span  Upload
                                 .col-12
                                     h5 Collection Notes
                                     .colllection-notes-selector.row
-                                        //- .collection-notes-item.col-md-4
-                                        //-     .card
-                                        //-         .card-header
-                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6048")
-                                        //-         .card-body
-                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
-                                        //-         .card-footer
-                                        //-             .card-text 
-                                        //-                 small Notes name dfghdfhfgh
-                                        //- .collection-notes-item.col-md-4
-                                        //-     .card 
-                                        //-         .card-header
-                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6050")
-                                        //-         .card-body
-                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
-                                        //-         .card-footer
-                                        //-             .card-text 
-                                        //-                 small Notes name
-                                        //- .collection-notes-item.col-md-4
-                                        //-     .card 
-                                        //-         .card-header
-                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="6049")
-                                        //-         .card-body
-                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
-                                        //-         .card-footer
-                                        //-             .card-text 
-                                        //-                 small Notes name
-                                        //- .collection-notes-item.col-md-4
-                                        //-     .card 
-                                        //-         .card-header
-                                        //-             i.fa.fa-times.delete-note-from-collection(data-note-id="21432")
-                                        //-         .card-body
-                                        //-             img.card-img-top(src="/images/dummy/collection.png").w-100.collection-notes-thumbnail
-                                        //-         .card-footer
-                                        //-             .card-text 
-                                        //-                 small Notes name
                                         .collection-notes-item.plus.col-md-4
                                             .card.h-100
                                                 .card-body.d-flex.justify-content-center.align-items-center.p-5
@@ -100,7 +68,7 @@ html(lang="en")
                                 div
                                 div
                                 div
-                .modal(tabindex='-1')#select-public-notes-modal.fade
+            .modal(tabindex='-1')#select-public-notes-modal.fade
                     .modal-dialog.modal-fullscreen
                         .modal-content
                             .modal-header
@@ -112,23 +80,6 @@ html(lang="en")
                                 form
                                     .container-fluid
                                         .row.public-notes-row-modal
-                                        //- .col-md-2
-                                        //-     .form-check.form-check-inline
-                                        //-     .card.border-0.shadow.rounded
-                                        //-         .card-header.bg-white.border-0
-                                        //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
-                                        //-         img(src="/images/dummy/collection.png").card-img-top
-                                        //-         .card-body.border-0
-                                        //-             p.card-text Lorem ipsum dolor sit amet.
-                                        //- .col-md-2
-                                        //-     .form-check.form-check-inline
-                                        //-     .card.border-0.shadow.rounded
-                                        //-         .card-header.border-0.bg-white
-                                        //-             input#inlineCheckbox1.form-check-input(type='checkbox' value='option1')
-                                        //-         img(src="/images/dummy/collection.png").card-img-top
-                                        //-         .card-body.border-0
-                                        //-            p.card-text Lorem ipsum dolor sit amet.
-
                                 .row.loading-public-notes
                                     center 
                                         .lds-roller
@@ -156,5 +107,35 @@ html(lang="en")
                                 a.list-group-item.list-group-item-action.border-0(href='#')#preview-collections 
                                     i.fa.fa-eye.mx-1
                                     span Preview 
+            .modal.upload-modal(data-bs-backdrop="static" data-bs-keyboard="false")
+                .modal-dialog.modal-dialog-centered
+                    .modal-content
+                        .modal-header
+                            span Upload Notes
+                            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-body
+                            form.upload-form
+                                .form-group
+                                    label Title
+                                    input(type="text" placeholder="Title" class="form-control").note-title
+                                    .invalid-feedback
+                                        p.invalid-title-error invalid title
+                                    .valid-feedback
+                                        p looks good
+                                .formp-group.my-3
+                                    label Description
+                                    textarea.form-control(rows="4" cols="5", placeholder="Write something about your note").note-descriptions
+                                    .invalid-feedback
+                                        p.invalid-descriptions-error invalid Description
+                                    .valid-feedback
+                                        p looks good
+                                .form-group.my-3
+                                    div(class="dropzone" id="file-upload")
+                                .form-group.my-3
+                                    button.upload-notes-btn.btn.btn-notesocean.btn-sm(type="button")
+                                        i.fa.fa-cloud-arrow-up.mx-1
+                                        span Upload
+        script(src="/vendors/dropzone/dropzone.min.js")
         include ../../includes/dashjs
         script(src="/javascripts/dashboard/collections/collections-details.js")
+        //script(src="/javascripts/dashboard/collections/collection_notes_upload.js")

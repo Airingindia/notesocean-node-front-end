@@ -1,41 +1,29 @@
 $(document).ready(function () {
 
-    // get user public notes
-    function loadData() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/products",
-            contentType: "application/json",
-            processData: false,
-            headers: {
-                Authorization: getCookie("token")
-            },
-            beforeSend: function () {
-                $(".loading-public-notes").removeClass("d-none");
-            },
-            success: function (data) {
-                showData(data);
-                $(".total-notes").html(data.size);
+    // Get the public notes
+    $.ajax({
+        type: "GET",
+        url: app.getApi() + "/products",
+        contentType: "application/json",
+        processData: false,
+        headers: {
+            Authorization: getCookie("token")
+        },
+        beforeSend: function () {
+            $(".loading-public-notes").removeClass("d-none");
+        },
+        success: function (data) {
+            showData(data);
+            $(".total-notes").html(data.size);
+        },
+        error: function (err) {
+            app.alert(err.status,"Failed to load public notes");
+            $(".loading-public-notes").addClass("d-none");
+            $(".public-notes-container").addClass("d-none");
+            $(".no-public-notes").removeClass("d-none");
+        }
+    });
 
-            },
-            error: function (err) {
-                if (err.status == 401) {
-                    window.location = "/session-expire";
-                } else {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Faild to load public notes ",
-                        timeout: 1000,
-                    }).show();
-                }
-                $(".loading-public-notes").addClass("d-none");
-                $(".public-notes-container").addClass("d-none");
-                $(".no-public-notes").removeClass("d-none");
-            }
-        });
-    }
-    loadData();
     function showData(data) {
         if (data.requested.length !== 0) {
             $(".loading-public-notes").addClass("d-none");
@@ -170,24 +158,31 @@ $(document).ready(function () {
         if (input.length !== 0) {
             $.ajax({
                 type: "GET",
-                url: app.getApi() + "/products/search/" + input,
+                url: app.getApi() + "/products/self/search/" + input,
                 headers: {
-                    Authorization: getCookie("token")
+                    Authorization: app.getToken()
                 },
                 beforeSend: function () {
                     $(".loading-public-notes").removeClass("d-none");
+                    app.alert(200,"Searching....");
+                    $(".search-btn").prop("disabled",true);
+                    $(".search-btn").html("Searching ....");
                 },
                 success: function (data) {
+                    $(".search-btn").prop("disabled",false);
+                    $(".search-btn").html("Search");
                     showData(data);
                     new Noty({
                         theme: "sunset",
-                        type: "success",
+                        type: `${data.size} Notes Found`,
                         text: '<i class="fa fa-check-circle">  </i> Filter by ' + input + " ",
                         timeout: 4000,
                     }).show();
 
                 },
                 error: function () {
+                    $(".search-btn").prop("disabled",false);
+                    $(".search-btn").html("Search");
                     new Noty({
                         theme: "sunset",
                         type: "error",
@@ -206,11 +201,4 @@ $(document).ready(function () {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
 });

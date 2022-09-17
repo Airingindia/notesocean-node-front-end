@@ -90,7 +90,7 @@ $(document).ready(function () {
         $("#recentNotesChart").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
     }
   }).catch(err=>{
-    console.log(err);
+    app.alert(err.status,"Failed to load notes data");
   })
 });
 

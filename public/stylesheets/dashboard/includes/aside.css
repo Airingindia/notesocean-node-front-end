@@ -116,7 +116,7 @@
 
     .dash-aside button {
         background: #fff;
-        border-radius: none;
+        border-radius: 0px;
         max-width: fit-content;
         max-height: fit-content;
         padding: 10px 15px;

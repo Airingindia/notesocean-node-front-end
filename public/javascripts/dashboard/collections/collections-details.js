@@ -1,3 +1,4 @@
+Dropzone.autoDiscover = false;
 $(document).ready(function () {
     const collection_id = window.location.pathname.split("/")[3];
     $.ajax({
@@ -122,7 +123,7 @@ $(document).ready(function () {
         })
     }
 
-    function uncheckall() {
+    function unCheckAll() {
         $(".public-notes-row-modal .card").each(function () {
             const checkbox = $(this).find("input");
             $(checkbox).prop('checked', false);
@@ -192,7 +193,7 @@ $(document).ready(function () {
             } else {
                 $("#select-public-notes-modal").modal("hide");
             }
-            uncheckall();
+            unCheckAll();
             deleteNotesFormCollection();
         });
     }
@@ -207,6 +208,8 @@ $(document).ready(function () {
     }
 
     function addNotes(data) {
+        //filter data by timestamp
+        data = data.sort((a, b) => { return b.timestamp - a.timestamp });
         for (let i = 0; i < data.length; i++) {
             let name = data[i].name;
             let id = data[i].uuid;
@@ -226,9 +229,29 @@ $(document).ready(function () {
         }
 
         deleteNotesFormCollection();
-        return;
+    }
+    function addUploadedNotes(data) {
+        //filter data by timestamp
+        data = data.sort((a, b) => { return b.timestamp - a.timestamp });
+        for (let i = 0; i < data.length; i++) {
+            let name = data[i].name;
+            let id = data[i].uuid;
+            let thumbnails = data[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/300x300/filters:format(webp)/filters:quality(100)");
+            $(".colllection-notes-selector.row").prepend(`
+            <div class="collection-notes-item col-md-4 my-1">
+            <a href="/dashboard/public-notes/${id}">
+            <div class="card p-0">
+                <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>
+                <div class="card-body p-0"><img class="card-img-top collection-notes-thumbnail w-100" src="${thumbnails}" /></div>
+                <div class="card-footer">
+                    <div class="card-text"> <small> ${name.substring(0, 50)} ...</small></div>
+                </div>
+            </div>
+            </a>
+        </div>`);
+        }
 
-
+        deleteNotesFormCollection();
     }
 
     $(".update-collection-btn").click(function(){
@@ -286,7 +309,7 @@ $(document).ready(function () {
     addNotesToCollection();
     getAllPublicNotes();
     check();
-    uncheckall();
+    unCheckAll();
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -347,4 +370,164 @@ $(document).ready(function () {
                 }
             });
     }
+
+//    upload notes
+    $(".upload-notes-collection-btn").click(function (){
+        $(".upload-modal").modal("show");
+    });
+
+
+
+    //Disabling autoDiscover
+
+    function uploadNotes() {
+        const myDropzone = new Dropzone(".dropzone", {
+            dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h6> Drag or drop your pdf to upload </h6> `,
+            autoProcessQueue: false,
+            maxFilesize: 50,
+            addRemoveLinks: true,
+            clickable: true,
+            parallelUploads: 1,
+            maxFiles: 1,
+            uploadMultiple: false,
+            acceptedFiles: ".pdf",
+            url: app.getApi() + "/products",
+            method: "post",
+            chunking: false,
+            forceChunking: false,
+            headers: {
+                Authorization: app.getToken()
+            },
+            success: function (data) {
+                data = JSON.parse(data.xhr.response);
+                myDropzone.removeAllFiles();
+                app.alert(200,"File uploaded successfully");
+                $(".upload-form").trigger("reset");
+                addUploadedNotes([data]);
+                $(".modal").modal("hide");
+            },
+            error: function (err) {
+                app.alert(err.status,"Failed to upload file");
+            }
+        });
+
+        myDropzone.on("sending", function (file, xhr, formData) {
+            let title = $(".note-title").val();
+            let description = $(".note-descriptions").val();
+            $(".upload-notes-btn").html(`<i class="fa fa-spinner fa-spin"> </i> Uploading ...`);
+            $(".upload-notes-btn").prop("disabled", true);
+            // formData.append("name",);// append file description
+            // get collection form last path of url
+            let collection = window.location.pathname.split("/").pop();
+            formData.append("collections", collection);
+            const json = {
+                name: title,
+                tags: "",
+                description: description
+            };
+            formData.append("products", new Blob([JSON.stringify(json)], { type: "application/json" }));
+        });
+        myDropzone.on("addedfile", function (file) {
+            if (myDropzone.files.length === 0) {
+                $(".dropzone").addClass("is-invalid");
+                $(".dropzone").removeClass("is-valid");
+            } else {
+                $(".dropzone").addClass("is-valid");
+                $(".dropzone").removeClass("is-invalid");
+            }
+        });
+
+        $('.upload-form').submit(function (event) {
+            event.preventDefault();
+            if ($(".note-title").hasClass("is-valid") && $(".note-descriptions").hasClass("is-valid") && myDropzone.files.length > 0) {
+                myDropzone.processQueue();
+            } else if (!$(".note-title").hasClass("is-valid")) {
+                $(".note-title").addClass("is-invalid")
+            } else if (!$(".note-descriptions").hasClass("is-valid")) {
+                $(".note-descriptions").addClass("is-invalid");
+            }
+            else if (myDropzone.files.length == 0) {
+                $(".dropzone").addClass("is-invalid");
+                $(".dropzone").removeClass("is-valid");
+            }
+        });
+    }
+    uploadNotes();
+
+    $(".upload-notes-btn").click(function () {
+        $(".upload-form").submit();
+    });
+
+
+    function validate() {
+        $(".note-title").on("input", function () {
+            $(".title-char-count").html("( " + $(this).val().trim().length + " )");
+            if ($(this).val().trim().length > 20) {
+                $(".note-title").addClass("is-valid");
+                $(".note-title").removeClass("is-invalid");
+            }
+            else if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty");
+                $(".notes-title").addClass("animate__heartBeat");
+            }
+            else {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title should be at least 20 characters");
+            }
+        });
+        $(".note-title").on("change", function () {
+            if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty'");
+            }
+        });
+
+        $(".note-title").on("blur", function () {
+            if ($(this).val().length == 0) {
+                $(".note-title").addClass("is-invalid");
+                $(".note-title").removeClass("is-valid");
+                $(".invalid-title-error").html("Title can't be empty'");
+            }
+        });
+
+        // description validations
+
+        $(".note-descriptions").on("input", function () {
+            $(".desctiption-char-count").html("( " + $(this).val().trim().length + " )");
+            if ($(this).val().trim().length > 50) {
+                $(".note-descriptions").addClass("is-valid");
+                $(".note-descriptions").removeClass("is-invalid");
+            }
+            else if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+            else {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 50 characters");
+            }
+        });
+        $(".note-descriptions").on("change", function () {
+            if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+        });
+
+        $(".note-descriptions").on("blur", function () {
+            if ($(this).val().length == 0) {
+                $(".note-descriptions").addClass("is-invalid");
+                $(".note-descriptions").removeClass("is-valid");
+                $(".invalid-descriptions-error").html("Descriptions can't be empty'");
+            }
+        });
+    };
+    validate();
 });
