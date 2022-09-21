@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const api_url = getCookie("api_url");
+
     // sherron init
     Shareon.init();
     // like function
@@ -17,7 +17,7 @@ $(document).ready(function () {
 
         $(".react-btn").each(function () {
             $(this).click(function () {
-                const token = getCookie("token");
+                const token = app.getToken()
                 reset();
                 if (token !== undefined) {
                     const count = Number($(this).find(".react-count").html());
@@ -47,7 +47,7 @@ $(document).ready(function () {
             type: "POST",
             url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/reacts/" + action,
             headers: {
-                Authorization: getCookie("token")
+                Authorization: app.getToken()
             },
             success: function (data) {
                 if (action == "LIKE") {
@@ -81,16 +81,10 @@ $(document).ready(function () {
         });
     };
 
-    function urlanys() {
-        if (window.location.hash == "#comment") {
-            $("#commentbox").toggle("show");
-        }
-        else if (window.location.hash == "#report") {
-            $(".report-modal").modal("show");
-        }
-    }
+
 
     function toggler() {
+        $("#commentbox").toggle("show");
         $(".share-btn").click(function () {
             $(".share-modal").modal("show");
         });
@@ -143,7 +137,7 @@ $(document).ready(function () {
 
     // comments function
     function commentValidator() {
-        if (getCookie("token") != undefined || getCookie("token") != null) {
+        if (app.getToken() != undefined || app.getToken() != null) {
             var userdata = localStorage.getItem("userInfo");
             if (userdata != null || userdata != undefined) {
                 userdata = JSON.parse(userdata);
@@ -153,7 +147,7 @@ $(document).ready(function () {
                     type: "GET",
                     url: app.getApi() + "/users/self",
                     headers: {
-                        Authorization: getCookie("token")
+                        Authorization: app.getToken()
                     },
                     success: function (data) {
                         localStorage.setItem("userInfo", JSON.stringify(data));
@@ -270,7 +264,7 @@ $(document).ready(function () {
                         content: $(".commentbox-input").val().trim()
                     }),
                     headers: {
-                        Authorization: getCookie("token")
+                        Authorization:app.getToken()
                     }, beforeSend: function () {
                         $(".comment-add-btn").prop("disabled", true);
                         $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
@@ -311,18 +305,6 @@ $(document).ready(function () {
 
     // showRelatedNotes();
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
     function report() {
         $(".report-form").submit(function (e) {
             e.preventDefault();
@@ -339,7 +321,7 @@ $(document).ready(function () {
                     message: message
                 }),
                 headers: {
-                    Authorization: getCookie("token")
+                    Authorization: app.getToken()
                 },
                 beforeSend: function () {
                     $(".report-btn-modal").prop("disabled", true);
@@ -377,9 +359,8 @@ $(document).ready(function () {
                 }
             })
         })
-    };
+    }
     likeAndDislike();
-    urlanys();
     toggler();
     commentValidator();
     addComments();
