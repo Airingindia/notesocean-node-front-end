@@ -4,7 +4,6 @@ $(document).ready(function () {
     Shareon.init();
     // like function
     function likeAndDislike() {
-        var lastCount = 0;
         var action = "NEUTRAL";
         function reset() {
             $(".react-btn").each(function () {
@@ -23,9 +22,7 @@ $(document).ready(function () {
                     const count = Number($(this).find(".react-count").html());
                     if ($(this).hasClass("active")) {
                         $(this).removeClass("active");
-                        // action = 0;
-                        // $(this).find(".react-count").html(count - 1);
-
+                        addReactionAction("NEUTRAL");
                     } else {
                         $(".react-btn").removeClass("active");
                         $(this).addClass("active");
@@ -65,8 +62,6 @@ $(document).ready(function () {
                         timeout: 4000,
                     }).show();
                 }
-
-
             },
             error: function () {
                 new Noty({
