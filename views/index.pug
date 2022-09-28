@@ -60,38 +60,38 @@ html(lang="en-US")
           span.color-red Courses
         p Find your notes by your courses 
           a(href="/courses").color-red View all
-        .container.categories-item-cont
+        .container-fluid.categories-item-cont
           .row
             - let count = 0;
             -for(let i = 0;i<12;i++){
               - count++;
               - var item = courses[Math.floor(Math.random()*courses.length)];
 
-                .col-6.col-lg-4.mt-3
+                .col-6.col-lg-3.mt-3
                   a(href="/courses/"+url.make(item))
-                    .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center.w-100.h-100
+                    .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.w-100.h-100.py-5.px-1
                       h6 #{item}
 
             -}
 
-    section.categories.categories-subject.wow.animate__animated.animate__fadeIn
+    section.categories.categories-subject.wow
       .container.py-5
         h3 Notes By 
           span.color-red Subjects
         p Find your notes by your subjects 
           a(href="/subjects").color-red View all
-        .container.categories-item-cont
+        .container-fluid.categories-item-cont
           .row
             - let counter = 0;
             -for(let i = 0;i<12;i++){
               - counter++;
               - var item = subjects[Math.floor(Math.random()*subjects.length)];
-                .col-6.col-lg-4.mt-3
+                .col-6.col-lg-3.mt-3
                   a(href="/subjects/"+url.make(item))
-                    .card.shadow.border-0.p-5.text-center.h-100.d-flex.justify-content-center.align-items-center
+                    .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.py-5.px-1
                       h6 #{item}
             -}
-    section.most-viewd-notes.wow.animate__animated.animate__fadeIn
+    section.most-viewd-notes.wow
       .container.py-5
         h3 Most Viewed 
           span.color-red Notes
@@ -165,7 +165,7 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-    section.recent-notes.wow.animate__animated.animate__fadeIn
+    section.recent-notes.wow
       .container.py-5
         h3 Recent Uploaded  
           span.color-red Notes

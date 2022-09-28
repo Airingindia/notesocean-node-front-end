@@ -86,7 +86,8 @@ $(document).ready(function () {
                }
             },
             error: function (err) {
-               app.alert(err.status, err.responseJSON.description);
+                console.log(err);
+               app.alert(err.status, err.responseJSON !== undefined ?  err.responseJSON.description  :"");
                 $(".login-btn").html("Login");
                 $(".login-btn").prop("disabled", false);
             }

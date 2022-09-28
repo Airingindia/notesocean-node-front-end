@@ -1,24 +1,29 @@
 $(document).ready(function () {
-    if (getCookie("token") !== undefined) {
+
+    function Showheader(){
+        let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        let pic = userInfo.profileImage !== null ?  userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/25x25") : "https://static.ncdn.in/public/user.png";
+        $(".dashboard-nav-item img").attr("src", pic);
+        $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName);
+    }
+    if (app.getCookie("token") !== undefined) {
         $(".loading-nav-item").addClass("d-none");
         $(".dashboard-nav-item").removeClass("d-none");
-        if (localStorage.getItem("userdata") !== null) {
-            let pic = JSON.parse(localStorage.getItem("userdata")).profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
-            $(".dashboard-nav-item img").attr("src", pic);
-            $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userdata")).firstName + " " + JSON.parse(localStorage.getItem("userdata")).lastName);
+        if (localStorage.getItem("userInfo") !== null) {
+           Showheader();
         } else {
-            $(".dashboard-nav-item img").attr("src", "/images/dummy/user_dummy.jpg");
-            $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName);
+            app.loaduserInfo().then(()=>{
+                Showheader();
+            }).catch(()=>{
+                $(".dashboard-nav-item img").attr("src", "https://static.ncdn.in/public/user.png");
+            $(".user-profile-name").html(" Dashboard");
+            })
         }
     } else {
         $(".login-navbar-item").removeClass("d-none");
         $(".loading-nav-item").addClass("d-none");
     }
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
+    
     function navbar() {
         $(".mobile-menus-bars-button").click(function () {
             $(".mobile-menu-wrapper").css({ display: "flex" })

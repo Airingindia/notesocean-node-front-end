@@ -28,6 +28,16 @@ router.get('/', function (req, res, next) {
   });
 });
 
+// no internet route
+
+router.get("/no-internet",(req,res,next)=>{
+    res.render("errors/0",{
+      data:req.headers.referer
+    });
+})
+
+// upload route
+
 router.get("/upload", (req, res, next) => {
   if (req.cookies.token == undefined) {
     return res.redirect("/login?dest=" + req.originalUrl);
@@ -236,7 +246,7 @@ router.get("/logout", (req, res, next) => {
     profileControllers.logout(req.cookies.token).then((response) => {
       console.log("user logout");
     }).catch((err) => {
-      console.log(err);
+      console.log("error");
     })
   }
   res.clearCookie("token");

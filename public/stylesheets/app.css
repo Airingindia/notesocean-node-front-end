@@ -1,0 +1,43 @@
+h1,h2,h3,h4,h5,h6,p,span,a,li{
+    font-family: 'Inter', sans-serif !important;
+    }
+    .javascript-blocked{
+        display:none;
+    }
+    .color-notesocean{
+        color: #FF0000;
+    }
+
+    .btn-notesocean {
+        color: #fff;
+        background-color: #FF0000;
+        border-color: #fff;
+        border:none  !important;
+    }
+
+    .btn-notesocean:hover, .btn-notesocean:focus, .btn-notesocean:active, .btn-notesocean.active, .open .dropdown-toggle.btn-notesocean {
+        border:none  !important;
+        color: #fff;
+        box-shadow:none  !important;
+        outline:none !important;
+    }
+    textarea:focus, 
+    textarea.form-control:focus, 
+    input.form-control:focus, 
+    input[type=text]:focus, 
+    input[type=password]:focus, 
+    input[type=email]:focus, 
+    input[type=number]:focus, 
+    [type=text].form-control:focus, 
+    [type=password].form-control:focus, 
+    [type=email].form-control:focus, 
+    [type=tel].form-control:focus, 
+    [contenteditable].form-control:focus {
+        box-shadow: inset 0 -1px 0 #ddd;
+        outline: 0 !important;
+    }
+    button:active {
+        border-style: outset;
+        outline:0px !important;
+        box-shadow:0px !important;
+    }  

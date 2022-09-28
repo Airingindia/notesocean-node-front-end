@@ -1,30 +1,35 @@
 //- preconnect and pre fetching
 link(rel='dns-prefetch' href='https://fonts.googleapis.com')
+link(rel='dns-prefetch' href='https://static.ncdn.in')
+link(rel='dns-prefetch' href='https://thumbnails.ncdn.in')
+link(rel='dns-prefetch' href='https://profile.ncdn.in')
+link(rel='dns-prefetch' href='https://notes.ncdn.in')
+link(rel='dns-prefetch' href='https://products.ncdn.in')
 //-mobile optimized links
 meta(name="mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="default")
-link(rel='apple-touch-icon' href='/touch-icons/apple-touch-icon-iphone-60x60.png')
-link(rel='apple-touch-icon' sizes='60x60' href='/touch-icons/apple-touch-icon-ipad-76x76.png')
-link(rel='apple-touch-icon' sizes='114x114' href='/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
-link(rel='apple-touch-icon' sizes='144x144' href='/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
+link(rel='apple-touch-icon' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-60x60.png')
+link(rel='apple-touch-icon' sizes='60x60' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-76x76.png')
+link(rel='apple-touch-icon' sizes='114x114' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
+link(rel='apple-touch-icon' sizes='144x144' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
 //- libs css
-link(rel='stylesheet' href='/vendors/bootstrap/bootstrap.min.css' media="all")
-link(rel='stylesheet' href='/vendors/fontawesome-free-6.1.1-web/css/all.css' media="all")
-link(rel="stylesheet" href="/vendors/noty/noty.css" media="all")
-link(href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="all")
+link(rel='stylesheet' href='https://static.ncdn.in/vendor/bootstrap/bootstrap.min.css')
+link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css' )
+link(rel="stylesheet" href="https://static.ncdn.in/vendor/noty/noty.css")
+link(href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet")
 //- libs js
-script(src='/vendors/jquery/jquery.js' type="application/javascript")
-script(src='/vendors/bootstrap/bootstrap.js' type="application/javascript" ) 
-script(src="/vendors/noty/noty.min.js" type="application/javascript" )
-script(src="/vendors/lozad/lozad.min.js" type="application/javascript" )
-script(src="/vendors/wow/wow.min.js" type="application/javascript")
-script(src="/vendors/crypto/crypto-js.min.js")
+script(src='https://static.ncdn.in/vendor/jquery/jquery.js' type="application/javascript")
+script(src='https://static.ncdn.in/vendor/bootstrap/bootstrap.js' type="application/javascript" ) 
+script(src="https://static.ncdn.in/vendor/noty/noty.min.js" type="application/javascript" )
+script(src="https://static.ncdn.in/vendor/lozad/lozad.min.js" type="application/javascript" )
+script(src="https://static.ncdn.in/vendor/wow/wow.min.js" type="application/javascript")
+script(src="https://static.ncdn.in/vendor/crypto/crypto-js.min.js"  type="application/javascript")
 //- icons
-link(rel="shortcut icon" href="/icon-192x192.png")
-link(rel='apple-touch-icon-precomposed' href='/touch-icons/apple-touch-icon-iphone-60x60.png')
-link(rel='apple-touch-icon-precomposed' sizes='60x60' href='/touch-icons/apple-touch-icon-ipad-76x76.png')
-link(rel='apple-touch-icon-precomposed' sizes='114x114' href='/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
-link(rel='apple-touch-icon-precomposed' sizes='144x144' href='/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
+link(rel="shortcut icon" href="https://static.ncdn.in/public/icon-192x192.png")
+link(rel='apple-touch-icon-precomposed' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-60x60.png')
+link(rel='apple-touch-icon-precomposed' sizes='60x60' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-76x76.png')
+link(rel='apple-touch-icon-precomposed' sizes='114x114' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-iphone-retina-120x120.png')
+link(rel='apple-touch-icon-precomposed' sizes='144x144' href='https://static.ncdn.in/public/touch-icons/apple-touch-icon-ipad-retina-152x152.png')
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
@@ -67,64 +72,31 @@ script(type='application/ld+json').
             "https://www.linkedin.com/company/notesocean"
         ]
     }
-style.
-    h1,h2,h3,h4,h5,h6,p,span,a,li{
-    font-family: 'Inter', sans-serif !important;
-    }
-    .javascript-blocked{
-        display:none;
-    }
-    .color-notesocean{
-        color: #FF0000;
-    }
-
-    .btn-notesocean {
-        color: #fff;
-        background-color: #FF0000;
-        border-color: #fff;
-        border:none  !important;
-    }
-
-
-    .btn-notesocean:hover, .btn-notesocean:focus, .btn-notesocean:active, .btn-notesocean.active, .open .dropdown-toggle.btn-notesocean {
-        border:none  !important;
-        color: #fff;
-        box-shadow:none  !important;
-        outline:none !important;
-    }
-    textarea:focus, 
-    textarea.form-control:focus, 
-    input.form-control:focus, 
-    input[type=text]:focus, 
-    input[type=password]:focus, 
-    input[type=email]:focus, 
-    input[type=number]:focus, 
-    [type=text].form-control:focus, 
-    [type=password].form-control:focus, 
-    [type=email].form-control:focus, 
-    [type=tel].form-control:focus, 
-    [contenteditable].form-control:focus {
-        box-shadow: inset 0 -1px 0 #ddd;
-        outline: 0 !important;
-    }
-    button:active {
-        border-style: outset;
-        outline:0px !important;
-        box-shadow:0px !important;
-    }   
-
+ 
+link(rel="stylesheet", href="/stylesheets/app.css")
 noscript
-    h1 Your browser does not support JavaScript!
+    h1 Javascript disabled!
+    p Please enable javascript to use this website
+    p Don't know how to enable it , please watch this video 
+        a(href="https://youtu.be/8SAN4uVrjHo",rel="nofollow") click here
     style(type='text/css').
-        .javascript-blocked{
-            display:block;
+        h1{
+            text-align:center;
+            margin:20px 0px;
+            color:red;
         }
-        body{
+        p{
+            text-align:center;
+        }
+        a{
+            color:blue !important;
+        }
+        header{
             display:none;
         }
-script.
-    new WOW().init(); 
-// Google tag (gtag.js)
+        section{
+            display:none;
+        }
 script(async src='https://www.googletagmanager.com/gtag/js?id=G-QCGYD0XM2C')
 script.
     window.dataLayer = window.dataLayer || [];
@@ -133,13 +105,13 @@ script.
     gtag('config', 'G-QCGYD0XM2C');
 script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834928493837917"
     crossorigin="anonymous")
-script
-    include ../../public/javascripts/app.js
+script(src="/javascripts/app.js")
 script.
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "dm0m0qv43m");
-
+script.
+    new WOW().init();
 

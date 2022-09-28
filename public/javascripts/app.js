@@ -1,12 +1,13 @@
+
 class notesocean{
     getApi(){
-        return CryptoJS.enc.Base64.parse(decodeURIComponent(getCookie("api"))).toString(CryptoJS.enc.Utf8);
+        return CryptoJS.enc.Base64.parse(decodeURIComponent(app.getCookie("api"))).toString(CryptoJS.enc.Utf8);
     }
     getToken(){
-        return getCookie("token")
+        return app.getCookie("token")
     }
     getCurrentUserid(){
-        return JSON.parse(atob(decodeURIComponent(getCookie("token")).split(".")[1])).userUuid;
+        return JSON.parse(atob(decodeURIComponent(app.getCookie("token")).split(".")[1])).userUuid;
     }
     logout(){
         $.ajax({
@@ -123,12 +124,8 @@ class notesocean{
                     timeout: 2000
                 }).show();
         }else if(status ===0){
-                new Noty({
-                    type: "error",
-                    layout: "topRight",
-                    text: "Network Error ! try again later", 
-                    timeout: 2000
-                }).show();
+                window.location = "/no-internet";
+                return false;
         }
         else{
             new Noty({
@@ -139,16 +136,77 @@ class notesocean{
             }).show();
         }
     }
+
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    getTime = (previous) => {
+        const current = Date.now();
+        var msPerMinute = 60 * 1000;
+        var msPerHour = msPerMinute * 60;
+        var msPerDay = msPerHour * 24;
+        var msPerMonth = msPerDay * 30;
+        var msPerYear = msPerDay * 365;
+
+        var elapsed = current - previous;
+
+        if (elapsed < msPerMinute) {
+            return Math.round(elapsed / 1000) + ' seconds ago';
+        }
+
+        else if (elapsed < msPerHour) {
+            return Math.round(elapsed / msPerMinute) + ' minutes ago';
+        }
+
+        else if (elapsed < msPerDay) {
+            return Math.round(elapsed / msPerHour) + ' hours ago';
+        }
+
+        else if (elapsed < msPerMonth) {
+            return Math.round(elapsed / msPerDay) + ' days ago';
+        }
+
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed / msPerMonth) + ' months ago';
+        }
+
+        else {
+            return Math.round(elapsed / msPerYear) + ' years ago';
+        }
+    };
+
+    // load user info if not stored in loaclstorage
+    loadUserData = ()=>{
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+                type:"GET",
+                url:app.getApi()+"/users/self",
+                headers:{
+                    Authorization:app.getToken()
+                },
+                beforeSend:function(){},
+                success:function(data){
+                    localStorage.setItem("userInfo",JSON.stringify(data));
+                    resolve(data)
+                },
+                error:function(err){
+                    reject(err)
+                    app.logout();
+                    app.alert(400,"Failed to load your data , please login again")
+                }
+            })
+        })
+    }
 }
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+
+
 const app = new notesocean();
