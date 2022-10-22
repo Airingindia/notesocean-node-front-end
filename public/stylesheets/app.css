@@ -1,43 +1,165 @@
-h1,h2,h3,h4,h5,h6,p,span,a,li{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li {
     font-family: 'Inter', sans-serif !important;
-    }
-    .javascript-blocked{
-        display:none;
-    }
-    .color-notesocean{
-        color: #FF0000;
-    }
+}
 
-    .btn-notesocean {
-        color: #fff;
-        background-color: #FF0000;
-        border-color: #fff;
-        border:none  !important;
-    }
+.javascript-blocked {
+    display: none;
+}
 
-    .btn-notesocean:hover, .btn-notesocean:focus, .btn-notesocean:active, .btn-notesocean.active, .open .dropdown-toggle.btn-notesocean {
-        border:none  !important;
-        color: #fff;
-        box-shadow:none  !important;
-        outline:none !important;
-    }
-    textarea:focus, 
-    textarea.form-control:focus, 
-    input.form-control:focus, 
-    input[type=text]:focus, 
-    input[type=password]:focus, 
-    input[type=email]:focus, 
-    input[type=number]:focus, 
-    [type=text].form-control:focus, 
-    [type=password].form-control:focus, 
-    [type=email].form-control:focus, 
-    [type=tel].form-control:focus, 
-    [contenteditable].form-control:focus {
-        box-shadow: inset 0 -1px 0 #ddd;
-        outline: 0 !important;
-    }
-    button:active {
-        border-style: outset;
-        outline:0px !important;
-        box-shadow:0px !important;
-    }  
+.color-notesocean {
+    color: #FF0000;
+}
+
+.btn-notesocean {
+    color: #fff;
+    background-color: #FF0000;
+    border-color: #fff;
+    border: none !important;
+}
+
+/* dark btn */
+
+.btn-notesocean.dark {
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+.btn-notesocean:hover,
+.btn-notesocean:focus {
+    opacity: 0.90;
+}
+
+
+/* red btn */
+
+.btn-notesocean.red {
+    background-color: #E21717;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+.btn-notesocean.blue {
+    background-color: #383CC1;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+
+.btn-notesocean:hover,
+.btn-notesocean:focus,
+.btn-notesocean:active,
+.btn-notesocean.active,
+.open .dropdown-toggle.btn-notesocean {
+    border: none !important;
+    color: #fff;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: inset 0 -1px 0 #ddd;
+    outline: 0 !important;
+}
+
+button:active {
+    border-style: outset;
+    outline: 0px !important;
+    box-shadow: 0px !important;
+}
+
+/* text css  */
+
+.text-notesocean {
+    color: #FF0000 !important;
+}
+
+.text-notesocean.blue {
+    color: #383CC1 !important;
+}

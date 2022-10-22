@@ -19,6 +19,48 @@ html(lang="en-US")
     meta(name='twitter:site' content='@real_notesocean')
     meta(name='twitter:title' content=`Notes Ocean`)
     meta(name='twitter:description' content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
+    script(type="application/ld+json").
+      {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Notes Ocean",
+        "url": "https://notesocean.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://notesocean.com/search?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    script(type='application/ld+json').
+      {
+        "@context": "https://schema.org",
+        "@type": "Corporation",
+        "name": "Notes ocean",
+        "alternateName": "Airing Private Limited",
+        "url": "https://notesocean.com",
+        "logo": "https://notesocean.com/logo.png",
+        "contactPoint": [{
+          "@type": "ContactPoint",
+          "telephone": "+918045685522",
+          "contactType": "customer service",
+          "contactOption": "HearingImpairedSupported",
+          "areaServed": "IN",
+          "availableLanguage": ["en","Hindi"]
+        },{
+          "@type": "ContactPoint",
+          "telephone": "+918045685522",
+          "contactType": "technical support",
+          "contactOption": "HearingImpairedSupported",
+          "areaServed": "IN",
+          "availableLanguage": ["en","Hindi"]
+        }],
+          "sameAs": [
+          "https://www.facebook.com/notesoceanofficial",
+          "https://twitter.com/real_notesocean",
+          "https://www.instagram.com/notesoceanofficial/",
+          "https://www.linkedin.com/company/notesocean"
+        ]
+      }
 
     include includes/bootstrap
     //- ads

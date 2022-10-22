@@ -10,29 +10,39 @@ head
     style
         include ../../public/stylesheets/account/signup.css
     link(rel="stylesheet" href="/stylesheets/animate.css")
+    style.
+        form{
+            width:30%;
+        }
+
+        @media(max-with: 768px){
+            form{
+                width: 100%;
+            }
+        }
     body
         header
             include ../includes/navbar
         section.main-section
-            form.w-25.mx-auto
+            form.mx-auto
                 h2 Forget your password?
                 p Don't worry , we will help you to reset your password
                 .form-group.email-form
                     i.fa.fa-envelope
                     //- label(for="email address") Enter Email Address
                     input(type="email" placeholder="Enter Email Address" name="email").form-control
-                    button(type="button").btn.btn-notesocean.send-code.my-3 Send Code
-                .form-group.verify-form.animate__animated.animate__backInUp.d-none
-                    i.fa.fa-lock
-                    input(type="number" placeholder="Enter code" name="code" ).form-control
-                    button(type="button").btn.btn-notesocean.verify-code.my-3 verify code
+                    button(type="button").btn-notesocean.dark.send-code.w-100.my-3 Send Code
+                div.animate__animated.animate__backInUp.d-none
+                    p.text-notesocean.blue Enter the code we sent to your email address
+                    .form-group.verify-form
+                        i.fa.fa-lock
+                        input(type="number" placeholder="Enter code" name="code" ).form-control
+                        button(type="button").btn-notesocean.blue.w-100.verify-code.my-3 verify code
                 .form-group.password-form.animate__animated.animate__backInUp.d-none
                     i.fa.fa-lock
                     input(type="text" placeholder="New Password" name="new-password").form-control
                     br
                     i.fa.fa-lock
                     input(type="text" placeholder="Confirm New Password" name="confirm-password").form-control
-                    button(type="button").btn.btn-notesocean.reset-password.my-3 Reset password
+                    button(type="button").btn-notesocean.red.w-100.reset-password.my-3 Reset password
         include ../includes/footer
-        script
-            include ../../public/javascripts/accounts/signup.js
