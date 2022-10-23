@@ -14,8 +14,11 @@ head
         section
 
             .container.text-center
-                i.fa.fa-check-circle.text-success(style="font-size:150px")
-                h5 Your request is subbmitted successfully, 
+                - if(title== undefined || title ==""){
+                    title = "request"
+                -}
+                i.fa.fa-check-circle.text-success(style="font-size:150px").my-3
+                h5 Your #{title} is subbmitted successfully, 
                 p our executive will get back to you soon
                 br
                 a(href="/")
