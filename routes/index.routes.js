@@ -30,10 +30,10 @@ router.get('/', function (req, res, next) {
 
 // no internet route
 
-router.get("/no-internet",(req,res,next)=>{
-    res.render("errors/0",{
-      data:req.headers.referer
-    });
+router.get("/no-internet", (req, res, next) => {
+  res.render("errors/0", {
+    data: req.headers.referer
+  });
 })
 
 // upload route
@@ -114,15 +114,15 @@ router.get("/profile/:user_id", async (req, res, next) => {
 
 //  login page route
 
-router.get("/login/:token",(req,res,next)=>{
-  profileControllers.validateToken(req.params.token).then((response)=>{
-   if(response.body){
-      res.cookie("token",response.body.token);
+router.get("/login/:token", (req, res, next) => {
+  profileControllers.validateToken(req.params.token).then((response) => {
+    if (response.body) {
+      res.cookie("token", response.body.token);
       res.redirect("/dashboard");
-   }else{
+    } else {
       res.redirect("/login");
-   }
-  }).catch((error)=>{
+    }
+  }).catch((error) => {
     res.redirect("/login");
   })
 })
@@ -179,7 +179,7 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   const query = req.query.query;
-  if(query == undefined){
+  if (query == undefined) {
     return res.redirect("/");
   }
   productControllers.searchProducts(query, req).then((product) => {
@@ -224,7 +224,6 @@ router.get("/contact-us/success", (req, res, next) => {
 
 router.get("/contact-us/error", (req, res, next) => {
   res.render("information-pages/contact-error");
-  ;
 });
 
 router.get("/session-expire", (req, res, next) => {

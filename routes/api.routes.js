@@ -11,23 +11,23 @@ const apiServices = require('../services/mail.services');
 
 /* GET home page. */
 router.get('/env', function (req, res, next) {
-    const envdata = {
-        env: env,
-        home: homepage,
-        api: api_url
-    };
-    res.json(envdata);
+  const envdata = {
+    env: env,
+    home: homepage,
+    api: api_url
+  };
+  res.json(envdata);
 });
 
 router.post("/contact-email", async (req, res, next) => {
-    const user_email = req.body.email;
-    const name = req.body.name;
-    const subject = req.body.subject;
-    const message = req.body.message;
-    const phone = req.body.phone;
-    const from = "no-reply@notesocean.com";
-    const admin = "admin@notesocean.com";
-    const html = `
+  const user_email = req.body.email;
+  const name = req.body.name;
+  const subject = req.body.subject;
+  const message = req.body.message;
+  const phone = req.body.phone;
+  const from = "no-reply@notesocean.com";
+  const admin = "contact@notesocean.com";
+  const html = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -316,21 +316,118 @@ router.post("/contact-email", async (req, res, next) => {
           </center>
         </body>
       </html>`;
-    const adminHtml = `<div> <h1> Name: ${name} </h1> <h2> Email : ${user_email} </h2> <h3> Phone ${phone} </h3> <h4> subject ${subject} </h4> <p> ${message} </p> </div>`;
-    try {
-        await mailServices.send(user_email, from, subject, html, from);
-        await mailServices.send(admin, from, subject, adminHtml, user_email);
-        res.json({
-            status: 200,
-            message: "Email sent successfully",
-        });
-    }
-    catch (err) {
-        res.json({
-            status: 400,
-            message: "Email not sent"
-        });
-    }
+  const adminHtml = `<div> <h1> Name: ${name} </h1> <h2> Email : ${user_email} </h2> <h3> Phone ${phone} </h3> <h4> subject ${subject} </h4> <p> ${message} </p> </div>`;
+  try {
+    await mailServices.send(user_email, from, subject, html, from);
+    await mailServices.send(admin, from, subject, adminHtml, user_email);
+    res.json({
+      status: 200,
+      message: "Email sent successfully",
+    });
+  }
+  catch (err) {
+    res.json({
+      status: 400,
+      message: "Email not sent"
+    });
+  }
 });
+
+
+router.post("/report", async (req, res) => {
+  let data = req.body;
+  if (!req.body.basicInfo && !req.body.legalInfo && !req.body.reportInfo) {
+    res.status(400).json({
+      message: "bad request!"
+    });
+
+    return;
+  }
+  let basicInfo = data.basicInfo;
+  let legalInfo = data.legalInfo;
+  let reportInfo = data.reportInfo;
+  //check basic info is not empty or undefined
+  if (basicInfo.firstName !== undefined && basicInfo.firstName.length !== 0 && basicInfo.lastName !== undefined && basicInfo.lastName.length !== 0 && basicInfo.email !== undefined && basicInfo.email.length !== 0 && basicInfo.mobile !== undefined && basicInfo.mobile.length !== 0) {
+    // check email is valid
+    if (basicInfo.email.indexOf("@") !== -1 && basicInfo.email.trim().length > 10) {
+      // check legal info
+      if (legalInfo.copyrightNumber !== undefined && legalInfo.copyrightNumber.length !== 0 || legalInfo.proofURL !== undefined && legalInfo.proofURL.length !== 0) {
+        // check report url and decription
+        if (reportInfo.reportURL !== undefined && reportInfo.reportURL.length !== 0 && reportInfo.reportDescription !== undefined && reportInfo.reportDescription.length !== 0) {
+          // send mail
+          const user_email = basicInfo.email;
+          const name = basicInfo.firstName + " " + basicInfo.lastName;
+          const subject = "Notes Ocean | Reported a note!";
+          const phone = basicInfo.mobile;
+          const from = "no-reply@notesocean.com";
+          const admin = "contact@notesocean.com";
+          const html = `
+            <h1> Reported Content!  </h1>
+            <h5> Content url : ${reportInfo.reportURL} </h5>
+            <b> Desription </b>
+            <br>
+            <p> ${reportInfo.reportDescription} </p>
+            <hr>
+            <h5> Legal Info Provided </h5>
+            <p> Copyright Number  : ${legalInfo.copyrightNumber} </p>
+            <p> Proof URL  : ${legalInfo.proofURL} </p>
+            <hr>
+            <h5> Reporter Full Name : ${basicInfo.firstName} ${basicInfo.lastName} </h5>
+            <h5> Reporter Email : ${basicInfo.email} </h5>
+
+            <h5> Reporter Mobile : ${basicInfo.mobile} </h5>
+            <h5> Reporter Address : ${basicInfo.address} </h5>
+          `;
+
+          const thankYourMessage = `
+
+            <h1> Thank you ${basicInfo.firstName} ${basicInfo.lastName} </h1>
+            <p> For Reporting the content </p>
+
+            <p> We will get back to you soon </p>
+
+            <h5> Best Regard </h5>
+            <p> Content Management Team  | Notes Ocean </>
+          
+          `;
+
+          try {
+            await mailServices.send(user_email, from, subject, thankYourMessage, admin);
+            await mailServices.send(admin, from, subject, html, user_email, user_email);
+            res.json({
+              status: 200,
+              message: "Reported successfully",
+            });
+          } catch (e) {
+            console.log(e);
+            res.json({
+              status: 500,
+              message: "Email not sent!",
+            });
+          }
+
+        } else {
+          res.status(400).json({
+            message: "Please provide report info!"
+          })
+        }
+      } else {
+        res.status(400).json({
+          message: "Please one legal info!"
+        })
+      }
+    } else {
+      res.status(400).json({
+        message: "Invalid Email provided"
+      })
+    }
+  } else {
+    res.status(400).json({
+      message: "Basic info not provided properly"
+    })
+  }
+});
+
+
 
 module.exports = router;

@@ -21,59 +21,52 @@ html(lang="en")
         section.main-section
             form
                 h1 New Report
-                p We are here to help you at every point.
-                span Report any copyright issue you found here and our team will take care of it 
+                p We are strictly against any kind of plagiarism. If you found any copyright issue please report it here.
                 .row
-                    .col-md-6
-                        h6 Required Infomation
-                        .form-group
-                            label Note Url *
-                            -if(id !== undefined){
-                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required , readonly ,value=`https://notesocean.com/notes/`+id)
-                            -}else{
-                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required )
-                            -}
 
+
+                    .col-md-6
+                        h6 Basic Infomation
                         .form-group.my-2
                             label First Name *
-                            input.form-control(type="text" required)
+                            input.form-control(type="text" required,name="firstName")
                         .form-group.my-2
                             label Last Name *
-                            input.form-control(type="text" required)
+                            input.form-control(type="text" required,name="lastName")
                         .form-group.my-2
                             label Email Address *
-                            input.form-control(type="email" required)
+                            input.form-control(type="email" required ,name="email")
                         .form-group.my-2
                             label Phone Number *
                                 small  ( with country code)
-                            input.form-control(type="tel" required)
+                            input.form-control(type="tel" required ,name="mobile")
                         .form-group.my-2
                             label Address *
-                            textarea.form-control(required)
-                    .col-md-6
+                            textarea.form-control(required ,name="address")
+                    .col-md-6.d-none
                         h6 Company Infomation
                         .form-group.my-2
                             label Company Name
                                 small  (optional)
                             input.form-control(type="text")
                         .form-group.my-2
-                            label Website
+                            label Company Website
                                 small  (optional)
                             input.form-control(type="url" )
                         .form-group.my-2
-                            label Address
+                            label Office Address
                                 small  (optional)
                             textarea.form-control
                         .form-group.my-2
-                            label Email 
+                            label Company Email 
                                 small  (optional)
                             input.form-control(type="email")
                         .form-group.my-2
-                            label Phone Number
+                            label Office Phone Number
                                 small  (optional)
                             input.form-control(type="tel")
                         .form-group.my-2
-                            label CIN
+                            label Company CIN
                                 small  (optional)
                             input.form-control(type="text")
                     .col-md-6
@@ -82,14 +75,27 @@ html(lang="en")
                         .form-group.my-2
                             label ROC Number / Diary No  / Copyright Number
                                 small  (only applicable for India and USA)
-                            input.form-control(type="url" , placeholder="Enter ROC Number, Diary No or Copyright Number if any") 
+                            input.form-control(type="text" , placeholder="Enter ROC Number, Diary No or Copyright Number if any" name="copyrightNumber") 
                         .form-group.my-2
                             label Proof URL  
-                            input.form-control(type="url" , placeholder="Enter a url that proves you own or you have the right to use the content") 
-                        .form-group.my-2
-                            label Proof Image 
-                            input.form-control(type="file" accept="image/*" , placeholder =" Upload a image that proves you own or you have the right to use the content")
+                            input.form-control(type="url" , placeholder="Enter a url that proves you own or you have the right to use the content" ,name="proofURL") 
+                    .col-md-6
+                        h5 Report Infomation
+                        .form-group
+                            b Content URL *
+                            -if(id !== undefined){
+                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required , readonly ,value=`https://notesocean.com/notes/`+id ,name="reportURL")
+                            -}else{
+                                input.form-control(placeholder="https://notesocean.com/notes/abc-123-zyx" type="url",required, name="reportURL")
+                            -}
+                        //- report description
+                        .form-group
+                            b Report Description *
+                            textarea.form-control(rows="5" name="reportDescription" ,required)
+                    .col-md-7
                         .form-group.mt-4
-                            button(type="submit").btn.btn-dark Submit
+                            button(type="submit").btn-notesocean.dark.report-btn  Submit
+        script
+            include ../../public/javascripts/reports/new.report.js
         include ../includes/footer.pug
 
