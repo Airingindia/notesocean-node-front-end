@@ -10,7 +10,7 @@ head
   title Dashboard | Notes Ocean
   body
     header
-      include ../includes/dashHeader  
+      include ../includes/dashHeader
     section 
       .row
         include ../includes/dashAside
@@ -59,43 +59,103 @@ head
               .col-md-6
                 h6.text-center.mt-3 Top Notes
                 div#barchart_values.shadow
-                  center(style="width:100%;height:200px;margin-top:40%")
-                    .lds-roller
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
+                  .skeleton-live-loader.loader
+                    .loading-message
+                      p Chart is loading
+                      p.dot-one  .
+                      p.dot-two  .
+                      p.dot-three  .
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
               .col-md-6
                 h6.text-center.mt-3 Recent Notes
                 #recentNotesChart.shadow
-                  center(style="width:100%;height:200px;margin-top:40%")
-                    .lds-roller
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
+                  .skeleton-live-loader.loader
+                    .loading-message
+                      p Chart is loading
+                      p.dot-one  .
+                      p.dot-two  .
+                      p.dot-three  .
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
               .col-md-6.d-none
                 h5.text-center.mt-5 Merit
                 p.text-center This chart show your merit based on your notes activities and reports
                 #profile-strength.shadow
-                  center(style="width:100%;height:200px;margin-top:40%")
-                    .lds-roller
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
-                      div
+                  .skeleton-live-loader.loader
+                    .loading-message
+                      p Chart is loading
+                      p.dot-one  .
+                      p.dot-two  .
+                      p.dot-three  .
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
+                    .one.chartLine
+                    .two.chartLine
+                    .three.chartLine
+                    .four.chartLine
     include ../includes/dashjs
     script(src="/javascripts/dashboard/dashboard.js")
     script 
