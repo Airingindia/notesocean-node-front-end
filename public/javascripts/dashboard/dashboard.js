@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // return false;
   $(".add-new-notes-btn").click(function () {
     $(".modal").modal("show");
   });
@@ -43,53 +44,53 @@ $(document).ready(function () {
   };
   getUserInfo();
 
-//   get total notes and views
-  app.getSlefProducts().then((data)=>{
+  //   get total notes and views
+  app.getSlefProducts().then((data) => {
     let totalNotes = data.requested.length;
     $(".total-notes-dash").html(totalNotes);
-  //  total views
+    //  total views
     let totalViews = 0;
-    data.requested.map((item)=>{totalViews+=item.views});
+    data.requested.map((item) => { totalViews += item.views });
     $(".total-views-dash").html(totalViews);
-  //    total likes
+    //    total likes
     let totalLikes = 0;
-    data.requested.map((item)=>{totalLikes+=item.likes});
+    data.requested.map((item) => { totalLikes += item.likes });
     $(".total-likes-dash").html(totalLikes);
-  //  earning
+    //  earning
     $(".total-earning-dash").html("0");
-  //   get product by views
-    let productByViews = data.requested.sort((a,b)=>{return b.views-a.views});
-    let topViews = productByViews.slice(0,5);
+    //   get product by views
+    let productByViews = data.requested.sort((a, b) => { return b.views - a.views });
+    let topViews = productByViews.slice(0, 5);
     let topViewsData = [["Element", "Likes", "views", { role: "style" }]];
-    for(let i=0;i<topViews.length;i++){
+    for (let i = 0; i < topViews.length; i++) {
       let name = topViews[i].name;
-        let views = topViews[i].views;
-        let likes = topViews[i].likes;
-        topViewsData.push([name,likes,views,"blue"]);
+      let views = topViews[i].views;
+      let likes = topViews[i].likes;
+      topViewsData.push([name, likes, views, "blue"]);
     }
-    if(totalNotes>0){
+    if (totalNotes > 0) {
       topNotes(topViewsData);
-    }else{
-        $("#barchart_values").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
+    } else {
+      $("#barchart_values").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
     }
 
 
-  // get recent notes
-    let recentNotesData = data.requested.sort((a,b)=>{return b.timestamp-a.timestamp});
-    let recentNotes = recentNotesData.slice(0,5);
+    // get recent notes
+    let recentNotesData = data.requested.sort((a, b) => { return b.timestamp - a.timestamp });
+    let recentNotes = recentNotesData.slice(0, 5);
     let recentNotesChartData = [["Element", "Likes", "views", { role: "style" }]];
-    for(let i=0;i<recentNotes.length;i++){
-            let name = recentNotes[i].name;
-            let views = recentNotes[i].views;
-            let likes = recentNotes[i].likes;
-            recentNotesChartData.push([name,likes,views,"blue"]);
+    for (let i = 0; i < recentNotes.length; i++) {
+      let name = recentNotes[i].name;
+      let views = recentNotes[i].views;
+      let likes = recentNotes[i].likes;
+      recentNotesChartData.push([name, likes, views, "blue"]);
     }
-    if(totalNotes>0){
+    if (totalNotes > 0) {
       recentNotesChart(recentNotesChartData);
-    }else{
-        $("#recentNotesChart").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
+    } else {
+      $("#recentNotesChart").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
     }
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
   })
 });
@@ -122,7 +123,7 @@ function topNotes(notesData) {
   }
 }
 
-function  recentNotesChart(notesData){
+function recentNotesChart(notesData) {
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {

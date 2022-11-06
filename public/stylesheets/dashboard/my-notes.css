@@ -1,17 +1,19 @@
-a{
-    text-decoration: none ;
+a {
+    text-decoration: none;
     color: inherit;
 }
 
-a:hover{
-    text-decoration: none ;
+a:hover {
+    text-decoration: none;
     color: inherit;
 }
-.viewer{
-    display:flex;
+
+.viewer {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .add-new {
     border-radius: 5px;
     font-size: 16px;
@@ -95,17 +97,20 @@ textarea {
     height: 300px;
 }
 
-.no-public-notes,.no-private-notes{
+.no-public-notes,
+.no-private-notes {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
-.no-public-notes img,.no-private-notes img{
+.no-public-notes img,
+.no-private-notes img {
     width: 200px;
 }
-.private-notes .card-footer{
+
+.private-notes .card-footer {
     padding: 0px 10px;
 }
 
@@ -163,5 +168,23 @@ textarea {
 
     .heading-text {
         display: none;
+    }
+}
+
+/* skelatton customization */
+
+.loader .footer {
+    width: 100%;
+    height: 20%;
+    background-color: #ddd;
+    opacity: 0.5;
+}
+
+@media (max-width:769px) {
+    .loading-private-notes {
+        width: 100% !important;
+        margin: 0px !important;
+        padding: 0px;
+        top: 30% !important;
     }
 }

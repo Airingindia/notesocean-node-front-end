@@ -83,9 +83,10 @@ $(document).ready(function () {
                 let img = "/images/icons/" + fileType + ".png";
                 let type = data[i].fileType;
 
+
                 $(".notes-container-row").append(`
                 <div class="col-6 col-lg-2 my-2">
-                    <div class="card  border-0 rounded shadow w-100 h-100 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}">
+                    <div class="card border-0 shadow p-0 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}"  style="height:100%">
                             
                             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
                             <div class="card-body border-0 py-2">

@@ -23,7 +23,7 @@ html(lang="en")
             -}else{
                 h1.text-danger #{course.replace(/-/g, ' ')} 
                     span.text-dark notes 
-                .row(itemscope itemtype="https://schema.org/BreadcrumbList")
+                .row
                     - let count = 0;
                     -for (let i = 0; i < data.requested.length; i++){
                         - count++;
@@ -44,8 +44,8 @@ html(lang="en")
                         - let lastName = data.requested[i].users.lastName;
                         - let userid = data.requested[i].users.uuid;
                         - let profileImage = data.requested[i].users.profileImage != null ?  data.requested[i].users.profileImage  : "/user.png";
-                        .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem")
-                            a(href="/notes/"+productid , temprop="item")
+                        .col-xl-3.col-lg-4.col-md-4.col-sm-2.my-3
+                            a(href="/notes/"+productid)
                                 .card.shadow.rounded.h-100
                                     .card-header
                                         span(itemprop="name").card-title=productname.substring(0,100)+"..." 
