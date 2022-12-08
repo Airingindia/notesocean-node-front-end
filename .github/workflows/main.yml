@@ -1,4 +1,4 @@
-name: Notesocean Prod CI
+name: Notesocean Dev CI
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: prod
+    runs-on: dev
   
     defaults:
       run:
