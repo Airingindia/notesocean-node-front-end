@@ -94,7 +94,7 @@ $(document).ready(function () {
             error: function (err) {
                 $(".signup-btn").prop("disabled", false);
                 $(".signup-btn").html(`Signup`);
-                app.alert(err.status, err.responseJSON.description)
+                app.alert(err.status, err.responseJSON.description ? err.responseJSON.description : err.responseJSON.message, "error");
             }
 
         })
