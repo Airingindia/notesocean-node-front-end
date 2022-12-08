@@ -1,8 +1,8 @@
-name: Notesocean Prod CI
+name: Notesocean Dev CI
 
 on:
   push:
-    branches: [ "prod" ]  
+    branches: [ "main" ]  
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}        
     
     - name: "Checkout to Prod branch"
-      run: git checkout prod
+      run: git checkout main
 
     - name: "Git Reset"
       run : git reset --hard
