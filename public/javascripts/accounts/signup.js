@@ -2,25 +2,29 @@
 $(document).ready(function () {
     $('#countries').select2({
         placeholder: 'Select your country',
-        selectOnClose: true,
+        selectOnClose: false,
+        width: '100%'
     });
-    // form validations
+
     $.ajax({
-        type:"GET",
-        url: app.getApi()+"/countries",
+        type: "GET",
+        url: app.getApi() + "/countries",
         success: function (data) {
             for (let i = 0; i < data.requested.length; i++) {
                 const short_code = data.requested[i].iso3;
                 const name = data.requested[i].niceName;
                 $("#countries").append(`<option value="${short_code}"> ${name} </option>`);
             }
+            setTimeout(() => {
+                $.getJSON('https://ipapi.co/json', function (data) {
+                    // $('#countries').val(data.country_code_iso3);
+                    $('#countries').select2().val(data.country_code_iso3).trigger("change");
+                });
+            }, 1000)
         }
-    })
-    // $.getScript('/vendors/data/countries.json', function (data) {
-    //     data = JSON.parse(data);
-    //     localStorage.setItem("countriesData", JSON.stringify(data));
-       
-    // });
+    });
+
+
     $("form.signup-form").submit(function (event) {
         event.preventDefault();
         let firstName = $("form input[name='fistName']").val();
@@ -90,7 +94,7 @@ $(document).ready(function () {
             error: function (err) {
                 $(".signup-btn").prop("disabled", false);
                 $(".signup-btn").html(`Signup`);
-               app.alert(err.status, err.responseJSON.description)
+                app.alert(err.status, err.responseJSON.description ? err.responseJSON.description : err.responseJSON.message, "error");
             }
 
         })
