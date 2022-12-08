@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}        
     
-    - name: "Checkout to Main branch"
+    - name: "Checkout to Prod branch"
       run: git checkout prod
 
     - name: "Pull Latest code"
@@ -32,5 +32,5 @@ jobs:
     - name: "Install Dependencies"
       run: npm install
 
-    - name: "Build for production"
-      run: pm2 restart 0
+    - name: "Restart all Process"
+      run: pm2 restart all
