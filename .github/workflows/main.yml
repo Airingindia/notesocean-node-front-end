@@ -1,4 +1,4 @@
-name: Notesocean CI
+name: Notesocean Prod CI
 
 on:
   push:
