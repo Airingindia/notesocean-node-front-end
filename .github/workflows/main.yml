@@ -26,9 +26,15 @@ jobs:
     - name: "Checkout to Prod branch"
       run: git checkout prod
 
+    - name: "Git Reset"
+      run : git reset --hard
+
+    - name: "Git Clean"
+      run : git clean -fd
+    
     - name: "Pull Latest code"
       run: git pull
-
+      
     - name: "Install Dependencies"
       run: npm install
 
