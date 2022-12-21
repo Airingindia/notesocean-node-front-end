@@ -14,22 +14,21 @@ html(lang="en")
         section.row
             include ../../includes/dashAside
             .col-10.second-side
-                .container.my-3
-                    ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='4327642415' data-ad-format='auto' data-full-width-responsive='true')
-                .container.content-box
-                    h3 Upload Private Notes
-                    p.mt-2.text-danger *Before you upload please read the following instructions*
-                    //- p You are uploading private notes , this notes will be private and will not be published to the public
-                    p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
+                .container
+                    h3 Private Notes
+                        i.fa.fa-lock.mx-2
+                    //- p.mt-2.text-danger *Before you upload please read the following instructions*
+                    //- //- p You are uploading private notes , this notes will be private and will not be published to the public
+                    //- p  You can't earn money or rewards from these notes because it will be private and only you will be able to access
 
-                    p If you want to published to the public and earn money or rewards  
-                        a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
+                    //- p If you want to published to the public and earn money or rewards  
+                    //-     a(href="/dashboard/public-notes/new").btn.btn-sm.btn-dark.mx-1 click here 
                 .container.uploader-box
                     form(class="dropzone" id="file-upload")               
 
         section
             .position-fixed.top-0.end-0.p-3.mt-5.notice-box(style='z-index: 11')
         script(src='/vendors/dropzone/dropzone.min.js')
-        script(src='/javascripts/dashboard//private-notes/upload-private-notes.js')
+        script(src='/javascripts/dashboard/private-notes/upload-private-notes.js')
         script.
             (adsbygoogle = window.adsbygoogle || []).push({});

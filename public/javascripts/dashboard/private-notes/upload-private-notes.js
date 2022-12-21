@@ -4,11 +4,8 @@ $(function () {
     var uploading_file = "";
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone(".dropzone", {
-        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:50px'> </i> <br>  <br> <h4> Drag or drop your files to upload </h4> <br>
-        <small> <b> Note : </b>  you can upload only these supported file types  </small> <br>
-        <small> 
-        pdf txt ppt xls xlsx doc docx pptx gsheet xltx png jpeg jpg webp psd 
-        </small> `,
+        dictDefaultMessage: `<i class='fa fa-file' style='color:red;font-size:80px'> </i> <br>  <br> <h4> Drag or drop your files to upload </h4> <br>
+        <small> <b> Note : </b>  you can upload only documents and images   </small>`,
         autoProcessQueue: true,
         maxFilesize: 100,
         addRemoveLinks: true,

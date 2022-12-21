@@ -8,6 +8,7 @@ html(lang="en")
         include ../../includes/dashcss
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
+        style(src="/vendors/Dynamic-Right-Click-Context-Menu/dist/contextmenu.css")
     body
         header
             include ../../includes/dashHeader
@@ -84,6 +85,7 @@ html(lang="en")
                             .col-6.col-lg-2
                                 .skeleton-live-loader.loader
                                     .footer.shine
+
         section
             .modal#file-open-modal(tabindex='-1').fade.p-0
                 .modal-dialog.modal-fullscreen.p-0
@@ -107,8 +109,18 @@ html(lang="en")
                         .modal-body.p-0.border-0
                             .card.h-100.w-100.p-0.border-0
                                 .card-body.p-0.viewer
-
-
+        #context-menu.modal.context-menu
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        .modal-title Action
+                    .modal-body.border-0.px-0.py-1
+                        .list-group.border-0.p-0
+                            a.list-group-item.list-group-item-action.border-0(href='#')#delete-collections
+                                i.fa.fa-trash.mx-1
+                                span Delete 
+                            a.list-group-item.list-group-item-action.border-0(href='#')#edit-collections
+                                i.fa.fa-edit.mx-1
+                                span Edit
         include ../../includes/dashjs
-        script
-            include ../../../public/javascripts/dashboard/private-notes/private-notes.js
+        script(src="/javascripts/dashboard/private-notes/private-notes.js")

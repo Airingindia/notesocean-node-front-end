@@ -7,7 +7,7 @@ html(lang="en")
         title Public notes | Notes Ocean
         include ../../includes/dashcss
         style
-            include ../../../public/stylesheets/dashboard/my-notes.css
+            include ../../../public/stylesheets/dashboard/my-notes.min.css
     body
         header
             include ../../includes/dashHeader
@@ -38,26 +38,25 @@ html(lang="en")
                     .no-public-notes.d-none
                         .card.border-0
                             .card-content
-                                    img.card-img-top(src="/images/animation/sad.gif")
-                                    .card-body
-                                        center
-                                            h5 I can't see any notes here
-                                            a(href="/dashboard/public-notes/new")
-                                                button.btn.btn-notesocean.btn-sm
-                                                    i.fa.fa-cloud-upload.mx-1
-                                                    span Upload now
+                                img.card-img-top(src="/images/animation/sad.gif")
+                                .card-body
+                                    center
+                                        h5 I can't see any notes here
+                                        a(href="/dashboard/public-notes/new")
+                                            button.btn.btn-notesocean.btn-sm
+                                                i.fa.fa-cloud-upload.mx-1
+                                                span Upload now
                     .loading-public-notes
-                            center
-                                .lds-roller
-                                    div
-                                    div
-                                    div
-                                    div
-                                    div
-                                    div
-                                    div
-                                    div
-                                p.loading-notice Your public notes are loading...
+                        center
+                            .lds-roller
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                                div
+                            p.loading-notice Your public notes are loading...
         include ../../includes/dashjs
-        script
-            include ../../../public/javascripts/dashboard/public-notes/public-notes.js
+        script(src="/javascripts/dashboard/public-notes/public-notes.js")

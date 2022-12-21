@@ -180,6 +180,12 @@ textarea {
     opacity: 0.5;
 }
 
+/* context menu */
+
+#context-menu .modal-content {
+    border-radius: 0px !important;
+}
+
 @media (max-width:769px) {
     .loading-private-notes {
         width: 100% !important;

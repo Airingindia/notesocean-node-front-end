@@ -34,7 +34,7 @@ html(lang="en-US")
                 }
             }
         style
-            include ../public/stylesheets/subpages/profile.css
+            include ../public/stylesheets/subpages/profile.min.css
 
     body 
         header 
@@ -71,5 +71,4 @@ html(lang="en-US")
                                     i.fa.fa-info-circle.mx-1.text-warning
                                     span No Collections Created By User
         include includes/footer
-        script
-            include ../public/javascripts/subpages/profile.js
+        script(src="/javascripts/subpages/profile.js")

@@ -112,6 +112,7 @@ $(document).ready(function () {
                 `);
             }
             fileOpner();
+            openContext();
         } else {
             $(".no-private-notes").removeClass("d-none");
         }
@@ -160,46 +161,22 @@ $(document).ready(function () {
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
     function openContext() {
-        $(".private-note-delete-btn").click(function () {
-
+        $(".private-note-item").each(function () {
+            $(this).on("contextmenu", function (e) {
+                e.preventDefault();
+                $(".context-menu").modal("show");
+                // set position
+                $(".modal-dialog").css({
+                    "top": (e.pageY - 50) + "px",
+                    "left": (e.pageX + 50) + "px",
+                    "position": "absolute",
+                })
+            })
         });
 
-        // update name
-        $(".action-note-update-btn").click(function () {
-            let input = $(".action-note-input");
-            const json = JSON.stringify({
-                name: $(input).val()
-            });
-            if ($(input).hasClass("is-valid")) {
-                $.ajax({
-                    type: "PUT",
-                    url: app.getApi() + "/notes/" + id,
-                    headers: {
-                        Authorization: decodeURIComponent(getCookie("token"))
-                    },
-                    contentType: "application/json",
-                    processData: false,
-                    data: json,
-                    beforeSend: function () {
-                        $(".action-note-update-btn").html(`<i class="fa fa-spinner f-spin mx-1 "> </i> <span> Please wait... </span>`);
-                        $(".action-note-update-btn").prop("disabled", true);
-                    },
-                    success: function (data) {
-
-                        $(".action-note-update-btn").html(`Update`);
-                        $(".action-note-update-btn").prop("disabled", false);
-                        swal("success", "Note name updated successfully", "success");
-                    },
-                    error: function (errorData) {
-                        $(".action-note-update-btn").html(`Update`);
-                        $(".action-note-update-btn").prop("disabled", false);
-                        swal("Opps!", "somthing went wrong , please try after sometimes", "error");
-                    }
-
-                })
-            }
-        })
     };
+
+
 
 
     function validate() {
