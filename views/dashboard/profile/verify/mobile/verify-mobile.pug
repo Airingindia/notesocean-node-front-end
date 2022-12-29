@@ -22,22 +22,15 @@ html(lang="en")
                         span.mobile-text Enter the code we just send 6 digit verification code  on your Mobile Number 
                         b.text-danger.Mobile-label.my-2.user-Mobile-label
                         .d-flex.flex-row.mt-5.mx-auto
-                            input.form-control.rounded-0(type='text' autofocus,maxlength="1")
-                            input.form-control.rounded-0(type='text' maxlength="1")
-                            input.form-control.rounded-0(type='text' maxlength="1")
-                            input.form-control.rounded-0(type='text' maxlength="1")
-                            input.form-control.rounded-0(type='text' maxlength="1")
-                            input.form-control.rounded-0(type='text' maxlength="1")
+                            input.form-control.rounded-0(type='text' autofocus)
                         button.btn.btn-primary.mt-5.rounded-0.mx-auto.verify-btn verify
                         .text-center.mt-5
                             span.d-block.mobile-text Don&apos;t receive the code?
-                            span.font-weight-bold.text-danger.cursor Resend
+                            span.font-weight-bold.text-danger.cursor.resend-btn Resend
 
 
     script(src="/vendors/hammer/hammer.min.js")
     script 
         include ../../../../../public/javascripts/common.js
-    script 
-        include ../../../../../public/javascripts/dashboard/dashboard.js
     script 
         include ../../../../../public/javascripts/dashboard/profile/verify/mobile/verify-mobile.js

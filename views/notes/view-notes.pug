@@ -9,7 +9,10 @@ html(lang="en")
         meta(name="keyword",content=`${(data.products.tags)}`)
         meta(name="author",content=`${(data.products.users.firstName)} ${(data.products.users.firstName)}`)
         title #{data.products.name.substring(0,40)} | Notes ocean
-
+        meta(name="robots" content="index, follow")
+        meta(name="image" content=`${(data.products.thumbnails.split(",")[0])}`)
+        meta(name="googlebot" content="index, follow")
+        meta(name="cononical" content=`https://notesocean.com/notes/${(data.products.uuid)}`)
         //-  og 
         meta(property='og:title' content=`${(data.products.name.substring(0,40))}`)
         meta(property='og:site_name' content='Notes ocean')
@@ -237,11 +240,14 @@ html(lang="en")
                         .modal-body.border-0.text-center
                             p You are not logged in , please login and continue
                             a(href="/account/login?dest=/notes/"+data.products.uuid).btn.btn-sm.btn-notesocean Login
-            #adsModal.modal(data-bs-backdrop="static" data-bs-keyboard="false")
+            #adsModal.modal(data-bs-backdrop="static")
                 .modal-dialog.modal-fullscreen
+
                     .modal-content
+
                         .modal-header.border-0
                             h5.modal-title Advertisement
+                            i.close.fa.fa-times(data-bs-dismiss='modal' aria-label='Close' style="cursor:pointer;font-size:20px;")
                         .modal-body
                             .container
                                 ins.adsbygoogle(
@@ -255,8 +261,8 @@ html(lang="en")
                             span
                                 i.fa.fa-spinner.fa-spin.mx-1
                                 span Pdf is loading...
-                    
-            
+
+
         script(src="https://documentcloud.adobe.com/view-sdk/main.js")
         script
             include ../../public/javascripts/notes/viewer.js

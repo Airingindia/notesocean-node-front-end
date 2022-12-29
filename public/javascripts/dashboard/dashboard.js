@@ -96,7 +96,7 @@ $(document).ready(function () {
 
   app.getUserEarning().then((data) => {
     console.log(data);
-    $(".total-earning-dash").html(Number(data.totalEarning).toFixed(2));
+    $(".total-earning-dash").html(Number(data?.totalEarning ? data?.totalEarning : 0).toFixed(2));
   }).catch(err => {
     app.alert("error", 400, "Failed to fetch earning");
   })

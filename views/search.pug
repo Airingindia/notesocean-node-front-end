@@ -21,7 +21,7 @@ html(lang="en")
                         span Notes Found
                     //- .filter-dropdown
                     //-     button.btn.btn-sm.btn-danger(data-bs-toggle="modal" data-bs-target="#modal-filter") filter
-                div.search-item-row(itemscope itemtype="https://schema.org/BreadcrumbList")
+                div.search-item-row
                     - let count = 0;
                     - let adshow = 0;
                     -for (let i = 0; i < data.requested.length; i++){
@@ -45,7 +45,7 @@ html(lang="en")
                         - let lastName = data.requested[i].users.lastName;
                         - let userid = data.requested[i].users.uuid;
                         - let profileImage = data.requested[i].users.profileImage == null ? "/images/dummy/user_dummy.jpg" :  data.requested[i].users.profileImage ;
-                            div(itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem").wow.animate__animated.fadeIn
+                            div.wow.animate__animated.fadeIn
                                 a(href="/notes/"+productid,itemprop="item")
                                     div.d-flex.shadow.search-notes-item.my-3
                                         .flex-shrink-0
@@ -73,7 +73,7 @@ html(lang="en")
                                                             img(src=profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") alt=firstName).creator-img
                                                         .flex-grow-1.ms-2.pt-3
                                                             p.text-muted #{firstName} #{lastName}
-                                meta(itemprop="position" content=count)
+
                         -if(adshow == 5){
                             - adshow = 0;
                             div
