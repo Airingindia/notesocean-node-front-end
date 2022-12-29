@@ -122,21 +122,21 @@ $(document).ready(function () {
 
     // get user products
 
-    app.getSlefProducts().then((data) => {
-        // get total views and likes of each product
-        let totalViews = 0;
-        let totalLikes = 0;
-        data = data.requested;
-        for (let i = 0; i < data.length; i++) {
-            totalViews += data[i].views;
-            totalLikes += data[i].likes;
-        }
-        // calculate earning
-        // 1 likes = 0.5 rupees
-        // 1 views = 0.40 rupees
-        let totalEarning = Number((totalLikes * 0.5) + (totalViews * 0.40)).toFixed(2);
-        $(".total-earning").html("&#x20B9; " + totalEarning);
-    }).catch((err) => {
-        app.alert("error", 400, "Failed to fetch user products");
-    })
+    // app.getSlefProducts().then((data) => {
+    //     // get total views and likes of each product
+    //     let totalViews = 0;
+    //     let totalLikes = 0;
+    //     data = data.requested;
+    //     for (let i = 0; i < data.length; i++) {
+    //         totalViews += data[i].views;
+    //         totalLikes += data[i].likes;
+    //     }
+    //     // calculate earning
+    //     // 1 likes = 0.5 rupees
+    //     // 1 views = 0.40 rupees
+    //     let totalEarning = Number((totalLikes * 0.5) + (totalViews * 0.40)).toFixed(2);
+    //     $(".total-earning").html("&#x20B9; " + totalEarning);
+    // }).catch((err) => {
+    //     app.alert("error", 400, "Failed to fetch user products");
+    // })
 })
