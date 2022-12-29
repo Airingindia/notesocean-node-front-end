@@ -1,32 +1,31 @@
 doctype html
 html(lang="en")
     head
+        // Primary Meta Tags
+html
+    head
         //- main meta's
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        meta(name="description",content=`${(data.products.description.substring(0,145))}`)
-        meta(name="keyword",content=`${(data.products.tags)}`)
-        meta(name="author",content=`${(data.products.users.firstName)} ${(data.products.users.firstName)}`)
-        title #{data.products.name.substring(0,40)} | Notes ocean
-        meta(name="robots" content="index, follow")
-        meta(name="image" content=`${(data.products.thumbnails.split(",")[0])}`)
-        meta(name="googlebot" content="index, follow")
+        title #{data.products.name.substring(0,100)} | Notes ocean
+        meta(name='title',content=`${(data.products.name.substring(0,100))}`)
+        meta(name='description',content=`${(data.products.description.substring(0,145))}`)
         meta(name="cononical" content=`https://notesocean.com/notes/${(data.products.uuid)}`)
-        //-  og 
-        meta(property='og:title' content=`${(data.products.name.substring(0,40))}`)
-        meta(property='og:site_name' content='Notes ocean')
-        meta(property='og:url' content=`https://notesocean.com/notes/${(data.products.uuid)}`)
-        meta(property='og:description' content=`${(data.products.description.substring(0,145))}`)
-        meta(property='og:type' content='product.item')
-        meta(property='og:image' content=`${(data.products.thumbnails.split(",")[0])}`)
-
-        //- twitter card
-        meta(name='twitter:card' content='summary')
-        meta(name='twitter:site' content='@real_notesocean')
-        meta(name='twitter:title' content=`${(data.products.name.substring(0,40))}`)
-        meta(name='twitter:description' content=`${(data.products.description.substring(0,145))}`)
-        meta(name='twitter:image' content=`${(data.products.thumbnails)}`)
+        meta(name="googlebot" content="index, follow")
+        meta(name="robots" content="index, follow")
+        //- Open Graph / Facebook
+        meta(property='og:type' ,content='website')
+        meta(property='og:url' ,content=`https://notesocean.com/notes/${(data.products.uuid)}`)
+        meta(property='og:title', content=`${(data.products.name.substring(0,100))}`)
+        meta(property='og:description', content=`${(data.products.description.substring(0,145))}`)
+        meta(property='og:image',content=`${(data.products.thumbnails.split(",")[0])}`)
+        //- Twitter
+        meta(property='twitter:card' content='summary_large_image')
+        meta(property='twitter:url' ,content=`https://notesocean.com/notes/${(data.products.uuid)}`)
+        meta(property='twitter:title' ,content=`${(data.products.name.substring(0,100))}`)
+        meta(property='twitter:description',content=`${(data.products.description.substring(0,145))}`)
+        meta(property='twitter:image',content=`${(data.products.thumbnails.split(",")[0])}`)
         script(type="application/ld+json").
             {
                 "@context": "https://schema.org",
