@@ -2,6 +2,8 @@ require("dotenv").config();
 var express = require('express');
 var router = express.Router();
 const api_url = process.env.API_URL;
+const httpService = require("../services/http.services");
+const time = require("../services/time.services");
 router.get('/', async function (req, res, next) {
     if (req.cookies.token == undefined) {
         return res.redirect("/login?dest=" + req.originalUrl);
@@ -53,6 +55,31 @@ router.get('/:page', async function (req, res, next) {
         res.render("notfound");
     }
 });
+
+router.get("/earning/:id", (req, res, next) => {
+    if (req.cookies.token == undefined) {
+        return res.redirect("/login?dest=" + req.originalUrl);
+    }
+    // set local time
+    let getPayout = httpService.getWithAuth("/payouts/" + req.params.id, req.cookies.token);
+    getPayout.then((response) => {
+        // console.log(response.body);
+        if (response.statusCode == 200) {
+            res.render("dashboard/earning/earning-details", {
+                url: req.originalUrl,
+                payout: response.body,
+                time: time
+            });
+        }
+        else {
+            res.status(404);
+            res.render("notfound");
+        }
+    }).catch((err) => {
+        res.status(404);
+        res.render("notfound");
+    })
+})
 
 router.get("/:page/:parameter", (req, res, next) => {
     if (req.cookies.token == undefined) {

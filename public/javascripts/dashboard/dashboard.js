@@ -57,7 +57,7 @@ $(document).ready(function () {
     data.requested.map((item) => { totalLikes += item.likes });
     $(".total-likes-dash").html(totalLikes);
     //  earning
-    $(".total-earning-dash").html("0");
+    // $(".total-earning-dash").html("0");
     //   get product by views
     let productByViews = data.requested.sort((a, b) => { return b.views - a.views });
     let topViews = productByViews.slice(0, 5);
@@ -92,6 +92,13 @@ $(document).ready(function () {
     }
   }).catch(err => {
     console.log(err);
+  })
+
+  app.getUserEarning().then((data) => {
+    console.log(data);
+    $(".total-earning-dash").html(Number(data.totalEarning).toFixed(2));
+  }).catch(err => {
+    app.alert("error", 400, "Failed to fetch earning");
   })
 });
 

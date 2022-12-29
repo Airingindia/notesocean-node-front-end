@@ -1,0 +1,33 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(lang="En-US")
+    meta(name="description" content="Access your personal dashboard, view the notes result , earning result  and many more")
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    include ../../includes/dashcss
+    title Dashboard | Notes Ocean
+    style
+        include ../../../public/stylesheets/earning/my-earning.css
+    body
+        header
+            include ../../includes/dashHeader  
+        section 
+            .row
+                include ../../includes/dashAside
+                .col-md-10.second-side
+                    .withdrawal.shadow    
+                        h3.withdrawal-history-text Withdrwal Details
+                        .row.withdrawal-history
+                            .col-md-6.col-lg-4.my-2.payout-history
+                                .card.p-3.bg-white.border-0
+                                    div.widthrawal-info-cont
+                                        h1 &#x20B9;#{payout.amount/100}
+                                        p #{payout.description}
+                                        //- h6 Date : #{time.get(payout.createdAt)}
+                                        p status:  #{payout.status}
+                                        p Payout link
+                                            a(href=payout.shortUrl).text-info.mx-1 #{payout.shortUrl}
+        include ../../includes/dashjs
+
+

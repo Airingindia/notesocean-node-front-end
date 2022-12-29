@@ -1,125 +1,66 @@
 doctype html
 head
-  meta(charset='UTF-8')
-  meta(lang="En-US")
-  meta(name="description" content="Access your personal dashboard, view the notes result , earning result  and many more")
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  include ../../includes/dashcss
-  title Dashboard | Notes Ocean
-  style
-    include ../../../public/stylesheets/earning/my-earning.css
-  body
-    header
-      include ../../includes/dashHeader  
-    section 
-      .row
-        include ../../includes/dashAside
-        .col-md-10.second-side
-            h1 Comming soon!
-            p This page is under development, please check back later
-            a(href="/dashboard") Go back to dashboard
-        .col-md-10.second-side.d-none
-          h3 Comming Soon!
-          .row.earning-row.d-none
-            .col-md-6.col-lg-4.col-xl-3
-                .card.shadow
-                    h4.animate-charcter 
-                        i.fa.fa-wallet.mx-1
-                        span Total
-                    h5 &#x20B9; 1005
-            .col-md-6.col-lg-4.col-xl-3
-                .card.shadow
-                    h4.animate-charcter 
-                        i.fa.fa-wallet.mx-1
-                        span Available
-                    h5 &#x20B9; 1005
-            .col-md-6.col-lg-4.col-xl-3
-                .card.shadow
-                    h4.animate-charcter 
-                        i.fa.fa-calendar-day.mx-1
-                        span Today
-                    h5 &#x20B9; 1005
-            .col-md-6.col-lg-4.col-xl-3
-                .card.shadow
-                    h4.animate-charcter 
-                        i.fa.fa-calendar.mx-1
-                        span This Month
-                    h5 &#x20B9; 1005
-          .row.withdrawal-history
-            h3 Withdrwal History
-            .col-md-6.col-lg-4.my-2
-                .card.p-3.bg-white.border-0.shadow
-                    div.widthrawal-info-cont
-                        h6 HDFC BANK
-                        p xxxxxx9090
-                        p.text-danger  - &#x20B9; 100
-                        p.text-success Success
-                    p 10-06-2022
-            .col-md-6.col-lg-4.my-2
-                .card.p-3.bg-white.border-0.shadow
-                    div.widthrawal-info-cont
-                        h6 HDFC BANK
-                        p xxxxxx9090
-                        p.text-danger  - &#x20B9; 100
-                        p.text-success Success
-                    p 10-06-2022
-            .col-md-6.col-lg-4.my-2
-                .card.p-3.bg-white.border-0.shadow
-                    div.widthrawal-info-cont
-                        h6 HDFC BANK
-                        p xxxxxx9090
-                        p.text-danger  - &#x20B9; 100
-                        p.text-success Success
-                    p 10-06-2022
-          .bank-accounts-cont
-            .heading
-                h3 Bank Accounts 
-                button.btn.btn-primary.btn-sm.mx-2 Add Bank
+    meta(charset='UTF-8')
+    meta(lang="En-US")
+    meta(name="description" content="Access your personal dashboard, view the notes result , earning result  and many more")
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    include ../../includes/dashcss
+    title Dashboard | Notes Ocean
+    style
+        include ../../../public/stylesheets/earning/my-earning.css
+    body
+        header
+            include ../../includes/dashHeader  
+        section 
             .row
-                .col-md-4.my-2
-                    .card.shadow.border-0.p-3
-                        div.d-flex.justify-content-between
-                            h6 Bank name 
-                            h6.text-danger HDFC
-                        div.d-flex.justify-content-between
-                            h6 Account Holder
-                            h6.text-danger Sachin Kumar
-                        div.d-flex.justify-content-between
-                            h6 Account Number
-                            h6.text-danger xxxxxx0090
-                        div.d-flex.justify-content-between
-                            h6 IFSC Code
-                            h6.text-danger HDFC000989
-                .col-md-4.my-2
-                    .card.shadow.border-0.p-3
-                        div.d-flex.justify-content-between
-                            h6 Bank name 
-                            h6.text-danger State Bank Of India 
-                        div.d-flex.justify-content-between
-                            h6 Account Holder
-                            h6.text-danger Sachin Kumar
-                        div.d-flex.justify-content-between
-                            h6 Account Number
-                            h6.text-danger xxxxxx0090
-                        div.d-flex.justify-content-between
-                            h6 IFSC Code
-                            h6.text-danger SBIN000989
-          .withdrawal.mt-4.shadow
-            h3 Withdrawl
-            .withdrawl-cont
-                .item
-                    label Slect Bank
-                    select.form-control
-                        option(value="sbi") State bank of india
-                         option(value="sbi") HDFC Bank
-                .item
-                    label Enter Amount (
-                        span.text-danger &#x20B9;100 Available
-                        span )
-                    input.form-control(type="number",placeholder="100")
-                .item
-                    button.btn.btn-danger.mt-4 Withdrwal
-    include ../../includes/dashjs
+                include ../../includes/dashAside
+                .col-md-10.second-side
+                    .withdrawal.shadow
+                        .row.earning-row
+                            .col-md-6.col-lg-4.col-xl-3.d-none
+                                .card.shadow
+                                    h4.animate-charcter 
+                                        i.fa.fa-wallet.mx-1
+                                        span Total
+                                    h5 &#x20B9; 1005
+                            .col-md-10.col-lg-10.col-xl-3
+                                .card.border-0.p-2
+                                    h5.animate-charcter 
+                                        i.fa.fa-wallet.mx-1
+                                        p Available Balance
+                                    h5.avl-balance.animate-charcter 
+                            .col-md-6.col-lg-4.col-xl-3.d-none
+                                .card.shadow
+                                    h4.animate-charcter 
+                                        i.fa.fa-calendar-day.mx-1
+                                        span Today
+                                    h5 &#x20B9; 1005
+                            .col-md-6.col-lg-4.col-xl-3.d-none
+                                .card.shadow
+                                    h4.animate-charcter 
+                                        i.fa.fa-calendar.mx-1
+                                        span This Month
+                                    h5 &#x20B9; 1005
+                        h3 Withdrawl Request
+                        .withdrawl-cont.my-3.d-none
+                            .item.m-1
+                                label Name
+                                input.form-control(type="text" placeholder="Name" name="name" required)
+                            .item.m-1
+                                label Mobile Number
+                                input.form-control(type="number" placeholder="+91******" name="phone",required)
+                            .itemm.m-1
+                                label Email
+                                input.form-control(type="email" placeholder="Email" name="email",required)
+                            .item
+                                button.btn.btn-danger.mt-4.withdrawl-btn Withdrwal
+                        .withdral-notice.alert.alert-warning.d-none
+                            p Withdrawl box will be appear after you have &#x20B9; 50 or more in your account!
+                        h3.withdrawal-history-text.d-none Withdrwal History
+                        .row.withdrawal-history.d-none
+        script
+            include ../../../public/javascripts/dashboard/earnings/earning.js
+        include ../../includes/dashjs
 
 

@@ -40,7 +40,8 @@
 .withdrawal-history .widthrawal-info-cont {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .earning-row .col-md-6.col-lg-4.col-xl-3 {
@@ -66,8 +67,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
-
+    width: 60%;
 }
 
 .withdrawal {
@@ -76,6 +76,11 @@
 
 .withdrawl-cont .item {
     width: 30%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 
