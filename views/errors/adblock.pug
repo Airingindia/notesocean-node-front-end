@@ -17,7 +17,6 @@ style.
     }
     .adblock-container p{
         margin: 0 0 20px}
-
 script
     include ../../public/vendors/adblock/adblocker.min.js
 
@@ -29,6 +28,7 @@ script
                 p We have detected that you are using an ad blocker. Please disable your ad blocker to continue.
                 button(type="button" onclick="reload()").btn.btn-notesocean Disable Ad Blocker
 script.
+    function isBraveAgent(e){return 0>~e.indexOf("Brave")}function httpRequest(e,t,n){var r=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");return n&&(r.onreadystatechange=function(){4==this.readyState&&n(this)}),r.open(t,e,!!n),r.send(),r}function checkIsBrave(){var e=!1;return isBraveAgent(JSON.parse(httpRequest("https://api.duckduckgo.com/?q=whats+my+user+agent&format=json&pretty=1","GET").responseText).Answer)&&(e=!0),e}
     function reload() {
         location.reload();
     }
@@ -44,6 +44,9 @@ script.
             blockAdBlock.onNotDetected(()=>{
                 adBlockEnabled = false;
             });
+    }
+    if(checkIsBrave()){
+        adBlockEnabled = true;
     }
     async function detectAdBlock() {
 
