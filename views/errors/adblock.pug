@@ -1,0 +1,62 @@
+//- add blocked detech
+style.
+    .adblock-container{
+        background:black !important;
+        color:white !important;
+        text-align:center;
+        padding:10px;
+        }
+    #adblocker .modal-content,#adblocker .adblock-container, #adblocker .modal-dialog,#adblocker .modal{
+        background:black;
+        border-radius:5px;
+    }
+    .adblock-container h1{
+        font-size: 2em;
+        margin: 0 0 0.3em;
+        color:white !important;
+    }
+    .adblock-container p{
+        margin: 0 0 20px}
+
+script
+    include ../../public/vendors/adblock/adblocker.min.js
+
+#adblocker.modal(data-bs-backdrop="static")
+    .modal-dialog.modal-dialog-centered
+        .modal-content
+            .adblock-container
+                h1 Ads Blocked
+                p We have detected that you are using an ad blocker. Please disable your ad blocker to continue.
+                button(type="button" onclick="reload()").btn.btn-notesocean Disable Ad Blocker
+script.
+    function reload() {
+        location.reload();
+    }
+    var adBlockEnabled = false;
+    var adBlockerModal = new bootstrap.Modal(document.getElementById('adblocker'));
+    //- adBlockerModal.show();
+    if (typeof blockAdBlock === "undefined") {
+        adBlockDetected();
+        } else {
+            blockAdBlock.onDetected(()=>{
+                adBlockEnabled = true
+            });
+            blockAdBlock.onNotDetected(()=>{
+                adBlockEnabled = false;
+            });
+    }
+    async function detectAdBlock() {
+
+    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    try {
+        await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
+    } catch (e) {
+        adBlockEnabled = true
+    } finally {
+        if (adBlockEnabled) {
+            adBlockerModal.show();
+        }
+    }
+    }
+    detectAdBlock();
+
