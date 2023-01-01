@@ -1,8 +1,26 @@
 style
-  include ../../public/stylesheets/dashboard/includes/header.min.css
+  include ../../public/stylesheets/dashboard/includes/header.css
 nav.navbar.navbar-expand-lg
   .container-fluid.d-flex.justify-content-between
     a.navbar-brand(href='/')
       img(src='/images/dash-logo.svg' alt='notesocean-logo').logo
     a.nav-link(href="/dashboard/profile")
       img(src='/images/dummy/user_dummy.jpg' alt='user-pic').navbar-user-pic
+script.
+  function showUserPic() {
+    if (localStorage.getItem('userInfo') !== null) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (userInfo.profileImage !== null) {
+        const profilePic = userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
+        if (profilePic !== null) {
+          $(".navbar-user-pic").attr("src", profilePic);
+        } else {
+          $(".navbar-user-pic").attr("src", "/images/user.jpg");
+        }
+      } else {
+        $(".navbar-user-pic").attr("src", "/images/user.jpg");
+      }
+
+    }
+  }
+  showUserPic();

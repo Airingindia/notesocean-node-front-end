@@ -5,7 +5,10 @@ header {
     background-color: #fff;
     width: 100%;
     z-index: 100;
+    box-shadow: 0px 0px 10px #ccc !important;
 }
+
+
 
 img[alt='user-pic'] {
     border-radius: 50%;

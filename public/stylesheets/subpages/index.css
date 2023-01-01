@@ -37,7 +37,7 @@ a {
 
 .banner-search {
     background-image: url("https://static.ncdn.in/public/images/notebook.svg");
-    height: 70vh;
+    height: 65vh;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -51,7 +51,7 @@ form.example input[type=text] {
     font-size: 17px;
     border: none !important;
     border-radius: 2px 0px 0px 2px;
-    width: 70%;
+    width: 75%;
     background: #ffff;
     border-right: none;
     text-align: center;

@@ -10,10 +10,9 @@ html(lang="en-US")
     meta(name="keyword",content=`notes,notes ocean, free pdf notes , download pdf , upsc pdf , ssc pdf , free pdf download,sell pdf, engineering notes , medical notes, pharma notes, bihar board notes , cbse notes`)
     meta(property='og:title', content=`Notes Ocean`)
     meta(property='og:site_name' content='Notes Ocean')
-    meta(property='og:url' content=`https://notesocean.com`)
     meta(property='og:description' content=`Notes ocean is educational media sharing platform where students and teacher's connects all over the world`)
     meta(property='og:type' content='website')
-    meta(property='og:image' content=`https://notesocean.com/logo.png`)
+    meta(property='og:image' content=`/touch-icons/apple-touch-icon.png`)
 
     meta(name='twitter:card' content='website')
     meta(name='twitter:site' content='@real_notesocean')
@@ -38,7 +37,7 @@ html(lang="en-US")
         "name": "Notes ocean",
         "alternateName": "Airing Private Limited",
         "url": "https://notesocean.com",
-        "logo": "https://notesocean.com/logo.png",
+        "logo": "https://notesocean.com/touch-icons/apple-touch-icon.png",
         "sameAs": [
           "https://www.facebook.com/notesoceanofficial",
           "https://twitter.com/real_notesocean",
@@ -48,13 +47,8 @@ html(lang="en-US")
       }
 
     include includes/bootstrap
-    //- ads
-
-    //- include includes/amplitude 
     style
-      include ../public/stylesheets/subpages/index.min.css
-    link(rel="stylesheet" href="https://static.ncdn.in/vendor/swiper/swiper-bundle.min.css" media="all")
-    //- schema .org
+      include ../public/stylesheets/subpages/index.css
   body
     header
       include ./includes/navbar
@@ -284,4 +278,5 @@ html(lang="en-US")
             br
             a(href="https://www.youtube.com/watch?v=jxUU4YltU98" rel="nofollow" style="text-decoration:underline;color:blue") Enable javascript in chrome Windows
     include includes/footer
-    script(src="/javascripts/subpages/index.js")
+    script
+      include ../public/javascripts/subpages/index.js

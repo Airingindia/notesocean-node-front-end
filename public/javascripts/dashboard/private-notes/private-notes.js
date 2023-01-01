@@ -112,7 +112,7 @@ $(document).ready(function () {
                 `);
             }
             fileOpner();
-            openContext();
+            // openContext();
         } else {
             $(".no-private-notes").removeClass("d-none");
         }

@@ -23,37 +23,41 @@ head
           div
             .row
               .col-lg-3.col-6
-                .card.card-shadow.border-0.pt-3
-                  .card-content.text-center
-                    h6
-                      i.fa.fa-book.mx-2.text-danger
-                      span.text-danger Notes
-                      p.text-bold.my-2.total-notes-dash
-                        i.fa.fa-spinner.fa-spin
+                a(href="dashboard/public-notes" style="text-decoration:none;color:inherit")
+                  .border-0.pt-3.info-card
+                    .text-center
+                      h6
+                        i.fa.fa-book.mx-2.text-danger
+                        span.text-danger Notes
+                        p.text-bold.my-2.total-notes-dash
+                          i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
-                .card.card-shadow.border-0.pt-3
-                  .card-content.text-center
-                    h6
-                      i.fa.fa-globe.mx-2.text-danger
-                      span.text-danger Views
-                      p.text-bold.my-2.total-views-dash
-                        i.fa.fa-spinner.fa-spin
+                a(href="dashboard/public-notes" style="text-decoration:none;color:inherit")
+                  .border-0.pt-3.info-card
+                    .text-center
+                      h6
+                        i.fa.fa-globe.mx-2.text-danger
+                        span.text-danger Views
+                        p.text-bold.my-2.total-views-dash
+                          i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
-                .card.card-shadow.border-0.pt-3
-                  .card-content.text-center
-                    h6
-                      i.fa.fa-thumbs-up.mx-2.text-danger
-                      span.text-danger Likes
-                      p.text-bold.my-2.total-likes-dash
-                        i.fa.fa-spinner.fa-spin
+                a(href="dashboard/public-notes" style="text-decoration:none;color:inherit")
+                  .border-0.pt-3.info-card
+                    .text-center
+                      h6
+                        i.fa.fa-thumbs-up.mx-2.text-danger
+                        span.text-danger Likes
+                        p.text-bold.my-2.total-likes-dash
+                          i.fa.fa-spinner.fa-spin
               .col-lg-3.col-6
-                .card.card-shadow.border-0.pt-3
-                  .card-content.text-center
-                    h6
-                      i.fa.fa-rupee.mx-2.text-danger
-                      span.text-danger Earnings
-                      p.text-bold.my-2.total-earning-dash
-                        i.fa.fa-spinner.fa-spin
+                a(href="dashboard/earning" style="text-decoration:none;color:inherit")
+                  .border-0.pt-3.info-card
+                    .text-center
+                      h6
+                        i.fa.fa-rupee.mx-2.text-danger
+                        span.text-danger Earning
+                        p.text-bold.my-2.total-earning-dash
+                          i.fa.fa-spinner.fa-spin
 
             .row
               .col-md-6
@@ -157,7 +161,9 @@ head
                     .three.chartLine
                     .four.chartLine
     include ../includes/dashjs
-    script(src="/javascripts/dashboard/dashboard.js")
-    script(src="/javascripts/dashboard/charts.js")
+    script
+      include ../../public/javascripts/dashboard/dashboard.js
+    script
+      include ../../public/javascripts/dashboard/charts.js
 
 

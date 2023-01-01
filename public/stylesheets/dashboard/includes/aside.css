@@ -3,7 +3,7 @@
     left: 0;
     background-color: #fff;
     z-index: 100;
-    top: 10%;
+    top: 10.5%;
     width: 15%;
 }
 
@@ -13,7 +13,7 @@
     left: 15%;
     background-color: #fff;
     z-index: 100;
-    top: 10%;
+    top: 10.5%;
     height: 90vh;
     overflow: scroll;
     width: 85%;
@@ -33,6 +33,7 @@
     margin: 10px 0;
     text-align: left;
     border: none;
+    border-radius: 5px !important;
 
 }
 
@@ -41,8 +42,10 @@
 }
 
 .dash-aside button.active {
-    background: red;
-    color: #fff;
+    background: #FFFFFF !important;
+    border-left: 5px solid #FF0606 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 5px !important;
 }
 
 .dash-aside button:focus,
@@ -100,7 +103,8 @@
     }
 
     .item-text {
-        display: none !important;
+        text-align: center;
+        font-size: 10px;
     }
 
     .second-side {
@@ -119,6 +123,32 @@
         border-radius: none;
         max-width: fit-content;
         max-height: fit-content;
-        padding: 10px 15px;
+        /* padding: 10px 15px;   */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .dash-aside button.active {
+        background: #fff;
+        border-radius: none;
+        max-width: fit-content;
+        max-height: fit-content;
+        /* padding: 10px 15px;   */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom: 3px solid #FF0606 !important;
+        border-left: none !important;
+        box-shadow: none !important;
+        border-radius: 0px !important;
+        color: #FF0606 !important;
+    }
+
+    .dash-aside a {
+        text-decoration: none !important;
+        color: inherit;
     }
 }

@@ -9,22 +9,7 @@ $(document).ready(function () {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
-  function showUserPic() {
-    if (localStorage.getItem('userInfo') !== null) {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      if (userInfo.profileImage !== null && userInfo.profileImage !== undefined) {
-        const profilePic = userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
-        if (profilePic !== null) {
-          $(".navbar-user-pic").attr("src", profilePic);
-        } else {
-          $(".navbar-user-pic").attr("src", "/images/user.jpg");
-        }
-      } else {
-        $(".navbar-user-pic").attr("src", "/images/user.jpg");
-      }
 
-    }
-  }
 
   showUserPic();
   function getUserInfo() {

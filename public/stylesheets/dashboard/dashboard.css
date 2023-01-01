@@ -3,37 +3,51 @@ body {
     background-color: #fff !important;
 }
 
-.card-shadow {
-    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+.info-card {
+    background: #FFFFFF !important;
+    border-left: 4px solid #FF0606 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 5px !important;
+    padding: 10px;
 }
 
+/* .card-shadow {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+} */
+
 .second-side {
-    border-left: 0.5px solid #ccc;
+    border-left: 1px solid #FF0606 !important;
+}
+
+#barchart_values,
+#dailyViews,
+#profile-strength {
+    border-radius: 5px !important;
 }
 
 @media (max-width:769px) {
-    .card-shadow {
-        box-shadow: none !important
+    .info-card {
+        margin-top: 10px;
     }
 
     #barchart_values {
         width: 100% !important;
         max-width: 100% !important;
+        border-radius: 5px !important;
         overflow: hidden !important;
-        box-shadow: none !important;
-
     }
 
     #dailyViews {
         max-width: 100% !important;
         overflow: hidden !important;
-        box-shadow: none !important;
+        border-radius: 5px !important;
         width: 100% !important;
     }
 
     #profile-strength {
         max-width: 100% !important;
         overflow: hidden !important;
+        border-radius: 5px !important;
         box-shadow: none !important;
     }
 }

@@ -20,10 +20,10 @@ li {
 }
 
 .btn-notesocean {
-    color: #fff !important;
-    background-color: #FF0000;
-    border-color: #fff;
-    border: none !important;
+    color: #FF0000 !important;
+    border: 1px solid #FF0000;
+    border-radius: 5px;
+    background-color: #fff !important;
 }
 
 /* dark btn */
@@ -126,10 +126,10 @@ li {
 .btn-notesocean:active,
 .btn-notesocean.active,
 .open .dropdown-toggle.btn-notesocean {
-    border: none !important;
-    color: #fff;
+    color: #fff !important;
     box-shadow: none !important;
     outline: none !important;
+    background-color: #FF0000 !important;
 }
 
 textarea:focus,

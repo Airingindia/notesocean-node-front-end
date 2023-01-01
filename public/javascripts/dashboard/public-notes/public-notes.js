@@ -43,7 +43,7 @@ $(document).ready(function () {
             let adshow = 0;
             for (let i = 0; i < data.requested.length; i++) {
                 adshow++;
-                if(adshow == 5){
+                if (adshow == 5) {
                     adshow = 0;
                     $(".public-notes-container").append(`
                     <div class="col-md-3 my-3 d-flex justify-content-center align-items-center">
@@ -58,11 +58,11 @@ $(document).ready(function () {
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
-                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
-                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:4500x400/');
+                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
+                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
+                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
 
-                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x400/');
+                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
 
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);
