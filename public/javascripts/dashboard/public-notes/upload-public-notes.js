@@ -11,7 +11,8 @@ $(function () {
         maxFiles: 1,
         uploadMultiple: false,
         acceptedFiles: ".pdf",
-        imeout: 99999999,
+        // 20 minute of timeout
+        timeout: (20 * 60 * 1000),
         url: app.getApi() + "/products",
         method: "post",
         headers: {
