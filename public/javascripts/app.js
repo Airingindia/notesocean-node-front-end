@@ -37,7 +37,7 @@ class notesocean {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: app.getApi() + "/products",
+                url: app.getApi() + "/products?page=0",
                 headers: {
                     Authorization: app.getToken(),
                 },
@@ -185,6 +185,12 @@ class notesocean {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
+    dashboard() {
+
+    }
+
+
+
     getTime = (previous) => {
         const current = Date.now();
         var msPerMinute = 60 * 1000;
@@ -244,5 +250,82 @@ class notesocean {
     }
 }
 
+
+class dashboard {
+    getTotalProductsSize = () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products/users/size",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+
+    getTotalProductsCount = () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products/count",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+
+    getTotalReactCount = () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/reacts/likes/count",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+
+    getUserTotalViews = () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/views/count",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+}
+
+
+const dash = new dashboard();
 
 const app = new notesocean();

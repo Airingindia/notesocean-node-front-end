@@ -12,6 +12,7 @@ $(function () {
         parallelUploads: 4,
         maxFiles: 4,
         uploadMultiple: false,
+        timeout: 90000,
         acceptedFiles: ".pdf,.txt,.png,.jpg,.jpeg,.doc,.docx,.xls,.xls,.ppt,.pptx,.csv",
         url: app.getApi() + "/notes",
         method: "post",

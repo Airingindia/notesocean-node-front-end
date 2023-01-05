@@ -9,7 +9,22 @@ $(document).ready(function () {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
+  function showUserPic() {
+    if (localStorage.getItem('userInfo') !== null) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (userInfo.profileImage !== null && userInfo.profileImage !== undefined) {
+        const profilePic = userInfo.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/25x25");
+        if (profilePic !== null) {
+          $(".navbar-user-pic").attr("src", profilePic);
+        } else {
+          $(".navbar-user-pic").attr("src", "/images/user.jpg");
+        }
+      } else {
+        $(".navbar-user-pic").attr("src", "/images/user.jpg");
+      }
 
+    }
+  }
 
   showUserPic();
   function getUserInfo() {
@@ -29,20 +44,37 @@ $(document).ready(function () {
   };
   getUserInfo();
 
+  dash.getTotalProductsCount().then((data) => {
+    $(".total-notes-dash").html(data.userProductsCount);
+  }).catch(err => {
+    app.alert(err.resposeJSON.message, "danger");
+  });
+
+  dash.getTotalReactCount().then((data) => {
+    $(".total-likes-dash").html(data.userReactsLikeCount);
+  }).catch(err => {
+    app.alert(err.resposeJSON.message, "danger");
+  })
+
+  dash.getUserTotalViews().then((data) => {
+    $(".total-views-dash").html(data.userProductsViewsCount);
+  }).catch(err => {
+    app.alert(err.resposeJSON.message, "danger");
+  });
+
+
+  app.getUserEarning().then((data) => {
+    $(".total-earning-dash").html(data.totalEarning);
+  }).catch(err => {
+    app.alert(err.resposeJSON.message, "danger");
+  })
+
+
+
   //   get total notes and views
   app.getSlefProducts().then((data) => {
     let totalNotes = data.requested.length;
-    $(".total-notes-dash").html(totalNotes);
-    //  total views
-    let totalViews = 0;
-    data.requested.map((item) => { totalViews += item.views });
-    $(".total-views-dash").html(totalViews);
-    //    total likes
-    let totalLikes = 0;
-    data.requested.map((item) => { totalLikes += item.likes });
-    $(".total-likes-dash").html(totalLikes);
-    //  earning
-    // $(".total-earning-dash").html("0");
+
     //   get product by views
     let productByViews = data.requested.sort((a, b) => { return b.views - a.views });
     let topViews = productByViews.slice(0, 5);
@@ -77,13 +109,6 @@ $(document).ready(function () {
     }
   }).catch(err => {
     console.log(err);
-  })
-
-  app.getUserEarning().then((data) => {
-    console.log(data);
-    $(".total-earning-dash").html(Number(data?.totalEarning ? data?.totalEarning : 0).toFixed(2));
-  }).catch(err => {
-    app.alert("error", 400, "Failed to fetch earning");
   })
 });
 

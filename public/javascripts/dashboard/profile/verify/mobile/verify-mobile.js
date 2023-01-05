@@ -54,7 +54,7 @@ $(document).ready(function () {
 
                     $(".verify-btn").click(function () {
                         var count = 0;
-                        data.code = Number($("input").val());
+                        data.code = $("input").val();
                         $.ajax({
                             type: "POST",
                             url: app.getApi() + "/authenticate/verify-phone",

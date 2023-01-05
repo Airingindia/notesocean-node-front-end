@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // get userdata 
-    
-   
+
+
 
     function show() {
         $("input").each(function () {
@@ -37,29 +37,29 @@ $(document).ready(function () {
                 $(this).css({ "border": "1px solid #ccc" });
             })
         });
-        
+
     }
 
     var lastKeyCode = 0;
 
-    $('input[type="number"]').bind('keydown', function(e) {
+    $('input[type="number"]').bind('keydown', function (e) {
         lastKeyCode = e.keyCode;
     });
     // Bind on the input having changed.  As long as the previous character
     // was not a space, BS or Del, trim the input.
-    $('input[type="number"]').bind('input', function(e) {
-        if(lastKeyCode != 32 && lastKeyCode != 8 && lastKeyCode != 46) {
+    $('input[type="number"]').bind('input', function (e) {
+        if (lastKeyCode != 32 && lastKeyCode != 8 && lastKeyCode != 46) {
             $(this).val($(this).val().replace(/^\s+|\s+$/g, ''));
         }
     });
 
 
     show();
-    $(".resend-btn").click(function(){
-      window.location = location.href;
+    $(".resend-btn").click(function () {
+        window.location = location.href;
     });
 
-    function sendCode(){
+    function sendCode() {
         $.ajax(
             {
                 type: "GET",
@@ -67,22 +67,22 @@ $(document).ready(function () {
                 headers: {
                     Authorization: getCookie("token")
                 }, beforeSend: function () {
-    
+
                 },
                 success: function (data) {
                     $(".user-email-label").html(data.email);
-                    app.alert(200,"code sent to your email address!");
+                    app.alert(200, "code sent to your email address!");
 
                     // verify
 
                     $(".verify-btn").click(function () {
                         var count = 0;
-                        if ($("input").val().length ==6) {
+                        if ($("input").val().length == 6) {
                             count = 6;
                         }
 
-                        data.code = Number($("input").val());
-            
+                        data.code = $("input").val()
+
                         if (count == 6) {
                             $.ajax({
                                 type: "POST",
@@ -98,34 +98,34 @@ $(document).ready(function () {
                                     $(".verify-btn").html(`<i class="fa fa-spinner fa-spin mx-1"> </i> <span> verifing... </span>`);
                                 },
                                 success: function (data) {
-                                    if(data){
-                                    const userdata = JSON.parse(localStorage.getItem("userInfo"));
-                                    userdata.emailVerified = true;
-                                    localStorage.setItem("userInfo", JSON.stringify(userdata));
-                                    new Noty({
-                                        theme: "nest",
-                                        type: "success",
-                                        text: 'Email verified successfully!',
-                                        timeout: 3000,
-                                        closeWith: ['click', 'button'],
-                                    }).show();
+                                    if (data) {
+                                        const userdata = JSON.parse(localStorage.getItem("userInfo"));
+                                        userdata.emailVerified = true;
+                                        localStorage.setItem("userInfo", JSON.stringify(userdata));
+                                        new Noty({
+                                            theme: "nest",
+                                            type: "success",
+                                            text: 'Email verified successfully!',
+                                            timeout: 3000,
+                                            closeWith: ['click', 'button'],
+                                        }).show();
 
-                                    window.location = "/dashboard";
+                                        window.location = "/dashboard";
 
-                                    }else{
-                                        app.alert(400,"Invalid code , please enter correct code")
+                                    } else {
+                                        app.alert(400, "Invalid code , please enter correct code")
                                     }
                                     $(".verify-btn").prop("disabled", false);
                                     $(".verify-btn").html(`Verify`);
                                 }, error: function (error) {
-                                   app.alert(error.status,"Somthing went wrong , please try again later");
-                                   $(".verify-btn").prop("disabled", false);
-                                   $(".verify-btn").html(`Verify`);
+                                    app.alert(error.status, "Somthing went wrong , please try again later");
+                                    $(".verify-btn").prop("disabled", false);
+                                    $(".verify-btn").html(`Verify`);
                                 }
                             });
                         } else {
-                            $("input").css({ "border": "1px solid red"});
-                            app.alert(400 ,"Enter 6 digit code!");
+                            $("input").css({ "border": "1px solid red" });
+                            app.alert(400, "Enter 6 digit code!");
                         }
                     });
                 }, error: function (error) {
@@ -137,7 +137,7 @@ $(document).ready(function () {
     }
 
     sendCode();
-   
+
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
