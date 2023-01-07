@@ -105,7 +105,7 @@ class notesocean {
                 timeout: 2000
             }).show();
         }
-        else if (status === 401) {
+        else if (status === 401 || status === 403) {
             new Noty({
                 type: "error",
                 layout: "topRight",
@@ -311,6 +311,24 @@ class dashboard {
             $.ajax({
                 type: "GET",
                 url: app.getApi() + "/views/count",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+
+    getUserTopProducts = () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products/self/top-performing",
                 headers: {
                     Authorization: app.getToken(),
                 },

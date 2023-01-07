@@ -45,28 +45,50 @@ $(document).ready(function () {
   getUserInfo();
 
   dash.getTotalProductsCount().then((data) => {
-    $(".total-notes-dash").html(data.userProductsCount);
+    $(".total-notes-dash").html(data?.userProductsCount ? Number(data.userProductsCount) : 0);
   }).catch(err => {
-    app.alert(err.resposeJSON.message, "danger");
+    app.alert(err.status, "failed to load likes");
+    // app.alert(err.resposeJSON.message, "danger");
   });
 
   dash.getTotalReactCount().then((data) => {
-    $(".total-likes-dash").html(data.userReactsLikeCount);
+    $(".total-likes-dash").html(data?.userReactsLikeCount ? Number(data.userReactsLikeCount) : 0);
   }).catch(err => {
-    app.alert(err.resposeJSON.message, "danger");
+    console.log("error", err);
+    app.alert(err.status, "failed to load likes");
   })
 
   dash.getUserTotalViews().then((data) => {
-    $(".total-views-dash").html(data.userProductsViewsCount);
+    $(".total-views-dash").html(data?.userProductsViewsCount ? Number(data.userProductsViewsCount) : 0);
   }).catch(err => {
-    app.alert(err.resposeJSON.message, "danger");
+    // app.alert(err.resposeJSON.message, "danger");
+    app.alert(err.status, "failed to load likes");
   });
 
 
   app.getUserEarning().then((data) => {
-    $(".total-earning-dash").html(data.totalEarning);
+    $(".total-earning-dash").html(data?.totalEarning ? Number(data.totalEarning).toFixed(2) : 0);
   }).catch(err => {
-    app.alert(err.resposeJSON.message, "danger");
+    app.alert(err.status, "failed to load likes");
+  });
+
+
+  dash.getUserTopProducts().then((data) => {
+    let topProducts = data?.requested;
+    let topProductsData = [["Element", "Likes", "views", { role: "style" }]];
+    for (let i = 0; i < data.requested.length; i++) {
+      let name = data.requested[i].name;
+      let views = data.requested[i].views;
+      let likes = data.requested[i].likes;
+      topProductsData.push([name, likes, views, "blue"]);
+    }
+    if (topProducts.length > 0) {
+      topNotes(topProductsData);
+    } else {
+      $("#barchart_values").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
+    }
+  }).catch(err => {
+    app.alert(err.status, "failed to load notes");
   })
 
 
@@ -86,7 +108,7 @@ $(document).ready(function () {
       topViewsData.push([name, likes, views, "blue"]);
     }
     if (totalNotes > 0) {
-      topNotes(topViewsData);
+      // topNotes(topViewsData);
     } else {
       $("#barchart_values").html("<div class='d-flex justify-content-center align-items-center p-3'>  No Notes Found! </div>");
     }

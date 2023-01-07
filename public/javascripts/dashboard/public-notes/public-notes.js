@@ -4,7 +4,7 @@ $(document).ready(function () {
     function loadData() {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products",
+            url: app.getApi() + "/products?page=0",
             contentType: "application/json",
             processData: false,
             headers: {
