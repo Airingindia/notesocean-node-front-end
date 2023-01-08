@@ -1,10 +1,39 @@
 $(document).ready(function () {
 
+    dash.getTotalProductsCount().then(data => {
+        let count = data.userProductsCount;
+        $(".total-notes").html(count);
+    }).catch((err) => {
+        app.alert(err.status, "failed to load products count ")
+    })
+    var wow = new WOW({ scrollContainer: ".second-side" });
+    wow.init();
+    var next = 0;
+    var prev = 0;
+    var checked = false;
+    var hit = false;
+    function check() {
+        $(".second-side").scroll(function () {
+            // get last div element of .public-notes-container
+            let lastDiv = $(".public-item").last();
+            //    get visibility of last div
+            let lastDivVisiblity = lastDiv.css("visibility");
+            console.log(lastDivVisiblity);
+            if (lastDivVisiblity == "visible") {
+                if (!hit) {
+                    next += 1;
+                    hit = true;
+                    loadData();
+                }
+
+            }
+        });
+    }
     // get user public notes
     function loadData() {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products?page=0",
+            url: app.getApi() + "/products?page=" + next,
             contentType: "application/json",
             processData: false,
             headers: {
@@ -14,8 +43,10 @@ $(document).ready(function () {
                 $(".loading-public-notes").removeClass("d-none");
             },
             success: function (data) {
+                prev = next;
+
                 showData(data);
-                $(".total-notes").html(data.size);
+                // $(".total-notes").html(data.size);
 
             },
             error: function (err) {
@@ -37,23 +68,32 @@ $(document).ready(function () {
     }
     loadData();
     function showData(data) {
+
         if (data.requested.length !== 0) {
-            $(".loading-public-notes").addClass("d-none");
+            hit = false;
+            // $(".loading-public-notes").addClass("d-none");
             $(".no-public-notes").addClass("d-none");
             let adshow = 0;
+            // get domain
+
+            let api = app.getApi();
+
             for (let i = 0; i < data.requested.length; i++) {
                 adshow++;
-                if (adshow == 5) {
-                    adshow = 0;
-                    $(".public-notes-container").append(`
-                    <div class="col-md-3 my-3 d-flex justify-content-center align-items-center">
-                    <ins class="adsbygoogle"
-                    style="display:inline-block;width:336px;height:280px"
-                    data-ad-client="ca-pub-3834928493837917"
-                    data-ad-slot="1394357315"></ins>
-                    </div>`);
-                    (adsbygoogle = window.adsbygoogle || []).push({});
+                if (api == "https://api.notesocean.com") {
+                    if (adshow == 5) {
+                        adshow = 0;
+                        $(".public-notes-container").append(`
+                        <div class="col-md-3 my-3 d-flex justify-content-center align-items-center wow ">
+                        <ins class="adsbygoogle"
+                        style="display:inline-block;width:336px;height:280px"
+                        data-ad-client="ca-pub-3834928493837917"
+                        data-ad-slot="1394357315"></ins>
+                        </div>`);
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
                 }
+
                 let id = data.requested[i].uuid;
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
@@ -70,8 +110,7 @@ $(document).ready(function () {
                 let pages = data.requested[i].pages;
                 let views = data.requested[i].views;
                 $(".public-notes-container").append(`
-                    <div class="col-md-3 my-3">
-
+                    <div class="col-md-3 my-3 public-item wow animate__animated  animate__fadeIn">
                         <a href="/dashboard/public-notes/${id}"> 
                         <div class="card h-100 shadow public-notes-item  border-0 rounded bg-white my-3"  data-route="${id}">
                             <img class="card-img-top lozad" src="${thumbnails}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" style="height:200px;width:100%" loading="lazy"  />
@@ -107,10 +146,18 @@ $(document).ready(function () {
 
             }
             publicNotesRoute();
+            if (!checked) {
+                checked = true;
+                check();
+            }
         } else {
-            $(".loading-public-notes").addClass("d-none");
-            $(".public-notes-container").addClass("d-none");
-            $(".no-public-notes").removeClass("d-none");
+            if (!checked) {
+                $(".loading-public-notes").addClass("d-none");
+                $(".public-notes-container").addClass("d-none");
+                $(".no-public-notes").removeClass("d-none");
+            } else {
+                $(".loading-public-notes").addClass("d-none");
+            }
         }
     }
     function timeDifference(previous) {

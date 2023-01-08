@@ -341,6 +341,24 @@ class dashboard {
             })
         })
     }
+
+    getUserNotesCount() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/notes/count",
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
 }
 
 

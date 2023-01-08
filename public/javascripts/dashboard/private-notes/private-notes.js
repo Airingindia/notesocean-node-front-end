@@ -1,10 +1,39 @@
 $(document).ready(function () {
-    // get all private notes
 
+    dash.getUserNotesCount().then(data => {
+        let count = data.userNotesCount;
+        $(".total-notes").html(count);
+    }).catch(err => {
+        app.alert(err.status, "faild to load notes count !")
+    })
+    // get all private notes
+    var wow = new WOW({ scrollContainer: ".second-side" });
+    wow.init();
+    var next = 0;
+    var prev = 0;
+    var checked = false;
+    var hit = false;
+    function check() {
+        $(".second-side").scroll(function () {
+            // get last div element of .public-notes-container
+            let lastDiv = $(".public-item").last();
+            //    get visibility of last div
+            let lastDivVisiblity = lastDiv.css("visibility");
+            console.log(lastDivVisiblity);
+            if (lastDivVisiblity == "visible") {
+                if (!hit) {
+                    next += 1;
+                    hit = true;
+                    loaddata();
+                }
+
+            }
+        });
+    }
     function loaddata() {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/notes",
+            url: app.getApi() + "/notes?page=" + next,
             headers: {
                 Authorization: decodeURIComponent(getCookie("token"))
             },
@@ -12,8 +41,9 @@ $(document).ready(function () {
                 $(".loading-private-notes").removeClass("d-none");
             },
             success: function (data) {
+                $(".loading-private-notes").addClass("d-none");
                 showData(data.requested);
-                $(".total-notes").html(data.size);
+
             },
             error: function (err) {
                 if (err.status == 401) {
@@ -50,9 +80,8 @@ $(document).ready(function () {
     loaddata();
 
     function showData(data) {
-        // $(".notes-container-row").html("");  
-        $(".loading-private-notes").addClass("d-none");
         if (data.length !== 0) {
+            hit = false;
             $(".no-private-notes").addClass("d-none");
             let adshow = 0;
             for (let i = 0; i < data.length; i++) {
@@ -85,7 +114,7 @@ $(document).ready(function () {
 
 
                 $(".notes-container-row").append(`
-                <div class="col-6 col-lg-2 my-2">
+                <div class="col-6 col-lg-2 my-2 public-item wow animate__animated  animate__fadeIn">
                     <div class="card border-0 shadow p-0 private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}"  style="height:100%">
                             
                             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
@@ -112,9 +141,20 @@ $(document).ready(function () {
                 `);
             }
             fileOpner();
+            if (!checked) {
+                checked = true;
+                check();
+            }
             // openContext();
         } else {
-            $(".no-private-notes").removeClass("d-none");
+            if (checked) {
+                $(".loading-private-notes").addClass("d-none");
+            } else {
+                $(".no-private-notes").removeClass("d-none");
+                $(".loading-private-notes").addClass("d-none");
+            }
+
+
         }
     }
 
