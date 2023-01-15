@@ -35,30 +35,8 @@ $(document).ready(function () {
         });
     }
 
-    function showData(data) {
-        let id = data.products.uuid;
-        let name = data.products.name;
-        let thumbnails = data.products.thumbnails;
-        let views = data.products.views;
-        let dislikes = data.products.dislikes;
-        let likes = data.products.likes;
-        let timestamp = data.products.timestamp;
-        let description = data.products.description;
-        let tags = data.products.tags;
 
-        $(".public-notes-title").html(name);
-        $(".public-notes-likes-count").html(likes);
-        $(".public-notes-dislikes-count").html(dislikes);
-        $(".public-notes-views-count").html(formatViews(views));
-        $(".public-notes-details-thumbnails").attr("src", thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:500x500/"));
-        $(".public-notes-description").html(description);
-        $(".note-title").val(name);
-        $(".note-descriptions").val(description);
-
-        $(".share-item").attr("data-url", localStorage.getItem("home") + "/notes/" + public_notes_id);
-        $(".share-item").attr("data-title", "I uploaded this notes on Notes Ocean and i earned money for this , please checkout my note");
-    }
-    getNoteDetails();
+    // getNoteDetails();
 
     function deleteNote() {
 
@@ -143,8 +121,8 @@ $(document).ready(function () {
                 $(".public-notes-update-btn").html(`Update`);
                 $(".public-notes-update-btn").prop("disabled", false);
                 swal("success!", "Note successfully updated", "success");
-                $(".public-notes-description").html($(".note-descriptions").val());
-                $(".public-notes-title").html($(".note-title").val());
+                $(".description").html($(".note-descriptions").val());
+                $(".title").html($(".note-title").val());
                 $("#edit-public-notes-modal").modal('hide');
             }, error: function (error) {
                 swal("oops!", "Note can't be update right now", "error");
@@ -251,14 +229,7 @@ $(document).ready(function () {
             $(".invalid-descriptions-error").html("Descriptions should be at least 40 characters");
         }
     };
-    const formatViews = n => {
-        if (n < 1e3) return n;
-        if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "K";
-        if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "M";
-        if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
-        if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
-    };
-    Shareon.init();
+
 
     $(".note-preview-btn").click(function () {
         window.location = "/notes/" + public_notes_id;
@@ -276,11 +247,127 @@ $(document).ready(function () {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+    dash.getUserProductViewTimeLine(public_notes_id).then(res => {
+        if (!res.hasOwnProperty("size") || res.size == 0) {
+            $("#timeline-chaart").html("<h4 class='text-center'>No views yet</h4>");
+            return false;
+        }
+        let data = res.requested;
+        let viewsData = [];
+        let views = [];
+        viewsData.push(["Date", "Views"]);
+        for (let i = 0; i < data.length; i++) {
+            views.push([moment.unix((data[i].timestamp) / 1000).format("ll"), data[i].currentViews]);
+        }
+
+        showChart(viewsData.concat(views.reverse()));
+        console.log(views);
+    }).catch(err => {
+        console.log(err);
+        $("#timeline-chaart").html("<h4 class='text-center text-muted mt-3'>No Timeline</h4>");
+        return false;
+    });
+
+    dash.getProductDetails(public_notes_id).then(res => {
+        let data = res.products;
+        let title = data.name;
+        let description = data.description;
+        let likes = data.likes;
+        let views = data.views;
+        let dislikes = data.dislikes;
+        let pages = data.pages;
+        let size = data.size;
+        let thumbnails = data.thumbnails;
+        $(".thumbnails").attr("src", thumbnails);
+        $(".likes").html(likes);
+        $(".views").html(views);
+        $(".dislikes").html(dislikes);
+        $(".title").html(title);
+        $(".description").html(description);
+        $(".pages").html(pages);
+        $(".note-title").val(title);
+        $(".note-descriptions").val(description);
+        $(".size").html(formatBytes(size));
+    }).catch(err => {
+        app.alert(err.status, "failed to load notes details");
+    });
+
+
+    function showChart(views) {
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(views);
+
+            var options = {
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                width: "100%",
+                height: 300,
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('timeline-chaart'));
+
+            chart.draw(data, options);
+        }
+
     }
 
+    function formatBytes(bytes, decimals = 1) {
+        if (!+bytes) return '0 Bytes'
+
+        const k = 1024
+        const dm = decimals < 0 ? 0 : decimals
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+    }
+
+    showChart();
+
+    $(".share-btn").click(function () {
+        share();
+    })
+
+    function share() {
+        let title = $(".title").html();
+        let description = $(".description").html();
+        let img = $(".note-img").attr("src");
+        let shareData = {
+            title: title,
+            text: description,
+            url: "https://notesocean.com/notes/" + public_notes_id,
+            img: img
+        }
+
+        // share using native share api
+
+        if (navigator.share) {
+            navigator.share(shareData).then(() => {
+                console.log('Thanks for sharing!');
+            })
+                .catch((err) => {
+                    app.alert(400, "Failed to share");
+                });
+
+        } else {
+            // copy  link to clipboard
+            let input = document.createElement("input");
+            input.value = shareData.url;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+            app.alert(200, "link copied to clipboard");
+        }
+    }
+
+    $(".Preview-btn").click(function () {
+        window.location = "/notes/" + public_notes_id;
+    });
 });

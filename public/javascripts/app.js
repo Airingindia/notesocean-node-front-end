@@ -359,6 +359,41 @@ class dashboard {
             })
         })
     }
+
+
+    getUserProductViewTimeLine(productId) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products/" + productId + "/timeline/page/0/size/20",
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        })
+    }
+    getProductDetails(productId) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products/" + productId,
+                headers: {
+                    Authorization: app.getToken(),
+                },
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            })
+        }
+        )
+
+    }
 }
 
 

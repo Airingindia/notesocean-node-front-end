@@ -160,6 +160,8 @@ $(document).ready(function () {
             }
         }
     }
+
+
     function timeDifference(previous) {
         const current = Date.now();
         var msPerMinute = 60 * 1000;

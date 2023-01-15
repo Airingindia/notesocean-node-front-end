@@ -6,6 +6,7 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Public notes | Notes Ocean
         include ../../includes/dashcss
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js")
         style
             include ../../../public/stylesheets/dashboard/public-notes/public-notes-details.css
     body
@@ -15,72 +16,66 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
-                    .row.public-notes-details-container.d-none
-                        .col-md-4
-                            img(src="/images/dummy/collection2.png").public-notes-details-thumbnails
-                        .col-md-8
-                            div
-                                h5.public-notes-title
-                                p.public-notes-description 
-                            div.d-flex.text-center
-                                .div.mx-2
+                    div.main-content
+                        .first-row
+                            .coll.first.p-0
+                                .loader.loader-1.shadow
+                                    img(src="" alt="" style="width:100%;height:100%").thumbnails
+                            .coll.second
+                                .loader.loader-1.shadow
+                                    div#timeline-chaart.w-100.h-100
 
-                                    i.fa.fa-thumbs-up.text-danger.mx-1
-                                        span.public-notes-likes-count.mx-1.text-dark
-                                    span Like
+                        .button-row
+                            .coll
+                                .row
+                                    .col-md-6.d-flex.justify-content-start.align-items-start.flex-row
+                                        .loader.loader-4
+                                            button.btn.btn-notesocean.btn-sm(type="button").share-btn.w-100.h-100
+                                                i.fa.fa-share.mx-1
+                                                span share
+                                        .loader.loader-4
+                                            button.btn.btn-notesocean.btn-sm(type="button").w-100.h-100.Preview-btn
+                                                i.fa.fa-eye.mx-1
+                                                span Preview
+                                        .loader.loader-4
+                                            button.btn.btn-notesocean.btn-sm(type="button").w-100.h-100.public-notes-edit-btn
+                                                i.fa.fa-edit.mx-1
+                                                span Edit
+                                        .loader.loader-4
+                                            button.btn.btn-notesocean.btn-sm(type="button").w-100.h-100.delete-puublic-note
+                                                i.fa.fa-trash.mx-1
+                                                span Delete
+                                    .col-md-6.d-flex.justify-content-end.align-items-end.flex-row
+                                        .loader.loader-4
+                                            .card.w-100.h-100.shadow.text-center.p-1.border-0.d-flex.justify-content-center.align-items-center.flex-row
+                                                i.fa.fa-thumbs-up.mx-1
+                                                span.likes 0
+                                        .loader.loader-4
+                                            .card.w-100.h-100.shadow.text-center.p-1.border-0.d-flex.justify-content-center.align-items-center.flex-row
+                                                i.fa.fa-thumbs-down.mx-1
+                                                span.dislikes 0
 
-                                .div.mx-2
-                                    i.fa.fa-thumbs-down.text-danger.mx-1
-                                        span.public-notes-dislikes-count.mx-1.text-dark
-                                    span Dislike
+                                        .loader.loader-4
+                                            .card.w-100.h-100.shadow.text-center.p-1.border-0.d-flex.justify-content-center.align-items-center.flex-row
+                                                i.fa.fa-globe.mx-1
+                                                span.views 0
+                                        .loader.loader-4
+                                            .card.w-100.h-100.shadow.text-center.p-1.border-0.d-flex.justify-content-center.align-items-center.flex-row
+                                                i.fa.fa-file.mx-1
+                                                span.pages 0
+                                        .loader.loader-4
+                                            .card.w-100.h-100.shadow.text-center.p-1.border-0.d-flex.justify-content-center.align-items-center.flex-row
+                                                i.fa.fa-database.mx-1
+                                                span.size 0
+                        .second-row
+                            .coll
+                                div.loader.loader-2
+                                    h5.text-notesocean.title this is a notes title
+                                    p.description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, saepe!
+                        .second-row
+                            .coll
+                                div.loader.loader-3
 
-                                .div.mx-2
-                                    i.fa.fa-globe.text-danger.mx-1
-                                        span.public-notes-views-count.mx-1.text-dark
-                                    span views
-
-                                .div.mx-2
-                                    i.fa.fa-comment.text-danger.mx-1
-                                        span.public-notes-comment-count.mx-1.text-dark
-                                    span Comments
-
-                            div.d-flex.justify-content-start.mt-5
-                                div
-                                    button.btn.btn-sm.btn-dark.mx-1.public-notes-edit-btn
-                                        i.fa.fa-edit.mx-1
-                                        span Edit
-
-                                div
-                                    button.btn.btn-primary.btn-sm.mx-1.delete-puublic-note
-                                        i.fa.fa-trash.mx-1
-                                        span Delete
-                                div
-                                    button.btn.btn-warning.btn-sm.mx-1.note-preview-btn
-                                        i.fa.fa-eye.mx-1
-                                        span preview
-                                //- div
-                                //-     button.btn.btn-info.btn-sm.mx-1.note-share-btn
-                                //-         i.fa.fa-share.mx-1
-                                //-         span Share
-                    .row.notes-removed.d-none
-                        .card.border-0
-                            .card-content
-                                center
-                                    img.card-img-top.w-50(src="/images/dashboard/collection_details_not_found.svg")  
-                                    .card-body
-                                        h6 The note you are looking for it may removed or insufficient permissions to access
-                    .row.loading-public-notes
-                        center
-                            .lds-roller
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                                div
-                            p Your public notes details are loading... please wait...
                 div.modal#edit-public-notes-modal
                     .modal-dialog.modal-xl
                         .modal-content.bg-white
@@ -121,6 +116,7 @@ html(lang="en")
                                     button.twitter(data-url="" ,data-title="").share-item
                                     button.whatsapp(data-url="" ,data-title="").share-item
         script(src="/vendors/sheron/shareon.iife.js")
+        script(src="/javascripts/loader.js")
         include ../../includes/dashjs
         script
             include ../../../public/javascripts/dashboard/public-notes/public-notes-details.js
