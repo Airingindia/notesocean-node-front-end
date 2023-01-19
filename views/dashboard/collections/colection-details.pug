@@ -15,19 +15,20 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-10.second-side
+                    h2 Collection Details
                     div.d-none.collection-container
                         form.form
                             .row
-                                .col-12.mb-4
+                                .col-lg-6.col-12
                                     .form-group.my-2
-                                        h6 Collection Name
-                                        input.form-control(placeholder="Class 10th all math mcq pdf",type="text").collection-name
+                                        h6.text-notesocean Collection Name
+                                        input.form-control(placeholder="Class 10th all math mcq pdf" type="text").collection-name
                                         .invalid-feedback
                                             p.invalid-title-error Collection name should be atleast 10 characters
                                         .valid-feedback
                                             p looks good
                                     .form-group.my-2
-                                        h6 Collection Descriptions
+                                        h6.text-notesocean Collection Descriptions
                                         textarea.form-control(rows="4" cols="5")
                                         .invalid-feedback
                                             p.invalid-title-error Collection descriptions should be atleast 20 characters
@@ -35,14 +36,14 @@ html(lang="en")
                                             p looks good
                                     .form-group
                                         .btn-group(role="group")
-                                            button.btn.btn-notesocean.btn-sm.update-collection-btn(type="button")
+                                            button.btn.btn-dark.btn-sm.update-collection-btn(type="button")
                                                 i.fa.fa-save.mx-1
                                                 span Update
-                                            button.btn.btn-dark.btn-sm.mx-1.delete-collection-btn(type="button")
+                                            button.btn.btn-danger.btn-sm.mx-1.delete-collection-btn(type="button")
                                                 i.fa.fa-trash
                                                 span  Delete
                                 .col-12
-                                    h5 Collection Notes
+                                    h6.text-notesocean.mt-3 Collection Notes
                                     .colllection-notes-selector.row
                                         //- .collection-notes-item.col-md-4
                                         //-     .card
@@ -80,8 +81,8 @@ html(lang="en")
                                         //-         .card-footer
                                         //-             .card-text 
                                         //-                 small Notes name
-                                        .collection-notes-item.plus.col-md-4
-                                            .card.h-100
+                                        .collection-notes-item.plus.col-lg-3.col-12.mt-2
+                                            .card.h-100.shadow.rounded.border-0
                                                 .card-body.d-flex.justify-content-center.align-items-center.p-5
                                                     h1.fa.fa-plus
 

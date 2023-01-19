@@ -38,6 +38,9 @@ $(document).ready(function () {
         success: function (data) {
           localStorage.setItem("userInfo", JSON.stringify(data));
           showUserInfo(data);
+        },
+        error: function (err) {
+          app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
       })
     }

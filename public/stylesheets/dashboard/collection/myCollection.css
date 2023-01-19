@@ -57,16 +57,17 @@ textarea:hover {
 }
 
 .collection-item-content {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
+
 }
 
 .collection-item-content-box {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    width: 70%;
-    align-items: center;
+    width: 100%;
+    align-items: center; */
 
 }
 
@@ -79,7 +80,22 @@ textarea:hover {
     width: 50%;
 }
 
+.collection-info-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media(max-width:768px) {
+    .collection-info-box {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .collection-info-box div {
+        margin-bottom: 10px;
+    }
+
     .second-side .header-text {
         display: none;
     }

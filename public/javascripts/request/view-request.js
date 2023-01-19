@@ -53,8 +53,8 @@ $(document).ready(function () {
                     acceptProduct();
                 }
             },
-            error: function (error) {
-                console.log("error", error);
+            error: function (err) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         });
     }
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 console.log(requestUuid);
                 $.ajax({
                     type: 'POST',
-                    url:  app.getApi() + "/requests/" + requestUuid + "/products/" + uuid,
+                    url: app.getApi() + "/requests/" + requestUuid + "/products/" + uuid,
                     beforeSend: function () {
                         $(btn).html("<i class='fa fa-spinner fa-spin'></i> Accepting ...");
                     },
@@ -105,11 +105,7 @@ $(document).ready(function () {
                         }, 2000);
                     },
                     error: function (error) {
-                        new Noty({
-                            type: 'error',
-                            text: 'Something went wrong , please try again later',
-                            timeout: 2000
-                        })
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     }
                 });
             })

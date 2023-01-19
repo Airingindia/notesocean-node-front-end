@@ -2,14 +2,14 @@ $(document).ready(function () {
     let topNotesHit = false;
     let recentNotesHit = false;
     $(window).scroll(function () {
-      let topNotesVisiblity =  $(".most-viewd-notes").css("visibility");
-      if(topNotesVisiblity == "visible" && topNotesHit == false){
-        topNotesHit = true;
-        loadTopNotes();
-      }
-    //    check recnt notes visiblity
-        let recentNotesVisiblity =  $(".recent-notes").css("visibility");
-        if(recentNotesVisiblity == "visible" && recentNotesHit == false){
+        let topNotesVisiblity = $(".most-viewd-notes").css("visibility");
+        if (topNotesVisiblity == "visible" && topNotesHit == false) {
+            topNotesHit = true;
+            loadTopNotes();
+        }
+        //    check recnt notes visiblity
+        let recentNotesVisiblity = $(".recent-notes").css("visibility");
+        if (recentNotesVisiblity == "visible" && recentNotesHit == false) {
             recentNotesHit = true;
             loadRecentNotes();
         }
@@ -68,7 +68,7 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
-                app.alert(err.status,"")
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 $(".most-viewd-notes .row").html("");
                 $("section.most-viewd-notes").addClass("d-none");
 
@@ -134,7 +134,7 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
-                app.alert(err.status,"")
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 $(".recent-notes").addClass("d-none")
                 $(".recent-notes .row").html("");
             }

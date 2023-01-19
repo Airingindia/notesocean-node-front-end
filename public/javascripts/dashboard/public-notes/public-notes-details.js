@@ -28,6 +28,7 @@ $(document).ready(function () {
                 }
             },
             error: function (err) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 $(".loading-public-notes").addClass("d-none");
                 $(".notes-removed").removeClass("d-none");
                 $(".public-notes-details-container").addClass("d-none");
@@ -74,7 +75,7 @@ $(document).ready(function () {
                                 }));
                             },
                             error: function (err) {
-                                swal("Error!", "Your note has beeen successfully deleted", "error");
+                                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                             }
                         })
                     }
@@ -125,7 +126,7 @@ $(document).ready(function () {
                 $(".title").html($(".note-title").val());
                 $("#edit-public-notes-modal").modal('hide');
             }, error: function (error) {
-                swal("oops!", "Note can't be update right now", "error");
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 $("#edit-public-notes-modal").modal('hide');
             }
         });
@@ -316,7 +317,7 @@ $(document).ready(function () {
 
     }
 
-    function formatBytes(bytes, decimals = 1) {
+    function formatBytes(bytes, decimals = 0) {
         if (!+bytes) return '0 Bytes'
 
         const k = 1024

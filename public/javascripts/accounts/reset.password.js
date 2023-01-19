@@ -66,8 +66,8 @@ $(document).ready(function () {
                         }
                     });
                 },
-                error: function (data) {
-                    app.alert(data.status, data.responseJSON.message ? data.responseJSON.message : "Faild to send email");
+                error: function (err) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             })
         } else {

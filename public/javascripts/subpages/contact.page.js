@@ -26,6 +26,9 @@ $(document).ready(function () {
                 } else {
                     window.location = "/";
                 }
+            },
+            error: function (err) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         });
     })

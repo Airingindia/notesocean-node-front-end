@@ -160,7 +160,7 @@ class notesocean {
                 timeout: 2000
             }).show();
         } else if (status === 0) {
-            window.location = "/no-internet";
+            // window.location = "/no-internet";
             return false;
         }
         else {

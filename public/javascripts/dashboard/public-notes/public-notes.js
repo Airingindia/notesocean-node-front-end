@@ -50,16 +50,7 @@ $(document).ready(function () {
 
             },
             error: function (err) {
-                if (err.status == 401) {
-                    window.location = "/session-expire";
-                } else {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Faild to load public notes ",
-                        timeout: 1000,
-                    }).show();
-                }
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-container").addClass("d-none");
                 $(".no-public-notes").removeClass("d-none");
@@ -237,12 +228,7 @@ $(document).ready(function () {
 
                 },
                 error: function () {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: '<i class="fa fa-info-circle">  </i>  Failed to search notes',
-                        timeout: 4000,
-                    }).show();
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             })
         } else {

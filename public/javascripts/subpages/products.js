@@ -125,6 +125,9 @@ $(document).ready(function () {
                         `);
                     }
                 }
+            },
+            error: function (err) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
 
         });
@@ -149,8 +152,8 @@ $(document).ready(function () {
                         showCommentBox(data);
 
                     },
-                    error:function(err){
-                        app.alert(err.status,"Failed to load your info , please try after sometimes");
+                    error: function (err) {
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     }
                 })
             }
@@ -259,7 +262,7 @@ $(document).ready(function () {
                         content: $(".commentbox-input").val().trim()
                     }),
                     headers: {
-                        Authorization:app.getToken()
+                        Authorization: app.getToken()
                     }, beforeSend: function () {
                         $(".comment-add-btn").prop("disabled", true);
                         $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
@@ -279,12 +282,7 @@ $(document).ready(function () {
                         `);
                     },
                     error: function (err) {
-                        new Noty({
-                            theme: "sunset",
-                            type: "error",
-                            text: "Somthing went wrong , please try after sometimes",
-                            timeout: 4000,
-                        }).show();
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     }
                 })
             } else if ($(".commentbox-input").val().length > 200) {
@@ -343,12 +341,7 @@ $(document).ready(function () {
                     $(".report-form").trigger("reset");
                 },
                 error: function (err) {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Somthing went wrong , please try after sometimes",
-                        timeout: 4000,
-                    }).show();
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     $(".report-btn-modal").prop("disabled", false);
                     $(".report-btn-modal").html("Report");
                 }

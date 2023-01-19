@@ -112,6 +112,12 @@
     height: 50px !important;
 }
 
+@media (max-width:769px) {
+    .loader-4 {
+        height: 70px !important;
+    }
+}
+
 .button-row .coll .loader {
     border-radius: 5px;
     background: #fff;

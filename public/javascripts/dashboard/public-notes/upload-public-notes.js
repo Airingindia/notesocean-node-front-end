@@ -100,6 +100,7 @@ $(function () {
 
                 },
                 error: function (error) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     $(".request-error").removeClass("d-none");
                     $("form").remove();
                 }

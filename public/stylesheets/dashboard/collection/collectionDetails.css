@@ -1,17 +1,23 @@
-a{
-    text-decoration: none ;
+a {
+    text-decoration: none;
     color: inherit;
 }
 
-a:hover{
-    text-decoration: none ;
+a:hover {
+    text-decoration: none;
     color: inherit;
 }
 
 .collection-container {
-    width: 50%;
-    margin: 0 auto;
+    width: 99%;
+    /* margin-left: 10px; */
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+
 
 .colllection-notes-selector .card-header,
 .colllection-notes-selector .card-footer,

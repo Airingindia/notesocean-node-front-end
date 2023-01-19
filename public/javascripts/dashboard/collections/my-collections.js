@@ -24,22 +24,44 @@ $(document).ready(function () {
 
 
     function showCollection(colllections) {
-        $(".collections-rows").html("");
+        // $(".collections-rows").html("");
         for (let i = 0; i < colllections.length; i++) {
-        
-            $(".collections-rows").append(`
-                <li class="list-group-item collection-row-item rounded my-2 shadow   border-0"  data-id="${colllections[i].uuid}" style="box-shadow:0px 0px 0px 0px #ccc">
+
+            $(".collections-rows").prepend(`
+                <li class="list-group-item collection-row-item rounded my-2 shadow border-0 pt-3"  data-id="${colllections[i].uuid}" style="box-shadow:0px 0px 0px 0px #ccc">
                 <a href="/dashboard/collections/${colllections[i].uuid}">
                 <div class="collection-item-content">
                    <div class="collection-item-content-box"> 
                   
-                   <div class="mb-3 mx-1"> ${colllections[i].name} </div> 
+                   <div class="mb-3 mx-1"> 
+                   <h5 class="text-notesocean"> ${colllections[i].name.substring(0, 100)} </h5>
+                   <small class="text-muted"> ${colllections[i]?.description ? colllections[i].description.substring(0, 100) : ""} ${colllections[i].description.length > 100 ? "..." : ""} </small>
+                <div class="pt-2 collection-info-box">
+                    <div>
+                     
+                    <small class="text-muted ">  <i class="fa fa-file mx-1"></i> ${colllections[i]?.totalProducts ? colllections[i].totalProducts : 0} Notes </small> 
+                  
+                 <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(colllections[i].timestamp)}</small> 
+                    
+                    </div>
+
+                <div>
+                <button class="btn btn-notesocean dark"> Edit </button>
+                <button class="btn btn-notesocean delete-collections" data-id="${colllections[i].uuid}">Delete</button>
+
+              
+
+                </div>
+                    
+                    </div>
+
+                    
+
+                   </div> 
                    </div>
 
                   <div> 
-                  <small class="text-muted">  <i class="fa fa-file mx-1"></i> ${colllections[i].totalProducts} Notes </small> 
-                     <br>
-                  <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(colllections[i].timestamp)}</small> 
+                 
 
                   </div>
                     
@@ -50,8 +72,8 @@ $(document).ready(function () {
                
             `);
         }
+        deleteCollection();
 
-        contextmenu();
 
     }
 
@@ -107,26 +129,30 @@ $(document).ready(function () {
 
                         // <img src="${data.thumbnails}" class="collection-items-thumbnails">
 
-                        $(".collections-rows").prepend(`
-                        <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
-                        <a href="/dashboard/collections/${data.uuid}" class="w-100">
-                            <div class="collection-item-content">
-                                <div class="collection-item-content-box">
-                                        <div class="mb-3 mx-1"> ${data.name} </div>
-                                </div>
+                        //     $(".collections-rows").prepend(`
+                        //     <li class="list-group-item  w-100 rounded my-2 shadow  border-0" data-id="${data.i}" style="box-shadow:0px 0px 0px 0px #ccc">
+                        //     <a href="/dashboard/collections/${data.uuid}" class="w-100">
+                        //         <div class="collection-item-content">
+                        //             <div class="collection-item-content-box">
+                        //                     <div class="mb-3 mx-1"> ${data.name} </div>
+                        //             </div>
 
-                                <div class=""> 
-                                <small class="text-muted">  <i class="fa fa-file mx-1"> </i>  0 Notes </small> 
-                                   <br>
-                                <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(data.timestamp)} </small> 
-              
-                                </div>
-                            </div>
-                        </a>
-                       
-                    </li>
-                       
-                    `);
+                        //             <div class=""> 
+                        //             <small class="text-muted">  <i class="fa fa-file mx-1"> </i>  0 Notes </small> 
+                        //                <br>
+                        //             <small class="text-muted">  <i class="fa fa-clock mx-1"></i> ${timeDifference(data.timestamp)} </small> 
+
+                        //             </div>
+                        //         </div>
+                        //     </a>
+
+                        // </li>
+
+                        // `);
+
+                        let arrary = [];
+                        arrary.push(data);
+                        showCollection(arrary);
 
                     },
                     error: function (error) {
@@ -199,58 +225,64 @@ $(document).ready(function () {
 
 
     function deleteCollection() {
-        $("#delete-collections").click(function () {
-            const collection_id = $(this).attr("data-id");
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this collection!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: app.getApi() + "/collections/" + collection_id,
-                            contentType: "application/json",
-                            processData: false,
-                            headers: {
-                                Authorization: getCookie("token")
-                            },
-                            beforeSend: function () {
-                                $("#delete-collections").prop("disabled", true);
-                                $("#delete-collections").html("Deleting...");
-                            },
-                            success: function (data) {
-                                $("#delete-collections").prop("disabled", false);
-                                $("#delete-collections").html("Delete");
-                                $(".collections-rows").find(`.list-group-item[data-id="${collection_id}"]`).trigger("remove");
-                                $(".collections-context-menu").modal("hide");
+        $(".delete-collections").each(function () {
+            $(this).click(function () {
+                const collection_id = $(this).attr("data-id");
+                var btn = $(this);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this collection!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                type: "DELETE",
+                                url: app.getApi() + "/collections/" + collection_id,
+                                contentType: "application/json",
+                                processData: false,
+                                headers: {
+                                    Authorization: getCookie("token")
+                                },
+                                beforeSend: function () {
+                                    $(btn).prop("disabled", true);
+                                    $(btn).html("Deleting...");
+                                },
+                                success: function (data) {
+                                    $(btn).prop("disabled", false);
+                                    $(btn).html("Delete");
+                                    $(".collections-rows").find(`.list-group-item[data-id="${collection_id}"]`).trigger("remove");
+                                    $(".collections-context-menu").modal("hide");
 
-                                new Noty({
-                                    theme: "sunset",
-                                    type: "error",
-                                    text: '<i class="fa fa-check-circle">  </i> Collection Deleted ',
-                                    timeout: 4000,
-                                }).show();
-                            },
-                            error: function (err) {
-                                $("#delete-collections").prop("disabled", false);
-                                $("#delete-collections").html("Delete");
-                                new Noty({
-                                    theme: "sunset",
-                                    type: "error",
-                                    text: '<i class="fa fa-check-circle">  </i> Failed to delete collection',
-                                    timeout: 4000,
-                                }).show();
-                                $(".collections-context-menu").modal("hide");
-                            }
-                        })
+                                    new Noty({
+                                        theme: "sunset",
+                                        type: "error",
+                                        text: '<i class="fa fa-check-circle">  </i> Collection Deleted ',
+                                        timeout: 4000,
+                                    }).show();
+                                },
+                                error: function (err) {
+                                    $("#delete-collections").prop("disabled", false);
+                                    $("#delete-collections").html("Delete");
+                                    new Noty({
+                                        theme: "sunset",
+                                        type: "error",
+                                        text: '<i class="fa fa-check-circle">  </i> Failed to delete collection',
+                                        timeout: 4000,
+                                    }).show();
+                                    $(".collections-context-menu").modal("hide");
+                                }
+                            })
 
-                    }
-                });
-        });
+                        }
+                    });
+                return false;
+            });
+
+        })
+
     }
 
 
@@ -265,9 +297,9 @@ $(document).ready(function () {
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-    
+
     createCollection();
-    deleteCollection();
+    // deleteCollection();
 
 
 });

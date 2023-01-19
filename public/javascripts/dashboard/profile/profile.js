@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     //log out
-    $(".logout-btn").click(function (){
+    $(".logout-btn").click(function () {
         app.logout();
     });
     $('.country').select2({
@@ -20,8 +20,7 @@ $(document).ready(function () {
             showUserInfo(data);
         },
         error: function (err) {
-            app.alert(err.status, err.statusText);
-            
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
     })
     function showUserInfo(userInfo) {
@@ -117,23 +116,23 @@ $(document).ready(function () {
 
                 },
                 error: function (err) {
-                    app.alert(err.status, err.responseJSON.description);
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             })
         })
     });
 
-    if(localStorage.getItem("countries") != null){
-        let data =JSON.parse(localStorage.getItem("countries"));
+    if (localStorage.getItem("countries") != null) {
+        let data = JSON.parse(localStorage.getItem("countries"));
         for (let i = 0; i < data.requested.length; i++) {
             const short_code = data.requested[i].iso3;
             const name = data.requested[i].niceName;
             $(".country").append(`<option value="${short_code}"> ${name} </option>`);
         }
-    }else{
+    } else {
         $.ajax({
-            type:"GET",
-            url: app.getApi()+"/countries",
+            type: "GET",
+            url: app.getApi() + "/countries",
             success: function (data) {
                 localStorage.setItem("countries", JSON.stringify(data));
                 for (let i = 0; i < data.requested.length; i++) {
@@ -141,6 +140,9 @@ $(document).ready(function () {
                     const name = data.requested[i].niceName;
                     $(".country").append(`<option value="${short_code}"> ${name} </option>`);
                 }
+            },
+            error: function (err) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         });
     }
@@ -202,18 +204,12 @@ $(document).ready(function () {
                 success: function (data) {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
-                    localStorage.setItem("userInfo", JSON.stringify(data));
-                    new Noty({
-                        theme: "nest",
-                        type: "success",
-                        text: ' Profile updated successfully!',
-                        timeout: 2000,
-                    }).show();
+                    app.alert(200, "Profile updated successfully");
                 },
                 error: function (err) {
                     $(".profile-update-btn").prop("disabled", false);
                     $(".profile-update-btn").html(`Update`);
-                    app.alert(err.status, err.responseJSON.description);
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             });
         }

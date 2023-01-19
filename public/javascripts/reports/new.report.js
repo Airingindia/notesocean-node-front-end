@@ -33,8 +33,7 @@ $(document).ready(function () {
                 $(".report-btn").html("Reported!");
                 window.location = "/report/success";
             }, error: function (data) {
-                console.log(data);
-                app.alert(data.status, data.responseJSON.message);
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         })
     })

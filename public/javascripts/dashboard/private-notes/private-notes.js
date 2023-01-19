@@ -46,33 +46,7 @@ $(document).ready(function () {
 
             },
             error: function (err) {
-                if (err.status == 401) {
-                    window.location = "/session-expire";
-                }
-                else if (err.status == 500) {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Internal Server Error",
-                        timeout: 4000,
-                    }).show();
-                }
-                else if (err.status == 0) {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Server is not responding",
-                        timeout: 4000,
-                    }).show();
-                } else {
-                    new Noty({
-                        theme: "sunset",
-                        type: "error",
-                        text: "Failed to load notes, somthing went wrong",
-                        timeout: 4000,
-                    }).show();
-                }
-
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         });
     }
@@ -275,13 +249,8 @@ $(document).ready(function () {
                     success: function (data) {
                         showFile(data.name, data.type, data.file);
                     },
-                    error: function (errorData) {
-                        new Noty({
-                            theme: "sunset",
-                            type: "error",
-                            text: "Faild to open file",
-                            timeout: 4000,
-                        }).show();
+                    error: function (err) {
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     }
                 });
 
@@ -343,7 +312,7 @@ $(document).ready(function () {
 
                                     },
                                     error: function (err) {
-                                        swal("Error!", "Somthing went wrong , please try after sometimes", "error");
+                                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                                     }
                                 })
                             }
@@ -386,6 +355,9 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
                     showData(data.notes);
+                },
+                error: function (err) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             })
         } else {

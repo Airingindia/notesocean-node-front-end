@@ -34,12 +34,7 @@ $(document).ready(function () {
             error: function (error) {
                 $("section form button").html("Request");
                 $(" section form  button").prop("disabled", false);
-                new Noty({
-                    theme: "nest",
-                    type: "error",
-                    text: 'Failed to submit your request due to technical issue, please try again later',
-                    timeout: 5000,
-                }).show();
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         });
     });

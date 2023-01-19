@@ -11,10 +11,10 @@ $(document).ready(function () {
             $(".notes-loader").addClass("d-none");
             if (data.requested.length !== 0) {
                 $(".public-now-row").html("");
-                let  adshow = 0;
+                let adshow = 0;
                 for (let i = 0; i < data.requested.length; i++) {
                     adshow++;
-                    if(adshow == 5){
+                    if (adshow == 5) {
                         adshow = 0;
                         $(".public-now-row").append(`
                         <div class="col-md-3 d-flex justify-content-center align-items-center">
@@ -60,12 +60,7 @@ $(document).ready(function () {
             }
         },
         error: function () {
-            new Noty({
-                theme: "sunset",
-                type: "error",
-                text: "Somthing went wrong , please try after sometimes",
-                timeout: 4000,
-            }).show();
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
     });
 
@@ -113,12 +108,7 @@ $(document).ready(function () {
             }
         },
         error: function () {
-            new Noty({
-                theme: "sunset",
-                type: "error",
-                text: "Somthing went wrong , please try after sometimes",
-                timeout: 4000,
-            }).show();
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
     });
 
@@ -168,5 +158,5 @@ $(document).ready(function () {
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-   
+
 });

@@ -21,6 +21,9 @@ $(document).ready(function () {
                     $('#countries').select2().val(data.country_code_iso3).trigger("change");
                 });
             }, 1000)
+        },
+        error: function (err) {
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
     });
 
@@ -77,13 +80,8 @@ $(document).ready(function () {
                             const authToken = data.token;
                             setCookie("token", authToken, 1);
                             window.location = "/dashboard/profile/verify-email";
-                        }, error: function () {
-                            new Noty({
-                                theme: "nest",
-                                type: "error",
-                                text: '<i class="fa fa-check-circle">  </i> Failed to auto login  , please login again',
-                                timeout: 3000,
-                            }).show();
+                        }, error: function (err) {
+                            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                             setTimeout(() => {
                                 window.location = "/login";
                             }, 1000);
@@ -94,7 +92,7 @@ $(document).ready(function () {
             error: function (err) {
                 $(".signup-btn").prop("disabled", false);
                 $(".signup-btn").html(`Signup`);
-                app.alert(err.status, err.responseJSON.description ? err.responseJSON.description : err.responseJSON.message, "error");
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
 
         })

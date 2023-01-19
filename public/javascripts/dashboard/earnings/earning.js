@@ -60,7 +60,7 @@ $(document).ready(function () {
                 $(".withdrawl-btn").html("Withdraw");
             },
             error: function (err) {
-                app.alert("error", 400, "Failed to initiate withdrawal");
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
         })
     });
@@ -116,7 +116,7 @@ $(document).ready(function () {
             }
         },
         error: function (err) {
-            app.alert("error", 400, "Failed to fetch payout list");
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
         }
     });
 

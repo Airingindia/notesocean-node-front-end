@@ -34,7 +34,7 @@ $(document).ready(function () {
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products",
+            url: app.getApi() + "/products?page=0",
             headers: {
                 Authorization: getCookie("token")
             },
@@ -63,13 +63,13 @@ $(document).ready(function () {
                     `);
                     }
                     check();
-                }else{
+                } else {
                     $(".loading-public-notes").addClass("d-none");
-                    $(".public-notes-row-modal").html("");  
+                    $(".public-notes-row-modal").html("");
                 }
             },
-            error:function(err){
-                app.alert(err.status,"Failed to load notes");
+            error: function (err) {
+                app.alert(err.status, "Failed to load notes");
             }
         });
     }
@@ -103,7 +103,9 @@ $(document).ready(function () {
                         $(btn).addClass("fa-times");
                         $(btn).removeClass("fa-spinner fa-spin");
                     }
-                })
+                });
+
+                return false;
             });
 
         })
@@ -183,7 +185,7 @@ $(document).ready(function () {
                         addNotes(selected_notes_arry);
                     },
                     error: function (errr) {
-                       app.alert(err.status,"Failed to add notes!"); 
+                        app.alert(err.status, "Failed to add notes!");
                     },
                     complete: function () {
                         $("#select-public-notes-modal").modal("hide");
@@ -212,9 +214,9 @@ $(document).ready(function () {
             let id = data[i].uuid;
             let thumbnails = data[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/300x300/filters:format(webp)/filters:quality(100)");
             $(".collection-notes-item.plus").before(`
-            <div class="collection-notes-item col-md-4 my-1">
+            <div class="collection-notes-item col-lg-3 col-6 my-1 border-0 rounded">
             <a href="/dashboard/public-notes/${id}">
-            <div class="card p-0">
+            <div class="card p-0 shadow h-100 border-0 rounded">
                 <div class="card-header"><i class="fa fa-times delete-note-from-collection" data-note-id="${id}"></i></div>
                 <div class="card-body p-0"><img class="card-img-top collection-notes-thumbnail w-100" src="${thumbnails}" /></div>
                 <div class="card-footer">
@@ -231,7 +233,7 @@ $(document).ready(function () {
 
     }
 
-    $(".update-collection-btn").click(function(){
+    $(".update-collection-btn").click(function () {
         updateCollection();
     })
 
@@ -255,11 +257,11 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 beforeSend: function () {
-                    $(".update-collection-btn").prop("disabled",true);
+                    $(".update-collection-btn").prop("disabled", true);
                     $(".update-collection-btn").html(` <i class="fa fa-spinner fa-spin"> </i> Updating..`);
                 },
                 success: function (data) {
-                    $(".update-collection-btn").prop("disabled",false);
+                    $(".update-collection-btn").prop("disabled", false);
                     $(".update-collection-btn").html(` <i class="fa  fa-save"> </i> Update`);
                     new Noty({
                         theme: "nest",
@@ -269,7 +271,7 @@ $(document).ready(function () {
                     }).show();
                 },
                 error: function (err) {
-                    $(".update-collection-btn").prop("disabled",false);
+                    $(".update-collection-btn").prop("disabled", false);
                     $(".update-collection-btn").html(` <i class="fa  fa-save"> </i> Update`);
                     app.alert(err.status, "Failed to update collection");
                 }
@@ -282,7 +284,7 @@ $(document).ready(function () {
             })
         }
     }
-    
+
     addNotesToCollection();
     getAllPublicNotes();
     check();
@@ -300,7 +302,7 @@ $(document).ready(function () {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
-    $(".delete-collection-btn").click(function(){
+    $(".delete-collection-btn").click(function () {
         deleteCollection();
     })
 
@@ -340,7 +342,7 @@ $(document).ready(function () {
                         error: function (err) {
                             $(".delete-collection-btn").prop("disabled", false);
                             $(".delete-collection-btn").html("Delete");
-                            app.alert(err.status,"Failed to delete collection");
+                            app.alert(err.status, "Failed to delete collection");
                         }
                     })
 
