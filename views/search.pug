@@ -31,13 +31,12 @@ html(lang="en")
                         - let productname = data.requested[i].name;
                         - let timestamp = Number(data.requested[i].timestamp);
                         - let description = data.requested[i].description;
-                        - let thumbnails = data.requested[i].thumbnails.replace("https://thumbnails.ncdn.in/","https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/40x0:400x400/");
-                        //- - let thumbnails = data.requested[i].thumbnails;
-                        - var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                        - let thumbnails = data.requested[i].thumbnails;
+                        - var img1 = data.requested[i].thumbnails;
 
-                        - var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+                        - var img2 = data.requested[i].thumbnails;
 
-                        - var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                        - var img3 = data.requested[i].thumbnails;
 
                         - let views = data.requested[i].views;
                         - let pages = data.requested[i].pages;
@@ -70,7 +69,7 @@ html(lang="en")
                                                 a(href="/profile/"+userid)
                                                     .d-flex.align-items-center.justify-content-center
                                                         .flex-shrink-0
-                                                            img(src=profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)") alt=firstName).creator-img
+                                                            img(src=profileImage , alt=firstName).creator-img
                                                         .flex-grow-1.ms-2.pt-3
                                                             p.text-muted #{firstName} #{lastName}
 
