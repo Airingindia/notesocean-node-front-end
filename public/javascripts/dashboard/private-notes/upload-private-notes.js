@@ -28,21 +28,23 @@ $(function () {
     myDropzone.on("complete", function (file) {
         //should remove after implement api
         let response = file;
+        console.log("res",);
         if (file.accepted == true) {
             if (file.status == "success") {
                 new Noty({
                     theme: "nest",
                     type: "success",
-                    text: file.name + " uploaded",
+                    text: file.name + " is uploaded <a href='/dashboard/private-notes' class='text-dark'> click to view </a>",
                     timeout: 3000,
+                    closeWith: ['view file']
                 }).show();
                 myDropzone.removeFile(file);
             }
             if (file.status == "error") {
                 new Noty({
                     theme: "nest",
-                    type: "success",
-                    text: "Faild to upload, plese try after sometimes ",
+                    type: "error",
+                    text: JSON.parse(response?.xhr?.response)?.message ? JSON.parse(response.xhr.response)?.message : "error uploading " + file.name,
                     timeout: 3000,
                 }).show();
                 myDropzone.removeFile(file);

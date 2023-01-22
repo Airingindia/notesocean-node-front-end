@@ -16,6 +16,7 @@ $(document).ready(function () {
                 $(".no-collections").removeClass("d-none");
             }
         }, error: function (error) {
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             $(".loading-collections").css({ display: "none" });
             $(".no-collections").removeClass("d-none");
         }
@@ -158,12 +159,7 @@ $(document).ready(function () {
                     error: function (error) {
                         $("button[type='submit']").html("Create");
                         $("button[type='submit']").prop("disabled", false);
-                        new Noty({
-                            theme: "nest",
-                            type: "error",
-                            text: '<i class="fa fa-check-circle">  </i>  ' + name + " : Failed to create collection",
-                            timeout: 4000,
-                        }).show();
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                         $(".create-collections-modal").modal("hide");
                     }
                 })
@@ -266,12 +262,7 @@ $(document).ready(function () {
                                 error: function (err) {
                                     $("#delete-collections").prop("disabled", false);
                                     $("#delete-collections").html("Delete");
-                                    new Noty({
-                                        theme: "sunset",
-                                        type: "error",
-                                        text: '<i class="fa fa-check-circle">  </i> Failed to delete collection',
-                                        timeout: 4000,
-                                    }).show();
+                                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                                     $(".collections-context-menu").modal("hide");
                                 }
                             })

@@ -17,35 +17,6 @@ $(function () {
         method: "post",
         headers: {
             Authorization: getCookie("token"),
-        },
-        success: function (data) {
-            let uploadedfile = JSON.parse(data.xhr.response);
-            let uploadedId = uploadedfile.uuid;
-            let uploadedfilename = uploadedfile.name;
-            let status = data.status;
-            console.log(data);
-
-            if (status == "success") {
-                swal({
-                    title: "Upload success!",
-                    text: "Your Notes has been uploaded successfully",
-                    icon: "success",
-                    buttons: ["Upload Another", "Preview"],
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            window.location = "/notes/" + uploadedId;
-                        } else {
-                            // $("form").trigger("reset");
-                            myDropzone.removeAllFiles();
-                            window.location = window.location.href;
-                        }
-                    });
-            } else {
-                swal("error", "somthing sent wrong , please try again", "error");
-            }
-            myDropzone.removeAllFiles();
         }
     });
 
@@ -121,46 +92,49 @@ $(function () {
     })
 
     myDropzone.on("complete", function (file) {
-        myDropzone.removeFile(file);
-        $("form").trigger("reset");
-        $(".chips .chip").each(function () {
-            $(this).remove();
-        });
+        let response = file;
         $(".progress").css({ display: "none" });
-        $(".note-title").val("");
-        $(".note-descriptions").val("");
-
-        // remove validtion
         $(".note-descriptions").removeClass("is-invalid");
         $(".note-descriptions").removeClass("is-valid");
         $(".dropzone").removeClass("is-invalid");
         $(".dropzone").removeClass("is-valid");
-        $(".progress").css({ display: "none" });
         $(".note-title").removeClass("is-valid");
         $(".note-title").removeClass("is-invalid");
         $('.upload-notes-btn').html("Upload");
         $('.upload-notes-btn').prop('disabled', false);
-        if (file.xhr.status == 500) {
+        let uploadedfile = JSON.parse(file.xhr.response);
+        let uploadedId = uploadedfile.uuid;
+        let status = file.status;
+        myDropzone.removeFile(file);
+        if (status == "success") {
+            $("form").trigger("reset");
+
+            swal({
+                title: "Upload success!",
+                text: "Your Notes has been uploaded successfully",
+                icon: "success",
+                buttons: ["Upload Another", "Preview"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location = "/notes/" + uploadedId;
+                    } else {
+
+                        myDropzone.removeAllFiles();
+                        window.location = window.location.href;
+                    }
+                });
+        }
+        else if (file.status == "error") {
             new Noty({
                 theme: "nest",
                 type: "error",
-                text: "something went wrong uploading file , please try again later",
-                timeout: 4000,
+                text: JSON.parse(response?.xhr?.response)?.message ? JSON.parse(response.xhr.response)?.message : "error uploading " + file.name,
+                timeout: 3000,
             }).show();
         }
 
-        if (file.xhr.status == 406) {
-            new Noty({
-                theme: "nest",
-                type: "error",
-                text: "he file was corrupted, or not of valid type",
-                timeout: 4000,
-            }).show();
-        }
-
-        if (file.xhr.status == 401) {
-            window.location = "/session-expire";
-        }
     });
 
 
@@ -170,19 +144,7 @@ $(function () {
     });
     $('form').submit(function (event) {
         event.preventDefault();
-        // check all field is not null
-        console.log(myDropzone.files.length);
-        if ($(".note-title").hasClass("is-valid") && $(".note-descriptions").hasClass("is-valid") && myDropzone.files.length > 0) {
-            myDropzone.processQueue();
-        } else if (!$(".note-title").hasClass("is-valid")) {
-            $(".note-title").addClass("is-invalid")
-        } else if (!$(".note-descriptions").hasClass("is-valid")) {
-            $(".note-descriptions").addClass("is-invalid");
-        }
-        else if (myDropzone.files.length == 0) {
-            $(".dropzone").addClass("is-invalid");
-            $(".dropzone").removeClass("is-valid");
-        }
+        myDropzone.processQueue();
     });
 
     function validate() {

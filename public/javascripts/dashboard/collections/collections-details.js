@@ -26,6 +26,7 @@ $(document).ready(function () {
             }
         },
         error: function (err) {
+            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             $(".collection-removed").css({ display: "block" });
             $(".notes-details-row").addClass("d-none");
         }
@@ -64,6 +65,7 @@ $(document).ready(function () {
                     }
                     check();
                 } else {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     $(".loading-public-notes").addClass("d-none");
                     $(".public-notes-row-modal").html("");
                 }
@@ -102,6 +104,9 @@ $(document).ready(function () {
                     complete: function () {
                         $(btn).addClass("fa-times");
                         $(btn).removeClass("fa-spinner fa-spin");
+                    },
+                    error: function (err) {
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     }
                 });
 
@@ -185,7 +190,7 @@ $(document).ready(function () {
                         addNotes(selected_notes_arry);
                     },
                     error: function (errr) {
-                        app.alert(err.status, "Failed to add notes!");
+                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     },
                     complete: function () {
                         $("#select-public-notes-modal").modal("hide");
@@ -273,7 +278,7 @@ $(document).ready(function () {
                 error: function (err) {
                     $(".update-collection-btn").prop("disabled", false);
                     $(".update-collection-btn").html(` <i class="fa  fa-save"> </i> Update`);
-                    app.alert(err.status, "Failed to update collection");
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                 }
             })
 
@@ -340,9 +345,10 @@ $(document).ready(function () {
                             window.location = "/dashboard/collections";
                         },
                         error: function (err) {
+                            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                             $(".delete-collection-btn").prop("disabled", false);
                             $(".delete-collection-btn").html("Delete");
-                            app.alert(err.status, "Failed to delete collection");
+
                         }
                     })
 
