@@ -1,26 +1,30 @@
 $(document).ready(function () {
     // get users collections
-    $.ajax({
-        type: "GET",
-        url: app.getApi() + "/collections",
-        contentType: "application/json",
-        processData: false,
-        headers: {
-            Authorization: getCookie("token")
-        },
-        success: function (data) {
-            $(".loading-collections").css({ display: "none" });
-            if (data.size !== 0) {
-                showCollection(data.requested.sort((a, b) => { return b.timestamp - a.timestamp }));
-            } else {
+    function getCollections() {
+        $.ajax({
+            type: "GET",
+            url: app.getApi() + "/collections",
+            contentType: "application/json",
+            processData: false,
+            headers: {
+                Authorization: getCookie("token")
+            },
+            success: function (data) {
+                $(".loading-collections").css({ display: "none" });
+                if (data.size !== 0) {
+                    showCollection(data.requested.sort((a, b) => { return b.timestamp - a.timestamp }));
+                } else {
+                    $(".no-collections").removeClass("d-none");
+                }
+            }, error: function (error) {
+                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                $(".loading-collections").css({ display: "none" });
                 $(".no-collections").removeClass("d-none");
             }
-        }, error: function (error) {
-            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
-            $(".loading-collections").css({ display: "none" });
-            $(".no-collections").removeClass("d-none");
-        }
-    });
+        });
+    }
+
+    getCollections();
 
 
 
@@ -290,7 +294,57 @@ $(document).ready(function () {
     }
 
     createCollection();
-    // deleteCollection();
+
+    // search collection
+
+    $("form.search-collection-form").submit(function (e) {
+        e.preventDefault();
+        const input = $("input[type='search']").val();
+        if (input.length > 0) {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/collections/self/search/" + input,
+                headers: {
+                    Authorization: app.getToken()
+                },
+                beforeSend: function () { },
+                success: function (data) {
+
+                    if (data.size == 0) {
+                        new Noty({
+                            theme: "sunset",
+                            type: "error",
+                            text: "No results found",
+                            timeout: 4000,
+                        }).show();
+                    } else {
+                        $(".collections-rows").html("");
+                        showCollection(data.requested);
+                        new Noty({
+                            theme: "sunset",
+                            type: "success",
+                            text: "Found " + data.size + " results",
+                            timeout: 4000,
+                        }).show();
+                    }
+
+
+                },
+                error: function (err) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                }
+            })
+        }
+
+    });
+
+    $(".search-input").on("search", function () {
+        if ($(this).val() == "") {
+            getCollections();
+        }
+    });
+
+
 
 
 });

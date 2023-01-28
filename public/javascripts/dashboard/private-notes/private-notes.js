@@ -13,7 +13,10 @@ $(document).ready(function () {
     var prev = 0;
     var checked = false;
     var hit = false;
+    var isSearched = false;
     function check() {
+
+
         $(".second-side").scroll(function () {
             // get last div element of .public-notes-container
             let lastDiv = $(".public-item").last();
@@ -31,24 +34,26 @@ $(document).ready(function () {
         });
     }
     function loaddata() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/notes?page=" + next,
-            headers: {
-                Authorization: decodeURIComponent(getCookie("token"))
-            },
-            beforeSend: function () {
-                $(".loading-private-notes").removeClass("d-none");
-            },
-            success: function (data) {
-                $(".loading-private-notes").addClass("d-none");
-                showData(data.requested);
+        if (!isSearched) {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/notes?page=" + next,
+                headers: {
+                    Authorization: decodeURIComponent(getCookie("token"))
+                },
+                beforeSend: function () {
+                    $(".loading-private-notes").removeClass("d-none");
+                },
+                success: function (data) {
+                    $(".loading-private-notes").addClass("d-none");
+                    showData(data.requested);
 
-            },
-            error: function (err) {
-                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
-            }
-        });
+                },
+                error: function (err) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                }
+            });
+        }
     }
 
     loaddata();
@@ -56,7 +61,7 @@ $(document).ready(function () {
     function showData(data) {
         if (data.length !== 0) {
             hit = false;
-            $(".no-private-notes").addClass("d-none");
+            loaderVisible(false);
             let adshow = 0;
             for (let i = 0; i < data.length; i++) {
                 // adshow++;
@@ -129,6 +134,27 @@ $(document).ready(function () {
             }
 
 
+        }
+    }
+
+    $("input[type='search']").on("search", function () {
+        if ($(this).val() == "") {
+            isSearched = false;
+            clearData();
+            next = 0;
+            loaddata();
+        }
+    });
+
+    function clearData() {
+        $(".notes-container-row").html("");
+    }
+
+    function loaderVisible(trueOrFalse) {
+        if (trueOrFalse) {
+            $(".loading-private-notes").removeClass("d-none");
+        } else {
+            $(".loading-private-notes").addClass("d-none");
         }
     }
 
@@ -261,8 +287,8 @@ $(document).ready(function () {
                         src = `<iframe style="display:inline;width:100%;height:100%;" src="https://view.officeapps.live.com/op/embed.aspx?src=${url}" </iframe>`;
                         $(".viewer").html(src);
                     } else if (type == "png" || type == "jpeg" || type == "jpg") {
-                        src = `<img src="${url}" > `;
-                        $(".viewer").html(`<div class="d-flex justify-content-center align-items-center"> ${src} </div>`);
+                        src = `<img style="width:100px;height:100%" src="${url}" > `;
+                        $(".viewer").html(src);
                     } else {
                         src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
                         $(".viewer").html(src);
@@ -318,13 +344,6 @@ $(document).ready(function () {
                             }
                         });
                 });
-                // download private notes
-
-                // rename private notes
-                // $(".private-notes-rename-btn").click(function () {
-                //     alert(note_id);
-                // })
-
             });
         });
     }
@@ -343,6 +362,7 @@ $(document).ready(function () {
         event.preventDefault();
         const input = $("input").val();
         if (input.length !== 0) {
+            isSearched = true;
             $.ajax({
                 type: "GET",
                 url: app.getApi() + "/notes/search/" + input,
@@ -350,11 +370,27 @@ $(document).ready(function () {
                     Authorization: getCookie("token")
                 },
                 beforeSend: function () {
-                    $(".loading-private-notes").removeClass("d-none");
+                    loaderVisible(true);
                 },
                 success: function (data) {
-                    console.log(data);
-                    showData(data.notes);
+                    if (data.size == 0) {
+                        new Noty({
+                            theme: "sunset",
+                            type: "error",
+                            text: "No results found",
+                            timeout: 4000,
+                        }).show();
+                        loaderVisible(false);
+                    } else {
+                        new Noty({
+                            theme: "sunset",
+                            type: "success",
+                            text: "Found " + data.size + " results",
+                            timeout: 4000,
+                        }).show();
+                        clearData();
+                        showData(data.requested)
+                    }
                 },
                 error: function (err) {
                     app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");

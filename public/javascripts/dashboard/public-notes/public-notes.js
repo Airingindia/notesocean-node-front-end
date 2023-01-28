@@ -12,6 +12,7 @@ $(document).ready(function () {
     var prev = 0;
     var checked = false;
     var hit = false;
+    isSearched = false;
     function check() {
         $(".second-side").scroll(function () {
             // get last div element of .public-notes-container
@@ -31,42 +32,42 @@ $(document).ready(function () {
     }
     // get user public notes
     function loadData() {
-        $.ajax({
-            type: "GET",
-            url: app.getApi() + "/products?page=" + next,
-            contentType: "application/json",
-            processData: false,
-            headers: {
-                Authorization: getCookie("token")
-            },
-            beforeSend: function () {
-                $(".loading-public-notes").removeClass("d-none");
-            },
-            success: function (data) {
-                prev = next;
+        if (!isSearched) {
+            $.ajax({
+                type: "GET",
+                url: app.getApi() + "/products?page=" + next,
+                contentType: "application/json",
+                processData: false,
+                headers: {
+                    Authorization: getCookie("token")
+                },
+                beforeSend: function () {
+                    loaderVisible(true);
+                },
+                success: function (data) {
+                    prev = next;
+                    showData(data);
+                },
+                error: function (err) {
+                    app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                    $(".loading-public-notes").addClass("d-none");
+                    loaderVisible(false);
+                    $(".no-public-notes").removeClass("d-none");
+                }
+            });
+        }
 
-                showData(data);
-                // $(".total-notes").html(data.size);
-
-            },
-            error: function (err) {
-                app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
-                $(".loading-public-notes").addClass("d-none");
-                $(".public-notes-container").addClass("d-none");
-                $(".no-public-notes").removeClass("d-none");
-            }
-        });
     }
     loadData();
     function showData(data) {
+        console.log(data);
 
         if (data.requested.length !== 0) {
             hit = false;
-            // $(".loading-public-notes").addClass("d-none");
             $(".no-public-notes").addClass("d-none");
             let adshow = 0;
             // get domain
-
+            loaderVisible(false);
             let api = app.getApi();
 
             for (let i = 0; i < data.requested.length; i++) {
@@ -89,12 +90,10 @@ $(document).ready(function () {
                 let name = data.requested[i].name;
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
-                let thumbnails = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
-                var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
-                var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
-
-                var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", 'https://thumbnails.ncdn.in/fit-in/400x400/filters:format(webp)/filters:quality(100)/');
-
+                let thumbnails = data.requested[i].thumbnails;
+                var img1 = data.requested[i].thumbnails;
+                var img2 = data.requested[i].thumbnails;
+                var img3 = data.requested[i].thumbnails;
                 timestamp = timeDifference(timestamp);
                 let size = bytesToSize(data.requested[i].size);
                 let fileType = data.requested[i].fileType;
@@ -142,8 +141,8 @@ $(document).ready(function () {
                 check();
             }
         } else {
+            loaderVisible(false);
             if (!checked) {
-                $(".loading-public-notes").addClass("d-none");
                 $(".public-notes-container").addClass("d-none");
                 $(".no-public-notes").removeClass("d-none");
             } else {
@@ -151,6 +150,15 @@ $(document).ready(function () {
             }
         }
     }
+
+    $("input[type='search']").on("search", function () {
+        if ($(this).val() == "") {
+            isSearched = false;
+            clearData();
+            next = 0;
+            loadData();
+        }
+    });
 
 
     function timeDifference(previous) {
@@ -208,23 +216,37 @@ $(document).ready(function () {
         event.preventDefault();
         const input = $("input").val();
         if (input.length !== 0) {
+            isSearched = true;
             $.ajax({
                 type: "GET",
-                url: app.getApi() + "/products/search/" + input,
+                url: app.getApi() + "/products/self/search/" + input,
                 headers: {
                     Authorization: getCookie("token")
                 },
                 beforeSend: function () {
-                    $(".loading-public-notes").removeClass("d-none");
+
+                    loaderVisible(true);
+
                 },
                 success: function (data) {
-                    showData(data);
-                    new Noty({
-                        theme: "sunset",
-                        type: "success",
-                        text: '<i class="fa fa-check-circle">  </i> Filter by ' + input + " ",
-                        timeout: 4000,
-                    }).show();
+
+                    if (data.size == 0) {
+                        new Noty({
+                            theme: "sunset",
+                            type: "error",
+                            text: "No results found",
+                            timeout: 4000,
+                        }).show();
+                    } else {
+                        clearData();
+                        showData(data);
+                        new Noty({
+                            theme: "sunset",
+                            type: "success",
+                            text: "Found " + data.size + " results",
+                            timeout: 4000,
+                        }).show();
+                    }
 
                 },
                 error: function (err) {
@@ -235,6 +257,24 @@ $(document).ready(function () {
             loadData();
         }
     });
+
+    function DataNotFound() {
+        $(".public-notes-container").addClass("d-none");
+        $(".no-public-notes").removeClass("d-none");
+    }
+
+    function clearData() {
+        $(".public-notes-container").html("");
+    }
+
+    function loaderVisible(trueOrFalse) {
+        if (trueOrFalse) {
+            $(".loading-public-notes").removeClass("d-none");
+        } else {
+            $(".loading-public-notes").addClass("d-none");
+        }
+    }
+
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
