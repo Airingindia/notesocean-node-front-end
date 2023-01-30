@@ -29,6 +29,10 @@ $(document).ready(function () {
 
 
     function showCollection(colllections) {
+
+        if (colllections.length === 0) {
+            return false;
+        }
         // $(".collections-rows").html("");
         for (let i = 0; i < colllections.length; i++) {
 
@@ -40,7 +44,7 @@ $(document).ready(function () {
                   
                    <div class="mb-3 mx-1"> 
                    <h5 class="text-notesocean"> ${colllections[i].name.substring(0, 100)} </h5>
-                   <small class="text-muted"> ${colllections[i]?.description ? colllections[i].description.substring(0, 100) : ""} ${colllections[i].description.length > 100 ? "..." : ""} </small>
+                   <small class="text-muted"> ${colllections[i]?.description ? colllections[i].description.substring(0, 100) : ""} ${colllections[i].description?.length > 100 ? "..." : ""} </small>
                 <div class="pt-2 collection-info-box">
                     <div>
                      
