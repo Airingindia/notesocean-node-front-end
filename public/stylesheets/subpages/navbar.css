@@ -1,7 +1,7 @@
 /* desktop navbar css */
 nav.desktop-navbar {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 99.9%;
@@ -28,13 +28,13 @@ nav.desktop-navbar {
     align-items: center;
 }
 
-.desktop-navbar-item{
-    width:auto;
+.desktop-navbar-item {
+    width: auto;
 }
 
 
-.desktop-navbar-item.brand img{
-   width: auto;
+.desktop-navbar-item.brand img {
+    width: auto;
 }
 
 .desktop-navbar-item.brand a {
@@ -43,7 +43,7 @@ nav.desktop-navbar {
     text-decoration: none;
     color: black;
     font-size: 30px;
-    font-weight:500;
+    font-weight: 500;
 }
 
 
@@ -52,26 +52,32 @@ nav.desktop-navbar {
 }
 
 @media (max-width:1025px) {
-    .desktop-brand-text{
-        display:none;
+    .desktop-brand-text {
+        display: none;
     }
+
     .desktop-navbar-item.brand img {
         width: 130px;
     }
+
     .desktop-navbar-item a {
         font-size: 12px;
     }
 }
 
 
-.desktop-navbar-item.search input, .desktop-navbar-item.search button,  .desktop-navbar-item.search span  {
+.desktop-navbar-item.search input,
+.desktop-navbar-item.search button,
+.desktop-navbar-item.search span {
     border-radius: 0px !important;
     text-align: center;
 }
 
-.desktop-navbar-item.search input:focus , .desktop-navbar-item.search input:active , .desktop-navbar-item.search input:hover {
-    border:1px solid #ccc !important;
-    
+.desktop-navbar-item.search input:focus,
+.desktop-navbar-item.search input:active,
+.desktop-navbar-item.search input:hover {
+    border: 1px solid #ccc !important;
+
 }
 
 
@@ -89,7 +95,7 @@ nav.desktop-navbar {
     margin: 0px 10px;
 }
 
-.desktop-navbar-item.navigation a{
+.desktop-navbar-item.navigation a {
     text-decoration: none;
     color: black;
 }
@@ -144,7 +150,7 @@ nav.desktop-navbar {
 /* mobile navbar css */
 
 .mobile-navbar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 99.9%;
@@ -167,7 +173,7 @@ nav.desktop-navbar {
 }
 
 .mobile-menu-wrapper {
-    position: fixed;
+    position: absolute;
     width: 99.9%;
     height: 100vh;
     top: 0;
@@ -180,7 +186,7 @@ nav.desktop-navbar {
 }
 
 .menu-wrapper-header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 99.9%;
@@ -202,7 +208,7 @@ nav.desktop-navbar {
     display: flex;
     justify-content: center;
     width: 99.9%;
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -228,7 +234,7 @@ nav.desktop-navbar {
 }
 
 .mobile-nav-wrapper-footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     box-shadow: 0px 0px 10px #ccc;
@@ -247,7 +253,7 @@ nav.desktop-navbar {
 }
 
 .mobile-search-wrapper {
-    position: fixed;
+    position: absolute;
     width: 99.9%;
     height: 100vh;
     top: 0;
@@ -259,7 +265,7 @@ nav.desktop-navbar {
 }
 
 .mobile-search-wrapper-header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 99.9%;

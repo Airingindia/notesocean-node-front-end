@@ -300,7 +300,9 @@ $(document).ready(function () {
     createCollection();
 
     // search collection
-
+    function clearData() {
+        $(".collections-rows").html("");
+    }
     $("form.search-collection-form").submit(function (e) {
         e.preventDefault();
         const input = $("input[type='search']").val();
@@ -322,7 +324,7 @@ $(document).ready(function () {
                             timeout: 4000,
                         }).show();
                     } else {
-                        $(".collections-rows").html("");
+                        clearData();
                         showCollection(data.requested);
                         new Noty({
                             theme: "sunset",
@@ -344,6 +346,7 @@ $(document).ready(function () {
 
     $(".search-input").on("search", function () {
         if ($(this).val() == "") {
+            clearData();
             getCollections();
         }
     });
