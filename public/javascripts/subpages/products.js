@@ -83,11 +83,6 @@ $(document).ready(function () {
         $(".share-btn").click(function () {
             $(".share-modal").modal("show");
         });
-        $(".comment-btn").click(function () {
-
-            window.location.hash = "comment";
-            $("#commentbox").toggle("show");
-        });
         $(".info-button").click(function () {
             $(".info-modal").modal("show");
         })

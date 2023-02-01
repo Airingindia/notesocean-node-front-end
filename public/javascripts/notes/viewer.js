@@ -37,6 +37,5 @@ if (api == "https://api.notesocean.com") {
     showPdf();
     (adsbygoogle = window.adsbygoogle || []).push({});
 } else {
-    myModal.show();
-    // myModal.hide();
+    myModal.hide();
 }

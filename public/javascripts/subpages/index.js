@@ -140,4 +140,10 @@ $(document).ready(function () {
             }
         })
     }
+
+    var winwidth = $(window).width();
+
+    if (winwidth < 769) {
+        loadTopNotes();
+    }
 });
