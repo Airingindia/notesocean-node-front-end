@@ -76,11 +76,11 @@ $(document).ready(function () {
                 //     </div>`);
                 //     (adsbygoogle = window.adsbygoogle || []).push({});
                 // }
-                var name;
-                if ($(window).width() < 769) {
-                    name = data[i].name.substring(0, 12) + "..";
+
+                let name = data[i].name;
+                if (name.length > 30) {
+                    name = name.substring(0, 30) + "...";
                 }
-                name = data[i].name;
                 let fileType = data[i].fileType;
                 let id = data[i].uuid;
                 let size = data[i].size;

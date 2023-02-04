@@ -88,6 +88,9 @@ $(document).ready(function () {
 
                 let id = data.requested[i].uuid;
                 let name = data.requested[i].name;
+                if (name.length > 80) {
+                    name = name.substring(0, 80) + "...";
+                }
                 let timestamp = data.requested[i].timestamp;
                 let description = data.requested[i].description;
                 let thumbnails = data.requested[i].thumbnails;

@@ -9,29 +9,39 @@ head
     include ../includes/bootstrap
     style
         include ../../public/stylesheets/account/signup.css
-    link(rel="stylesheet" href="/stylesheets/animate.css")
+    style
+        include ../../public/stylesheets/animate.css
     style.
-        form{
+        .reset-pass-form{
             width:30%;
+            margin: 0 auto;
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 20px;
+            border-radius: 10px;
         }
 
         @media(max-with: 768px){
-            form{
+            .reset-pass-form{
                 width: 100%;
             }
+
         }
+
     body
         header
             include ../includes/navbar
         section.main-section
-            form.mx-auto
+            form.reset-pass-form
                 h2 Forgot your password?
                 p Don't worry , we will help you to reset your password
                 .form-group.email-form
                     i.fa.fa-envelope
                     //- label(for="email address") Enter Email Address
                     input(type="email" placeholder="Enter Email Address" name="email").form-control
-                    button(type="button").btn-notesocean.dark.send-code.w-100.my-3 Send Code
+                    button(type="button").btn.btn-primary.btn-grad.send-code.w-100.my-3 Send Code
                 div.animate__animated.animate__backInUp.verify-form.d-none
                     p.text-notesocean.blue Enter the code we sent to your email address
                     .form-group
@@ -44,7 +54,9 @@ head
                         br
                         i.fa.fa-lock
                         input(type="password" placeholder="Confirm New Password" name="confirm-password").form-control
-                        button(type="button").btn-notesocean.red.w-100.reset-password.my-3 Reset password
+                        button(type="button").btn.btn-primary.btn-grad.w-100.reset-password.my-3 Reset password
+                p Remember your password? <a href="/login">Login</a>
+                p Don't have an account? <a href="/signup">Signup</a>
+
         script
             include ../../public/javascripts/accounts/reset.password.js
-        include ../includes/footer

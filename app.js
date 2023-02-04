@@ -58,9 +58,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
-app.use(helmet.frameguard())
-// routers
-
 app.use('/', indexRouter);
 app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
@@ -79,9 +76,9 @@ app.use("/policies", policiesRoutes);
 app.use("/report", reportRoutes);
 
 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log(req.url);
   res.status(404);
   res.render("notfound");
   next();
