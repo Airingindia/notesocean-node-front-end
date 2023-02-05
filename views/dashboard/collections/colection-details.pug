@@ -102,7 +102,7 @@ html(lang="en")
                                 div
                                 div
                 .modal(tabindex='-1')#select-public-notes-modal.fade
-                    .modal-dialog.modal-fullscreen
+                    .modal-dialog.modal-xl
                         .modal-content
                             .modal-header
                                 .div 
@@ -158,4 +158,5 @@ html(lang="en")
                                     i.fa.fa-eye.mx-1
                                     span Preview 
         include ../../includes/dashjs
-        script(src="/javascripts/dashboard/collections/collections-details.js")
+        script
+            include ../../../public/javascripts/dashboard/collections/collections-details.js

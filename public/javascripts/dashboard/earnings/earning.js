@@ -89,7 +89,7 @@ $(document).ready(function () {
                 //    amount in paise 
                 let amount = payoutList[i].amount;
                 let status = payoutList[i].status;
-                let date = payoutList[i].updateTimestamp;
+                let date = payoutList[i].updateTimestamp / 1000;
                 let shortUrl = payoutList[i].shortUrl;
                 // convert amount to rupees
                 amount = amount / 100;
@@ -100,7 +100,11 @@ $(document).ready(function () {
                       
                       <h1 class="${status == "issued" || status == "processing" ? "text-warning" : "text-notesocean"}">&#x20B9; ${amount}</h1>                    
                         <p class="text-muted">${description}</p>
+                        <p> Payout Id  : ${payoutid}    </p>
+                        <p class="text-muted"> Date : ${moment.unix(date).format("DD MMM YYYY")}</p>
                         <p class="text-dark">status: ${status}</p>
+                        
+                        <p class="text-notesocean"> ${status == "issued" || status == "processing" ? `<a href="${shortUrl}" target="_blank">Click here to complete your payout</a>` : ""}</p>
                         <p class="text-warning">${status == "issued" ? "payout in not processed you can continue again" : ""}</p>
                         <p class="text-warning">${status == "processing" ? "your payout is curently under processing , please wait sometimes" : ""}</p>
                         <p class="text-warning">${status == "pending" ? "your payout is pending , please wait sometimes" : ""}</p>

@@ -3,58 +3,7 @@ $(document).ready(function () {
 
 
 
-    function show() {
-        $("input").each(function () {
-            $(this).on("input", function () {
 
-                if ($(this).val().length == 1) {
-                    if (isNaN($(this).val()) == false) {
-                        $(this).next().focus();
-                    } else {
-                        $(this).val("");
-                    }
-                }
-
-            });
-
-            // detect key code
-            $(this).keyup(function (event) {
-                if (event.keyCode === 8 || event.keyCode == 46) {
-                    $(this).prev().focus();
-                }
-            });
-
-        });
-
-        $("input").each(function () {
-            $(this).on("input", function () {
-                $(this).css({ "border": "1px solid #ccc" });
-            })
-            $(this).on("focus", function () {
-                $(this).css({ "border": "1px solid #ccc" });
-            })
-            $(this).click(function () {
-                $(this).css({ "border": "1px solid #ccc" });
-            })
-        });
-
-    }
-
-    var lastKeyCode = 0;
-
-    $('input[type="number"]').bind('keydown', function (e) {
-        lastKeyCode = e.keyCode;
-    });
-    // Bind on the input having changed.  As long as the previous character
-    // was not a space, BS or Del, trim the input.
-    $('input[type="number"]').bind('input', function (e) {
-        if (lastKeyCode != 32 && lastKeyCode != 8 && lastKeyCode != 46) {
-            $(this).val($(this).val().replace(/^\s+|\s+$/g, ''));
-        }
-    });
-
-
-    show();
     $(".resend-btn").click(function () {
         window.location = location.href;
     });
@@ -67,7 +16,7 @@ $(document).ready(function () {
                 headers: {
                     Authorization: getCookie("token")
                 }, beforeSend: function () {
-
+                    app.alert(200, "Sending code to your email address!");
                 },
                 success: function (data) {
                     $(".user-email-label").html(data.email);
@@ -129,8 +78,7 @@ $(document).ready(function () {
                         }
                     });
                 }, error: function (error) {
-                    app.alert(error.status, "Faild to send verification code!, please try again")
-                    window.location = "/dashboard";
+                    app.alert(400, "Faild to send verification code!, please try again")
                 }
             }
         )
@@ -144,10 +92,9 @@ $(document).ready(function () {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
+
+    // logout
+    $(".logout-btn").click(function () {
+        app.logout();
+    })
 })

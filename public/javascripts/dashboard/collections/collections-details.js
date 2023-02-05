@@ -9,6 +9,7 @@ $(document).ready(function () {
             Authorization: getCookie("token")
         },
         success: function (data) {
+            getAllPublicNotes();
             if (data) {
                 $(".loading-collection").addClass("d-none");
                 $(".collection-container").removeClass("d-none");
@@ -17,7 +18,6 @@ $(document).ready(function () {
                 $("textarea").val(data.description);
                 $(".select-banner-img").attr("src", data.thumbnails.replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/700x100/filters:format(webp)/filters:quality(100)"));
                 const box = $(".add-notes-box").parent();
-                getAllPublicNotes();
                 addNotes(data.products);
             } else {
                 $(".collection-removed").removeClass("d-none");
@@ -32,29 +32,66 @@ $(document).ready(function () {
         }
     });
 
+    var wow = new WOW({ scrollContainer: ".public-notes-row-modal" });
+    wow.init();
+    var next = 0;
+    var prev = 0;
+    var checked = false;
+    var hit = false;
+    isSearched = false;
+    function checkScroll() {
+        $(".public-notes-row-modal").scroll(function () {
+            // get last div element of .public-notes-container
+            let lastDiv = $(".public-item-row-notes").last();
+            //    get visibility of last div
+            let lastDivVisiblity = lastDiv.css("visibility");
+            console.log(lastDivVisiblity);
+            if (lastDivVisiblity == "visible") {
+                console.log("visible");
+                if (!hit) {
+                    next += 1;
+                    hit = true;
+                    getAllPublicNotes();
+                }
+
+            }
+        });
+    }
+
+    var CollectionNotesIds = [];
+
     function getAllPublicNotes() {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products?page=0",
+            url: app.getApi() + "/products?page=" + next,
             headers: {
                 Authorization: getCookie("token")
             },
             before: function () {
-                $(".public-notes-row-modal").html("");
+
             },
             success: function (data) {
+
                 if (data.requested.length > 0) {
+                    // push all ids in array
+
+                    prev = next;
+                    hit = false;
                     localStorage.setItem("public-notes", JSON.stringify(data));
                     // $("#public-notes").html("");
                     $(".loading-public-notes").addClass("d-none");
-                    $(".public-notes-row-modal").html("");
+
                     for (let i = 0; i < data.requested.length; i++) {
                         const box = $(".add-notes-box").parent();
+                        let isChecked = ""
+                        if (CollectionNotesIds.includes(data.requested[i].uuid)) {
+                            isChecked = "checked"
+                        }
                         $(".public-notes-row-modal").append(`
-                    <div class="col-md-2 container my-3 ">
+                    <div class="col-md-4 container my-3 public-item-row-notes">
                         <div class="form-check form-check-inline"></div>
                             <div class="card border-0 shadow rounded h-100" data-id="${data.requested[i].uuid}" data-name="${data.requested[i].name}" data-thumbnails="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}">
-                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" data-src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}}" height="190px" />
+                                <div class="card-header bg-white border-0"><input class="form-check-input" id="inlineCheckbox1" type="checkbox" value="option1" ${isChecked} /></div><img class=" lozad card-img-top" src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}" data-src="${data.requested[i].thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/300x300/filters:format(webp)/filters:quality(100)")}}" height="190px" />
                                 <div class="card-body border-0"> </div>
                                 <div class="card-footer border-0 bg-white">
                                     <p class="card-text"> ${data.requested[i].name} </p>
@@ -64,6 +101,7 @@ $(document).ready(function () {
                     `);
                     }
                     check();
+                    checkScroll();
                 } else {
                     app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                     $(".loading-public-notes").addClass("d-none");
@@ -102,6 +140,7 @@ $(document).ready(function () {
                         $(parent).remove();
                     },
                     complete: function () {
+                        CollectionNotesIds.pop(noteid);
                         $(btn).addClass("fa-times");
                         $(btn).removeClass("fa-spinner fa-spin");
                     },
@@ -199,7 +238,7 @@ $(document).ready(function () {
             } else {
                 $("#select-public-notes-modal").modal("hide");
             }
-            uncheckall();
+            // uncheckall();
             deleteNotesFormCollection();
         });
     }
@@ -217,6 +256,7 @@ $(document).ready(function () {
         for (let i = 0; i < data.length; i++) {
             let name = data[i].name;
             let id = data[i].uuid;
+            CollectionNotesIds.push(id);
             let thumbnails = data[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/300x300/filters:format(webp)/filters:quality(100)");
             $(".collection-notes-item.plus").before(`
             <div class="collection-notes-item col-lg-3 col-6 my-1 border-0 rounded">
@@ -291,9 +331,9 @@ $(document).ready(function () {
     }
 
     addNotesToCollection();
-    getAllPublicNotes();
+
     check();
-    uncheckall();
+    // uncheckall();
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
