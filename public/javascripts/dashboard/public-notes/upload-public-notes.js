@@ -94,12 +94,7 @@ $(function () {
     myDropzone.on("complete", function (file) {
         let response = file;
         $(".progress").css({ display: "none" });
-        $(".note-descriptions").removeClass("is-invalid");
-        $(".note-descriptions").removeClass("is-valid");
-        $(".dropzone").removeClass("is-invalid");
-        $(".dropzone").removeClass("is-valid");
-        $(".note-title").removeClass("is-valid");
-        $(".note-title").removeClass("is-invalid");
+
         $('.upload-notes-btn').html("Upload");
         $('.upload-notes-btn').prop('disabled', false);
         let uploadedfile = JSON.parse(file.xhr.response);
@@ -108,7 +103,12 @@ $(function () {
         myDropzone.removeFile(file);
         if (status == "success") {
             $("form").trigger("reset");
-
+            $(".note-descriptions").removeClass("is-invalid");
+            $(".note-descriptions").removeClass("is-valid");
+            $(".dropzone").removeClass("is-invalid");
+            $(".dropzone").removeClass("is-valid");
+            $(".note-title").removeClass("is-valid");
+            $(".note-title").removeClass("is-invalid");
             swal({
                 title: "Upload success!",
                 text: "Your Notes has been uploaded successfully",
@@ -144,13 +144,19 @@ $(function () {
     });
     $('form').submit(function (event) {
         event.preventDefault();
-        myDropzone.processQueue();
+        validate();
+        let title = $(".note-title").hasClass("is-valid");
+        let description = $(".note-descriptions").hasClass("is-valid");
+        let file = $(".dropzone").hasClass("is-valid");
+        if (title && description && file) {
+            myDropzone.processQueue();
+        }
     });
 
     function validate() {
         $(".note-title").on("input", function () {
             $(".title-char-count").html("( " + $(this).val().trim().length + " )");
-            if ($(this).val().trim().length > 20) {
+            if ($(this).val().trim().length > 50) {
                 $(".note-title").addClass("is-valid");
                 $(".note-title").removeClass("is-invalid");
             }
@@ -163,7 +169,7 @@ $(function () {
             else {
                 $(".note-title").addClass("is-invalid");
                 $(".note-title").removeClass("is-valid");
-                $(".invalid-title-error").html("Title should be at least 20 characters");
+                $(".invalid-title-error").html("Title should be at least 50 characters");
             }
         });
         $(".note-title").on("change", function () {
@@ -186,7 +192,7 @@ $(function () {
 
         $(".note-descriptions").on("input", function () {
             $(".desctiption-char-count").html("( " + $(this).val().trim().length + " )");
-            if ($(this).val().trim().length > 50) {
+            if ($(this).val().trim().length > 120) {
                 $(".note-descriptions").addClass("is-valid");
                 $(".note-descriptions").removeClass("is-invalid");
             }
@@ -198,7 +204,7 @@ $(function () {
             else {
                 $(".note-descriptions").addClass("is-invalid");
                 $(".note-descriptions").removeClass("is-valid");
-                $(".invalid-descriptions-error").html("Descriptions should be at least 50 characters");
+                $(".invalid-descriptions-error").html("Descriptions should be at least 120 characters");
             }
         });
         $(".note-descriptions").on("change", function () {
@@ -218,6 +224,12 @@ $(function () {
         });
     };
     validate();
+
+    // check validation  evrry 5 seconds
+
+    setInterval(function () {
+        validate();
+    }, 5000);
 
 
 
