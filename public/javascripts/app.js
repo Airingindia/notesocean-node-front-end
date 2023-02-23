@@ -13,6 +13,7 @@ class notesocean {
 		).userUuid;
 	}
 	logout() {
+		app.clearData();
 		$.ajax({
 			type: "GET",
 			url: app.getApi() + "/authenticate/logout",
@@ -20,11 +21,9 @@ class notesocean {
 				Authorization: app.getToken(),
 			},
 			success: function (data) {
-				app.clearData();
 				window.location = "/login";
 			},
 			error: function (err) {
-				app.clearData();
 				window.location = "/login";
 			},
 		});
@@ -33,8 +32,10 @@ class notesocean {
 	clearData() {
 		localStorage.removeItem("token");
 		localStorage.removeItem("userinfo");
-		document.cookie =
-			"token" + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+		localStorage.removeItem("userInfo");
+		localStorage.removeItem("public-notes");
+		localStorage.removeItem("emailData");
+		document.cookie = "token" + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 
 	getSlefProducts() {
@@ -190,7 +191,7 @@ class notesocean {
 		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 	}
 
-	dashboard() {}
+	dashboard() { }
 
 	getTime = (previous) => {
 		const current = Date.now();
@@ -226,7 +227,7 @@ class notesocean {
 				headers: {
 					Authorization: app.getToken(),
 				},
-				beforeSend: function () {},
+				beforeSend: function () { },
 				success: function (data) {
 					localStorage.setItem("userInfo", JSON.stringify(data));
 					resolve(data);

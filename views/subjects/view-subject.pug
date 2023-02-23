@@ -31,12 +31,12 @@ html(lang="en")
                         - let productname = data.requested[i].name;
                         - let timestamp = Number(data.requested[i].timestamp);
                         - let description = data.requested[i].description;
-                        - let thumbnails = data.requested[i].thumbnails.replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)/40x0:400x300") ;
-                        - var img1 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)/40x0:400x300");
+                        - let thumbnails = data.requested[i].thumbnails;
+                        - var img1 = data.requested[i].thumbnails;
 
-                        - var img2 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)/40x0:400x300");
+                        - var img2 = data.requested[i].thumbnails;
 
-                        - var img3 = data.requested[i].thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)/40x0:400x300");
+                        - var img3 = data.requested[i].thumbnails;
 
                         - let views = data.requested[i].views;
                         - let pages = data.requested[i].pages;
