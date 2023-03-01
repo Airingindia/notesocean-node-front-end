@@ -4,139 +4,148 @@ var router = express.Router();
 const api_url = process.env.API_URL;
 const httpService = require("../services/http.services");
 const time = require("../services/time.services");
+const quickNotesDashRoutes = require("./dashboard/quick.Notes.dashboard.routes");
+const privateNotesDashRoutes = require("./dashboard/private.notes.dashboard.routes");
+const publicNotesDashRoutes = require("./dashboard/public.notes.dashboard.routes");
+const collectionsDashRoutes = require("./dashboard/collections.dashboard.routes");
+const earningDashRoutes = require("./dashboard/earning.dashboard.routes");
+const profileDashRoutes = require("./dashboard/profile.dashboard.routes");
 router.get('/', async function (req, res, next) {
-    if (req.cookies.token == undefined) {
-        return res.redirect("/login?dest=" + req.originalUrl);
-    }
     res.render("dashboard/my-dashboard", {
         url: req.originalUrl
     });
 });
 
-router.get('/:page', async function (req, res, next) {
-    if (req.cookies.token == undefined) {
-        return res.redirect("/login?dest=" + req.originalUrl);
-    }
-    var alias = req.params.page;
-    if (alias == "private-notes") {
-        res.render("dashboard/private-notes/private-notes", {
-            url: req.originalUrl
-        });
+// quick notes routes
 
-    }
-    // profile
-    else if (alias == "profile") {
-        res.render("dashboard/profile/profile", {
-            url: req.originalUrl
-        });
+router.use("/quick-notes", quickNotesDashRoutes);
 
-    }
-    //  public notes
-    else if (alias == "public-notes") {
-        res.render("dashboard/public-notes/my-public-notes", {
-            url: req.originalUrl
-        });
 
-    }
-    else if (alias == "collections") {
-        res.render("dashboard/collections/my-collections", {
-            url: req.originalUrl
-        });
 
-    }
-    else if (alias == "earning") {
-        res.render("dashboard/earning/my-earning", {
-            url: req.originalUrl
-        });
+// router.get('/:page', async function (req, res, next) {
+//     if (req.cookies.token == undefined) {
+//         return res.redirect("/login?dest=" + req.originalUrl);
+//     }
+//     var alias = req.params.page;
+//     if (alias == "private-notes") {
+//         res.render("dashboard/private-notes/private-notes", {
+//             url: req.originalUrl
+//         });
 
-    }
-    else {
-        res.status(404);
-        res.render("notfound");
-    }
-});
+//     }
+//     // profile
+//     else if (alias == "profile") {
+//         res.render("dashboard/profile/profile", {
+//             url: req.originalUrl
+//         });
 
-router.get("/earning/:id", (req, res, next) => {
-    if (req.cookies.token == undefined) {
-        return res.redirect("/login?dest=" + req.originalUrl);
-    }
-    // set local time
-    let getPayout = httpService.getWithAuth("/payouts/" + req.params.id, req.cookies.token);
-    getPayout.then((response) => {
-        // console.log(response.body);
-        if (response.statusCode == 200) {
-            res.render("dashboard/earning/earning-details", {
-                url: req.originalUrl,
-                payout: response.body,
-                time: time
-            });
-        }
-        else {
-            res.status(404);
-            res.render("notfound");
-        }
-    }).catch((err) => {
-        res.status(404);
-        res.render("notfound");
-    })
-})
+//     }
+//     //  public notes
+//     else if (alias == "public-notes") {
+//         res.render("dashboard/public-notes/my-public-notes", {
+//             url: req.originalUrl
+//         });
 
-router.get("/:page/:parameter", (req, res, next) => {
-    if (req.cookies.token == undefined) {
-        return res.redirect("/login?dest=" + req.originalUrl);
-    }
-    var alias = req.params.page;
-    var parameter = req.params.parameter;
-    if (alias == "collections") {
-        res.render("dashboard/collections/colection-details");
+//     }
+//     else if (alias == "collections") {
+//         res.render("dashboard/collections/my-collections", {
+//             url: req.originalUrl
+//         });
 
-    }
-    else if (alias == "public-notes" && parameter.length > 10) {
-        res.render("dashboard/public-notes/public-notes-details");
+//     }
+//     else if (alias == "earning") {
+//         res.render("dashboard/earning/my-earning", {
+//             url: req.originalUrl
+//         });
 
-    }
-    else if (alias == "public-notes" && parameter == "new") {
-        res.render("dashboard/public-notes/upload-public-notes");
+//     }
+//     else {
+//         res.status(404);
+//         res.render("notfound");
+//     }
+// });
 
-    }
-    else if (alias == "public-notes" && parameter == "create") {
-        res.render("dashboard/public-notes/create-public-notes");
+// router.get("/earning/:id", (req, res, next) => {
+//     if (req.cookies.token == undefined) {
+//         return res.redirect("/login?dest=" + req.originalUrl);
+//     }
+//     // set local time
+//     let getPayout = httpService.getWithAuth("/payouts/" + req.params.id, req.cookies.token);
+//     getPayout.then((response) => {
+//         // console.log(response.body);
+//         if (response.statusCode == 200) {
+//             res.render("dashboard/earning/earning-details", {
+//                 url: req.originalUrl,
+//                 payout: response.body,
+//                 time: time
+//             });
+//         }
+//         else {
+//             res.status(404);
+//             res.render("notfound");
+//         }
+//     }).catch((err) => {
+//         res.status(404);
+//         res.render("notfound");
+//     })
+// })
 
-    }
-    else if (alias == "private-notes" && parameter == "new") {
-        res.render("dashboard/private-notes/upload-private-notes");
+// router.get("/:page/:parameter", (req, res, next) => {
+//     if (req.cookies.token == undefined) {
+//         return res.redirect("/login?dest=" + req.originalUrl);
+//     }
+//     var alias = req.params.page;
+//     var parameter = req.params.parameter;
+//     if (alias == "collections") {
+//         res.render("dashboard/collections/colection-details");
 
-    }
-    else if (alias == "private-notes" && parameter == "create") {
-        res.render("dashboard/private-notes/create-private-notes");
+//     }
+//     else if (alias == "public-notes" && parameter.length > 10) {
+//         res.render("dashboard/public-notes/public-notes-details");
 
-    }
-    else if (alias == "private-notes" && !isNaN(parameter)) {
-        res.render("dashboard/private-notes/private-notes-details");
+//     }
+//     else if (alias == "public-notes" && parameter == "new") {
+//         res.render("dashboard/public-notes/upload-public-notes");
 
-    }
+//     }
+//     else if (alias == "public-notes" && parameter == "create") {
+//         res.render("dashboard/public-notes/create-public-notes");
 
-    else if (alias == "profile" && parameter == "verify-email") {
-        res.render("dashboard/profile/verify/email/verify-email");
+//     }
+//     else if (alias == "private-notes" && parameter == "new") {
+//         res.render("dashboard/private-notes/upload-private-notes");
 
-    }
-    else if (alias == "profile" && parameter == "verified-email") {
-        res.render("dashboard/profile/verify/email/email-verified");
+//     }
+//     else if (alias == "private-notes" && parameter == "create") {
+//         res.render("dashboard/private-notes/create-private-notes");
 
-    }
-    else if (alias == "profile" && parameter == "verify-mobile") {
-        res.render("dashboard/profile/verify/mobile/verify-mobile");
+//     }
+//     else if (alias == "private-notes" && !isNaN(parameter)) {
+//         res.render("dashboard/private-notes/private-notes-details");
 
-    }
-    else if (alias == "profile" && parameter == "verified-mobile") {
-        res.render("dashboard/profile/verify/mobile/mobile-verified");
+//     }
 
-    }
-    else {
-        res.status(404);
-        res.render("notfound");
+//     else if (alias == "profile" && parameter == "verify-email") {
+//         res.render("dashboard/profile/verify/email/verify-email");
 
-    }
-});
+//     }
+//     else if (alias == "profile" && parameter == "verified-email") {
+//         res.render("dashboard/profile/verify/email/email-verified");
+
+//     }
+//     else if (alias == "profile" && parameter == "verify-mobile") {
+//         res.render("dashboard/profile/verify/mobile/verify-mobile");
+
+//     }
+//     else if (alias == "profile" && parameter == "verified-mobile") {
+//         res.render("dashboard/profile/verify/mobile/mobile-verified");
+
+//     }
+//     else {
+//         res.status(404);
+//         res.render("notfound");
+
+//     }
+// });
 
 module.exports = router;
