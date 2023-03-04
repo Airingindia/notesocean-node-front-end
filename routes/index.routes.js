@@ -28,6 +28,13 @@ router.get('/', function (req, res, next) {
   });
 });
 
+
+router.get("/quick-notes/new", (req, res, next) => {
+  res.render("dashboard/quick-notes/create-quick-notes", {
+    url: req.originalUrl
+  });
+})
+
 // no internet route
 
 router.get("/no-internet", (req, res, next) => {
