@@ -13,4 +13,38 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
+                    .quick-notes-header.d-flex.justify-content-between
+                        div
+                            h2.header-title Quick Notes
+                                span 
+                                    small.text-muted
+                                        |  ( 
+                                        span.total-notes
+                                        |  )
+
+                            small.header-text Here your quick notes are stored 
+                        div
+                            a(href="/quick-notes/new")
+                                button.btn-notesocean.add-new
+                                    i.fa.fa-edit.m-1
+                                    span Create New
+                    .notes-container
+                        ul.list-group.border-0.notes-list
+                            //- li.list-group-item.shadow.my-2.border-0
+                            //-     a(href="http://" style="text-decoration:none").text-dark
+                            //-         div.d-flex.justify-content-between.align-items-center
+                            //-             span.list-group-item-heading(style="font-weight:400") gdfgdfgjk
+                            //-             div.d-flex.justify-conatent-around.align-items-center
+                            //-                 small.isLocked.mx-2 
+                            //-                     i.fa.fa-lock
+                            //-                 small.isPublic.mx-2
+                            //-                     i.fa.fa-globe
+                            //-                 small.createdAt.mx-2 
+                            //-                     i.fa.fa-clock.mx-1
+                            //-                     span 2021-09-01 12:00:00
+
+
+
         include ../../includes/dashjs
+        script
+            include ../../../public/javascripts/dashboard/quick-notes/my-quick-notes.js

@@ -4,12 +4,14 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description" content="Create and share instant notes")
+        meta(name="keywords" content="quick notes, create quick notes, share quick notes, instant notes, create instant notes, share instant notes")
         include ../../includes/dashcss
-        title Create Quick Notes | Dashboard
-        link(href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" rel="stylesheet")
-        link(href='//cdn.quilljs.com/1.3.6/quill.snow.css' rel='stylesheet')
-        link(href='//cdn.quilljs.com/1.3.6/quill.bubble.css' rel='stylesheet')
-        link(href='//cdn.quilljs.com/1.3.6/quill.core.css' rel='stylesheet')
+        title Create Quick Notes
+        link(href="/vendors/highlight/styles/default.min.css" rel="stylesheet")
+        link(href='/vendors/quill/quill.snow.css' rel='stylesheet')
+        link(href='/vendors/quill/quill.bubble.css' rel='stylesheet')
+        link(href='/vendors/quill/quill.core.css' rel='stylesheet')
         link(href="/vendors/highlight/styles/monokai-sublime.min.css" rel="stylesheet")
         style.
             #editor-container {
@@ -27,7 +29,7 @@ html(lang="en")
             .ql-toolbar{
                 border-radius: 5px !important;
                 border:none !important;
-                background : #C51C1D !important;
+                background : #C51C1D;
                 color : #fff !important;
             }
 
@@ -45,27 +47,56 @@ html(lang="en")
                 color: #fff;
             }
 
+            @media(max-width:769px){
+                .col-2{ 
+                    display:none
+                }
+                input#title{
+                    width:100% !important;
+                }
+                .btn-group{
+                    width:100% !important;
+                    margin:10px 0px ;
+                }
+                #editor-container {
+                    height: 60vh;
+                    border:none !important;
+                    width : 99.9% !important;
+                }
+            }       
+
     body
         header
             include ../../includes/navbar.pug
         section.main-section
-
-            .container(style='margin-top: 90px;')
-                .editor-wrapper
-                    #editor-container
-                .button-wrapper
-                    .btn-group.mt-2
-                        button.btn.btn-danger.btn-sm(type='button') 
-                            i.fas.fa-save.mx-1
-                            span Save
-                        button.btn.btn-dark.btn-sm(type='button')
-                            i.fas.fa-share.mx-1
-                            span Share
+            .row
+                .col-2
+                    ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='7222187733' data-ad-format='auto' data-full-width-responsive='true')
+                .col-md-8
+                    .div(style='margin-top: 70px;')
+                        div.input-group
+                            input#title.form-control.my-2(type='text' placeholder='Enter Title')
+                            .input-group-append
+                                .input-group-text.p-0.border-0.h-100.rounded-0
+                                    .btn-group.rounded-0
+                                        button.btn.btn-danger(type='button').save-btn.rounded-0
+                                            i.fas.fa-save.mx-1
+                                            span Save
+                                        button.btn.btn-dark(type='button').share-btn
+                                            i.fas.fa-share.mx-1
+                                            span Share
+                                        button.btn.btn-info(type='button').share-btn.text-white
+                                            i.fas.fa-add.mx-1
+                                            a(href="/quick-notes/new" ,style="text-decoration:none").text-white New
+                        .editor-wrapper
+                            #editor-container
+                        .button-wrapper
+                .col-2
+                    ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='7222187733' data-ad-format='auto' data-full-width-responsive='true')
         include ../../includes/dashjs
-        script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js')
-        script(src='//cdn.quilljs.com/1.3.6/quill.core.js')
-        script(src='//cdn.quilljs.com/1.3.6/quill.js')
-        script(src='//cdn.quilljs.com/1.3.6/quill.min.js')
-
+        script(src='/vendors/highlight/highlight.min.js')
+        script(src='/vendors/quill/quill.min.js')
+        script.
+            (adsbygoogle = window.adsbygoogle || []).push({});
         script
             include ../../../public/javascripts/dashboard/quick-notes/create-quick-notes.js
