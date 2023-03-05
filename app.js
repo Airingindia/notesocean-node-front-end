@@ -18,6 +18,7 @@ const notesRoutes = require("./routes/notes.routes");
 const requestRoutes = require("./routes/request.routes");
 const policiesRoutes = require("./routes/policies.routes");
 const reportRoutes = require("./routes/report.routes");
+const adminRoutes = require("./routes/admin/admin.routes");
 const helmet = require('helmet');
 // express
 const express = require('express');
@@ -54,6 +55,19 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
+const authadminMiddleware = (req, res, next) => {
+  if (req.cookies.token) {
+    next();
+  } else {
+    res.redirect("/account/login?dest=/admin");
+  }
+}
+
+// auth admin middleware
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -74,6 +88,7 @@ app.use("/courses", coursesRoute);
 app.use("/subjects", subjectRoutes);
 app.use("/policies", policiesRoutes);
 app.use("/report", reportRoutes);
+app.use("/admin", authadminMiddleware, adminRoutes);
 
 
 
