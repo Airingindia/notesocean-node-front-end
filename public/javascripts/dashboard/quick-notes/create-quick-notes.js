@@ -29,30 +29,29 @@ $(document).ready(function () {
 
     // check if uuid  or new is present in url
     var uuid = window.location.pathname.split("/")[2];
-    if (uuid !== "new") {
+    console.log(uuid);
+    if (uuid != "new") {
         getData(uuid);
     }
 
-    // save automatically after 5 seconds
+
     var saveTimer;
     quill.on('text-change', function (delta, oldDelta, source) {
         clearTimeout(saveTimer);
+        let uuid = window.location.pathname.split("/")[2];
         saveTimer = setTimeout(function () {
             var note = quill.root.innerHTML;
             var title = $("#title").val();
             // check if title is empty
-            if (title.trim() == "" || title.trim() == null || title.trim() == undefined || title.trim().length == 0) {
-                title = "Untitled";
-            }
             if (uuid == "new") {
                 create(title, note);
             } else {
-                update(title, note);
+                update(title, note, uuid);
             }
         }, 3000);
     });
 
-    // save automatically after 5 seconds on title change
+
 
     $("#title").on("change", function () {
         clearTimeout(saveTimer);
@@ -74,6 +73,7 @@ $(document).ready(function () {
 
     $(".share-btn").click(function () {
         // share current url
+
         var url = window.location.href;
         var $temp = $("<input>");
         $("body").append($temp);
@@ -89,19 +89,13 @@ $(document).ready(function () {
 
 
     $(".save-btn").click(function () {
-        var note = quill.root.innerHTML;
-        var title = $("#title").val();
-        // check if title is empty
-        if (title.trim() == "" || title.trim() == null || title.trim() == undefined || title.trim().length == 0) {
-            title = "Untitled";
-        }
-        var formdata = new FormData();
-        formdata.append("instant-note", new Blob([JSON.stringify({ "title": title, "content": note })], { type: "application/json" }));
-
+        let uuid = window.location.pathname.split("/")[2];
+        let note = quill.root.innerHTML;
+        let title = $("#title").val();
         if (uuid == "new") {
             create(title, note);
         } else {
-            update(title, note);
+            update(title, note, uuid);
         }
 
     });
@@ -125,7 +119,7 @@ $(document).ready(function () {
             url: app.getApi() + "/instant-note",
             type: "POST",
             data: JSON.stringify({
-                "title": title,
+                "title": title == "" || title == null ? null : title,
                 "content": note
             }),
             headers: {
@@ -139,13 +133,13 @@ $(document).ready(function () {
                 savedChanges();
                 console.log(data);
                 var uuid = data.uuid;
-                var title = data.title;
+                let title = data.title;
                 // set title on page title
                 document.title = title + " - Quick Notes";
-
+                $("#title").val(title);
                 // reaplce url with uuid of note where new note is created
                 window.history.replaceState({}, document.title, "/quick-notes/" + uuid);
-                app.alert(err.status, "Note created successfully");
+                app.alert(200, "Note created successfully");
             },
             error: function (err) {
                 app.alert(200, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
@@ -153,12 +147,12 @@ $(document).ready(function () {
         });
     }
 
-    function update(title, note) {
+    function update(title, note, uuid) {
         $.ajax({
             url: app.getApi() + "/instant-note/" + uuid,
             type: "PUT",
             data: JSON.stringify({
-                "title": title,
+                "title": title == "" || title == null ? null : title,
                 "content": note
             }),
             contentType: "application/json",
@@ -175,7 +169,7 @@ $(document).ready(function () {
                 var title = data.title;
                 // set title on page title
                 document.title = title + " - Quick Notes";
-
+                $("#title").val(title);
                 // reaplce url with uuid of note where new note is created
                 window.history.replaceState({}, document.title, "/quick-notes/" + uuid);
                 app.alert(200, "Note updated successfully");
