@@ -78,8 +78,10 @@ $(document).ready(function () {
 
 
 
+
+
     function toggler() {
-        $("#commentbox").toggle("show");
+        // $("#commentbox").toggle("show");
         $(".share-btn").click(function () {
             $(".share-modal").modal("show");
         });
@@ -89,6 +91,8 @@ $(document).ready(function () {
         $(".report-btn").click(function () {
             $(".report-modal").modal("show");
         });
+
+
     }
     // load comments
     function loadComments() {
@@ -289,6 +293,14 @@ $(document).ready(function () {
             }
         });
     }
+
+    $(".comment-btn").click(function () {
+        $("#commentbox").slideToggle();
+    })
+
+    $(".product-title").click(function () {
+        $(".prod-desc").slideToggle("show");
+    })
     // add comments
 
     // showRelatedNotes();

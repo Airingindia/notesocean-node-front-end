@@ -33,7 +33,14 @@ function showPdf() {
 //EXTRACT DOMAIN FROM URL
 let api = app.getApi();
 if (api == "https://api.notesocean.com") {
-    myModal.show();
+    // check screen size is mobile
+    var width = $(window).width();
+    if ((width < 1024)) {
+        myModal.show();
+    }
+    else {
+        myModal.hide();
+    }
     showPdf();
     (adsbygoogle = window.adsbygoogle || []).push({});
 } else {
