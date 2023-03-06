@@ -54,6 +54,18 @@ app.use(function (req, res, next) {
   next();
 });
 
+//  check cookie and redirect to login page
+
+function validateCookie(req, res, next) {
+  if (req.cookies.token == undefined) {
+    if (req.originalUrl == "/login") {
+      return next();
+    }
+    return res.redirect("/login?dest=" + req.originalUrl);
+  }
+  next();
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -62,7 +74,7 @@ app.use('/', indexRouter);
 app.use('/account', accountRoutes);
 app.use("/loginHandler", loginHandlerRoutes);
 app.use("/api", apiRoutes);
-app.use("/dashboard", dashboardRoutes);
+app.use("/dashboard", validateCookie, dashboardRoutes);
 app.use("/about", aboutRoutes);
 app.use("/about-us", aboutRoutes);
 app.use("/sitemaps", sitemapRoutes);
