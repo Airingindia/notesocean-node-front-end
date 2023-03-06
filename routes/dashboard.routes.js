@@ -13,6 +13,15 @@ router.get('/', async function (req, res, next) {
     });
 });
 
+router.get("/quick-notes", (req, res, next) => {
+    if (req.cookies.token == undefined) {
+        return res.redirect("/login?dest=" + req.originalUrl);
+    }
+    res.render("dashboard/quick-notes/my-quick-notes", {
+        url: req.originalUrl
+    });
+})
+
 router.get('/:page', async function (req, res, next) {
     if (req.cookies.token == undefined) {
         return res.redirect("/login?dest=" + req.originalUrl);
@@ -79,7 +88,9 @@ router.get("/earning/:id", (req, res, next) => {
         res.status(404);
         res.render("notfound");
     })
-})
+});
+
+
 
 router.get("/:page/:parameter", (req, res, next) => {
     if (req.cookies.token == undefined) {
