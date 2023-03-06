@@ -163,6 +163,9 @@ $(document).ready(function () {
                 Authorization: app.getToken()
             },
             success: function (data) {
+                // log status code
+
+                console.log(data);
                 savedChanges();
                 console.log(data);
                 var uuid = data.uuid;
@@ -177,6 +180,7 @@ $(document).ready(function () {
             error: function (err) {
                 app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
+
         });
     }
 
@@ -186,7 +190,13 @@ $(document).ready(function () {
             type: "GET",
             contentType: "application/json",
             success: function (data) {
-                console.log(data);
+                if (data == null || data == undefined) {
+                    $(".editorView").addClass("d-none");
+                    $(".notPublic").removeClass("d-none");
+                } else {
+                    $(".editorView").removeClass("d-none");
+                    $(".notPublic").addClass("d-none");
+                }
                 var uuid = data.uuid;
                 var title = data.title;
                 var content = data.content;
@@ -206,6 +216,7 @@ $(document).ready(function () {
             error: function (err) {
                 app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
             }
+
         });
     }
 })

@@ -51,14 +51,14 @@ $(document).ready(function () {
                     </small>
                     
                     <small class="isPublic mx-2" data-id="${uuid}" data-public="${isPublic}">
-                    ${isPublic ? `<i class="fa fa-globe" title="Note is Public , click to change"></i>` : `<i class="fa fa-user" title="Note is Private , click to change"></i>`}
+                    ${isPublic ? `<i class="fa fa-globe text-info" title="Note is Public , click to change"></i>` : `<i class="fa fa-user" title="Note is Private , click to change"></i>`}
                     
                     </small>
 
                    
 
                     <small class="deleteNote mx-2" data-id="${uuid}">
-                    <i class="fa fa-trash" title="Delete Note"></i>
+                    <i class="fa fa-trash text-danger" title="Delete Note"></i>
                     </small>
                     
                     <small class="createdAt mx-2"> <i class="fa fa-clock mx-1"></i>
@@ -89,6 +89,9 @@ $(document).ready(function () {
                     if (isLocked == "lock") {
                         $(btn).html(`<i class="fa fa-lock" title="Locked , click to change"></i>`);
                         $(btn).attr("data-locked", true);
+                    } else {
+                        $(btn).html(`<i class="fa fa-unlock" title="Unlocked , click to change" ></i>`);
+                        $(btn).attr("data-locked", false);
                     }
                 }).catch((err) => {
                     $(btn).html(`<i class="fa fa-unlock" title="Unlocked , click to change" ></i>`);
@@ -109,6 +112,9 @@ $(document).ready(function () {
                     if (isPublic == "public") {
                         $(btn).html(`<i class="fa fa-globe" title="Note is Public , click to change"></i>`);
                         $(btn).attr("data-public", true);
+                    } else {
+                        $(btn).html(`<i class="fa fa-user" title="Note is Private , click to change"></i>`);
+                        $(btn).attr("data-public", false);
                     }
                 }).catch((err) => {
                     $(btn).html(`<i class="fa fa-user" title="Note is Private , click to change"></i>`);
@@ -137,14 +143,14 @@ $(document).ready(function () {
     function changeLockStatus(uuid, isLocked) {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: app.getApi() + "/instant-note/" + uuid + "/" + isLocked,
+                url: app.getApi() + "/instant-note/" + uuid + "/" + "lock",
                 type: "PUT",
                 headers: {
                     Authorization: app.getToken()
                 },
                 success: function (data) {
                     resolve(data);
-                    app.alert(200, "Note updated successfully");
+                    app.alert(200, "Note  " + isLocked + "ed successfully");
                 },
                 error: function (err) {
                     reject(err);
@@ -158,14 +164,14 @@ $(document).ready(function () {
     function changePublicStatus(uuid, isPublic) {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: app.getApi() + "/instant-note/" + uuid + "/" + isPublic,
+                url: app.getApi() + "/instant-note/" + uuid + "/" + "public",
                 type: "PUT",
                 headers: {
                     Authorization: app.getToken()
                 },
                 success: function (data) {
                     resolve(data);
-                    app.alert(200, "Note updated successfully");
+                    app.alert(200, "Note changed to " + isPublic + " successfully");
                 },
                 error: function (err) {
                     reject(err);

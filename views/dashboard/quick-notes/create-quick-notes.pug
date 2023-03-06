@@ -73,7 +73,7 @@ html(lang="en")
                 .col-2
                     ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='7222187733' data-ad-format='auto' data-full-width-responsive='true')
                 .col-md-8
-                    .div
+                    .div.editorView
                         div.input-group
                             input#title.form-control.my-2(type='text' placeholder='Enter Title')
                             .input-group-append
@@ -91,6 +91,10 @@ html(lang="en")
                         .editor-wrapper
                             #editor-container
                         .button-wrapper
+                    .notPublic.text-center.text-danger.mt-5.d-none.p-3.w-lg-50.w-100.mx-auto
+                        h5 This page is not public , please infrom the owner to make it public
+                        .create-new
+                            a.btn.btn-notesocean.mt-3(href="/quick-notes/new" ,style="text-decoration:none").text-white Create New
                 .col-2
                     ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='7222187733' data-ad-format='auto' data-full-width-responsive='true')
         include ../../includes/dashjs
