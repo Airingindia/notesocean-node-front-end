@@ -58,6 +58,7 @@ $(document).ready(function () {
         saveTimer = setTimeout(function () {
             var note = quill.root.innerHTML;
             var title = $("#title").val();
+            let uuid = window.location.pathname.split("/")[2];
             // check if title is empty
             if (title.trim() == "" || title.trim() == null || title.trim() == undefined || title.trim().length == 0) {
                 title = "Untitled";
