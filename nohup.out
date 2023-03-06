@@ -1,0 +1,5 @@
+
+> notesocean@0.0.0 start
+> node ./bin/www
+
+app is listening on port 3000
