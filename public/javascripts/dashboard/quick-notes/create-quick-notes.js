@@ -28,8 +28,7 @@ $(document).ready(function () {
     });
 
     // check if uuid  or new is present in url
-    var uuid = window.location.pathname.split("/")[2];
-    console.log(uuid);
+    let uuid = window.location.pathname.split("/")[2];
     if (uuid != "new") {
         getData(uuid);
     }
@@ -38,7 +37,7 @@ $(document).ready(function () {
     var saveTimer;
     quill.on('text-change', function (delta, oldDelta, source) {
         clearTimeout(saveTimer);
-        let uuid = window.location.pathname.split("/")[2];
+        var uuid = window.location.pathname.split("/")[2];
         saveTimer = setTimeout(function () {
             var note = quill.root.innerHTML;
             var title = $("#title").val();
@@ -58,7 +57,7 @@ $(document).ready(function () {
         saveTimer = setTimeout(function () {
             var note = quill.root.innerHTML;
             var title = $("#title").val();
-            let uuid = window.location.pathname.split("/")[2];
+            var uuid = window.location.pathname.split("/")[2];
             // check if title is empty
             if (title.trim() == "" || title.trim() == null || title.trim() == undefined || title.trim().length == 0) {
                 title = "Untitled";
@@ -66,7 +65,7 @@ $(document).ready(function () {
             if (uuid == "new") {
                 create(title, note);
             } else {
-                update(title, note);
+                update(title, note, uuid);
             }
         }, 3000);
     });
@@ -90,7 +89,7 @@ $(document).ready(function () {
 
 
     $(".save-btn").click(function () {
-        let uuid = window.location.pathname.split("/")[2];
+        var uuid = window.location.pathname.split("/")[2];
         let note = quill.root.innerHTML;
         let title = $("#title").val();
         if (uuid == "new") {
@@ -133,7 +132,7 @@ $(document).ready(function () {
             success: function (data) {
                 savedChanges();
                 console.log(data);
-                var uuid = data.uuid;
+                let uuid = data.uuid;
                 let title = data.title;
                 // set title on page title
                 document.title = title + " - Quick Notes";
@@ -158,17 +157,13 @@ $(document).ready(function () {
             }),
             contentType: "application/json",
             beforeSend: function (xhr) {
-                savingChanges();
+
             },
             headers: {
                 Authorization: app.getToken()
             },
             success: function (data) {
-                // log status code
-
-                console.log(data);
-                savedChanges();
-                console.log(data);
+                // log status cod
                 var uuid = data.uuid;
                 var title = data.title;
                 // set title on page title
