@@ -31,13 +31,7 @@ function showPdf() {
 
 
 
-var width = $(window).width();
-if ((width > 1024)) {
-    myModal.show();
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-else {
-    myModal.hide();
-}
+myModal.show();
+(adsbygoogle = window.adsbygoogle || []).push({});
 
 showPdf();

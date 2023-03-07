@@ -1,7 +1,4 @@
 doctype html
-html(lang="en")
-    head
-        // Primary Meta Tags
 html
     head
         //- main meta's
@@ -90,36 +87,36 @@ html
                                         i.fa.fa-clock.
                                         small #{timeService.get(data.products.timestamp)}
                             .col-md-8
-                                .icon-group.d-flex.justify-content-end.text-muted
+                                .icon-group.d-flex.justify-content-end.text-muted.align-items-center
                                     - if(data.reacts != null && data.reacts.react == "LIKE"){
                                         .icon-item.mx-3.text-center.react-btn.active(data-action="LIKE" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
-                                            i.fa.fa-thumbs-up.
-                                            span.icon-text Like
-                                            span.react-count #{data.products.likes}
+                                            i.fa.fa-thumbs-up
+                                            //- span.icon-text Like
+                                            span.react-count.mx-1 #{data.products.likes}
                                     - }
                                     - else{
                                     .icon-item.mx-3.text-center.react-btn(data-action="LIKE",data-default=data.products.likes)
-                                        i.fa.fa-thumbs-up.
-                                        span.icon-text Like
-                                        span.react-count #{data.products.likes}
+                                        i.fa.fa-thumbs-up
+                                        //- span.icon-text Like
+                                        span.react-count.mx-1 #{data.products.likes}
                                     - }
 
                                     - if (data.reacts != null && data.reacts.react == "DISLIKE"){
                                     .icon-item.mx-3.text-center.react-btn.active(data-action="DISLIKE",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
                                         i.fa.fa-thumbs-down
-                                        span.icon-text Dislike
-                                        span.react-count #{data.products.dislikes}
+                                        //- span.icon-text Dislike
+                                        span.react-count.mx-1 #{data.products.dislikes}
                                     - }
                                     -else{
                                     .icon-item.mx-3.text-center.react-btn(data-action="DISLIKE",data-default=data.products.dislikes)
                                         i.fa.fa-thumbs-down
-                                        span.icon-text Dislike
-                                        span.react-count #{data.products.dislikes}
+                                        //- span.icon-text Dislike
+                                        span.react-count.mx-1 #{data.products.dislikes}
                                     -}
 
                                     .icon-item.mx-3.text-center( aria-label="comments").comment-btn
                                         i.fa.fa-comment
-                                        span.icon-text Comments
+                                        //- span.icon-text.mx Comments
                                         span.comment-length
                                     .icon-item.mx-3.text-center.report-btn
                                         i.fa.fa-flag
