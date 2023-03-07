@@ -6,17 +6,61 @@
     display: none !important;
 }
 
-.main-section-top {
-    width: 99.9%;
+iframe {
+    width: 100% !important;
+}
+
+
+.content-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-box .center {
+    width: 70%;
+}
+
+.content-box .right,
+.content-box .left {
+    width: 12.5% !important;
+}
+
+.content-box i {
+    margin: 0px 5px;
+}
+
+.content-box .card {
+    border: none !important;
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+.info-bar {
+    width: 100%;
     overflow: hidden;
+    box-shadow: 0px 0px 5px #ccc;
+    padding: 0px 5px;
+}
+
+.card {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.shadow {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+
+
+.main-section-top {
+    width: 100% !important;
 }
 
 .product-title {
     cursor: pointer;
-}
-
-.product-title ::after {
-    content: ">";
 }
 
 h1 {
@@ -32,18 +76,7 @@ h1.card-title {
     cursor: pointer;
 }
 
-.main-content-box {
-    width: 99%;
-}
 
-.realted-notes-container {
-    width: 20%;
-    float: left;
-    padding: 10px 1%;
-    background: #ffff;
-    color: black;
-
-}
 
 footer,
 .footer-credit {
@@ -87,7 +120,7 @@ div#amzn-native-ad-0 {
     color: white !important;
 }
 
-*/ .btn-primary:hover,
+.btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
     background: #FF0000 !important;
@@ -96,13 +129,11 @@ div#amzn-native-ad-0 {
 
 
 .pdf-cont {
-    width: 99.9%;
     height: 70vh;
-    position: relative;
 }
 
 .ads-box {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100% !important;
@@ -115,53 +146,7 @@ div#amzn-native-ad-0 {
     color: black;
 }
 
-/*  */
-.related-notes-item .card {
-    padding: 0px !important;
-}
 
-.related-notes-item .card,
-.related-notes-item .card-header,
-.related-notes-item .card-footer {
-    background-color: #fff;
-    border: none !important;
-}
-
-.related-notes-item .card-body,
-.related-notes-item .card-footer {
-    padding: 0px !important;
-}
-
-.related-notes-item-info {
-    width: 100%;
-    list-style: none;
-    display: flex;
-    font-size: 12px;
-    font-weight: 300;
-    justify-content: space-between;
-    margin: 10px 0px;
-}
-
-.related-notes-item .card-header {
-    font-size: 20px !important;
-    font-weight: 300 !important;
-}
-
-.related-notes-item-user-info {
-    display: flex;
-    font-size: 15px;
-    font-weight: 300;
-}
-
-.related-notes-item-user-info div {
-    margin: 0px 5px;
-}
-
-.related-notes-item-user-info img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-}
 
 .report-success-animation {
     width: 200px;
@@ -178,6 +163,31 @@ div#amzn-native-ad-0 {
 }
 
 @media (max-width:768px) {
+
+
+    .content-box {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .content-box .center {
+        width: 100%;
+    }
+
+    .content-box .right,
+    .content-box .left {
+        display: none;
+    }
+
+    #commentbox {
+        width: 100% !important;
+    }
+
+    #commentbox .card-body {
+        padding: 0px !important;
+    }
+
     .main-section-top .col-2 {
         display: none;
     }
@@ -210,7 +220,6 @@ div#amzn-native-ad-0 {
     }
 
     .pdf-cont {
-        width: 100%;
         height: 40vh;
     }
 
@@ -219,123 +228,8 @@ div#amzn-native-ad-0 {
         clear: both;
     }
 
-    .realted-notes-container {
-        width: 100%;
-        clear: left;
-        padding: 10px 1%;
-        background: white;
-
-    }
-
-
-
     footer {
         clear: both;
         width: 100%;
     }
-}
-
-/* light mode */
-
-.card,
-.card-header,
-.card-footer,
-.modal-header,
-.modal-body,
-.modal-footer {
-    background: #ffff;
-    color: black !important;
-    box-shadow: none !important;
-}
-
-/* dark mode code */
-
-@media (prefers-color-scheme: darkkk) {
-
-    h1.card-title {
-        color: white !important;
-    }
-
-    .card,
-    .card-header,
-    .card-footer,
-    .modal-header,
-    .modal-body,
-    .modal-footer {
-        background: #232225;
-        color: white !important;
-        box-shadow: none !important;
-    }
-
-    .main-section-top {
-        border-top: 1px solid black;
-    }
-
-    .realted-notes-container {
-        float: left;
-        padding: 10px 1%;
-        background: #232225;
-        color: white !important;
-    }
-
-}
-
-/*  */
-
-/*  */
-
-
-.accordion {
-    margin: 40px 0;
-}
-
-.accordion .item {
-    border: none;
-    margin-bottom: 50px;
-    background: none;
-}
-
-.t-p {
-    color: rgb(193 206 216);
-    padding: 40px 30px 0px 30px;
-}
-
-.accordion .item .item-header h2 button.btn.btn-link {
-    background: #333435;
-    color: white;
-    border-radius: 0px;
-    font-family: 'Poppins';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 2.5;
-    text-decoration: none;
-}
-
-.accordion .item .item-header {
-    border-bottom: none;
-    background: transparent;
-    padding: 0px;
-    margin: 2px;
-}
-
-.accordion .item .item-header h2 button {
-    color: white;
-    font-size: 20px;
-    padding: 15px;
-    display: block;
-    width: 100%;
-    text-align: left;
-}
-
-.accordion .item .item-header h2 i {
-    float: right;
-    font-size: 30px;
-    color: #eca300;
-    background-color: black;
-    width: 60px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
 }
