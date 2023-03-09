@@ -19,6 +19,7 @@ const requestRoutes = require("./routes/request.routes");
 const policiesRoutes = require("./routes/policies.routes");
 const reportRoutes = require("./routes/report.routes");
 const helmet = require('helmet');
+const CryptoJS = require("crypto-js");
 // express
 const express = require('express');
 const app = express();
@@ -50,7 +51,11 @@ app.use(connect_datadog);
 
 app.use(function (req, res, next) {
   const api = process.env.API_URL;
-  res.cookie("api", Buffer.from(api).toString('base64'));
+  // encode api using base64
+
+  var words = CryptoJS.enc.Utf8.parse(api); // WordArray object
+  var base64 = CryptoJS.enc.Base64.stringify(words); // string: 'SGVsbG8gd29ybGQ='
+  res.cookie("api", base64);
   next();
 });
 
