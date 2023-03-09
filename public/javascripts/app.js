@@ -1,8 +1,6 @@
 class notesocean {
 	getApi() {
-		return CryptoJS.enc.Base64.parse(
-			decodeURIComponent(app.getCookie("api"))
-		).toString(CryptoJS.enc.Utf8);
+		return "https://api.notesocean.com";
 	}
 	getToken() {
 		return app.getCookie("token");
