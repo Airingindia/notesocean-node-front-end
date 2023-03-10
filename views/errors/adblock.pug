@@ -45,11 +45,11 @@ script.
                 adBlockEnabled = false;
             });
     }
-    if(checkIsBrave()){
-        adBlockEnabled = true;
-    }
-    async function detectAdBlock() {
 
+    async function detectAdBlock() {
+    //- if(checkIsBrave()){
+    //-     adBlockEnabled = true;
+    //- }
     const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
     try {
         await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
@@ -61,5 +61,7 @@ script.
         }
     }
     }
-    detectAdBlock();
+    window.onload = function() {
+        detectAdBlock();
+    }
 
