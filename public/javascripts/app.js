@@ -123,10 +123,10 @@ class notesocean {
 			new Noty({
 				type: "error",
 				layout: "topRight",
-				text: "Email not verified",
+				text: "Mobile not verified",
 				timeout: 2000,
 			}).show();
-			window.location.href = "/dashboard/profile/verify-email";
+			window.location.href = "/dashboard/profile/verify-mobile";
 		} else if (status === 404) {
 			new Noty({
 				type: "error",

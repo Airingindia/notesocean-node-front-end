@@ -79,7 +79,7 @@ $(document).ready(function () {
                         success: function (data) {
                             const authToken = data.token;
                             setCookie("token", authToken, 1);
-                            window.location = "/dashboard/profile/verify-email";
+                            window.location = "/dashboard";
                         }, error: function (err) {
                             app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                             setTimeout(() => {

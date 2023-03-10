@@ -1,39 +1,39 @@
 $(document).ready(function () {
     const userdata = JSON.parse(localStorage.getItem("userInfo"));
     $(".user-Mobile-label").html(userdata.phone);
-    $("input").each(function () {
-        $(this).on("input", function () {
+    // $("input").each(function () {
+    //     $(this).on("input", function () {
 
-            if ($(this).val().length == 1) {
-                if (isNaN($(this).val()) == false) {
-                    $(this).next().focus();
-                } else {
-                    $(this).val("");
-                }
-            }
+    //         if ($(this).val().length == 1) {
+    //             if (isNaN($(this).val()) == false) {
+    //                 $(this).next().focus();
+    //             } else {
+    //                 $(this).val("");
+    //             }
+    //         }
 
-        });
+    //     });
 
-        // detect key code
-        $(this).keyup(function (event) {
-            if (event.keyCode === 8 || event.keyCode == 46) {
-                $(this).prev().focus();
-            }
-        });
+    //     // detect key code
+    //     $(this).keyup(function (event) {
+    //         if (event.keyCode === 8 || event.keyCode == 46) {
+    //             $(this).prev().focus();
+    //         }
+    //     });
 
-    });
+    // });
 
-    $("input").each(function () {
-        $(this).on("input", function () {
-            $(this).css({ "border": "1px solid #ccc" });
-        })
-        $(this).on("focus", function () {
-            $(this).css({ "border": "1px solid #ccc" });
-        })
-        $(this).click(function () {
-            $(this).css({ "border": "1px solid #ccc" });
-        })
-    });
+    // $("input").each(function () {
+    //     $(this).on("input", function () {
+    //         $(this).css({ "border": "1px solid #ccc" });
+    //     })
+    //     $(this).on("focus", function () {
+    //         $(this).css({ "border": "1px solid #ccc" });
+    //     })
+    //     $(this).click(function () {
+    //         $(this).css({ "border": "1px solid #ccc" });
+    //     })
+    // });
 
 
     function sendCode() {
@@ -89,7 +89,7 @@ $(document).ready(function () {
                                 $(".verify-btn").prop("disabled", false);
                                 $(".verify-btn").html(`Verify`);
                             }, error: function (error) {
-                                app.alert(error.status, "Somthing went wrong , please try again later");
+                                app.alert(400, "Somthing went wrong , please try again later");
                                 $(".verify-btn").prop("disabled", false);
                                 $(".verify-btn").html(`Verify`);
                             }
@@ -97,7 +97,7 @@ $(document).ready(function () {
                     });
                 }, error: function (error) {
                     app.alert(error.status, "Faild to send verification code!, please try again")
-                    window.location = "/dashboard";
+                    // window.location = "/dashboard";
                 }
             }
         )
