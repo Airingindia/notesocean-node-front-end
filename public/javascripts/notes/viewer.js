@@ -1,4 +1,6 @@
 var myModal = new bootstrap.Modal(document.getElementById('adsModal'));
+myModal.show();
+(adsbygoogle = window.adsbygoogle || []).push({});
 function showPdf() {
     document.addEventListener("adobe_dc_view_sdk.ready", function () {
         var adobeDCView = new AdobeDC.View({ clientId: document.querySelector("#pdfShow").getAttribute("data-client"), divId: "pdfShow" });
@@ -21,17 +23,14 @@ function showPdf() {
                 apis.getPDFMetadata()
                     .then(result => {
                         totalPages = result.numPages;
-                        myModal.hide();
+                        // myModal.hide();
                     })
                     .catch(error => myModal.hide());
             }).catch(error => myModal.hide());
         });
     });
 }
-
-
-
-myModal.show();
-(adsbygoogle = window.adsbygoogle || []).push({});
-
 showPdf();
+
+
+
