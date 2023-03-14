@@ -1,6 +1,6 @@
-var myModal = new bootstrap.Modal(document.getElementById('adsModal'));
-myModal.show();
-(adsbygoogle = window.adsbygoogle || []).push({});
+// var myModal = new bootstrap.Modal(document.getElementById('adsModal'));
+// myModal.show();
+// (adsbygoogle = window.adsbygoogle || []).push({});
 function showPdf() {
     document.addEventListener("adobe_dc_view_sdk.ready", function () {
         var adobeDCView = new AdobeDC.View({ clientId: document.querySelector("#pdfShow").getAttribute("data-client"), divId: "pdfShow" });
