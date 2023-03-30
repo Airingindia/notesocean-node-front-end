@@ -7,14 +7,23 @@ nav.desktop-navbar
     .desktop-navbar-item.brand
       a(href="/")
         img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="notes ocean logo")
-    .desktop-navbar-item.search.search-box(class= home === "/" ? "d-none" : "")
-      form(method="GET" action="/search").w-100
-        .input-group
-          input.form-control(type='search'  value=query placeholder="Search notes" aria-label="search" aria-describedby='search' name="query",required)
-          span#basic-addon2.input-group-text 
-            button(type="submit").btn.p-0
-              i.fa.fa-search
-    .desktop-navbar-item.navigation
+    
+    div.form.search
+        form(action='/search')
+        input.input(type='text' placeholder='Search notes...' name='query',required)
+        span.searchIcon(type='submit')
+          i.fa.fa-search  
+     
+          
+    //- .desktop-navbar-item.search.search-box(class= home === "/" ? "d-none" : "")
+    //-   form(method="GET" action="/search").w-100
+    //-     .input-group
+    //-       input.form-control(type='search'  value=query placeholder="Search notes" aria-label="search" aria-describedby='search' name="query",required)
+    //-       span#basic-addon2.input-group-text 
+    //-         button(type="submit").btn.p-0
+    //-           i.fa.fa-search 
+    
+    .desktop-navbar-item.navigation 
       ul
         li
           a(href='/subjects')
@@ -114,3 +123,21 @@ nav.mobile-navbar
     form(action="/search" method="GET")
       input(type="search" value=query placeholder="Search Notes" name="query",required).form-control.rounded-0
       button.btn.btn-danger.rounded-0(type="submit") Search
+
+
+  script.
+      var flag = false;
+      window.addEventListener('scroll', function() {
+        var myContent = document.getElementsByClassName('form');
+        var scrollPosition = window.scrollY;
+        console.log("line130",scrollPosition,myContent[0]) 
+        if (scrollPosition > 390) {
+          myContent[0].style = ''
+
+          flag = true
+        } else {
+          myContent[0].style = 'display:none'
+
+          flag =false
+        }
+      })

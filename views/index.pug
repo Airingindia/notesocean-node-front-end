@@ -60,10 +60,11 @@ html(lang="en-US")
           br
           span to find perfect notes for every subjects , chapters &amp; courses.
         br
-        form.example.animate__animated.animate__fadeInUp(action='/search')
-          input(type='text' placeholder='search your notes' name='query',required)
-          button(type='submit')
-            i.fa.fa-search
+        div.form.search(action='/search')
+        form
+        input.input(type='text' placeholder='Search notes...' name='query',required)
+        span.searchIcon(type='submit')
+          i.fa.fa-search
         .realted-searches.mt-2.d-none
           a(href="/search?query=engineering").text-danger.mx-3
             small Engineeering Notes
@@ -80,7 +81,7 @@ html(lang="en-US")
       .container.py-5
         h3 Most Viewed 
           span.color-red Notes
-        small These are some of the most viewed
+        small These are some of the most viewed 
         //- small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
         //-   a(href="/notes/most-viewed").color-red View All
         .row
