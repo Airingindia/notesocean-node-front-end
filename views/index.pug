@@ -60,11 +60,12 @@ html(lang="en-US")
           br
           span to find perfect notes for every subjects , chapters &amp; courses.
         br
-        div.form.search(action='/search')
-        form
-        input.input(type='text' placeholder='Search notes...' name='query',required)
-        span.searchIcon(type='submit')
-          i.fa.fa-search
+        div.form.search
+          form.form.search(action='/search')
+            input.input(type='text' placeholder='Search notes...' name='query',required)
+            button(type='submit' style="background: transparent; border:none;")
+              span.searchIcon
+                i.fa.fa-search
         .realted-searches.mt-2.d-none
           a(href="/search?query=engineering").text-danger.mx-3
             small Engineeering Notes
@@ -76,6 +77,8 @@ html(lang="en-US")
             small CBSE Notes
           a(href="/search?query=ncrt").text-danger.mx-3 
             small NCRT Notes
+
+    
 
     section.most-viewd-notes.wow
       .container.py-5

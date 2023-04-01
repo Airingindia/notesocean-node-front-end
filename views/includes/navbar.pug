@@ -8,11 +8,11 @@ nav.desktop-navbar
       a(href="/")
         img(src="https://static.ncdn.in/public/images/dash-logo.svg" alt="notes ocean logo")
     
-    div.form.search
-        form(action='/search')
-        input.input(type='text' placeholder='Search notes...' name='query',required)
-        span.searchIcon(type='submit')
-          i.fa.fa-search  
+    form.form.searchTop(action='/search')
+      input.input(type='text' placeholder='Search notes...' name='query',required)
+      button(type='submit' style="background: transparent; border:none;")
+        span.searchIcon
+          i.fa.fa-search
      
           
     //- .desktop-navbar-item.search.search-box(class= home === "/" ? "d-none" : "")
@@ -130,9 +130,9 @@ nav.mobile-navbar
       window.addEventListener('scroll', function() {
         var myContent = document.getElementsByClassName('form');
         var scrollPosition = window.scrollY;
-        console.log("line130",scrollPosition,myContent[0]) 
+        console.log("line130",scrollPosition,myContent[0].style) 
         if (scrollPosition > 390) {
-          myContent[0].style = ''
+          myContent[0].style = 'display:block'
 
           flag = true
         } else {
