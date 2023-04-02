@@ -200,7 +200,6 @@ router.get("/collections/:collecton_id", async (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
 	const query = req.query.query;
-	console.log("working",query);
 	if (query == undefined) {
 		return res.redirect("/");
 	}
@@ -220,6 +219,10 @@ router.get("/search", (req, res, next) => {
 		});
 });
 
+router.get("/top-notes", (req, res, next) => {
+	console.log("line2233");
+	res.render("topnotes/top-notes");
+});
 router.get("/privacy-policies", (req, res, next) => {
 	res.render("information-pages/privacy");
 });
