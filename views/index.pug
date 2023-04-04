@@ -80,88 +80,91 @@ html(lang="en-US")
 
     section
       div.category-selector
-        p.category-heading
-          a(href='/top-notes') Top Performing
-        p.category-heading Recent Uploads 
-        p.category-heading For you 
-        p.category-heading Subjects 
-        p.category-heading Courses 
+        p.category-heading(data-class='view-top-performing') Top Performing
+        p.category-heading(data-class='view-recent-uploads') Recent Uploads 
+        p.category-heading(data-class='view-for-you') Suggested Notes 
+        p.category-heading(data-class='subjects-view') Subjects 
+        p.category-heading(data-class='courses-view') Courses 
+    
+    
 
-    //- section.most-viewd-notes.wow
-    //-   .container.py-5
-    //-     h3 Top Performing Notes 
-    //-       span.color-red Notes
-    //-     small These are some of the most viewed 
-    //-     //- small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
-    //-     //-   a(href="/notes/most-viewed").color-red View All
-    //-     .row
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+    
+    section.most-viewd-notes
+      .container.py-5
+        h3 Top Performing 
+          span.color-red Notes
+        small These are some of the most viewed 
+        //- small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
+        //-   a(href="/notes/most-viewed").color-red View All
+        .row
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    //-       .col-md-6.col-lg-4.mt-3.skeleton-live-loader
-    //-         a(href="#")
-    //-           .card.border-0
-    //-             .card-header
-    //-               p 
-    //-             .card-body.p-0
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    //-             .card-footer
-    //-               .notes-profile-cont
-    //-               .user-name-cont
-    //-               .notes-cont-info
-    section.recent-notes.wow
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+
+    section.recent-notes
       .container.py-5
         h3 Recent Uploaded  
           span.color-red Notes
@@ -235,8 +238,81 @@ html(lang="en-US")
                   .user-name-cont
                   .notes-cont-info
 
+    section.personalised-feed
+      .container.py-5
+        h3 Suggested   
+          span.color-red Notes
+        small These are some of the notes based on recent .
+          //- a(href="/notes/recent-uploaded").color-red View All
+        .row
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    section.categories.categories-courses.wow.animate__animated.animate__fadeIn
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+
+    section.categories.categories-courses.animate__animated.animate__fadeIn
       .container.py-5
         h3 Notes By 
           span.color-red Courses
@@ -256,23 +332,24 @@ html(lang="en-US")
 
             -}
 
-    section.categories.categories-subject.wow
+    section.categories.categories-subject
       .container.py-5
         h3 Notes By 
           span.color-red Subjects
         p Find your notes by your subjects 
           a(href="/subjects").color-red View all
         .container-fluid.categories-item-cont
-          .row
-            - let counter = 0;
-            -for(let i = 0;i<12;i++){
-              - counter++;
-              - var item = subjects[Math.floor(Math.random()*subjects.length)];
-                .col-6.col-lg-3.mt-3
-                  a(href="/subjects/"+url.make(item))
-                    .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.py-5.px-1
-                      h6 #{item}
-            -}
+            .row
+              //- - let counter = 0;
+              //- -for(let i = 0;i<subjects.length;i++){
+              //-   - counter++;
+              //-   - var item = subjects[i];
+              //-     .col-6.col-lg-3.mt-3
+              //-       a(href="/subjects/"+url.make(item))
+              //-         .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.py-5.px-1
+              //-           h6 #{item}
+              //- -}
+    
 
     section.javascript-blocked
       div.row.mt-4

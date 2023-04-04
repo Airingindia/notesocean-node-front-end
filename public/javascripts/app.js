@@ -4,7 +4,7 @@ class notesocean {
 		if (currentDomian == "notesocean.com") {
 			return "https://api.notesocean.com";
 		} else {
-			return "http://localhost:8081";
+			return "https://devapi.notesocean.com";
 		}
 	}
 	getToken() {

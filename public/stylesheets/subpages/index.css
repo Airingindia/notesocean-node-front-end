@@ -6,6 +6,12 @@ a {
 	text-decoration: none;
 }
 
+.category-default{
+	display:none !important;
+}
+
+
+
 @media (min-width: 768px) {
 	/* .public-notes-item:hover {
 
@@ -412,6 +418,15 @@ a:hover {
 	border-radius: 0px;
 }
 
+/* personalised feed */
+.personalised-feed .card,
+.personalised-feed .card-header,
+.personalised-feed .card-body,
+.personalised-feed .card-footer {
+	background-color: #ffff;
+	border: none !important;
+	border-radius: 0px;
+}
 /* media queries */
 
 @media (max-width: 768px) {
