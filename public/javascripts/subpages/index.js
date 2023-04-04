@@ -2,8 +2,13 @@ $(document).ready(function () {
     let topNotesHit = false;
     let recentNotesHit = false;
     loadTopNotes()
-
     let element = document.getElementsByClassName('category-heading')
+    const token = app.getToken();
+    
+    if(token==undefined){
+        element[2].style.display = "none"
+    }
+
     element[0].addEventListener("click",()=>{myFunction(0)})
     element[1].addEventListener("click",()=>{myFunction(1)})
     element[2].addEventListener("click",()=>{myFunction(2)})
