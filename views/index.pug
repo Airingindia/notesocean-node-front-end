@@ -60,10 +60,12 @@ html(lang="en-US")
           br
           span to find perfect notes for every subjects , chapters &amp; courses.
         br
-        form.example.animate__animated.animate__fadeInUp(action='/search')
-          input(type='text' placeholder='search your notes' name='query',required)
-          button(type='submit')
-            i.fa.fa-search
+        div.form.search
+          form.form.search(action='/search')
+            input.input(type='text' placeholder='Search notes...' name='query',required)
+            button(type='submit' style="background: transparent; border:none;")
+              span.searchIcon
+                i.fa.fa-search
         .realted-searches.mt-2.d-none
           a(href="/search?query=engineering").text-danger.mx-3
             small Engineeering Notes
@@ -76,11 +78,22 @@ html(lang="en-US")
           a(href="/search?query=ncrt").text-danger.mx-3 
             small NCRT Notes
 
-    section.most-viewd-notes.wow
+    section
+      div.category-selector
+        p.category-heading(data-class='view-top-performing') Top Performing
+        p.category-heading(data-class='view-recent-uploads') Recent Uploads 
+        p.category-heading(data-class='view-for-you') Suggested Notes 
+        p.category-heading(data-class='subjects-view') Subjects 
+        p.category-heading(data-class='courses-view') Courses 
+    
+    
+
+    
+    section.most-viewd-notes
       .container.py-5
-        h3 Most Viewed 
+        h3 Top Performing 
           span.color-red Notes
-        small These are some of the most viewed
+        small These are some of the most viewed 
         //- small Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eaque! 
         //-   a(href="/notes/most-viewed").color-red View All
         .row
@@ -150,7 +163,8 @@ html(lang="en-US")
                   .notes-profile-cont
                   .user-name-cont
                   .notes-cont-info
-    section.recent-notes.wow
+
+    section.recent-notes
       .container.py-5
         h3 Recent Uploaded  
           span.color-red Notes
@@ -224,8 +238,81 @@ html(lang="en-US")
                   .user-name-cont
                   .notes-cont-info
 
+    section.personalised-feed
+      .container.py-5
+        h3 Suggested   
+          span.color-red Notes
+        small These are some of the notes based on recent .
+          //- a(href="/notes/recent-uploaded").color-red View All
+        .row
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
 
-    section.categories.categories-courses.wow.animate__animated.animate__fadeIn
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+          .col-md-6.col-lg-4.mt-3.skeleton-live-loader
+            a(href="#")
+              .card.border-0
+                .card-header
+                  p 
+                .card-body.p-0
+
+                .card-footer
+                  .notes-profile-cont
+                  .user-name-cont
+                  .notes-cont-info
+
+    section.categories.categories-courses.animate__animated.animate__fadeIn
       .container.py-5
         h3 Notes By 
           span.color-red Courses
@@ -245,23 +332,24 @@ html(lang="en-US")
 
             -}
 
-    section.categories.categories-subject.wow
+    section.categories.categories-subject
       .container.py-5
         h3 Notes By 
           span.color-red Subjects
         p Find your notes by your subjects 
           a(href="/subjects").color-red View all
         .container-fluid.categories-item-cont
-          .row
-            - let counter = 0;
-            -for(let i = 0;i<12;i++){
-              - counter++;
-              - var item = subjects[Math.floor(Math.random()*subjects.length)];
-                .col-6.col-lg-3.mt-3
-                  a(href="/subjects/"+url.make(item))
-                    .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.py-5.px-1
-                      h6 #{item}
-            -}
+            .row
+              //- - let counter = 0;
+              //- -for(let i = 0;i<subjects.length;i++){
+              //-   - counter++;
+              //-   - var item = subjects[i];
+              //-     .col-6.col-lg-3.mt-3
+              //-       a(href="/subjects/"+url.make(item))
+              //-         .card.shadow.border-0.text-center.h-100.d-flex.justify-content-center.align-items-center.py-5.px-1
+              //-           h6 #{item}
+              //- -}
+    
 
     section.javascript-blocked
       div.row.mt-4
