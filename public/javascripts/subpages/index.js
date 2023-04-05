@@ -14,6 +14,15 @@ $(document).ready(function () {
     element[2].addEventListener("click",()=>{myFunction(2)})
     element[3].addEventListener("click",()=>{myFunction(3)})
     element[4].addEventListener("click",()=>{myFunction(4)})
+
+    const spanElement1 =    $('.category-selector').children('p').children('span.s1')
+    const spanElement2 =    $('.category-selector').children('p').children('span.s2')
+    const spanElement3 =    $('.category-selector').children('p').children('span.s3')
+    const spanElement4 =    $('.category-selector').children('p').children('span.s4')
+    const spanElement5 =    $('.category-selector').children('p').children('span.s5')
+
+
+
     function myFunction(arg){
 
         if(arg==0){
@@ -22,6 +31,15 @@ $(document).ready(function () {
             $('.categories.categories-subject').addClass('category-default')
             $('.personalised-feed').addClass("category-default")
             $('.most-viewd-notes').removeClass("category-default")
+            
+
+            //active class
+            spanElement1.addClass('selected-tab')
+            spanElement2.removeClass('selected-tab')
+            spanElement3.removeClass('selected-tab')
+            spanElement4.removeClass('selected-tab')
+            spanElement5.removeClass('selected-tab')
+
             loadTopNotes()
         }else if(arg==1){
             $('.most-viewd-notes').addClass("category-default")
@@ -29,6 +47,15 @@ $(document).ready(function () {
             $('.categories.categories-subject').addClass('category-default')
             $('.personalised-feed').addClass("category-default")
             $('.recent-notes').removeClass("category-default")
+
+            //active class
+            spanElement2.addClass('selected-tab')
+            spanElement1.removeClass('selected-tab')
+            spanElement3.removeClass('selected-tab')
+            spanElement4.removeClass('selected-tab')
+            spanElement5.removeClass('selected-tab')
+
+
             loadRecentNotes()
         }else if(arg==2){
             $('.most-viewd-notes').addClass("category-default")
@@ -36,6 +63,15 @@ $(document).ready(function () {
             $('.categories.categories-subject').addClass('category-default')
             $('.recent-notes').addClass("category-default")
             $('.personalised-feed').removeClass("category-default")
+
+            //active class
+            spanElement3.addClass('selected-tab')
+            spanElement1.removeClass('selected-tab')
+            spanElement2.removeClass('selected-tab')
+            spanElement4.removeClass('selected-tab')
+            spanElement5.removeClass('selected-tab')
+
+
             loadForYou()
         }else if(arg==3){
             $('.most-viewd-notes').addClass("category-default")
@@ -43,6 +79,16 @@ $(document).ready(function () {
             $('.recent-notes').addClass("category-default")
             $('.personalised-feed').addClass("category-default")
             $('.categories.categories-subject').removeClass('category-default')
+
+            //active class
+            spanElement4.addClass('selected-tab')
+
+            spanElement1.removeClass('selected-tab')
+            spanElement2.removeClass('selected-tab')
+            spanElement3.removeClass('selected-tab')
+            spanElement5.removeClass('selected-tab')
+
+
             loadSubjects()
         }else if(arg==4){
             $('.most-viewd-notes').addClass("category-default")
@@ -50,6 +96,13 @@ $(document).ready(function () {
             $('.categories.categories-subject').addClass('category-default')
             $('.personalised-feed').addClass("category-default")
             $('.categories.categories-courses').removeClass('category-default')
+
+            //active class
+            spanElement5.addClass('selected-tab')
+            spanElement1.removeClass('selected-tab')
+            spanElement2.removeClass('selected-tab')
+            spanElement3.removeClass('selected-tab')
+            spanElement4.removeClass('selected-tab')
         }else{
 
             console.log(arg)

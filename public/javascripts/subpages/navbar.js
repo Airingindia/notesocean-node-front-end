@@ -6,6 +6,7 @@ $(document).ready(function () {
         $(".dashboard-nav-item img").attr("src", pic);
         $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName);
     }
+    
     if (app.getCookie("token") !== undefined) {
         $(".loading-nav-item").addClass("d-none");
         $(".dashboard-nav-item").removeClass("d-none");

@@ -39,26 +39,62 @@ a {
 }
 
 .banner-search {
-	background-image: url("https://static.ncdn.in/public/images/notebook.svg");
-	height: 68vh;
+	/* background-image: url("https://static.ncdn.in/public/images/notebook.svg"); */
+	height: 40vh;
 	background-repeat: no-repeat;
 	background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 60px;
+	margin-top: 94px;
+	margin-bottom: 20px;
 }
 
 .category-selector {
 	background-color: white;
 	display: flex;
-	justify-content: left;
+	justify-content: space-evenly;
+	
 }
 
 .category-heading {
-	padding-left: 8%;
-	padding-top: 1%;
+	/* padding-left: 8%; */
 	color: red;
+	white-space: nowrap;
+    text-align: center
+}
+
+
+.vertical-divider {
+	border-left: 1px solid #e0e0e0;
+	height: 100%;
+}
+
+.separator {
+    display: inline-block;
+    margin: 0 40px;
+    border-left: 2px solid #e0e0e0;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+.products-tabs{
+	display: flex;
+    justify-content: center;
+
+	/* position:sticky;
+	top:68px;
+	z-index: 68; */
+
+	/* margin-right: 6%; */
+    /* padding: 0; */
+    /* margin-left: 10%; */
+}
+
+.selected-tab {
+	border-bottom: 2px solid #e52d27;
+    padding: 6px;
+	/* margin-top:20px */
 }
 
 form.example input[type="text"] {
@@ -106,8 +142,13 @@ form.example::after {
 
 .headings h1 {
 	font-weight: bold;
-	padding-top: 25px;
-	color: white;
+	/* padding-top: 25px; */
+	color: blue
+}
+
+.headings p {
+	font-weight: 500;
+	color: black
 }
 
 .public {
@@ -271,7 +312,7 @@ a:hover {
 
 .animate-charcter {
 	text-transform: uppercase;
-	background-image: linear-gradient(
+	background-image: linear-gradient(	
 		-225deg,
 		#231557 0%,
 		#44107a 29%,
