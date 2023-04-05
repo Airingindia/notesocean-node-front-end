@@ -25,22 +25,22 @@ nav.desktop-navbar
     
     .desktop-navbar-item.navigation 
       ul
-        li
-          a(href='/subjects')
-            //- i.fa.fa-hand-holding-hand
-            span  Subjects
-        li
-          a(href='/courses')
-            //- i.fa.fa-hand-holding-hand
-            span  Courses
+        //- li
+        //-   a(href='/subjects')
+        //-     //- i.fa.fa-hand-holding-hand
+        //-     span  Subjects
+        //- li
+        //-   a(href='/courses')
+        //-     //- i.fa.fa-hand-holding-hand
+        //-     span  Courses
         li
           a(href='/request')
             //- i.fa.fa-hand-holding-hand
             span  Request
-        li
-          a(href='/upload')
-            //- i.fa.fa-cloud-upload
-            span  Upload
+        //- li
+        //-   a(href='/upload')
+        //-     //- i.fa.fa-cloud-upload
+        //-     span  Upload
 
         li
           a(href='/quick-notes/new')
@@ -48,9 +48,13 @@ nav.desktop-navbar
             span  Quick Notes
 
         li.d-none.login-navbar-item
-          a(href='/login').btn.btn-outline-secondary.btn-grad-nav-login-dash
+          a(href='/login').login-button
             //- i.fa.fa-user
             span    Login
+        li.d-none.login-navbar-item
+          a(href='/signup').btn.btn-outline-secondary.btn-grad-nav-login-dash
+            //- i.fa.fa-user
+            span    SignUp
         li.loading-nav-item
           a(href='#').btn.btn-outline-secondary
             i.fa.fa-spinner.fa-spin
@@ -131,7 +135,7 @@ nav.mobile-navbar
         var myContent = document.getElementsByClassName('form');
         var scrollPosition = window.scrollY;
         console.log("line130",scrollPosition,myContent[0].style) 
-        if (scrollPosition > 390) {
+        if (scrollPosition > 280) {
           myContent[0].style = 'display:block'
 
           flag = true

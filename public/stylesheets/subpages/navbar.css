@@ -159,23 +159,24 @@ input:focus {
 		#e52d27 0%,
 		#b31217 51%,
 		#e52d27 100%
-	);
+	); 
 	transition: 0.5s;
 	background-size: 200% auto;
 	color: white;
-	box-shadow: 0 0 20px #eee;
+	 box-shadow: 0 0 20px #eee;
 	border: none;
 }
 
 .btn-grad-nav-login-dash span {
+	font-weight: 500;
 	color: white;
 }
 
-.btn-grad-nav-login-dash:hover {
-	background-position: right center;
-	/* change the direction of the change here */
-	color: #fff;
-	text-decoration: none;
+
+
+.login-button {
+	font-weight: 600;
+	color:red !important
 }
 
 .btn-grad-nav-upload {
