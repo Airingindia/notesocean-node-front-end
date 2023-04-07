@@ -154,24 +154,35 @@ input:focus {
 }
 
 .btn-grad-nav-login-dash {
-	background-image: linear-gradient(
+	/* background-image: linear-gradient(
 		to right,
 		#e52d27 0%,
 		#b31217 51%,
 		#e52d27 100%
 	); 
-	transition: 0.5s;
-	background-size: 200% auto;
+	transition: 0.5s; */
+	/* background-size: 200% auto; */
+	background-color: white;
+	/* box-shadow: 10px 10px 4  red; */
 	color: white;
 	 box-shadow: 0 0 20px #eee;
 	border: none;
 }
 
-.btn-grad-nav-login-dash span {
-	font-weight: 500;
-	color: white;
+
+.btn-outline-{
+	color:white !important
 }
 
+.btn-grad-nav-login-dash span {
+	font-weight: 500;
+	color: red;
+}
+
+/* .btn-grad-nav-login-dash span:hover {
+	font-weight: 500;
+	color: white;
+} */
 
 
 .login-button {
@@ -197,12 +208,12 @@ input:focus {
 	color: white;
 }
 
-.btn-grad-nav-upload:hover {
+.btn-grad-nav-upload:hover {  
 	background-position: right center;
 	/* change the direction of the change here */
 	color: #fff;
 	text-decoration: none;
-}
+}    
 
 /* mobile navbar css */
 

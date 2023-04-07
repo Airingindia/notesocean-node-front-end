@@ -20,6 +20,7 @@ $(document).ready(function () {
     const spanElement3 =    $('.category-selector').children('p').children('span.s3')
     const spanElement4 =    $('.category-selector').children('p').children('span.s4')
     const spanElement5 =    $('.category-selector').children('p').children('span.s5')
+    spanElement1.addClass('selected-tab')
 
 
 
