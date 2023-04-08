@@ -20,6 +20,26 @@ $(document).ready(function () {
     const spanElement3 =    $('.category-selector').children('div').children('span.s3')
     const spanElement4 =    $('.category-selector').children('div').children('span.s4')
     const spanElement5 =    $('.category-selector').children('div').children('span.s5')
+
+    function wrapLongText(string , limit) {
+        var dots = "...";
+        if(string.length > limit)
+        {
+            // you can also use substr instead of substring
+            string = string.substring(0,limit) + dots;
+        }
+        return string;
+      }
+
+
+      function bytesToMb(bytes) {
+        /*
+        Converts a number of bytes to megabytes.
+        */
+        const mb = bytes / 1048576;
+        return mb.toFixed(2)+" "+'mb';
+      }
+      
     spanElement1.addClass('selected-tab')
 
 
@@ -154,13 +174,17 @@ $(document).ready(function () {
                         adshow++;
                         if (adshow == 4 && domain == "notesocean.com") {
                             adshow = 0;
-                            $(".most-viewd-notes .row").append(`
-                            <div class="col-lg-4 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
-                            <ins class="adsbygoogle"
-                            style="display:inline-block;width:336px;height:280px"
-                            data-ad-client="ca-pub-3834928493837917"
-                            data-ad-slot="1394357315"></ins>
-                            </div>`);
+                            $(".most-viewd-notes .row").append
+                            (
+                            `<div class="col-lg-4 col-sm-6 mt-3">
+                                <div class=' h-100 border-dark short-notes-details-container'>
+                                    <ins class="adsbygoogle"
+                                    style="display:inline-block;width:336px;height:280px"
+                                    data-ad-client="ca-pub-3834928493837917"
+                                    data-ad-slot="1394357315"></ins>
+                                </div>
+                            </div>`
+                            );
                             try {
                                 (adsbygoogle = window.adsbygoogle || []).push({});
                             } catch (e) {
@@ -207,15 +231,16 @@ $(document).ready(function () {
                                   <div class='notes-stats dot'>&#x2022;</div>
                                   <div class='notes-stats view'>${views} views</div>
                                   <div class='notes-stats dot'>&#x2022;</div>
-                                  <div class='notes-stats size'>${size}</div>
+                                  <div class='notes-stats size'>${bytesToMb(size)} </div>
                                 </div>
                                 <div class="bookmark-conatiner">
                                   <div class='bookmark'><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
                                 </div>
                               </div>
                               <div class='notes-details'>
-                                  <div class='notes-header'>${name}</div>
-                                  <div class='notes-describtion'>${describtion}</div>
+                                  <div class='notes-header'>${wrapLongText(name,80)}</div>
+                                  
+                                  <div class='notes-describtion'>${wrapLongText(describtion,150)}</div>
                               </div>
                             </div>
                           </div>
@@ -272,25 +297,58 @@ $(document).ready(function () {
                         let name = data.requested[i].name;
                         let pages = data.requested[i].pages;
                         let thumbnails = data.requested[i].thumbnails;
+                        let size = data.requested[i].size;
+                        let describtion = data.requested[i].description;
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
-                        let mainthumbail = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
-                        var img1 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
-
-                        var img2 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
-
-                        var img3 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                        let username = data.requested[i].users.firstName + " " + data.requested[i].users.lastName;
+                        let userprofileImage = data.requested[i].users.profileImage; 
 
 
-                        let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
-                <div class="card shadow border-0 h-100">
-                    <div class="card-header">  ${name}</div>
-                    <div class="card-body p-0"><img class="card-img-top lozad" loading="lazy"  src="${mainthumbail}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" /></div>
-                    <div class="card-footer">
-                        <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
-                    </div>
-                </div>
-            </a></div>`;
+                        let content=` <div class='col-lg-4 col-sm-6 mt-3'><a href="/notes/${product_id}">
+                        <div class=" h-100 border-dark short-notes-details-container">
+                          
+                            <div class='user-profile-details-container'>
+                              <div class='user-profile-image'>
+                                <img class='user-image' src=${userprofileImage.split(",")[0].replace("https://thumbnails.ncdn.in","https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                              </div>
+                              <div class='user-info-container'>
+                                
+                                <div class='user-profile-details'>
+                                    <div class='user-profile name'>${username}</div>
+                                    <div class='user-profile dot'>&#x2022;</div>
+                                    <div class='user-profile timeline'>${timestamp}</div>
+                                </div>
+                                <div class='user-profile-organisation'></div>
+                              </div>
+                            </div> 
+                            
+                            <div class='notes'>
+                                <img class='product-img' src=${thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                            </div>
+                            
+                            <div class='notes-details-conatiner'>
+                              <div class='notes-page-details-container'>
+                                <div class='notes-view-details'>
+                                  <div class='notes-stats page-size'>${pages} pages</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats view'>${views} views</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats size'>${bytesToMb(size)} </div>
+                                </div>
+                                <div class="bookmark-conatiner">
+                                  <div class='bookmark'><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+                                </div>
+                              </div>
+                              <div class='notes-details'>
+                                  <div class='notes-header'>${wrapLongText(name,80)}</div>
+                                  
+                                  <div class='notes-describtion'>${wrapLongText(describtion,150)}</div>
+                              </div>
+                            </div>
+                          </div>
+              
+                      </div>`
                         $(".recent-notes .row").append(content);
                     }
                 }
@@ -374,29 +432,62 @@ $(document).ready(function () {
                             }
 
                         }
+
                         let product_id = data.requested[i].uuid;
                         let name = data.requested[i].name;
                         let pages = data.requested[i].pages;
                         let thumbnails = data.requested[i].thumbnails;
+                        let size = data.requested[i].size;
+                        let describtion = data.requested[i].description;
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
-                        let mainthumbail = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
-                        var img1 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                        let username = data.requested[i].users.firstName + " " + data.requested[i].users.lastName;
+                        let userprofileImage = data.requested[i].users.profileImage; 
 
-                        var img2 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
-
-                        var img3 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
-
-
-                        let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
-                <div class="card shadow border-0 h-100">
-                    <div class="card-header">  ${name}</div>
-                    <div class="card-body p-0"><img class="card-img-top lozad" loading="lazy"  src="${mainthumbail}"  srcset="${img1} 320w,${img2} 480w,${img3} 800w",sizes="(max-width: 320px) 280px,(max-width: 480px) 440px,800px" /></div>
-                    <div class="card-footer">
-                        <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
-                    </div>
-                </div>
-            </a></div>`;
+                        let content=` <div class='col-lg-4 col-sm-6 mt-3'><a href="/notes/${product_id}">
+                        <div class=" h-100 border-dark short-notes-details-container">
+                          
+                            <div class='user-profile-details-container'>
+                              <div class='user-profile-image'>
+                                <img class='user-image' src=${userprofileImage?.split(",")[0].replace("https://thumbnails.ncdn.in","https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                              </div>
+                              <div class='user-info-container'>
+                                
+                                <div class='user-profile-details'>
+                                    <div class='user-profile name'>${username}</div>
+                                    <div class='user-profile dot'>&#x2022;</div>
+                                    <div class='user-profile timeline'>${timestamp}</div>
+                                </div>
+                                <div class='user-profile-organisation'></div>
+                              </div>
+                            </div> 
+                            
+                            <div class='notes'>
+                                <img class='product-img' src=${thumbnails?.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                            </div>
+                            
+                            <div class='notes-details-conatiner'>
+                              <div class='notes-page-details-container'>
+                                <div class='notes-view-details'>
+                                  <div class='notes-stats page-size'>${pages} pages</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats view'>${views} views</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats size'>${bytesToMb(size)} </div>
+                                </div>
+                                <div class="bookmark-conatiner">
+                                  <div class='bookmark'><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+                                </div>
+                              </div>
+                              <div class='notes-details'>
+                                  <div class='notes-header'>${wrapLongText(name,80)}</div>
+                                  
+                                  <div class='notes-describtion'>${wrapLongText(describtion,150)}</div>
+                              </div>
+                            </div>
+                          </div>
+              
+                      </div>`
                         $(".personalised-feed .row").append(content);
                     }
                 }

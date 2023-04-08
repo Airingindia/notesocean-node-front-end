@@ -601,3 +601,11 @@ max-height: 250px;
 width: 100%;
 /* object-fit: cover; */
 }
+
+.wrap {
+	display:inline-block;
+	white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+	width:100%
+  }
