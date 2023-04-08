@@ -171,17 +171,73 @@ $(document).ready(function () {
                         let name = data.requested[i].name;
                         let pages = data.requested[i].pages;
                         let thumbnails = data.requested[i].thumbnails;
+                        let size = data.requested[i].size;
+                        let describtion = data.requested[i].description;
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
-                        let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
-                    <div class="card shadow border-0 h-100">
-                        <div class="card-header">  ${name}</div>
-                        <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
-                        <div class="card-footer">
-                            <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
-                        </div>
-                    </div>
-                </a></div>`;
+                        let username = data.requested[i].users.firstName ;
+                        let userprofileImage = data.requested[i].users.profileImage;
+                        console.log("line180",data.requested[i].users)
+
+                //         let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
+                //     <div class="card shadow border-0 h-100">
+                //         <div class="card-header">  
+
+                //             ${name}
+                //         </div>
+                //         <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
+                //         <div class="card-footer">
+                //             <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
+                //         </div>
+                //     </div>
+                // </a></div>`;
+                    
+
+                        let content=` <div class='col-lg-4 col-sm-6 mt-3'><a href="/notes/${product_id}">
+                        <div class="short-notes-details-container">
+                          
+                            <div class='user-profile-details-container'>
+                              <div class='user-profile-image'>
+                                <img class='user-image' src=${userprofileImage.split(",")[0].replace("https://thumbnails.ncdn.in","https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                              </div>
+                              <div class='user-info-container'>
+                                
+                                <div class='user-profile-details'>
+                                    <div class='user-profile name'>${username}</div>
+                                    <div class='user-profile dot'>&#x2022;</div>
+                                    <div class='user-profile timeline'>${timestamp}</div>
+                                </div>
+                                <div class='user-profile-organisation'>GLA University , Mathura</div>
+                              </div>
+                            </div> 
+                            
+                            <div class='notes'>
+                                <img class='product-img' src=${thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x200/filters:format(webp)/filters:quality(100)")} />
+                            </div>
+                            
+                            <div class='notes-details-conatiner'>
+                              <div class='notes-page-details-container'>
+                                <div class='notes-view-details'>
+                                  <div class='notes-stats page-size'>${pages} pages</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats view'>${views} views</div>
+                                  <div class='notes-stats dot'>&#x2022;</div>
+                                  <div class='notes-stats size'>${size}</div>
+                                </div>
+                                <div class="bookmark-conatiner">
+                                  <div class='bookmark'><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+                                </div>
+                              </div>
+                              <div class='notes-details'>
+                                  <div class='notes-header'>${name}</div>
+                                  <div class='notes-describtion'>${describtion}</div>
+                              </div>
+                            </div>
+                          </div>
+              
+                      </div>`
+
+                        
                         $(".most-viewd-notes .row").append(content);
                     }
 
