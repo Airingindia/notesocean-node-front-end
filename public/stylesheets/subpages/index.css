@@ -54,7 +54,26 @@ a {
 	background-color: white;
 	display: flex;
 	justify-content: space-evenly;
+	cursor: pointer;
+	/* overflow-x:scroll; */
 	
+}
+
+::-webkit-scrollbar {
+	display:none; 
+}
+
+@media (max-width:481px) {
+	.category-selector{
+
+		overflow-x: scroll;
+		overflow-y: hidden;
+		padding-bottom:10px;
+		padding-left:10px;
+		padding-right:10px;
+		justify-content: flex-start ;
+		
+	}
 }
 
 .category-heading {
@@ -493,121 +512,92 @@ a:hover {
 
 /* card-design */
 
-/* <div class='class="col-lg-4 col-sm-6 mt-3'>
-          <div class="short-notes-details-container">
-            
-            <div class='user-profile-details-container'>
-              <div class='user-profile-image'>
-                
-              </div>
-              <div class='user-profile-details'>
-                  <div class='user-name'>keshav</div>
-                  <div>&#x2022;</div>
-                  <div class='user-notes-timeline'>3d</div>
-              </div>
-            </div> 
-            
-            <div class='notes'></div>
-            
-            <div class='notes-details-conatiner'>
-              <div class='notes-page-details-container'>
-                <div class='notes-view-details'>
-                  <div class='page-size'></div>
-                  <div class='view'></div>
-                  <div class='size'></div>
-                </div>
-                <div class="bookmark-conatiner">
-                  <div class='bookmark'>#</div>
-                </div>
-              </div>
-              <div class=''></div>
-            </div>
-			</div>
-        </div> */
 
 
-		.short-notes-details-container{
-			height:420px;
-			width:400px;
-			border:1px solid grey;
-			box-shadow:0 4px 5px 0 rgba(0, 0, 0, 0.2);
-			border-radius: 5px;
-		  }
-		  
-		  .user-profile-details-container{
-			padding:5px;
-			display:flex;
-			/* justify-content:center; */
-			align-items:center;
-			width:100%;
-			
-		  }
-		  .user-info-container{
-			margin-left: 6px;
-			
-		  }
-		  .user-image{
-			height:40px;
-			width:40px;
-			border-radius:50%;
-			border:1px solid black;
-		  }
-		  
-		  .user-profile-details{
+.short-notes-details-container{
+/* height:420px;
+width:400px; */
+border:1px solid black !important;
+box-shadow:0 4px 5px 0 rgba(0, 0, 0, 0.2);
+border-radius: 5px !important;
+}
 
-		  }
-		  
-		  .user-profile{
-			display:inline-block;
-			font-size: 1.0em;
-			
-		  }
+.user-profile-details-container{
+padding:5px;
+display:flex;
+/* justify-content:center; */
+align-items:center;
+width:100%;
+
+}
+
+.user-info-container{
+margin-left: 6px;
+
+}
+
+.user-image{
+height:40px;
+width:40px;
+border-radius:50%;
+border:1px solid black;
+}
+
+.user-profile-details{
+
+}
+
+.user-profile{
+display:inline-block;
+font-size: 1.0em;
+
+}
 
 
-		  .user-profile-organisation{
-			margin-top: -7px;
-    		font-size: 0.8rem;
-		  }
+.user-profile-organisation{
+/* margin-top: -7px; */
+font-size: 0.8rem;
+}
 
-		  .dot{
-			margin:0 5px;
-		  }
+.dot{
+margin:0 5px;
+}
 
-		  .notes{
-			height: 53%;
-			/* border: 1px solid; */
-			width: 100%;
-		  }
+.notes{
+/* height: 53%; */
+/* border: 1px solid; */
+/* width: 100%; */
+}
 
-		  .notes-stats{
-			display:inline-block;
-			font-size:0.8rem;
-		  }
+.notes-stats{
+display:inline-block;
+font-size:0.8rem;
+}
 
-		  .notes-page-details-container{
-			display:flex;
-			justify-content:space-between;
-			align-items: center;
-			padding: 6px;
-		  }
-		  
-		  .notes-details{
-			padding:6px;
-		  }
+.notes-page-details-container{
+display:flex;
+justify-content:space-between;
+align-items: center;
+padding: 6px;
+}
 
-		  .notes-header{
-			padding-bottom: 5px;
-			color: red;
-			font-weight: 500;
-		  }
+.notes-details{
+padding:6px;
+}
 
-		  .notes-describtion{
-			font-size: 0.8rem;
-			font-weight: 500;
-		  }
+.notes-header{
+padding-bottom: 5px;
+color: red;
+font-weight: 500;
+}
 
-		  .product-img{
-			height: 100%;
-			width: 100%;
-		  /* object-fit: cover; */
-		  }
+.notes-describtion{
+font-size: 0.8rem;
+font-weight: 500;
+}
+
+.product-img{
+max-height: 250px;
+width: 100%;
+/* object-fit: cover; */
+}
