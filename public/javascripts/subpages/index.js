@@ -15,11 +15,11 @@ $(document).ready(function () {
     element[3].addEventListener("click",()=>{myFunction(3)})
     element[4].addEventListener("click",()=>{myFunction(4)})
 
-    const spanElement1 =    $('.category-selector').children('p').children('span.s1')
-    const spanElement2 =    $('.category-selector').children('p').children('span.s2')
-    const spanElement3 =    $('.category-selector').children('p').children('span.s3')
-    const spanElement4 =    $('.category-selector').children('p').children('span.s4')
-    const spanElement5 =    $('.category-selector').children('p').children('span.s5')
+    const spanElement1 =    $('.category-selector').children('div').children('span.s1')
+    const spanElement2 =    $('.category-selector').children('div').children('span.s2')
+    const spanElement3 =    $('.category-selector').children('div').children('span.s3')
+    const spanElement4 =    $('.category-selector').children('div').children('span.s4')
+    const spanElement5 =    $('.category-selector').children('div').children('span.s5')
     spanElement1.addClass('selected-tab')
 
 
@@ -175,26 +175,11 @@ $(document).ready(function () {
                         let describtion = data.requested[i].description;
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
-                        let username = data.requested[i].users.firstName ;
-                        let userprofileImage = data.requested[i].users.profileImage;
-                        console.log("line180",data.requested[i].users)
-
-                //         let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
-                //     <div class="card shadow border-0 h-100">
-                //         <div class="card-header">  
-
-                //             ${name}
-                //         </div>
-                //         <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
-                //         <div class="card-footer">
-                //             <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
-                //         </div>
-                //     </div>
-                // </a></div>`;
-                    
+                        let username = data.requested[i].users.firstName + " " + data.requested[i].users.lastName;
+                        let userprofileImage = data.requested[i].users.profileImage;                    
 
                         let content=` <div class='col-lg-4 col-sm-6 mt-3'><a href="/notes/${product_id}">
-                        <div class="short-notes-details-container">
+                        <div class=" h-100 border-dark short-notes-details-container">
                           
                             <div class='user-profile-details-container'>
                               <div class='user-profile-image'>
@@ -207,7 +192,7 @@ $(document).ready(function () {
                                     <div class='user-profile dot'>&#x2022;</div>
                                     <div class='user-profile timeline'>${timestamp}</div>
                                 </div>
-                                <div class='user-profile-organisation'>GLA University , Mathura</div>
+                                <div class='user-profile-organisation'></div>
                               </div>
                             </div> 
                             
