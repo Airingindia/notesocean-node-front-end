@@ -4,6 +4,7 @@ const homeControllers = require("../controllers/home.controller");
 const profileControllers = require("../controllers/profile.controller");
 const urlMaker = require("../services/url.services");
 const timeService = require("../services/time.services");
+const bytesToMbService = require("../services/bytesToMb.services");
 const productControllers = require("../controllers/product.controller");
 const collectionController = require("../controllers/collection.controller");
 const socketServices = require("../services/socket.services");
@@ -211,6 +212,7 @@ router.get("/search", (req, res, next) => {
 				data: product,
 				query: query,
 				time: timeService,
+				bytesToMb:bytesToMbService
 			});
 		})
 		.catch((err) => {

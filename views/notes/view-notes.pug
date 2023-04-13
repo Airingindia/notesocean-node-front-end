@@ -68,64 +68,124 @@ html
                 .left
                     ins.adsbygoogle(style='display:block' data-ad-client='ca-pub-3834928493837917' data-ad-slot='9487111197' data-ad-format='auto' data-full-width-responsive='true')
                 .center
-                    .pdf-cont
-                        #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
-                    .info-bar
-                        h1.card-title.product-title.mt-2(style="font-size:18px")=data.products.name
-                        p.prod-desc.collapse.hide=data.products.description
-                        .row.info-row.mt-3.w-100
-                            .col-md-4.py-2
-                                p.card-text.notes-details-text.text-muted
-                                    span
-                                        i.fa.fa-globe.
-                                        small #{data.products.views} views
-                                    span
-                                        i.fa.fa-file
-                                        small #{data.products.pages} pages
-                                    span
-                                        i.fa.fa-clock.
-                                        small #{timeService.get(data.products.timestamp)}
-                            .col-md-8
-                                .icon-group.d-flex.justify-content-end.text-muted.align-items-center
-                                    - if(data.reacts != null && data.reacts.react == "LIKE"){
-                                        .icon-item.mx-3.text-center.react-btn.active(data-action="LIKE" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
-                                            i.fa.fa-thumbs-up
-                                            //- span.icon-text Like
-                                            span.react-count.mx-1 #{data.products.likes}
-                                    - }
-                                    - else{
-                                    .icon-item.mx-3.text-center.react-btn(data-action="LIKE",data-default=data.products.likes)
-                                        i.fa.fa-thumbs-up
-                                        //- span.icon-text Like
-                                        span.react-count.mx-1 #{data.products.likes}
-                                    - }
+                    .col-lg-12.col-sm-12.mt-3
+                        .h-100.border-dark.short-notes-details-container
+                            .notes-product-container
+                                .notes-product-user-profile-image
+                                    img(src=`${data.products.users.profileImage}`).notes-product-user-image
+                                .notes-product-info-container
+                                    .notes-product-user-profile-details
+                                        .notes-product-user-profile.name #{data.products.users.firstName} #{data.products.users.lastName}
+                                        .notes-product-user-profile.dot &bull;
+                                        .notes-product-user-profile.timeline #{timeService.get(data.products.timestamp)}
+                                    .notes-product-user-profile-organisation Gla University , Mathura
+                            .pdf-cont
+                                #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
+                            .notes-product-notes-details-conatiner
+                                .notes-product-notes-page-details-container
+                                    .notes-product-notes-view-details
+                                        - if(data.reacts != null && data.reacts.react == "LIKE"){
+                                            .notes-product-notes-stats.likes-icon.react-btn.active(data-action="LIKE" , title=`You  liked this note ` aria-label="like",data-default=data.products.likes)
+                                                i#iframe2.fa-solid.fa-heart
+                                        - }
+                                        - else{
+                                        .notes-product-notes-stats.likes-icon.react-btn(data-action="LIKE" , title=`You  liked this note ` aria-label="like",data-default=data.products.likes)
+                                            i#iframe1.fa-regular.fa-heart
+                                        - }
+                                        .notes-product-notes-stats.comments-icon
+                                            i.fa-sharp.fa-regular.fa-comment
+                                        .notes-product-notes-stats.share-icon.share-btn
+                                            i.fa-regular.fa-share-from-square
+                                    .bookmark-conatiner
+                                        .bookmark 
+                                            - if(data.bookmark!=null){
+                                                .notes-product-bookmark.bookmark-btn.active(data-action="bookmark") 
+                                                    i#bookmark2.fa-sharp.fa-solid.fa-bookmark
+                                            - }
+                                            - else{
+                                                .notes-product-bookmark.bookmark-btn(data-action="bookmark")
+                                                    i#bookmark1.fa-sharp.fa-regular.fa-bookmark
+                                            - }
+                            .notes-product-notes-stats-details
+                                .notes-product-notes-stats.page-size #{data.products.likes} likes
+                                .notes-product-notes-stats.dot &bull;
+                                .notes-product-notes-stats.view #{bytesToMbService.get(data.products.size)} 
+                                .notes-product-notes-stats.dot &bull;
+                                .notes-product-notes-stats.size #{data.products.pages} pages
+                            .notes-product-notes-details
+                                .notes-product-notes-header #{data.products.name}
+                                .notes-product-notes-describtion #{data.products.description}
+                            .notes-product-comments-containersss
+                                .notes-product-input
+                                    img(src="/images/dummy-user.jpeg" alt="" style="width:35px;height:35px;border-radius:50%").commentator-user-img
+                                    input(type="text" placeholder='Add your comment here...').commentbox-input
 
-                                    - if (data.reacts != null && data.reacts.react == "DISLIKE"){
-                                    .icon-item.mx-3.text-center.react-btn.active(data-action="DISLIKE",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
-                                        i.fa.fa-thumbs-down
-                                        //- span.icon-text Dislike
-                                        span.react-count.mx-1 #{data.products.dislikes}
-                                    - }
-                                    -else{
-                                    .icon-item.mx-3.text-center.react-btn(data-action="DISLIKE",data-default=data.products.dislikes)
-                                        i.fa.fa-thumbs-down
-                                        //- span.icon-text Dislike
-                                        span.react-count.mx-1 #{data.products.dislikes}
-                                    -}
+                                    div.notesocean-plus-icon.comment-add-btn.notes-product-comments-count(type='button')
+                                        i.fa-light.fa-plus
+                                .container
+                                    label.comment-error-notice
+                                .notes-product-comments-count  Comments (#{data.commentsCount})
+                            .cmt-box 
+                            .more-comments-api#increment-btn Load More Comments
 
-                                    .icon-item.mx-3.text-center( aria-label="comments").comment-btn
-                                        i.fa.fa-comment
-                                        //- span.icon-text.mx Comments
-                                        span.comment-length
-                                    .icon-item.mx-3.text-center.report-btn
-                                        i.fa.fa-flag
-                                        span.icon-text Report
-                                    .icon-item.mx-3.text-center.share-btn
-                                        i.fa.fa-share
-                                        span.icon-text Share
-                                    .icon-item.mx-3.text-center.info-button
-                                        i.fa.fa-info-circle
-                                        span.icon-text Info
+                    //- .pdf-cont
+                    //-     #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
+                    //- .info-bar
+                    //-     h1.card-title.product-title.mt-2(style="font-size:18px")=data.products.name
+                    //-     p.prod-desc.collapse.hide=data.products.description
+                    //-     .row.info-row.mt-3.w-100
+                    //-         .col-md-4.py-2
+                    //-             p.card-text.notes-details-text.text-muted
+                    //-                 span
+                    //-                     i.fa.fa-globe.
+                    //-                     small #{data.products.views} views
+                    //-                 span
+                    //-                     i.fa.fa-file
+                    //-                     small #{data.products.pages} pages
+                    //-                 span
+                    //-                     i.fa.fa-clock.
+                    //-                     small #{timeService.get(data.products.timestamp)}
+                    //-         .col-md-8
+                    //-             .icon-group.d-flex.justify-content-end.text-muted.align-items-center
+                    //-                 - if(data.reacts != null && data.reacts.react == "LIKE"){
+                    //-                     .icon-item.mx-3.text-center.react-btn.active(data-action="LIKE" , title=`You  liked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="like",data-default=data.products.likes)
+                    //-                         i.fa.fa-thumbs-up
+                    //-                         //- span.icon-text Like
+                    //-                         span.react-count.mx-1 #{data.products.likes}
+                    //-                 - }
+                    //-                 - else{
+                    //-                 .icon-item.mx-3.text-center.react-btn(data-action="LIKE",data-default=data.products.likes)
+                    //-                     i.fa.fa-thumbs-up
+                    //-                     //- span.icon-text Like
+                    //-                     span.react-count.mx-1 #{data.products.likes}
+                    //-                 - }
+
+                    //-                 - if (data.reacts != null && data.reacts.react == "DISLIKE"){
+                    //-                 .icon-item.mx-3.text-center.react-btn.active(data-action="DISLIKE",data-default=data.products.dislikes,title=`You  disliked this note ${(timeService.get(data.reacts.timestamp))}` aria-label="dislike")
+                    //-                     i.fa.fa-thumbs-down
+                    //-                     //- span.icon-text Dislike
+                    //-                     span.react-count.mx-1 #{data.products.dislikes}
+                    //-                 - }
+                    //-                 -else{
+                    //-                 .icon-item.mx-3.text-center.react-btn(data-action="DISLIKE",data-default=data.products.dislikes)
+                    //-                     i.fa.fa-thumbs-down
+                    //-                     //- span.icon-text Dislike
+                    //-                     span.react-count.mx-1 #{data.products.dislikes}
+                    //-                 -}
+
+                    //-                 .icon-item.mx-3.text-center( aria-label="comments").comment-btn
+                    //-                     i.fa.fa-comment
+                    //-                     //- span.icon-text.mx Comments
+                    //-                     span.comment-length
+                    //-                 .icon-item.mx-3.text-center.report-btn
+                    //-                     i.fa.fa-flag
+                    //-                     span.icon-text Report
+                    //-                 .icon-item.mx-3.text-center.share-btn
+                    //-                     i.fa.fa-share
+                    //-                     span.icon-text Share
+                    //-                 .icon-item.mx-3.text-center.info-button
+                    //-                     i.fa.fa-info-circle
+                    //-                     span.icon-text Info
                             .col-12
                                 a(href=`/profile/${data.products.users.uuid}`)
                                     .d-flex.justify-content-start.align-items-center

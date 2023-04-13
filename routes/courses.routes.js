@@ -4,6 +4,7 @@ require("dotenv").config();
 const api_url = process.env.API_URL;
 const productControllers = require("../controllers/product.controller");
 const timeService = require('../services/time.services');
+const bytesToMbService = require('../services/bytesToMb.services');
 const url = require("./../services/url.services.js");
 const courses = require("./courses.json");
 
@@ -21,6 +22,7 @@ router.get("/:course", (req, res, next) => {
         res.render("courses/view-course", {
             data: product,
             time: timeService,
+            bytesToMb: bytesToMbService,
             course: req.params.course
         });
 

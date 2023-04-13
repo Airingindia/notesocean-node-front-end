@@ -4,6 +4,7 @@ var router = express.Router();
 const api_url = process.env.API_URL;
 const requestController = require("../controllers/request.controller");
 const timeService = require("../services/time.services");
+const bytesToMbService = require("../services/bytesToMb.services");
 const guest = process.env.GUEST_TOKEN;
 router.get("/", (req, res, next) => {
     requestController.getAll().then((requests) => {
@@ -52,7 +53,8 @@ router.get("/:uuid", (req, res, next) => {
         res.render("request/view-request.pug", {
             data: response,
             vieweruuid: Vieweruuid,
-            time: timeService
+            time: timeService ,
+            bytesToMb: bytesToMbService
         });
     }).catch((error) => {
         res.render("notfound");

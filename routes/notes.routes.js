@@ -2,14 +2,17 @@ require("dotenv").config();
 var express = require('express');
 var router = express.Router();
 const timeService = require('../services/time.services');
+const bytesToMbService = require('../services/bytesToMb.services');
 const productControllers = require("../controllers/product.controller");
 const api_url = process.env.API_URL;
 const path = require('path');
 const fs = require('fs');
 const { PDFDocument } = require("pdf-lib");
+
 router.get("/", (req, res, next) => {
     res.redirect("/");
 });
+
 // router.get('/', async (req, res) => {
 //     const pdfpath = path.join(__dirname, 'new.pdf');
 //     fs.readFile(pdfpath, async function (err, data) {
@@ -71,10 +74,11 @@ router.get("/", (req, res, next) => {
 //     res.render("notes/live-reading");
 //     next();
 // });
+
 router.get("/most-viewed", (req, res, next) => {
     productControllers.getMostViewedNotes().then((notes) => {
         res.render("notes/most-viewed", {
-            data: notes, timeService: timeService
+            data: notes, timeService: timeService , bytesToMbService: bytesToMbService
         });
     }).catch((err) => {
         res.status(404).render("notfound");
@@ -101,8 +105,9 @@ router.get("/:id", (req, res, next) => {
             clientid = process.env.ADOBE_CLIENT_ID;
         }
         res.render("notes/view-notes", {
-            data: product, timeService: timeService, api: api_url, token: token, clientid: clientid, view: view
+            data: product, timeService: timeService, bytesToMbService: bytesToMbService, api: api_url, token: token, clientid: clientid, view: view
         });
+
     }).catch((error) => {
         if (error.statusCode == 429) {
             res.status(429);
@@ -115,4 +120,5 @@ router.get("/:id", (req, res, next) => {
         }
     });
 });
+
 module.exports = router;

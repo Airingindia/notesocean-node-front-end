@@ -109,24 +109,55 @@ div#amzn-native-ad-0 {
 }
 
 .commentbox-input {
-    border-left: none !important;
-    border-top: none !important;
+    background-color: lightgrey;
+    color:black !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-radius: 23px;
+    width: 100%;
+    height:100%;
+    margin-left:4px;
+}
+input[type="text"].commentbox-input
+{
+  padding-bottom: 0.4rem;
+}
+::-webkit-input-placeholder{
+    color:black !important;
+    padding-top:60px !important;
+    font-size: 12px !important;
+    
 }
 
+.notes-product-input{
+    
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    margin: 4px;
+    padding: 0 0.5rem 0 0.5rem;
 
+}
 .comment-add-btn:active,
 .comment-add-btn:focus {
-    background: #FF0000 !important;
-    color: white !important;
+    position: absolute;
+    right: 4px;
+    top: 3px;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-    background: #FF0000 !important;
-    color: white !important;
+    position:absolute
 }
 
+.notesocean-plus-icon{
+    position:absolute;
+    top:3px;
+    right:10px;
+}
 
 .pdf-cont {
     height: 70vh;
@@ -233,3 +264,168 @@ div#amzn-native-ad-0 {
         width: 100%;
     }
 }
+
+
+
+
+/* card-design */
+.short-notes-details-container{
+    /* height:420px;
+    width:400px; */
+    border:1px solid black !important;
+    box-shadow:0 4px 5px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px !important;
+    }
+    
+    .notes-product-container{
+    padding:5px;
+    display:flex;
+    /* justify-content:center; */
+    align-items:center;
+    width:100%;
+    
+    }
+    
+    .notes-product-user-info-container{
+    margin-left: 6px;
+    
+    }
+    
+    .notes-product-user-image{
+    height:40px;
+    width:40px;
+    border-radius:50%;
+    border:1px solid black;
+    }
+    
+    .notes-product-user-profile-details{
+        font-weight: 500;
+        
+    }
+    
+    .notes-product-user-profile{
+    display:inline-block;
+    font-size: 1.0em;
+    
+    }
+    
+    
+    .notes-product-user-profile-organisation{
+        margin-top: -3px;
+        font-size: 0.8rem;
+    }
+    
+    .dot{
+    margin:0 3px;
+    }
+    
+    .notes-product-notes{
+    /* height: 53%; */
+    /* border: 1px solid; */
+    /* width: 100%; */
+    }
+    
+    .notes-product-notes-stats{
+    display:inline-block;
+    /* font-size:0.8rem; */
+    }
+    
+    .notes-product-notes-page-details-container{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 6px;
+    margin-left: 0.06rem;
+    }
+    
+    .notes-product-notes-details{
+        padding: 0px 0px 0.3rem 0.7rem;
+    }
+    
+    .notes-product-notes-header{
+    padding-bottom: 5px;
+    color: red;
+    font-weight: 500;
+    }
+    
+    .notes-product-notes-describtion{
+    font-size: 0.8rem;
+    font-weight: 500;
+    }
+    
+    .notes-product-product-img{
+    height: 250px;
+    width: 100%;
+    border:1px solid black
+    /* object-fit: cover; */
+    }
+    
+    .wrap {
+        display:inline-block;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        width:100%
+      }
+    
+    .notes-product-notes-describtion{
+        color:#808080;
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    .notes-product-notes-stats-details{
+        padding-left: 0.8rem;
+    }
+
+
+    .notes-product-comments-container{
+        padding: 5px;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        padding-left: 0.8rem;
+        width: 100%;
+    }
+
+    .notes-product-comments-user-image{
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+
+    .notes-stats{
+        display:inline-block;
+        font-weight: 700;
+        font-size:10px;
+    }
+    .notes-product-comments-info-container{
+        margin-top: -4px;
+        margin-left: 4px;
+    }
+
+    .notes-product-comments-on-post{
+        margin-top: -4px;
+        font-weight: 500;
+        font-size:12px;
+    }
+
+    .notes-product-comments-count{
+        padding-left: 0.8rem;
+    }
+
+    .more-comments-api{
+        text-align: center;
+        font-size: 11px;
+        padding: 5px;
+        cursor:pointer;
+    }
+    .notes-product-comments-containersss{
+        padding-top: 1.5rem;
+    }
+
+    .notes-product-info-container{
+        padding-left: 0.6rem;
+        /* font-size: 0.9rem;
+        font-weight: 600; */
+    }
