@@ -160,6 +160,9 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             url: app.getApi() + "/products/top-performing-products",
+            headers: {
+                Authorization: app.getToken()
+            },
             beforeSend: function () { },
             success: function (data) {
                 $(".most-viewd-notes .row").html("");
@@ -200,9 +203,9 @@ $(document).ready(function () {
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
                         let username = data.requested[i].users.firstName + " " + data.requested[i].users.lastName;
-                        let userprofileImage = data.requested[i].users.profileImage;                    
-
-                        let content=` <div class='col-lg-4 col-sm-6 mt-3'><a href="/notes/${product_id}">
+                        let userprofileImage = data.requested[i].users.profileImage;
+                        let bookmark=data.requested[i].bookmark                    
+                        let content=` <div class='col-lg-3 col-sm-6 mt-3'><a href="/notes/${product_id}">
                         <div class=" h-100 border-dark short-notes-details-container">
                           
                             <div class='user-profile-details-container'>
@@ -234,7 +237,19 @@ $(document).ready(function () {
                                   <div class='notes-stats size'>${bytesToMb(size)} </div>
                                 </div>
                                 <div class="bookmark-conatiner">
-                                  <div class='bookmark'><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+
+                                  <div class='bookmark'>
+                                  ${bookmark!=null?`<div class='bookmark-btn active' data-action='bookmark'>
+                                                     <i id='bookmark2' class='fa-sharp fa-solid fa-bookmark'></i>
+                                                    </div>`
+                                                    :
+                                                    `<div class='bookmark-btn' data-action='bookmark'>
+                                                        <i id='bookmark1' class='fa-sharp fa-regular fa-bookmark'></i>
+                                                    </div>`
+                                    }
+                                  
+
+                                  </div>
                                 </div>
                               </div>
                               <div class='notes-details'>
@@ -418,12 +433,12 @@ $(document).ready(function () {
                         if (adshow == 3 && domain == "notesocean.com") {
                             adshow = 0;
                             $(".personalised-feed .row").append(`
-                        <div class="col-lg-4 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
-                        <ins class="adsbygoogle"
-                        style="display:inline-block;width:336px;height:280px"
-                        data-ad-client="ca-pub-3834928493837917"
-                        data-ad-slot="1394357315"></ins>
-                        </div>`);
+                            <div class="col-lg-4 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
+                            <ins class="adsbygoogle"
+                            style="display:inline-block;width:336px;height:280px"
+                            data-ad-client="ca-pub-3834928493837917"
+                            data-ad-slot="1394357315"></ins>
+                            </div>`);
 
                             try {
                                 (adsbygoogle = window.adsbygoogle || []).push({});
@@ -488,7 +503,8 @@ $(document).ready(function () {
                           </div>
               
                       </div>`
-                        $(".personalised-feed .row").append(content);
+                      
+                      $(".personalised-feed .row").append(content);
                     }
                 }
 
@@ -501,6 +517,8 @@ $(document).ready(function () {
             }
         })
     }
+
+    
 
     var winwidth = $(window).width();
 

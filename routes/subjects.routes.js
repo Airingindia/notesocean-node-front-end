@@ -7,6 +7,8 @@ const subjects = require("./subject.json");
 const url = require("./../services/url.services.js");
 const productControllers = require("../controllers/product.controller");
 const timeService = require('../services/time.services');
+const bytesToMbService = require('../services/bytesToMb.services');
+
 router.get('/', async function (req, res, next) {
     res.render("subjects/all-subjects.pug", {
         subjects: subjects,
@@ -20,7 +22,8 @@ router.get("/:subject", (req, res, next) => {
         res.render("subjects/view-subject", {
             data: product,
             time: timeService,
-            subject: req.params.subject
+            subject: req.params.subject ,
+            bytesToMb: bytesToMbService
         });
     }).catch((err) => {
         res.status(404);
