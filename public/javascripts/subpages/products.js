@@ -277,12 +277,18 @@ $(document).ready(function () {
         });
         // add comment when user hit enter buttons
         $(".commentbox-input").keyup(function (event) {
-            if (event.keyCode === 13) {
+            var token = app.getToken
+            if (event.keyCode === 13 && token!=undefined) {
                 $(".comment-add-btn").click();
+            }else{
+                $(".user-not-login-modal").modal("show");
+
             }
         });
         //  add comment
+        
         $(".notes-product-comments-count").click(function () {
+
             if ($(".commentbox-input").val().length < 200 && $(".commentbox-input").val().length !== 0) {
                 $(".comment-error-notice").html("");
                 $(".comment-error-notice").removeClass("text-danger");
@@ -300,69 +306,79 @@ $(document).ready(function () {
                         profileImage = "/images/dummy/user_dummy.jpg";
                     }
                 } else {
-                    app.alert(400, "somthing went wrong , please try after sometimes");
+                    $(".user-not-login-modal").modal("show");
+
+                    // app.alert(400, "somthing went wrong , please try after sometimes");
                     return false;
                 }
-                $.ajax({
-                    type: "POST",
-                    url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
-                    processData: false,
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        content: $(".commentbox-input").val().trim()
-                    }),
-                    headers: {
-                        Authorization: app.getToken()
-                    }, beforeSend: function () {
-                        $(".comment-add-btn").prop("disabled", true);
-                        $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
-                    },
-                    success: function (data) {
-                        console.log("line321",data);
-                        $(".comment-length").html(Number($(".comment-length").html()) + 1);
-                        $(".commentbox-input").val("");
-                        $(".comment-add-btn").prop("disabled", false);
-                        $(".comment-add-btn").html(`
-                            <i class='fa-light fa-plus'></i>
-                        `);
-                        $(".cmt-box").prepend(`
+                let token = app.getToken();
+                console.log("line313",token);
+                if(token != undefined){
 
-                        <div class="notes-product-comments-container">
-
-                                <div class="notes-product-comments-user-profile-image">
-                                    <img class='notes-product-comments-user-image' src="${profileImage}" alt="" >
-                                </div>
-
-                                <div class="notes-product-comments-info-container">
-
-                                    <div class='notes-product-comments-user-profile-details'>
-
-                                        <div class='notes-product-comments-user-profile notes-stats name'>
-                                            ${firstName} ${lastName}
-                                        </div>
-
-                                        <div class='notes-product-comments-user-profile notes-stats dot'>
-                                            &#x2022
-                                        </div>
-
-                                        <div class='notes-product-comments-user-profile notes-stats timeline'>
-                                        ${getTime(data.timestamp)}
-                                        </div>
-
+                    $.ajax({
+                        type: "POST",
+                        url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
+                        processData: false,
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            content: $(".commentbox-input").val().trim()
+                        }),
+                        headers: {
+                            Authorization: app.getToken()
+                        }, beforeSend: function () {
+                            $(".comment-add-btn").prop("disabled", true);
+                            $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
+                        },
+                        success: function (data) {
+                            console.log("line321",data);
+                            $(".comment-length").html(Number($(".comment-length").html()) + 1);
+                            $(".commentbox-input").val("");
+                            $(".comment-add-btn").prop("disabled", false);
+                            $(".comment-add-btn").html(`
+                                <i class='fa-light fa-plus'></i>
+                            `);
+                            $(".cmt-box").prepend(`
+    
+                            <div class="notes-product-comments-container">
+    
+                                    <div class="notes-product-comments-user-profile-image">
+                                        <img class='notes-product-comments-user-image' src="${profileImage}" alt="" >
                                     </div>
+    
+                                    <div class="notes-product-comments-info-container">
+    
+                                        <div class='notes-product-comments-user-profile-details'>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats name'>
+                                                ${firstName} ${lastName}
+                                            </div>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats dot'>
+                                                &#x2022
+                                            </div>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats timeline'>
+                                            ${getTime(data.timestamp)}
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class='notes-product-comments-on-post'>
+                                            ${data.content}
+                                        </div>
+                                        </div>
+                                    </div>
+                           
+                            `);
+                        },
+                        error: function (err) {
+                            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                        }
+                    })
+                }{
+                    $(".user-not-login-modal").modal("show");
 
-                                    <div class='notes-product-comments-on-post'>
-                                        ${data.content}
-                                    </div>
-                                    </div>
-                                </div>
-                       
-                        `);
-                    },
-                    error: function (err) {
-                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
-                    }
-                })
+                }
             } else if ($(".commentbox-input").val().length > 200) {
                 $(".comment-error-notice").html("Comment should not be more than 200 characters");
                 $(".comment-error-notice").addClass("text-danger");
