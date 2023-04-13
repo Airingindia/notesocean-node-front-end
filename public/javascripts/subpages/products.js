@@ -116,19 +116,22 @@ $(document).ready(function () {
     function loadComments(page) {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments/" + page,
+            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
             beforeSend: function () { },
+            data:{
+                "page":page
+            } ,
             success: function (data) {
                 $(".comment-length").html(data.size);
                 // $(".cmt-box").html("");
                 if (data.length !== 0) {
-                    for (let i = 0; i < data.requested.length; i++) {
-                        let content = data.requested[i].content;
-                        let timestamp = data.requested[i].timestamp;
-                        let firstName = data.requested[i].users.firstName;
-                        let lastName = data.requested[i].users.lastName;
-                        let uuid = data.requested[i].users.uuid;
-                        let userprofileImage = data.requested[i].users.profileImage ? data.requested[i].users.profileImage : "/images/user.png";
+                    for (let i = 0; i < data.content.length; i++) {
+                        let content = data.content[i].content;
+                        let timestamp = data.content[i].timestamp;
+                        let firstName = data.content[i].users.firstName;
+                        let lastName = data.content[i].users.lastName;
+                        let uuid = data.content[i].users.uuid;
+                        let userprofileImage = data.content[i].users.profileImage ? data.content[i].users.profileImage : "/images/user.png";
                         if (userprofileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") != -1) {
                             userprofileImage = userprofileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
                         }
@@ -167,7 +170,7 @@ $(document).ready(function () {
                     }
                 }
 
-                if(data.size==0){
+                if(data.last==true){
                     $(".more-comments-api").css("display","none");
 
                     console.log("check171",data)
@@ -315,6 +318,7 @@ $(document).ready(function () {
                         $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
                     },
                     success: function (data) {
+                        console.log("line321",data);
                         $(".comment-length").html(Number($(".comment-length").html()) + 1);
                         $(".commentbox-input").val("");
                         $(".comment-add-btn").prop("disabled", false);
