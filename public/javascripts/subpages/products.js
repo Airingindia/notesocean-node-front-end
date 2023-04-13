@@ -312,7 +312,6 @@ $(document).ready(function () {
                     return false;
                 }
                 let token = app.getToken();
-                console.log("line313",token);
                 if(token != undefined){
 
                     $.ajax({
@@ -546,6 +545,8 @@ $(document).ready(function () {
         $(".commentbox-input").focus();
     });
 
+   
+
     likeAndDislike();
     toggler();
     commentValidator();
@@ -555,3 +556,19 @@ $(document).ready(function () {
     bookmark();
 });
 
+$(document).ready(function() {
+    // Click event using event delegation
+    $(document).on("click", ".three-dots", function() {
+      // Toggle the display of the options list
+    //   console.log('line563',$(this).siblings(".options-list").toggle())
+      $(".options-list").toggle();
+    });
+  
+    // Click event on the document to hide the options list when clicking outside of it
+    $(document).on("click", function(e) {
+      if (!$(e.target).closest(".options-container").length) {
+        $(".options-list").hide();
+      }
+    });
+  });
+  
