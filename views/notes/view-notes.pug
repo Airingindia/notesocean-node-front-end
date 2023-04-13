@@ -71,14 +71,21 @@ html
                     .col-lg-12.col-sm-12.mt-3
                         .h-100.border-dark.short-notes-details-container
                             .notes-product-container
-                                .notes-product-user-profile-image
+                                .notes-product-user-profile-image.start
                                     img(src=`${data.products.users.profileImage}`).notes-product-user-image
-                                .notes-product-info-container
+                                .notes-product-info-container.start
                                     .notes-product-user-profile-details
                                         .notes-product-user-profile.name #{data.products.users.firstName} #{data.products.users.lastName}
                                         .notes-product-user-profile.dot &bull;
                                         .notes-product-user-profile.timeline #{timeService.get(data.products.timestamp)}
                                     .notes-product-user-profile-organisation Gla University , Mathura
+                                .options-container.end
+                                    span.three-dots &vellip;
+                                        ul.options-list
+                                            li.report-btn Report
+                                            
+
+                                
                             .pdf-cont
                                 #pdfShow.active(data-url=data.products.file, data-name=data.products.name data-client=clientid)
                             .notes-product-notes-details-conatiner
@@ -186,7 +193,7 @@ html
                     //-                 .icon-item.mx-3.text-center.info-button
                     //-                     i.fa.fa-info-circle
                     //-                     span.icon-text Info
-                            .col-12
+                            .col-12 
                                 a(href=`/profile/${data.products.users.uuid}`)
                                     .d-flex.justify-content-start.align-items-center
                                         img(src=data.products.users.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in") alt=data.products.users.firstName).user-image

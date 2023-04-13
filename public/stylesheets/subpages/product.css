@@ -281,8 +281,8 @@ input[type="text"].commentbox-input
     padding:5px;
     display:flex;
     /* justify-content:center; */
-    align-items:center;
-    width:100%;
+    /* align-items:center; */
+    /* width:100%; */
     
     }
     
@@ -429,3 +429,41 @@ input[type="text"].commentbox-input
         /* font-size: 0.9rem;
         font-weight: 600; */
     }
+
+    .notes-product-option{
+        /* display:inline-block */
+    }
+
+    .options-container {
+        position: relative;
+      }
+      
+      .three-dots {
+        cursor: pointer;
+      }
+      
+      .options-list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #fff;
+        list-style: none;
+        padding: 0;
+      }
+      
+      .options-list li {
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+      
+      .start {
+        
+        padding: 6px;
+      }
+
+      .end {
+        padding: 10px;
+        margin-left: auto; /* Use auto margin to push the third child div to the end */
+      }
+      

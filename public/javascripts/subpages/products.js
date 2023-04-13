@@ -116,19 +116,22 @@ $(document).ready(function () {
     function loadComments(page) {
         $.ajax({
             type: "GET",
-            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments/" + page,
+            url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
             beforeSend: function () { },
+            data:{
+                "page":page
+            } ,
             success: function (data) {
                 $(".comment-length").html(data.size);
                 // $(".cmt-box").html("");
                 if (data.length !== 0) {
-                    for (let i = 0; i < data.requested.length; i++) {
-                        let content = data.requested[i].content;
-                        let timestamp = data.requested[i].timestamp;
-                        let firstName = data.requested[i].users.firstName;
-                        let lastName = data.requested[i].users.lastName;
-                        let uuid = data.requested[i].users.uuid;
-                        let userprofileImage = data.requested[i].users.profileImage ? data.requested[i].users.profileImage : "/images/user.png";
+                    for (let i = 0; i < data.content.length; i++) {
+                        let content = data.content[i].content;
+                        let timestamp = data.content[i].timestamp;
+                        let firstName = data.content[i].users.firstName;
+                        let lastName = data.content[i].users.lastName;
+                        let uuid = data.content[i].users.uuid;
+                        let userprofileImage = data.content[i].users.profileImage ? data.content[i].users.profileImage : "/images/user.png";
                         if (userprofileImage.indexOf("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com") != -1) {
                             userprofileImage = userprofileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com", "https://profiles.ncdn.in");
                         }
@@ -167,7 +170,7 @@ $(document).ready(function () {
                     }
                 }
 
-                if(data.size==0){
+                if(data.last==true){
                     $(".more-comments-api").css("display","none");
 
                     console.log("check171",data)
@@ -274,12 +277,18 @@ $(document).ready(function () {
         });
         // add comment when user hit enter buttons
         $(".commentbox-input").keyup(function (event) {
-            if (event.keyCode === 13) {
+            var token = app.getToken
+            if (event.keyCode === 13 && token!=undefined) {
                 $(".comment-add-btn").click();
+            }else{
+                $(".user-not-login-modal").modal("show");
+
             }
         });
         //  add comment
+        
         $(".notes-product-comments-count").click(function () {
+
             if ($(".commentbox-input").val().length < 200 && $(".commentbox-input").val().length !== 0) {
                 $(".comment-error-notice").html("");
                 $(".comment-error-notice").removeClass("text-danger");
@@ -297,68 +306,78 @@ $(document).ready(function () {
                         profileImage = "/images/dummy/user_dummy.jpg";
                     }
                 } else {
-                    app.alert(400, "somthing went wrong , please try after sometimes");
+                    $(".user-not-login-modal").modal("show");
+
+                    // app.alert(400, "somthing went wrong , please try after sometimes");
                     return false;
                 }
-                $.ajax({
-                    type: "POST",
-                    url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
-                    processData: false,
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        content: $(".commentbox-input").val().trim()
-                    }),
-                    headers: {
-                        Authorization: app.getToken()
-                    }, beforeSend: function () {
-                        $(".comment-add-btn").prop("disabled", true);
-                        $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
-                    },
-                    success: function (data) {
-                        $(".comment-length").html(Number($(".comment-length").html()) + 1);
-                        $(".commentbox-input").val("");
-                        $(".comment-add-btn").prop("disabled", false);
-                        $(".comment-add-btn").html(`
-                            <i class='fa-light fa-plus'></i>
-                        `);
-                        $(".cmt-box").prepend(`
+                let token = app.getToken();
+                if(token != undefined){
 
-                        <div class="notes-product-comments-container">
-
-                                <div class="notes-product-comments-user-profile-image">
-                                    <img class='notes-product-comments-user-image' src="${profileImage}" alt="" >
-                                </div>
-
-                                <div class="notes-product-comments-info-container">
-
-                                    <div class='notes-product-comments-user-profile-details'>
-
-                                        <div class='notes-product-comments-user-profile notes-stats name'>
-                                            ${firstName} ${lastName}
-                                        </div>
-
-                                        <div class='notes-product-comments-user-profile notes-stats dot'>
-                                            &#x2022
-                                        </div>
-
-                                        <div class='notes-product-comments-user-profile notes-stats timeline'>
-                                        ${getTime(data.timestamp)}
-                                        </div>
-
+                    $.ajax({
+                        type: "POST",
+                        url: app.getApi() + "/products/" + window.location.pathname.split("/").pop() + "/comments",
+                        processData: false,
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            content: $(".commentbox-input").val().trim()
+                        }),
+                        headers: {
+                            Authorization: app.getToken()
+                        }, beforeSend: function () {
+                            $(".comment-add-btn").prop("disabled", true);
+                            $(".comment-add-btn").html(`<i class="fa fa-spinner fa-spin">  </i>`);
+                        },
+                        success: function (data) {
+                            console.log("line321",data);
+                            $(".comment-length").html(Number($(".comment-length").html()) + 1);
+                            $(".commentbox-input").val("");
+                            $(".comment-add-btn").prop("disabled", false);
+                            $(".comment-add-btn").html(`
+                                <i class='fa-light fa-plus'></i>
+                            `);
+                            $(".cmt-box").prepend(`
+    
+                            <div class="notes-product-comments-container">
+    
+                                    <div class="notes-product-comments-user-profile-image">
+                                        <img class='notes-product-comments-user-image' src="${profileImage}" alt="" >
                                     </div>
+    
+                                    <div class="notes-product-comments-info-container">
+    
+                                        <div class='notes-product-comments-user-profile-details'>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats name'>
+                                                ${firstName} ${lastName}
+                                            </div>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats dot'>
+                                                &#x2022
+                                            </div>
+    
+                                            <div class='notes-product-comments-user-profile notes-stats timeline'>
+                                            ${getTime(data.timestamp)}
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class='notes-product-comments-on-post'>
+                                            ${data.content}
+                                        </div>
+                                        </div>
+                                    </div>
+                           
+                            `);
+                        },
+                        error: function (err) {
+                            app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
+                        }
+                    })
+                }{
+                    $(".user-not-login-modal").modal("show");
 
-                                    <div class='notes-product-comments-on-post'>
-                                        ${data.content}
-                                    </div>
-                                    </div>
-                                </div>
-                       
-                        `);
-                    },
-                    error: function (err) {
-                        app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
-                    }
-                })
+                }
             } else if ($(".commentbox-input").val().length > 200) {
                 $(".comment-error-notice").html("Comment should not be more than 200 characters");
                 $(".comment-error-notice").addClass("text-danger");
@@ -526,6 +545,8 @@ $(document).ready(function () {
         $(".commentbox-input").focus();
     });
 
+   
+
     likeAndDislike();
     toggler();
     commentValidator();
@@ -535,3 +556,19 @@ $(document).ready(function () {
     bookmark();
 });
 
+$(document).ready(function() {
+    // Click event using event delegation
+    $(document).on("click", ".three-dots", function() {
+      // Toggle the display of the options list
+    //   console.log('line563',$(this).siblings(".options-list").toggle())
+      $(".options-list").toggle();
+    });
+  
+    // Click event on the document to hide the options list when clicking outside of it
+    $(document).on("click", function(e) {
+      if (!$(e.target).closest(".options-container").length) {
+        $(".options-list").hide();
+      }
+    });
+  });
+  
