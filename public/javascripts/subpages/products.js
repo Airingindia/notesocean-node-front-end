@@ -277,17 +277,23 @@ $(document).ready(function () {
         });
         // add comment when user hit enter buttons
         $(".commentbox-input").keyup(function (event) {
-            var token = app.getToken
-            if (event.keyCode === 13 && token!=undefined) {
+            
+            if (event.keyCode === 13 ) {
                 $(".comment-add-btn").click();
-            }else{
-                $(".user-not-login-modal").modal("show");
-
             }
         });
         //  add comment
         
         $(".notes-product-comments-count").click(function () {
+            let token = app.getToken();
+            console.log('line 289',token)
+            if(token==undefined || token==null){
+
+                $(".user-not-login-modal").modal("show");
+                return;
+            }
+
+            
 
             if ($(".commentbox-input").val().length < 200 && $(".commentbox-input").val().length !== 0) {
                 $(".comment-error-notice").html("");
@@ -312,7 +318,8 @@ $(document).ready(function () {
                     return false;
                 }
                 let token = app.getToken();
-                if(token != undefined){
+                console.log("line312",token)
+                if(token != undefined || token !== null){
 
                     $.ajax({
                         type: "POST",
@@ -374,9 +381,6 @@ $(document).ready(function () {
                             app.alert(err.status, err?.responseJSON?.message ? err?.responseJSON?.message : "Something went wrong");
                         }
                     })
-                }{
-                    $(".user-not-login-modal").modal("show");
-
                 }
             } else if ($(".commentbox-input").val().length > 200) {
                 $(".comment-error-notice").html("Comment should not be more than 200 characters");
