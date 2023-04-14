@@ -1,6 +1,10 @@
 section.main-section{
-    width: 99%;
+    margin-top:2% !important;
+    /* width: 99%; */
 }
+  
+
+
 
 
 .social-login-btn a {
@@ -11,6 +15,130 @@ section.main-section{
     width: 100%;
 }
 
+.login-form-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding:2.0rem 4.0rem 2.0rem 4.0rem;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border:0.5px solid gray !important;
+    border-radius: 0.3rem;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .login-form-container{
+        padding:2.0rem 1.0rem 2.0rem 1.0rem;
+        border:0px !important;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+
+    }
+}
+    
+
+
+.google-sign-in-container{
+
+}
+
+.continue-with-google-btn{
+    width: 100%;
+    white-space: nowrap;
+    padding: 10px 0px 10px 4.8rem !important;
+
+
+}
+.or-tag-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+}
+.or-tag{
+    font-size: 0.6rem;
+    margin: 0 1.5rem;
+}
+.divider-line{
+  height: 1px; 
+  background-color: lightgray;
+  border: none; 
+  margin: 10px 0;  
+  width: 40%;
+}
+
+.form-style{
+    width:100% !important;
+    border-radius:0.3rem !important ;
+    border: 1px solid black !important;
+}
+
+.form-group{
+    margin:20px 0;
+}
+
+.login-btn{
+    width: 100%;
+    border-radius: 0.3rem;
+    background-color:  red;
+    
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 2.5rem;
+}
+
+
+.login-btn:hover{
+   
+    /* background-color:  red; */
+    
+    
+}
+
+
+.continue-with-google-btn {
+    display: inline-flex; /* Set display property to inline-flex for horizontal alignment */
+    align-items: center; /* Center align the button vertically */
+    padding: 10px 16px; /* Add padding to the button */
+    background-color: #fff; /* Set the background color of the button to white */
+    border: 1px solid #ddd; /* Add a 1px solid border with a light gray color */
+    border-radius: 4px; /* Add border-radius for rounded corners */
+    font-size: 16px; /* Set the font size of the button */
+    color: #000; /* Set the text color to black */
+    text-decoration: none; /* Remove underline from the button text */
+  }
+  
+  .continue-with-google-btn:hover {
+    background-color: #f9f9f9; /* Change the background color on hover for a subtle effect */
+  }
+
+  .login-text{
+        font-size: 1.5rem;
+        font-weight: 500;
+        color:grey
+  }
+  .log-in-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:2rem
+    
+  }
+
+  .notes-ocean-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .bottom-login-options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 h1,
 h2,
 h3,
