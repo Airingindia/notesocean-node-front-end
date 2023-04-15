@@ -5,6 +5,8 @@ class notesocean {
 			return "https://api.notesocean.com";
 		} else {
 			return "https://devapi.notesocean.com";
+			// return "http://192.168.30.10:8081";
+
 		}
 	}
 	getToken() {
