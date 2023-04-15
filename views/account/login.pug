@@ -20,13 +20,14 @@ head
         //-   img(src='/images/animation/38435-register.gif' loading='lazy' alt='signup background')
         .col-lg-4.col-sm-12.col-md-6
           .login-form-container 
-            .notes-ocean-logo 
-              img(src='https://static.ncdn.in/public/images/dash-logo.svg' alt='notes ocean logo')
+            .notes-ocean-logo
+              a(href="/")
+                img(src='https://static.ncdn.in/public/images/dash-logo.svg' alt='notes ocean logo')
 
             .log-in-container
               .login-text  Log in 
             .sign-options-container 
-              .google-sign-in-container 
+              .google-sign-in-container.w-100  
                 a.continue-with-google-btn
                   img(src='https://static.ncdn.in/icons/google-256-logo.png' alt='Google Logo' width='20' height='20' style='margin-right: 8px;')
                   |   Continue with Google 
@@ -45,22 +46,18 @@ head
                   label.d-none(for='Password')
                     | Password
                   input#password.form-control.form-style(type='password' name='password' placeholder='Password' autocomplete='new-password' required)
-                .form-check
-                  input.remember-me-checked.form-check-input(type='checkbox')
-                  label.form-check-label(for='flexCheckChecked') Stay Logged In
-                    span.mx-2
-                      a(href="/policies/privacy#login-cookies-policy" target="_blank" style="color:blue") learn more
+                
                 .form-group
                   button.login-btn.col-12(type='submit') Log In
                   div.mt-3
                     div.bottom-login-options
                       p 
                         span
-                        a(href='/reset-password' style="text-decoration:underline").link  I forget my password    
-                    div.bottom-login-options
+                        a(href='/reset-password' style="text-decoration:underline").link   Forget your password?   
+                    div.bottom-login-options.sign-up-button
                       p  
                         span
-                        a(href='signup' style="text-decoration:underline").link  Sign Up 
+                        a(href='signup' style="text-decoration:underline").link  Sign Up Instead! 
         
           //- div
           //-   h1 Login
@@ -107,6 +104,6 @@ head
                 //-     svg.mx-1(width='24' height='24' viewbox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
                 //-       path(fill-rule='evenodd' clip-rule='evenodd' d='M0 12.067C0 18.033 4.333 22.994 10 24V15.333H7V12H10V9.333C10 6.333 11.933 4.667 14.667 4.667C15.533 4.667 16.467 4.8 17.333 4.933V8H15.8C14.333 8 14 8.733 14 9.667V12H17.2L16.667 15.333H14V24C19.667 22.994 24 18.034 24 12.067C24 5.43 18.6 0 12 0C5.4 0 0 5.43 0 12.067Z' fill='#699BF7')
                 //-     p Facebook
-    include ../includes/footer
+ 
     script(src='/javascripts/accounts/login.js')
 

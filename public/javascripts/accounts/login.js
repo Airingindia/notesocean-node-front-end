@@ -114,7 +114,6 @@ $(document).ready(function () {
                       'include_granted_scopes': 'true',
                       'state': 'pass-through value'};
       
-        console.log("line125",params)
         // Add form parameters as hidden input values.
         for (var p in params) {
           var input = document.createElement('input');
