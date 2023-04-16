@@ -14,7 +14,7 @@ head
   body
     section.main-section
       .row
-        .col-lg-5.col-sm-12.col-md-6
+        .col-lg-4.col-sm-12.col-md-6
           .sign-up-form-container
             .notes-ocean-logo
               a(href="/")
@@ -34,14 +34,14 @@ head
               form.signup-form(method="POST")
                 .row
                 
-                  .col-md-6
-                    .form-group
+                  
+                    .form-group.col-lg-6
                       
                       label.animate__animated.animate__fadeInUp.d-none(for='First Name')
                         | First Name
                       input.form-control(type='text' name='fistName' placeholder='First Name' required='')
-                  .col-md-6
-                    .form-group.margin-between-input
+                  
+                    .form-group.col-lg-6
                       
                       label.animate__animated.animate__fadeInUp.d-none(for='Last Name') Last Name
                       input#lastName.form-control(type='text' name='lastName' placeholder='Last Name' required='')
@@ -67,10 +67,6 @@ head
                     | Choose
                     | Password
                   input#password.form-control(type='password' name='password' placeholder='Choose Password' autocomplete='new-password' required='')
-                .form-group.mt-0
-                  
-                  label.animate__animated.animate__fadeInUp.d-none(for='Address') Address
-                  input#address.form-control(type='text' name='address' placeholder='Address' required='')
                 .form-group-center
                   .form-check.mb-2 
                     input#flexCheckChecked.form-check-input(type='checkbox' value='' required='')
