@@ -3,14 +3,7 @@ section.main-section{
     /* width: 99%; */
 }
 
-/* @media screen and (min-width: 725) {
-    .section-main-section {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-} */
+
 
 @media (max-width:725px){
     .main-section{
@@ -52,12 +45,13 @@ section.main-section{
 
 .or-tag{
     font-size: 0.6rem;
+    color:grey;
     margin: 0 1.5rem;
-    font-weight: 800;
+    font-weight: 500;
 }
 
 .divider-line{
-  height: 3px; 
+  height: 1px; 
   background-color: lightgray;
   border: none; 
   margin: 10px 0;  
@@ -189,6 +183,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left:30px
 }
 
 
@@ -211,13 +206,14 @@ p {
 
 
 .form-group input {
-    border: none;
+    border: 1px solid lightgray; 
+
     outline: none;
     box-shadow: none;
-    background-color: lightgray;
+    background-color: rgba(242, 241, 238, 0.6) !important;
     /* border-bottom: 1px solid #323232; */
-    border-radius: 10px;
-    padding: 10px 40px 10px 10px;
+    border-radius: 0.3rem;
+    padding: 10px 10px 10px 10px;
 }
 
 .form-group label {
@@ -241,7 +237,7 @@ select {
     border: none;
     outline: none;
     box-shadow: none;
-    background-color: lightgray;
+    background-color: rgba(242, 241, 238, 0.6);
     /* border-bottom: 1px solid #323232; */
     border-radius: 10px;
     padding: 10px 40px 10px 10px;
@@ -325,18 +321,28 @@ section .btn {
 }
 
 .select2-container--default .select2-selection--single {
-    border: none !important;
-    outline: none;
+    /* outline: none; */
     box-shadow: none;
     border-radius: 0 !important;
     width: 100% !important;
-    background-color: lightgray !important;
+    background-color: rgba(242, 241, 238, 0.6) !important;
     border-radius: 5px !important;
     height: 2.6rem !important;
     margin-top: 2px !important;
-
-
+    border: 1px solid lightgray !important;
+    
 }
+
+
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    color: grey !important;
+    line-height: 40px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    top: 8px !important;
+}
+
 
 .signup-form .col-md-6 {
     padding: 0px !important;
@@ -362,13 +368,14 @@ section .btn {
         margin: 0% auto;
     }
 
-    .main-section {
+    section.main-section {
         margin-top: 105px !important;
     }
 
 
 
 }
+
 
 
 @media (max-width:1000px) {
@@ -392,3 +399,17 @@ section .btn {
 
 
 /* animation */
+
+.form-check-label{
+    color: #f44336
+}
+
+a {
+    color: #f44336;
+    /* text-decoration: none; */
+}
+
+.terms-and-condition-text{
+    text-align: center;
+    font-size:0.6rem;
+}

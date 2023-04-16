@@ -19,6 +19,10 @@ head
             .notes-ocean-logo
               a(href="/")
                 img(src='https://static.ncdn.in/public/images/dash-logo.svg' alt='notes ocean logo')
+            .span.terms-and-condition-text By clicking “Continue with Google/SignUp below, you acknowledge that you have read and understood, and agree to NotesOcean's 
+              a(href="/policies/privacy#account-creation-policy" target="_blank") Terms and Condition   
+              span  and 
+              a(href="/terms-and-condition#user-account-agreemment" target="_blank") Privacy Policy
             .sign-up-container
               .sign-up-text  Sign Up 
             .form-container
@@ -29,19 +33,19 @@ head
                     |   Continue with Google 
                 .or-tag-container
                     .divider-line 
-                    span.or-tag OR
+                    span.or-tag or
                     .divider-line  
               form.signup-form(method="POST")
                 .row
                 
                   
-                    .form-group.col-lg-6
+                    .form-group.col-lg-6.mt-0
                       
                       label.animate__animated.animate__fadeInUp.d-none(for='First Name')
                         | First Name
                       input.form-control(type='text' name='fistName' placeholder='First Name' required='')
                   
-                    .form-group.col-lg-6
+                    .form-group.col-lg-6.mt-0
                       
                       label.animate__animated.animate__fadeInUp.d-none(for='Last Name') Last Name
                       input#lastName.form-control(type='text' name='lastName' placeholder='Last Name' required='')
@@ -68,12 +72,12 @@ head
                     | Password
                   input#password.form-control(type='password' name='password' placeholder='Choose Password' autocomplete='new-password' required='')
                 .form-group-center
-                  .form-check.mb-2 
-                    input#flexCheckChecked.form-check-input(type='checkbox' value='' required='')
-                    label.form-check-label(for='flexCheckChecked') I agree to the terms of 
-                      a(href="/policies/privacy#account-creation-policy" target="_blank") account policy 
-                      span  and 
-                      a(href="/terms-and-condition#user-account-agreemment" target="_blank")  user agreement
+                  //- .form-check.mb-2 
+                  //-   input#flexCheckChecked.form-check-input(type='checkbox' value='' required='')
+                  //-   label.form-check-label(for='flexCheckChecked') I agree to the terms of 
+                  //-     a(href="/policies/privacy#account-creation-policy" target="_blank") account policy 
+                  //-     span  and 
+                  //-     a(href="/terms-and-condition#user-account-agreemment" target="_blank")  user agreement
                   .div
                     button.signup-btn.col-12(type='submit').mr-3 Signup
                     div.mt-3
