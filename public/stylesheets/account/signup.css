@@ -1,3 +1,128 @@
+section.main-section{
+    margin-top:2% !important;
+    /* width: 99%; */
+}
+
+/* @media screen and (min-width: 725) {
+    .section-main-section {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+} */
+
+@media (max-width:725px){
+    .main-section{
+        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+}
+
+
+.google-sign-in-container{
+
+}
+
+.continue-with-google-btn{
+    width: 100%;
+    /* padding: 10px 0px 10px 4.8rem !important; */
+
+    justify-content: center;
+
+    padding: 10px 16px !important;
+
+}
+
+.continue-with-google-btn:hover{
+   color:red;
+   cursor: pointer;
+
+}
+
+.or-tag-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    padding-top:0.9rem;
+}
+
+.or-tag{
+    font-size: 0.6rem;
+    margin: 0 1.5rem;
+    font-weight: 800;
+}
+
+.divider-line{
+  height: 3px; 
+  background-color: lightgray;
+  border: none; 
+  margin: 10px 0;  
+  width: 40%;
+}
+
+
+
+.continue-with-google-btn {
+    display: inline-flex; 
+    align-items: center; 
+    padding: 10px 16px;
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    color: #000; 
+    text-decoration: none; 
+  }
+  
+  .continue-with-google-btn:hover {
+    background-color: #f9f9f9;
+  }
+
+
+ 
+
+.sign-up-form-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding:2.0rem 4.0rem 2.0rem 4.0rem;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border:0.5px solid gray !important;
+    border-radius: 4px; 
+}
+
+.notes-ocean-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+
+
+@media screen and (max-width: 768px) {
+
+    .sign-up-form-container{
+
+        padding:2.0rem 1.0rem 2.0rem 1.0rem;
+        border:0px !important;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+
+    }
+
+}
+
+.margin-between-input{
+    margin-left:1.5rem !important;   
+}
+
+
+
 p {
     color: black !important;
 }
@@ -50,25 +175,55 @@ p {
 
 }
 
+.signup-btn{
+    width: 60%;
+    border-radius: 0.3rem;
+    background-color:  red;
+    color: white !important;;
+    font-weight: bold;
+    border: none;
+    height: 2.5rem;
+    border:1px solid lightgray !important;
+    /* font-size:1rem; */
+    font-weight: 500 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.signup-btn:hover{
+    color:rgb(227, 37, 37);
+}
+
 
 /* Using a string */
 .form-group {
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
+.form-group-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .form-group input {
     border: none;
     outline: none;
     box-shadow: none;
-    border-bottom: 1px solid #323232;
-    border-radius: 0;
-    padding: 10px 40px;
+    background-color: lightgray;
+    /* border-bottom: 1px solid #323232; */
+    border-radius: 10px;
+    padding: 10px 40px 10px 10px;
 }
 
 .form-group label {
     margin: 0 30px;
+    /* padding: 10px 40px 10px 10px; */
+
 }
 
 .form-group i {
@@ -81,9 +236,39 @@ p {
     left: 84%;
 }
 
+
+select {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: lightgray;
+    /* border-bottom: 1px solid #323232; */
+    border-radius: 10px;
+    padding: 10px 40px 10px 10px;
+}
+
 .signup-form,
 .login-form {
     width: 100%;
+}
+
+
+.sign-up-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:2rem
+    
+}
+
+.sign-up-text{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color:grey
+}
+
+.sign-up-text:hover{
+color:red;
 }
 
 datalist#browsers:focus,
@@ -143,9 +328,14 @@ section .btn {
     border: none !important;
     outline: none;
     box-shadow: none;
-    border-bottom: 1px solid #323232 !important;
     border-radius: 0 !important;
     width: 100% !important;
+    background-color: lightgray !important;
+    border-radius: 5px !important;
+    height: 2.6rem !important;
+    margin-top: 2px !important;
+
+
 }
 
 .signup-form .col-md-6 {
@@ -196,8 +386,8 @@ section .btn {
 .main-section .row {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    margin: 0 auto !important;
+    align-items: center;
+    /* margin: 0 auto !important; */
 }
 
 

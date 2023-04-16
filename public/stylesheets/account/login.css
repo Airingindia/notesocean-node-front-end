@@ -32,7 +32,7 @@ section.main-section{
     width: 100%;
 }
 
-.login-form-container{
+.login-form-container {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -46,11 +46,11 @@ section.main-section{
 
 
 @media screen and (max-width: 768px) {
-    .login-form-container{
+    .login-form-container {
+
         padding:2.0rem 1.0rem 2.0rem 1.0rem;
         border:0px !important;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
-
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
     }
 }
     
@@ -75,6 +75,7 @@ section.main-section{
    cursor: pointer;
 
 }
+
 .or-tag-container{
     display: flex;
     align-items: center;
@@ -82,10 +83,12 @@ section.main-section{
     height: 2.5rem;
     padding-top:0.9rem;
 }
+
 .or-tag{
     font-size: 0.6rem;
     margin: 0 1.5rem;
 }
+
 .divider-line{
   height: 1px; 
   background-color: lightgray;
@@ -131,19 +134,19 @@ section.main-section{
 
 
 .continue-with-google-btn {
-    display: inline-flex; /* Set display property to inline-flex for horizontal alignment */
-    align-items: center; /* Center align the button vertically */
-    padding: 10px 16px; /* Add padding to the button */
-    background-color: #fff; /* Set the background color of the button to white */
-    border: 1px solid #ddd; /* Add a 1px solid border with a light gray color */
-    border-radius: 4px; /* Add border-radius for rounded corners */
-    font-size: 16px; /* Set the font size of the button */
-    color: #000; /* Set the text color to black */
-    text-decoration: none; /* Remove underline from the button text */
+    display: inline-flex; 
+    align-items: center; 
+    padding: 10px 16px;
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    color: #000; 
+    text-decoration: none; 
   }
   
   .continue-with-google-btn:hover {
-    background-color: #f9f9f9; /* Change the background color on hover for a subtle effect */
+    background-color: #f9f9f9;
   }
 
   .login-text{
@@ -151,9 +154,11 @@ section.main-section{
         font-weight: 500;
         color:grey
   }
+
   .login-text:hover{
     color:red;
   }
+
   .log-in-container{
     display: flex;
     justify-content: center;
@@ -175,12 +180,15 @@ section.main-section{
     justify-content: center;
     font-size:0.8rem;
   }
+  
   .link:hover{
    color:red !important;
   }
+
   .sign-up-button{
     font-size: 0.9rem;
   }
+
 h1,
 h2,
 h3,
