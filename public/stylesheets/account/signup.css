@@ -415,3 +415,8 @@ a {
     text-align: center;
     font-size:0.6rem;
 }
+
+.span.terms-and-condition-text{
+    text-align: center;
+    padding-top:1rem
+}

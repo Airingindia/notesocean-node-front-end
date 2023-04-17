@@ -71,16 +71,16 @@ head
                     | Password
                   input#password.form-control(type='password' name='password' placeholder='Choose Password' autocomplete='new-password' required='')
                 .form-group-center
-                  button.signup-btn.col-12(type='submit') Signup
+                  button.signup-btn.col-12(type='submit') Sign Up
+
+                  .span.terms-and-condition-text By clicking “Continue with Google/SignUp above, you acknowledge that you have read and understood, and agree to NotesOcean's 
+                    a(href="/policies/privacy#account-creation-policy" target="_blank") Terms and Condition   
+                    span  and 
+                    a(href="/terms-and-condition#user-account-agreemment" target="_blank") Privacy Policy        
                   div.mt-3
                     div
-                      p  
-                        span
-                          a(href='/login' style="text-decoration:underline").link Already have an account?Login
-                .span.terms-and-condition-text By clicking “Continue with Google/SignUp below, you acknowledge that you have read and understood, and agree to NotesOcean's 
-                  a(href="/policies/privacy#account-creation-policy" target="_blank") Terms and Condition   
-                  span  and 
-                  a(href="/terms-and-condition#user-account-agreemment" target="_blank") Privacy Policy        
+                      span
+                        a(href='/login' style="text-decoration:underline").link Already have an account?Login
                 .form-group.d-none  
                   h5 Other's
                   .social-login-btn.d-flex
