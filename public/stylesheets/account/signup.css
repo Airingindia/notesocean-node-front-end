@@ -1,6 +1,7 @@
 section.main-section{
     margin-top:2% !important;
     /* width: 99%; */
+    margin-bottom: 2% !important;
 }
 
 
@@ -40,7 +41,7 @@ section.main-section{
     align-items: center;
     justify-content: center;
     height: 2.5rem;
-    padding-top:0.9rem;
+    padding:0.9rem;
 }
 
 .or-tag{
@@ -83,7 +84,7 @@ section.main-section{
     display: flex;
     flex-direction: column;
     /* align-items: center; */
-    padding:2.0rem 4.0rem 2.0rem 4.0rem;
+    padding:2.0rem 2.0rem 2.0rem 2.0rem;
     
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border:0.5px solid gray !important;
@@ -169,6 +170,8 @@ p {
 
 }
 
+
+
 .signup-btn{
     width: 60%;
     border-radius: 0.3rem;
@@ -183,7 +186,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left:30px
+    /* margin-left:4rem */
 }
 
 
@@ -253,8 +256,7 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:2rem
-    
+    padding-bottom:2rem;    
 }
 
 .sign-up-text{
