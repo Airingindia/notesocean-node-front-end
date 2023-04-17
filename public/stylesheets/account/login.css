@@ -190,6 +190,17 @@ section.main-section{
   }
  
 
+  .form-group input {
+    border: 1px solid lightgray !important; 
+
+    outline: none;
+    box-shadow: none;
+    background-color: rgba(242, 241, 238, 0.6) !important;
+    /* border-bottom: 1px solid #323232; */
+    border-radius: 0.3rem;
+    padding: 10px 10px 10px 10px;
+}
+
 h1,
 h2,
 h3,
