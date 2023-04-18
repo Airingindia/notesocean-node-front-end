@@ -1,55 +1,127 @@
 style
-  include ../../public/stylesheets/subpages/footer.min.css
-
+  //- include ../../public/stylesheets/subpages/footer.min.css
+  include ../../public/stylesheets/subpages/footer.css
 footer
-  .item
-    img(src="/touch-icons/apple-touch-icon.png" alt="")
-    h5(style="color:#FB0100") Notes  
-      span(style="color:#fff") Ocean
-    ul.p-0.m-0.navbar-nav
-      li.nav-link
-        i.fa.fa-location-arrow.mx-1
-        span Sonipat , Haryana , India- 131001
-      li.nav-link
-        i.fa.fa.fa-envelope
-        a(href="mailto:support@notesocean.com")  support@notesocean.com
-      li.nav-link
-        i.fa.fa.fa-envelope
-        a(href="mailto:contact@notesocean.com")  contact@notesocean.com
-      li.nav-link
-        i.fa.fa-question-circle
-        a(href='https://support.notesocean.com/portal/en/home')  Support
-  .item
-    div
-      h5 Payments Policies
-      .footer_ul_amrc.navbar-nav
-        ul.p-0.m-0
-          li
-            a.nav-link(href='/policies/payment') Payment Policy 
-          li
-            a.nav-link(href='/policies/payment/refund') Refund and Cancellation Policy
-  .item
-    div
-      h5 Information
-      .footer_ul_amrc.navbar-nav
-        ul.p-0.m-0
-          li
-            a.nav-link(href='/policies/privacy') Privacy Policies
-          li
-            a.nav-link(href='/terms-and-condition') Terms & Conditions
-          li
-            a.nav-link(href='/policies/copyright') Copyright Policy
-          //- li
-          //-   a.nav-link(href='/feedback') Feedback
-          li
-            a.nav-link(href='/report') Report
-  .item
-    div
-      h5.headin5_amrc.col_white_amrc.pt2 Reach us
-      // headin5_amrc
-      .footer_ul_amrc.navbar-nav
-        ul.p-0.m-0
-          li
-            a.nav-link(href='/about-us') About Us
-          li
-            a.nav-link(href='/contact-us') Contact Us
+  .footer-wrap
+    .footer-wrap-container
+
+      .first-row.col-lg-3col.md-3
+        .site-logo-wrapper  
+          .img-wrap 
+            img(src='https://static.ncdn.in/public/images/dash-logo.svg' alt='notes ocean logo')  
+          .site-footer-description
+            .info-text We provide an open platform for all to create, share and colloborate the finest notes you have with whole eager to grab knowledge out there. NotesOcean is a platform for that which provides you the ability to upload your notes/documents which can be the shared and used by others.
+      .second-row.col-lg-3.col.md-3
+        .site-info-wrapper
+          .information-header
+            h5.heading Information
+          .links
+            ul
+              li.ml-0
+                a.nav-link(href='/policies/privacy') Privacy Policies
+              li.ml-0
+                a.nav-link(href='/terms-and-condition') Terms & Conditions
+              li.ml-0
+                a.nav-link(href='/policies/copyright') Copyright Policy
+              //- li
+              //-   a.nav-link(href='/feedback') Feedback
+              li.ml-0
+                a.nav-link(href='/report') Report
+      .third-row.col-lg-3.col.md-3
+        .site-info-wrapper
+          .information-header
+            h5.heading Payments Policies
+          .links3
+            ul
+              li
+                a.nav-link(href='/policies/payment') Payment Policy 
+              li
+                a.nav-link(href='/policies/payment/refund') Refund and Cancellation Policy
+      .four-row.col-lg-3.col.md-3
+        .site-info-wrapper
+          .information-header
+            h5.heading Reach us
+          .links4
+            ul
+              li
+                a.nav-link(href='/about-us') About Us
+              li
+                a.nav-link(href='/contact-us') Contact Us
+              li
+                .social-icons-container
+                  i.fa-brands.fa-linkedin.icon
+                  i.fa-brands.fa-facebook.icon
+                  i.fa-brands.fa-twitter.icon
+                  i.fa-brands.fa-instagram.icon
+
+    .footer-file-text 
+      .company-text A product by Airing.
+        .in-text in  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- .item
+//-     img(src="/touch-icons/apple-touch-icon.png" alt="")
+//-     h5(style="color:#FB0100") Notes  
+//-       span(style="color:#fff") Ocean
+//-     ul.p-0.m-0.navbar-nav
+//-       li.nav-link
+//-         i.fa.fa-location-arrow.mx-1
+//-         span Sonipat , Haryana , India- 131001
+//-       li.nav-link
+//-         i.fa.fa.fa-envelope
+//-         a(href="mailto:support@notesocean.com")  support@notesocean.com
+//-       li.nav-link
+//-         i.fa.fa.fa-envelope
+//-         a(href="mailto:contact@notesocean.com")  contact@notesocean.com
+//-       li.nav-link
+//-         i.fa.fa-question-circle
+//-         a(href='https://support.notesocean.com/portal/en/home')  Support
+//-   .item
+//-     div
+//-       h5 Payments Policies
+//-       .footer_ul_amrc.navbar-nav
+//-         ul.p-0.m-0
+//-           li
+//-             a.nav-link(href='/policies/payment') Payment Policy 
+//-           li
+//-             a.nav-link(href='/policies/payment/refund') Refund and Cancellation Policy
+//-   .item
+//-     div
+//-       h5 Information
+//-       .footer_ul_amrc.navbar-nav
+//-         ul.p-0.m-0
+//-           li
+//-             a.nav-link(href='/policies/privacy') Privacy Policies
+//-           li
+//-             a.nav-link(href='/terms-and-condition') Terms & Conditions
+//-           li
+//-             a.nav-link(href='/policies/copyright') Copyright Policy
+//-           //- li
+//-           //-   a.nav-link(href='/feedback') Feedback
+//-           li
+//-             a.nav-link(href='/report') Report
+//-   .item
+//-     div
+//-       h5.headin5_amrc.col_white_amrc.pt2 Reach us
+//-       // headin5_amrc
+//-       .footer_ul_amrc.navbar-nav
+//-         ul.p-0.m-0
+//-           li
+//-             a.nav-link(href='/about-us') About Us
+//-           li
+//-             a.nav-link(href='/contact-us') Contact Us
