@@ -570,8 +570,8 @@ margin:0 5px;
 }
 
 .notes-stats{
-display:inline-block;
-font-size:0.8rem;
+	display:inline-block;
+	font-size:0.8rem;
 }
 
 .notes-page-details-container{
@@ -582,7 +582,7 @@ padding: 6px;
 }
 
 .notes-details{
-padding:6px;
+	padding:6px;
 }
 
 .notes-header{
