@@ -16,29 +16,40 @@ html(lang="en")
             .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
-                    .upload-header.d-flex.justify-content-between
+                    .upload-header.justify-content-between
                         div
                             div.header-heading
                                 img(class='img-private-wrap ' ,src='../guard.png') 
                                 h2.header-title Private Notes 
                                     span 
-                                        small
+                                        small.note-count
                                             |  ( 
                                             span.total-notes
                                             |  )
-                            small.header-text Upload your personal documents, accessible only to you.
-                            br  
-                            small.header-text Store your documents here safely and securely.
-                        div
-                            a(href="/dashboard/private-notes/new")
-                                button.btn-notesocean.add-new
-                                    i.fa.fa-cloud-upload.m-1
-                                    span Upload
-                    .search-container
-                        form
-                            .input-group
-                                input(type="search" placeholder="Search private notes..." aria-label="Search  private notes").form-control
-                                button.btn.btn-notesocean.btn-sm.search-btn(aria-label="Search") Search
+                            //- small.header-text Upload your personal documents, accessible only to you.
+                            //- br  
+                            //- small.header-text Store your documents here safely and securely.
+                        //- div
+                        //-     a(href="/dashboard/private-notes/new")
+                        //-         button.btn-notesocean.add-new
+                        //-             i.fa.fa-cloud-upload.m-1
+                        //-             span Upload
+                        div.search-container
+                            form.search-container
+                                input.input(type="search" placeholder="Search private notes..." aria-label="Search  private notes")
+                                button(type='submit' style="background: transparent; border:none;")
+                                    span.search-btn
+                                        i.fa.fa-search
+                    .upload-box
+                        a.upload-box-div(href="/dashboard/private-notes/new")
+                            div.upload-box-div-child1
+                                p.upload-box-text Click to Upload your private notes
+                                img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
+                                //- img(src = "https://static.ncdn.in/icons/upload_icon.png").upload-box-img
+                            p.upload-box-details-text Notes you upload here are safe and secure, accessible only to you
+                    .upload-mobile-box(href="/dashboard/private-notes/new")
+                        div.upload-mobile-text Upload Note
+                        img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
                     .row.notes-container-row.mt-3.private-notes
                     .container.no-private-notes.mt-4.d-none
                         center

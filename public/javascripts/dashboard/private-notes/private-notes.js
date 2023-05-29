@@ -95,7 +95,7 @@ $(document).ready(function () {
 				let type = data[i].fileType;
 
 				$(".notes-container-row").append(`
-                <div class="col-12 col-lg-3 col-md-12 col-xs-12 mb-3">
+                <div class="col-12 col-lg-3 col-md-6 col-xs-12 mb-3">
                 <div class="card card-details">
                   <div class='image-card-wrapper'>
                   <img class="card-img-top  mx-auto mt-3 w-50" src="${img}" /> 
@@ -118,30 +118,29 @@ $(document).ready(function () {
                 
                 
                 `);
-                // <div class="col-6 col-lg-2 my-2 public-item wow animate__animated  animate__fadeIn">
-                //     <div class="card  private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}"  style="height:100%">
-                            
-                //             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" /> 
-                //             <div class="card-body border-0 py-2">
-                               
-                //             </div>
-                //             <div class="card-footer border-0 bg-white">
-                //             <p class="card-title">${name} </p>
-                //                 <small class="card-text text-muted"> <i class="fa fa-clock mx-1"></i><span> ${ago_time} </span></small>
+				// <div class="col-6 col-lg-2 my-2 public-item wow animate__animated  animate__fadeIn">
+				//     <div class="card  private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}"  style="height:100%">
 
-                //                 <p class="card-text d-flex align-items-center justify-content-between">
-                                
-                //                 <span class="text-muted"> 
-                //                 <i class="fa fa-database mx-1">
-                //                 </i>
-                //                 <small> ${actual_size} </small>
-                //                 </span>                                    
-                //             </p>
-                //             </div>
-                      
-                    
-                //     </div>
-                // </div>
+				//             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" />
+				//             <div class="card-body border-0 py-2">
+
+				//             </div>
+				//             <div class="card-footer border-0 bg-white">
+				//             <p class="card-title">${name} </p>
+				//                 <small class="card-text text-muted"> <i class="fa fa-clock mx-1"></i><span> ${ago_time} </span></small>
+
+				//                 <p class="card-text d-flex align-items-center justify-content-between">
+
+				//                 <span class="text-muted">
+				//                 <i class="fa fa-database mx-1">
+				//                 </i>
+				//                 <small> ${actual_size} </small>
+				//                 </span>
+				//             </p>
+				//             </div>
+
+				//     </div>
+				// </div>
 
 				//   +
 			}
@@ -153,8 +152,7 @@ $(document).ready(function () {
 			// openContext();
 		} else {
 			if (checked) {
-				$(".loading-private-notes").addClass
-                +("d-none");
+				$(".loading-private-notes").addClass + "d-none";
 			} else {
 				$(".no-private-notes").removeClass("d-none");
 				$(".loading-private-notes").addClass("d-none");
