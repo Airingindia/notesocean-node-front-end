@@ -16,31 +16,63 @@ head
             .row
                 include ../../includes/dashAside
                 .col-md-10.second-side
-                    .withdrawal.shadow
-                        .row.earning-row
-                            .col-md-8.col-lg-10.col-xl-3
-                                .card.border-0.p-2
-                                    h4.animate-charcter 
-                                        i.fa.fa-wallet.mx-1
-                                        span Balance
-                                    h5.avl-balance.animate-charcter 
-                        h3 Withdrawl Request
-                        .withdrawl-cont.my-3.d-none
-                            .item.m-1
-                                label Name
-                                input.form-control(type="text" placeholder="Name" name="name" required)
-                            .item.m-1
-                                label Mobile Number
-                                input.form-control(type="number" placeholder="+91******" name="phone",required)
-                            .itemm.m-1
-                                label Email
-                                input.form-control(type="email" placeholder="Email" name="email",required)
-                            .item
-                                button.btn.btn-danger.mt-4.withdrawl-btn Withdrwal
-                        .withdral-notice.alert.d-none.rounded-0
-                            p.text-muted Withdrawl box will be appear after you have &#x20B9; 50 or more in your account!
-                        h3.withdrawal-history-text.d-none Withdrwal History
+                    div.earning-first-container
+                        div.earning-header-component
+                            div.earning-icon-image-container
+                                img(class='img-earning-wrap' , src="https://static.ncdn.in/icons/wallet.png")
+                            div.earning-header-text
+                                div.earning-header-text
+                                    h4 My Earnings
+                        
+                        div.earning-withdrawl-container 
+                            div.current-balance-container 
+                                div.current-balance-amount ₹ ...
+                                div.current-balance-text Current Balance 
+                            div.withdrawl-text-container 
+                                .withdrawal-text-icon-container 
+                                    .withdrawl-text-1 Withdrawl your earnings 
+                                    .icon-container
+                                        img(src='')
+                                .withdrawal-text Rewards you earn from product will be redeemed from here 
+                            .reedem-button-text-container
+                                .reedem-text-container
+                                    .reedem-text REEDEM NOW*
+                        
+                        div.tnm-wrap
+                            div.tnm-text * Withdrawl box will be active after you have ₹ 50 or more in your account!
+                        //- h3.withdrawal-history-text.d-none Withdrwal History
+                        div.withdrawal-history-heading-div
+                            p.withdrawal-history-heading Withdrawl History
                         .row.withdrawal-history.d-none
+                        div.progress-bar-container
+                            div.progress-bar
+                           
+
+                    
+                    
+                    //- .withdrawal.shadow
+                    //-     .row.earning-row
+                    //-         .col-md-8.col-lg-10.col-xl-3
+                    //-             .card.border-0.p-2
+                    //-                 h4.animate-charcter 
+                    //-                     i.fa.fa-wallet.mx-1
+                    //-                     span Balance
+                    //-                 h5.avl-balance.animate-charcter 
+                    //-     h3 Withdrawl Request
+                    //-     .withdrawl-cont.my-3.d-none
+                    //-         .item.m-1
+                    //-             label Name
+                    //-             input.form-control(type="text" placeholder="Name" name="name" required)
+                    //-         .item.m-1
+                    //-             label Mobile Number
+                    //-             input.form-control(type="number" placeholder="+91******" name="phone",required)
+                    //-         .itemm.m-1
+                    //-             label Email
+                    //-             input.form-control(type="email" placeholder="Email" name="email",required)
+                    //-         .item
+                    //-             button.btn.btn-danger.mt-4.withdrawl-btn Withdrwal
+                    //-     .withdral-notice.alert.d-none.rounded-0
+                    //-         p.text-muted Withdrawl box will be appear after you have &#x20B9; 50 or more in your account!
         script
             include ../../../public/javascripts/dashboard/earnings/earning.js
         include ../../includes/dashjs
