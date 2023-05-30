@@ -192,9 +192,10 @@ a {
 	border-radius: 0px 10px 10px 0px; /* Set the border radius value */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
 	.withdrawal-history .widthrawal-info-cont {
-		display: block !important;
+		display: grid;
+		/* display: block !important; */
 	}
 
 	.earning-row .col-md-6.col-lg-4.col-xl-3 {
@@ -219,6 +220,24 @@ a {
 
 	.withdrawal {
 		padding: 10px;
+	}
+
+	.earning-withdrawl-container {
+		display: block;
+		width: 100%;
+	}
+
+	.reedem-button-text-container {
+		min-height: 50px;
+		max-height: 100px;
+		height: 10px;
+		width: 100%;
+	}
+
+	.withdrawl-text-container {
+		margin-top: -10%;
+		font-size: medium;
+		padding: 15px;
 	}
 }
 
