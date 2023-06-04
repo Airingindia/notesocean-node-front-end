@@ -239,6 +239,15 @@ a {
 		font-size: medium;
 		padding: 15px;
 	}
+
+	.header-title {
+		font-size: 20px;
+		white-space: nowrap;
+	}
+}
+
+.header-title {
+	white-space: nowrap;
 }
 
 .withdrawal-table {
