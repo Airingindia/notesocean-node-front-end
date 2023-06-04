@@ -9,6 +9,8 @@ html(lang="en")
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
         style(src="/vendors/Dynamic-Right-Click-Context-Menu/dist/contextmenu.css")
+        link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/upload-note.css')
     body
         header
             include ../../includes/dashHeader
@@ -40,16 +42,10 @@ html(lang="en")
                                 button(type='submit' style="background: transparent; border:none;")
                                     span.search-btn
                                         i.fa.fa-search
-                    .upload-box
-                        a.upload-box-div(href="/dashboard/private-notes/new")
-                            div.upload-box-div-child1
-                                p.upload-box-text Click to Upload your private notes
-                                img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
-                                //- img(src = "https://static.ncdn.in/icons/upload_icon.png").upload-box-img
-                            p.upload-box-details-text Notes you upload here are safe and secure, accessible only to you
-                    .upload-mobile-box(href="/dashboard/private-notes/new")
-                        div.upload-mobile-text Upload Note
-                        img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
+                    .upload-box.dropzone.p-0
+                    .upload-mobile-box
+                        div.upload-mobile-text New
+                            i.fa.fa-cloud-upload.mx-2                      
                     .row.notes-container-row.mt-3.private-notes
                     .container.no-private-notes.mt-4.d-none
                         center
@@ -118,5 +114,7 @@ html(lang="en")
                                 i.fa.fa-edit.mx-1
                                 span Edit
         include ../../includes/dashjs
+        script(src='/vendors/dropzone/dropzone.min.js')
+        script(src='/javascripts/dashboard/private-notes/new-upload.js')
         script
             include ../../../public/javascripts/dashboard/private-notes/private-notes.js 

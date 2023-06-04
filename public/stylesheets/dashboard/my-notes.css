@@ -216,30 +216,21 @@ textarea {
 		margin-top: 2px !important;
 	}
 	.upload-mobile-box {
-		display: flex !important;
+		display: block !important;
 		position: fixed;
 		right: 20px;
-		bottom: 120px;
-		height: 55px;
-		width: 214px;
+		bottom: 100px;
+		height: 40px;
+		width:auto;
 		background-color: white;
 		color: #ff0202;
-		justify-content: space-around;
-		padding: 10px;
-		align-items: center;
 		border-radius: 10px;
 		box-shadow: 0px 6px 14px -4px rgba(0, 0, 0, 0.75);
 		z-index: 999;
+		padding: 10px 10px;
 	}
 	.upload-box {
 		display: none;
-	}
-
-	.upload-box-img {
-		min-height: 10px;
-		max-height: 20px;
-		margin-left: 7px;
-		margin-top: 10px;
 	}
 }
 

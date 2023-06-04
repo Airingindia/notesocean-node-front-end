@@ -38,7 +38,7 @@ $(document).ready(function () {
 				type: "GET",
 				url: app.getApi() + "/notes?page=" + next,
 				headers: {
-					Authorization: decodeURIComponent(getCookie("token")),
+					Authorization: app.getToken(),
 				},
 				beforeSend: function () {
 					$(".loading-private-notes").removeClass("d-none");
@@ -95,20 +95,20 @@ $(document).ready(function () {
 				let type = data[i].fileType;
 
 				$(".notes-container-row").append(`
-                <div class="col-12 col-lg-3 col-md-6 col-xs-12 mb-3">
-                <div class="card card-details">
-                  <div class='image-card-wrapper'>
-                  <img class="card-img-top  mx-auto mt-3 w-50" src="${img}" /> 
+                <div class="col-12 col-lg-3 col-md-6 col-xs-12 mb-3" data-id="${id}">
+                <div class="card card-details" data-id="${id}">
+                  <div class='image-card-wrapper' data-id="${id}">
+                  <img class="card-img-top  mx-auto mt-3 w-50" data-id="${id}" src="${img}" /> 
                       
                   </div>
-                  <div class='info-card-container'>
-                      <div class='info-card-1'>
-                        <div class='infos'>${ago_time}</div>
-                        <div class='infos'>&#x2022</div>
-                        <div class='infos'>${actual_size}</div>
+                  <div class='info-card-container' data-id="${id}">
+                      <div class='info-card-1' data-id="${id}">
+                        <div class='infos data-id="${id}" '>${ago_time}</div>
+                        <div class='infos data-id="${id}"'>&#x2022</div>
+                        <div class='infos data-id="${id}" '>${actual_size}</div>
                       </div>
-                      <div class='info-card-2'>
-                          <div class='info-name'>${name}</div>
+                      <div class='info-card-2' data-id="${id}">
+                          <div class='info-name' data-id="${id}">${name}</div>
                       </div>
                   </div>
                   </div>
@@ -118,38 +118,13 @@ $(document).ready(function () {
                 
                 
                 `);
-				// <div class="col-6 col-lg-2 my-2 public-item wow animate__animated  animate__fadeIn">
-				//     <div class="card  private-note-item" data-name="${name}" data-id="${id}"  data-time="${ago_time}" data-size="${actual_size}" id="${id}" data-url="${url}" data-type="${type}"  style="height:100%">
-
-				//             <img class="card-img-top w-50 mx-auto mt-4" src="${img}" />
-				//             <div class="card-body border-0 py-2">
-
-				//             </div>
-				//             <div class="card-footer border-0 bg-white">
-				//             <p class="card-title">${name} </p>
-				//                 <small class="card-text text-muted"> <i class="fa fa-clock mx-1"></i><span> ${ago_time} </span></small>
-
-				//                 <p class="card-text d-flex align-items-center justify-content-between">
-
-				//                 <span class="text-muted">
-				//                 <i class="fa fa-database mx-1">
-				//                 </i>
-				//                 <small> ${actual_size} </small>
-				//                 </span>
-				//             </p>
-				//             </div>
-
-				//     </div>
-				// </div>
-
-				//   +
 			}
 			fileOpner();
 			if (!checked) {
 				checked = true;
 				check();
 			}
-			// openContext();
+
 		} else {
 			if (checked) {
 				$(".loading-private-notes").addClass + "d-none";
@@ -212,20 +187,7 @@ $(document).ready(function () {
 		var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
 		return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
 	}
-	function openContext() {
-		$(".private-note-item").each(function () {
-			$(this).on("contextmenu", function (e) {
-				e.preventDefault();
-				$(".context-menu").modal("show");
-				// set position
-				$(".modal-dialog").css({
-					top: e.pageY - 50 + "px",
-					left: e.pageX + 50 + "px",
-					position: "absolute",
-				});
-			});
-		});
-	}
+
 
 	function validate() {
 		$(".action-note-input").on("input", function () {
@@ -273,11 +235,11 @@ $(document).ready(function () {
 					type: "GET",
 					url: app.getApi() + "/notes/" + note_id,
 					headers: {
-						Authorization: decodeURIComponent(getCookie("token")),
+						Authorization: app.getToken(),
 					},
 					contentType: "application/json",
 					processData: false,
-					beforeSend: function () {},
+					beforeSend: function () { },
 					success: function (data) {
 						showFile(data.name, data.type, data.file);
 					},
@@ -334,7 +296,7 @@ $(document).ready(function () {
 								contentType: "application/json",
 								processData: false,
 								headers: {
-									Authorization: getCookie("token"),
+									Authorization: app.getToken(),
 								},
 								beforeSend: function () {
 									$(".private-note-delete-btn").html(
@@ -389,7 +351,7 @@ $(document).ready(function () {
 				type: "GET",
 				url: app.getApi() + "/notes/search/" + input,
 				headers: {
-					Authorization: getCookie("token"),
+					Authorization: app.getToken(),
 				},
 				beforeSend: function () {
 					loaderVisible(true);
@@ -411,7 +373,8 @@ $(document).ready(function () {
 							timeout: 4000,
 						}).show();
 						clearData();
-						showData(data.requested);
+						if (data.requested.length != 0) { showData(data.requested) };
+
 					}
 				},
 				error: function (err) {
@@ -433,10 +396,30 @@ $(document).ready(function () {
 		const parts = value.split(`; ${name}=`);
 		if (parts.length === 2) return parts.pop().split(";").shift();
 	}
-	function setCookie(cname, cvalue, exdays) {
-		const d = new Date();
-		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-		let expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+	// context menu
+
+	function onContextInit() {
+		new VanillaContextMenu({
+			scope: document.querySelector('.notes-container-row'),
+			menuItems: [
+				{
+					label: 'Copy',
+					callback: (event) => {
+						// get data from the row
+						const row = event.target.closest('.info-card-container div');
+
+						// get the id of the row
+						const id = row.getAttribute('data-id');
+
+						console.log(id)
+					},
+				}
+			]
+		});
 	}
+
+	onContextInit();
 });
+
+
