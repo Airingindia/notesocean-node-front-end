@@ -8,7 +8,8 @@ html(lang="en")
         include ../../includes/dashcss
         style
             include ../../../public/stylesheets/dashboard/my-notes.css
-        style(src="/vendors/Dynamic-Right-Click-Context-Menu/dist/contextmenu.css")
+        link(rel='stylesheet' href='/vendors/dropzone/dropzone.min.css')
+        link(rel='stylesheet' href='/stylesheets/dashboard/upload-note.css')
     body
         header
             include ../../includes/dashHeader
@@ -40,16 +41,10 @@ html(lang="en")
                                 button(type='submit' style="background: transparent; border:none;")
                                     span.search-btn
                                         i.fa.fa-search
-                    .upload-box
-                        a.upload-box-div(href="/dashboard/private-notes/new")
-                            div.upload-box-div-child1
-                                p.upload-box-text Click to Upload your private notes
-                                img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
-                                //- img(src = "https://static.ncdn.in/icons/upload_icon.png").upload-box-img
-                            p.upload-box-details-text Notes you upload here are safe and secure, accessible only to you
-                    .upload-mobile-box(href="/dashboard/private-notes/new")
-                        div.upload-mobile-text Upload Note
-                        img(class='upload-box-img' , src='https://static.ncdn.in/icons/upload_icon.png')
+                    .upload-box.dropzone.p-0
+                    .upload-mobile-box
+                        div.upload-mobile-text New
+                            i.fa.fa-cloud-upload.mx-2                      
                     .row.notes-container-row.mt-3.private-notes
                     .container.no-private-notes.mt-4.d-none
                         center
@@ -104,19 +99,20 @@ html(lang="en")
                         .modal-body.p-0.border-0
                             .card.h-100.w-100.p-0.border-0
                                 .card-body.p-0.viewer
-        #context-menu.modal.context-menu
-            .modal-dialog
-                .modal-content
-                    .modal-header
-                        .modal-title Action
-                    .modal-body.border-0.px-0.py-1
-                        .list-group.border-0.p-0
-                            a.list-group-item.list-group-item-action.border-0(href='#')#delete-collections
-                                i.fa.fa-trash.mx-1
-                                span Delete 
-                            a.list-group-item.list-group-item-action.border-0(href='#')#edit-collections
-                                i.fa.fa-edit.mx-1
-                                span Edit
+        section
+            .context-menu
+                .context-menu-items
+                    span(context-menu-action='open', data-id='')
+                        i.fa.fa-eye
+                        span.mx-2 Open
+                    span(context-menu-action='download', data-id='')
+                        i.fa.fa-cloud-download
+                        span.mx-2 Download
+                    span(context-menu-action='delete',data-id='')
+                        i.fa.fa-trash
+                        span.mx-2 Delete
         include ../../includes/dashjs
+        script(src='/vendors/dropzone/dropzone.min.js')
+        script(src='/javascripts/dashboard/private-notes/new-upload.js')
         script
             include ../../../public/javascripts/dashboard/private-notes/private-notes.js 
