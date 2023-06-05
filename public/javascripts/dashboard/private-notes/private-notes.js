@@ -61,6 +61,63 @@ $(document).ready(function () {
 
 	loaddata();
 
+	function onContextmenu() {
+		$(".note-item").each(function () {
+			$(this).on("contextmenu", function (e) {
+				let id = $(this).attr("data-id");
+				let top = e.pageY;
+				let left = e.pageX;
+				$(".context-menu").css({
+					top: top,
+					left: left,
+					"display": "block",
+				});
+				$(".context-menu").attr("data-id", id);
+				e.preventDefault();
+			});
+
+			$(this).on("click", function () {
+				$(".context-menu").css({
+					"display": "none",
+				});
+				let id = $(this).attr("data-id");
+				fileOpner(id);
+			});
+
+
+		});
+
+		$(".second-side").on("click", function () {
+			$(".context-menu").css({
+				"display": "none",
+			});
+		})
+	}
+
+	$("span[context-menu-action='open']").click(function () {
+		let id = $(".context-menu").attr("data-id");
+		fileOpner(id);
+		$(".context-menu").css({
+			"display": "none",
+		})
+	});
+
+	$("span[context-menu-action='delete']").click(function () {
+		let id = $(".context-menu").attr("data-id");
+		$(".context-menu").css({
+			"display": "none",
+		})
+		deletePrivate(id);
+	});
+
+	$("span[context-menu-action='download']").click(function () {
+		let id = $(".context-menu").attr("data-id");
+		$(".context-menu").css({
+			"display": "none",
+		})
+		download(id);
+	})
+
 	function showData(data) {
 		if (data.length !== 0) {
 			hit = false;
@@ -95,7 +152,7 @@ $(document).ready(function () {
 				let type = data[i].fileType;
 
 				$(".notes-container-row").append(`
-                <div class="col-12 col-lg-3 col-md-6 col-xs-12 mb-3" data-id="${id}">
+                <div class="col-12 col-lg-3 col-md-6 col-xs-12 mb-3 note-item" data-id="${id}">
                 <div class="card card-details" data-id="${id}">
                   <div class='image-card-wrapper' data-id="${id}">
                   <img class="card-img-top  mx-auto mt-3 w-50" data-id="${id}" src="${img}" /> 
@@ -119,6 +176,7 @@ $(document).ready(function () {
                 
                 `);
 			}
+			onContextmenu();
 			fileOpner();
 			if (!checked) {
 				checked = true;
@@ -143,6 +201,7 @@ $(document).ready(function () {
 			loaddata();
 		}
 	});
+
 
 	function clearData() {
 		$(".notes-container-row").html("");
@@ -223,122 +282,85 @@ $(document).ready(function () {
 	}
 	validate();
 
-	function fileOpner() {
-		$(".private-note-item").each(function () {
-			$(this).click(function () {
-				const parent = $(this).parent();
-				const type = $(this).attr("data-type");
-				const note_id = $(this).attr("data-id");
-				const name = $(this).attr("data-name");
-				// get note url
-				$.ajax({
-					type: "GET",
-					url: app.getApi() + "/notes/" + note_id,
-					headers: {
-						Authorization: app.getToken(),
-					},
-					contentType: "application/json",
-					processData: false,
-					beforeSend: function () { },
-					success: function (data) {
-						showFile(data.name, data.type, data.file);
-					},
-					error: function (err) {
-						app.alert(
-							err.status,
-							err?.responseJSON?.message
-								? err?.responseJSON?.message
-								: "Something went wrong"
-						);
-					},
-				});
-
-				function showFile(name, type, url) {
-					$(".private-notes-moda-title").html(name);
-					var src;
-					if (
-						type == "doc" ||
-						type == "csv" ||
-						type == "docx" ||
-						type == "ppt" ||
-						type == "pptx"
-					) {
-						src = `<iframe style="display:inline;width:100%;height:100%;" src="https://view.officeapps.live.com/op/embed.aspx?src=${url}" </iframe>`;
-						$(".viewer").html(src);
-					} else if (type == "png" || type == "jpeg" || type == "jpg") {
-						src = `<img style="width:100px;height:100%" src="${url}" > `;
-						$(".viewer").html(src);
-					} else {
-						src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
-						$(".viewer").html(src);
-					}
-
-					$("#file-open-modal").modal("show");
-					$(".private-notes-download").click(function () {
-						download(url, name);
-					});
-				}
-
-				// delete function
-				$(".private-notes-delete-btn").click(function () {
-					// delete
-					swal({
-						title: "Are you sure?",
-						text: "Once deleted, you will not be able to recover this Note! ",
-						icon: "warning",
-						buttons: ["Cancel", "Delete"],
-						dangerMode: true,
-					}).then((willDelete) => {
-						if (willDelete) {
-							$.ajax({
-								type: "DELETE",
-								url: app.getApi() + "/notes/" + note_id,
-								contentType: "application/json",
-								processData: false,
-								headers: {
-									Authorization: app.getToken(),
-								},
-								beforeSend: function () {
-									$(".private-note-delete-btn").html(
-										`<i class="fa fa-spinner fa-spin mx-1"> </i> Please wait ...`
-									);
-									$(".private-note-delete-btn").prop("disabled", true);
-								},
-								success: function (data) {
-									$(".private-note-delete-btn").html(`Delete`);
-									$(".private-note-delete-btn").prop("disabled", false);
-									swal("Success ! Your note deleted succesfully!", {
-										icon: "success",
-										button: "continue",
-									}).then(function () {
-										$("#file-open-modal").modal("hide");
-										$(parent).remove();
-										// window.location = "/dashboard/private-notes";
-									});
-								},
-								error: function (err) {
-									app.alert(
-										err.status,
-										err?.responseJSON?.message
-											? err?.responseJSON?.message
-											: "Something went wrong"
-									);
-								},
-							});
-						}
-					});
-				});
-			});
+	function fileOpner(id) {
+		const note_id = id;
+		// get note url
+		$.ajax({
+			type: "GET",
+			url: app.getApi() + "/notes/" + note_id,
+			headers: {
+				Authorization: app.getToken(),
+			},
+			contentType: "application/json",
+			processData: false,
+			beforeSend: function () { },
+			success: function (data) {
+				showFile(data.name, data.type, data.file);
+			},
+			error: function (err) {
+				app.alert(
+					err.status,
+					err?.responseJSON?.message
+						? err?.responseJSON?.message
+						: "Something went wrong"
+				);
+			},
 		});
+
+		function showFile(name, type, url) {
+			$(".private-notes-moda-title").html(name);
+			var src;
+			if (
+				type == "doc" ||
+				type == "csv" ||
+				type == "docx" ||
+				type == "ppt" ||
+				type == "pptx"
+			) {
+				src = `<iframe style="display:inline;width:100%;height:100%;" src="https://view.officeapps.live.com/op/embed.aspx?src=${url}" </iframe>`;
+				$(".viewer").html(src);
+			} else if (type == "png" || type == "jpeg" || type == "jpg") {
+				src = `<img style="width:100px;height:100%" src="${url}" > `;
+				$(".viewer").html(src);
+			} else {
+				src = `<iframe width="100%" height="100%" src="${url}" </iframe>`;
+				$(".viewer").html(src);
+			}
+
+			$("#file-open-modal").modal("show");
+			$(".private-notes-download").click(function () {
+				download(note_id);
+			});
+		}
 	}
 
-	function download(uri, name) {
-		var link = document.createElement("a");
-		link.setAttribute("download", name);
-		link.href = uri;
-		document.body.appendChild(link);
-		link.click();
-		link.remove();
+	function download(note_id) {
+		$.ajax({
+			type: "GET",
+			url: app.getApi() + "/notes/" + note_id,
+			headers: {
+				Authorization: app.getToken(),
+			},
+			contentType: "application/json",
+			processData: false,
+			beforeSend: function () { },
+			success: function (data) {
+				var link = document.createElement("a");
+				link.setAttribute("download", data.name);
+				link.setAttribute("href", data.file);
+				link.style.display = "none";
+				link.click();
+				link.remove();
+			},
+			error: function (err) {
+				app.alert(
+					err.status,
+					err?.responseJSON?.message
+						? err?.responseJSON?.message
+						: "Something went wrong"
+				);
+			},
+		});
 	}
 
 	// search private notes
@@ -397,29 +419,45 @@ $(document).ready(function () {
 		if (parts.length === 2) return parts.pop().split(";").shift();
 	}
 
-	// context menu
-
-	function onContextInit() {
-		new VanillaContextMenu({
-			scope: document.querySelector('.notes-container-row'),
-			menuItems: [
-				{
-					label: 'Copy',
-					callback: (event) => {
-						// get data from the row
-						const row = event.target.closest('.info-card-container div');
-
-						// get the id of the row
-						const id = row.getAttribute('data-id');
-
-						console.log(id)
+	function deletePrivate(note_id) {
+		// delete
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted, you will not be able to recover this Note! ",
+			icon: "warning",
+			buttons: ["Cancel", "Delete"],
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					type: "DELETE",
+					url: app.getApi() + "/notes/" + note_id,
+					contentType: "application/json",
+					processData: false,
+					headers: {
+						Authorization: app.getToken(),
 					},
-				}
-			]
+					beforeSend: function () {
+
+					},
+					success: function (data) {
+						app.alert(200, "Note deleted successfully");
+						$(".note-item[data-id=" + note_id + "]").remove();
+					},
+					error: function (err) {
+						app.alert(
+							err.status,
+							err?.responseJSON?.message
+								? err?.responseJSON?.message
+								: "Something went wrong"
+						);
+					},
+				});
+			}
 		});
 	}
 
-	onContextInit();
+
 });
 
 
