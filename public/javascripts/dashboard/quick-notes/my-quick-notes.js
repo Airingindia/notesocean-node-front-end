@@ -34,13 +34,13 @@ $(document).ready(function () {
             let title = notes[i].title;
             let content = notes[i].content;
             $(".notes-list").append(`
-            <li class="list-group-item shadow my-2 border-0"><a class="text-dark" href="/quick-notes/${uuid}" style="text-decoration:none">
+            <li class="card-bg"><a class="text-dark" href="/quick-notes/${uuid}" style="text-decoration:none">
             <div class="d-flex justify-content-start justify-content-lg-between align-items-start align-items-lg-center flex-lg-row flex-column">
                 <div class="d-flex flex-column">
                     <h6 class="list-group-item-heading">
                     ${encodeHTMLEntities(title)}
                     </h6>
-                    <small class="text-muted"> ${content}  </small>
+                    <small class="text-muted card-inner-content"> ${content}  </small>
                 </div>
            
 
