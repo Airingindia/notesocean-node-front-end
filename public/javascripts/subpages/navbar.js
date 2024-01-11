@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    function Showheader(){
+    function Showheader() {
         let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        let pic = userInfo.profileImage !== null ?  userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/25x25") : "https://static.ncdn.in/public/user.png";
+        let pic = userInfo.profileImage !== null ? userInfo.profileImage.replace("https://profiles.ncdn.in", "https://profiles.ncdn.in/fit-in/25x25") : "user.png";
         $(".dashboard-nav-item img").attr("src", pic);
         $(".user-profile-name").html(" " + JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName);
     }
@@ -10,20 +10,20 @@ $(document).ready(function () {
         $(".loading-nav-item").addClass("d-none");
         $(".dashboard-nav-item").removeClass("d-none");
         if (localStorage.getItem("userInfo") !== null) {
-           Showheader();
+            Showheader();
         } else {
-            app.loaduserInfo().then(()=>{
+            app.loaduserInfo().then(() => {
                 Showheader();
-            }).catch(()=>{
-                $(".dashboard-nav-item img").attr("src", "https://static.ncdn.in/public/user.png");
-            $(".user-profile-name").html(" Dashboard");
+            }).catch(() => {
+                $(".dashboard-nav-item img").attr("src", "/user.png");
+                $(".user-profile-name").html(" Dashboard");
             })
         }
     } else {
         $(".login-navbar-item").removeClass("d-none");
         $(".loading-nav-item").addClass("d-none");
     }
-    
+
     function navbar() {
         $(".mobile-menus-bars-button").click(function () {
             $(".mobile-menu-wrapper").css({ display: "flex" })

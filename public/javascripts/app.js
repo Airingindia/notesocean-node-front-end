@@ -1,11 +1,15 @@
 class notesocean {
 	getApi() {
 		let currentDomian = window.location.hostname;
-		if (currentDomian == "notesocean.com") {
-			return "https://api.notesocean.com";
-		} else {
-			return "https://devapi.notesocean.com";
-		}
+		// if (currentDomian == "notesocean.com") {
+		// 	return "https://api.notesocean.com";
+		// } else {
+		// 	return "https://devapi.notesocean.com";
+		// }
+
+		currentDomian = "https://api.notesocean.com";
+
+		return currentDomian;
 	}
 	getToken() {
 		return app.getCookie("token");
