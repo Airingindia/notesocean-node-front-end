@@ -36,14 +36,14 @@ html(lang="en")
                         - let description = data.requested[i].product.description;
                         - let id = data.requested[i].product.id;
                         - let userId = data.requested[i].user.id;
-                        - let thumbnails = data.requested[i].product.thumbnails.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
+                        - let thumbnails = data.requested[i].product.thumbnails.split(",")[0]
                         - let size = data.requested[i].product.size;
                         - let pages = data.requested[i].product.pages;
                         - let timestamp = timeService.get(data.requested[i].product.timestamp);
                         - let views = data.requested[i].product.views;
                         - let firstName = data.requested[i].user.firstName;
                         - let lastName = data.requested[i].user.lastName;
-                        - let profileImage = data.requested[i].user.profileImage.replace("https://s3.ap-south-1.amazonaws.com/profiles.notesocean.com","https://profiles.ncdn.in/fit-in/25x25/filters:format(webp)/filters:quality(100)");
+                        - let profileImage = data.requested[i].user.profileImage;
                         .col-md-6.col-lg-4.col-xl-3.mt-3
                             a(href="/notes/"+id)
                                 .card.shadow.border-0

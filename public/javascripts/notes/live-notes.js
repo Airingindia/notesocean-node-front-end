@@ -22,7 +22,7 @@ $(document).ready(function () {
                     let name = product.name;
                     let pages = product.pages;
                     let product_id = product.product_id;
-                    let thumbnail = product.thumbnail.split(",")[0].replace("https://s3.ap-south-1.amazonaws.com/thumbnails.notesocean.com", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
+                    let thumbnail = product.thumbnail;
                     let timestamp = product.timestamp;
                     let views = product.views;
                     let firstName = product.user.firstName;

@@ -56,7 +56,7 @@ $(document).ready(function () {
                         let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
                     <div class="card shadow border-0 h-100">
                         <div class="card-header">  ${name}</div>
-                        <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)")}" /></div>
+                        <div class="card-body p-0"><img class="card-img-top" src="${thumbnails.split(",")[0]}" /></div>
                         <div class="card-footer">
                             <div class="notes-cont-info d-flex justify-content-between text-muted mt-2"><small><i class="fa fa-globe"> </i><span> ${views} Views</span></small><small><i class="fa fa-file"> </i><span> ${pages} pages </span></small><small><i class="fa fa-clock"></i><span> ${timestamp} </span></small></div>
                         </div>
@@ -112,12 +112,12 @@ $(document).ready(function () {
                         let thumbnails = data.requested[i].thumbnails;
                         let views = data.requested[i].views;
                         let timestamp = app.getTime(data.requested[i].timestamp);
-                        let mainthumbail = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/720x250/filters:format(webp)/filters:quality(100)");
-                        var img1 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/320x240/filters:format(webp)/filters:quality(100)");
+                        let mainthumbail = thumbnails.split(",")[0];
+                        var img1 = thumbnails.split(",")[0];
 
-                        var img2 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/480x360/filters:format(webp)/filters:quality(100)");
+                        var img2 = thumbnails.split(",")[0];
 
-                        var img3 = thumbnails.split(",")[0].replace("https://thumbnails.ncdn.in", "https://thumbnails.ncdn.in/fit-in/800x480/filters:format(webp)/filters:quality(100)");
+                        var img3 = thumbnails.split(",")[0];
 
 
                         let content = `<div class="col-lg-4 col-sm-6 mt-3"><a href="/notes/${product_id}">
